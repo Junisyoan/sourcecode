@@ -15,6 +15,12 @@ import java.util.Random;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
+/**
+ * 2019年1月16日21:14:32
+ * @author Junisyoan
+ */
+
+
 // 生成  验证码  和  验证码图片  的类
 public final class ImageUtil {
 	
