@@ -2,132 +2,188 @@ package xyz.cymedical.entity.jun;
 
 import org.springframework.stereotype.Component;
 
-/**
-*	@author Junisyoan;
-*	���ڣ�2018��12��25��
-*	ʱ�䣺����11:11:01
-*	��˵����
-*/
-
 @Component
-public class User {
-
-	private String user_id;
-	private String account;
+public class User
+{
+	private int userid;
+	private String name;
 	private String pwd;
-	private int age;
 	private String sex;
-	private String edu;
-	private String occu;
-	private String phone;
+	private String education;
+	private String job;
+	private String tel;
 	private String email;
+	private int roleid;
 	private String state;
 	
-	public User() {
+
+	public User()
+	{
 		super();
 	}
 
-	public User(String user_id, String account, String pwd, int age, String sex, String edu, String occu, String phone,
-			String email, String state) {
+	
+	public User(String name, String pwd)
+	{
 		super();
-		this.user_id = user_id;
-		this.account = account;
+		this.name = name;
 		this.pwd = pwd;
-		this.age = age;
+	}
+
+	public User(String name, String pwd, String sex, String education, String job, String tel, String email, int roleid,
+			String state)
+	{
+		super();
+		this.name = name;
+		this.pwd = pwd;
 		this.sex = sex;
-		this.edu = edu;
-		this.occu = occu;
-		this.phone = phone;
+		this.education = education;
+		this.job = job;
+		this.tel = tel;
 		this.email = email;
+		this.roleid = roleid;
 		this.state = state;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	
+	
+	public User(String name, String pwd, String sex, String education, String job, String tel, String email)
+	{
+		super();
+		this.name = name;
+		this.pwd = pwd;
+		this.sex = sex;
+		this.education = education;
+		this.job = job;
+		this.tel = tel;
+		this.email = email;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public User(int userid, String name, String pwd, String sex, String education, String job, String tel, String email,
+			int roleid, String state)
+	{
+		super();
+		this.userid = userid;
+		this.name = name;
+		this.pwd = pwd;
+		this.sex = sex;
+		this.education = education;
+		this.job = job;
+		this.tel = tel;
+		this.email = email;
+		this.roleid = roleid;
+		this.state = state;
 	}
 
-	public String getAccount() {
-		return account;
+	public int getUserid()
+	{
+		return userid;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUserid(int userid)
+	{
+		this.userid = userid;
 	}
 
-	public String getPwd() {
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getPwd()
+	{
 		return pwd;
 	}
 
-	public void setPwd(String pwd) {
+	public void setPwd(String pwd)
+	{
 		this.pwd = pwd;
 	}
 
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getSex() {
+	public String getSex()
+	{
 		return sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(String sex)
+	{
 		this.sex = sex;
 	}
 
-	public String getEdu() {
-		return edu;
+	public String getEducation()
+	{
+		return education;
 	}
 
-	public void setEdu(String edu) {
-		this.edu = edu;
+	public void setEducation(String education)
+	{
+		this.education = education;
 	}
 
-	public String getOccu() {
-		return occu;
+	public String getJob()
+	{
+		return job;
 	}
 
-	public void setOccu(String occu) {
-		this.occu = occu;
+	public void setJob(String job)
+	{
+		this.job = job;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getTel()
+	{
+		return tel;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setTel(String tel)
+	{
+		this.tel = tel;
 	}
 
-	public String getEmail() {
+	public String getEmail()
+	{
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
 
-	public String getState() {
+	public int getRoleid()
+	{
+		return roleid;
+	}
+
+	public void setRoleid(int roleid)
+	{
+		this.roleid = roleid;
+	}
+
+	public String getState()
+	{
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(String state)
+	{
 		this.state = state;
 	}
 
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", account=" + account + ", pwd=" + pwd + ", age=" + age + ", sex=" + sex
-				+ ", edu=" + edu + ", occu=" + occu + ", phone=" + phone + ", email=" + email + ", state=" + state
-				+ "]";
-	}
 
+
+	@Override
+	public String toString()
+	{
+		return "User [userid=" + userid + ", name=" + name + ", pwd=" + pwd + ", sex=" + sex + ", education="
+				+ education + ", job=" + job + ", tel=" + tel + ", email=" + email + ", roleid=" + roleid + ", state="
+				+ state + "]";
+	}
 	
+
 }
