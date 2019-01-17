@@ -1,5 +1,6 @@
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import javax.annotation.Resource;
+
+import xyz.cymedical.biz.inter.jun.UserBiz;
 
 /**
 *	@author Junisyoan;
@@ -9,8 +10,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 */
 public class Test {
 
-	public static void main(String[] args) {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-		System.out.println(applicationContext);
+	@Resource
+	private UserBiz userBiz;
+	
+	@org.junit.Test
+	public void test() {
+		System.out.println(userBiz.queryUserCount());
 	}
 }
