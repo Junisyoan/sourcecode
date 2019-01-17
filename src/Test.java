@@ -1,7 +1,5 @@
-import javax.annotation.Resource;
-
-import xyz.cymedical.biz.impl.jun.UserBizImpl;
-import xyz.cymedical.biz.inter.jun.UserBiz;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
 *	@author Junisyoan;
@@ -11,11 +9,11 @@ import xyz.cymedical.biz.inter.jun.UserBiz;
 */
 public class Test {
 
-	@Resource
-	private UserBiz userBiz = new UserBizImpl();
-	
-	@org.junit.Test
-	public void test() {
-		System.out.println(userBiz.queryUserCount());
+	public static void main(String[] args) {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+		System.out.println(applicationContext);
+		
+		System.out.println("org.springframework.context.support.ClassPathXmlApplicationContext@694f9431, started on Thu Jan 17 15:12:58 CST 2019");
+		
 	}
 }
