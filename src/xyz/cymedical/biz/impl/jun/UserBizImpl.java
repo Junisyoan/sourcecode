@@ -11,7 +11,7 @@ import xyz.cymedical.biz.inter.jun.UserBiz;
 import xyz.cymedical.entity.jun.User;
 import xyz.cymedical.mapper.jun.UserMapper;
 
-@Service("UserBiz")
+@Service("userBiz")
 public class UserBizImpl extends BaseImpl implements UserBiz{
 
 	@Resource
@@ -50,6 +50,8 @@ public class UserBizImpl extends BaseImpl implements UserBiz{
 
 	@Override
 	public int queryUserCount() {
+		
+		System.out.println("userMapper"+userMapper);
 		return userMapper.queryUserCount();
 	}
 
