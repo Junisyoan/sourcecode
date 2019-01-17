@@ -25,6 +25,8 @@ public class TestMySQL {
 				con = DriverManager.getConnection(url,user,password);
 				if(!con.isClosed()) {
 					System.out.println("连接成功");
+					Thread.sleep(5000);
+					con.close();
 				}else {
 					System.out.println("失败");
 				}
@@ -32,6 +34,9 @@ public class TestMySQL {
             	// TODO Auto-generated catch block
             	e.printStackTrace();
             } catch (SQLException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     }
