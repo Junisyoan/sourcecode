@@ -3,9 +3,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
 *	@author Junisyoan;
-*	日期：2019年1月17日
-*	时间：上午11:08:20
-*	类说明：
+*	锟斤拷锟节ｏ拷2019锟斤拷1锟斤拷17锟斤拷
+*	时锟戒：锟斤拷锟斤拷11:08:20
+*	锟斤拷说锟斤拷
 */
 public class Test {
 
