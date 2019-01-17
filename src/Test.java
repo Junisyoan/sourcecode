@@ -1,5 +1,6 @@
 import javax.annotation.Resource;
 
+import xyz.cymedical.biz.impl.jun.UserBizImpl;
 import xyz.cymedical.biz.inter.jun.UserBiz;
 
 /**
@@ -11,7 +12,7 @@ import xyz.cymedical.biz.inter.jun.UserBiz;
 public class Test {
 
 	@Resource
-	private UserBiz userBiz;
+	private UserBiz userBiz = new UserBizImpl();
 	
 	@org.junit.Test
 	public void test() {
