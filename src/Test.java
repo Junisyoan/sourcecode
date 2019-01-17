@@ -13,5 +13,7 @@ public class Test {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 		System.out.println(applicationContext);
 		
+		System.out.println("org.springframework.context.support.ClassPathXmlApplicationContext@694f9431, started on Thu Jan 17 15:12:58 CST 2019");
+		
 	}
 }
