@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="org.jiang.mapper.UserMapper">
+<mapper namespace="xyz.cymedical.mapper.jiang.TbUserMapper">
 
 
 <!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
 
-	<select id="findUser"   parameterType="org.jiang.bean.TbUser"
-		resultType="org.jiang.bean.TbUser">
+	<select id="findUser"   parameterType="xyz.cymedical.entity.jun.User"
+		resultType="xyz.cymedical.entity.jun.User">
 		select * from tbuser where uname = #{uname} and pwd=#{pwd}
 	</select>
  
