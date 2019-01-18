@@ -12,13 +12,17 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
 	default-init-method="init" default-destroy-method="destroy">
 		
-<!-- 	</bean> -->
-
-	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-	destroy-method="close">
-	    <property name="driverClassName"  value="oracle.jdbc.OracleDriver"/>
-	    <property name="url"	 		  value="jdbc:oracle:thin:@117.28.98.168:1521:orcl"/>
+<!-- 数据源，连接mysql配置 -->
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"	destroy-method="close">
+   <!-- 
+   		<property name="driverClassName"  value="oracle.jdbc.OracleDriver"/>
+	    <property name="url"	 		  value="jdbc:oracle:thin:@120.41.187.0:1521:orcl"/>
 	    <property name="username"		  value="sys"/>
+	    <property name="password"		  value="123"/>
+   -->
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	    <property name="url"	 		  value="jdbc:mysql://129.28.83.44:3306/cymedical"/>
+	    <property name="username"		  value="admin"/>
 	    <property name="password"		  value="123"/>
 	</bean>
 	

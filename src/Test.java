@@ -3,15 +3,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
 *	@author Junisyoan;
-*	ÈÕÆÚ£º2019Äê1ÔÂ17ÈÕ
-*	Ê±¼ä£ºÉÏÎç11:08:20
-*	ÀàËµÃ÷£º
+*	ï¿½ï¿½ï¿½Ú£ï¿½2019ï¿½ï¿½1ï¿½ï¿½17ï¿½ï¿½
+*	Ê±ï¿½ä£ºï¿½ï¿½ï¿½ï¿½11:08:20
+*	ï¿½ï¿½Ëµï¿½ï¿½
 */
 public class Test {
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 		System.out.println(applicationContext);
+		
+		System.out.println("org.springframework.context.support.ClassPathXmlApplicationContext@694f9431, started on Thu Jan 17 15:12:58 CST 2019");
 		
 	}
 }
