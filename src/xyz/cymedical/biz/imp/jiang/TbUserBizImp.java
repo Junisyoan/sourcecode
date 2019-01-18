@@ -17,7 +17,6 @@ public class TbUserBizImp implements TbUserBiz{
 	TbUserMapper tbUserMapper;
 	@Override
 	public List<Tb_user> findUser(Tb_user user) {
-		// TODO Auto-generated method stub
 		return (List<Tb_user>) tbUserMapper.findUser(user);
 	}
 
