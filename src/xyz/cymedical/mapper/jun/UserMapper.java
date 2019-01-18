@@ -8,7 +8,7 @@ import xyz.cymedical.entity.jun.User;
 
 @Repository
 public interface UserMapper {
-	// ²éÑ¯ËùÓÐ
+	// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	public List<User> findAll();
 
 }
