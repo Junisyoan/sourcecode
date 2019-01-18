@@ -1,0 +1,11 @@
+/* CSS Document */
+
+#top{font-size:50px;color:#666;text-align:center;font-weight:bold}
+
+#login{width:300px;border:#000 1px solid;border-radius:10px;margin:120px auto}
+#login table{margin:0 auto;border:0;text-align:center;color:#666}
+#login table input{border-radius:8px;width:180px}
+
+#button{}
+
+#brole{width:180px;border-radius:10px;margin-left:0}
