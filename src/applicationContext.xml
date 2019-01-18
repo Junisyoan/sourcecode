@@ -21,12 +21,13 @@
 	    <property name="username"		  value="admin"/>
 	    <property name="password"		  value="123"/>
 	</bean>
-	
+<!-- 连接工厂 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource"></property>
 		<property name="mapperLocations" value="classpath:xyz/cymedical/*.xml"></property>
 	</bean>
-	
+
+<!-- mybatis -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="basePackage" value="xyz.cymedical.mapper"/>
