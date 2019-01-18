@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//WebContent/WEB-INF/view.jiang/index.jsp.jsp=UTF-8
+=======
 encoding//src/xyz/cymedical/mapper/jun/UserMapper.java=UTF-8
+>>>>>>> 959dc5c21382db7facc8b9fdc8c639c9e334afd9
 encoding/<project>=UTF-8

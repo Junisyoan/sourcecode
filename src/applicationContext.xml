@@ -12,6 +12,19 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
 	default-init-method="init" default-destroy-method="destroy">
 		
+<<<<<<< HEAD
+<!-- 	</bean> -->
+
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	destroy-method="close">
+	    <property name="driverClassName"  value="oracle.jdbc.OracleDriver"/>
+<!-- 	    <property name="url"	 		  value="jdbc:oracle:thin:@localhost:1521:caonima"/> -->
+	    <property name="url"	 		  value="jdbc:oracle:thin:@129.28.83.44:3306:orcl"/>
+	    <property name="username"		  value="root"/>
+	    <property name="password"		  value="123"/>
+<!-- 	    <property name="username"		  value="jx1807"/> -->
+<!-- 	    <property name="password"		  value="123456"/> -->
+=======
 <!-- 数据源，连接mysql配置 -->
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"	destroy-method="close">
    <!-- 
@@ -24,6 +37,7 @@
 	    <property name="url"	 		  value="jdbc:mysql://129.28.83.44:3306/cymedical"/>
 	    <property name="username"		  value="admin"/>
 	    <property name="password"		  value="123"/>
+>>>>>>> 959dc5c21382db7facc8b9fdc8c639c9e334afd9
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
