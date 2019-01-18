@@ -36,6 +36,5 @@
 		<property name="basePackage" value="xyz.cymedical.mapper"/>
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 	</bean>
-	
 	 <context:component-scan base-package="xyz.cymedical" annotation-config="true"/>  
 </beans>
