@@ -24,7 +24,7 @@ import xyz.cymedical.tools.jun.ResponseTools;
 public class CompanyHandle {
 
 	@Resource
-	private CompanyBiz companyBiz; 
+	private CompanyBiz companyBiz; 			//公司的业务逻辑
 	private String strTarget;
 	
 	public CompanyHandle() {
@@ -35,38 +35,38 @@ public class CompanyHandle {
 	 * 公司注册
 	 */
 	@RequestMapping(value="/regCompany.handle", method=RequestMethod.POST)
-	public @ResponseBody String regCompany(HttpServletResponse response,Company company) {
+	public String regCompany(HttpServletResponse response,Company company) {
 		System.out.println(company);
 		//执行注册
-//		String res = companyBiz.regCompany(company);
-//		try {
-//
-//			switch (res) {
-//
-//			case "已被注册":
-//				strTarget = null;
-//				response.getWriter().println(ResponseTools.returnMsgAndBack("已被注册"));
-//				break;
-//			
-//			case "注册失败":
-//				strTarget = null;
-//				response.getWriter().println(ResponseTools.returnMsgAndBack("注册失败"));
-//				break;
-//				
-//			case "注册成功":
-//				strTarget = "comanyLogin";
-//				response.getWriter().println(ResponseTools.returnMsgAndBack("注册成功"));
-//				break;
-//				
-//			default:
-//				strTarget="fail";
-//				break;
-//			}
-//			
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		String res = companyBiz.regCompany(company);
+		try {
+
+			switch (res) {
+
+			case "已被注册":
+				System.out.println("公司已被注册");
+				response.getWriter().println(ResponseTools.returnMsgAndBack(res));
+				break;
+			
+			case "注册失败":
+				System.out.println("公司注册失败");
+				response.getWriter().println(ResponseTools.returnMsgAndBack(res));
+				break;
+				
+			case "注册成功":
+				System.out.println("公司注册成功");
+				response.getWriter().println(ResponseTools.returnMsgAndBack(res));
+				break;
+				
+			default:
+				strTarget="fail";
+				break;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		return strTarget;
+		return null;
 	}
 }
