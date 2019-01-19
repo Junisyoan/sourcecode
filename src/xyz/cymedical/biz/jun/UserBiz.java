@@ -2,11 +2,11 @@ package xyz.cymedical.biz.jun;
 
 import java.util.List;
 
-import xyz.cymedical.entity.jun.User;
+import xyz.cymedical.bean.jun.User;
 
 public interface UserBiz
 {
-	//²éÑ¯ËùÓÐ
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	public List<User> findAll();
 
 }
