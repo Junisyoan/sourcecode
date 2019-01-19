@@ -15,7 +15,7 @@ import xyz.cymedical.mapper.jun.CompanyMapper;
 */
 
 @Service("companyBiz")
-public class CompanyBizImpl implements CompanyBiz {
+public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 
 	@Resource
 	private CompanyMapper companyMapper;
@@ -24,7 +24,7 @@ public class CompanyBizImpl implements CompanyBiz {
 	public String regCompany(Company company) {
 		System.out.println("准备注册"+company);
 		//先查询这个公司名字有没有被注册过了
-		if(companyMapper.queryCompanyByName(company)!=null) {
+		if(companyMapper.queryCompanyByName(company.getName())!=null) {
 			return "已被注册";
 		}else {
 			//注册公司
@@ -36,4 +36,33 @@ public class CompanyBizImpl implements CompanyBiz {
 		}
 	}
 
+	@Override
+	public boolean queryName(String name) {
+		if (companyMapper.queryCompanyByName(name)!=null) {
+			isExsit=true;
+		} else {
+			isExsit=false;
+		}
+		return isExsit;
+	}
+
+	@Override
+	public boolean queryAccount(String account) {
+		if (companyMapper.queryCompanyByAccount(account)!=null) {
+			isExsit=true;
+		} else {
+			isExsit=false;
+		}
+		return isExsit;
+	}
+
+	@Override
+	public boolean queryTel(String tel) {
+		if (companyMapper.queryCompanyByTel(tel)!=null) {
+			isExsit=true;
+		} else {
+			isExsit=false;
+		}
+		return isExsit;
+	}
 }
