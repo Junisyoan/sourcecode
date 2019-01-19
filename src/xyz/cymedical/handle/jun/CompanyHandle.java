@@ -40,9 +40,8 @@ public class CompanyHandle {
 		//执行注册
 		String res = companyBiz.regCompany(company);
 		try {
-
+			
 			switch (res) {
-
 			case "已被注册":
 				System.out.println("公司已被注册");
 				response.getWriter().println(ResponseTools.returnMsgAndBack(res));
@@ -69,4 +68,8 @@ public class CompanyHandle {
 		
 		return null;
 	}
+	
+	/*
+	 * 查询公司名字
+	 */
 }
