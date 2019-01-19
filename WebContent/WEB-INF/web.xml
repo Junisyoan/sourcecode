@@ -3,7 +3,7 @@
   
   <display-name>cymedical</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>backlogin.jsp</welcome-file>
   </welcome-file-list>
   
 <!--   <context-param> -->
