@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import xyz.cymedical.bean.jun.User;
 import xyz.cymedical.biz.jun.UserBiz;
-import xyz.cymedical.entity.jun.User;
 
-@Controller // ´Ë×¢ÊÍµÄº¬ÒåÊÇ½«¸ÃÀàÉèÖÃ³ÉÎªä¯ÀÀÆ÷Ìá½»µÄÉÏÀ´µÄÀà
+@Controller // ï¿½ï¿½×¢ï¿½ÍµÄºï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 @RequestMapping("/user")
 public class LoginAction {
 
@@ -33,7 +33,7 @@ public class LoginAction {
 
 //	String s = "applicationContext.xml";
 //	ApplicationContext conf = new ClassPathXmlApplicationContext(s);
-//	System.out.println(conf);//³õÊ¼»¯ÈİÆ÷
+//	System.out.println(conf);//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //	
 //	UserBiz userBiz = conf.getBean("userimpl",UserBizImpl.class);
 
@@ -89,38 +89,38 @@ public class LoginAction {
 
 //		if (checkCode.equals(mapcode)) {
 //
-//			System.out.println("ÑéÖ¤Âë´íÎóÕıÈ·");
+//			System.out.println("ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·");
 //
-//			System.out.println("²éÑ¯Ç°user=" + user);
+//			System.out.println("ï¿½ï¿½Ñ¯Ç°user=" + user);
 //
 //			user = userBiz.login(user);
 //
-//			System.out.println("²éÑ¯ºóuser=" + user);
+//			System.out.println("ï¿½ï¿½Ñ¯ï¿½ï¿½user=" + user);
 //
 //			if (null != user) {
 //				//
-//				if (user.getState().equals("ÆôÓÃ")) {
+//				if (user.getState().equals("ï¿½ï¿½ï¿½ï¿½")) {
 //					req.getSession().setAttribute("USER", user);
 //					if (user.getRoleid() == 1) {
-//						result = "¹ÜÀíÔ±";
+//						result = "ï¿½ï¿½ï¿½ï¿½Ô±";
 //					} else {
-//						result = "ÆÕÍ¨ÓÃ»§";
+//						result = "ï¿½ï¿½Í¨ï¿½Ã»ï¿½";
 //					}
-//				} else if (user.getState().equals("½ûÓÃ")) {
-//					result = "µÇÂ¼Ê§°Ü£¡ÓÃ»§±»½ûÓÃ£¡";
+//				} else if (user.getState().equals("ï¿½ï¿½ï¿½ï¿½")) {
+//					result = "ï¿½ï¿½Â¼Ê§ï¿½Ü£ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½";
 //				}
 //			} else if (user == null) {
-//				result = "ÓÃ»§ÃûÃÜÂë´íÎó£¡";
-//				System.out.println("ÓÃ»§ÃûÃÜÂë´íÎó£¡");
+//				result = "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+//				System.out.println("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 //			}
 //		} else {
 //
-//			result = "ÑéÖ¤Âë´íÎó£¡";
-//			System.out.println("ÑéÖ¤Âë´íÎó£¡");
+//			result = "ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½";
+//			System.out.println("ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½");
 //		}
 //
 //		return result;
-		result = "¹ÜÀíÔ±";
+		result = "ï¿½ï¿½ï¿½ï¿½Ô±";
 		return result;
 	}
 
