@@ -30,7 +30,7 @@
 <!-- mybatis -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-		<property name="basePackage" value="xyz.cymedical.mapper"/>
+		<property name="basePackage" value="xyz.cymedical"/>
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 	</bean>
 	
