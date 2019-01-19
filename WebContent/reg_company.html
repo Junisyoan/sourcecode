@@ -22,7 +22,7 @@
                     	<input type="password" name="pwd" id="pwd" placeholder="密码，6-18个字符" />
                     </div>
                     <div class="tel">
-                        <input type="tel" name="tel" id="tel" placeholder="公司座机号" /><em id="telIsExists"></em>
+                        <input type="text" name="tel" id="tel" placeholder="公司座机号" /><em id="telIsExists"></em>
                     </div>
                     <div class="address">
                         <input type="text" name="address" id="address" placeholder="公司地址" />
@@ -53,12 +53,52 @@ $(function(){
 	});
 	
 	$("#name").on("blur",function(){
+		if($("#name").val()==""){
+			return;
+		}
 		$.ajax({
+			type:"post",
 			dataType:"text",
 			data:{name:$("#name").val()},
-			url:company/queryName.handle,
+			url:"company/queryName.handle",
 			success:function(retData){
-				
+				document.getElementById("nameIsExists").innerHTML=retData;
+			},
+			error:function(){
+				alert('服务器连接失败');
+			}
+		});
+	});
+	
+	$("#account").on("blur",function(){
+		if($("#account").val()==""){
+			return;
+		}
+		$.ajax({
+			type:"post",
+			dataType:"text",
+			data:{account:$("#account").val()},
+			url:"company/queryAccount.handle",
+			success:function(retData){
+				document.getElementById("accIsExists").innerHTML=retData;
+			},
+			error:function(){
+				alert('服务器连接失败');
+			}
+		});
+	});
+	
+	$("#tel").on("blur",function(){
+		if($("#tel").val()==""){
+			return;
+		}
+		$.ajax({
+			type:"post",
+			dataType:"text",
+			data:{tel:$("#tel").val()},
+			url:"company/queryTel.handle",
+			success:function(retData){
+				document.getElementById("telIsExists").innerHTML=retData;
 			},
 			error:function(){
 				alert('服务器连接失败');
