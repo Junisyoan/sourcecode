@@ -16,11 +16,27 @@ public interface CompanyMapper {
 	//query
 	
 	/**
+	 *	查询公司座机号 
+	 * @param tel	座机号
+	 * @return	公司信息
+	 */
+	public Company queryCompanyByTel(String tel);
+	
+	/**
 	 * 查询公司是否存在
-	 * @param company	公司信息
+	 * @param name	公司名
 	 * @return	是否存在
 	 */
-	public Company queryCompanyByName(Company company);
+	public Company queryCompanyByName(String name);
+	
+	/**
+	 * 按照账户查询公司
+	 * @param account	账户
+	 * @return	公司信息
+	 */
+	public Company queryCompanyByAccount(String account);
+	
+	
 	
 	
 	//insert
