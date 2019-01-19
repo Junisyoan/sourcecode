@@ -1,5 +1,7 @@
 package xyz.cymedical.mapper.jun;
 
+import org.springframework.stereotype.Repository;
+
 import xyz.cymedical.entity.jun.Company;
 
 /**
@@ -7,6 +9,8 @@ import xyz.cymedical.entity.jun.Company;
 * @author Junisyoan
 * @version 1.0
 */
+
+@Repository
 public interface CompanyMapper {
 
 	//query
@@ -20,6 +24,7 @@ public interface CompanyMapper {
 	
 	
 	//insert
+	
 	/**
 	 * 公司注册
 	 * @param company	公司信息
