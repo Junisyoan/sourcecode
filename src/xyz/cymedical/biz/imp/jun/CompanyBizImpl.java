@@ -21,19 +21,10 @@ public class CompanyBizImpl implements CompanyBiz {
 	private CompanyMapper companyMapper;
 	
 	@Override
-	public String regCompany(Company company) {
+	public boolean regCompany(Company company) {
 		System.out.println("准备注册"+company);
-		//先查询这个公司名字有没有被注册过了
-		if(companyMapper.queryCompanyByName(company)!=null) {
-			return "已被注册";
-		}else {
-			//注册公司
-			if(companyMapper.insertCompany(company)) {
-				return "注册成功";
-			}else {
-				return "注册失败";
-			}
-		}
+		return companyMapper.insertCompany(company);
+		
 	}
 
 }
