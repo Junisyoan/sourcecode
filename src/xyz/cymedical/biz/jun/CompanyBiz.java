@@ -15,5 +15,5 @@ public interface CompanyBiz {
 	 * @param company	公司信息
 	 * @return	返回已被注册、注册成功、注册失败
 	 */
-	public boolean regCompany(Company company);
+	public String regCompany(Company company);
 }
