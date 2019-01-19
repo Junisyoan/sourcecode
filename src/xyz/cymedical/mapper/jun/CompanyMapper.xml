@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="xyz.cymedical.mapper.jun.CompanyMapper">
+<!-- 按名字查找公司 -->
+	<select id="queryCompanyByName" parameterType="xyz.cymedical.entity.jun.Company" resultType="xyz.cymedical.entity.jun.Company">
+		select * from tb_company where name=#{name}
+	</select>
+
+<!-- 注册公司 -->
+	<insert id="insertCompany" parameterType="xyz.cymedical.entity.jun.Company">
+		insert into tb_company(name,account,pwd,tel,address,people,phone) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone})
+	</insert>
+	
+</mapper> 
