@@ -13,22 +13,22 @@
 <script src="<%=path%>js/jquery-1.4.2.min.js"></script>
 <script>
 
-function turn(){
+// function turn(){
 	
-	window.location.href="<%=path%>user/findRoleOne.handle";
+<%-- 	window.location.href="<%=path%>user/findRoleOne.handle"; --%>
 	
-}
+// }
 
 function passwordIsTrue(){
 	
-	var name = document.getElementById("name").value;
+	var account = document.getElementById("account").value;
 	var pwd = document.getElementById("pwd").value;
 	var kcode =  document.getElementById("checkCode").value;
 	 $.ajax({
 		 type:"POST",
-		 url:"user/login.action",
+		 url:"user/login.handle",
 		 data:{
-			 "name":name,
+			 "account":account,
 			 "pwd":pwd,
 			 "checkCode":kcode
 			 },
@@ -39,7 +39,7 @@ function passwordIsTrue(){
 		 success:function(data){
 			if(data=="管理员"){
 				alert("登陆成功！您的身份为管理员！");
-				window.location.href="<%=path%>user/findRoleOne.action";
+				window.location.href="<%=path%>user/index.handle";
 			}else if(data=="普通用户"){
 				alert("登陆成功！您的身份为普通用户！");
 				window.location.href="<%=path%>user.jsp";
@@ -78,8 +78,7 @@ function passwordIsTrue(){
 				</tr>
 				<tr>
 					<td width="65" height="30">用户名:</td>
-					<td width="222" colspan="2"><input type="text" name="name"
-						id="name" /></td>
+					<td width="222" colspan="2"><input type="text" name="account" id="account" /></td>
 				</tr>
 				<tr>
 					<td height="23">密码:</td>
@@ -96,7 +95,7 @@ function passwordIsTrue(){
 
 				<tr>
 					<td height="35" colspan="3"><input type="button"
-						onClick="turn()" value="登录" style="width: 100px;" /> <a
+						onClick="passwordIsTrue()" value="登录" style="width: 100px;" /> <a
 						href="<%=path%>register.jsp"><input type="button" value="注册"
 							style="width: 100px;" /></a></td>
 				</tr>
