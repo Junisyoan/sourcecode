@@ -61,7 +61,7 @@ public class CompanyHandle {
 		//执行注册
 		String res = companyBiz.regCompany(company);
 		try {
-			
+			response.setContentType("text/html;charset=utf-8");
 			switch (res) {
 			case "已被注册":
 				System.out.println("公司已被注册");
@@ -75,7 +75,7 @@ public class CompanyHandle {
 				
 			case "注册成功":
 				System.out.println("公司注册成功");
-				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, ""));
+				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "login_company.html"));
 				break;
 				
 			default:
