@@ -1,6 +1,9 @@
 package xyz.cymedical.biz.xin;
 
+import java.util.List;
+
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.xin.Detail;
 
 /**
 * 2019年1月20日
@@ -15,5 +18,5 @@ public interface DoctorBiz {
 	 * @param code	条码号
 	 * @return	返回条码对应的病人所有已选项目
 	 */
-//	public List<PatientBrief> regCompany(String code);
+	public List<Detail> findMyDetails(String code);
 }
