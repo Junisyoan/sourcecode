@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.entity.jun.Company;
@@ -29,6 +30,29 @@ public class CompanyHandle {
 	}
 	
 	/*
+	 * 公司用户登录
+	 */
+	@RequestMapping(value="/loginCompany.handle", method=RequestMethod.POST)
+	public ModelAndView	companyLogin(HttpServletResponse response, String userName,String password) {
+		System.out.println("用户登录"+userName);
+		Company company = companyBiz.companyLogin(userName, password);
+		ModelAndView modelAndView = new ModelAndView();
+		if (company!=null) {
+			modelAndView.setViewName("WEB-INF/medical_workstation/company-manage");
+			return modelAndView;
+		}else {
+			try {
+				response.getWriter().println(ResponseTools.returnMsgAndBack("用户或者密码错误"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+	}
+	
+	
+	/*
 	 * 公司注册
 	 */
 	@RequestMapping(value="/regCompany.handle", method=RequestMethod.POST)
@@ -37,7 +61,7 @@ public class CompanyHandle {
 		//执行注册
 		String res = companyBiz.regCompany(company);
 		try {
-			
+			response.setContentType("text/html;charset=utf-8");
 			switch (res) {
 			case "已被注册":
 				System.out.println("公司已被注册");
@@ -51,7 +75,7 @@ public class CompanyHandle {
 				
 			case "注册成功":
 				System.out.println("公司注册成功");
-				response.getWriter().println(ResponseTools.returnMsgAndBack(res));
+				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "login_company.html"));
 				break;
 				
 			default:

@@ -11,6 +11,14 @@ import xyz.cymedical.entity.jun.Company;
 public interface CompanyBiz {
 
 	/**
+	 * 登录
+	 * @param account	用户
+	 * @param pwd	密码
+	 * @return	公司信息
+	 */
+	public Company companyLogin(String account,String pwd);
+	
+	/**
 	 * 公司注册
 	 * @param company	公司信息
 	 * @return	返回已被注册、注册成功、注册失败

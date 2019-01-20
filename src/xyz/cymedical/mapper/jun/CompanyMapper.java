@@ -1,5 +1,6 @@
 package xyz.cymedical.mapper.jun;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jun.Company;
@@ -14,6 +15,14 @@ import xyz.cymedical.entity.jun.Company;
 public interface CompanyMapper {
 
 	//query
+	
+	/**
+	 * 公司信息
+	 * @param account	账户
+	 * @param pwd	密码
+	 * @return	公司信息
+	 */
+	public Company queryCompanyByLogin(@Param("account")String account, @Param("pwd")String pwd);
 	
 	/**
 	 *	查询公司座机号 
@@ -35,7 +44,6 @@ public interface CompanyMapper {
 	 * @return	公司信息
 	 */
 	public Company queryCompanyByAccount(String account);
-	
 	
 	
 	
