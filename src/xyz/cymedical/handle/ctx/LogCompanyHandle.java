@@ -26,7 +26,7 @@ public class LogCompanyHandle {
 	}
 
 	// 公司记账
-	@RequestMapping(value = "/findcompanylog.action")
+	@RequestMapping(value = "/findcompanylog.handle")
 	public ModelAndView findcompanylog() {
 
 		// 没写完，数据未获取
