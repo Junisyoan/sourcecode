@@ -4,6 +4,10 @@
 
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyMapper">
+<!-- 登录 -->
+	<select id="queryCompanyByLogin" parameterType="String" resultType="xyz.cymedical.entity.jun.Company">
+		select * from tb_company where account=#{account} and pwd=#{pwd}
+	</select>
 
 <!-- 按公司座机查找公司 -->
 	<select id="queryCompanyByTel" parameterType="String" resultType="xyz.cymedical.entity.jun.Company">
