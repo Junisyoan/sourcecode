@@ -65,4 +65,9 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 		}
 		return isExsit;
 	}
+
+	@Override
+	public Company companyLogin(String account, String pwd) {
+		return companyMapper.queryCompanyByLogin(account, pwd);
+	}
 }
