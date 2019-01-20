@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.jiang.TbUserBiz;
+import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.entity.jiang.Tb_user;
 
 @Controller //此注释的含义是将该类设置成为浏览器提交的上来的类
@@ -17,6 +18,9 @@ public class LoginHandle {
 
 	@Resource
 	private TbUserBiz userBiz;
+	
+	@Resource
+	private DoctorBiz doctorbiz; 			//医生的业务逻辑
 	
 
 	@RequestMapping(value = "/login.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
@@ -44,6 +48,8 @@ public class LoginHandle {
 
 		System.out.println("2222");
 
+		System.out.println(doctorbiz.findMyDetails(""));
+		
 		System.out.println(userBiz.findAll());
 
 		ModelAndView mav = new ModelAndView();
