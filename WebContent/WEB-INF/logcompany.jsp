@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +12,20 @@
 	<form id="form1" name="form1" method="post" action=""
 		style="border: 1px solid #000; margin: 50px 140px;">
 		<p align="center">&nbsp;</p>
-		<p align="center">公司帐号 ：帐号余额：</p>
+		<p align="center">公司帐号 ：${logCompanylist.get(0).getName()}帐号余额：</p>
 		<table width="500" border="1" align="center">
 			<tr align="center">
 				<td width="160">操作</td>
 				<td width="100">金额</td>
 				<td width="150">时间</td>
 			</tr>
+			<c:forEach items="${logCompanylist}" var="l" varStatus="s">
+				<tr>
+					<td>${l.operate}</td>
+					<td>${l.money}</td>
+					<td>${l.time}</td>
+				</tr>
+			</c:forEach>
 			<tr align="center">
 				<td width="160">资金存入</td>
 				<td width="100">10000</td>
