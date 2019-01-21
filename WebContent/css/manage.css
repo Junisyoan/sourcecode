@@ -1,0 +1,74 @@
+form {
+    border: 1px black solid;
+    height: auto;
+    width: 800px;
+    padding: 30px 20px;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 20px 0 0 100px;
+}
+
+label, input {
+    margin-left: 15px;
+}
+
+input[type = button], input[type = submit] {
+    width: 80px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+span {
+    margin-left: 30px;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 780px;
+    margin: 10px auto;
+}
+
+th, td {
+    border: 1px black solid;
+    font-weight: 100;
+    line-height: 25px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.head{
+    margin-top: 0;
+}
+
+.btn {
+    width: 600px;
+    text-align: center;
+    height: auto;
+    margin: 0 auto;
+}
+
+.btn input {
+    margin: 10px 20px 0;
+}
+
+#leftBtn{
+    float: right;
+    margin: 20px 20px;
+}
+
+a {
+    color: blue;
+    padding-right: 10px;
+    text-decoration: none;
+}
+a:hover {
+    color: rgb(85, 26, 139);
+}
+
+div{
+    margin: 10px 0;
+}
+
+
