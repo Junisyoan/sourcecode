@@ -27,15 +27,12 @@ public class LogCompanyHandle {
 
 	// 公司记账
 	@RequestMapping(value = "/findcompanylog.handle")
-	public ModelAndView findcompanylog() {
+	public ModelAndView findcompanylog(String account) {
 
-		// 没写完，数据未获取
-		String name = "";
-
-		logCompanylist = logCompanyBiz.queryByName(name);
+		logCompanylist = logCompanyBiz.queryByName(account);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/ctx/logcompany");
+		mav.setViewName("WEB-INF/medical_workstation/logcompany");
 		mav.addObject("logCompanylist", logCompanylist);
 		return mav;
 
