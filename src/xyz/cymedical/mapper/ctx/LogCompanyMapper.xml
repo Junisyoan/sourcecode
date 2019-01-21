@@ -5,21 +5,8 @@
 <mapper namespace="xyz.cymedical.mapper.ctx.LogCompanyMapper">
 
 	<select id="queryByName" parameterType="java.lang.String"
-		resultMap="companyMap">
-		select * from tb_company where name = #{name}
-	</select>
-
-	<select id="selectCompanyid" parameterType="java.lang.Integer"
 		resultType="xyz.cymedical.entity.ctx.LogCompany">
-		select * from tb_log_company where company_id =
-		#{company_id}
+		select * from tb_log_company
 	</select>
-
-	<resultMap type="xyz.cymedical.entity.ctx.LogCompany"
-		id="queryByName">
-		<association property="logcompany" column="company_id"
-			javaType="xyz.cymedical.entity.ctx.LogCompany" select="selectCompanyid">
-		</association>
-	</resultMap>
 
 </mapper>
