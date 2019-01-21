@@ -9,18 +9,15 @@
 <meta name="author" content="order by dede58.com"/>
 <title>传一体检系统 </title>
 <script type="text/javascript"></script>
-<script src="<%=path %>js/jquery.min.js"></script>
+<script src="<%=path %>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path %>js/jquery.validate.min.js"></script>
 <script src="<%=path %>js/jquery.validate.cn.js"></script>
   
-		 
-   
-		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
 		<!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 		<link rel="stylesheet" href="<%=path %>http://fonts.useso.com/css?family=Open+Sans:400,300" />
 		<link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
@@ -28,12 +25,12 @@
 		<link rel="stylesheet" href="<%=path %>assets/css/ace-skins.min.css" />
         <link rel="stylesheet" href="<%=path %>css/style.css"/>
 		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="<%=path %>assets/css/ace-ie.min.css" />
 		<![endif]-->
 		<script src="<%=path %>assets/js/ace-extra.min.js"></script>
 		<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.js"></script>
-		<script src="assets/js/respond.min.js"></script>
+		<script src="<%=path %>assets/js/html5shiv.js"></script>
+		<script src="<%=path %>assets/js/respond.min.js"></script>
 		<![endif]-->
         		<!--[if !IE]> -->
 		<script src="<%=path %>assets/js/jquery.min.js"></script>        
@@ -217,7 +214,7 @@
          </div>
         <!-- /.main-container -->
 		<!-- basic scripts -->
-		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="<%=path %>js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<!--[if !IE]> -->
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
@@ -229,18 +226,18 @@
 </script>
 <![endif]-->
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src='<%=path %>assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/typeahead-bs2.min.js"></script>
+		<script src="<%=path %>assets/js/bootstrap.min.js"></script>
+		<script src="<%=path %>assets/js/typeahead-bs2.min.js"></script>
 		<!-- page specific plugin scripts -->
 		<!--[if lte IE 8]>
-		  <script src="assets/js/excanvas.min.js"></script>
+		  <script src="<%=path %>assets/js/excanvas.min.js"></script>
 		<![endif]-->
 		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
-        <script src="assets/layer/layer.js" type="text/javascript"></script>
+		<script src="<%=path %>assets/js/ace-elements.min.js"></script>
+		<script src="<%=path %>assets/js/ace.min.js"></script>
+        <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 		<!-- inline scripts related to this page -->
 <script type="text/javascript">		
  jQuery(document).ready(function(){  
