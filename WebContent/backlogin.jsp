@@ -40,9 +40,9 @@ function passwordIsTrue(){
 			if(data=="管理员"){
 				alert("登陆成功！您的身份为管理员！");
 				window.location.href="<%=path%>user/index.handle";
-			}else if(data=="普通用户"){
-				alert("登陆成功！您的身份为普通用户！");
-				window.location.href="<%=path%>user.jsp";
+			}else if(data=="医生"){
+				alert("登陆成功！您的身份为医生！");
+				window.location.href="<%=path%>doctor/";
 			}
 			else{
 				document.getElementById("checkCode").value = "";

@@ -46,7 +46,9 @@ public class LoginHandle {
 
 		if (user.getAccount().equals("admin") && user.getPwd().equals("123")) {
 			result = "管理员";
-		} else {
+		}else if(user.getAccount().equals("admin")&&user.getPwd().equals("1234")) {
+			result = "医生";
+		}else {
 			result = "账号密码错误";
 		}
 		return result;
