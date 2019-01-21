@@ -9,8 +9,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
   <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
   <![endif]-->
@@ -23,11 +23,14 @@
 <div class="page-content">
 <div class="gys_style">
  <div class="Manager_style">
-<!--     <div class="title_name">项目读取</div> -->
-      <div class="title_names">项目读取</div>
+    <div class="title_name">项目读取</div>
+<!--       <div class="title_names">项目读取</div> -->
       <ul class="search_content clearfix">
-       <li><label class="lf">条码号</label><input name="" type="text"  class="text_add"/></li>
-       <li style="width:90px;"><button type="button" class="btn_search">查询</button></li>
+       <li>
+      	 <label class="lf">条码号</label><input name="" type="text"  class="text_add"/>
+      	 <button type="button" class="btn btn-primary" class="btn_search">查询</button>
+       </li>
+       
       </ul>
 <!--     <button type="button" class="btn btn-primary" id="Add_Product_btn">添加产品</button> -->
     <div class="Add_Manager_style">
@@ -46,57 +49,69 @@
       </div>
     </div>
     </div>
+    
     <div class="Manager_style">
-     <span class="title_name">产品信息</span>
-     <table class="table table-striped table-bordered table-hover">
-      <thead>
+    <span class="title_name">产品信息</span>
+    <table class="table table-striped table-bordered table-hover">
+    <thead>
        <tr>
         <th>序号</th>
-        <th>名称</th>
-        <th>联系人</th>
-        <th>联系电话</th>
-        <th>备注</th>
+        <th>科室</th>
+        <th>项目</th>
+        <th>状态</th>
         <th>操作</th>
        </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <td>1</td><td>#0号柴油</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td>
+     </thead>
+     
+     <tbody>
+     	<tr>
+     	<td>1</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> 
         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td>
-       </tr>
-       <tr>
-        <td>2</td><td>#0号柴油A</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td>
-        <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td>
-       </tr>
-       <tr>
-        <td>3</td><td>#0号柴油B</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td>
-        <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td>
-       </tr>
-       <tr>
-        <td>4</td><td>#18号柴油</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td>
-        <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td>
-       </tr>
-      </tbody>
-     </table>
-      <div class="page_style">
-  <select name="" size="1">
-    <option value="1">10</option>
-    <option value="2">20</option>
-    <option value="3">30</option>
-  </select>
-  <a href="" class="icon-step-backward page_btn" ></a>
-  <a href="" class="icon-caret-left page_btn"></a>
-  第
-  <select name="" size="1">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
-  共2页
-   <a href="" class=" icon-caret-right page_btn"></a>
-  <a href="" class="icon-step-forward page_btn"></a>
+     	</tr>
+     	
+     	
+     	
+     </tbody>
+     
+    </table> 
    </div>
-  </div> 
+    
+<!--     <div class="Manager_style"> -->
+<!--      <span class="title_name">产品信息</span> -->
+<!--      <table class="table table-striped table-bordered table-hover"> -->
+<!--       <thead> -->
+<!--        <tr> -->
+<!--         <th>序号</th> -->
+<!--         <th>细项</th> -->
+<!--         <th>结果</th> -->
+<!--         <th>单位</th> -->
+<!--         <th>参考值</th> -->
+<!--         <th>提示</th> -->
+<!--         <th>操作</th> -->
+<!--        </tr> -->
+<!--       </thead> -->
+<!--       <tbody> -->
+<!--        <tr> -->
+<!--         <td>1</td><td>#0号柴油</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
+<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
+<!--        </tr> -->
+<!--        <tr> -->
+<!--         <td>2</td><td>#0号柴油A</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
+<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
+<!--        </tr> -->
+<!--        <tr> -->
+<!--         <td>3</td><td>#0号柴油B</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
+<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
+<!--        </tr> -->
+<!--        <tr> -->
+<!--         <td>4</td><td>#18号柴油</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
+<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
+<!--        </tr> -->
+<!--       </tbody> -->
+<!--      </table> -->
+<!--   </div>  -->
+  
+  
  </div>    
 </div>
 <div class="" id="Product_Details" style="display:none">
@@ -151,13 +166,13 @@
 </div>
 
 <!--[if !IE]> -->
-		<script src="assets/js/jquery.min.js"></script>
+		<script src="<%=path %>assets/js/jquery.min.js"></script>
 		<!-- <![endif]-->
 
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='<%=path %>assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -167,9 +182,10 @@
  window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
-<script src="assets/layer/layer.js" type="text/javascript"></script>
+<script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
 $('.Product_Details').on('click', function(){
+	alert("111");
     layer.open({
         type: 1,
         title: '产品详情',
@@ -209,7 +225,7 @@ $('.Attribute_btn').on('click', function(){
 $('#Add_Product_btn').on('click', function(){
     layer.open({
         type: 1,
-        title: '添加/修噶产品',
+        title: '添加/修改产品',
 		shadeClose: true, //点击遮罩关闭层
         area: ['600px' , ''],
         content: $('#Add_Product_style'),
