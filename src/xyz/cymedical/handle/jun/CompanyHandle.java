@@ -38,7 +38,7 @@ public class CompanyHandle {
 		Company company = companyBiz.companyLogin(userName, password);
 		ModelAndView modelAndView = new ModelAndView();
 		if (company!=null) {
-			modelAndView.setViewName("WEB-INF/medical_workstation/company-manage");
+			modelAndView.setViewName("WEB-INF/medical_workstation/index");
 			return modelAndView;
 		}else {
 			try {
