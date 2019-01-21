@@ -2,6 +2,8 @@ package xyz.cymedical.entity.ctx;
 
 import org.springframework.stereotype.Component;
 
+import xyz.cymedical.entity.jun.Company;
+
 /**
  * 2019年1月20日
  * 
@@ -18,6 +20,8 @@ public class LogCompany {
 	public String operate;// 操作事项
 	public int money;// 金额
 	public String time;// 时间
+
+	private Company company;
 
 	public LogCompany() {
 		super();
@@ -70,6 +74,14 @@ public class LogCompany {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 }
