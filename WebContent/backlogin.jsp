@@ -26,7 +26,7 @@ function passwordIsTrue(){
 	var kcode =  document.getElementById("checkCode").value;
 	 $.ajax({
 		 type:"POST",
-		 url:"log/findAllLog.handle",
+		 url:"user/login.handle",
 		 data:{
 			 "account":account,
 			 "pwd":pwd,
