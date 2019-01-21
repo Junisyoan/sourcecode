@@ -91,14 +91,16 @@
 						<c:forEach items="${prolist }" var="p" varStatus="s">
 							<tr>
 								<td>${s.index + 1}</td>
-								<td>${p.patientname}</td>
-								<td>${p.projectname}</td>
+								<td>${p.patient_id}</td>
+								<td>${p.project_id}</td>
 								<td>${p.state}</td>
 								<td class="center">
-								<c:if test="${p.PNAME=='待审核'}">
-									<a href="<%=path %>CardManageServlet?action=ToApproval&appid=${apply.APPLICATIONID}&appname=${apply.APPLYNAME}&apptime=${apply.APPLYTIME}&amount=${apply.AMOUNT}&saleid=${apply.SALESPERSONID}">审核</a>
+								<c:if test="${p.state=='未接收' }">
+									<a href="<%=path %>doctor/receive.handle?projectid=${p.project_id}"><button type="button" class="btn btn-primary">接收</button></a>
 								</c:if> 
-								<a href="<%=path %>CardManageServlet?action=ToApprMsg&appname=${apply.APPLYNAME}&apptime=${apply.APPLYTIME}&amount=${apply.AMOUNT}&adminname=${apply.ADMINNAME}&apprtime=${apply.APPROVETIME}&appid=${apply.APPLICATIONID}">查看</a>
+								<c:if test="${p.state=='已接收' }">
+									<a href="<%=path %>doctor/Detail.handle?projectname=血常规 &patientid=1&projectid=1"><button type="button" class="btn btn-info Product_Details">检查</button></a>
+								</c:if> 
 								</td>
 							</tr>
 						</c:forEach>
