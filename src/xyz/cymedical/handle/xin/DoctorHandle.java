@@ -28,4 +28,18 @@ public class DoctorHandle {
 		return mav;
 
 	}
+	
+	@RequestMapping(value = "/index.handle")
+	public ModelAndView find() {
+
+		System.out.println("index....");
+
+		System.out.println(doctorbiz.findMyDetails(""));
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
+		return mav;
+
+	}
+	
 }
