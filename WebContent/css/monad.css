@@ -1,0 +1,39 @@
+form {
+    border: 1px black solid;
+    height: auto;
+    width: 500px;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 20px 0 0 250px;
+    text-align: center;
+}
+
+p{
+    width: 500px;
+    height: 22px;
+}
+
+p span{
+    float: left;
+    width: 200px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 16px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+p input,p label{
+    margin-right: 10px;
+    float: left;
+}
+
+.btn input{
+    width: 80px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.btn{
+    margin-bottom: 10px;
+}
