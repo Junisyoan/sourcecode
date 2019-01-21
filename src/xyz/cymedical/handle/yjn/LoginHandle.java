@@ -82,7 +82,7 @@ public class LoginHandle {
 		System.out.println(logCompanylist.size());
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/companylog");
+		mav.setViewName("WEB-INF/logcompany");
 		mav.addObject("logCompanylist", logCompanylist);
 		return mav;
 
