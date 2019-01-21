@@ -35,7 +35,7 @@ public class LogCompanyHandle {
 		logCompanylist = logCompanyBiz.queryByName(name);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/logcompany");
+		mav.setViewName("WEB-INF/ctx/logcompany");
 		mav.addObject("logCompanylist", logCompanylist);
 		return mav;
 
