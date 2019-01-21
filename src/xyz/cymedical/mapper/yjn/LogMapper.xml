@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.yjn.LogMapper">
+	
+	<select id="findAllLog"
+		parameterType="xyz.cymedical.entity.yjn.Log"
+		resultType="xyz.cymedical.entity.yjn.Log">
+		select * from tb_log
+	</select>
+
+
+</mapper>

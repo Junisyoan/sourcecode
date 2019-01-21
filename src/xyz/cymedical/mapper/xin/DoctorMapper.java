@@ -20,7 +20,7 @@ public interface DoctorMapper {
 	//query
 	
 	/**
-	 * 公司信息
+	 * 细项信息
 	 * @param code	条码号
 	 * @return	细项列表
 	 */
