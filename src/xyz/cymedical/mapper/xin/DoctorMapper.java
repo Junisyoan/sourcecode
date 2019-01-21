@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jun.Company;
-import xyz.cymedical.entity.xin.Detail;
+import xyz.cymedical.entity.zsc.Detail;
 
 /**
 * 2019年1月19日
@@ -24,5 +24,5 @@ public interface DoctorMapper {
 	 * @param code	条码号
 	 * @return	细项列表
 	 */
-	public List<Detail> findMyDetails(String code);
+	public List<Detail> findMyProject(String code);
 }
