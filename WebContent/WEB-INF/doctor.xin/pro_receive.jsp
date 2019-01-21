@@ -39,33 +39,33 @@
 				
 				
 				<!--     <button type="button" class="btn btn-primary" id="Add_Product_btn">添加产品</button> -->
-				<div class="Add_Manager_style">
-					<div id="Add_Product_style" style="display:none">
-						<div class="page-content">
-							<div class="add_user_style clearfix">
-								<ul class="clearfix">
-									<li><label class="label_name">产品名称</label> <input
-										name="产品名称" type="text" class="text_add" id="name_text" /><i
-										style="color: #F60;">*</i></li>
-									<li><label class="label_name">产品联系人</label><input name=""
-										type="text" class="text_add" /></li>
-									<li><label class="label_name">产品联系电话</label><input name=""
-										type="text" class="text_add" /></li>
-								</ul>
-								<div class="Remark">
-									<label class="label_name">备注</label>
-									<textarea name="" cols="" rows=""
-										style="width: 436px; height: 200px; padding: 5px;"></textarea>
-								</div>
-								<!--     <div class="btn_operating"><button  type="button" class="btn btn-primary" id="submit">保存</button><button  type="button" class="btn btn-warning">重置</button></div>-->
-							</div>
-						</div>
-					</div>
+<!-- 				<div class="Add_Manager_style"> -->
+<!-- 						<div class="page-content"> -->
+<!-- 							<div class="add_user_style clearfix"> -->
+<!-- 								<ul class="clearfix"> -->
+<!-- 									<li><label class="label_name">产品名称</label> <input -->
+<!-- 										name="产品名称" type="text" class="text_add" id="name_text" /><i -->
+<!-- 										style="color: #F60;">*</i></li> -->
+<!-- 									<li><label class="label_name">产品联系人</label><input name="" -->
+<!-- 										type="text" class="text_add" /></li> -->
+<!-- 									<li><label class="label_name">产品联系电话</label><input name="" -->
+<!-- 										type="text" class="text_add" /></li> -->
+<!-- 								</ul> -->
+<!-- 								<div class="Remark"> -->
+<!-- 									<label class="label_name">备注</label> -->
+<!-- 									<textarea name="" cols="" rows="" -->
+<!-- 										style="width: 436px; height: 200px; padding: 5px;"></textarea> -->
+<!-- 								</div> -->
+<!-- 								    <div class="btn_operating"><button  type="button" class="btn btn-primary" id="submit">保存</button><button  type="button" class="btn btn-warning">重置</button></div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 
 			<div class="Manager_style">
 				<span class="title_name">产品信息</span>
+			<form method="post" action="<%=path %>doctor/findProject.handle">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
@@ -76,28 +76,26 @@
 							<th>操作</th>
 						</tr>
 					</thead>
-
 					<tbody>
-
 						<tr>
 							<td>1</td>
 							<td>13505140602</td>
 							<td>备注信息</td>
 							<td>备注信息</td>
-							<td><button type="button"
-									class="btn btn-info Product_Details">详情</button>
+							<td>
+								<a href="<%=path %>doctor/Detail.handle?projectname=血常规 &patientid=1&projectid=1"><button type="button" class="btn btn-info Product_Details">检查</button></a>
 								<button type="button" class="btn btn-primary">修改</button>
 								<button type="button" class="btn btn-warning">删除</button></td>
 						</tr>
 
-						<c:forEach items="${applylist }" var="apply" varStatus="s">
+						<c:forEach items="${prolist }" var="p" varStatus="s">
 							<tr>
-								<td>${apply.ROWNUM}</td>
-								<td>${apply.APPLYTIME}</td>
-								<td>${apply.APPLYNAME}</td>
-								<td>${apply.AMOUNT}</td>
+								<td>${s.index + 1}</td>
+								<td>${p.patientname}</td>
+								<td>${p.projectname}</td>
+								<td>${p.state}</td>
 								<td class="center">
-								<c:if test="${apply.PNAME=='待审核'}">
+								<c:if test="${p.PNAME=='待审核'}">
 									<a href="<%=path %>CardManageServlet?action=ToApproval&appid=${apply.APPLICATIONID}&appname=${apply.APPLYNAME}&apptime=${apply.APPLYTIME}&amount=${apply.AMOUNT}&saleid=${apply.SALESPERSONID}">审核</a>
 								</c:if> 
 								<a href="<%=path %>CardManageServlet?action=ToApprMsg&appname=${apply.APPLYNAME}&apptime=${apply.APPLYTIME}&amount=${apply.AMOUNT}&adminname=${apply.ADMINNAME}&apprtime=${apply.APPROVETIME}&appid=${apply.APPLICATIONID}">查看</a>
@@ -106,8 +104,8 @@
 						</c:forEach>
 
 					</tbody>
-
-				</table>
+				 </table>
+				</form>
 			</div>
 
 			<!--     <div class="Manager_style"> -->
