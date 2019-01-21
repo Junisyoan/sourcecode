@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import xyz.cymedical.entity.ctx.LogCompany;
 
 /**
- * 2019年1月20日
+ * 2019-01-20
  * 
  * @author ctx
  * @version 1.0
