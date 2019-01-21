@@ -5,9 +5,9 @@
 
 <mapper namespace="xyz.cymedical.mapper.xin.DoctorMapper">
 <!-- 登录 -->
-	<select id="findMyProject" parameterType="String" resultType="xyz.cymedical.entity.xin.Detail">
-		select * from tb_detail
-	</select>
+<!-- 	<select id="findMyProject" parameterType="String" resultType="xyz.cymedical.entity.xin.Detail"> -->
+<!-- 		select * from tb_detail -->
+<!-- 	</select> -->
 
 	
 </mapper> 
