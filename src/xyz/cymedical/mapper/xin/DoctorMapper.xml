@@ -4,10 +4,13 @@
 
 
 <mapper namespace="xyz.cymedical.mapper.xin.DoctorMapper">
-<!-- 登录 -->
-<!-- 	<select id="findMyProject" parameterType="String" resultType="xyz.cymedical.entity.xin.Detail"> -->
-<!-- 		select * from tb_detail -->
-<!-- 	</select> -->
+<!-- 查询套餐内项目 -->
+	<select id="findMyProject" parameterType="String" resultMap="PatPro">
+		select * from tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d
+		where a.combo_id=b.combo_id and b.project_id=c.project_id and d.project_id=c.project_id
+	</select>
 
-	
+	<resultMap  id="PatPro" type="xyz.cymedical.entity.xin.Patient_Project">
+		
+	</resultMap>	
 </mapper> 
