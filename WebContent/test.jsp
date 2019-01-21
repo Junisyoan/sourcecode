@@ -12,6 +12,7 @@
 </head>
 <body>
 	<a href="<%=path%>log/findAllLog.handle">测试</a>
+	<a href="<%=path%>doctor/index.handle">doc测试</a>
 </body>
 
 </html>
