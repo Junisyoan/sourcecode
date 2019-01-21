@@ -60,7 +60,7 @@ public class LoginHandle {
 
 		System.out.println("2222");
 
-		System.out.println(doctorbiz.findMyDetails(""));
+		System.out.println(doctorbiz.findMyProject(""));
 
 		System.out.println(userBiz.findAll());
 
