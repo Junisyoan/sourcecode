@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -70,7 +71,11 @@ public class CompanyHandle {
 					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 					stream.write(bytes);
 					stream.close();
-					System.out.println("上传成功，写入数据库");
+					System.out.println("上传成功，准备写入数据库");
+					
+					companyBiz.lo
+					
+					CompanyFile insertFile = new CompanyFile(-1, company_id, fname, fsize, fpath, ftime);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
