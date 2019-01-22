@@ -9,7 +9,11 @@
 
 	<select id="findUser"   parameterType="xyz.cymedical.entity.jiang.Tb_user"
 		resultType="xyz.cymedical.entity.jiang.Tb_user">
+<<<<<<< HEAD
 		select * from tb_user where uname = #{uname} and pwd=#{pwd}
+=======
+		select * from tb_user where  account = #{account} and pwd=#{pwd}
+>>>>>>> 8725e2e9078cab9b86e9b2b0d6e46a50a90b7c9f
 	</select>
  
  	<select id="findAll" resultType="xyz.cymedical.entity.jiang.Tb_user">
