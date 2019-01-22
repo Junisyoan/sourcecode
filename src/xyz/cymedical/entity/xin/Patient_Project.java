@@ -2,6 +2,8 @@ package xyz.cymedical.entity.xin;
 
 import org.springframework.stereotype.Component;
 
+import xyz.cymedical.entity.zsc.Project;
+
 @Component
 public class Patient_Project {
 	
@@ -12,26 +14,28 @@ public class Patient_Project {
 	*/
 	
 	private int patient_project_id;
-	private int patient_id;
-	private int project_id;
+	
+	private Patient patient;
+	private Project project;
+	
 	private String state;
 	
 	public Patient_Project() {
 		super();
 	}
 
-	public Patient_Project(int patient_id, int project_id, String state) {
+	public Patient_Project(Patient patient, Project project, String state) {
 		super();
-		this.patient_id = patient_id;
-		this.project_id = project_id;
+		this.patient = patient;
+		this.project = project;
 		this.state = state;
 	}
 
-	public Patient_Project(int patient_project_id, int patient_id, int project_id, String state) {
+	public Patient_Project(int patient_project_id, Patient patient, Project project, String state) {
 		super();
 		this.patient_project_id = patient_project_id;
-		this.patient_id = patient_id;
-		this.project_id = project_id;
+		this.patient = patient;
+		this.project = project;
 		this.state = state;
 	}
 
@@ -43,20 +47,20 @@ public class Patient_Project {
 		this.patient_project_id = patient_project_id;
 	}
 
-	public int getPatient_id() {
-		return patient_id;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
-	public int getProject_id() {
-		return project_id;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setProject_id(int project_id) {
-		this.project_id = project_id;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String getState() {
@@ -69,8 +73,8 @@ public class Patient_Project {
 
 	@Override
 	public String toString() {
-		return "Patient_Project [patient_project_id=" + patient_project_id + ", patient_id=" + patient_id
-				+ ", project_id=" + project_id + ", state=" + state + "]";
+		return "Patient_Project [patient_project_id=" + patient_project_id + ", patient=" + patient + ", project="
+				+ project + ", state=" + state + "]";
 	}
 
 	
