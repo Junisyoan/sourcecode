@@ -25,10 +25,15 @@ public class PatientHandle {
 
 	}
 
-	// 公司记账
+	// 人员查询
 	@RequestMapping(value = "/findpatient.handle")
 	public ModelAndView findpatient(String name, String phone, String time, String code) {
 
+		System.out.println(name+"2222");
+		System.out.println(phone+"3333");
+		System.out.println(time+"4444");
+		System.out.println(code+"5555");
+		
 		patientlist = patientMapper.query(name, phone, time, code);
 
 		ModelAndView mav = new ModelAndView();
