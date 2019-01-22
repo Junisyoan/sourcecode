@@ -16,6 +16,7 @@
 	<a href="<%=path%>doctor/index.handle">doc测试</a>
 
 	<a href="<%=path%>patient/findpatient.handle">测试</a>
+	<a href="<%=path%>logcompany/findlogcompany.handle">测试</a>
 
 </body>
 
