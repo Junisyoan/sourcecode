@@ -12,7 +12,7 @@
 		where c.name = #{name}
 	</select>
 
-	<resultMap type="xyz.cymedical.entity.xin.LogCompany"
+	<resultMap type="xyz.cymedical.entity.ctx.LogCompany"
 		id="logcompanyMap">
 		
 		<id property="company_id" column="company_id" />
