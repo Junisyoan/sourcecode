@@ -21,15 +21,15 @@ String path = request.getScheme() + "://" + request.getServerName() + ":" + requ
 			<thead>
 				<tr>
 					<th>序号</th>
+					<th>文件名</th>
+					<th>上传时间</th>
 					<th>操作</th>
-					<th>金额</th>
-					<th>时间</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${logCompanylist}" var="l" varStatus="s">
+				<c:forEach items="${listFile}" var="l">
 					<tr>
-						<td>${s.index + 1}</td>
+						<td>${l.file_id + 1}</td>
 						<td>${l.operate}</td>
 						<td>${l.money}</td>
 						<td>${l.time}</td>
