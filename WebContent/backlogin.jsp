@@ -43,6 +43,9 @@ function passwordIsTrue(){
 			}else if(data=="医生"){
 				alert("登陆成功！您的身份为医生！");
 				window.location.href="<%=path%>doctor/index.handle";
+			}else if(data=="后台"){
+				alert("登陆成功！");
+				window.location.href="<%=path%>user/index.handle";
 			}
 			else{
 				document.getElementById("checkCode").value = "";
