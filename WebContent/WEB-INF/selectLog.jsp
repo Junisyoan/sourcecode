@@ -22,8 +22,10 @@
 			<tr>
 				<th>序号</th>
 				<th>操作人</th>
-				<th>操作时间</th>
 				<th>操作事项</th>
+				<th>操作时间</th>
+				<th>删除</th>
+
 			</tr>
 			<c:forEach items="${loglist}" var="l" varStatus="s">
 				<tr>
@@ -31,6 +33,7 @@
 					<td>${l.user_id}</td>
 					<td>${l.opera}</td>
 					<td>${l.time}</td>
+					<td><a href="<%=path%>log/delLog.handle?log_id=${l.log_id}">删除</a></td>
 				</tr>
 			</c:forEach>
 		</table>
