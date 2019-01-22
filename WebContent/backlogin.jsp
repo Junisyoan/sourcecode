@@ -42,7 +42,7 @@ function passwordIsTrue(){
 				window.location.href="<%=path%>user/index.handle";
 			}else if(data=="医生"){
 				alert("登陆成功！您的身份为医生！");
-				window.location.href="<%=path%>doctor/";
+				window.location.href="<%=path%>doctor/index.handle";
 			}
 			else{
 				document.getElementById("checkCode").value = "";
