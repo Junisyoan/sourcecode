@@ -37,7 +37,7 @@ public class CompanyHandle {
 	 */
 	@RequestMapping(value="/fileUpload.handle", method=RequestMethod.POST)
 	public String fileUpload(MultipartFile companyFile) {
-		
+		return null;
 	}
 	
 	/*
