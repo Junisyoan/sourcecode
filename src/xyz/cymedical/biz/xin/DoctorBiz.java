@@ -20,5 +20,10 @@ public interface DoctorBiz {
 	 * @return	返回条码对应的病人所有已选项目
 	 */
 	public List<Map<String,Object>> findMyProject(String code);
+	
+	public List<Map<String,Object>> findMyDetail(int projectid,int patientid);
+	
+	//项目接收
+	public boolean receive(int patient_project_id);
 
 }
