@@ -49,7 +49,7 @@ public class LoginHandle {
 	@RequestMapping(value = "/index.handle")
 	public ModelAndView find() {
 
-		System.out.println("2222");
+		System.out.println("2222111");
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.jiang/index");

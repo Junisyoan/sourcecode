@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
+import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -31,6 +34,8 @@ public class CompanyHandle {
 
 	@Resource
 	private CompanyBiz companyBiz; 			//公司的业务逻辑
+	@Resource
+	private CompanyFileBiz companyFileBiz;	//上传文件业务
 	private ModelAndView modelAndView;		//视图和模型
 	private Company company;				//公司信息
 	
@@ -53,7 +58,7 @@ public class CompanyHandle {
 	 * 上传团检文件
 	 */
 	@RequestMapping(value="/fileUpload.handle", method=RequestMethod.POST)
-	public String fileUpload(HttpServletRequest request,MultipartFile companyFile) {
+	public String fileUpload(HttpServletRequest request,HttpServletResponse response, MultipartFile companyFile) {
 		company = (Company)request.getSession().getAttribute("user");
 		System.out.println(companyFile.getSize());
 		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/"+company.getName()));
@@ -70,7 +75,14 @@ public class CompanyHandle {
 					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 					stream.write(bytes);
 					stream.close();
-					System.out.println("上传成功，写入数据库");
+					System.out.println("上传成功，准备写入数据库");
+					
+					CompanyFile insertFile = new CompanyFile(-1, company.getCompany_id(), companyFile.getOriginalFilename(), companyFile.getSize(),file.getAbsolutePath() , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+					if(companyFileBiz.insertFile(insertFile)) {
+						
+					}
+					
+				
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
