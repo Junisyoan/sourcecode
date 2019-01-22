@@ -90,7 +90,12 @@ public class CompanyHandle {
 					stream.close();
 					System.out.println("上传成功，准备写入数据库");
 					
-					CompanyFile insertFile = new CompanyFile(-1, company.getCompany_id(), companyFile.getOriginalFilename(), companyFile.getSize(),file.getAbsolutePath() , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+					CompanyFile insertFile = new CompanyFile(-1, 
+							company.getCompany_id(), 
+							companyFile.getOriginalFilename(), 
+							companyFile.getSize(),
+							file.getAbsolutePath() , 
+							new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis()));
 					if(companyFileBiz.insertFile(insertFile)) {
 						System.out.println("写入成功，开始解析文件");
 						
