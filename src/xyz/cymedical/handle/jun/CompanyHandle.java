@@ -1,6 +1,9 @@
 package xyz.cymedical.handle.jun;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.annotation.Resource;
@@ -29,6 +32,8 @@ public class CompanyHandle {
 	@Resource
 	private CompanyBiz companyBiz; 			//公司的业务逻辑
 	private ModelAndView modelAndView;		//视图和模型
+	private Company company;				//公司信息
+	
 	
 	public CompanyHandle() {
 	}
@@ -36,22 +41,45 @@ public class CompanyHandle {
 	/*
 	 * 获取上传文档的路径
 	 */
+	@RequestMapping(value="/getUpFilePath.handle",method=RequestMethod.GET)
 	public ModelAndView getUpFilePath() {
 		System.out.println("获取上传文件地址");
 		modelAndView = new ModelAndView();
-		modelAndView.setViewName("WEB-INF/medical_workstation/upfile-group.jsp");
+		modelAndView.setViewName("WEB-INF/medical_workstation/upfile-group");
 		return modelAndView;
 	}
-	
 	
 	/*
 	 * 上传团检文件
 	 */
 	@RequestMapping(value="/fileUpload.handle", method=RequestMethod.POST)
 	public String fileUpload(HttpServletRequest request,MultipartFile companyFile) {
-		
+		company = (Company)request.getSession().getAttribute("user");
 		System.out.println(companyFile.getSize());
-		
+		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/"+company.getName()));
+		System.out.println(fileDir.getPath());
+		//目录是否存在
+		if (fileDir.isDirectory()) {
+			//创建文件
+			File file = new File(fileDir.getAbsolutePath()+"/"+companyFile.getOriginalFilename());
+			if (file.exists()) {
+				System.out.println("文件存在");
+			} else {
+				try {
+					byte [] bytes=companyFile.getBytes();
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+					stream.write(bytes);
+					stream.close();
+					System.out.println("上传成功，写入数据库");
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			System.out.println("目录不存在");
+		}
 		return null;
 	}
 	
@@ -69,6 +97,7 @@ public class CompanyHandle {
 					+ request.getServerPort()
 					+ request.getContextPath() + "/";
 			request.getSession().setAttribute("path", path);
+			request.getSession().setAttribute("user", company);
 			modelAndView.setViewName("WEB-INF/medical_workstation/index");
 			return modelAndView;
 		}else {
