@@ -12,35 +12,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>体检人员查询</title>
-<script>
-function export(){
-	alert("1111");
-  var table = document.getElementById(mytalbe);
-    // 克隆（复制）此table元素，这样对复制品进行修改（如添加或改变table的标题等），导出复制品，而不影响原table在浏览器中的展示。
-    table = table.cloneNode(true);
-    var uri = 'data:application/vnd.ms-excel;base64,',
-        template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><?xml version="1.0" encoding="UTF-8" standalone="yes"?><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table style="vnd.ms-excel.numberformat:@">{table}</table></body></html>',
-        base64 = function(s) {
-            return window.btoa(unescape(encodeURIComponent(s)));
-        },
-        format = function(s, c) {
-            return s.replace(/{(\w+)}/g, function(m, p) {
-                return c[p];
-            });
-        };
-    if(!table.nodeType) table = document.getElementById(table);
-    var ctx = {
-        worksheet: name || 'Worksheet',
-        table: table.innerHTML
-    };
-    window.location.href = uri + base64(format(template, ctx));  
-}
-</script>
 </head>
 
 <body>
 	<form id="form1" name="form1" method="post" action=""
-		style="border: 1px solid #000; margin: 50px 140px;">
+		style="border: 1px solid #000; margin: 50px 40px;">
 		<p align="center">&nbsp;</p>
 		<p align="center">
 			姓名 <input type="text" name="doc.title" id="doc.title"
@@ -55,8 +31,7 @@ function export(){
 				type="submit" value="查询"
 				style="height: 25px; width: 100px; font-size: 15px;" />&nbsp;&nbsp;<a
 				href=""><input type="button" value="Excel导出"
-				style="height: 25px; width: 100px; font-size: 15px;"
-				onclick="function export()" /></a>
+				style="height: 25px; width: 100px; font-size: 15px;" /></a>
 		</p>
 		<table width="1000" border="1" align="center" id="mytalbe">
 			<tr align="center">
@@ -70,7 +45,7 @@ function export(){
 				<td width="130">体检号</td>
 			</tr>
 			<c:forEach items="${patientlist}" var="p" varStatus="s">
-				<tr>
+				<tr align="center">
 					<td>${p.name}</td>
 					<td>${p.company_id}</td>
 					<td>${p.sex}</td>
