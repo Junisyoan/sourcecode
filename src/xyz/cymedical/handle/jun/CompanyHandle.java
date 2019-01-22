@@ -53,6 +53,7 @@ public class CompanyHandle {
 		System.out.println("查询文件列表，页码"+pageNum);
 		listFile = companyFileBiz.queryFileList(pageNum);
 		modelAndView = new ModelAndView("WEB-INF/medical_workstation/file-list");
+		modelAndView.addObject("listFile", listFile);
 		return modelAndView;
 	}
 	
