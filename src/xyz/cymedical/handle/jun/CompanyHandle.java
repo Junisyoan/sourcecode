@@ -57,10 +57,11 @@ public class CompanyHandle {
 		company = (Company)request.getSession().getAttribute("user");
 		System.out.println(companyFile.getSize());
 		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/"+company.getName()));
+		System.out.println(fileDir.getPath());
 		//目录是否存在
 		if (fileDir.isDirectory()) {
 			//创建文件
-			File file = new File(fileDir.getAbsolutePath()+"/"+companyFile.getName());
+			File file = new File(fileDir.getAbsolutePath()+"/"+companyFile.getOriginalFilename());
 			if (file.exists()) {
 				System.out.println("文件存在");
 			} else {
@@ -69,6 +70,7 @@ public class CompanyHandle {
 					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 					stream.write(bytes);
 					stream.close();
+					System.out.println("上传成功，写入数据库");
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -76,7 +78,7 @@ public class CompanyHandle {
 				}
 			}
 		} else {
-
+			System.out.println("目录不存在");
 		}
 		return null;
 	}
