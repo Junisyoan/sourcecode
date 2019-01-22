@@ -1,6 +1,8 @@
 package xyz.cymedical.mapper.xin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -24,5 +26,5 @@ public interface DoctorMapper {
 	 * @param code	条码号
 	 * @return	细项列表
 	 */
-	public List<Detail> findMyProject(String onecode);
+	public List<Map<String,Object>> findMyProject(String onecode);
 }
