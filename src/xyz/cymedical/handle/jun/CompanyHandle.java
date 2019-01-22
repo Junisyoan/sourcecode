@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +39,21 @@ public class CompanyHandle {
 	private CompanyFileBiz companyFileBiz;	//上传文件业务
 	private ModelAndView modelAndView;		//视图和模型
 	private Company company;				//公司信息
-	
+	private List<CompanyFile> listFile;		//文件列表
 	
 	public CompanyHandle() {
+	}
+	
+	
+	/*
+	 * 获得所上传的文件列表
+	 */
+	@RequestMapping(value="/getFileList.handle",method=RequestMethod.GET)
+	public ModelAndView getFileList(String pageNum) {
+		System.out.println("查询文件列表，页码"+pageNum);
+		listFile = companyFileBiz.queryFileList(pageNum);
+		modelAndView = new ModelAndView("WEB-INF/medical_workstation/file-list");
+		return modelAndView;
 	}
 	
 	/*
@@ -79,9 +92,12 @@ public class CompanyHandle {
 					
 					CompanyFile insertFile = new CompanyFile(-1, company.getCompany_id(), companyFile.getOriginalFilename(), companyFile.getSize(),file.getAbsolutePath() , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
 					if(companyFileBiz.insertFile(insertFile)) {
+						System.out.println("写入成功，开始解析文件");
 						
+						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件成功"));
+					}else {
+						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
 					}
-					
 				
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
