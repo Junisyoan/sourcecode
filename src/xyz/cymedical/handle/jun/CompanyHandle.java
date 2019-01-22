@@ -28,10 +28,21 @@ public class CompanyHandle {
 
 	@Resource
 	private CompanyBiz companyBiz; 			//公司的业务逻辑
-	
+	private ModelAndView modelAndView;		//视图和模型
 	
 	public CompanyHandle() {
 	}
+	
+	/*
+	 * 获取上传文档的路径
+	 */
+	public ModelAndView getUpFilePath() {
+		System.out.println("获取上传文件地址");
+		modelAndView = new ModelAndView();
+		modelAndView.setViewName("WEB-INF/medical_workstation/upfile-group.jsp");
+		return modelAndView;
+	}
+	
 	
 	/*
 	 * 上传团检文件
