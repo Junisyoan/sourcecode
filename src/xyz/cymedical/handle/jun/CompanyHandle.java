@@ -3,11 +3,13 @@ package xyz.cymedical.handle.jun;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
@@ -26,18 +28,32 @@ public class CompanyHandle {
 	@Resource
 	private CompanyBiz companyBiz; 			//公司的业务逻辑
 	
+	
 	public CompanyHandle() {
+	}
+	
+	/*
+	 * 上传团检文件
+	 */
+	@RequestMapping(value="/fileUpload.handle", method=RequestMethod.POST)
+	public String fileUpload(MultipartFile companyFile) {
+		
 	}
 	
 	/*
 	 * 公司用户登录
 	 */
 	@RequestMapping(value="/loginCompany.handle", method=RequestMethod.POST)
-	public ModelAndView	companyLogin(HttpServletResponse response, String userName,String password) {
+	public ModelAndView	companyLogin(HttpServletRequest request, HttpServletResponse response, String userName,String password) {
 		System.out.println("用户登录"+userName);
 		Company company = companyBiz.companyLogin(userName, password);
 		ModelAndView modelAndView = new ModelAndView();
 		if (company!=null) {
+			String path = request.getScheme() + "://" 
+					+ request.getServerName() + ":" 
+					+ request.getServerPort()
+					+ request.getContextPath() + "/";
+			request.getSession().setAttribute("path", path);
 			modelAndView.setViewName("WEB-INF/medical_workstation/index");
 			return modelAndView;
 		}else {
