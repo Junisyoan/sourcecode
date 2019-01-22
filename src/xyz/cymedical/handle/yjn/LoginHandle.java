@@ -44,4 +44,39 @@ public class LoginHandle {
 
 	}
 
+<<<<<<< HEAD
+=======
+	@RequestMapping(value = "/index.handle")
+	public ModelAndView find() {
+
+		System.out.println("2222");
+
+		System.out.println(doctorbiz.findMyProject(""));
+
+		System.out.println(userBiz.findAll());
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/index");
+		return mav;
+
+	}
+
+	// 公司记账
+	@RequestMapping(value = "/findcompanylog.handle")
+	public ModelAndView findcompanylog() {
+
+		// 没写完，数据未获取
+		String name = "蓝色科技";
+
+		logCompanylist = logCompanyBiz.queryByName(name);
+
+		System.out.println(logCompanylist.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/logcompany");
+		mav.addObject("logCompanylist", logCompanylist);
+		return mav;
+
+	}
+>>>>>>> 451b6c79b874ed54515fa511dceb29b0dcb6cdfc
 }
