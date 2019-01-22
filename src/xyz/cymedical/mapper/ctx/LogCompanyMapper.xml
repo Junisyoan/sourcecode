@@ -14,11 +14,13 @@
 
 	<resultMap type="xyz.cymedical.entity.ctx.LogCompany"
 		id="logcompanyMap">
+		
 		<id property="company_id" column="company_id" />
 		<result property="log_company_id" column="log_company_id" />
 		<result property="operate" column="operate" />
 		<result property="money" column="money" />
 		<result property="time" column="time" />
+		
 		<association property="company" column="company_id"
 			javaType="xyz.cymedical.entity.jun.Company">
 			<id property="company_id" column="company_id" />
