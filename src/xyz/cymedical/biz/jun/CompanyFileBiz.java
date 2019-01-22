@@ -1,6 +1,6 @@
 package xyz.cymedical.biz.jun;
 
-import org.springframework.web.multipart.MultipartFile;
+import xyz.cymedical.entity.jun.CompanyFile;
 
 /**
 *	@author Junisyoan;
@@ -17,5 +17,5 @@ public interface CompanyFileBiz {
 	 * @param file	文件
 	 * @return	是否插入成功
 	 */
-	public boolean insertFile(MultipartFile file);
+	public boolean insertFile(CompanyFile file);
 }
