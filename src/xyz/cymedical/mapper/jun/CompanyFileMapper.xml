@@ -4,6 +4,10 @@
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyFileMapper">
 
+	<select id="queryFileList" parameterType="int" resultType="xyz.cymedical.entity.jun.CompanyFile">
+		select * from tb_file limit #{pageNo}, 10
+	</select>
+
 	<insert id="insertFile" parameterType="xyz.cymedical.entity.jun.CompanyFile">
 		insert into tb_file(company_id,fname,fsize,fpath,ftime) values(#{company_id},#{fname},#{fsize},#{fpath},#{ftime})
 	</insert>
