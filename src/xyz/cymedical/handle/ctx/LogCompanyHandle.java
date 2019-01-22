@@ -28,7 +28,7 @@ public class LogCompanyHandle {
 	// 公司记账
 	@RequestMapping(value = "/findlogcompany.handle")
 	public ModelAndView findcompanylog(String name) {
-		
+
 		System.out.println("2323232");
 
 		logCompanylist = logCompanyBiz.queryByName("蓝们科技");
