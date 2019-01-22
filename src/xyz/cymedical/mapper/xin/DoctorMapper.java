@@ -24,5 +24,5 @@ public interface DoctorMapper {
 	 * @param code	条码号
 	 * @return	细项列表
 	 */
-	public List<Detail> findMyProject(String code);
+	public List<Detail> findMyProject(String onecode);
 }

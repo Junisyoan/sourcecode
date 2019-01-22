@@ -15,8 +15,7 @@
 </head>
 
 <body>
-	<form id="form1" name="form1" method="post"
-		action="<%=path%>"
+	<form id="form1" name="form1" method="post" action="<%=path%>"
 		style="border: 1px solid #000; margin: 50px 140px;">
 		<p align="center">&nbsp;</p>
 		<p align="center">
@@ -45,6 +44,18 @@
 				<td width="130">条码号</td>
 				<td width="130">体检号</td>
 			</tr>
+			<c:forEach items="${patientlist}" var="p" varStatus="s">
+				<tr>
+					<td>${p.name}</td>
+					<td>${p.company_id}</td>
+					<td>${p.sex}</td>
+					<td>${p.age}</td>
+					<td>${p.ID}</td>
+					<td>${p.phone}</td>
+					<td>${p.code}</td>
+					<td>${p.check_num}</td>
+				</tr>
+			</c:forEach>
 			<tr align="center">
 				<td>张三疯</td>
 				<td>武当创新无限科技有限公司</td>

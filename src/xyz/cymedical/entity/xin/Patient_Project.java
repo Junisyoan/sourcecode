@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class Patient_Project {
 	
 	/**
-	* 2019年1月19日
+	* 2019年1月21日
 	* @author xin
 	* @version 1.0
 	*/

@@ -41,27 +41,9 @@
     <tr>
      <td>1</td>
      <td>项目名称叫什么</td>
-     <td>H434534534</td><td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td></tr>
-      <tr>
-      <td>1</td>
-      <td>项目名称叫什么</td>
-      <td>H434534534</td>
-      <td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td></tr>
-      <tr>
-      <td>1</td>
-      <td>项目名称叫什么</td>
-      <td>H434534534</td><td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
-      </tr>
-      <tr>
-      <td>1</td>
-      <td>项目名称叫什么</td>
-      <td>H434534534</td><td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
-      </tr>
-     <tr> 
-     <td>1</td>
-     <td>项目名称叫什么</td>
      <td>H434534534</td><td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
      </tr>
+      
    </tbody>
   </table>
  <iframe style="border:0; width:100%; background-color:#FFF;"  frameborder="0" src="page.html"></iframe>
