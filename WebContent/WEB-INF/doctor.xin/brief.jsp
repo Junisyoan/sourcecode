@@ -38,6 +38,29 @@
     <tr><th>序号</th><th>项目名称</th><th>项目编号</th><th>预计加油时间</th><th>加油地点</th><th>报价截止时间</th><th>总报价</th><th>操作</th></tr>
    </thead>
    <tbody>
+   
+   <c:forEach items="${dlist }" var="d" varStatus="s">
+		<tr>
+			<td>${s.index + 1}</td>
+			<td>${p.name}</td>
+			<td>${p.age}</td>
+			<td>${p.phone}</td>
+			<td>${p.projectname}</td>
+			<td>${p.state}</td>
+			<td class="center">
+			<c:if test="${p.state=='未接收' }">
+				<a href="<%=path %>doctor/receive.handle?patient_project_id=${p.patient_project_id} "><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">接收</button></a>
+			</c:if> 
+			<c:if test="${p.state=='已接收' }">
+				<a href="<%=path %>doctor/Detail.handle?projectname=${p.projectname} &patientid=${p.projectname}&projectid=${p.project_id}"><button type="button" class="btn btn-info Product_Details">检查</button></a>
+			</c:if> 
+			</td>
+		</tr>
+	</c:forEach>
+
+   
+   
+   
     <tr>
      <td>1</td>
      <td>项目名称叫什么</td>

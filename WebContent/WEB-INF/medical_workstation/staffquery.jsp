@@ -55,20 +55,22 @@
 						<th>手机号码</th>
 						<th>条码号</th>
 						<th>体检号</th>
+						<th>体检时间</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${patientlist}" var="p" varStatus="s">
 						<tr>
 							<td>${s.index + 1}</td>
-							<td>${p.name}</td>
-							<td>${p.company_id}</td>
+							<td>${p.n1}</td>
+							<td>${p.n2}</td>
 							<td>${p.sex}</td>
 							<td>${p.age}</td>
 							<td>${p.ID}</td>
 							<td>${p.phone}</td>
 							<td>${p.code}</td>
 							<td>${p.check_num}</td>
+							<td>${p.time}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
