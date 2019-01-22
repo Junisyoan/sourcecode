@@ -9,7 +9,7 @@
 
 	<select id="findUser"   parameterType="xyz.cymedical.entity.jiang.Tb_user"
 		resultType="xyz.cymedical.entity.jiang.Tb_user">
-		select * from tbuser where uname = #{uname} and pwd=#{pwd}
+		select * from tb_user where uname = #{uname} and pwd=#{pwd}
 	</select>
  
  	<select id="findAll" resultType="xyz.cymedical.entity.jiang.Tb_user">
