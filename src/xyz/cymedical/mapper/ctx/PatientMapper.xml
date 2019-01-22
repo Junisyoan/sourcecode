@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.ctx.PatientMapper">
+
+	<select id="query"
+		parameterType="xyz.cymedical.entity.jun.Patient"
+		resultType="xyz.cymedical.entity.jun.Patient">
+		select * from tb_patient where 1 = 1
+		<if test="name != null and name != ''">
+			and name like '%'||#{name}||'%'
+		</if>
+		<if test="phone != null and phone != ''">
+			and phone = #{phone}
+		</if>
+		<if test="name != null and name != ''">
+			and name like '%'||#{name}||'%'
+		</if>
+		<if test="time != null and time != ''">
+			and time = #{time}
+		</if>
+		<if test="code != null  and code != ''">
+			and code like '%'||#{code}||'%'
+		</if>
+	</select>
+
+</mapper>
