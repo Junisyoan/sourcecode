@@ -2,6 +2,7 @@ package xyz.cymedical.handle.xin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.xin.DoctorBiz;
-import xyz.cymedical.entity.xin.Patient_Project;
 import xyz.cymedical.entity.zsc.Project;
 
 
@@ -21,7 +21,7 @@ public class DoctorHandle {
 	@Resource
 	private DoctorBiz doctorbiz; 			//医生的业务逻辑
 	
-	List<Patient_Project> plist = new ArrayList<Patient_Project>();
+	 List<Map<String,Object>> plist;
 	
 	//查询一维码对应病人的导检单
 	@RequestMapping(value = "/findProject.handle")
@@ -31,11 +31,7 @@ public class DoctorHandle {
 
 		System.out.println(doctorbiz.findMyProject(onecode));
 		
-		plist.add(new Patient_Project(1,2,"未接收"));
-		plist.add(new Patient_Project(2,3,"未接收"));
-		plist.add(new Patient_Project(2,4,"未接收"));
-		plist.add(new Patient_Project(2,5,"未接收"));
-		
+		plist=doctorbiz.findMyProject(onecode);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("prolist", plist);
