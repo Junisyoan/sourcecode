@@ -9,4 +9,6 @@ import xyz.cymedical.entity.yjn.Log;
 @Repository
 public interface LogMapper {
 	public List<Log> findAllLog();
+
+	public boolean delLog(String log_id);
 }
