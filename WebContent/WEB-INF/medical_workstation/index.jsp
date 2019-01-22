@@ -86,8 +86,8 @@
 				     <li class="home"><a href="javascript:void(0)" name="home.html" class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a></li>
                      <li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text">团检人员管理 </span><b class="arrow icon-angle-down"></b></a>
 					   <ul class="submenu">
-                         <li class="home"><a  href="javascript:void(0)" name="${path }company/getUpFilePath.handle"  title="团检表上传" class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
-						 <li class="home"><a  href="javascript:void(0)" name="未到期询价项目.html" title="未到期询价项目"  class="iframeurl"><i class="icon-double-angle-right"></i>未到期询价项目</a></li>
+                         <li class="home"><a href="javascript:void(0)" name="<%=path %>company/getUpFilePath.handle"  title="团检表上传" class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
+						 <li class="home"><a href="javascript:void(0)" name="未到期询价项目.html" title="未到期询价项目"  class="iframeurl"><i class="icon-double-angle-right"></i>未到期询价项目</a></li>
 						 <li class="home"><a href="javascript:void(0)" name="已到期询价项目.html" title="已到期询价项目"  class="iframeurl"><i class="icon-double-angle-right"></i>已到期询价项目</a></li>
 						 <li class="home"><a href="javascript:void(0)" name="暂存项目.html" title="暂存项目"  class="iframeurl"><i class="icon-double-angle-right"></i>暂存项目</a></li>
 						 <li class="home"><a href="javascript:void(0)" name="模板维护.html" title="模板维护"  class="iframeurl"><i class="icon-double-angle-right"></i>模板维护</a></li>
