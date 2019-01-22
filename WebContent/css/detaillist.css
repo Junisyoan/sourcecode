@@ -1,0 +1,10 @@
+/* CSS Document */
+
+#top{border:#00F 0px solid;width:808px;border-left:200px}
+
+#top table{text-align:center;margin:0 auto 10px;border:0px solid red}
+
+#top table input{width:122px;border-radius:5px}
+#top table select{width:122px;border-radius:5px}
+
+#t1{}
