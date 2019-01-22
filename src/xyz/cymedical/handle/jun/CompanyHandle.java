@@ -1,5 +1,6 @@
 package xyz.cymedical.handle.jun;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
@@ -36,7 +37,10 @@ public class CompanyHandle {
 	 * 上传团检文件
 	 */
 	@RequestMapping(value="/fileUpload.handle", method=RequestMethod.POST)
-	public String fileUpload(MultipartFile companyFile) {
+	public String fileUpload(HttpServletRequest request,MultipartFile companyFile) {
+		
+		System.out.println(companyFile.getSize());
+		
 		return null;
 	}
 	
@@ -72,7 +76,7 @@ public class CompanyHandle {
 	 * 公司注册
 	 */
 	@RequestMapping(value="/regCompany.handle", method=RequestMethod.POST)
-	public String regCompany(HttpServletResponse response,Company company) {
+	public String regCompany(HttpServletResponse response,HttpServletRequest request, Company company) {
 		System.out.println(company);
 		//执行注册
 		String res = companyBiz.regCompany(company);
@@ -90,7 +94,14 @@ public class CompanyHandle {
 				break;
 				
 			case "注册成功":
-				System.out.println("公司注册成功");
+				System.out.println("公司注册成功，生成公司目录"+company.getName());
+				File file = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/"+company.getName()));
+				System.out.println(file.getPath());
+				if (file.mkdir()) {
+					System.out.println("目录创建成功");
+				}else {
+					System.out.println("创建失败");
+				}
 				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "login_company.html"));
 				break;
 				
