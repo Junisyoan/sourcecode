@@ -19,7 +19,7 @@ public class Company {
 	private String address;			//公司地址
 	private String people;			//领队人
 	private String phone;			//领队人电话
-	private double deposit;
+	private double deposit;			//金额、余额
 	public Company() {
 		super();
 	}
