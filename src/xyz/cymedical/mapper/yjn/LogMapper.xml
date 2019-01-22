@@ -3,12 +3,15 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.yjn.LogMapper">
-	
+
 	<select id="findAllLog"
 		parameterType="xyz.cymedical.entity.yjn.Log"
 		resultType="xyz.cymedical.entity.yjn.Log">
 		select * from tb_log
 	</select>
 
+	<delete id="delLog">
+		delete from tb_log where log_id = #{id}
+	</delete>
 
 </mapper>
