@@ -15,8 +15,8 @@
 </head>
 
 <body>
-	<form id="form1" name="form1" method="post" action="<%=path%>"
-		style="border: 1px solid #000; margin: 50px 140px;">
+	<form id="form1" name="form1" method="post" action=""
+		style="border: 1px solid #000; margin: 50px 40px;">
 		<p align="center">&nbsp;</p>
 		<p align="center">
 			姓名 <input type="text" name="doc.title" id="doc.title"
@@ -29,11 +29,11 @@
 			条码号 <input type="text" name="doc.title" id="doc.title"
 				style="height: 20px; width: 145px; font-size: 15px;" /> <input
 				type="submit" value="查询"
-				style="height: 25px; width: 100px; font-size: 15px;" />&nbsp;&nbsp;<input
-				type="submit" value="Excel导出"
-				style="height: 25px; width: 100px; font-size: 15px;" />
+				style="height: 25px; width: 100px; font-size: 15px;" />&nbsp;&nbsp;<a
+				href=""><input type="button" value="Excel导出"
+				style="height: 25px; width: 100px; font-size: 15px;" /></a>
 		</p>
-		<table width="1000" border="1" align="center">
+		<table width="1000" border="1" align="center" id="mytalbe">
 			<tr align="center">
 				<td width="100">姓名</td>
 				<td width="150">公司</td>
@@ -45,7 +45,7 @@
 				<td width="130">体检号</td>
 			</tr>
 			<c:forEach items="${patientlist}" var="p" varStatus="s">
-				<tr>
+				<tr align="center">
 					<td>${p.name}</td>
 					<td>${p.company_id}</td>
 					<td>${p.sex}</td>
