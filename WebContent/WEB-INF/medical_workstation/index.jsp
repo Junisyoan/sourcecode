@@ -99,8 +99,8 @@
 								name="<%=path %>company/getUpFilePath.handle" title="团检表上传"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="未到期询价项目.html" title="未到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>未到期询价项目</a></li>
+								name="<%=path %>company/getFileList.handle?pageNum=1" title="团检表列表" class="iframeurl"><i
+									class="icon-double-angle-right"></i>团检表列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已到期询价项目</a></li>
