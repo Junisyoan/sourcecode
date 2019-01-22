@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.entity.jun.Company;
-import xyz.cymedical.entity.xin.Detail;
+import xyz.cymedical.entity.zsc.Detail;
 import xyz.cymedical.mapper.jun.CompanyMapper;
 import xyz.cymedical.mapper.xin.DoctorMapper;
 
@@ -26,10 +26,12 @@ public class DoctorBizImpl  implements DoctorBiz {
 	private DoctorMapper doctorMapper;
 
 	@Override
-	public List<Detail> findMyDetails(String code) {
+	public List<Detail> findMyProject(String code) {
 		// TODO Auto-generated method stub
-		return doctorMapper.findMyDetails(code);
+		return doctorMapper.findMyProject(code);
 	}
+
+
 	
 
 }
