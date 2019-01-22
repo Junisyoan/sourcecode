@@ -31,12 +31,8 @@ public class DoctorHandle {
 
 		System.out.println(doctorbiz.findMyProject(onecode));
 		
-<<<<<<< HEAD
-=======
 		plist=doctorbiz.findMyProject(onecode);
 
-
->>>>>>> efd837ccd3ed6915c32478a050b39e45400d4765
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("prolist", plist);
 		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
