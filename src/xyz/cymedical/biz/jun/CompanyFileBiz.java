@@ -1,5 +1,7 @@
 package xyz.cymedical.biz.jun;
 
+import java.util.List;
+
 import xyz.cymedical.entity.jun.CompanyFile;
 
 /**
@@ -10,6 +12,15 @@ import xyz.cymedical.entity.jun.CompanyFile;
 */
 public interface CompanyFileBiz {
 
+	
+	//select
+	/**
+	 * 查询文件列表
+	 * @param pageNum	页码
+	 * @return	文件列表
+	 */
+	public List<CompanyFile> queryFileList(String pageNum);
+	
 	//insert
 	
 	/**
