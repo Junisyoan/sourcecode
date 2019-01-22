@@ -31,12 +31,6 @@ public class DoctorHandle {
 
 		System.out.println(doctorbiz.findMyProject(onecode));
 		
-		plist.add(new Patient_Project(1,2,"未接收"));
-		plist.add(new Patient_Project(2,3,"未接收"));
-		plist.add(new Patient_Project(2,4,"未接收"));
-		plist.add(new Patient_Project(2,5,"未接收"));
-		
-
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("prolist", plist);
 		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
