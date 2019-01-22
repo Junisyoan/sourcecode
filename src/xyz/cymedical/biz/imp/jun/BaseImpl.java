@@ -8,4 +8,6 @@ package xyz.cymedical.biz.imp.jun;
 public class BaseImpl {
 
 	protected boolean isExsit;
+	protected boolean isUpdate;
+	protected int pageNo;
 }
