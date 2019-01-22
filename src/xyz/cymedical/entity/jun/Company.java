@@ -19,11 +19,12 @@ public class Company {
 	private String address;			//公司地址
 	private String people;			//领队人
 	private String phone;			//领队人电话
+	private double deposit;
 	public Company() {
 		super();
 	}
-	public Company(int company_id, String name, String account, String pwd, String tel, String address,
-			String people, String phone) {
+	public Company(int company_id, String name, String account, String pwd, String tel, String address, String people,
+			String phone, double deposit) {
 		super();
 		this.company_id = company_id;
 		this.name = name;
@@ -33,6 +34,13 @@ public class Company {
 		this.address = address;
 		this.people = people;
 		this.phone = phone;
+		this.deposit = deposit;
+	}
+	@Override
+	public String toString() {
+		return "公司信息 [company_id=" + company_id + ", name=" + name + ", account=" + account + ", pwd=" + pwd
+				+ ", tel=" + tel + ", address=" + address + ", people=" + people + ", phone=" + phone + ", deposit="
+				+ deposit + "]";
 	}
 	public int getCompany_id() {
 		return company_id;
@@ -82,10 +90,11 @@ public class Company {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	@Override
-	public String toString() {
-		return "公司信息 [company_id=" + company_id + ", name=" + name + ", account=" + account + ", pwd=" + pwd
-				+ ", tel=" + tel + ", address=" + address + ", people=" + people + ", phone=" + phone + "]";
+	public double getDeposit() {
+		return deposit;
+	}
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
 	}
 	
 }
