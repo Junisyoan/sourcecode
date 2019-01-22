@@ -1,9 +1,12 @@
 package xyz.cymedical.entity.jun;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author Junisyoan; 日期：2019年1月21日 时间：下午10:03:44 类说明：病人实体类
  *
  */
+@Component
 public class Patient {
 
 	private int paitent_id; // 病人id
