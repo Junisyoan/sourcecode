@@ -19,9 +19,11 @@ public class LogHandle {
 	@Resource
 	public LogBiz logBiz;
 
+	boolean flag = false;
+
 	private List<Log> loglist = new ArrayList<Log>();
 
-	// 方法
+	// 查询所有方法
 	@RequestMapping(value = "/findAllLog.handle")
 	public ModelAndView findlog() {
 		loglist = logBiz.findAllLog();
@@ -34,5 +36,24 @@ public class LogHandle {
 
 		return mav;
 
+	}
+
+	// 删除方法
+	@RequestMapping(value = "/delLog.handle")
+	public ModelAndView dellog(String log_id) {
+
+		flag = logBiz.delLog(log_id);
+		if (flag == true) {
+			System.out.println("成功");
+		} else {
+			System.out.println("失败");
+		}
+
+		loglist = logBiz.findAllLog();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/selectLog");
+		mav.addObject("loglist", loglist);
+
+		return mav;
 	}
 }
