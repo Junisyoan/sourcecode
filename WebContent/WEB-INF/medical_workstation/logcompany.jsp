@@ -16,7 +16,8 @@
 	<form id="form1" name="form1" method="post" action=""
 		style="border: 1px solid #000; margin: 50px 140px;">
 		<p align="center">&nbsp;</p>
-		<p align="center">公司帐号 ：帐号余额：</p>
+		<p align="center">公司帐号
+			：${logCompanylist.get(0).getCompany().getName()}帐号余额：${logCompanylist.get(0).getCompany().getDeposit() }</p>
 		<table width="500" border="1" align="center">
 			<tr align="center">
 				<td width="160">操作</td>
