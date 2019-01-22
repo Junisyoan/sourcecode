@@ -37,10 +37,23 @@ public class LoginHandle {
 			result = "管理员";
 		} else if (user.getAccount().equals("admin") && user.getPwd().equals("1234")) {
 			result = "医生";
+		} else if (user.getAccount().equals("admin") && user.getPwd().equals("123456")) {
+			result = "后台";
 		} else {
 			result = "账号密码错误";
 		}
 		return result;
+
+	}
+
+	@RequestMapping(value = "/index.handle")
+	public ModelAndView find() {
+
+		System.out.println("2222");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/index");
+		return mav;
 
 	}
 
