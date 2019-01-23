@@ -24,7 +24,6 @@
 		<div class="gys_style">
 			<div class="Manager_style">
 				<div class="title_name">体检综合查询</div>
-				<!-- 查询条码号 -->
 				<form method="post" action="<%=path%>patient/findpatientall.handle">
 					<ul class="search_content clearfix">
 						<li><label class="lf">姓名<input name="name"
