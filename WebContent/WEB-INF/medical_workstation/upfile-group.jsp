@@ -11,5 +11,8 @@
 <input type="file" name="companyFile" />
 <input type="submit" value="上传" />
 </form>
+
+
+<a href="${path}XX公司团检表.xls">下载文档模板</a>
 </body>
 </html>
