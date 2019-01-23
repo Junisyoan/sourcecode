@@ -33,7 +33,9 @@ public class PatientHandle {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/staffquery");
-		mav.addObject("patientlist", patientlist);
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
 		return mav;
 
 	}
@@ -46,7 +48,9 @@ public class PatientHandle {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/integratedquery");
-		mav.addObject("patientlist", patientlist);
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
 		return mav;
 
 	}
@@ -59,7 +63,9 @@ public class PatientHandle {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/print");
-		mav.addObject("patientlist", patientlist);
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
 		return mav;
 
 	}
