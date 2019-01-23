@@ -45,7 +45,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <img
-						src="images/logo.png">
+						src="<%=path%>images/logo.png">
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -53,7 +53,8 @@
 			<!-- /.navbar-header -->
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
-					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,管理员</span>
+					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临
+						${user.name}</span>
 				</div>
 				<ul class="nav ace-nav">
 					<li><a href="javascript:ovid(0)" class="change_Password">修改密码</a></li>
@@ -244,8 +245,9 @@
 	<!--底部样式-->
 
 	<div class="footer_style" id="footerstyle">
-		<p class="lf">版权所有：长江南京航道局 苏ICP备11011739号</p>
-		<p class="rf">地址：南京市鼓楼区阅江楼街道公共路64号 邮编：210011 技术支持：XXXX</p>
+		<p class="lf">版权所有 闽ICP备11003491号</p>
+		<p class="rf">地址：厦门市思明区软件园二期观日路56号101室 咨询电话：0592-8260341
+			咨询服务QQ：高老师3315716916</p>
 	</div>
 	<!--修改密码样式-->
 	<div class="change_Pass_style" id="change_Pass">
@@ -429,7 +431,8 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "登录.html";
+				location.href = "<%=path%>
+		login_company.html";
 
 			});
 		});
