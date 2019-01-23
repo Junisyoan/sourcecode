@@ -3,8 +3,6 @@ package xyz.cymedical.biz.xin;
 import java.util.List;
 import java.util.Map;
 
-import xyz.cymedical.entity.jun.Company;
-import xyz.cymedical.entity.zsc.Detail;
 
 /**
 * 2019年1月20日
