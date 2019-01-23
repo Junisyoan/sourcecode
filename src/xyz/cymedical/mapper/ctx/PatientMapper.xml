@@ -4,6 +4,16 @@
 
 <mapper namespace="xyz.cymedical.mapper.ctx.PatientMapper">
 
+
+<!-- 批量插入 -->
+	<insert id="insertByBatch" parameterType="java.util.List">
+		insert into tb_patient(company_id,name,sex,age,ID,phone)
+		values
+		<foreach collection="listRecord" item="p" separator=",">
+			(#{p.company_id},#{p.name},#{p.sex},#{p.age},#{p.ID},#{p.phone})
+		</foreach>
+	</insert>
+
 	<select id="query"
 		parameterType="xyz.cymedical.entity.jun.Patient"
 		resultType="java.util.HashMap">
@@ -13,8 +23,6 @@
 		n2,p.sex,p.age,p.ID,p.phone,p.code,p.check_num from tb_patient p left
 		join tb_company c on p.company_id = c.company_id)a left join tb_group
 		g on a.company_id = g.company_id where 1 = 1 
-
-
 
 		<if test="name != null and name != ''">
 			and a.n1 like '%${name}%'
