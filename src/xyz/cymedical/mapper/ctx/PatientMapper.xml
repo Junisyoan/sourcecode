@@ -6,22 +6,27 @@
 
 	<select id="query"
 		parameterType="xyz.cymedical.entity.jun.Patient"
-		resultType="xyz.cymedical.entity.jun.Patient">
-		select * from tb_patient where 1 = 1
+		resultType="java.util.HashMap">
+		select
+		a.company_id,a.n1,a.n2,a.sex,a.age,a.ID,a.phone,a.code,a.check_num,g.time
+		from (select p.company_id,p.name n1,c.name
+		n2,p.sex,p.age,p.ID,p.phone,p.code,p.check_num from tb_patient p left
+		join tb_company c on p.company_id = c.company_id)a left join tb_group
+		g on a.company_id = g.company_id where 1 = 1 
+
+
+
 		<if test="name != null and name != ''">
-			and name like '%'||#{name}||'%'
+			and a.n1 like '%${name}%'
 		</if>
 		<if test="phone != null and phone != ''">
-			and phone = #{phone}
-		</if>
-		<if test="name != null and name != ''">
-			and name like '%'||#{name}||'%'
+			and a.phone = #{phone}
 		</if>
 		<if test="time != null and time != ''">
-			and time = #{time}
+			and g.time = #{time}
 		</if>
 		<if test="code != null  and code != ''">
-			and code like '%'||#{code}||'%'
+			and a.code like '%${code}%'
 		</if>
 	</select>
 

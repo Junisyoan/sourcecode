@@ -26,5 +26,12 @@ public interface DoctorMapper {
 	 * @param code	条码号
 	 * @return	细项列表
 	 */
+	//项目接收
+	public boolean receive(int patient_project_id);
+
+	//获取项目列表
 	public List<Map<String,Object>> findMyProject(String onecode);
+
+	//项目细项
+	public List<Map<String, Object>> findMyDetail(int projectid,int patientid);
 }

@@ -6,7 +6,7 @@
 
 	<select id="queryByName" parameterType="java.lang.String"
 		resultMap="logcompanyMap">
-		select c.name,l.operate,l.money,l.time from
+		select c.name,c.account,c.deposit,l.operate,l.money,l.time from
 		tb_log_company l left join tb_company c on
 		l.company_id = c.company_id
 		where c.name = #{name}
@@ -14,13 +14,13 @@
 
 	<resultMap type="xyz.cymedical.entity.ctx.LogCompany"
 		id="logcompanyMap">
-		
+
 		<id property="company_id" column="company_id" />
 		<result property="log_company_id" column="log_company_id" />
 		<result property="operate" column="operate" />
 		<result property="money" column="money" />
 		<result property="time" column="time" />
-		
+
 		<association property="company" column="company_id"
 			javaType="xyz.cymedical.entity.jun.Company">
 			<id property="company_id" column="company_id" />
@@ -31,6 +31,7 @@
 			<result property="address" column="address" />
 			<result property="people" column="people" />
 			<result property="phone" column="phone" />
+			<result property="deposit" column="deposit" />
 		</association>
 	</resultMap>
 

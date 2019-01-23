@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
+import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -31,11 +35,26 @@ public class CompanyHandle {
 
 	@Resource
 	private CompanyBiz companyBiz; 			//公司的业务逻辑
+	@Resource
+	private CompanyFileBiz companyFileBiz;	//上传文件业务
 	private ModelAndView modelAndView;		//视图和模型
 	private Company company;				//公司信息
-	
+	private List<CompanyFile> listFile;		//文件列表
 	
 	public CompanyHandle() {
+	}
+	
+	
+	/*
+	 * 获得所上传的文件列表
+	 */
+	@RequestMapping(value="/getFileList.handle",method=RequestMethod.GET)
+	public ModelAndView getFileList(String pageNum) {
+		System.out.println("查询文件列表，页码"+pageNum);
+		listFile = companyFileBiz.queryFileList(pageNum);
+		modelAndView = new ModelAndView("WEB-INF/medical_workstation/file-list");
+		modelAndView.addObject("listFile", listFile);
+		return modelAndView;
 	}
 	
 	/*
@@ -53,7 +72,7 @@ public class CompanyHandle {
 	 * 上传团检文件
 	 */
 	@RequestMapping(value="/fileUpload.handle", method=RequestMethod.POST)
-	public String fileUpload(HttpServletRequest request,MultipartFile companyFile) {
+	public String fileUpload(HttpServletRequest request,HttpServletResponse response, MultipartFile companyFile) {
 		company = (Company)request.getSession().getAttribute("user");
 		System.out.println(companyFile.getSize());
 		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/"+company.getName()));
@@ -70,7 +89,22 @@ public class CompanyHandle {
 					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 					stream.write(bytes);
 					stream.close();
-					System.out.println("上传成功，写入数据库");
+					System.out.println("上传成功，准备写入数据库");
+					
+					CompanyFile insertFile = new CompanyFile(-1, 
+							company.getCompany_id(), 
+							companyFile.getOriginalFilename(), 
+							companyFile.getSize(),
+							file.getAbsolutePath() , 
+							new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis()));
+					if(companyFileBiz.insertFile(insertFile)) {
+						System.out.println("写入成功，开始解析文件");
+						
+						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件成功"));
+					}else {
+						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
+					}
+				
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {

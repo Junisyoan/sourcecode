@@ -25,7 +25,7 @@ public class PatientHandle {
 
 	}
 
-	// 公司记账
+	// 人员查询
 	@RequestMapping(value = "/findpatient.handle")
 	public ModelAndView findpatient(String name, String phone, String time, String code) {
 

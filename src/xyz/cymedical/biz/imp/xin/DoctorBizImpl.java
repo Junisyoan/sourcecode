@@ -27,6 +27,18 @@ public class DoctorBizImpl  implements DoctorBiz {
 		return doctorMapper.findMyProject(code);
 	}
 
+	@Override
+	public boolean receive(int patient_project_id) {
+		// TODO Auto-generated method stub
+		return doctorMapper.receive(patient_project_id);
+	}
+
+	@Override
+	public List<Map<String, Object>> findMyDetail(int projectid,int patientid) {
+		// TODO Auto-generated method stub
+		return doctorMapper.findMyDetail(projectid,patientid);
+	}
+
 
 	
 

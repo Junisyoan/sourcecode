@@ -78,74 +78,12 @@
 				<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>
-<<<<<<< HEAD
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 						后台管理</div>
 					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 						<span class="btn btn-success"></span> <span class="btn btn-info"></span>
 						<span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
-=======
-					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                     <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						后台管理  
-						</div>
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-							<span class="btn btn-success"></span>
-							<span class="btn btn-info"></span>
-							<span class="btn btn-warning"></span>
-							<span class="btn btn-danger"></span>
-						</div>
-					</div><!-- #sidebar-shortcuts -->
-					<ul class="nav nav-list" id="nav_list">
-				     <li class="home"><a href="javascript:void(0)" name="home.html" class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a></li>
-                     <li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text">团检人员管理 </span><b class="arrow icon-angle-down"></b></a>
-					   <ul class="submenu">
-                         <li class="home"><a href="javascript:void(0)" name="<%=path %>company/getUpFilePath.handle"  title="团检表上传" class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
-						 <li class="home"><a href="javascript:void(0)" name="未到期询价项目.html" title="未到期询价项目"  class="iframeurl"><i class="icon-double-angle-right"></i>未到期询价项目</a></li>
-						 <li class="home"><a href="javascript:void(0)" name="已到期询价项目.html" title="已到期询价项目"  class="iframeurl"><i class="icon-double-angle-right"></i>已到期询价项目</a></li>
-						 <li class="home"><a href="javascript:void(0)" name="暂存项目.html" title="暂存项目"  class="iframeurl"><i class="icon-double-angle-right"></i>暂存项目</a></li>
-						 <li class="home"><a href="javascript:void(0)" name="模板维护.html" title="模板维护"  class="iframeurl"><i class="icon-double-angle-right"></i>模板维护</a></li>
-                         <li class="home"><a href="javascript:void(0)" name="待响应询价.html" title="待响应询价"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）待响应询价</a></li>
-                         <li class="home"><a href="javascript:void(0)" name="已响应询价.html" title="已响应询价"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）已响应询价</a></li>
-                         <li class="home"><a href="javascript:void(0)" name="已到期询价.html" title="已到期询价"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）已到期询价</a></li>
-						</ul>
-					</li>
-					<li>
-					<a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> 订单管理 </span><b class="arrow icon-angle-down"></b></a>
-                    <ul class="submenu">
-                    <li class="home"><a href="javascript:void(0)" name="待确认订单.html" title="待确认订单"  class="iframeurl"><i class="icon-double-angle-right"></i>待确认订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="在执行订单.html" title="在执行订单"  class="iframeurl"><i class="icon-double-angle-right"></i>在执行订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="作废订单.html" title="作废订单"  class="iframeurl"><i class="icon-double-angle-right"></i>作废订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="待加油订单.html" title="待加油订单"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）待加油订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="（船只权限）待加油订单.html" title="(船只权限)待加油订单"  class="iframeurl"><i class="icon-double-angle-right"></i>(船只权限)待加油订单</a></li>
-                     <li class="home"><a href="javascript:void(0)" name="(船只权限)已完结订单.html" title="(船只权限)已完结订单"  class="iframeurl"><i class="icon-double-angle-right"></i>(船只权限)已完结订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="已加油订单.html" title="已加油订单"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）已加油订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="已完结订单.html" title="已完结订单"  class="iframeurl"><i class="icon-double-angle-right"></i>已完结订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="异常订单.html" title="异常订单"  class="iframeurl"><i class="icon-double-angle-right"></i>异常订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="异常订单处理.html" title="异常订单处理"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）异常订单处理</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="供应商评价.html" title="供应商评价"  class="iframeurl"><i class="icon-double-angle-right"></i>供应商评价</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="订单评价.html" title="订单评价"  class="iframeurl"><i class="icon-double-angle-right"></i>（评价）订单评价</a></li>
-                   </ul>
-				  </li>
-						<li><a href="#" class="dropdown-toggle"><i class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b class="arrow icon-angle-down"></b></a>
-							<ul class="submenu">
-								<li class="home"><a href="javascript:void(0)" name="菜单管理.html" title="菜单管理" class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
-								<li class="home"><a href="javascript:void(0)" name="角色管理.html" title="角色管理"  class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="用户管理.html" title="用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
-                                <!--根据用户权限显示用户管理-->
-                                <li class="home"><a href="javascript:void(0)" name="权限用户管理界面.html" title="权限用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
-                                <!--结束-->
-                                <li class="home"><a href="javascript:void(0)" name="入围信息管理.html" title="入围信息管理" class="iframeurl"><i class="icon-double-angle-right"></i>入围信息管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="供应商管理.html" title="供应商管理" class="iframeurl"><i class="icon-double-angle-right"></i>供应商管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="船只管理.html" title="船只管理" class="iframeurl"><i class="icon-double-angle-right"></i>船只管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="产品管理.html" title="产品管理" class="iframeurl"><i class="icon-double-angle-right"></i>产品管理</a></li>
-							</ul>
-						</li>
-					</ul><!-- /.nav-list -->
-					<div class="sidebar-collapse" id="sidebar-collapse">
-						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
->>>>>>> c3c7f2fb8a0d4cbcb02f8175d4e2216153039b8f
 					</div>
 				</div>
 				<!-- #sidebar-shortcuts -->
@@ -158,11 +96,11 @@
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
-								name="${path }company/getUpFilePath.handle" title="团检表上传"
+								name="<%=path %>company/getUpFilePath.handle" title="团检表上传"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="未到期询价项目.html" title="未到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>未到期询价项目</a></li>
+								name="<%=path %>company/getFileList.handle?pageNum=1" title="团检表列表" class="iframeurl"><i
+									class="icon-double-angle-right"></i>团检表列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已到期询价项目</a></li>
@@ -232,10 +170,12 @@
 									class="icon-double-angle-right"></i>体检综合查询</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/findpatient.handle" title="体检人员查询"
-								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询</a></li>
+								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询
+							</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>logcompany/findlogcompany.handle" title="团检单位对账"
-								class="iframeurl"><i class="icon-double-angle-right"></i>团检单位对账</a></li>
+								class="iframeurl"><i class="icon-double-angle-right"></i>团检单位对账
+							</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.nav-list -->
