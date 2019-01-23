@@ -37,7 +37,9 @@ public class LogCompanyHandle {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/logcompany");
-		mav.addObject("logCompanylist", logCompanylist);
+		if (logCompanylist.size() > 0) {
+			mav.addObject("logCompanylist", logCompanylist);
+		}
 		return mav;
 
 	}
