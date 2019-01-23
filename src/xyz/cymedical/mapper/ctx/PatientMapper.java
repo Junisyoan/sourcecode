@@ -16,7 +16,7 @@ public interface PatientMapper {
 	 * @param listRecord	列表记录
 	 * @return	插入了几条
 	 */
-	public int insertByBatch(List<Patient> listRecord);
+	public int insertByBatch(@Param("listRecord")List<Patient> listRecord);
 	
 	public List<Patient> query(@Param("name") String name, @Param("phone") String phone, @Param("time") String time,
 			@Param("code") String code);
