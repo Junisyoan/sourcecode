@@ -10,6 +10,7 @@ import xyz.cymedical.entity.jun.Company;
 
 public interface CompanyBiz {
 
+	
 	/**
 	 * 登录
 	 * @param account	用户
