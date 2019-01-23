@@ -99,26 +99,12 @@
 								name="<%=path %>company/getUpFilePath.handle" title="团检表上传"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getFileList.handle?pageNum=1" title="团检表列表" class="iframeurl"><i
+								name="<%=path %>company/getFileList.handle?pageNum=1"
+								title="团检表列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检表列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>已到期询价项目</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="暂存项目.html" title="暂存项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>暂存项目</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="模板维护.html" title="模板维护" class="iframeurl"><i
-									class="icon-double-angle-right"></i>模板维护</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="待响应询价.html" title="待响应询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）待响应询价</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已响应询价.html" title="已响应询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）已响应询价</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已到期询价.html" title="已到期询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）已到期询价</a></li>
+								name="<%=path %>patient/printpatient.handle" title="体检报告打印"
+								class="iframeurl"><i class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
@@ -165,9 +151,9 @@
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)" name="<%=path%>patient/findpatientall.handle"
-								title="体检综合查询" class="iframeurl"><i
-									class="icon-double-angle-right"></i>体检综合查询</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>patient/findpatientall.handle" title="体检综合查询"
+								class="iframeurl"><i class="icon-double-angle-right"></i>体检综合查询</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/findpatient.handle" title="体检人员查询"
 								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询
