@@ -165,7 +165,7 @@
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)" name=""
+							<li class="home"><a href="javascript:void(0)" name="<%=path%>patient/findpatientall.handle"
 								title="体检综合查询" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检综合查询</a></li>
 							<li class="home"><a href="javascript:void(0)"
