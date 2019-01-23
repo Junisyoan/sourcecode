@@ -7,10 +7,10 @@
 
 <!-- 批量插入 -->
 	<insert id="insertByBatch" parameterType="java.util.List">
-		insert into tb_patient(company_id,name,sex,age,ID,phone)
+		insert into tb_patient(company_id,name,sex,age,ID,code,phone)
 		values
 		<foreach collection="listRecord" item="p" separator=",">
-			(#{p.company_id},#{p.name},#{p.sex},#{p.age},#{p.ID},#{p.phone})
+			(#{p.company_id},#{p.name},#{p.sex},#{p.age},#{p.ID},#{p.code},#{p.phone})
 		</foreach>
 	</insert>
 
