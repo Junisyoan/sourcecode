@@ -25,5 +25,4 @@
 	<insert id="insertCompany" parameterType="xyz.cymedical.entity.jun.Company">
 		insert into tb_company(name,account,pwd,tel,address,people,phone) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone})
 	</insert>
-	
 </mapper> 

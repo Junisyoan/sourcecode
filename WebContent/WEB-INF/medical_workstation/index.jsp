@@ -45,7 +45,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <img
-						src="<%=path%>images/logo.png">
+						src="images/logo.png">
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -53,12 +53,11 @@
 			<!-- /.navbar-header -->
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
-					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临
-						${user.name}</span>
+					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,${user.name }</span>
 				</div>
 				<ul class="nav ace-nav">
-					<li><a href="javascript:ovid(0)" class="change_Password">修改密码</a></li>
-					<li><a href="javascript:ovid(0)" id="Exit_system">退出系统</a></li>
+					<li><a href="javascript:void(0)" class="change_Password">修改密码</a></li>
+					<li><a href="javascript:oid(0)" id="Exit_system">退出系统</a></li>
 
 				</ul>
 				<!-- /.ace-nav -->
@@ -100,12 +99,26 @@
 								name="<%=path %>company/getUpFilePath.handle" title="团检表上传"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getFileList.handle?pageNum=1"
-								title="团检表列表" class="iframeurl"><i
+								name="<%=path %>company/getFileList.handle?pageNum=1" title="团检表列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检表列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>patient/printpatient.handle" title="体检报告打印"
-								class="iframeurl"><i class="icon-double-angle-right"></i>体检报告打印</a></li>
+								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
+									class="icon-double-angle-right"></i>已到期询价项目</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="暂存项目.html" title="暂存项目" class="iframeurl"><i
+									class="icon-double-angle-right"></i>暂存项目</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="模板维护.html" title="模板维护" class="iframeurl"><i
+									class="icon-double-angle-right"></i>模板维护</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="待响应询价.html" title="待响应询价" class="iframeurl"><i
+									class="icon-double-angle-right"></i>（权限）待响应询价</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="已响应询价.html" title="已响应询价" class="iframeurl"><i
+									class="icon-double-angle-right"></i>（权限）已响应询价</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="已到期询价.html" title="已到期询价" class="iframeurl"><i
+									class="icon-double-angle-right"></i>（权限）已到期询价</a></li>
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
@@ -152,9 +165,9 @@
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>patient/findpatientall.handle" title="体检综合查询"
-								class="iframeurl"><i class="icon-double-angle-right"></i>体检综合查询</a></li>
+							<li class="home"><a href="javascript:void(0)" name=""
+								title="体检综合查询" class="iframeurl"><i
+									class="icon-double-angle-right"></i>体检综合查询</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/findpatient.handle" title="体检人员查询"
 								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询
@@ -245,9 +258,8 @@
 	<!--底部样式-->
 
 	<div class="footer_style" id="footerstyle">
-		<p class="lf">版权所有 闽ICP备11003491号</p>
-		<p class="rf">地址：厦门市思明区软件园二期观日路56号101室 咨询电话：0592-8260341
-			咨询服务QQ：高老师3315716916</p>
+		<p class="lf">版权所有：长江南京航道局 苏ICP备11011739号</p>
+		<p class="rf">地址：南京市鼓楼区阅江楼街道公共路64号 邮编：210011 技术支持：XXXX</p>
 	</div>
 	<!--修改密码样式-->
 	<div class="change_Pass_style" id="change_Pass">

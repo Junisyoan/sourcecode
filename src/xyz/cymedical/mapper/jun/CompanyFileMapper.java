@@ -17,6 +17,21 @@ import xyz.cymedical.entity.jun.CompanyFile;
 @Repository
 public interface CompanyFileMapper {
 
+	
+	/**
+	 * 查询文件
+	 * @param file_id	文件id
+	 * @return	文件
+	 */
+	public CompanyFile queryFileById(String file_id);
+	
+	/**
+	 * 删除文件
+	 * @param file_id	文件id
+	 * @return	是否删除成功
+	 */
+	public boolean delFile(String file_id);
+	
 	/**
 	 * 查询文件列表
 	 * @param pageNo	页码
