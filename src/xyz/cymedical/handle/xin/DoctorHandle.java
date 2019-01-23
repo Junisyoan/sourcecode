@@ -74,22 +74,22 @@ public class DoctorHandle {
 		return mav;
 	}
 
-//	@RequestMapping(value = "/receive.handle")
-//	public ModelAndView getDetail(String patient_project_id,String code,String projectname) {
-//
-//		System.out.println("receive....");
-//		System.out.println("patient_project_id=" + patient_project_id);
-//
-//		boolean f=doctorbiz.receive(Integer.valueOf(patient_project_id));
-//		
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
-//		return mav;
-//	}
+	@RequestMapping(value = "/receive.handle")
+	public ModelAndView receive(String patient_project_id,String onecode) {
 
-	
-	
-	
-	
+		System.out.println("receive....");
+		System.out.println("patient_project_id=" + patient_project_id);
+		System.out.println("onecode=" + onecode);
+
+		boolean f=doctorbiz.receive(Integer.valueOf(patient_project_id));
+		System.out.println("f="+f);
+		plist=doctorbiz.findMyProject(onecode);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("prolist", plist);
+		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
+		return mav;
+	}
+
+
 }
