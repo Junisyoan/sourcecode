@@ -98,7 +98,6 @@ public class CompanyHandle {
 				System.out.println("一共这么多行数据: " + (lastRowIndex - firstRowIndex + 1));
 				for (int rIndex = firstRowIndex; rIndex <= lastRowIndex; rIndex++) {
 					// 遍历行
-					System.out.println("行号: " + rIndex);
 					Row row = sheet.getRow(rIndex);
 					ArrayList<String> listData = new ArrayList<>();
 					if (row != null) {
@@ -233,6 +232,7 @@ public class CompanyHandle {
 			return modelAndView;
 		}else {
 			try {
+				response.setContentType("text/html;charset=utf-8");
 				response.getWriter().println(ResponseTools.returnMsgAndBack("用户或者密码错误"));
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -273,7 +273,7 @@ public class CompanyHandle {
 				}else {
 					System.out.println("创建失败");
 				}
-				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "login_company.html"));
+				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "../login_company.html"));
 				break;
 				
 			default:
