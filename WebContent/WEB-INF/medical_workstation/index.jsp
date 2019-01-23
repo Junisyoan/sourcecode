@@ -443,7 +443,7 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "登录.html";
+				location.href = "<%=path%>login_company.html";
 
 			});
 		});
