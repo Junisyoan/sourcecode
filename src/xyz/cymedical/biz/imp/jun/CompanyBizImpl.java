@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.mapper.jun.CompanyFileMapper;
 import xyz.cymedical.mapper.jun.CompanyMapper;
 
 /**
@@ -19,6 +20,8 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 
 	@Resource
 	private CompanyMapper companyMapper;
+	@Resource
+	private CompanyFileMapper companyFileMapper;
 	
 	@Override
 	public String regCompany(Company company) {
