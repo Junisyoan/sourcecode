@@ -10,6 +10,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+	function base64(content) {
+		return window.btoa(unescape(encodeURIComponent(content)));
+	}
+	/*
+	 *@tableId: table的Id
+	 *@fileName: 要生成excel文件的名字（不包括后缀，可随意填写）
+	 */
+	function tableToExcel(tableID, fileName) {
+		var table = document.getElementById(tableID);
+		var excelContent = table.innerHTML;
+		var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
+		excelFile += "<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>";
+		excelFile += "<body><table>";
+		excelFile += excelContent;
+		excelFile += "</table></body>";
+		excelFile += "</html>";
+		var link = "data:application/vnd.ms-excel;base64," + base64(excelFile);
+		var a = document.createElement("a");
+		a.download = fileName + ".xls";
+		a.href = link;
+		a.click();
+	}
+</script>
 <link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
 <!--[if IE 7]>
@@ -35,6 +59,7 @@
 								class="text_add" /></label> <label class="lf">条码号<input
 								name="code" type="text" class="text_add" /></label>
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
+							<button type="button" onclick="tableToExcel('item','data')">导出</button>
 						</li>
 					</ul>
 				</form>
@@ -43,7 +68,8 @@
 
 		<div class="Manager_style">
 			<span class="title_name">体检人员信息</span>
-			<table class="table table-striped table-bordered table-hover">
+			<table class="table table-striped table-bordered table-hover"
+				id="item">
 				<thead>
 					<tr>
 						<th>序号</th>
@@ -66,11 +92,11 @@
 							<td>${p.n2}</td>
 							<td>${p.sex}</td>
 							<td>${p.age}</td>
-							<td>${p.ID}</td>
+							<td style="mso-number-format: '\@';">${p.ID}</td>
 							<td>${p.phone}</td>
 							<td>${p.code}</td>
 							<td>${p.check_num}</td>
-							<td>${p.time}</td>
+							<td style="mso-number-format:'yyyy\-mm\-dd';">${p.time}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
