@@ -37,4 +37,9 @@ public class CompanyFileBizImpl extends BaseImpl implements CompanyFileBiz {
 		return list;
 	}
 
+	@Override
+	public CompanyFile queryFile(String file_id) {
+		return companyFileMapper.queryFileById(file_id);
+	}
+
 }
