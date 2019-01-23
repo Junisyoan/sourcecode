@@ -17,21 +17,83 @@
   <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
   <link rel="stylesheet" href="<%=path %>css/style.css"/>
-<title>已响应询价</title>
+<title>项目小结</title>
 </head>
-
 <body>
+
 <div class="page-content">
-<h3 class="header smaller lighter blue">${projectname }</h3>
-      <div class="search_style">
-   <div class="title_names">搜索查询</div>
-      <ul class="search_content clearfix">
-       <li><label class="lf">项目名称</label><input name="项目名称" type="text"  class="text_add"/></li>
-       <li><label class="lf">订单编号</label><input name="订单编号" type="text"  class="text_add"/></li>
-       <li><label class="lf">报价截止时间</label><input name="报价截止时间" class="inline laydate-icon" id="start" style=" margin-left:10px;"></li>
-       <li style="width:90px;"><button id="btn_search" type="button" class="btn_search">查询</button></li>
-      </ul>
-    </div>
+<h3 class="header smaller lighter blue">普通项目</h3>
+  <div class="">
+  <table id="" class="table table-striped table-bordered table-hover">
+   <thead>
+    <tr><th>序号</th><th>项目名称</th><th>数值</th><th>建议</th><th>操作</th></tr>
+   </thead>
+   <tbody>
+   
+   <c:forEach items="${dlist }" var="d" varStatus="s">
+		<tr>
+			<c:if test="${d.type=='普通' }">
+				<td>${s.index + 1}</td>
+				<td>${d.name}</td>
+				<td><input type="text" /></td>
+				<td><input type="text" value="良好"/></td>
+				<td class="center">
+				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">提交</button></a>
+				</td>
+			</c:if> 
+		</tr>
+	</c:forEach>
+   
+    <tr>
+     <td>1</td>
+     <td>项目名称叫什么</td>
+     <td>H434534534</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
+     </tr>
+      
+   </tbody>
+  </table>
+
+  </div>
+ </div>
+ 
+ <div class="page-content">
+<h3 class="header smaller lighter blue">影像项目</h3>
+  <div class="">
+  <table id="" class="table table-striped table-bordered table-hover">
+   <thead>
+    <tr><th>序号</th><th>项目名称</th><th>影像结果</th><th>建议</th><th>操作</th></tr>
+   </thead>
+   <tbody>
+   
+   <c:forEach items="${dlist }" var="d" varStatus="s">
+		<tr>
+		  <c:if test="${d.type=='影像' }">
+			<td>${s.index + 1}</td>
+			<td>${d.name}</td>
+			<td>上传图片</td>
+			<td><input type="text" /></td>
+			<td class="center">
+				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">提交</button></a>
+			</td>
+		</c:if>
+		</tr>
+	</c:forEach>
+   
+    <tr>
+     <td>1</td>
+     <td>项目名称叫什么</td>
+     <td>H434534534</td><td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
+     </tr>
+      
+   </tbody>
+  </table>
+
+  </div>
+ </div>
+
+
+<div class="page-content">
+<h3 class="header smaller lighter blue">检验项目</h3>
   <div class="">
   <table id="" class="table table-striped table-bordered table-hover">
    <thead>
@@ -42,10 +104,10 @@
    <c:forEach items="${dlist }" var="d" varStatus="s">
 		<tr>
 			<td>${s.index + 1}</td>
-			<td>${p.name}</td>
-			<td>${p.age}</td>
-			<td>${p.phone}</td>
-			<td>${p.projectname}</td>
+			<td>${d.name}</td>
+			<td>${d.age}</td>
+			<td>${d.phone}</td>
+			<td>${d.projectname}</td>
 			<td>${p.state}</td>
 			<td class="center">
 			<c:if test="${p.state=='未接收' }">
@@ -57,9 +119,6 @@
 			</td>
 		</tr>
 	</c:forEach>
-
-   
-   
    
     <tr>
      <td>1</td>
@@ -69,7 +128,7 @@
       
    </tbody>
   </table>
- <iframe style="border:0; width:100%; background-color:#FFF;"  frameborder="0" src="page.html"></iframe>
+
   </div>
  </div>
 	<!--[if !IE]> -->
