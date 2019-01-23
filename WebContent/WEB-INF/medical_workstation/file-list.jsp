@@ -1,14 +1,14 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%
-	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ request.getContextPath() + "/";
-%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
@@ -67,11 +67,20 @@
 							<td>${l.fname}</td>
 							<td>${l.fsize}</td>
 							<td>${l.ftime}</td>
-							<td>导入|删除</td>
+							<td><a href="javascript:;" onclick="analysisExcel('${l.file_id}');">导入</a>|<a href="javascript:;" onclick="">删除</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 </body>
+<script type="text/javascript">
+function analysisExcel(file_id){
+	var sure=confirm("确定导入？");
+	if(sure){
+		location.href="<%=path%>company/analysisExcel.handle?file_id="+file_id;
+	}
+	
+}
+</script>
 </html>
