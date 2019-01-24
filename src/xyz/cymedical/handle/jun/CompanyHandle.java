@@ -42,7 +42,6 @@ import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Patient;
-import xyz.cymedical.handle.ctx.TestBarcode;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -78,7 +77,6 @@ public class CompanyHandle {
 	@RequestMapping(value = "/analysisExcel.handle", method = RequestMethod.GET)
 	public ModelAndView analysisExcel(HttpServletRequest request, String file_id) {
 		
-		String code = randomNumStr(13);
 		company = (Company) request.getSession().getAttribute("user");
 		// 要插入的病人信息表
 		List<Patient> listPatient = new ArrayList<>();
@@ -114,6 +112,7 @@ public class CompanyHandle {
 
 				System.out.println("一共这么多行数据: " + (lastRowIndex - firstRowIndex + 1));
 				for (int rIndex = firstRowIndex; rIndex <= lastRowIndex; rIndex++) {
+					String code = randomNumStr(13);
 					//	遍历行
 					Row row = sheet.getRow(rIndex);
 					ArrayList<String> listData = new ArrayList<>();
@@ -142,7 +141,9 @@ public class CompanyHandle {
 							listData.get(4), 
 							"-1"));
 					System.out.println();
-					TestBarcode.createBarCode("D://test//", code, ImageUtil.JPEG);
+					String path = createBarCode("D://test//", code, ImageUtil.JPEG);
+
+					System.out.println(path);
 				}
 				wb.close();
 				System.out.println(listPatient);
@@ -370,7 +371,7 @@ public class CompanyHandle {
 		return new String(randBuffer);
 	}
 
-	private static String createBarCode(String savePath, String jbarCode, String imgFormat) {
+	private static final String createBarCode(String savePath, String jbarCode, String imgFormat) {
 		try {
 			BufferedImage bi = null;
 			int len = jbarCode.length();
@@ -383,9 +384,10 @@ public class CompanyHandle {
 			// 获取到校验位
 			String code = jbarCode.substring(len - 1, len);
 			String checkCode = jbarcode13.calcCheckSum(barCode);
-			if (!code.equals(checkCode)) {
-				return "EN-13 条形码最后一位校验码 不对，应该是： " + checkCode;
-			}
+//			if (!code.equals(checkCode)) {
+//				return "EN-13 条形码最后一位校验码 不对，应该是： " + checkCode;
+//			}
+			
 			/*
 			 * 最重要的是这里的设置，如果明白了这里的设置就没有问题 如果是默认设置， 那么设置就是生成一般的条形码 如果不是默认 设置，那么就可以根据自己需要设置
 			 */
