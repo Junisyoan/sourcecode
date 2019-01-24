@@ -76,7 +76,7 @@ public class CompanyHandle {
 	 */
 	@RequestMapping(value = "/analysisExcel.handle", method = RequestMethod.GET)
 	public ModelAndView analysisExcel(HttpServletRequest request, String file_id) {
-		
+		System.out.println("读取excel");
 		company = (Company) request.getSession().getAttribute("user");
 		// 要插入的病人信息表
 		List<Patient> listPatient = new ArrayList<>();
@@ -141,17 +141,18 @@ public class CompanyHandle {
 							listData.get(4), 
 							"-1"));
 					System.out.println();
-					String path = createBarCode("D://test//", code, ImageUtil.JPEG);
+//					String path = createBarCode("D://test//", code, ImageUtil.JPEG);
 
-					System.out.println(path);
+//					System.out.println(path);
 				}
 				wb.close();
+//				System.out.println("开始入库");
 				System.out.println(listPatient);
-				System.out.println("开始入库");
-				boolean isSuccess = patientBiz.insertByBatch(listPatient);
-				if (isSuccess) {
-					System.out.println("导入成功");
-				}
+				request.getSession().setAttribute("listPatient", listPatient);
+//				boolean isSuccess = patientBiz.insertByBatch(listPatient);
+//				if (isSuccess) {
+//					System.out.println("导入成功");
+//				}
 			} else {
 				System.out.println("找不到指定的文件");
 			}
