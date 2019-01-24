@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jiang.TbRoleMapper">
+
+
+
+	<select id="selectRole"   parameterType="xyz.cymedical.entity.jiang.Tb_role"
+		resultType="xyz.cymedical.entity.jiang.Tb_role">
+		select * from tb_role where 1=1
+	</select>
+	
+	<insert id="addRole" parameterType="String"> 
+	
+		 insert into tb_role  (name) values (#{name})
+	
+	</insert>
+
+
+
+
+
+
+
+</mapper>
