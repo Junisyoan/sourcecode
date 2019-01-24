@@ -72,5 +72,20 @@
 		</trim>
 		 
 	</update>
+	
+	<select id="selUser"    resultType="java.util.HashMap">
+		 
+		select * from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id  
+ 	 
+		 <if test="#{0} !=null and #{0} !=''">
+		  and c.name=#{0}
+		</if> 
+		<if test="#{1} !=null and #{1} !=''">
+		  and a.account=#{1}    
+		</if> 
+		<if test="#{2} !=null and #{2} !=''">
+		  and a.phone=#{2}
+		</if>  
+ 	</select>  
 
 </mapper>
