@@ -131,14 +131,9 @@ public class CompanyHandle {
 						}
 						System.out.println(listData);
 					}
-<<<<<<< HEAD
-					listPatient.add(new Patient(-1, 
-							company.getCompany_id(), //
-=======
 					listPatient.add(new Patient(
 							-1, 
 							company.getCompany_id(), 
->>>>>>> 9a4633670b7068e971455c1c65fa2ba4e9828a70
 							-1, 
 							listData.get(0), 
 							listData.get(1),
