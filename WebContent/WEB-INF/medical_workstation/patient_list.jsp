@@ -26,12 +26,13 @@
 	<div class="page-content">
 		<div class="Manager_style">
 			<span class="title_name">文件列表</span>
-			<table class="table table-striped table-bordered table-hover">
+			<table id="patientTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>序号</th>
 						<th>姓名</th>
 						<th>性别</th>
+						<th>年龄</th>
 						<th>身份证号</th>
 						<th>手机号</th>
 						<th>选择</th>
@@ -54,7 +55,7 @@
 	</div>
 	
 	<!-- 弹出框 -->
-	<div id="dialog" title="增加人员">
+	<div id="addDialog" title="增加人员">
 		<form action="" method="post">
 			<table width="600" border="0" cellpadding="2">
 				<tr>
@@ -90,4 +91,20 @@
 
 	</div>
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#patientTable').DataTable();
+	$('#addDialog').dialog({
+		 autoOpen: false,
+	      show: {
+	        effect: "blind",
+	        duration: 1000
+	      },
+	      hide: {
+	        effect: "explode",
+	        duration: 1000
+	      }
+	});
+});
+</script>
 </html>
