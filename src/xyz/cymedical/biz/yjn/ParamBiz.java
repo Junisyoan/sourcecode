@@ -1,12 +1,10 @@
-package xyz.cymedical.mapper.yjn;
+package xyz.cymedical.biz.yjn;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import xyz.cymedical.entity.yjn.Param;
-@Repository
-public interface ParamMapper {
+
+public interface ParamBiz {
 	public List<Param> findAllParam();
 	
 	public boolean delParam(String param_id);
