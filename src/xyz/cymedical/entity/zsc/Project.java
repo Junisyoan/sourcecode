@@ -2,29 +2,41 @@ package xyz.cymedical.entity.zsc;
 
 import java.util.List;
 
+import xyz.cymedical.entity.yjn.Param;
+
 public class Project {
 
 	private int project_id;
 	private String name;
 	private String price;
-	private List<Detail> detials;
+	private Param param;
+	private List<Detail> details;
 
 	public Project() {
 		super();
 	}
 
-	public Project(int project_id, String name, String price, List<Detail> detials) {
+	public Project(int project_id, String name, String price, Param param, List<Detail> details) {
 		super();
 		this.project_id = project_id;
 		this.name = name;
 		this.price = price;
-		this.detials = detials;
+		this.param = param;
+		this.details = details;
 	}
 
 	@Override
 	public String toString() {
-		return "Project [project_id=" + project_id + ", name=" + name + ", price=" + price + ", detials=" + detials
-				+ "]";
+		return "Project [project_id=" + project_id + ", name=" + name + ", price=" + price + ", param=" + param
+				+ ", details=" + details + "]";
+	}
+
+	public Param getParam() {
+		return param;
+	}
+
+	public void setParam(Param param) {
+		this.param = param;
 	}
 
 	public int getProject_id() {
@@ -51,12 +63,12 @@ public class Project {
 		this.price = price;
 	}
 
-	public List<Detail> getDetials() {
-		return detials;
+	public List<Detail> getDetails() {
+		return details;
 	}
 
-	public void setDetials(List<Detail> detials) {
-		this.detials = detials;
+	public void setDetails(List<Detail> details) {
+		this.details = details;
 	}
 
 }
