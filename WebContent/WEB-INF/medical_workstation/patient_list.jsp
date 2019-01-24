@@ -17,61 +17,94 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
-<title>项目接收</title>
+<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
+<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
+<title>人员列表</title>
 </head>
 
 <body>
 	<div class="page-content">
-		<div class="gys_style">
-			<div class="Manager_style">
-				<div class="title_name">文件查询</div>
-				<!-- 查询条码号 -->
-				<form method="post" action="">
-					<ul class="search_content clearfix">
-						<li>
-						<label class="lf">
-							姓名<input name="name" type="text" class="text_add" />
-						</label>
-						<label class="lf">
-							手机号<input name="phone" type="text" class="text_add" />
-						</label>
-						<label class="lf">
-							体检时间<input name="time" type="date" class="text_add" />
-						</label>
-						<label class="lf">
-							条码号<input name="code" type="text" class="text_add" />
-						</label>
-							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-						</li>
-					</ul>
-				</form>
-			</div>
-		</div>
-
 		<div class="Manager_style">
 			<span class="title_name">文件列表</span>
-			<table class="table table-striped table-bordered table-hover">
+			<table id="patientTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>序号</th>
-						<th>文件名</th>
-						<th>文件大小</th>
-						<th>上传日期</th>
-						<th>操作</th>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>年龄</th>
+						<th>身份证号</th>
+						<th>手机号</th>
+						<th>选择</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${listFile}" var="l" varStatus="s">
+					<c:forEach items="${listPatient}" var="p" varStatus="s">
 						<tr>
 							<td>${s.count}</td>
-							<td>${l.fname}</td>
-							<td>${l.fsize}</td>
-							<td>${l.ftime}</td>
-							<td><a href="javascript:;" onclick="analysisExcel('${l.file_id}');">导入</a>|<a href="javascript:;" onclick="">删除</a></td>
+							<td>${p.name}</td>
+							<td>${p.sex}</td>
+							<td>${p.ID}</td>
+							<td>${p.phone}</td>
+							<td><input type="checked" value="${p.ID }"></input></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
+	</div>
+	
+	<!-- 弹出框 -->
+	<div id="addDialog" title="增加人员">
+		<form action="" method="post">
+			<table width="600" border="0" cellpadding="2">
+				<tr>
+					<td>姓名：</td>
+					<td><input type="text" name="name" id="name" /></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td><input type="text" name="sex" id="sex" /></td>
+				</tr>
+				<tr>
+					<td>年龄：</td>
+					<td><input type="text" name="age" id="age" /></td>
+				</tr>
+				<tr>
+					<td>身份证号：</td>
+					<td><input type="text" name="ID" id="ID" /></td>
+				</tr>
+				<tr>
+					<td>手机号：</td>
+					<td><input type="text" name="phone" id="phone" /></td>
+				</tr>
+				<tr>
+					<td>套餐：</td>
+					<td><input type="text" name="combo" id="combo" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="增加" /></td>
+					<td><input type="reset" value="清空" /></td>
+				</tr>
+			</table>
+		</form>
+
+	</div>
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#patientTable').DataTable();
+	$('#addDialog').dialog({
+		 autoOpen: false,
+	      show: {
+	        effect: "blind",
+	        duration: 1000
+	      },
+	      hide: {
+	        effect: "explode",
+	        duration: 1000
+	      }
+	});
+});
+</script>
 </html>

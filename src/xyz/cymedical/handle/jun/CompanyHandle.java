@@ -72,11 +72,21 @@ public class CompanyHandle {
 	}
 
 	/*
+	 * 导检人员增加
+	 */
+//	@RequestMapping(value="/addPatient.handle",method=RequestMethod.GET)
+//	public String addPatient(Patient patient) {
+//		
+//	}
+	
+	
+	
+	/*
 	 * 导入excel
 	 */
 	@RequestMapping(value = "/analysisExcel.handle", method = RequestMethod.GET)
 	public ModelAndView analysisExcel(HttpServletRequest request, String file_id) {
-		
+		System.out.println("读取excel");
 		company = (Company) request.getSession().getAttribute("user");
 		// 要插入的病人信息表
 		List<Patient> listPatient = new ArrayList<>();
@@ -112,7 +122,7 @@ public class CompanyHandle {
 
 				System.out.println("一共这么多行数据: " + (lastRowIndex - firstRowIndex + 1));
 				for (int rIndex = firstRowIndex; rIndex <= lastRowIndex; rIndex++) {
-					String code = randomNumStr(13);
+//					String code = randomNumStr(13);
 					//	遍历行
 					Row row = sheet.getRow(rIndex);
 					ArrayList<String> listData = new ArrayList<>();
@@ -124,7 +134,6 @@ public class CompanyHandle {
 							//	遍历列
 							Cell cell = row.getCell(cIndex);
 							if (cell != null) {
-								System.out.print(cell.toString() + "\t");
 								listData.add(cell.toString());
 							}
 						}
@@ -138,28 +147,33 @@ public class CompanyHandle {
 							listData.get(1),
 							listData.get(2), 
 							listData.get(3), 
-							code, 
+//							code, 
+							"-1",
 							listData.get(4), 
 							"-1"));
 					System.out.println();
-					String path = createBarCode("D://test//", code, ImageUtil.JPEG);
+//					String path = createBarCode("D://test//", code, ImageUtil.JPEG);
 
-					System.out.println(path);
+//					System.out.println(path);
 				}
 				wb.close();
+//				System.out.println("开始入库");
 				System.out.println(listPatient);
-				System.out.println("开始入库");
-				boolean isSuccess = patientBiz.insertByBatch(listPatient);
-				if (isSuccess) {
-					System.out.println("导入成功");
-				}
+				request.getSession().setAttribute("listPatient", listPatient);
+//				boolean isSuccess = patientBiz.insertByBatch(listPatient);
+//				if (isSuccess) {
+//					System.out.println("导入成功");
+//				}
+				modelAndView = new ModelAndView("WEB-INF/medical_workstation/patient_list");
+				modelAndView.addObject("listPatient", listPatient);
+				
 			} else {
 				System.out.println("找不到指定的文件");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return modelAndView;
 	}
 
 	/*
