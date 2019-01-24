@@ -125,7 +125,6 @@ public class CompanyHandle {
 							//	遍历列
 							Cell cell = row.getCell(cIndex);
 							if (cell != null) {
-								System.out.print(cell.toString() + "\t");
 								listData.add(cell.toString());
 							}
 						}
