@@ -106,15 +106,15 @@ public class CompanyHandle {
 				} else {
 					System.out.println("文件类型错误!");
 				}
-				// 开始解析，读取sheet 0
+				//	开始解析，读取sheet 0
 				Sheet sheet = wb.getSheetAt(0);
-				// 第一行是列名，所以不读
+				//	第一行是列名，所以不读
 				int firstRowIndex = sheet.getFirstRowNum() + 1;
 				int lastRowIndex = sheet.getLastRowNum();
 
 				System.out.println("一共这么多行数据: " + (lastRowIndex - firstRowIndex + 1));
 				for (int rIndex = firstRowIndex; rIndex <= lastRowIndex; rIndex++) {
-					// 遍历行
+					//	遍历行
 					Row row = sheet.getRow(rIndex);
 					ArrayList<String> listData = new ArrayList<>();
 					if (row != null) {
@@ -122,17 +122,23 @@ public class CompanyHandle {
 						int lastCellIndex = row.getLastCellNum();
 
 						for (int cIndex = firstCellIndex; cIndex < lastCellIndex; cIndex++) {
-							// 遍历列
+							//	遍历列
 							Cell cell = row.getCell(cIndex);
 							if (cell != null) {
 								System.out.print(cell.toString() + "\t");
 								listData.add(cell.toString());
 							}
 						}
+						System.out.println(listData);
 					}
+<<<<<<< HEAD
+					listPatient.add(new Patient(-1, 
+							company.getCompany_id(), //
+=======
 					listPatient.add(new Patient(
 							-1, 
 							company.getCompany_id(), 
+>>>>>>> 9a4633670b7068e971455c1c65fa2ba4e9828a70
 							-1, 
 							listData.get(0), 
 							listData.get(1),
