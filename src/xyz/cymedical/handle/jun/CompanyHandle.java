@@ -112,7 +112,7 @@ public class CompanyHandle {
 
 				System.out.println("一共这么多行数据: " + (lastRowIndex - firstRowIndex + 1));
 				for (int rIndex = firstRowIndex; rIndex <= lastRowIndex; rIndex++) {
-					String code = randomNumStr(13);
+//					String code = randomNumStr(13);
 					//	遍历行
 					Row row = sheet.getRow(rIndex);
 					ArrayList<String> listData = new ArrayList<>();
@@ -137,7 +137,8 @@ public class CompanyHandle {
 							listData.get(1),
 							listData.get(2), 
 							listData.get(3), 
-							code, 
+//							code, 
+							"-1",
 							listData.get(4), 
 							"-1"));
 					System.out.println();
@@ -153,13 +154,16 @@ public class CompanyHandle {
 //				if (isSuccess) {
 //					System.out.println("导入成功");
 //				}
+				modelAndView = new ModelAndView("");
+				modelAndView.addObject("listPatient", listPatient);
+				
 			} else {
 				System.out.println("找不到指定的文件");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return modelAndView;
 	}
 
 	/*
