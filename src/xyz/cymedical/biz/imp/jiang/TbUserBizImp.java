@@ -51,5 +51,9 @@ public class TbUserBizImp implements TbUserBiz{
 		// TODO Auto-generated method stub
 		return tbUserMapper.upUser(user);
 	}
-
+	@Override//模糊查询
+	public List<Map<String,Object>> selUser(String depts, String users,  String phones ) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.selUser(depts, users, phones);
+	}
 }
