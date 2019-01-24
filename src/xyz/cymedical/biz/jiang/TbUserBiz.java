@@ -21,4 +21,6 @@ public interface TbUserBiz {
 	public  int upState(int user_id,String state);
 	
 	public int upUser(Tb_user user);//修改人員信息
+	
+	public List<Map<String,Object>> selUser(String depts, String users,  String phones );
 }
