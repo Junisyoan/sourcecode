@@ -74,10 +74,10 @@ public class CompanyHandle {
 	/*
 	 * 导检人员增加
 	 */
-	@RequestMapping(value="/addPatient.handle",method=RequestMethod.GET)
-	public String addPatient(Patient patient) {
-		
-	}
+//	@RequestMapping(value="/addPatient.handle",method=RequestMethod.GET)
+//	public String addPatient(Patient patient) {
+//		
+//	}
 	
 	
 	
