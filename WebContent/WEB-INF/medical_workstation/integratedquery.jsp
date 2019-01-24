@@ -59,14 +59,14 @@
 				<tbody>
 					<c:forEach items="${patientlist}" var="p" varStatus="s">
 						<tr>
-							<th>${s.index + 1}</th>
-							<th>${p.n1}</th>
-							<th>${p.time}</th>
-							<th><a href="">查看</a></th>
-							<th><a href="">查看</a></th>
-							<th><a href="">查看</a></th>
-							<th><a href="">查看</a></th>
-							<th><a href="">查看</a></th>
+							<td>${s.index + 1}</th>
+							<td>${p.n1}</th>
+							<td>${p.time}</th>
+							<td><a href="">查看</a></th>
+							<td><a href="">查看</a></th>
+							<td><a href="">查看</a></th>
+							<td><a href="">查看</a></th>
+							<td><a href="">查看</a></th>
 						</tr>
 					</c:forEach>
 				</tbody>
