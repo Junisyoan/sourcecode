@@ -117,7 +117,7 @@
 							<ul class="submenu">
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>usermanage/select.handle" title="人员管理" class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
 								<li class="home"><a href="javascript:void(0)" name="菜单管理.html" title="菜单管理" class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
-								<li class="home"><a href="javascript:void(0)" name="角色管理.html" title="角色管理"  class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
+								<li class="home"><a href="javascript:void(0)" name="<%=path%>rolemanage/select.handle" title="角色管理"  class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
                                 <li class="home"><a href="javascript:void(0)" name="用户管理.html" title="用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
                                 <!--根据用户权限显示用户管理-->
                                 <li class="home"><a href="javascript:void(0)" name="权限用户管理界面.html" title="权限用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
