@@ -22,8 +22,12 @@
 <body>
 	<div class="Manager_style">
 		<span class="title_name">体检人员信息</span>
-		<h3 align="center">公司
-			：${logCompanylist.get(0).getCompany().getName()}&nbsp;&nbsp;&nbsp;&nbsp;帐号：${logCompanylist.get(0).getCompany().getAccount()}&nbsp;&nbsp;&nbsp;&nbsp;帐号余额：${logCompanylist.get(0).getCompany().getDeposit() }</h3>
+		<c:forEach items="${logCompanylist}" var="l" varStatus="s">
+			<c:if test="${s.index == 0}">
+				<h3 align="center">公司
+					：${l.name}&nbsp;&nbsp;&nbsp;&nbsp;帐号：${l.account}&nbsp;&nbsp;&nbsp;&nbsp;帐号余额：${l.deposit}</h3>
+			</c:if>
+		</c:forEach>
 		<p>&nbsp;</p>
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
