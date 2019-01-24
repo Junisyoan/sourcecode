@@ -17,7 +17,7 @@
 
 	<a href="<%=path%>patient/findpatient.handle">测试</a>
 	<a href="<%=path%>logcompany/findlogcompany.handle">测试</a>
-
+	<a href="<%=path%>param/findAllParam.handle">参数测试</a>
 </body>
 
 </html>
