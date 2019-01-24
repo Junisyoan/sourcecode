@@ -58,11 +58,11 @@ public class UserManageHandle {
 
 		if (ret == 1) {
 			System.out.println("添加成功...");
-			mav.setViewName("usermanage");
+			mav.setViewName("WEB-INF/view.jiang/usermanage");
 		}
 
 //		mav.setViewName("WEB-INF/view.jiang/index");
-		mav.setViewName("usermanage");
+		mav.setViewName("WEB-INF/view.jiang/usermanage");
 
 		return mav;
 
@@ -86,7 +86,7 @@ public class UserManageHandle {
 			System.out.println("沒有數據");
 		}
 
-		mav.setViewName("usermanage");
+		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		return mav;
 
 	}
@@ -145,7 +145,7 @@ public class UserManageHandle {
 		}
 		request.setAttribute("addrole", addrole);
 
-		mav.setViewName("usermanage");
+		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		return mav;
 
 	}
@@ -196,8 +196,32 @@ public class UserManageHandle {
  
 		tbUserBiz.upUser(upuser);
 
-		mav.setViewName("usermanage");
+		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		return mav;
 
 	}
+	
+	@RequestMapping(value = "/selectlittle.handle", method = RequestMethod.POST)
+	public ModelAndView selectlittle(HttpServletRequest request, HttpServletResponse response, String depts, String users,  String phones) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("11-="+depts);
+		System.out.println("11-="+users);
+		System.out.println("11-="+phones);
+//		String account= "'%"+users+"%'";
+//		System.out.println(account);
+//		String sql="select * from tb_user where account like '%"+users+"%'";
+//		System.out.println(sql);
+		maplist=tbUserBiz.selUser(depts, users, phones);
+		if (null != maplist && maplist.size() > 0) {
+			
+			request.setAttribute("maplist", maplist);
+		} else {
+			System.out.println("沒有數據");
+		}
+
+		mav.setViewName("WEB-INF/view.jiang/usermanage");
+		return mav;
+
+	}
+	
 }
