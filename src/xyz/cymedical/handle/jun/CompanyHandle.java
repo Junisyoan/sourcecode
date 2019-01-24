@@ -142,6 +142,7 @@ public class CompanyHandle {
 							listData.get(4), 
 							"-1"));
 					System.out.println();
+					TestBarcode.createBarCode("D://test//", code, ImageUtil.JPEG);
 				}
 				wb.close();
 				System.out.println(listPatient);
@@ -149,7 +150,6 @@ public class CompanyHandle {
 				boolean isSuccess = patientBiz.insertByBatch(listPatient);
 				if (isSuccess) {
 					System.out.println("导入成功");
-					TestBarcode.createBarCode("D://test//", code, ImageUtil.JPEG);
 				}
 			} else {
 				System.out.println("找不到指定的文件");
