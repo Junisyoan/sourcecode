@@ -33,7 +33,39 @@ public class PatientHandle {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/staffquery");
-		mav.addObject("patientlist", patientlist);
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
+		return mav;
+
+	}
+
+	// 人员综合查询
+	@RequestMapping(value = "/findpatientall.handle")
+	public ModelAndView findpatientall(String name, String phone, String time, String code) {
+
+		patientlist = patientMapper.query(name, phone, time, code);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/integratedquery");
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
+		return mav;
+
+	}
+
+	// 人员综合查询
+	@RequestMapping(value = "/printpatient.handle")
+	public ModelAndView printpatient(String name) {
+
+		patientlist = patientMapper.query(name, "", "", "");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/print");
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
 		return mav;
 
 	}

@@ -1,14 +1,9 @@
 package xyz.cymedical.mapper.xin;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import xyz.cymedical.entity.jun.Company;
-import xyz.cymedical.entity.zsc.Detail;
 
 /**
 * 2019年1月19日

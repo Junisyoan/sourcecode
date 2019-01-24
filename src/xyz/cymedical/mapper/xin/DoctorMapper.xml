@@ -8,19 +8,20 @@
 
 	<select id="findMyProject" parameterType="String"
 		resultType="java.util.HashMap">
-		select a.*,c.project_id,c.name
-		projectname,d.patient_project_id,d.state from tb_patient
-		a,tb_project_combo b,tb_project c,tb_patient_project d
+		select a.*,c.project_id,c.name projectname,e.name keshi
+		,d.patient_project_id,d.state from 
+		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e
 		where
 		a.combo_id=b.combo_id and b.project_id=c.project_id and
-		d.project_id=c.project_id
+		d.project_id=c.project_id and c.param_id=e.param_id
 		and a.code=#{onecode }
 	</select>
 
 	<select id="findMyDetail" parameterType="java.lang.Integer"
 		resultType="java.util.HashMap">
-		select distinct * from tb_brief a,tb_detail_project b
-		where a.detail_id=b.detail_id and time=(SELECT MAX(time) FROM `tb_group` )
+		select distinct * from tb_brief a,tb_detail_project b,tb_detail c
+		where a.detail_id=b.detail_id and time=
+		(SELECT MAX(time) FROM `tb_group` ) and b.detail_id=c.detail_id
 		and b.project_id=#{0 } and a.patient_id=#{1 }
 	</select>
 

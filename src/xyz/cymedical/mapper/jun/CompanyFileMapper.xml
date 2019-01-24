@@ -4,6 +4,11 @@
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyFileMapper">
 
+
+	<select id="queryFileById" parameterType="String" resultType="xyz.cymedical.entity.jun.CompanyFile">
+		select * from tb_file where file_id = #{file_id}
+	</select>
+
 	<select id="queryFileList" parameterType="int" resultType="xyz.cymedical.entity.jun.CompanyFile">
 		select * from tb_file limit #{pageNo}, 10
 	</select>

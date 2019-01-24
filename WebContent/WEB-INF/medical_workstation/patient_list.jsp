@@ -74,13 +74,4 @@
 			</table>
 		</div>
 </body>
-<script type="text/javascript">
-function analysisExcel(file_id){
-	var sure=confirm("确定导入？");
-	if(sure){
-		location.href="<%=path%>company/analysisExcel.handle?file_id="+file_id;
-	}
-	
-}
-</script>
 </html>

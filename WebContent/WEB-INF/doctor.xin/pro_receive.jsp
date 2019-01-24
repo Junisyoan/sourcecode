@@ -64,7 +64,7 @@
 			</div>
 
 			<div class="Manager_style">
-				<span class="title_name">产品信息</span>
+				<span class="title_name">体检信息</span>
 			<form method="post" action="<%=path %>doctor/findProject.handle">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
@@ -73,6 +73,7 @@
 							<th>病人姓名</th>
 							<th>年龄</th>
 							<th>电话</th>
+							<th>科室</th>
 							<th>项目</th>
 							<th>状态</th>
 							<th>操作</th>
@@ -82,6 +83,7 @@
 						<tr>
 							<td>1</td>
 							<td>13505140602</td>
+							<td>备注信息</td>
 							<td>备注信息</td>
 							<td>备注信息</td>
 							<td>备注信息</td>
@@ -98,11 +100,12 @@
 								<td>${p.name}</td>
 								<td>${p.age}</td>
 								<td>${p.phone}</td>
+								<td>${p.keshi}</td>
 								<td>${p.projectname}</td>
 								<td>${p.state}</td>
 								<td class="center">
 								<c:if test="${p.state=='未接收' }">
-									<a href="<%=path %>doctor/receive.handle?patient_project_id=${p.patient_project_id} "><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">接收</button></a>
+									<a href="<%=path %>doctor/receive.handle?patient_project_id=${p.patient_project_id}&onecode=${p.code } "><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">接收</button></a>
 								</c:if> 
 								<c:if test="${p.state=='已接收' }">
 									<a href="<%=path %>doctor/Detail.handle?projectname=${p.projectname} &patientid=${p.patient_id}&projectid=${p.project_id}"><button type="button" class="btn btn-info Product_Details">检查</button></a>
@@ -110,7 +113,6 @@
 								</td>
 							</tr>
 						</c:forEach>
-
 					</tbody>
 				 </table>
 				</form>

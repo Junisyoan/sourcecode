@@ -13,13 +13,21 @@ import xyz.cymedical.entity.jun.CompanyFile;
 public interface CompanyFileBiz {
 
 	
-	//select
+	
+	//query
 	/**
 	 * 查询文件列表
 	 * @param pageNum	页码
 	 * @return	文件列表
 	 */
 	public List<CompanyFile> queryFileList(String pageNum);
+	
+	/**
+	 * 	查询文件
+	 * @param file_id	文件id
+	 * @return	文件信息
+	 */
+	public CompanyFile queryFile(String file_id);
 	
 	//insert
 	

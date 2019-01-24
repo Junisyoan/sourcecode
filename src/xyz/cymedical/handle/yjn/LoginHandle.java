@@ -1,7 +1,5 @@
 package xyz.cymedical.handle.yjn;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
