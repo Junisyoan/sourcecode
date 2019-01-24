@@ -117,8 +117,8 @@
 								name="已响应询价.html" title="已响应询价" class="iframeurl"><i
 									class="icon-double-angle-right"></i>（权限）已响应询价</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="已到期询价.html" title="已到期询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）已到期询价</a></li>
+								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
+									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
@@ -165,7 +165,7 @@
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)" name=""
+							<li class="home"><a href="javascript:void(0)" name="<%=path%>patient/findpatientall.handle"
 								title="体检综合查询" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检综合查询</a></li>
 							<li class="home"><a href="javascript:void(0)"
