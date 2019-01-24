@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.zsc.ProjectMapper">
+
+	<!-- 查询部门id，用于添加细项 -->
+	<select id="selectParamtId" parameterType = "java.lang.String" resultType="int">
+		select param_id from tb_param where name = #{param_name}
+	</select>
+	
+	<!-- 添加项目 -->
+	<insert id="insertProject" parameterType="xyz.cymedical.entity.zsc.Project" useGeneratedKeys="true" keyProperty="project_id">
+  		insert into tb_project(param_id,name, price) values(#{param.param_id},#{name}, #{price})
+	</insert>
+	
+	<!-- 添加项目细项关系 -->
+	<insert id="insertDetPro" parameterType = "map">
+		insert into tb_detail_project(project_id,detail_id) values 
+		<foreach collection="idArray" item="d" separator="," close=";">
+			(#{project.project_id},#{d})
+		</foreach>
+	</insert>
+	
+	<delete id="deleteProject" parameterType="int">
+		delete from tb_detail_project where project_id = #{project_id};
+		delete from tb_project where project_id = #{project_id};
+	</delete>
+	
+	<update id="updateProject" parameterType="map">
+		update tb_project set param_id = #{project.param.param_id},name = #{project.name},price = #{project.price}
+		where project_id = #{project.project_id};
+		delete from tb_detail_project where project_id = #{project.project_id};
+		insert into tb_detail_project(project_id,detail_id) values 
+		<foreach collection="idArray" item="d" separator="," close=";">
+			(#{project.project_id},#{d})
+		</foreach>
+	</update>
+	
+	<!-- 按条件查询 -->
+	<select id="selectProject" parameterType="map" resultMap = "projectMap">
+		select pj.project_id,pj.name,pj.price,dt.detail_id,dt.name dtname,pa.param_id,pa.name paname
+		from tb_project pj
+		left join tb_param pa on pj.param_id = pa.param_id 
+		left join tb_detail_project dp on pj.project_id = dp.project_id
+		left join tb_detail dt on dp.detail_id = dt.detail_id
+		where 1=1
+		
+		<if test="name!=null and name!=''">
+			and pj.name like '%${name}%'
+		</if>
+		<if test="min!=null and min!=''">
+			and pj.price > ${min}
+		</if>
+		<if test="max!=null and max!=''">
+			and ${max} > pj.price
+		</if>
+		<if test="deptname!=null and deptname!=''">
+			and pa.name = ${paname}
+		</if>
+	</select>
+	
+	<select id="findProject" parameterType="java.lang.String" resultMap="projectMap">
+		select pj.project_id,pj.name,pj.price,dt.detail_id,dt.name dtname,pa.param_id,pa.name paname
+		from tb_project pj 
+		left join tb_param pa on pj.param_id = pa.param_id 
+		left join tb_detail_project dp on dp.project_id = #{project_id}
+		left join tb_detail dt on dp.detail_id = dt.detail_id where pj.project_id = #{project_id}
+	</select>
+	
+	<!-- 查询项目返回的map -->
+	<resultMap type="xyz.cymedical.entity.zsc.Project" id="projectMap">
+		<id property="project_id" column="project_id"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<association property="param" javaType="xyz.cymedical.entity.yjn.Param">
+			<id property="param_id" column="param_id"/>
+			<result property="name" column="paname"/>
+		</association>
+		<collection  property="details" ofType="xyz.cymedical.entity.zsc.Detail">
+			<id property="detail_id" column="detail_id"/>
+			<result property="name" column="dtname"/>
+		</collection>
+	</resultMap>
+	
+</mapper>
