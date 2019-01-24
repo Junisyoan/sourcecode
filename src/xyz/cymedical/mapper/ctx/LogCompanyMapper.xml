@@ -5,34 +5,12 @@
 <mapper namespace="xyz.cymedical.mapper.ctx.LogCompanyMapper">
 
 	<select id="queryByName" parameterType="java.lang.String"
-		resultMap="logcompanyMap">
-		select c.name,c.account,c.deposit,l.operate,l.money,l.time from
+		resultType="java.util.HashMap">
+		select c.name,c.account,c.deposit,l.operate,l.money,l.time
+		from
 		tb_log_company l left join tb_company c on
-		l.company_id = c.company_id
+		l.company_id =
+		c.company_id
 		where c.name = #{name}
 	</select>
-
-	<resultMap type="xyz.cymedical.entity.ctx.LogCompany"
-		id="logcompanyMap">
-
-		<id property="company_id" column="company_id" />
-		<result property="log_company_id" column="log_company_id" />
-		<result property="operate" column="operate" />
-		<result property="money" column="money" />
-		<result property="time" column="time" />
-
-		<association property="company" column="company_id"
-			javaType="xyz.cymedical.entity.jun.Company">
-			<id property="company_id" column="company_id" />
-			<result property="name" column="name" />
-			<result property="account" column="account" />
-			<result property="pwd" column="pwd" />
-			<result property="tel" column="tel" />
-			<result property="address" column="address" />
-			<result property="people" column="people" />
-			<result property="phone" column="phone" />
-			<result property="deposit" column="deposit" />
-		</association>
-	</resultMap>
-
 </mapper>
