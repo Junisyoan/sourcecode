@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +31,7 @@ public class LogCompanyHandle {
 	@RequestMapping(value = "/findlogcompany.handle")
 	public ModelAndView findcompanylog(String name) {
 
-		System.out.println("2323232");
-
-		logCompanylist = logCompanyBiz.queryByName("蓝们科技");
+		logCompanylist = logCompanyBiz.queryByName("123456");
 
 		System.out.println(logCompanylist.size());
 

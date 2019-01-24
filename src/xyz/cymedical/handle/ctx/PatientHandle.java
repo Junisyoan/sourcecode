@@ -55,7 +55,16 @@ public class PatientHandle {
 
 	}
 
-	// 人员综合查询
+	// 打印界面显示
+	@RequestMapping(value = "/showpatient.handle")
+	public ModelAndView showpatient() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/print");
+		return mav;
+
+	}
+
+	// 体检报告人查询
 	@RequestMapping(value = "/printpatient.handle")
 	public ModelAndView printpatient(String name) {
 
@@ -63,6 +72,21 @@ public class PatientHandle {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/print");
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
+		return mav;
+
+	}
+
+	// 体检报告人查询
+	@RequestMapping(value = "/print.handle")
+	public ModelAndView print(String name) {
+
+		patientlist = patientMapper.query(name, "", "", "");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/printpatient");
 		if (patientlist.size() > 0) {
 			mav.addObject("patientlist", patientlist);
 		}
