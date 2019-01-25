@@ -37,18 +37,18 @@ input {
 				<p>&nbsp;</p>
 				<hr style="width: 1200px; color: black;">
 				<p>&nbsp;</p>
-				<p style="margin-left: 165px;">
+				<p style="margin-left: 180px;">
 					团&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;体: <input type="text"
 						value="${p.n2}" disabled="disabled"
 						style="width: 410px; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</p>
-				<p style="margin-left: 165px;">
+				<p style="margin-left: 180px;">
 					团体序号: <input type="text" value="XXXXXXXX" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 					体检号码： <input type="text" value="${p.check_num}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</p>
-				<p style="margin-left: 165px;">
+				<p style="margin-left: 180px;">
 					姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名: <input type="text"
 						value="${p.n1}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
@@ -56,7 +56,7 @@ input {
 						value="${p.sex}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</p>
-				<p style="margin-left: 165px;">
+				<p style="margin-left: 180px;">
 					年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄: <input type="text"
 						value="${p.age}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
@@ -64,7 +64,7 @@ input {
 						value="${p.phone}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</p>
-				<p style="margin-left: 215px;">
+				<p style="margin-left: 230px;">
 					打印时间：<input type="text" value="XXXX-XX-XX" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</p>
@@ -74,6 +74,24 @@ input {
 				<h1 align="center">体检报告</h1>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
+			</form>
+			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
+				<div style="float: left; margin-left: 75px;">健康体检中心</div>
+				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<p>&nbsp;</p>
+				<hr style="width: 1200px;">
+					<p>&nbsp;</p>
+					<p style="margin-left: 90px;">尊敬的：XXX</p>
+					<p style="margin-left: 120px;">感谢你来到XXXXXXXX进行健康体检！</p>
+					<p style="margin-left: 120px;">为了增加您对健康体检的认识，我们在此特别向您说明，健康体检检查的目的在于及时的了解自身的健康情况，提</p>
+					<p style="margin-left: 90px;">高健康环保意识，如果此次检查在正常范围内，只表示您选择的体检项目所反映的身体健康情况，由于体检手段及项目</p>
+					<p style="margin-left: 90px;">所限，并不能完全排除身体潜在疾病，若有疾病症状出现，请及时到医院就医。</p>
+					<p style="margin-left: 120px;">"健康是人生最宝贵的"。不良的生活习惯和行为会损坏您的健康，我们真诚希望您保持科学健康的生活方式，定期</p>
+					<p style="margin-left: 90px;">
+						接受健康检查，在您最需要的时候请随时与我们联系，欢迎您再次光临XXXXXXXXXX。
+						<p style="margin-left: 120px;">
+							祝您，健康快乐！
+							<p>&nbsp;</p>
 			</form>
 		</c:if>
 	</c:forEach>
