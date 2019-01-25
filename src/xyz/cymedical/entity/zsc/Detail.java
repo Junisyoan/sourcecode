@@ -1,7 +1,5 @@
 package xyz.cymedical.entity.zsc;
 
-import xyz.cymedical.entity.jiang.Tb_dept;
-
 public class Detail {
 
 	private int detail_id;
@@ -10,13 +8,18 @@ public class Detail {
 	private String max;
 	private String min;
 	private String type;
-	private Tb_dept tb_dept;
 
 	public Detail() {
 		super();
 	}
 
-	public Detail(int detail_id, String name, String unit, String max, String min, String type, Tb_dept tb_dept) {
+	public Detail(int detail_id, String name) {
+		super();
+		this.detail_id = detail_id;
+		this.name = name;
+	}
+
+	public Detail(int detail_id, String name, String unit, String max, String min, String type) {
 		super();
 		this.detail_id = detail_id;
 		this.name = name;
@@ -24,21 +27,12 @@ public class Detail {
 		this.max = max;
 		this.min = min;
 		this.type = type;
-		this.tb_dept = tb_dept;
 	}
 
 	@Override
 	public String toString() {
 		return "Detail [detail_id=" + detail_id + ", name=" + name + ", unit=" + unit + ", max=" + max + ", min=" + min
-				+ ", type=" + type + ", tb_dept=" + tb_dept + "]";
-	}
-
-	public Tb_dept getTb_dept() {
-		return tb_dept;
-	}
-
-	public void setTb_dept(Tb_dept tb_dept) {
-		this.tb_dept = tb_dept;
+				+ ", type=" + type + "]";
 	}
 
 	public String getType() {

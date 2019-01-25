@@ -17,7 +17,7 @@
 <!-- 数据源，连接mysql配置 -->
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"	destroy-method="close">
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	    <property name="url"	 		  value="jdbc:mysql://129.28.83.44:3306/cymedical"/>
+	    <property name="url"	 		  value="jdbc:mysql://129.28.83.44:3306/cymedical?allowMultiQueries=true"/>
 	    <property name="username"		  value="admin"/>
 	    <property name="password"		  value="123"/>
 	</bean>

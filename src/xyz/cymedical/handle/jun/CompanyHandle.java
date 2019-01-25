@@ -72,6 +72,16 @@ public class CompanyHandle {
 	}
 
 	/*
+	 * 导检人员增加
+	 */
+//	@RequestMapping(value="/addPatient.handle",method=RequestMethod.GET)
+//	public String addPatient(Patient patient) {
+//		
+//	}
+	
+	
+	
+	/*
 	 * 导入excel
 	 */
 	@RequestMapping(value = "/analysisExcel.handle", method = RequestMethod.GET)
@@ -154,7 +164,7 @@ public class CompanyHandle {
 //				if (isSuccess) {
 //					System.out.println("导入成功");
 //				}
-				modelAndView = new ModelAndView("");
+				modelAndView = new ModelAndView("WEB-INF/medical_workstation/patient_list");
 				modelAndView.addObject("listPatient", listPatient);
 				
 			} else {

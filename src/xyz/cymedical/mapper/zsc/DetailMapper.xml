@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.zsc.DetailMapper">
+
+	<!-- 插入细项 -->
+	<insert id="insertDetail" parameterType = "xyz.cymedical.entity.zsc.Detail">
+		insert into tb_detail(name,unit,max,min,type) 
+		values (#{name},#{unit},#{max},#{min},#{type});
+	</insert>
+
+	<!-- 修改细项 -->
+	<update id="updateDetail" parameterType = "xyz.cymedical.entity.zsc.Detail">
+		update tb_detail set 
+		name = #{name}, unit = #{unit},max = #{max},min = #{min},type=#{type} 
+		where detail_id = #{detail_id}
+	</update>
+
+	<!-- 删除细项 -->
+	<delete id="deleteDetail" parameterType = "int">
+		delete from tb_detail_project where detail_id = #{detail_id};
+		delete from tb_detail where detail_id = #{detail_id};
+	</delete>
+
+	<!-- 细项集合 -->
+	<select id="findDetails" resultType = "xyz.cymedical.entity.zsc.Detail">
+		select detail_id,name,unit,max,min,type from tb_detail
+	</select>
+
+	<!-- 修改细项前的查询细项 -->
+	<select id = "findDetail" parameterType="java.lang.String" resultType = "xyz.cymedical.entity.zsc.Detail">
+		select detail_id,name,unit,max,min,type
+		from tb_detail where detail_id = #{detail_id} 
+	</select>
+
+	<!-- 查询细项 -->
+	<select id = "selectDetail" parameterType="xyz.cymedical.entity.zsc.Detail" resultType = "xyz.cymedical.entity.zsc.Detail">
+		select detail_id,name,unit,max,min,type from tb_detail where 1=1
+		<if test="name!=null and name!=''">
+			and name like '%${name}%'
+		</if>
+		<if test="type!=null and type!=''">
+			and type = #{type}
+		</if>
+	</select>
+</mapper>
