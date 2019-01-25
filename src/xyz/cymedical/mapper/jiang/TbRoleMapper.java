@@ -11,5 +11,7 @@ public interface TbRoleMapper {
 
 	public List<Tb_role> selectRole();
 	
+	public Tb_role selectName(String name);
+	
 	public int addRole(String name);
 }
