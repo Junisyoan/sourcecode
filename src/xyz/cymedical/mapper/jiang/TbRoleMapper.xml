@@ -17,7 +17,10 @@
 	
 	</insert>
 
-
+	<select id="selectName" parameterType="String" resultType="xyz.cymedical.entity.jiang.Tb_role" >
+	
+		select * from tb_role where name=#{name} 
+	</select>
 
 
 
