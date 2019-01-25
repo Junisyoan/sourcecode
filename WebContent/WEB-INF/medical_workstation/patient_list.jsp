@@ -17,8 +17,9 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
-<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
+<script src="<%=path%>js/jquery.dataTables.min.js"></script>
 <title>人员列表</title>
 </head>
 
@@ -26,6 +27,7 @@
 	<div class="page-content">
 		<div class="Manager_style">
 			<span class="title_name">文件列表</span>
+			<input type="button" value="添加人员" onclick="javascript:$('#addDialog').dialog('open');"/>
 			<table id="patientTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
@@ -44,9 +46,10 @@
 							<td>${s.count}</td>
 							<td>${p.name}</td>
 							<td>${p.sex}</td>
+							<td>${p.age}</td>
 							<td>${p.ID}</td>
 							<td>${p.phone}</td>
-							<td><input type="checked" value="${p.ID }"></input></td>
+							<td><input type="checkbox" value="${p.ID }"></input></td>
 						</tr>
 					</c:forEach>
 				</tbody>
