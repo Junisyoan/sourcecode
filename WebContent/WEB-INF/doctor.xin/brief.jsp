@@ -21,116 +21,102 @@
 </head>
 <body>
 
+
+
 <div class="page-content">
-<h3 class="header smaller lighter blue">普通项目</h3>
+<h3 class="header smaller lighter blue">
+	<div style="float:left">${projectname }</div>
+	<div style="float:right">${keshi }</div>
+</h3>
   <div class="">
+  <
   <table id="" class="table table-striped table-bordered table-hover">
+     <c:if test="${keshi=='常规检查室' }">
+  
    <thead>
-    <tr><th>序号</th><th>项目名称</th><th>数值</th><th>建议</th><th>操作</th></tr>
+    <tr><th>序号</th><th>项目名称</th><th>结果</th><th>操作</th></tr>
    </thead>
    <tbody>
-   
    <c:forEach items="${dlist }" var="d" varStatus="s">
 		<tr>
 			<c:if test="${d.type=='普通' }">
 				<td>${s.index + 1}</td>
 				<td>${d.name}</td>
-				<td><input type="text" /></td>
-				<td><input type="text" value="良好"/></td>
+				<td><input type="text" name="data" id="${d.name}" /></td>
 				<td class="center">
-				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">提交</button></a>
+				
+				<a href="javascript:;" onclick="location ='<%=path %>doctor/brief.handle?data='+document.getElementById('${d.name}').value;">
+					<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
+				</a>
+				
+<%-- 				<a href="<%=path %>doctor/brief.handle?data='+document.getElementById('data').value;"><button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？') ;">提交</button></a> --%>
 				</td>
 			</c:if> 
 		</tr>
 	</c:forEach>
+  </tbody>
+
+  </c:if>
+  
+  <c:if test="${keshi=='彩超室' }">
+  
+   <thead>
+    <tr><th>序号</th><th>项目名称</th><th>影像</th><th>结果描述</th><th>操作</th></tr>
+   </thead>
+   <tbody>
    
-    <tr>
-     <td>1</td>
-     <td>项目名称叫什么</td>
-     <td>H434534534</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
-     </tr>
-      
-   </tbody>
+   <c:forEach items="${dlist }" var="d" varStatus="s">
+		<tr>
+			<c:if test="${d.type=='影像' }">
+				<td>${s.index + 1}</td>
+				<td>${d.name}</td>
+				<td>上传文件</td>
+				<td><input type="text" /></td>
+				<td class="center">
+				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？') ;">提交</button></a>
+				</td>
+			</c:if> 
+		</tr>
+	</c:forEach>
+  </tbody>
+ 
+  </c:if>
+  
+    <c:if test="${keshi=='检验室' }">
+  
+   <thead>
+    <tr><th>序号</th><th>项目名称</th><th>单位</th><th>参考值</th><th>结果</th><th>提示</th><th>操作</th></tr>
+   </thead>
+   <tbody>
+   
+   <c:forEach items="${dlist }" var="d" varStatus="s">
+		<tr>
+			<c:if test="${d.type=='检验' }">
+				<td>${s.index + 1}</td>
+				<td>${d.name}</td>
+				<td>${d.unit}</td>
+				<td>${d.min}-${d.max}</td>
+				<td><input type="text" name="result" id="result"/></td>
+				<td><input type="text" name="result" id="result"/></td>
+				<td class="center">
+				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？') ;">提交</button></a>
+				</td>
+			</c:if> 
+		</tr>
+	</c:forEach>
+  </tbody>
+ 
+  </c:if>
+  
   </table>
 
   </div>
  </div>
  
- <div class="page-content">
-<h3 class="header smaller lighter blue">影像项目</h3>
-  <div class="">
-  <table id="" class="table table-striped table-bordered table-hover">
-   <thead>
-    <tr><th>序号</th><th>项目名称</th><th>影像结果</th><th>建议</th><th>操作</th></tr>
-   </thead>
-   <tbody>
-   
-   <c:forEach items="${dlist }" var="d" varStatus="s">
-		<tr>
-		  <c:if test="${d.type=='影像' }">
-			<td>${s.index + 1}</td>
-			<td>${d.name}</td>
-			<td>上传图片</td>
-			<td><input type="text" /></td>
-			<td class="center">
-				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">提交</button></a>
-			</td>
-		</c:if>
-		</tr>
-	</c:forEach>
-   
-    <tr>
-     <td>1</td>
-     <td>项目名称叫什么</td>
-     <td>H434534534</td><td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
-     </tr>
-      
-   </tbody>
-  </table>
-
-  </div>
- </div>
 
 
-<div class="page-content">
-<h3 class="header smaller lighter blue">检验项目</h3>
-  <div class="">
-  <table id="" class="table table-striped table-bordered table-hover">
-   <thead>
-    <tr><th>序号</th><th>项目名称</th><th>项目编号</th><th>预计加油时间</th><th>加油地点</th><th>报价截止时间</th><th>总报价</th><th>操作</th></tr>
-   </thead>
-   <tbody>
-   
-   <c:forEach items="${dlist }" var="d" varStatus="s">
-		<tr>
-			<td>${s.index + 1}</td>
-			<td>${d.name}</td>
-			<td>${d.age}</td>
-			<td>${d.phone}</td>
-			<td>${d.projectname}</td>
-			<td>${p.state}</td>
-			<td class="center">
-			<c:if test="${p.state=='未接收' }">
-				<a href="<%=path %>doctor/receive.handle?patient_project_id=${p.patient_project_id} "><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">接收</button></a>
-			</c:if> 
-			<c:if test="${p.state=='已接收' }">
-				<a href="<%=path %>doctor/Detail.handle?projectname=${p.projectname} &patientid=${p.projectname}&projectid=${p.project_id}"><button type="button" class="btn btn-info Product_Details">检查</button></a>
-			</c:if> 
-			</td>
-		</tr>
-	</c:forEach>
-   
-    <tr>
-     <td>1</td>
-     <td>项目名称叫什么</td>
-     <td>H434534534</td><td>2016-04-21</td><td>南京码头</td><td>2016-04-12 10:00</td><td>34554</td><td><a href="供应商报价.html" class="btn btn-primary gys_bz">修改</a></td>
-     </tr>
-      
-   </tbody>
-  </table>
 
-  </div>
- </div>
+
 	<!--[if !IE]> -->
 		<script src="<%=path %>assets/js/jquery.min.js"></script>
 		<!-- <![endif]-->
