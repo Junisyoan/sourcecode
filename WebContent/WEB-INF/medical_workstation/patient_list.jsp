@@ -26,7 +26,7 @@
 <body>
 	<div class="page-content">
 		<div class="Manager_style">
-			<span class="title_name">文件列表</span>
+			<span class="title_name">人员列表</span>
 			<input type="button" value="添加人员" onclick="javascript:$('#addDialog').dialog('open');"/>
 			<table id="patientTable" class="table table-striped table-bordered table-hover">
 				<thead>
@@ -37,7 +37,9 @@
 						<th>年龄</th>
 						<th>身份证号</th>
 						<th>手机号</th>
+						<th>套餐</th>
 						<th>选择</th>
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -49,18 +51,28 @@
 							<td>${p.age}</td>
 							<td>${p.ID}</td>
 							<td>${p.phone}</td>
-							<td><input type="checkbox" value="${p.ID }"></input></td>
+							<td>${p.comboName }</td>
+							<td><input type="checkbox" name="openBill" value="${p.paitent_id }"></input></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
+	<div id="opera">
+		<div>
+			<button id="choosed" onclick="chooseOpen();">选中开单</button>
+			<button id="all">全部开单</button>
+		</div>
+	</div>
 	<!-- 弹出框 -->
 	<div id="addDialog" title="增加人员">
-		<form action="" method="post">
+		<form action="<%=path %>company/addPatient.handle" method="post">
 			<table width="600" border="0" cellpadding="2">
+				<tr>
+					<td>套餐名：</td>
+					<td><input type="text" name="comboName" id="comboName" /></td>
+				</tr>
 				<tr>
 					<td>姓名：</td>
 					<td><input type="text" name="name" id="name" /></td>
@@ -82,10 +94,6 @@
 					<td><input type="text" name="phone" id="phone" /></td>
 				</tr>
 				<tr>
-					<td>套餐：</td>
-					<td><input type="text" name="combo" id="combo" /></td>
-				</tr>
-				<tr>
 					<td><input type="submit" value="增加" /></td>
 					<td><input type="reset" value="清空" /></td>
 				</tr>
@@ -95,6 +103,18 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function chooseOpen(){
+	var choosed = document.getElementsByName("openBill");
+	
+	for(var i=0;i<choosed.length;i++){
+		console.log('当前长度：'+choosed.length);
+		if(choosed[i].checked){
+			alert(choosed[i].value);
+		}
+	}
+}
+
 $(function(){
 	$('#patientTable').DataTable();
 	$('#addDialog').dialog({
@@ -107,6 +127,25 @@ $(function(){
 	        effect: "explode",
 	        duration: 1000
 	      }
+	});
+});
+
+$(function(){
+	$('#comboName').on('blur',function(){
+		var comboName = document.getElementById('combo').value;
+		$.ajax({
+			type:"post",
+			url:"<%=path%>company/queryCombo.handle?comboName="+comboName,
+			dataType:"text",
+			success:function(retData){
+				if(retData!=""){
+					alert(retData);
+				}
+			},
+			error:function(){
+				alert("服务器无响应");
+			}
+		});
 	});
 });
 </script>
