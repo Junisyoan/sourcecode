@@ -73,4 +73,14 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 	public Company companyLogin(String account, String pwd) {
 		return companyMapper.queryCompanyByLogin(account, pwd);
 	}
+
+	@Override
+	public boolean delCompanyFile(String file_id) {
+		
+		//1.删除记账表
+		
+		//2.删除团检表
+		//3.删除文件表
+		return false;
+	}
 }
