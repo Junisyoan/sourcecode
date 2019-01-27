@@ -7,8 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.PatientBiz;
+import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.entity.jun.Company;
@@ -60,7 +64,9 @@ public class CompanyHandle {
 	private CompanyFileBiz companyFileBiz; // 上传文件业务
 	@Resource
 	private PatientBiz patientBiz; // 体检人业务逻辑
-
+	@Resource
+	private ComboCheckBiz comboCheckBiz;//套餐业务
+	
 	private ModelAndView modelAndView; // 视图和模型
 	private Company company; // 公司信息
 	private List<CompanyFile> listFile; // 文件列表
@@ -74,12 +80,79 @@ public class CompanyHandle {
 	/*
 	 * 导检人员增加
 	 */
-//	@RequestMapping(value="/addPatient.handle",method=RequestMethod.GET)
-//	public String addPatient(Patient patient) {
-//		
-//	}
+	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
+	public String addPatient(Patient patient) {
+		System.out.println(patient);
+		return null;
+	}
+	
+	/*
+	 * 查询套餐名称
+	 */
+	@RequestMapping(value="/queryCombo.handle")
+	public String queryCombo(HttpServletResponse response, String comboName) {
+		System.out.println("查询套餐："+comboName);
+		boolean isExists=comboCheckBiz.queryCombo(comboName);
+		response.setCharacterEncoding("utf-8");//字符编码
+		try {
+			if (isExists) {
+				response.getWriter().print("");
+			} else {
+				response.getWriter().print("套餐不存在");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
+	/*
+	 * 文件下载
+	 */
+	@RequestMapping(value="/downloadFile.handle",method=RequestMethod.GET)
+	public String downloadFile(String file_id,HttpServletResponse response) {
+		CompanyFile companyFile = companyFileBiz.queryFile(file_id);
+		System.out.println("文件路径+文件名："+companyFile.getFpath());
+		File file = new File(companyFile.getFpath());
+		response.setCharacterEncoding("utf-8");
+		try {
+			if (file.exists()) {
+				response.reset();//重置文件头
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("multipart/form-data");	//设置内容类型为多媒体文件
+				//设置文件头
+				response.setHeader("Content-Disposition","attachment;fileName="+URLEncoder.encode(file.getName(), "utf-8"));
+				//设置文件流
+				InputStream is = new FileInputStream(file);
+				OutputStream os = response.getOutputStream();
+				//缓冲区2k
+				byte [] conBuffer = new byte[2048];
+				//开始发文件
+				int len = -1;
+				while ((len=is.read(conBuffer))!=-1) {
+					os.write(conBuffer,0,len);
+				}
+				os.flush();
+				os.close();
+				is.close();
+			}else {
+				response.getWriter().println(ResponseTools.returnMsgAndBack("文件不存在，请联系管理员"));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/*
+	 * 删除文件
+	 */
+	public ModelAndView delFile(String file_id) {
+		
+		return getFileList("1");
+	}
 	
 	/*
 	 * 导入excel
@@ -133,24 +206,32 @@ public class CompanyHandle {
 						for (int cIndex = firstCellIndex; cIndex < lastCellIndex; cIndex++) {
 							//	遍历列
 							Cell cell = row.getCell(cIndex);
-							if (cell != null) {
+							if (cell != null||!cell.toString().equals("")) {
 								listData.add(cell.toString());
 							}
 						}
 						System.out.println(listData);
 					}
-					listPatient.add(new Patient(
-							-1, 
-							company.getCompany_id(), 
-							-1, 
-							listData.get(0), 
-							listData.get(1),
-							listData.get(2), 
-							listData.get(3), 
-//							code, 
-							"-1",
-							listData.get(4), 
-							"-1"));
+					if (listData.get(0).equals("")) {
+						System.out.print("文档有空值");
+						continue;
+					}
+					listPatient.add(
+							new Patient(
+									-1, 
+									company.getCompany_id(), 
+									-1, 
+									listData.get(0), 		//姓名
+									listData.get(1),		//性别
+									listData.get(2), 		//年龄
+									listData.get(3), 		//身份证号
+//									code, 
+									"-1",
+									listData.get(4), 		//电话号码
+									"-1",
+									listData.get(5)			//套餐名
+							)
+					);
 					System.out.println();
 //					String path = createBarCode("D://test//", code, ImageUtil.JPEG);
 
