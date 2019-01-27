@@ -100,7 +100,7 @@
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检表上传</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>company/getFileList.handle?pageNum=1" title="团检表列表" class="iframeurl"><i
-									class="icon-double-angle-right"></i>团检表列表</a></li>
+									class="icon-double-angle-right"></i>团检文件列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已到期询价项目</a></li>
