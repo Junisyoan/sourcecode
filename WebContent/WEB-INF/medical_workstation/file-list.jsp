@@ -66,21 +66,28 @@
 							<td>${l.fname}</td>
 							<td>${l.fsize}</td>
 							<td>${l.ftime}</td>
-							<td><a href="javascript:;" onclick="analysisExcel('${l.file_id}');">导入</a>|<a href="javascript:;" onclick="">删除</a></td>
+							<td><a href="javascript:;" onclick="analysisExcel('${l.file_id}','${l.fname}');">导入</a>|
+							<a href="javascript:;" onclick="">删除</a>|
+							<a href="javascript:;" onclick="downloadFile('${l.file_id}');">导出</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-</body>
 <script type="text/javascript">
-function analysisExcel(file_id){
-	var sure=confirm("确定导入？");
+
+function downloadFile(file_id){
+	location.href='<%=path%>company/downloadFile.handle?file_id='+file_id;
+}
+
+function analysisExcel(file_id,file_name){
+	var sure=confirm("确定将--"+file_name+"--导入？");
 	if(sure){
 		location.href="<%=path%>company/analysisExcel.handle?file_id="+file_id;
 	}
 	
 }
 </script>
+</body>
 </html>
