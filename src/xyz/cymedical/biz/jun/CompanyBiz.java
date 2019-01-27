@@ -10,6 +10,12 @@ import xyz.cymedical.entity.jun.Company;
 
 public interface CompanyBiz {
 
+	/**
+	 * 删除文件
+	 * @param file_id	文件id
+	 * @return	是否删除成功
+	 */
+	public boolean delCompanyFile(String file_id);
 	
 	/**
 	 * 登录
