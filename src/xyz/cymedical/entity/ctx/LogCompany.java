@@ -84,4 +84,10 @@ public class LogCompany {
 		this.company = company;
 	}
 
+	@Override
+	public String toString() {
+		return "LogCompany [log_company_id=" + log_company_id + ", company_id=" + company_id + ", operate=" + operate
+				+ ", money=" + money + ", time=" + time + ", company=" + company + "]";
+	}
+
 }
