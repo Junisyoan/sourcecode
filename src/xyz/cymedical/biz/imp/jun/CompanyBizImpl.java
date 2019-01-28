@@ -1,10 +1,14 @@
 package xyz.cymedical.biz.imp.jun;
 
+import java.io.File;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
+import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.mapper.jun.CompanyFileMapper;
 import xyz.cymedical.mapper.jun.CompanyMapper;
@@ -76,11 +80,31 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 
 	@Override
 	public boolean delCompanyFile(String file_id) {
+		System.out.println("删除文件Id："+file_id);
+		isUpdate=false;
+		if (companyMapper.delFile(file_id)) {
+			System.out.println("删除关系表成功");
+		}else {
+			System.out.println("关系表不存在");
+		}
+		//文件路径
+		String path = companyFileMapper.queryFileById(file_id).getFpath();
+		//得到文件
+		File file = new File(path);
+		System.out.println("准备删除"+file.getName());
+		if (file.exists()) {
+			if (file.delete()&&companyFileMapper.delFile(file_id)) {
+				System.out.println("文件删除成功");
+				isUpdate=true;
+			}
+		}
 		
-		//1.删除记账表
-		
-		//2.删除团检表
-		//3.删除文件表
-		return false;
+		return isUpdate;
 	}
+
+	@Override
+	public List<LogCompany> queryDepositList(String c_id) {
+		return companyMapper.queryDepositList(c_id);
+	}
+
 }
