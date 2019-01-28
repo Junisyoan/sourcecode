@@ -4,6 +4,15 @@
 
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyMapper">
+<!-- 查询资金明细列表 -->
+	<select id="queryDepositList" resultType="xyz.cymedical.entity.ctx.LogCompany">
+		select * from tb_log_company where company_id = #{company_id}
+	</select>
+<!-- 删除关系表 -->
+	<delete id="delFile" parameterType="String">
+		delete from tb_file_group where file_id = #{file_id}
+	</delete>
+	
 <!-- 登录 -->
 	<select id="queryCompanyByLogin" parameterType="String" resultType="xyz.cymedical.entity.jun.Company">
 		select * from tb_company where account=#{account} and pwd=#{pwd}
@@ -23,6 +32,6 @@
 	</select>
 <!-- 注册公司 -->
 	<insert id="insertCompany" parameterType="xyz.cymedical.entity.jun.Company">
-		insert into tb_company(name,account,pwd,tel,address,people,phone) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone})
+		insert into tb_company(name,account,pwd,tel,address,people,phone,cstate) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{cstate})
 	</insert>
 </mapper> 
