@@ -18,10 +18,12 @@ public class CompanyFile {
 	private long fsize;				//文件大小
 	private String fpath;			//文件路径
 	private String ftime;			//上传时间
+	private String cstate;			//审核状态
 	public CompanyFile() {
 		super();
 	}
-	public CompanyFile(int file_id, int company_id, String fname, long fsize, String fpath, String ftime) {
+	public CompanyFile(int file_id, int company_id, String fname, long fsize, String fpath, String ftime,
+			String cstate) {
 		super();
 		this.file_id = file_id;
 		this.company_id = company_id;
@@ -29,6 +31,7 @@ public class CompanyFile {
 		this.fsize = fsize;
 		this.fpath = fpath;
 		this.ftime = ftime;
+		this.cstate = cstate;
 	}
 	public int getFile_id() {
 		return file_id;
@@ -66,10 +69,16 @@ public class CompanyFile {
 	public void setFtime(String ftime) {
 		this.ftime = ftime;
 	}
+	public String getCstate() {
+		return cstate;
+	}
+	public void setCstate(String cstate) {
+		this.cstate = cstate;
+	}
 	@Override
 	public String toString() {
-		return "文件信息 [file_id=" + file_id + ", company_id=" + company_id + ", fname=" + fname + ", fsize="
-				+ fsize + ", fpath=" + fpath + ", ftime=" + ftime + "]";
+		return "CompanyFile [file_id=" + file_id + ", company_id=" + company_id + ", fname=" + fname + ", fsize="
+				+ fsize + ", fpath=" + fpath + ", ftime=" + ftime + ", cstate=" + cstate + "]";
 	}
 	
 }
