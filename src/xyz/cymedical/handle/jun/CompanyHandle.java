@@ -13,7 +13,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -22,17 +21,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jbarcode.JBarcode;
 import org.jbarcode.encode.EAN13Encoder;
 import org.jbarcode.paint.EAN13TextPainter;
 import org.jbarcode.paint.WidthCodedPainter;
 import org.jbarcode.util.ImageUtil;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,9 +37,9 @@ import xyz.cymedical.biz.ctx.PatientBiz;
 import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
+import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
-import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -80,16 +74,16 @@ public class CompanyHandle {
 	/*
 	 * 导检人员增加
 	 */
-	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
+/*	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
 	public String addPatient(Patient patient) {
 		System.out.println(patient);
 		return null;
 	}
-	
+*/	
 	/*
 	 * 查询套餐名称
 	 */
-	@RequestMapping(value="/queryCombo.handle")
+/*	@RequestMapping(value="/queryCombo.handle")
 	public String queryCombo(HttpServletResponse response, String comboName) {
 		System.out.println("查询套餐："+comboName);
 		boolean isExists=comboCheckBiz.queryCombo(comboName);
@@ -105,10 +99,57 @@ public class CompanyHandle {
 		}
 		return null;
 	}
+*/	
+	
+	
+	//TODO 充值
+	/*
+	 * 查询费用明细
+	 */
+	@RequestMapping(value="/getDepositDetail.handle",method=RequestMethod.GET)
+	public ModelAndView getDepositDetail(HttpServletRequest request) {
+		company = (Company)request.getSession().getAttribute("user");
+		List<LogCompany> logList = companyBiz.queryDepositList(String.valueOf(company.getCompany_id()));
+		System.out.println(logList);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("logList", logList);
+		modelAndView.setViewName("WEB-INF/user_admin/deposit-log");
+		return modelAndView;
+	}
+	
+	/*
+	 * 删除文件
+	 */
+	@RequestMapping(value="/delFile.handle",method=RequestMethod.GET)
+	public String delFile(HttpServletResponse response, String file_id) {
+		response.setCharacterEncoding("utf-8");
+		try {
+			if(companyBiz.delCompanyFile(file_id)) {
+				response.getWriter().print(ResponseTools.returnMsgAndBack("删除成功，请刷新页面"));
+			}else {
+				response.getWriter().print(ResponseTools.returnMsgAndBack("文件删除失败"));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/*
+	 * 获取文件列表
+	 */
+	@RequestMapping(value = "/getFileList.handle", method = RequestMethod.GET)
+	public ModelAndView getFileList(String pageNum) {
+		System.out.println("查询文件列表，页码" + pageNum);
+		listFile = companyFileBiz.queryFileList(pageNum);
+		modelAndView = new ModelAndView("WEB-INF/user_admin/file-list");
+		modelAndView.addObject("listFile", listFile);
+		return modelAndView;
+	}
 	
 	
 	/*
-	 * 文件下载
+	 * 下载文件
 	 */
 	@RequestMapping(value="/downloadFile.handle",method=RequestMethod.GET)
 	public String downloadFile(String file_id,HttpServletResponse response) {
@@ -146,18 +187,59 @@ public class CompanyHandle {
 		return null;
 	}
 	
-	/*
-	 * 删除文件
-	 */
-	public ModelAndView delFile(String file_id) {
-		
-		return getFileList("1");
-	}
 	
 	/*
-	 * 导入excel
+	 * 上传团检文件
 	 */
-	@RequestMapping(value = "/analysisExcel.handle", method = RequestMethod.GET)
+	@RequestMapping(value = "/fileUpload.handle", method = RequestMethod.POST)
+	public String fileUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile companyFile) {
+		company = (Company) request.getSession().getAttribute("user");
+		System.out.println(companyFile.getSize());
+		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
+		System.out.println(fileDir.getPath());
+		// 目录是否存在
+		if (fileDir.isDirectory()) {
+			// 创建文件
+			File file = new File(fileDir.getAbsolutePath() + "/" + companyFile.getOriginalFilename());
+			if (file.exists()) {
+				System.out.println("文件存在");
+			} else {
+				try {
+					byte[] bytes = companyFile.getBytes();
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+					stream.write(bytes);
+					stream.close();
+					System.out.println("上传成功，准备写入数据库");
+
+					CompanyFile insertFile = new CompanyFile(-1, company.getCompany_id(),
+							companyFile.getOriginalFilename(), companyFile.getSize(), file.getAbsolutePath(),
+							new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis()),"未审核");
+					if (companyFileBiz.insertFile(insertFile)) {
+						System.out.println("写入成功"+file.getName());
+
+						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件成功"));
+					} else {
+						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
+					}
+
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			System.out.println("目录不存在");
+		}
+		return null;
+	}
+	
+	
+	
+	/*
+	 *导入文件
+	 */
+/*	@RequestMapping(value = "/analysisExcel.handle", method = RequestMethod.GET)
 	public ModelAndView analysisExcel(HttpServletRequest request, String file_id) {
 		System.out.println("读取excel");
 		company = (Company) request.getSession().getAttribute("user");
@@ -206,7 +288,7 @@ public class CompanyHandle {
 						for (int cIndex = firstCellIndex; cIndex < lastCellIndex; cIndex++) {
 							//	遍历列
 							Cell cell = row.getCell(cIndex);
-							if (cell != null||!cell.toString().equals("")) {
+							if (cell != null&&!cell.toString().equals("")) {
 								listData.add(cell.toString());
 							}
 						}
@@ -256,19 +338,7 @@ public class CompanyHandle {
 		}
 		return modelAndView;
 	}
-
-	/*
-	 * 获得所上传的文件列表
-	 */
-	@RequestMapping(value = "/getFileList.handle", method = RequestMethod.GET)
-	public ModelAndView getFileList(String pageNum) {
-		System.out.println("查询文件列表，页码" + pageNum);
-		listFile = companyFileBiz.queryFileList(pageNum);
-		modelAndView = new ModelAndView("WEB-INF/medical_workstation/file-list");
-		modelAndView.addObject("listFile", listFile);
-		return modelAndView;
-	}
-
+*/
 	/*
 	 * 获取上传文档的路径
 	 */
@@ -276,55 +346,10 @@ public class CompanyHandle {
 	public ModelAndView getUpFilePath() {
 		System.out.println("获取上传文件地址");
 		modelAndView = new ModelAndView();
-		modelAndView.setViewName("WEB-INF/medical_workstation/upfile-group");
+		modelAndView.setViewName("WEB-INF/user_admin/upfile-group");
 		return modelAndView;
 	}
 
-	/*
-	 * 上传团检文件
-	 */
-	@RequestMapping(value = "/fileUpload.handle", method = RequestMethod.POST)
-	public String fileUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile companyFile) {
-		company = (Company) request.getSession().getAttribute("user");
-		System.out.println(companyFile.getSize());
-		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
-		System.out.println(fileDir.getPath());
-		// 目录是否存在
-		if (fileDir.isDirectory()) {
-			// 创建文件
-			File file = new File(fileDir.getAbsolutePath() + "/" + companyFile.getOriginalFilename());
-			if (file.exists()) {
-				System.out.println("文件存在");
-			} else {
-				try {
-					byte[] bytes = companyFile.getBytes();
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
-					stream.write(bytes);
-					stream.close();
-					System.out.println("上传成功，准备写入数据库");
-
-					CompanyFile insertFile = new CompanyFile(-1, company.getCompany_id(),
-							companyFile.getOriginalFilename(), companyFile.getSize(), file.getAbsolutePath(),
-							new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis()));
-					if (companyFileBiz.insertFile(insertFile)) {
-						System.out.println("写入成功，开始解析文件");
-
-						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件成功"));
-					} else {
-						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
-					}
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		} else {
-			System.out.println("目录不存在");
-		}
-		return null;
-	}
 
 	/*
 	 * 公司用户登录
@@ -340,7 +365,7 @@ public class CompanyHandle {
 					+ request.getContextPath() + "/";
 			request.getSession().setAttribute("path", path);
 			request.getSession().setAttribute("user", company);
-			modelAndView.setViewName("WEB-INF/medical_workstation/index");
+			modelAndView.setViewName("WEB-INF/user_admin/index");
 			return modelAndView;
 		} else {
 			try {
@@ -456,7 +481,6 @@ public class CompanyHandle {
 	}
 
 	private static final String randomNumStr(int length) {
-		// TODO Auto-generated method stub
 		if (length < 1) {
 			return null;
 		}
