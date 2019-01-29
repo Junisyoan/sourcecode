@@ -118,4 +118,9 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 		return companyMapper.updateDeposit(deposit, company_id);
 	}
 
+	@Override
+	public Company queryCompanyById(int id) {
+		return companyMapper.queryCompanyById(id);
+	}
+
 }
