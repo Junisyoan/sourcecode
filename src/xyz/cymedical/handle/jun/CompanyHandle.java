@@ -103,9 +103,14 @@ public class CompanyHandle {
 	@RequestMapping(value="/pay.handle",method=RequestMethod.POST)
 	public String payForDeposit(HttpServletResponse response,HttpServletRequest request, String deposit) {
 		System.out.println("存款："+deposit);
-		logCompanyBiz.queryByName(name)
-		//先查询余额
+		//得到操作用户
 		company = (Company)request.getSession().getAttribute("user");
+		//插入日志
+		logCompanyBiz.insertLog(company.getCompany_id(), 
+				"充值", 
+				deposit, 
+				new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+		//先查询余额
 		float balance = companyBiz.queryDepositCompanyId(company.getCompany_id());
 		boolean isSuccess = companyBiz.updateDeposit(Float.parseFloat(deposit)+balance,company.getCompany_id());
 		response.setCharacterEncoding("utf-8");
