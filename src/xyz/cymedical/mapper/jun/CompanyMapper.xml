@@ -4,6 +4,20 @@
 
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyMapper">
+
+<!-- 充值 -->
+	<update id="updateDeposit">
+		update tb_company set deposit = #{deposit} where company_id = #{company_id}
+	</update>
+	
+<!-- 查询余额 -->
+	<select id="queryDepositByCompanyId" parameterType="int" resultType="float">
+		select deposit from tb_company where company_id = #{id}
+	</select>
+<!-- 查询公司信息 -->
+	<select id="queryCompanyById" parameterType="int" resultType="xyz.cymedical.entity.jun.Company">
+		select * from tb_company where company_id = #{id}
+	</select>
 <!-- 查询资金明细列表 -->
 	<select id="queryDepositList" resultType="xyz.cymedical.entity.ctx.LogCompany">
 		select * from tb_log_company where company_id = #{company_id}
