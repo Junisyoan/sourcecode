@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -109,30 +107,25 @@ public class UserHandle {
 		
 		System.out.println("总价："+price);
 		
-		
-		String strRetMsg = null;
 		//扣除费用
-//		try {
+		try {
 			switch (nurseBiz.deductDeposit(patientList.get(0).getCompany_id(), price)) {
 			case "扣除成功":
-				strRetMsg = "已生成导检单";
-//				response.getWriter().print("已生成导检单");
+				response.getWriter().print("已生成导检单");
 				break;
 			case "扣除失败":
-				strRetMsg = "费用扣除失败，请联系管理员！";
-//				response.getWriter().print("费用扣除失败，请联系管理员！");
+				response.getWriter().print("费用扣除失败，请联系管理员！");
 				break;
 			case "余额不足":
-				strRetMsg = "余额不足，请联系用户！";
-//				response.getWriter().print("余额不足，请联系用户！");
+				response.getWriter().print("余额不足，请联系用户！");
 				break;
 			default:
 				break;
 			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		return strRetMsg;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	
