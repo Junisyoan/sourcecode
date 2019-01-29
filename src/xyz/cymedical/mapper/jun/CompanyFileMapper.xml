@@ -5,7 +5,7 @@
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyFileMapper">
 <!-- 查询已审核文件列表 -->
 	<select id="queryPassFileList" resultType="xyz.cymedical.entity.jun.CompanyFile">
-		select * from tb_file where cstate='已审核'
+		select * from tb_file f join tb_company c on cstate='已审核' and f.company_id = c.company_id
 	</select>
 
 <!-- 修改文件状态 -->
