@@ -51,7 +51,7 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 		double deposit = companyMapper.queryCompanyById(company_id).getDeposit();
 		
 		if (deposit-price>0) {
-			if (nurseMapper.deductDeposit(String.valueOf(company_id),String.valueOf(price))) {
+			if (nurseMapper.deductDeposit(String.valueOf(company_id),String.valueOf(deposit-price))) {
 				return "扣除成功";
 			} else {
 				return "扣除失败";
