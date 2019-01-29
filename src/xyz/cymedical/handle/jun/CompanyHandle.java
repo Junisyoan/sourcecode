@@ -114,6 +114,7 @@ public class CompanyHandle {
 	public ModelAndView getDepositDetail(HttpServletRequest request) {
 		//得到操作用户
 		company = (Company)request.getSession().getAttribute("userCompany");
+		System.out.println(company);
 		//更新数据
 		company = companyBiz.queryCompanyById(company.getCompany_id());
 		request.getSession().setAttribute("userCompany", company);
