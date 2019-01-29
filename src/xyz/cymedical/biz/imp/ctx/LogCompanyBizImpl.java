@@ -29,7 +29,7 @@ public class LogCompanyBizImpl implements LogCompanyBiz {
 	}
 
 	@Override
-	public boolean insertLog(int cid, String op, float deposit, String t) {
+	public boolean insertLog(int cid, String op, String deposit, String t) {
 		return logCompanyMapper.insertLog(cid, op, deposit, t);
 	}
 
