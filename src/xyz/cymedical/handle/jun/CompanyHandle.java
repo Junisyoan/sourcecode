@@ -101,7 +101,7 @@ public class CompanyHandle {
 	 * 充值
 	 */
 	@RequestMapping(value="/pay.handle",method=RequestMethod.POST)
-	public String payForDeposit(HttpServletResponse response,HttpServletRequest request, String deposit) {
+	public ModelAndView payForDeposit(HttpServletResponse response,HttpServletRequest request, String deposit) {
 		System.out.println("存款："+deposit);
 		//得到操作用户
 		company = (Company)request.getSession().getAttribute("user");
@@ -117,7 +117,7 @@ public class CompanyHandle {
 		try {
 			if (isSuccess) {
 				
-				response.getWriter().print(ResponseTools.returnMsgAndBack("充值成功！"));
+				response.getWriter().print("<script type='text/javascript'>alert('充值成功!');location.href='<%=path %>company/getDepositDetail.handle';</script>");
 			} else {
 				response.getWriter().print(ResponseTools.returnMsgAndBack("充值失败！请联系管理员"));
 			}
@@ -133,9 +133,15 @@ public class CompanyHandle {
 	 */
 	@RequestMapping(value="/getDepositDetail.handle",method=RequestMethod.GET)
 	public ModelAndView getDepositDetail(HttpServletRequest request) {
+		//得到操作用户
 		company = (Company)request.getSession().getAttribute("user");
+		//更新数据
+		company = companyBiz.queryCompanyById(company.getCompany_id());
+		request.getSession().setAttribute("user", company);
+		//查询日志
 		List<LogCompany> logList = companyBiz.queryDepositList(String.valueOf(company.getCompany_id()));
 		System.out.println(logList);
+		//转发
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("logList", logList);
 		modelAndView.setViewName("WEB-INF/user_admin/deposit-log");
