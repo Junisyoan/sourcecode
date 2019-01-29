@@ -30,7 +30,7 @@
 			<input type="submit" value="充值" />
 		</form>
 		
-		余额：${user.deposit }
+		余额：${userCompany.deposit }
 	</div>
 	<div class="Manager_style">
 		<span class="title_name">金额明细</span>
