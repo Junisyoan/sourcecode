@@ -41,7 +41,7 @@
 					<c:forEach items="${listFile}" var="l" varStatus="s">
 						<tr>
 							<td>${s.count}</td>
-							<td>${l.fname}</td>
+							<td>${l.name}</td>
 							<td>${l.fsize}</td>
 							<td>${l.ftime}</td>
 							<td>${l.cstate }</td>
