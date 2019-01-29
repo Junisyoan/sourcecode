@@ -18,7 +18,6 @@ public class TbRoleDeptBizImp implements TbRoleDept{
 	
 	@Override
 	public List<Tb_role_dept> findroledeptid(int role_dept_id) {
-		// TODO Auto-generated method stub
 		return tbRoleDeptMapper.findroledeptid(role_dept_id);
 	}
 
