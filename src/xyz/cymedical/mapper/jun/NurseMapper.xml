@@ -5,7 +5,7 @@
 <mapper namespace="xyz.cymedical.mapper.jun.NurseMapper">
 <!-- 扣除体检费用 -->
 	<update id="deductDeposit" parameterType="String">
-		update tb_company set 
+		update tb_company set deposit=#{price} where company_id = #{company_id}
 	</update>
 <!-- 套餐信息 -->
 	<select id="queryComboByName" parameterType="String" resultType="xyz.cymedical.entity.xin.Combo">
