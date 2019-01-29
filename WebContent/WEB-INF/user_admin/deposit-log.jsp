@@ -22,6 +22,14 @@
 
 <body>
 
+
+	<div class="Manager_style">
+		<div class="title_name">充值</div>
+		<form method="post" action="<%=path%>company/pay.handle">
+			<input type="text" name="deposit"/>
+			<input type="submit" value="充值" />
+		</form>
+	</div>
 	<div class="Manager_style">
 		<span class="title_name">金额明细</span>
 		<table class="table table-striped table-bordered table-hover">
