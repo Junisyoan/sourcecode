@@ -3,6 +3,15 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyFileMapper">
+<!-- 查询已审核文件列表 -->
+	<select id="queryPassFileList" resultType="xyz.cymedical.entity.jun.CompanyFile">
+		select * from tb_file where cstate='已审核'
+	</select>
+
+<!-- 修改文件状态 -->
+	<update id="updateFileState" parameterType="int">
+		update tb_file set cstate = '已审核' where file_id = #{fid}
+	</update>
 <!-- 删除文件 -->
 	<delete id="delFile" parameterType="String">
 		delete from tb_file where file_id = #{file_id}
