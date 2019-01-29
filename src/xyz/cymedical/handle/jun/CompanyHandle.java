@@ -75,27 +75,6 @@ public class CompanyHandle {
 	public CompanyHandle() {
 	}
 
-	/*
-	 * 查询套餐名称
-	 */
-/*	@RequestMapping(value="/queryCombo.handle")
-	public String queryCombo(HttpServletResponse response, String comboName) {
-		System.out.println("查询套餐："+comboName);
-		boolean isExists=comboCheckBiz.queryCombo(comboName);
-		response.setCharacterEncoding("utf-8");//字符编码
-		try {
-			if (isExists) {
-				response.getWriter().print("");
-			} else {
-				response.getWriter().print("套餐不存在");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-*/	
-	
 	
 	/*
 	 * 充值
@@ -104,7 +83,7 @@ public class CompanyHandle {
 	public ModelAndView payForDeposit(HttpServletResponse response,HttpServletRequest request, String deposit) {
 		System.out.println("存款："+deposit);
 		//得到操作用户
-		company = (Company)request.getSession().getAttribute("user");
+		company = (Company)request.getSession().getAttribute("userCompany");
 		//插入日志
 		logCompanyBiz.insertLog(company.getCompany_id(), 
 				"充值", 
@@ -134,10 +113,10 @@ public class CompanyHandle {
 	@RequestMapping(value="/getDepositDetail.handle",method=RequestMethod.GET)
 	public ModelAndView getDepositDetail(HttpServletRequest request) {
 		//得到操作用户
-		company = (Company)request.getSession().getAttribute("user");
+		company = (Company)request.getSession().getAttribute("userCompany");
 		//更新数据
 		company = companyBiz.queryCompanyById(company.getCompany_id());
-		request.getSession().setAttribute("user", company);
+		request.getSession().setAttribute("userCompany", company);
 		//查询日志
 		List<LogCompany> logList = companyBiz.queryDepositList(String.valueOf(company.getCompany_id()));
 		System.out.println(logList);
@@ -224,7 +203,7 @@ public class CompanyHandle {
 	 */
 	@RequestMapping(value = "/fileUpload.handle", method = RequestMethod.POST)
 	public String fileUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile companyFile) {
-		company = (Company) request.getSession().getAttribute("user");
+		company = (Company) request.getSession().getAttribute("userCompany");
 		System.out.println(companyFile.getSize());
 		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
 		System.out.println(fileDir.getPath());
@@ -265,111 +244,6 @@ public class CompanyHandle {
 		return null;
 	}
 	
-	
-	
-	/*
-	 *导入文件
-	 */
-/*	@RequestMapping(value = "/analysisExcel.handle", method = RequestMethod.GET)
-	public ModelAndView analysisExcel(HttpServletRequest request, String file_id) {
-		System.out.println("读取excel");
-		company = (Company) request.getSession().getAttribute("user");
-		// 要插入的病人信息表
-		List<Patient> listPatient = new ArrayList<>();
-		// 1得到文件信息
-		CompanyFile companyFile = companyFileBiz.queryFile(file_id);
-		System.out.println(companyFile);
-		// 2载入文件，解析
-		// 得到文件
-		try {
-			// String encoding = "GBK";
-			System.out.println("文件路径：" + companyFile.getFpath());
-			File excel = new File(companyFile.getFpath());
-			// 判断文件是否存在
-			if (excel.isFile() && excel.exists()) {
-				// 点.是特殊字符，需要转义
-				String[] split = excel.getName().split("\\.");
-				Workbook wb = null;
-				// 根据文件后缀（xls/xlsx）进行判断
-				if ("xls".equals(split[1])) {
-					// 文件流对象
-					FileInputStream fis = new FileInputStream(excel);
-					wb = new HSSFWorkbook(fis);
-				} else if ("xlsx".equals(split[1])) {
-					wb = new XSSFWorkbook(excel);
-				} else {
-					System.out.println("文件类型错误!");
-				}
-				//	开始解析，读取sheet 0
-				Sheet sheet = wb.getSheetAt(0);
-				//	第一行是列名，所以不读
-				int firstRowIndex = sheet.getFirstRowNum() + 1;
-				int lastRowIndex = sheet.getLastRowNum();
-
-				System.out.println("一共这么多行数据: " + (lastRowIndex - firstRowIndex + 1));
-				for (int rIndex = firstRowIndex; rIndex <= lastRowIndex; rIndex++) {
-//					String code = randomNumStr(13);
-					//	遍历行
-					Row row = sheet.getRow(rIndex);
-					ArrayList<String> listData = new ArrayList<>();
-					if (row != null) {
-						int firstCellIndex = row.getFirstCellNum();
-						int lastCellIndex = row.getLastCellNum();
-
-						for (int cIndex = firstCellIndex; cIndex < lastCellIndex; cIndex++) {
-							//	遍历列
-							Cell cell = row.getCell(cIndex);
-							if (cell != null&&!cell.toString().equals("")) {
-								listData.add(cell.toString());
-							}
-						}
-						System.out.println(listData);
-					}
-					if (listData.get(0).equals("")) {
-						System.out.print("文档有空值");
-						continue;
-					}
-					listPatient.add(
-							new Patient(
-									-1, 
-									company.getCompany_id(), 
-									-1, 
-									listData.get(0), 		//姓名
-									listData.get(1),		//性别
-									listData.get(2), 		//年龄
-									listData.get(3), 		//身份证号
-//									code, 
-									"-1",
-									listData.get(4), 		//电话号码
-									"-1",
-									listData.get(5)			//套餐名
-							)
-					);
-					System.out.println();
-//					String path = createBarCode("D://test//", code, ImageUtil.JPEG);
-
-//					System.out.println(path);
-				}
-				wb.close();
-//				System.out.println("开始入库");
-				System.out.println(listPatient);
-				request.getSession().setAttribute("listPatient", listPatient);
-//				boolean isSuccess = patientBiz.insertByBatch(listPatient);
-//				if (isSuccess) {
-//					System.out.println("导入成功");
-//				}
-				modelAndView = new ModelAndView("WEB-INF/medical_workstation/patient_list");
-				modelAndView.addObject("listPatient", listPatient);
-				
-			} else {
-				System.out.println("找不到指定的文件");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return modelAndView;
-	}
-*/
 	/*
 	 * 获取上传文档的路径
 	 */
@@ -390,12 +264,13 @@ public class CompanyHandle {
 			String password) {
 		System.out.println("用户登录" + userName);
 		Company company = companyBiz.companyLogin(userName, password);
+		System.out.println(company);
 		ModelAndView modelAndView = new ModelAndView();
 		if (company != null) {
 			String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 					+ request.getContextPath() + "/";
 			request.getSession().setAttribute("path", path);
-			request.getSession().setAttribute("user", company);
+			request.getSession().setAttribute("userCompany", company);
 			modelAndView.setViewName("WEB-INF/user_admin/index");
 			return modelAndView;
 		} else {
