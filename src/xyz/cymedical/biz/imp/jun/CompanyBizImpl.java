@@ -107,4 +107,15 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 		return companyMapper.queryDepositList(c_id);
 	}
 
+	@Override
+	public float queryDepositCompanyId(int company_id) {
+		return companyMapper.queryDepositByCompanyId(company_id);
+		
+	}
+
+	@Override
+	public boolean updateDeposit(float deposit, int company_id) {
+		return companyMapper.updateDeposit(deposit, company_id);
+	}
+
 }
