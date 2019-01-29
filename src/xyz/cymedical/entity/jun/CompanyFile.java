@@ -14,6 +14,7 @@ public class CompanyFile {
 
 	private int file_id;			//文件id
 	private int company_id;			//公司id
+	private String company_name;	//公司名字
 	private String fname;			//文件名
 	private long fsize;				//文件大小
 	private String fpath;			//文件路径
@@ -44,6 +45,12 @@ public class CompanyFile {
 	}
 	public void setCompany_id(int company_id) {
 		this.company_id = company_id;
+	}
+	public String getCompany_name() {
+		return company_name;
+	}
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
 	}
 	public String getFname() {
 		return fname;
@@ -77,8 +84,8 @@ public class CompanyFile {
 	}
 	@Override
 	public String toString() {
-		return "CompanyFile [file_id=" + file_id + ", company_id=" + company_id + ", fname=" + fname + ", fsize="
-				+ fsize + ", fpath=" + fpath + ", ftime=" + ftime + ", cstate=" + cstate + "]";
+		return "CompanyFile [file_id=" + file_id + ", company_id=" + company_id + ", company_name=" + company_name
+				+ ", fname=" + fname + ", fsize=" + fsize + ", fpath=" + fpath + ", ftime=" + ftime + ", cstate="
+				+ cstate + "]";
 	}
-	
 }
