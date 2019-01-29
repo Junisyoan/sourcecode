@@ -230,6 +230,7 @@ public class UserHandle {
 	@RequestMapping(value = "/getFileList.handle", method = RequestMethod.GET)
 	public ModelAndView getFileList() {
 		List<CompanyFile> fileList = companyFileBiz.queryPassFileList();
+		System.out.println(fileList);
 		modelAndView = new ModelAndView("WEB-INF/medical_workstation/file-list");
 		modelAndView.addObject("fileList", fileList);
 		return modelAndView;
