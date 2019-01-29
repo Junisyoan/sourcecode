@@ -26,7 +26,7 @@ public interface NurseMapper {
 	 * @param price	总价格
 	 * @return	是否扣除成功
 	 */
-	public boolean deductDeposit(String company_id,String price);
+	public boolean deductDeposit(@Param("company_id")String company_id,@Param("price")String price);
 	
 	
 	
