@@ -26,7 +26,7 @@ public interface LogCompanyMapper {
 	 */
 	public boolean insertLog(@Param("company_id")int cid,
 			@Param("operate")String op,
-			@Param("deposit")float deposit,
+			@Param("deposit")String deposit,
 			@Param("time")String t);
 	
 	public List<LogCompany> queryByName(String name);
