@@ -2,6 +2,8 @@ package xyz.cymedical.biz.ctx;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import xyz.cymedical.entity.ctx.LogCompany;
 
 /**
@@ -13,6 +15,16 @@ import xyz.cymedical.entity.ctx.LogCompany;
 
 public interface LogCompanyBiz {
 
+	/**
+	 * @author Junisyoan
+	 * @param cid	公司id
+	 * @param op	操作
+	 * @param deposit	金额
+	 * @param t	操作时间
+	 * @return	是否插入成功
+	 */
+	public boolean insertLog(int cid,String op,float deposit,String t);
+	
 	public List<LogCompany> queryByName(String name);
 
 }
