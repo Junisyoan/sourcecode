@@ -38,7 +38,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${listFile}" var="l" varStatus="s">
+					<c:forEach items="${fileList}" var="l" varStatus="s">
 						<tr>
 							<td>${s.count}</td>
 							<td>${l.name}</td>
