@@ -99,7 +99,7 @@
 								name="<%=path %>nurse/queryCheckFile.handle?pageNum=1" title="待审核文件"
 								class="iframeurl"><i class="icon-double-angle-right"></i>待审核文件</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getFileList.handle" title="团检表列表" class="iframeurl"><i
+								name="<%=path %>nurse/getFileList.handle" title="团检表列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检文件列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
