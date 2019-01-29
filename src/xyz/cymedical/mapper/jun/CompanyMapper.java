@@ -28,6 +28,20 @@ public interface CompanyMapper {
 	
 	//query
 	/**
+	 * 查询余额
+	 * @param id	公司id
+	 * @return	余额
+	 */
+	public float queryDepositByCompanyId(int id);
+	
+	/**
+	 * 查询公司信息
+	 * @param id	公司id
+	 * @return	公司信息
+	 */
+	public Company queryCompanyById(int id);
+	
+	/**
 	 * 查询资金明细列表
 	 * @return	资金明细列表
 	 */
@@ -62,7 +76,13 @@ public interface CompanyMapper {
 	 */
 	public Company queryCompanyByAccount(String account);
 	
-	
+	//update
+	/**
+	 * 充值
+	 * @param deposit	金额
+	 * @return	是否充值成功
+	 */
+	public boolean updateDeposit(@Param("deposit")float deposit,@Param("company_id")int company_id);
 	
 	//insert
 	
