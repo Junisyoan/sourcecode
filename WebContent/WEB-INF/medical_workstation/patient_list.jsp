@@ -43,7 +43,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${listPatient}" var="p" varStatus="s">
+					<c:forEach items="${patientList}" var="p" varStatus="s">
 						<tr>
 							<td>${s.count}</td>
 							<td>${p.name}</td>
@@ -61,13 +61,13 @@
 	</div>
 	<div id="opera">
 		<div>
-			<button id="choosed" onclick="chooseOpen();">选中开单</button>
-			<button id="all">全部开单</button>
+			<button id="choosed" onclick="chooseOpen('${fid}');">选中开单</button>
+			<button id="all" onclick="allOpen('${fid}');">全部开单</button>
 		</div>
 	</div>
 	<!-- 弹出框 -->
 	<div id="addDialog" title="增加人员">
-		<form action="<%=path %>company/addPatient.handle" method="post">
+		<form action="<%=path %>nurse/addPatient.handle" method="post">
 			<table width="600" border="0" cellpadding="2">
 				<tr>
 					<td>套餐名：</td>
@@ -103,6 +103,23 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function allOpen(fid){
+	var s = confirm("确定全部开单吗？");
+	if(s){
+		$.ajax({
+			type:"post",
+			dataType:"text",
+			url:"<%=path%>nurse/allOpen.handle?fid="+fid,
+			success:function(retData){
+				alert(retData);
+			},
+			error:function(){
+				alert('服务器无响应');
+			}
+		});
+	}
+}
 
 function chooseOpen(){
 	var choosed = document.getElementsByName("openBill");
