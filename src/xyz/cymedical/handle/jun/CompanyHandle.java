@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.ctx.PatientBiz;
 import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
@@ -60,6 +61,9 @@ public class CompanyHandle {
 	private PatientBiz patientBiz; // 体检人业务逻辑
 	@Resource
 	private ComboCheckBiz comboCheckBiz;//套餐业务
+	@Resource
+	private LogCompanyBiz logCompanyBiz;//日志业务
+	
 	
 	private ModelAndView modelAndView; // 视图和模型
 	private Company company; // 公司信息
@@ -71,15 +75,6 @@ public class CompanyHandle {
 	public CompanyHandle() {
 	}
 
-	/*
-	 * 导检人员增加
-	 */
-/*	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
-	public String addPatient(Patient patient) {
-		System.out.println(patient);
-		return null;
-	}
-*/	
 	/*
 	 * 查询套餐名称
 	 */
@@ -102,7 +97,32 @@ public class CompanyHandle {
 */	
 	
 	
-	//TODO 充值
+	/*
+	 * 充值
+	 */
+	@RequestMapping(value="/pay.handle",method=RequestMethod.POST)
+	public String payForDeposit(HttpServletResponse response,HttpServletRequest request, String deposit) {
+		System.out.println("存款："+deposit);
+		logCompanyBiz.queryByName(name)
+		//先查询余额
+		company = (Company)request.getSession().getAttribute("user");
+		float balance = companyBiz.queryDepositCompanyId(company.getCompany_id());
+		boolean isSuccess = companyBiz.updateDeposit(Float.parseFloat(deposit)+balance,company.getCompany_id());
+		response.setCharacterEncoding("utf-8");
+		try {
+			if (isSuccess) {
+				
+				response.getWriter().print(ResponseTools.returnMsgAndBack("充值成功！"));
+			} else {
+				response.getWriter().print(ResponseTools.returnMsgAndBack("充值失败！请联系管理员"));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
 	/*
 	 * 查询费用明细
 	 */
