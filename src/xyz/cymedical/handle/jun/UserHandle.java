@@ -238,7 +238,7 @@ public class UserHandle {
 	/*
 	 * 通过审核
 	 */
-	@RequestMapping(value="/passFile.handle",method=RequestMethod.GET)
+	@RequestMapping(value="/passFile.handle",method=RequestMethod.POST)
 	public String passFile(HttpServletResponse response, String fid) {
 		
 		response.setCharacterEncoding("utf-8");
