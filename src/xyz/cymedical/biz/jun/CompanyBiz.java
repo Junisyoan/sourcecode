@@ -17,9 +17,17 @@ public interface CompanyBiz {
 	/**
 	 * 存钱
 	 * @param deposit	金额
+	 * @param	company_id	公司id
 	 * @return	是否存入
 	 */
-//	public boolean insertDeposit(String deposit);
+	public boolean updateDeposit(float deposit,int company_id);
+	
+	/**
+	 * 查询余额
+	 * @param company_id	公司id
+	 * @return	余额
+	 */
+	public float queryDepositCompanyId(int company_id);
 	
 	/**
 	 * 查询资金明细
