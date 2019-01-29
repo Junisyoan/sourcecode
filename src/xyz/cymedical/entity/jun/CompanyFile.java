@@ -23,6 +23,20 @@ public class CompanyFile {
 	public CompanyFile() {
 		super();
 	}
+	
+	public CompanyFile(int file_id, int company_id, String name, String fname, long fsize, String fpath, String ftime,
+			String cstate) {
+		super();
+		this.file_id = file_id;
+		this.company_id = company_id;
+		this.name = name;
+		this.fname = fname;
+		this.fsize = fsize;
+		this.fpath = fpath;
+		this.ftime = ftime;
+		this.cstate = cstate;
+	}
+
 	public CompanyFile(int file_id, int company_id, String fname, long fsize, String fpath, String ftime,
 			String cstate) {
 		super();
@@ -46,11 +60,11 @@ public class CompanyFile {
 	public void setCompany_id(int company_id) {
 		this.company_id = company_id;
 	}
-	public String getCompany_name() {
+	public String getName() {
 		return name;
 	}
-	public void setCompany_name(String company_name) {
-		this.name = company_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getFname() {
 		return fname;
