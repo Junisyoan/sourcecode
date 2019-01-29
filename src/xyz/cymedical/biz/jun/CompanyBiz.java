@@ -13,6 +13,12 @@ import xyz.cymedical.entity.jun.Company;
 
 public interface CompanyBiz {
 
+	/**
+	 * 查询公司信息
+	 * @param id	公司id
+	 * @return	公司信息
+	 */
+	public Company queryCompanyById(int id);
 	
 	/**
 	 * 存钱
