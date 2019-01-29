@@ -20,7 +20,7 @@
 	</select>
 <!-- 查询资金明细列表 -->
 	<select id="queryDepositList" resultType="xyz.cymedical.entity.ctx.LogCompany">
-		select * from tb_log_company where company_id = #{company_id}
+		select * from tb_log_company where company_id = #{company_id} order by time desc
 	</select>
 <!-- 删除关系表 -->
 	<delete id="delFile" parameterType="String">
