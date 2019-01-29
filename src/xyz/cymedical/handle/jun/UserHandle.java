@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -67,35 +70,69 @@ public class UserHandle {
 	@RequestMapping(value="/allOpen.handle",method=RequestMethod.POST)
 	public String allOpen(HttpServletResponse response,HttpServletRequest request,String fid) {
 		response.setCharacterEncoding("utf-8");
+		@SuppressWarnings("unchecked")
 		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
-		//获取所有人的套餐，计算价格
-		float price = 0.0f;
+		//获取所有人的套餐数量
+		HashMap<String, Integer> map = new HashMap<>();
+		//基本套餐数量一
+		int iCombo = 1;	
+		//计算套餐数量
 		for (int i = 0; i < patientList.size(); i++) {
-			//查找套餐价格
-			Combo combo = nurseBiz.queryComboByName(patientList.get(i).getComboName());
-			//累计价格
-			price+=combo.getPrice();
+			//如果这个套餐不存在
+			if (map.get(patientList.get(i).getComboName()) == null) {
+				//放进去
+				map.put(patientList.get(i).getComboName(), iCombo);
+			} else {
+				//套餐已经存在，取出，加一
+				iCombo+=map.get(patientList.get(i).getComboName());
+				map.put(patientList.get(i).getComboName(), iCombo);
+			}
 		}
-		System.out.println("总价"+price);
+		System.out.println("一共"+map.keySet().size()+"种套餐");
+		
+		//套餐信息
+		Combo combo = null;
+		//套餐数量
+		int iComboNum = 0;
+		//计算套餐价格
+		float price = 0.0f;
+		for (int j = 0; j < map.keySet().size(); j++) {
+			if (map.keySet().iterator().hasNext()) {
+				//取得套餐价格
+				combo = nurseBiz.queryComboByName(map.keySet().iterator().next());
+				//套餐数量
+				iComboNum = map.get(map.keySet().iterator().next());
+				//套餐价格
+				price += combo.getPrice()*iComboNum;
+			}
+		}
+		
+		System.out.println("总价："+price);
+		
+		
+		String strRetMsg = null;
 		//扣除费用
-		try {
+//		try {
 			switch (nurseBiz.deductDeposit(patientList.get(0).getCompany_id(), price)) {
 			case "扣除成功":
-				response.getWriter().print("已生成导检单");
+				strRetMsg = "已生成导检单";
+//				response.getWriter().print("已生成导检单");
 				break;
 			case "扣除失败":
-				response.getWriter().print("费用扣除失败，请联系管理员！");
+				strRetMsg = "费用扣除失败，请联系管理员！";
+//				response.getWriter().print("费用扣除失败，请联系管理员！");
 				break;
 			case "余额不足":
-				response.getWriter().print("余额不足，请联系用户！");
+				strRetMsg = "余额不足，请联系用户！";
+//				response.getWriter().print("余额不足，请联系用户！");
 				break;
 			default:
 				break;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		return strRetMsg;
 	}
 	
 	
