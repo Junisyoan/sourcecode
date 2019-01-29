@@ -23,19 +23,16 @@ public class DoctorBizImpl  implements DoctorBiz {
 
 	@Override
 	public List<Map<String,Object>> findMyProject(String code) {
-		// TODO Auto-generated method stub
 		return doctorMapper.findMyProject(code);
 	}
 
 	@Override
 	public boolean receive(int patient_project_id) {
-		// TODO Auto-generated method stub
 		return doctorMapper.receive(patient_project_id);
 	}
 
 	@Override
 	public List<Map<String, Object>> findMyDetail(int projectid,int patientid) {
-		// TODO Auto-generated method stub
 		return doctorMapper.findMyDetail(projectid,patientid);
 	}
 
