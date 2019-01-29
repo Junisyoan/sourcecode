@@ -76,12 +76,11 @@ public class UserHandle {
 			//累计价格
 			price+=combo.getPrice();
 		}
-		
+		System.out.println("总价"+price);
 		//扣除费用
 		try {
 			switch (nurseBiz.deductDeposit(patientList.get(0).getCompany_id(), price)) {
 			case "扣除成功":
-				//修改文件状态
 				response.getWriter().print("已生成导检单");
 				break;
 			case "扣除失败":
