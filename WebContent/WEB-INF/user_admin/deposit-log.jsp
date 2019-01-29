@@ -29,6 +29,8 @@
 			<input type="text" name="deposit"/>
 			<input type="submit" value="充值" />
 		</form>
+		
+		余额：${user.deposit }
 	</div>
 	<div class="Manager_style">
 		<span class="title_name">金额明细</span>
