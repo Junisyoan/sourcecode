@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
+import xyz.cymedical.biz.jun.GroupBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
@@ -57,7 +59,8 @@ public class UserHandle {
 	@Resource
 	private NurseBiz nurseBiz;
 	
-	
+	@Resource
+	private GroupBiz groupBiz;
 	
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
@@ -111,6 +114,16 @@ public class UserHandle {
 		try {
 			switch (nurseBiz.deductDeposit(patientList.get(0).getCompany_id(), price)) {
 			case "扣除成功":
+				logCompanyBiz.insertLog(
+						patientList.get(0).getCompany_id(), 
+						"开单结算", 
+						String.valueOf(price), 
+						new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+				
+				//生成团检表
+				groupBiz.insert(patientList.get(0).getCompany_id(), patientList.size(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+				
+				
 				response.getWriter().print("已生成导检单");
 				break;
 			case "扣除失败":
