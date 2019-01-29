@@ -53,7 +53,7 @@
 			<!-- /.navbar-header -->
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
-					<span id="time"></span>&nbsp;&nbsp;<span>欢迎光临,${user.account }</span>
+					<span id="time"></span>&nbsp;&nbsp;<span>欢迎光临,${userCompany.account }</span>
 				</div>
 				<ul class="nav ace-nav">
 					<li><a href="javascript:void(0)" class="change_Password">修改密码</a></li>
