@@ -39,6 +39,14 @@ public class ProjectHandle {
 		return mav;
 	}
 
+	@RequestMapping(value="/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String checkName(String name,String id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", name);
+		map.put("id", id);
+		return projectBiz.checkName(map);
+	}
+	
 	//新增项目
 	@RequestMapping(value = "/addProject.handle")
 	public @ResponseBody String addProject(int[] idArray, Project project) {
