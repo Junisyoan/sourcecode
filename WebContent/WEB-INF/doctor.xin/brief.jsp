@@ -64,6 +64,8 @@
 	</c:forEach>
   </tbody>
 
+ 
+
   </c:if>
   
   <c:if test="${keshi=='彩超室' }">
@@ -78,11 +80,24 @@
 			<c:if test="${d.type=='彩超' }">
 				<td>${s.index + 1}</td>
 				<td>${d.name}</td>
-				<td>上传文件</td>
-				<td><input type="text" /></td>
-				<td class="center">
-				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？') ;">提交</button></a>
-				</td>
+				
+				<c:if test="${d.sstate=='未提交' }">
+					<td><input type="file" id="${d.name}"/></td>
+					<td><textarea rows="4" id="${d.name}${d.name}"> </textarea></td>
+					<td class="center">
+						<a href="javascript:;" onclick="location ='<%=path %>brief/photo.handle?path='+document.getElementById('${d.name}').value+'&result='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};">
+						<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
+						</a>
+					</td>
+				</c:if> 
+				
+				<c:if test="${d.sstate=='已提交' }">
+					<td><input type="file" id="${d.name}"/></td>
+					<td><b>${d.resulttext}</b></td>
+					<td class="center">
+						<lable class="btn btn-primary" >已提交</lable>
+					</td>
+				</c:if> 
 			</c:if> 
 		</tr>
 	</c:forEach>
@@ -131,7 +146,9 @@
   </c:if>
   
   </table>
-
+	<div style="width:100px;margin:0 auto">
+		<a href="<%=path %>brief/turnback.handle"><input type="button" class="btn btn-warning" value="返回"/></a>
+	</div>
   </div>
  </div>
  
