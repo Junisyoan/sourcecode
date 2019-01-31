@@ -271,6 +271,7 @@ public class CompanyHandle {
 			String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 					+ request.getContextPath() + "/";
 			request.getSession().setAttribute("path", path);
+			request.getSession().setAttribute("userName", userName);
 			request.getSession().setAttribute("userCompany", company);
 			modelAndView.setViewName("WEB-INF/user_admin/index");
 			return modelAndView;
