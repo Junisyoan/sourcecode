@@ -92,4 +92,11 @@ public interface CompanyMapper {
 	 * @return	是否注册成功
 	 */
 	public boolean insertCompany(Company company);
+	
+	/**
+	 * 按照账户查询公司
+	 * @param account	账户
+	 * @return	公司信息
+	 */
+	public List<Company> queryByAccount(String account);
 }
