@@ -24,6 +24,6 @@ public interface ProjectMapper {
 	public Project findProject(String project_id);
 	
 	public int updateProject(Map<String, Object> map);
-	
-//	public int deleteDetPro(String project_id);
+
+	public int checkName(Map<String, Object> map);
 }
