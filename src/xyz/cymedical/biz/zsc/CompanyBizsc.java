@@ -39,4 +39,13 @@ public class CompanyBizsc {
 	public List<Company> selectCompany(Map<String, Object> map){
 		return companyMappers.selectCompany(map);
 	};
+
+	public String checkName(Map<String, Object> map) {
+		int rt = companyMappers.checkName(map);
+		if (rt > 0) {
+			return "该账号已存在";
+		} else {
+			return "该账号可使用";
+		}
+	};
 }
