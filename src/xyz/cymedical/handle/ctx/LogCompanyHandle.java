@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
+import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
+import xyz.cymedical.entity.jun.Company;
 
 @Controller
 @RequestMapping("/logcompany")
@@ -21,7 +24,12 @@ public class LogCompanyHandle {
 	@Resource
 	public LogCompanyBiz logCompanyBiz;
 
+	@Resource
+	public CompanyBiz companyBiz;
+
 	private List<LogCompany> logCompanylist = new ArrayList<LogCompany>();
+
+	private List<Company> Companylist = new ArrayList<Company>();
 
 	public LogCompanyHandle() {
 
@@ -29,9 +37,13 @@ public class LogCompanyHandle {
 
 	// 公司记账
 	@RequestMapping(value = "/findlogcompany.handle")
-	public ModelAndView findcompanylog(String name) {
+	public ModelAndView findcompanylog(HttpServletRequest request, HttpServletResponse response, String name) {
 
-		logCompanylist = logCompanyBiz.queryByName("123456");
+		System.out.println(request.getSession().getAttribute("userName"));
+
+		Companylist = companyBiz.queryByAccount((String) request.getSession().getAttribute("userName"));
+
+		logCompanylist = logCompanyBiz.queryByName(Companylist.get(0).getName());
 
 		System.out.println(logCompanylist.size());
 
