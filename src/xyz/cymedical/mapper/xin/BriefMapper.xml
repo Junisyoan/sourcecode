@@ -6,12 +6,18 @@
 <mapper namespace="xyz.cymedical.mapper.xin.BriefMapper">
 	<!-- 查询套餐内项目 -->
 
+	<update id="Normal" parameterType="String" >
+		update tb_brief set sstate='已提交' ,resulttext=#{0 } where brief_id=#{1 }
+	</update>
+	
+	<update id="Photo" parameterType="String" >
+		update tb_brief set sstate='已提交' ,resulttext=#{0 },resultpath=#{1 } where brief_id=#{2 }
+	</update>
+	
+	
 	<update id="Check" parameterType="String" >
 		update tb_brief set sstate='已提交' ,resulttext=#{0 },tips=#{1 } where brief_id=#{2 }
 	</update>
 	
-	<update id="Normal" parameterType="String" >
-		update tb_brief set sstate='已提交' ,resulttext=#{0 } where brief_id=#{1 }
-	</update>
 
 </mapper> 
