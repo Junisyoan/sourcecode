@@ -30,6 +30,7 @@ public class DoctorHandle {
 	
 	public static String keshi;
 	
+	public static String onecode;
 	
 
 	// 查询一维码对应病人的导检单
@@ -38,6 +39,8 @@ public class DoctorHandle {
 
 		System.out.println("onecode=" + onecode);
 
+		this.onecode=onecode;
+		
 		System.out.println(doctorbiz.findMyProject(onecode));
 		
 		plist=doctorbiz.findMyProject(onecode);
@@ -63,7 +66,7 @@ public class DoctorHandle {
 
 	// 根据选中项目跳转至对应小结
 	@RequestMapping(value = "/Detail.handle")
-	public ModelAndView getDetail(String patientid, String projectid, String projectname,String keshi) {
+	public ModelAndView getDetail(String patientid, String projectid, String projectname,String keshi,String code) {
 
 		System.out.println("getDetail....");
 		
@@ -84,6 +87,7 @@ public class DoctorHandle {
 		mav.addObject("projectname", projectname);
 		mav.addObject("keshi", keshi);
 		mav.addObject("dlist", dlist);
+		mav.addObject("code", code);
 
 		mav.setViewName("WEB-INF/doctor.xin/brief");
 		return mav;
