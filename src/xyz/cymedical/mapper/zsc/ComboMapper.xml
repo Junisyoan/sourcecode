@@ -4,6 +4,14 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.ComboMapper">
 
+	<!-- ajax验证 -->
+	<select id="checkName" parameterType="map" resultType="int">
+		select count(*) from tb_combo where name = #{name}
+		<if test="id!=null and id!=''">
+			and combo_id != #{id}
+		</if>
+	</select>
+
 	<!-- 查询套餐总价 -->
 	<select id="selectPrice" parameterType="map" resultType="int">
 		select sum(price) from tb_project where project_id in
