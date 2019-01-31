@@ -38,15 +38,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${fileList}" var="l" varStatus="s">
+					<c:forEach items="${listFile}" var="l" varStatus="s">
 						<tr>
 							<td>${s.count}</td>
-							<td>${l.name}</td>
+							<td>${l.fname}</td>
 							<td>${l.fsize}</td>
 							<td>${l.ftime}</td>
 							<td>${l.cstate }</td>
 							<td>
-								<a href="javascript:;" onclick="importFile('${l.file_id}');">导入</a>
+								<a href="javascript:;" onclick="delFile('${l.file_id}','${l.fname }');">删除</a>|
+								<a href="javascript:;" onclick="downloadFile('${l.file_id}');">导出</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -56,8 +57,14 @@
 	</div>
 <script type="text/javascript">
 
-function importFile(file_id){
-	location.href='<%=path%>nurse/importFile.handle?file_id='+file_id;
+function downloadFile(file_id){
+	location.href='<%=path%>company/downloadFile.handle?file_id='+file_id;
+}
+function delFile(fid,fname){
+	var s = confirm("确认删除  "+fname+"  ?");
+	if(s){
+		location.href="<%=path%>company/delFile.handle?file_id="+fid;
+	}
 }
 
 $(function(){

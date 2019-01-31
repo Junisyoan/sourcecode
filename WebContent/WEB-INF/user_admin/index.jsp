@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="author" content="order by dede58.com" />
-<title>传一体检系统</title>
+<title>系统后台</title>
 <script type="text/javascript"></script>
 <script src="<%=path %>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path %>js/jquery.validate.min.js"></script>
@@ -53,11 +53,11 @@
 			<!-- /.navbar-header -->
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
-					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,${user.account }</span>
+					<span id="time"></span>&nbsp;&nbsp;<span>欢迎光临,${userCompany.account }</span>
 				</div>
 				<ul class="nav ace-nav">
 					<li><a href="javascript:void(0)" class="change_Password">修改密码</a></li>
-					<li><a href="javascript:void(0)" id="Exit_system">退出系统</a></li>
+					<li><a href="javascript:oid(0)" id="Exit_system">退出系统</a></li>
 
 				</ul>
 				<!-- /.ace-nav -->
@@ -96,14 +96,14 @@
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/queryCheckFile.handle?pageNum=1" title="待审核文件"
-								class="iframeurl"><i class="icon-double-angle-right"></i>待审核文件</a></li>
+								name="<%=path %>company/getUpFilePath.handle" title="团检文件上传"
+								class="iframeurl"><i class="icon-double-angle-right"></i>团检文件上传</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/getFileList.handle" title="团检表列表" class="iframeurl"><i
+								name="<%=path %>company/getFileList.handle?pageNum=1" title="团检文件列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检文件列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>已到期询价项目</a></li>
+								name="<%=path %>company/getDepositDetail.handle" title="费用管理" class="iframeurl"><i
+									class="icon-double-angle-right"></i>费用管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="暂存项目.html" title="暂存项目" class="iframeurl"><i
 									class="icon-double-angle-right"></i>暂存项目</a></li>
@@ -443,7 +443,7 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>login_user.html";
+				location.href = "<%=path%>login_company.html";
 
 			});
 		});

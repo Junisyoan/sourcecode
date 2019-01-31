@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jun.ComboCheckMapper">
+<!-- 根据套餐名查套餐 -->
+	<select id="queryComboByName" parameterType="String" resultType="xyz.cymedical.entity.xin.Combo">
+		select * from tb_combo where name = #{name}
+	</select>
+
+</mapper>

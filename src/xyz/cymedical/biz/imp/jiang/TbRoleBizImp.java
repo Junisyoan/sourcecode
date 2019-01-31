@@ -21,14 +21,12 @@ public class TbRoleBizImp implements TbRoleBiz{
 		
 	@Override
 	public List<Tb_role> selectRole() {
-		// TODO Auto-generated method stub
 		return tbRoleMapper.selectRole();
 	}
 
 
 	@Override
 	public int addRole(String name) {
-		// TODO Auto-generated method stub
 		return tbRoleMapper.addRole(name);
 	}
 

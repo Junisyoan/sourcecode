@@ -6,9 +6,9 @@ import xyz.cymedical.entity.zsc.Project;
 
 public class Combo {
 
-	private int combo_id;
-	private String name;
-	private float price;
+	private int combo_id;		//套餐id
+	private String name;		//套餐名
+	private float price;		//价格
 	private List<Project> projects;
 
 	public Combo() {

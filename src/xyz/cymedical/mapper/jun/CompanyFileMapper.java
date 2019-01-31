@@ -16,7 +16,19 @@ import xyz.cymedical.entity.jun.CompanyFile;
 
 @Repository
 public interface CompanyFileMapper {
+	
+	/**
+	 * 查询通过审核的文件列表
+	 * @return	文件列表
+	 */
+	public List<CompanyFile> queryPassFileList();
 
+	/**
+	 * 修改文件状态为已审核
+	 * @param fid	文件id
+	 * @return	是否修改成功
+	 */
+	public boolean updateFileState(int fid);
 	
 	/**
 	 * 查询文件

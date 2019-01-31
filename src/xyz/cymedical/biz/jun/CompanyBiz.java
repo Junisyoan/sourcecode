@@ -1,5 +1,8 @@
 package xyz.cymedical.biz.jun;
 
+import java.util.List;
+
+import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Company;
 
 /**
@@ -10,6 +13,40 @@ import xyz.cymedical.entity.jun.Company;
 
 public interface CompanyBiz {
 
+	/**
+	 * 查询公司信息
+	 * @param id	公司id
+	 * @return	公司信息
+	 */
+	public Company queryCompanyById(int id);
+	
+	/**
+	 * 存钱
+	 * @param deposit	金额
+	 * @param	company_id	公司id
+	 * @return	是否存入
+	 */
+	public boolean updateDeposit(float deposit,int company_id);
+	
+	/**
+	 * 查询余额
+	 * @param company_id	公司id
+	 * @return	余额
+	 */
+	public float queryDepositCompanyId(int company_id);
+	
+	/**
+	 * 查询资金明细
+	 * @return	资金明细列表
+	 */
+	public List<LogCompany> queryDepositList(String c_id);
+	
+	/**
+	 * 删除文件
+	 * @param file_id	文件id
+	 * @return	是否删除成功
+	 */
+	public boolean delCompanyFile(String file_id);
 	
 	/**
 	 * 登录

@@ -1,8 +1,11 @@
 package xyz.cymedical.mapper.jun;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Company;
 
 /**
@@ -14,7 +17,35 @@ import xyz.cymedical.entity.jun.Company;
 @Repository
 public interface CompanyMapper {
 
+	//delete
+	/**
+	 * 删除文件，团检关系表数据
+	 * @param file_id	文件id
+	 * @return	是否删除成功
+	 */
+	public boolean delFile(String file_id);
+	
+	
 	//query
+	/**
+	 * 查询余额
+	 * @param id	公司id
+	 * @return	余额
+	 */
+	public float queryDepositByCompanyId(int id);
+	
+	/**
+	 * 查询公司信息
+	 * @param id	公司id
+	 * @return	公司信息
+	 */
+	public Company queryCompanyById(int id);
+	
+	/**
+	 * 查询资金明细列表
+	 * @return	资金明细列表
+	 */
+	public List<LogCompany> queryDepositList(String company_id);
 	
 	/**
 	 * 公司信息
@@ -45,7 +76,13 @@ public interface CompanyMapper {
 	 */
 	public Company queryCompanyByAccount(String account);
 	
-	
+	//update
+	/**
+	 * 充值
+	 * @param deposit	金额
+	 * @return	是否充值成功
+	 */
+	public boolean updateDeposit(@Param("deposit")float deposit,@Param("company_id")int company_id);
 	
 	//insert
 	

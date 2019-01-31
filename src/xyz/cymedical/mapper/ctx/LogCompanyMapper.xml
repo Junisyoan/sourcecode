@@ -3,6 +3,11 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.ctx.LogCompanyMapper">
+<!-- 插入日志 -->
+	<insert id="insertLog">
+		insert into tb_log_company(company_id,operate,money,time)
+		values(#{company_id},#{operate},#{deposit},#{time})
+	</insert>
 
 	<select id="queryByName" parameterType="java.lang.String"
 		resultType="java.util.HashMap">

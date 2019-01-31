@@ -18,13 +18,11 @@ public class LogBizImpl implements LogBiz {
 
 	@Override
 	public List<Log> findAllLog() {
-		// TODO Auto-generated method stub
 		return logmapper.findAllLog();
 	}
 
 	@Override
 	public boolean delLog(String log_id) {
-		// TODO Auto-generated method stub
 		return logmapper.delLog(log_id);
 	}
 

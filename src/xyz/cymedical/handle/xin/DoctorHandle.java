@@ -54,7 +54,7 @@ public class DoctorHandle {
 
 	// 根据选中项目跳转至对应小结
 	@RequestMapping(value = "/Detail.handle")
-	public ModelAndView getDetail(String patientid, String projectid, String projectname) {
+	public ModelAndView getDetail(String patientid, String projectid, String projectname,String keshi) {
 
 		System.out.println("getDetail....");
 		
@@ -68,12 +68,14 @@ public class DoctorHandle {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("projectname", projectname);
+		mav.addObject("keshi", keshi);
 		mav.addObject("dlist", dlist);
 
 		mav.setViewName("WEB-INF/doctor.xin/brief");
 		return mav;
 	}
 
+	//项目接收
 	@RequestMapping(value = "/receive.handle")
 	public ModelAndView receive(String patient_project_id,String onecode) {
 
@@ -91,5 +93,15 @@ public class DoctorHandle {
 		return mav;
 	}
 
+	//小结
+	@RequestMapping(value = "/brief.handle")
+	public ModelAndView brief(String data) {
+
+		System.out.println("data...."+data);
+		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
+
+		return mav;
+	}
 
 }

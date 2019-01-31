@@ -19,15 +19,16 @@ public class Patient {
 	private String code; // 条形码
 	private String phone; // 手机号
 	private String check_num; // 体检号
-
+	private String comboName;	//套餐名字
+	
 	private Company company;
 
 	public Patient() {
 		super();
 	}
-
+	
 	public Patient(int paitent_id, int company_id, int combo_id, String name, String sex, String age, String iD,
-			String code, String phone, String check_num) {
+			String code, String phone, String check_num, String comboName) {
 		super();
 		this.paitent_id = paitent_id;
 		this.company_id = company_id;
@@ -39,6 +40,7 @@ public class Patient {
 		this.code = code;
 		this.phone = phone;
 		this.check_num = check_num;
+		this.comboName = comboName;
 	}
 
 	public int getPaitent_id() {
@@ -121,6 +123,14 @@ public class Patient {
 		this.check_num = check_num;
 	}
 
+	public String getComboName() {
+		return comboName;
+	}
+
+	public void setComboName(String comboName) {
+		this.comboName = comboName;
+	}
+
 	public Company getCompany() {
 		return company;
 	}
@@ -133,6 +143,6 @@ public class Patient {
 	public String toString() {
 		return "Patient [paitent_id=" + paitent_id + ", company_id=" + company_id + ", combo_id=" + combo_id + ", name="
 				+ name + ", sex=" + sex + ", age=" + age + ", ID=" + ID + ", code=" + code + ", phone=" + phone
-				+ ", check_num=" + check_num + "]";
+				+ ", check_num=" + check_num + ", comboName=" + comboName + ", company=" + company + "]";
 	}
 }

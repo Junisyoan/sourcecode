@@ -23,7 +23,6 @@ public class TbUserBizImp implements TbUserBiz{
 	}
 	@Override//无条件查询所有
 	public List<Tb_user> findAll() {
-		// TODO Auto-generated method stub
 		return tbUserMapper.findAll();
 	}
 //	@Override//无条件查询所有
@@ -33,27 +32,22 @@ public class TbUserBizImp implements TbUserBiz{
  
 	@Override//添加
 	public int addUser(Tb_user user) {
-		// TODO Auto-generated method stub
 		return  tbUserMapper.addUser(user); 
 	}
 	@Override//删除
 	public int deleteUser(int user_id) {
-		// TODO Auto-generated method stub
 		return tbUserMapper.deleteUser(user_id);
 	}
 	@Override
 	public int upState(int user_id,String state) {
-		// TODO Auto-generated method stub
 		return tbUserMapper.upState(user_id, state);
 	}
 	@Override//修改人员信息
 	public int upUser(Tb_user user) {
-		// TODO Auto-generated method stub
 		return tbUserMapper.upUser(user);
 	}
 	@Override//模糊查询
 	public List<Map<String,Object>> selUser(String depts, String users,  String phones ) {
-		// TODO Auto-generated method stub
 		return tbUserMapper.selUser(depts, users, phones);
 	}
 }
