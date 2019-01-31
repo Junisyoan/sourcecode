@@ -12,8 +12,11 @@
 <title>添加套餐</title>
 </head>
 <body>
-<form id = "cForm" onsubmit="return putIn()">
-	<label>名称</label><input type = "text" name="name" id = "name"/>
+<form id = "cForm" onsubmit="putIn()">
+	<label>名称</label>
+	<input type = "text" name="name" id = "name"  onblur="checkName()"/>
+	<input type="hidden" id = "checkValue" name="checkValue">
+	<input type="hidden" id = "length" name="length">
 	<label>价钱</label><input type = "text" name="price" id = "price"/>
 	<table>
 		<tr>
@@ -31,6 +34,34 @@
 <script src="<%=path%>js/jquery.min.js"></script>
 <script src="<%=path%>js/jquery.validate.min.js"></script>
 <script src="<%=path%>js/jquery.validate.cn.js"></script>
+<script>
+var check;
+function checkName(){
+	if($("#name").val() == ""){
+		return;
+	}
+	
+	$.ajax({
+		url:"<%=path%>combo/checkName.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			account:$("#account").val()
+		},
+		success:function(msg){
+			if(msg == "该名称已存在"){
+				check = 0;
+				alert("该名称已存在");
+			}else{
+				check = 1;
+			} 
+		},
+		error : function() {
+			alert("异常！");
+		}
+	});
+}
+</script>
 <script>
 var projectList = new Array();
 var current = 0;
@@ -134,12 +165,10 @@ $(document).ready(function(){
 function putIn(){
 	save();
 	
-	if(idArray.length > 0){
-		return true;
-	}else{
-		alert("未选择细项");
-		return false;
-	}
+	document.getElementById("length").value=idArray.length;
+	if(idArray.length == 0)alert("未选择细项");
+	document.getElementById("checkValue").value=check;
+	if(check == 0)alert("该名称已存在");
 }
 
 $("#cForm").validate({
@@ -152,11 +181,19 @@ $("#cForm").validate({
 		},
 		price:{
 			required:true
+		},
+		length:{
+			min:1
+		},
+		checkValue:{
+			min:1
 		}
 	},
 	messages:{
 		name:"名称不能为空",
-		price:"价钱不能为空"
+		price:"价钱不能为空",
+		length:"",
+		checkValue:""
 	},
     submitHandler: function (form) {  //通过之后回调
     	$.ajax({
