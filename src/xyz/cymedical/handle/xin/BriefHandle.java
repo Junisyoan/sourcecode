@@ -46,6 +46,32 @@ public class BriefHandle {
 		return mav;
 		
 	}
+	
+	
+	//彩超小结
+		@RequestMapping(value = "/photo.handle")
+		public ModelAndView photo(String result,String path,String id) {
+			
+			System.out.println("result="+result);
+			System.out.println("path="+path);
+			System.out.println("id="+id);
+			
+			briefbiz.Photo(result, path, id);
+			
+			dlist=doctorbiz.findMyDetail(Integer.valueOf(DoctorHandle.projectid),Integer.valueOf(DoctorHandle.patientid));
+			
+			System.out.println("dlist="+dlist);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("projectname", DoctorHandle.projectname);
+			mav.addObject("keshi", DoctorHandle.keshi);
+			mav.addObject("dlist", dlist);
+
+			mav.setViewName("WEB-INF/doctor.xin/brief");
+			return mav;
+			
+		}
+	
 
 	//检验小结
 	@RequestMapping(value = "/check.handle")
@@ -66,5 +92,26 @@ public class BriefHandle {
 		return mav;
 		
 	}
+	
+	// 查询一维码对应病人的导检单
+		@RequestMapping(value = "/turnback.handle")
+		public ModelAndView turnback() {
+
+			System.out.println("onecode=" + DoctorHandle.onecode);
+
+			System.out.println(doctorbiz.findMyProject(DoctorHandle.onecode));
+			
+			plist=doctorbiz.findMyProject(DoctorHandle.onecode);
+
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("prolist", plist);
+			mav.setViewName("WEB-INF/doctor.xin/pro_receive");
+			return mav;
+
+		}
+	
+
+	
+	
 	
 }
