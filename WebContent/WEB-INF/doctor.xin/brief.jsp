@@ -29,12 +29,12 @@
 	<div style="float:right">${keshi }</div>
 </h3>
   <div class="">
-  <
+  
   <table id="" class="table table-striped table-bordered table-hover">
      <c:if test="${keshi=='常规检查室' }">
   
    <thead>
-    <tr><th>序号</th><th>项目名称</th><th>结果</th><th>操作</th></tr>
+    <tr><th>序号</th><th>项目名称</th><th>单位</th><th>结果</th><th>操作</th></tr>
    </thead>
    <tbody>
    <c:forEach items="${dlist }" var="d" varStatus="s">
@@ -42,15 +42,23 @@
 			<c:if test="${d.type=='普通' }">
 				<td>${s.index + 1}</td>
 				<td>${d.name}</td>
+				<td>${d.unit}</td>
+				
+				<c:if test="${d.sstate=='未提交' }">
 				<td><input type="text" name="data" id="${d.name}" /></td>
 				<td class="center">
 				
-				<a href="javascript:;" onclick="location ='<%=path %>doctor/brief.handle?data='+document.getElementById('${d.name}').value;">
+				<a href="javascript:;" onclick="location ='<%=path %>brief/normal.handle?result='+document.getElementById('${d.name}').value+'&id='+${d.brief_id};">
 					<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
 				</a>
-				
-<%-- 				<a href="<%=path %>doctor/brief.handle?data='+document.getElementById('data').value;"><button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？') ;">提交</button></a> --%>
 				</td>
+				</c:if> 
+				<c:if test="${d.sstate=='已提交' }">
+				<td>${d.resulttext}</td>
+				<td class="center">
+					已提交
+				</td>
+				</c:if> 
 			</c:if> 
 		</tr>
 	</c:forEach>
@@ -67,7 +75,7 @@
    
    <c:forEach items="${dlist }" var="d" varStatus="s">
 		<tr>
-			<c:if test="${d.type=='影像' }">
+			<c:if test="${d.type=='彩超' }">
 				<td>${s.index + 1}</td>
 				<td>${d.name}</td>
 				<td>上传文件</td>
@@ -96,11 +104,25 @@
 				<td>${d.name}</td>
 				<td>${d.unit}</td>
 				<td>${d.min}-${d.max}</td>
-				<td><input type="text" name="result" id="result"/></td>
-				<td><input type="text" name="result" id="result"/></td>
+				
+				<c:if test="${d.sstate=='未提交' }">
+				
+				<td><input type="text" name="result" id="${d.name}" /></td>
+				<td><input type="text" name="tips" id="${d.name}${d.name}"/></td>
 				<td class="center">
-				<a href="<%=path %>"><button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？') ;">提交</button></a>
+				<a href="javascript:;" onclick="location ='<%=path %>brief/check.handle?result='+document.getElementById('${d.name}').value+'&tips='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};">
+					<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
+				</a>
 				</td>
+				</c:if>
+				<c:if test="${d.sstate=='已提交' }">
+				
+				<td>${d.resulttext}</td>
+				<td>${d.tips}</td>
+				<td class="center">
+					已提交
+				</td>
+				</c:if>
 			</c:if> 
 		</tr>
 	</c:forEach>

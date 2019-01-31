@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 */
 
 @Repository
-public interface DoctorMapper {
+public interface BriefMapper {
 
 	//query
 	
@@ -21,12 +21,13 @@ public interface DoctorMapper {
 	 * @param code	条码号
 	 * @return	细项列表
 	 */
-	//项目接收
-	public boolean receive(int patient_project_id);
+	
 
-	//获取项目列表
-	public List<Map<String,Object>> findMyProject(String onecode);
+	//普通小结
+	public boolean Normal(String result, String id);
+	
+	public List<Map<String,Object>> Photo(String code);
 
-	//项目细项
-	public List<Map<String, Object>> findMyDetail(int projectid,int patientid);
+	public boolean Check(String result, String tips, String id);
+
 }
