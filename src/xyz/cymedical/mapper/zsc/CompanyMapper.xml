@@ -4,6 +4,14 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.CompanyMappers">
 
+	<!-- ajax验证 -->
+	<select id="checkName" parameterType="map" resultType="int">
+		select count(*) from tb_company where account = #{account}
+		<if test="id!=null and id!=''">
+			and company_id != #{id}
+		</if>
+	</select>
+
 	<!-- 插入细项 -->
 	<insert id="insertCompany" parameterType = "xyz.cymedical.entity.jun.Company">
 		insert into tb_company(name,account,pwd,tel,address,people,phone,deposit) 
