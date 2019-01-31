@@ -59,4 +59,13 @@ public class ProjectBiz {
 		map.put("idArray", idArray);
 		return projectMapper.updateProject(map);
 	}
+
+	public String checkName(Map<String, Object> map) {
+		int rt = projectMapper.checkName(map);
+		if (rt > 0) {
+			return "该名称已存在";
+		} else {
+			return "该名称可使用";
+		}
+	};
 }
