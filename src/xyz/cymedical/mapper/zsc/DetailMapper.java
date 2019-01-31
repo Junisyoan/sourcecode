@@ -1,6 +1,7 @@
 package xyz.cymedical.mapper.zsc;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
@@ -21,4 +22,6 @@ public interface DetailMapper {
 	public Detail findDetail(String detail_id);
 	
 	public List<Detail> selectDetail(Detail detail);
+	
+	public int checkName(Map<String, Object> map);
 }
