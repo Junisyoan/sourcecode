@@ -4,6 +4,14 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.DetailMapper">
 
+	<!-- ajax验证 -->
+	<select id="checkName" parameterType="map" resultType="int">
+		select count(*) from tb_detail where name = #{name}
+		<if test="id!=null and id!=''">
+			and detail_id != #{id}
+		</if>
+	</select>
+
 	<!-- 插入细项 -->
 	<insert id="insertDetail" parameterType = "xyz.cymedical.entity.zsc.Detail">
 		insert into tb_detail(name,unit,max,min,type) 
