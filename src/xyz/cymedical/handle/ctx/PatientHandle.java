@@ -29,7 +29,11 @@ public class PatientHandle {
 	@RequestMapping(value = "/findpatient.handle")
 	public ModelAndView findpatient(String name, String phone, String time, String code) {
 
+		System.out.println(name + "," + phone + "," + time + "," + code);
+
 		patientlist = patientMapper.query(name, phone, time, code);
+
+		System.out.println(patientlist.size() + "aa");
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/staffquery");
@@ -91,7 +95,19 @@ public class PatientHandle {
 			mav.addObject("patientlist", patientlist);
 		}
 		return mav;
+	}
 
+	@RequestMapping(value = "/showmessage.handle")
+	public ModelAndView showmessage(String name) {
+
+		patientlist = patientMapper.query(name, "", "", "");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/message");
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
+		return mav;
 	}
 
 }
