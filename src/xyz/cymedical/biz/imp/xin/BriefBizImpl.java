@@ -25,9 +25,9 @@ public class BriefBizImpl  implements BriefBiz {
 	private BriefMapper briefMapper;
 
 	@Override
-	public List<Map<String, Object>> Photo(String code) {
+	public boolean Photo(String result,String path,String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return briefMapper.Photo(result,path,id);
 	}
 
 	@Override
