@@ -22,6 +22,15 @@ public class DoctorHandle {
 	
 	List<Map<String,Object>> dlist;			//细项列表
 	
+	public static String patientid;
+	
+	public static String projectid;
+	
+	public static String projectname;
+	
+	public static String keshi;
+	
+	
 
 	// 查询一维码对应病人的导检单
 	@RequestMapping(value = "/findProject.handle")
@@ -61,6 +70,11 @@ public class DoctorHandle {
 		System.out.println("patientid=" + patientid);
 		System.out.println("projectid=" + projectid);
 		System.out.println("projectname=" + projectname);
+		
+		this.patientid=patientid;
+		this.projectid=projectid;
+		this.projectname=projectname;
+		this.keshi=keshi;
 
 		dlist=doctorbiz.findMyDetail(Integer.valueOf(projectid),Integer.valueOf(patientid));
 		
