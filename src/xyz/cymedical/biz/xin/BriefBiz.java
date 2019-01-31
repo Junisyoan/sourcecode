@@ -20,7 +20,7 @@ public interface BriefBiz {
 	
 	public boolean Normal(String result,String id);
 	
-	public List<Map<String,Object>> Photo(String code);
+	public boolean Photo(String result,String path,String id);
 	
 	public boolean Check(String result,String tips,String id);
 
