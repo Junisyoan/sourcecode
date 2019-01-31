@@ -107,7 +107,7 @@
 									<a href="<%=path %>doctor/receive.handle?patient_project_id=${p.patient_project_id}&onecode=${p.code } "><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">接收</button></a>
 								</c:if> 
 								<c:if test="${p.state=='已接收' }">
-									<a href="<%=path %>doctor/Detail.handle?projectname=${p.projectname} &patientid=${p.patient_id}&projectid=${p.project_id}&keshi=${p.keshi }"><button type="button" class="btn btn-info Product_Details">检查</button></a>
+									<a href="<%=path %>doctor/Detail.handle?projectname=${p.projectname} &patientid=${p.patient_id}&projectid=${p.project_id}&keshi=${p.keshi }&code=${p.code}"><button type="button" class="btn btn-info Product_Details">检查</button></a>
 								</c:if> 
 								</td>
 							</tr>
