@@ -1,7 +1,6 @@
 package xyz.cymedical.handle.yjn;
 
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -10,15 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.entity.jiang.Tb_user;
 
 @Controller // 此注释的含义是将该类设置成为浏览器提交的上来的类
 @RequestMapping("/user")
 public class LoginHandle {
-
-	@Resource
-	private TbUserBiz userBiz;
 
 	@RequestMapping(value = "/login.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String login(HttpServletRequest req, String checkCode, Tb_user user) {
