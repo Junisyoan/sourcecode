@@ -116,16 +116,16 @@
 						<li><a href="#" class="dropdown-toggle"><i class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b class="arrow icon-angle-down"></b></a>
 							<ul class="submenu">
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>usermanage/select.handle" title="人员管理" class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
-								<li class="home"><a href="javascript:void(0)" name="菜单管理.html" title="菜单管理" class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
+								<li class="home"><a href="javascript:void(0)" name="<%=path%>menumanage/select.handle" title="菜单管理" class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>rolemanage/select.handle" title="角色管理"  class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="用户管理.html" title="用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>deptmanage/select.handle" title="科室管理" class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
                                 <!--根据用户权限显示用户管理-->
-                                <li class="home"><a href="javascript:void(0)" name="权限用户管理界面.html" title="权限用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>powermanage/select.handle" title="权限用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
                                 <!--结束-->
-                                <li class="home"><a href="javascript:void(0)" name="入围信息管理.html" title="入围信息管理" class="iframeurl"><i class="icon-double-angle-right"></i>入围信息管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="供应商管理.html" title="供应商管理" class="iframeurl"><i class="icon-double-angle-right"></i>供应商管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="船只管理.html" title="船只管理" class="iframeurl"><i class="icon-double-angle-right"></i>船只管理</a></li>
-                                <li class="home"><a href="javascript:void(0)" name="产品管理.html" title="产品管理" class="iframeurl"><i class="icon-double-angle-right"></i>产品管理</a></li>
+<!--                                 <li class="home"><a href="javascript:void(0)" name="入围信息管理.html" title="入围信息管理" class="iframeurl"><i class="icon-double-angle-right"></i>入围信息管理</a></li> -->
+<!--                                 <li class="home"><a href="javascript:void(0)" name="供应商管理.html" title="供应商管理" class="iframeurl"><i class="icon-double-angle-right"></i>供应商管理</a></li> -->
+<!--                                 <li class="home"><a href="javascript:void(0)" name="船只管理.html" title="船只管理" class="iframeurl"><i class="icon-double-angle-right"></i>船只管理</a></li> -->
+<!--                                 <li class="home"><a href="javascript:void(0)" name="产品管理.html" title="产品管理" class="iframeurl"><i class="icon-double-angle-right"></i>产品管理</a></li> -->
 							</ul>
 						</li>
 					</ul><!-- /.nav-list -->
