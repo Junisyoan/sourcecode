@@ -118,7 +118,17 @@
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>usermanage/select.handle" title="人员管理" class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>menumanage/select.handle" title="菜单管理" class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>rolemanage/select.handle" title="角色管理"  class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
+<<<<<<< HEAD
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>deptmanage/select.handle" title="科室管理" class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
+=======
+                                <li class="home"><a href="javascript:void(0)" name="用户管理.html" title="用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
+                                <!-- zsc -->
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>detail/detailsVeiw.handle" title="细项管理" class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>project/projectsVeiw.handle" title="项目管理" class="iframeurl"><i class="icon-double-angle-right"></i>项目管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>combo/combosVeiw.handle" title="套餐管理" class="iframeurl"><i class="icon-double-angle-right"></i>套餐管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>companys/companysVeiw.handle" title="账号管理" class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li>
+                                <!-- zsc -->
+>>>>>>> 1c9b39fc9e0bcbb4673e6f15790522aa64340a30
                                 <!--根据用户权限显示用户管理-->
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>powermanage/select.handle" title="权限用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
                                 <!--结束-->
