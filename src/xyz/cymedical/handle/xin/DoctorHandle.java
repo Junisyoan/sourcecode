@@ -22,6 +22,16 @@ public class DoctorHandle {
 	
 	List<Map<String,Object>> dlist;			//细项列表
 	
+	public static String patientid;
+	
+	public static String projectid;
+	
+	public static String projectname;
+	
+	public static String keshi;
+	
+	public static String onecode;
+	
 
 	// 查询一维码对应病人的导检单
 	@RequestMapping(value = "/findProject.handle")
@@ -29,6 +39,8 @@ public class DoctorHandle {
 
 		System.out.println("onecode=" + onecode);
 
+		this.onecode=onecode;
+		
 		System.out.println(doctorbiz.findMyProject(onecode));
 		
 		plist=doctorbiz.findMyProject(onecode);
@@ -54,13 +66,18 @@ public class DoctorHandle {
 
 	// 根据选中项目跳转至对应小结
 	@RequestMapping(value = "/Detail.handle")
-	public ModelAndView getDetail(String patientid, String projectid, String projectname) {
+	public ModelAndView getDetail(String patientid, String projectid, String projectname,String keshi,String code) {
 
 		System.out.println("getDetail....");
 		
 		System.out.println("patientid=" + patientid);
 		System.out.println("projectid=" + projectid);
 		System.out.println("projectname=" + projectname);
+		
+		this.patientid=patientid;
+		this.projectid=projectid;
+		this.projectname=projectname;
+		this.keshi=keshi;
 
 		dlist=doctorbiz.findMyDetail(Integer.valueOf(projectid),Integer.valueOf(patientid));
 		
@@ -68,12 +85,15 @@ public class DoctorHandle {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("projectname", projectname);
+		mav.addObject("keshi", keshi);
 		mav.addObject("dlist", dlist);
+		mav.addObject("code", code);
 
 		mav.setViewName("WEB-INF/doctor.xin/brief");
 		return mav;
 	}
 
+	//项目接收
 	@RequestMapping(value = "/receive.handle")
 	public ModelAndView receive(String patient_project_id,String onecode) {
 
@@ -91,5 +111,15 @@ public class DoctorHandle {
 		return mav;
 	}
 
+	//小结
+	@RequestMapping(value = "/brief.handle")
+	public ModelAndView brief(String data) {
+
+		System.out.println("data...."+data);
+		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
+
+		return mav;
+	}
 
 }
