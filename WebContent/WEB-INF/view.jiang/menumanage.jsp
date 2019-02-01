@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <%@ page language="java" import="java.util.*"
 	contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
 	  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -5,6 +7,7 @@
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
 %>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -79,12 +82,12 @@
 </table>
 </body>
 
-		<script src="<%=path %>assets/js/jquery.min.js"></script>
+<%-- 		<script src="<%=path %>assets/js/jquery.min.js"></script> --%>
  
 
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
+<!-- 		<script type="text/javascript"> -->
+//   			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+<!--  	</script>   -->
 
 	 
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
@@ -156,7 +159,7 @@ function loadAjax(){
 				
 // 				 var datato=data.val();
 				
-<%-- 				 window.location.href="<%=path%>usermanage/adddeptto.action"; --%>
+				 window.location.href="<%=path%>usermanage/adddeptto.action";
 			 }
 		
 		});
