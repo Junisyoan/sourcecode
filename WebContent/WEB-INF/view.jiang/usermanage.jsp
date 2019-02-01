@@ -11,9 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  <!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
+ 
   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
   <link rel="stylesheet" href="<%=path %>css/style.css"/>
 <title>人员设置</title>
@@ -38,7 +36,7 @@
     	<form action="<%=path%>usermanage/adduser.handle" method="post" id="ddd">
   		   <ul class="clearfix">
      
-     	<li> <label class="label_name"   >部门</label>
+     	<li> <label class="label_name">部门</label>
         <select name="cardstatef" id="dept" onblur="loadAjax()" style=" width:170px;">
        
             <option value="外科">外科</option>
@@ -52,23 +50,8 @@
         <li>   <label  class="label_name">   角色</label><input type="text" id="doctor" name="doctor"/>
         
         
-        </label></li>
-<!--         <li> <label class="label_name">角色</label> -->
-<!--         <select name="addrole" style=" width:170px;"> -->
-<%--         	 <c:if test="${addrole}=='外科'"> --%>
-<!--             <option value="外科">外科医生</option> -->
-<%--             </c:if> --%>
-<%--             <c:if test="${addrole}=='内科'"> --%>
-<!--             <option value="内科">内科医生</option> -->
-<%--             </c:if> --%>
-<%--              <c:if test="${addrole}=='妇产科'"> --%>
-<!--             <option value="妇产科">妇产科医生</option> -->
-<%--              </c:if> --%>
-<!--         </select></li> -->
-<!-- 		<li> <label id="utext">    </label>     </li> -->
-     
-     
-<!--       <li><label class="label_name">人员名称</label> <input name="人员名称" type="text"  class="text_add" id="name_text"/> -->
+       </li> 
+            
       <li><label class="label_name">账号</label><input name="account" type="text"  class="text_add" id="account"/><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">密码</label><input name="pwd" type="password"  class="text_add" id="pwd"/></li>
       <li><label class="label_name">性别</label><input name="sex" type="text"  class="text_add" id="sex"/></li>
@@ -268,23 +251,15 @@
  <input name="" type="text"  class="Attributestext" id="shuxin"/><!--<button type="button" class="btn btn-primary">添加</button>-->
 </div>
 
-<!--[if !IE]> -->
+ 
 		<script src="<%=path %>assets/js/jquery.min.js"></script>
-		<!-- <![endif]-->
-
-		<!--[if !IE]> -->
+ 
 
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+	 
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
 $('.Product_Details').on('click', function(){
