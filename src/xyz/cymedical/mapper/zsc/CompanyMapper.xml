@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.zsc.CompanyMappers">
+
+	<!-- ajax验证 -->
+	<select id="checkName" parameterType="map" resultType="int">
+		select count(*) from tb_company where account = #{account}
+		<if test="id!=null and id!=''">
+			and company_id != #{id}
+		</if>
+	</select>
+
+	<!-- 插入细项 -->
+	<insert id="insertCompany" parameterType = "xyz.cymedical.entity.jun.Company">
+		insert into tb_company(name,account,pwd,tel,address,people,phone,deposit) 
+		values (#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{deposit});
+	</insert>
+
+	<!-- 修改细项 -->
+	<update id="updateCompany" parameterType = "xyz.cymedical.entity.jun.Company">
+		update tb_company set 
+		name = #{name}, account = #{account},pwd = #{pwd},tel = #{tel},address=#{address}, 
+		people = #{people}, phone = #{phone},deposit = #{deposit}
+		where company_id = #{company_id}
+	</update>
+
+	<!-- 删除细项 -->
+	<delete id="deleteDetail" parameterType = "String">
+		delete from tb_patient where company_id = #{company_id};
+		delete from tb_file where company_id = #{company_id};
+		delete from tb_log_company where company_id = #{company_id};
+		delete from tb_group where company_id = #{company_id};
+		delete from tb_company where company_id = #{company_id};
+	</delete>
+
+	<!-- 细项集合 -->
+	<select id="findCompanys" resultType = "xyz.cymedical.entity.jun.Company">
+		select company_id,name,account,pwd,tel,address,people,phone,deposit 
+		from tb_company
+	</select>
+
+	<!-- 修改细项前的查询细项 -->
+	<select id = "findCompany" parameterType="java.lang.String" resultType = "xyz.cymedical.entity.jun.Company">
+		select company_id,name,account,pwd,tel,address,people,phone,deposit 
+		from tb_company where company_id = #{company_id} 
+	</select>
+
+	<!-- 查询细项 -->
+	<select id = "selectCompany" parameterType="map" resultType = "xyz.cymedical.entity.jun.Company">
+		select company_id,name,account,pwd,tel,address,people,phone,deposit 
+		from tb_company where 1=1
+		<if test="company.name!=null and company.name!=''">
+			and name like '%${company.name}%'
+		</if>
+		<if test="company.account!=null and company.account!=''">
+			and account like '%${company.account}%'
+		</if>
+		<if test="company.tel!=null and company.tel!=''">
+			and tel like '%${company.tel}%'
+		</if>
+		<if test="company.address!=null and company.address!=''">
+			and address like '%${company.address}%'
+		</if>
+		<if test="company.people!=null and company.people!=''">
+			and people like '%${company.people}%'
+		</if>
+		<if test="company.phone!=null and company.phone!=''">
+			and phone like '%${company.phone}%'
+		</if>
+		<if test="min!=null and min!=''">
+			and deposit > #{min}
+		</if>
+		<if test="max!=null and max!=''">
+			and #{max} > deposit
+		</if>
+	</select>
+</mapper>
