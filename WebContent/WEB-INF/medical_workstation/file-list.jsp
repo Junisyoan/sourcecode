@@ -16,71 +16,53 @@
  <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
 <title>项目接收</title>
 </head>
 
 <body>
 	<div class="page-content">
-		<div class="gys_style">
-			<div class="Manager_style">
-				<div class="title_name">文件查询</div>
-				<!-- 查询条码号 -->
-				<form method="post" action="">
-					<ul class="search_content clearfix">
-						<li>
-						<label class="lf">
-							姓名<input name="name" type="text" class="text_add" />
-						</label>
-						<label class="lf">
-							手机号<input name="phone" type="text" class="text_add" />
-						</label>
-						<label class="lf">
-							体检时间<input name="time" type="date" class="text_add" />
-						</label>
-						<label class="lf">
-							条码号<input name="code" type="text" class="text_add" />
-						</label>
-							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-						</li>
-					</ul>
-				</form>
-			</div>
-		</div>
-
 		<div class="Manager_style">
 			<span class="title_name">文件列表</span>
-			<table class="table table-striped table-bordered table-hover">
+			<table id="listTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>序号</th>
 						<th>文件名</th>
 						<th>文件大小</th>
 						<th>上传日期</th>
+						<th>审核状态</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${listFile}" var="l" varStatus="s">
+					<c:forEach items="${fileList}" var="l" varStatus="s">
 						<tr>
 							<td>${s.count}</td>
-							<td>${l.fname}</td>
+							<td>${l.name}</td>
 							<td>${l.fsize}</td>
 							<td>${l.ftime}</td>
-							<td><a href="javascript:;" onclick="analysisExcel('${l.file_id}');">导入</a>|<a href="javascript:;" onclick="">删除</a></td>
+							<td>${l.cstate }</td>
+							<td>
+								<a href="javascript:;" onclick="importFile('${l.file_id}');">导入</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-</body>
 <script type="text/javascript">
-function analysisExcel(file_id){
-	var sure=confirm("确定导入？");
-	if(sure){
-		location.href="<%=path%>company/analysisExcel.handle?file_id="+file_id;
-	}
-	
+
+function importFile(file_id){
+	location.href='<%=path%>nurse/importFile.handle?file_id='+file_id;
 }
+
+$(function(){
+	$("#listTable").dataTable();
+});
 </script>
+</body>
 </html>
