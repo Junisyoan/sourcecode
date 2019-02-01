@@ -42,4 +42,14 @@ public class CompanyFileBizImpl extends BaseImpl implements CompanyFileBiz {
 		return companyFileMapper.queryFileById(file_id);
 	}
 
+	@Override
+	public boolean updateFileState(int fid) {
+		return companyFileMapper.updateFileState(fid);
+	}
+
+	@Override
+	public List<CompanyFile> queryPassFileList() {
+		return companyFileMapper.queryPassFileList();
+	}
+
 }
