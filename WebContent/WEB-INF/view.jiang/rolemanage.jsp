@@ -8,9 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  <!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
+  
   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
   <link rel="stylesheet" href="<%=path %>css/style.css"/>
 <title>角色管理</title>
@@ -61,6 +59,7 @@
     
     
 <!--     ----------- -->
+
     <div class="Manager_style">
      <span class="title_name">角色信息</span>
      <table class="table table-striped table-bordered table-hover">
@@ -240,5 +239,4 @@ function updeterole(a){
 </body>
 </html>
 
- 
-</html>
+  
