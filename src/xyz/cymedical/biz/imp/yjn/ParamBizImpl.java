@@ -18,13 +18,11 @@ public class ParamBizImpl implements ParamBiz{
 	
 	@Override
 	public List<Param> findAllParam() {
-		// TODO Auto-generated method stub
 		return parammapper.findAllParam();
 	}
 
 	@Override
 	public boolean delParam(String param_id) {
-		// TODO Auto-generated method stub
 		return parammapper.delParam(param_id);
 	}
 
