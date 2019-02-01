@@ -33,7 +33,6 @@
 								class="text_add" /></label> <label class="lf">条码号<input
 								name="code" type="text" class="text_add" /></label>
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-							<button type="button" onclick="tableToExcel('item','data')">导出</button>
 						</li>
 					</ul>
 				</form>
@@ -62,7 +61,7 @@
 							<td>${s.index + 1}</th>
 							<td>${p.n1}</th>
 							<td>${p.time}</th>
-							<td><a href="">查看</a></th>
+							<td><a href="<%=path%>patient/showmessage.handle">查看</a></th>
 							<td><a href="">查看</a></th>
 							<td><a href="">查看</a></th>
 							<td><a href="">查看</a></th>
