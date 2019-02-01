@@ -83,20 +83,21 @@ public class MenuManageHandle {
 
 	}
 //
-//	// 删除 第一步
-//	@RequestMapping(value = "/delect.handle", method = RequestMethod.POST)
-//	public @ResponseBody String delect(HttpServletRequest request, HttpServletResponse response, String delectname) {
-//		String data = null;
-//		System.out.println("...=" + delectname);
-//		int user_id = Integer.valueOf(delectname);
-//		int ret = tbUserBiz.deleteUser(user_id);
-//		if (ret == 1) {
-//			data = "00";
-//		}
-//
-//		return data;
-//
-//	}
+//	// 删除  
+	@RequestMapping(value = "/delect.handle", method = RequestMethod.POST)
+	public @ResponseBody String delect(HttpServletRequest request, HttpServletResponse response, String delectname) {
+		String data = null;
+		System.out.println("...=" + delectname);
+		int menu_id = Integer.valueOf(delectname);
+		
+		int ret = tbMenuBiz.delete(menu_id);
+		if (ret == 1) {
+			data = "00";
+		}
+
+		return data;
+
+	}
 //
 //	// 菜单序号查询
 	@RequestMapping(value = "/addmenuid.handle", method = RequestMethod.POST) 
@@ -212,5 +213,35 @@ public class MenuManageHandle {
 //		return mav;
 //
 //	}
+	//修改第一步
+	 
+	
+	@RequestMapping(value = "/updete1.handle", method = RequestMethod.POST)
+	public ModelAndView updete2(HttpServletRequest request, HttpServletResponse response, String updetename) {
+		ModelAndView mav = new ModelAndView();
+
+		System.out.println("修改人员信息=" + updetename);
+		request.setAttribute("updetename", updetename);
+		mav.setViewName("WEB-INF/view.jiang/updetemenu");
+		return mav;
+
+	}
+
+	// 修改人员信息二部
+		@RequestMapping(value = "/updetemenu2.handle", method = RequestMethod.POST)
+		public ModelAndView updeteuser(HttpServletRequest request, HttpServletResponse response, Tb_menu tb_menu) {
+			System.out.println("修改");
+			ModelAndView mav = new ModelAndView();
+	 
+			tbMenuBiz.upMenu(tb_menu);
+			  
+			System.out.println("修改成功");
+			mav.setViewName("WEB-INF/view.jiang/menumanage");
+			return mav;
+
+		}
+	
+	
+	
 	
 }
