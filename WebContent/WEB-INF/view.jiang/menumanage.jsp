@@ -32,7 +32,7 @@
 <div class="Manager_style">
    <div class="title_name">添加菜单</div>
     <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加菜单</button>
-     <div class="Add_Manager_style">
+      <div class="Add_Manager_style">
     		  
     <div id="Add_Product_style" style="display:none">
      <div class="page-content">
@@ -72,8 +72,9 @@
 <td>${u.menu_id}</td>
 <td>${u.name}</td>
 <td>${u.link}</td>
-
-<td><input type="checkbox" value="5" /></td>
+<td>  <button type="button" class="btn btn-primary" onclick="updete()" name="${u.menu_id}">修改</button>
+  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.menu_id}">刪除</button></td>
+<!-- <td><input type="checkbox" value="5" /></td> -->
 </tr>
     </c:forEach> 
  
@@ -86,7 +87,7 @@
  
 
 <!-- 		<script type="text/javascript"> -->
-//   			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+<!-- //   			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>"); -->
 <!--  	</script>   -->
 
 	 
@@ -166,5 +167,67 @@ function loadAjax(){
  
 	
 }
+
+function delect(e){ 
+	var e=e||event;
+	var t =e.target || e.srcElement;
+	var delectname=t.name;
+	var re=confirm("确定删除此项？");
+	
+	if(re){
+	alert(delectname);
+	 $.ajax({
+		 type:"POST",
+		 url:"<%=path%>menumanage/delect.handle", 
+		 data:{
+			 "delectname":delectname
+			 },
+		 dataType:"text",
+		 error:function(){
+			 alert('ajax请求请求错误...啦');
+		 },
+		 success:function(data){
+		 if(data=="00"){
+			 alert("删除成功"); 
+			 
+		 }
+			
+		 },
+	 });
+	
+	}else{
+		alert("错误");
+	}
+}
+
+//修改updete第一步
+function updete(a){
+	var a=a||event;
+	var t =a.target || a.srcElement;
+	var updetename=t.name;
+	var re=confirm("确定修改此项？");
+	if(re){
+//			alert(updetename);
+		var form = document.createElement("Form");
+		form.action="<%=path%>menumanage/updete1.handle";
+		form.method="post";
+		form.style.display="none";
+		
+		var opupdetename= document.createElement("input");
+		opupdetename.name="updetename";
+		opupdetename.value=updetename;
+	  
+		form.appendChild(opupdetename); 
+		document.body.appendChild(form);
+		
+		form.submit();
+		
+		 
+		}else{
+			alert("错误");
+		}
+	  
+}
+
 </script>
 </html>
