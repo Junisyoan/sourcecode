@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jiang.TbMenuMapper">
+
+
+<!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
+
+	<select id="selectMenu"   parameterType="xyz.cymedical.entity.jiang.Tb_menu"
+	resultType="xyz.cymedical.entity.jiang.Tb_menu">
+		select * from tb_menu  
+	</select>
+ 
+ 	<select id="addMenuid"   parameterType="String" resultType="int">
+		select * from tb_menu  where name=#{name}
+	</select>
+  
+</mapper>
