@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
+import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 
 /**
@@ -18,6 +19,15 @@ import xyz.cymedical.entity.xin.Combo;
 
 @Repository
 public interface NurseMapper {
+	
+	//insert
+	/**
+	 * 批量插入记账病人关系表
+	 * @param bid
+	 * @param pList
+	 * @return
+	 */
+	public int insertBatchRelation(@Param("bid")int bid, @Param("pList")List<Patient> pList);
 
 	//delete
 	/**
