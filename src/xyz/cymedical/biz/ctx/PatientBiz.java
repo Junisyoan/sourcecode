@@ -16,7 +16,10 @@ public interface PatientBiz {
 	 */
 	public boolean insertByBatch(List<Patient> listRecord);
 	
-	public List<Patient> query(@Param("name") String name, @Param("phone") String phone, @Param("time") String time,
+	public List<Patient> query(
+			@Param("name") String name, 
+			@Param("phone") String phone, 
+			@Param("time") String time,
 			@Param("code") String code);
 
 }
