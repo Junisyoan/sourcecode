@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
+import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 import xyz.cymedical.mapper.jun.CompanyMapper;
+import xyz.cymedical.mapper.jun.GroupMapper;
 import xyz.cymedical.mapper.jun.NurseMapper;
 
 /**
@@ -61,4 +63,15 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 		}
 	}
 
+	@Override
+	public boolean insertRelation(int bid, List<Patient> pList) {
+		
+		int num = nurseMapper.insertBatchRelation(bid, pList);
+		if (pList.size()==num) {
+			isUpdate=true;
+		} else {
+			isUpdate=false;
+		}
+		return isUpdate;
+	}
 }
