@@ -4,6 +4,7 @@ import java.util.List;
 
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
+import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 
 /**
@@ -13,6 +14,15 @@ import xyz.cymedical.entity.xin.Combo;
 *	类说明：
 */
 public interface NurseBiz {
+	
+	
+	/**
+	 * 插入记账表和病人表之间的关系
+	 * @param bid	记账表id
+	 * @param pList	病人信息
+	 * @return	是否插入成功
+	 */
+	public boolean insertRelation(int bid, List<Patient> pList);
 	
 	/**
 	 * 扣除公司费用
