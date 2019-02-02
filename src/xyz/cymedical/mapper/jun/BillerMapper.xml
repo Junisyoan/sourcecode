@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jun.BillerMapper">
+<!-- 查询记账表 -->
+	<select id="queryBiller" resultType="xyz.cymedical.entity.jun.Biller">
+		select * from tb_biller where group_id = #{gid} and btime = #{time}
+	</select>
+<!-- 生成记账表 -->
+	<insert id="insertBiller">
+		insert into tb_biller(group_id,bstate,batch,btime)
+		values(#{gid},#{bstate},#{batch},#{btime})
+	</insert>
+
+</mapper>
