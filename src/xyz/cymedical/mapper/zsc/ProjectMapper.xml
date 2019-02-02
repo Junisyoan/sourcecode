@@ -4,6 +4,14 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.ProjectMapper">
 
+	<!-- ajax验证 -->
+	<select id="checkName" parameterType="map" resultType="int">
+		select count(*) from tb_project where name = #{name}
+		<if test="id!=null and id!=''">
+			and project_id != #{id}
+		</if>
+	</select>
+
 	<!-- 查询部门id，用于添加细项 -->
 	<select id="selectParamtId" parameterType = "java.lang.String" resultType="int">
 		select param_id from tb_param where name = #{param_name}

@@ -31,6 +31,14 @@ public class CompanyHandles {
 		return mav;
 	}
 	
+	@RequestMapping(value="/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String checkName(String account,String id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("account", account);
+		map.put("id", id);
+		return companyBizsc.checkName(map);
+	}
+	
 	// 添加用户--ajax
 	@RequestMapping(value = "/addCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String addDetail(Company company) {

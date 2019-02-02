@@ -48,4 +48,9 @@
 	<insert id="insertCompany" parameterType="xyz.cymedical.entity.jun.Company">
 		insert into tb_company(name,account,pwd,tel,address,people,phone,cstate) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{cstate})
 	</insert>
+	
+<!-- 按账户查找公司 -->
+	<select id="queryByAccount" parameterType="String" resultType="xyz.cymedical.entity.jun.Company">
+		select * from tb_company where account=#{account}
+	</select>
 </mapper> 

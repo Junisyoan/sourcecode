@@ -1,10 +1,11 @@
 package xyz.cymedical.handle.zsc;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,21 +26,24 @@ public class DetailHandle {
 
 	@RequestMapping(value = "/insertPage.handle")
 	public ModelAndView insertPage() {
-		System.out.println("进入insertPage");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.zsc/addDetail");
 		return mav;
 	}
 	
+	@RequestMapping(value="/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String checkName(String name,String id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", name);
+		map.put("id", id);
+		return detailBiz.checkName(map);
+	}
+	
 	// 添加用户--ajax
 	@RequestMapping(value = "/addDetail.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String addDetail(Detail detail) {
-		int rt = detailBiz.insertDetail(detail);
-		if (rt > 0) {
-			return "添加成功";
-		} else {
-			return "添加失败";
-		}
+		System.out.println("detail="+detail);
+		return detailBiz.insertDetail(detail);
 	}
 
 	// 删除细项--ajax
@@ -54,12 +58,7 @@ public class DetailHandle {
 	// 修改细项--表单
 	@RequestMapping(value = "/updateDetail.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String updateDetail(Detail detail) {
-		int rt = detailBiz.updateDetail(detail);
-		if (rt > 0) {
-			return "修改成功";
-		} else {
-			return "修改失败";
-		}
+		return detailBiz.updateDetail(detail);
 	}
 
 	// 显示细项界面--href

@@ -1,6 +1,7 @@
 package xyz.cymedical.biz.zsc;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,12 +16,22 @@ public class DetailBiz {
 	@Resource
 	DetailMapper detailMapper;
 	
-	public int insertDetail(Detail detail) {
-		return detailMapper.insertDetail(detail);
+	public String insertDetail(Detail detail) {
+		int rt = detailMapper.insertDetail(detail);
+		if (rt > 0) {
+			return "添加成功";
+		} else {
+			return "添加失败";
+		}
 	};
 	
-	public int updateDetail(Detail detail) {
-		return detailMapper.updateDetail(detail);
+	public String updateDetail(Detail detail) {
+		int rt = detailMapper.updateDetail(detail);
+		if (rt > 0) {
+			return "修改成功";
+		} else {
+			return "修改失败";
+		}
 	};
 	
 	public int deleteDetail(int id) {
@@ -37,5 +48,14 @@ public class DetailBiz {
 	
 	public List<Detail> selectDetail(Detail detail){
 		return detailMapper.selectDetail(detail);
+	};
+	
+	public String checkName(Map<String, Object> map) {
+		int rt = detailMapper.checkName(map);
+		if (rt > 0) {
+			return "该名称已存在";
+		} else {
+			return "该名称可使用";
+		}
 	};
 }

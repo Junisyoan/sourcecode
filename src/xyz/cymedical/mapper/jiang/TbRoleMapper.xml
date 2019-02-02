@@ -17,10 +17,17 @@
 	
 	</insert>
 
+	<select id="selectName" parameterType="String" resultType="xyz.cymedical.entity.jiang.Tb_role" >
+	
+		select * from tb_role where name=#{name} 
+	</select>
 
 
-
-
+	<delete id="delectrole" parameterType="int" >
+	
+		delete from tb_role where role_id = #{role_id}
+	
+	</delete>
 
 
 </mapper>

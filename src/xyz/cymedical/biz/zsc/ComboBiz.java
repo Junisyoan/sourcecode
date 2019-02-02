@@ -57,4 +57,14 @@ public class ComboBiz {
 		
 		return comboMapper.updateCombo(map);
 	}
+	
+
+	public String checkName(Map<String, Object> map) {
+		int rt = comboMapper.checkName(map);
+		if (rt > 0) {
+			return "该名称已存在";
+		} else {
+			return "该名称可使用";
+		}
+	};
 }

@@ -11,7 +11,8 @@
 <title>添加账号</title>
 </head>
 <body>
-<form method = "post" id = "cForm">
+<form method = "post" id = "cForm"  onsubmit="return putIn()">			
+	<input type="hidden" id = "checkValue" name="checkValue">
 	<table>
 		<tr>
 			<td>公司名</td>
@@ -19,7 +20,7 @@
 		</tr>
 		<tr>
 			<td>账户名</td>
-			<td><input type = "text" name="account" id = "account"></td></tr>
+			<td><input type = "text" name="account" id = "account" onblur="checkName()"></td></tr>
 		<tr>
 			<td>密码</td>
 			<td><input type = "password" name="pwd" id ="pwd"></td>
@@ -58,6 +59,40 @@
 <script src="<%=path%>js/jquery.validate.min.js"></script>
 <script src="<%=path%>js/jquery.validate.cn.js"></script>
 <script>
+var check;
+
+function putIn(){
+	document.getElementById("checkValue").value=check;
+	if(check == 0)alert("该账号已存在");
+}
+
+function checkName(){
+	if($("#name").val() == ""){
+		return;
+	}
+	
+	$.ajax({
+		url:"<%=path%>companys/checkName.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			account:$("#account").val()
+		},
+		success:function(msg){
+			if(msg == "该账号已存在"){
+				check = 0;
+				alert("该账号已存在");
+			}else{
+				check = 1;
+			} 
+		},
+		error : function() {
+			alert("异常！");
+		}
+	});
+}
+</script>
+<script>
 $("#cForm").validate({
     onsubmit: true,// 是否在提交是验证
     onfocusout: false,// 是否在获取焦点时验证
@@ -89,6 +124,9 @@ $("#cForm").validate({
 		},
 		deposit:{
 			required:true
+		},
+		checkValue:{
+			min:1
 		}
 	},
 	messages:{
@@ -100,7 +138,8 @@ $("#cForm").validate({
 		address:"计量单位不能为空",
 		people:"最小值不能为空",
 		phone:"最大值不能为空",
-		deposit:"最大值不能为空"
+		deposit:"最大值不能为空",
+		checkValue:""
 	},
     submitHandler: function (form) {  //通过之后回调
     	$.ajax({

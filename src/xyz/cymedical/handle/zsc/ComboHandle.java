@@ -2,6 +2,7 @@ package xyz.cymedical.handle.zsc;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,14 @@ public class ComboHandle {
 		return mav;
 	}
 
+	@RequestMapping(value="/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String checkName(String name,String id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", name);
+		map.put("id", id);
+		return comboBiz.checkName(map);
+	}
+	
 	//新增项目
 	@RequestMapping(value = "/addCombo.handle")
 	public @ResponseBody String addProject(int[] idArray,Combo combo) {

@@ -31,6 +31,21 @@ public class TbRoleBizImp implements TbRoleBiz{
 	}
 
 
+	@Override
+	public Tb_role selectName(String name) {
+		// TODO Auto-generated method stub
+		return tbRoleMapper.selectName(name);
+//		return null;
+	}
+
+
+	@Override
+	public int delectrole(int role_id) {
+		// TODO Auto-generated method stub
+		return tbRoleMapper.delectrole(role_id);
+	}
+
+
 	 
 
 }

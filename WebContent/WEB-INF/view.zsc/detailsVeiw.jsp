@@ -14,7 +14,13 @@
 <body>
 <form method = "post" id = "cFrom">
 	<label>名称</label><input type = "text" name="name" id="name"/>
-	<label>类型</label><input type = "text" name="type" id="type"/>
+	<label>类型</label>
+	<select name="type" id="type">
+		<option></option>
+		<option>普通</option>
+		<option>检验</option>
+		<option>影像</option>
+	</select>
 	<input type="button" value="查询" onclick="putIn()">
 	<div>
 		<input type="button" value="新增" onclick="javascript:window.location.href='<%=path %>detail/insertPage.handle'"/>
@@ -53,7 +59,7 @@
 function putIn(){
 	
 	$.ajax({
-		url:"<%=path%>derail/selectDetail.handle",
+		url:"<%=path%>detail/selectDetail.handle",
 		type:"POST",
 		dataType:"JSON",
 		data:$("#cFrom").serialize(),
@@ -73,7 +79,7 @@ function remove(e){
 	var rt = confirm("确定删除此项?");
 	if(rt){
 		$.ajax({
-			url:"<%=path%>derail/deleteDetail.handle",
+			url:"<%=path%>detail/deleteDetail.handle",
 			type:"POST",
 			dataType:"JSON",
 			data:"detail_id="+detail_id,
@@ -116,7 +122,7 @@ function change(e){
 	var detail_id = t.name;
 	
 	var form = document.createElement("Form");
-	form.action="<%=path%>derail/updatePage.handle";
+	form.action="<%=path%>detail/updatePage.handle";
 	form.method="post";
 	form.style.display="none";
 	

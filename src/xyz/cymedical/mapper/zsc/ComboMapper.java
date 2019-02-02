@@ -24,6 +24,6 @@ public interface ComboMapper {
 	public Combo findCombo(String combo_id);
 	
 	public int updateCombo(Map<String, Object> map);
-	
-//	public int deleteDetPro(String project_id);
+
+	public int checkName(Map<String, Object> map);
 }

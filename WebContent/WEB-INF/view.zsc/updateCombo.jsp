@@ -13,7 +13,7 @@
 </head>
 <body>
 <form id = "cForm" onsubmit="return putIn()">
-	<label>名称</label><input type = "text" name="name" id = "name" value="${combo.name}"/>
+	<label>名称</label><input type = "text" name="name" id = "name" value="${combo.name}"  onblur="checkName()"/>
 	<label>价钱</label><input type = "text" name="price" id = "price" value="${combo.price}"/>
 	<table>
 		<tr>
@@ -31,6 +31,35 @@
 <script src="<%=path%>js/jquery.min.js"></script>
 <script src="<%=path%>js/jquery.validate.min.js"></script>
 <script src="<%=path%>js/jquery.validate.cn.js"></script>
+<script>
+var check;
+function checkName(){
+	if($("#name").val() == ""){
+		return;
+	}
+	
+	$.ajax({
+		url:"<%=path%>combo/checkName.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			account:$("#account").val(),
+			id:"${combo.combo_id}"
+		},
+		success:function(msg){
+			if(msg == "该名称已存在"){
+				check = 0;
+				alert("该名称已存在");
+			}else{
+				check = 1;
+			} 
+		},
+		error : function() {
+			alert("异常！");
+		}
+	});
+}
+</script>
 <script>
 var projectList = new Array();
 var currentList = new Array();

@@ -11,12 +11,12 @@
 <title>更新账号</title>
 </head>
 <body>
-<form id = "cForm">
+<form id = "cForm"  onsubmit="return putIn()">
 	<input type = "hidden" name = "company_id" value = "${company.company_id}">
 	<table>
 		<tr>
 			<td>公司名</td>
-			<td><input type = "text" name="name" id="name" value="${company.name}"></td>
+			<td><input type = "text" name="name" id="name" value="${company.name}"  onblur="checkName()"></td>
 		</tr>
 		<tr>
 			<td>账户名</td>
@@ -62,7 +62,45 @@
 <script src="<%=path%>js/jquery.min.js"></script>
 <script src="<%=path%>js/jquery.validate.min.js"></script>
 <script src="<%=path%>js/jquery.validate.cn.js"></script>
+<script>
+var check;
 
+function putIn(){
+	if(check == 0){
+		alert("该账号已存在");
+		return false;
+	}else if(check == 1){
+		return true;
+	}
+}
+
+function checkName(){
+	if($("#name").val() == ""){
+		return;
+	}
+	
+	$.ajax({
+		url:"<%=path%>companys/checkName.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			account:$("#account").val(),
+			id:"${companys.company_id}"
+		},
+		success:function(msg){
+			if(msg == "该账号已存在"){
+				check = 0;
+				alert("该账号已存在");
+			}else{
+				check = 1;
+			} 
+		},
+		error : function() {
+			alert("异常！");
+		}
+	});
+}
+</script>
 <script>
 $("#cForm").validate({
     onsubmit: true,// 是否在提交是验证

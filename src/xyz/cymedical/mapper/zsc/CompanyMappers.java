@@ -21,4 +21,6 @@ public interface CompanyMappers {
 	public Company findCompany(String company_id);
 	
 	public List<Company> selectCompany(Map<String, Object> map);
+
+	public int checkName(Map<String, Object> map);
 }
