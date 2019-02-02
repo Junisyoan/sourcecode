@@ -4,9 +4,18 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.jun.GroupMapper">
-<!-- 插入导检表 -->
+
+<!-- 更新表信息 -->
+	<update id="updateGroupInfo">
+		update tb_group set pamount=#{pnum}, totalmoney=#{price} where file_id = #{fid}
+	</update>
+<!-- 查询团检表 -->
+	<select id="queryGroupByFileId" parameterType="int" resultType="xyz.cymedical.entity.jun.Group">
+		select * from tb_group where file_id = #{fid}
+	</select>
+<!-- 生成团检表 -->
 	<insert id="insert">
-		insert into tb_group(company_id,pamount,time)
-		values(#{cid},#{pnum},#{time})
+		insert into tb_group(company_id,file_id)
+		values(#{cid},#{fid})
 	</insert>
 </mapper>
