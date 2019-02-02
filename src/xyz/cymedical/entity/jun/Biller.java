@@ -11,18 +11,21 @@ public class Biller {
 
 	private int biller_id;			//记账表id
 	private int group_id;			//团检表id
-	private double totalMoney;		//总金额
 	private String bstate;			//是否结算
+	private double totalMoney;		//总金额
+	private String btime;			//结算时间
 	public Biller() {
 		super();
 	}
-	public Biller(int biller_id, int group_id, double totalMoney, String bstate) {
+	public Biller(int biller_id, int group_id, String bstate, double totalMoney, String btime) {
 		super();
 		this.biller_id = biller_id;
 		this.group_id = group_id;
-		this.totalMoney = totalMoney;
 		this.bstate = bstate;
+		this.totalMoney = totalMoney;
+		this.btime = btime;
 	}
+	
 	public int getBiller_id() {
 		return biller_id;
 	}
@@ -35,21 +38,27 @@ public class Biller {
 	public void setGroup_id(int group_id) {
 		this.group_id = group_id;
 	}
-	public double getTotalMoney() {
-		return totalMoney;
-	}
-	public void setTotalMoney(double totalMoney) {
-		this.totalMoney = totalMoney;
-	}
 	public String getBstate() {
 		return bstate;
 	}
 	public void setBstate(String bstate) {
 		this.bstate = bstate;
 	}
+	public double getTotalMoney() {
+		return totalMoney;
+	}
+	public void setTotalMoney(double totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+	public String getBtime() {
+		return btime;
+	}
+	public void setBtime(String btime) {
+		this.btime = btime;
+	}
 	@Override
 	public String toString() {
-		return "Biller [biller_id=" + biller_id + ", group_id=" + group_id + ", totalMoney=" + totalMoney + ", bstate="
-				+ bstate + "]";
+		return "Biller [biller_id=" + biller_id + ", group_id=" + group_id + ", bstate=" + bstate + ", totalMoney="
+				+ totalMoney + ", btime=" + btime + "]";
 	}
 }
