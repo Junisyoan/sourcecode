@@ -26,14 +26,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
+import xyz.cymedical.biz.ctx.PatientBiz;
+import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.biz.jun.GroupBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
+import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.CompanyFile;
+import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -62,6 +67,12 @@ public class UserHandle {
 	@Resource
 	private GroupBiz groupBiz;
 	
+	@Resource
+	private BillerBiz billerBiz;
+	
+	@Resource
+	private PatientBiz patientBiz;
+	
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
 	
@@ -70,8 +81,24 @@ public class UserHandle {
 	 */
 	@RequestMapping(value="/allOpen.handle",method=RequestMethod.POST)
 	public String allOpen(HttpServletResponse response,HttpServletRequest request,String fid) {
+		
 		response.setCharacterEncoding("utf-8");
+		//取得文件信息
+		companyFile = companyFileBiz.queryFile(fid);
+		//获得公司id
+//		int cid = companyFile.getCompany_id();
+		//查询团检表是否存在，不存在则是未通过审核
+		if (groupBiz.queryGroupByFileId(Integer.parseInt(fid))==null) {
+			try {
+				response.getWriter().print("团检表不存在");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 		@SuppressWarnings("unchecked")
+		//体检人员列表
 		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
 		//获取所有人的套餐数量
 		HashMap<String, Integer> map = new HashMap<>();
@@ -93,6 +120,7 @@ public class UserHandle {
 		
 		//套餐信息
 		Combo combo = null;
+		List<Combo> comboList = new ArrayList<>();
 		//套餐数量
 		int iComboNum = 0;
 		//计算套餐价格
@@ -101,6 +129,10 @@ public class UserHandle {
 			if (map.keySet().iterator().hasNext()) {
 				//取得套餐价格
 				combo = nurseBiz.queryComboByName(map.keySet().iterator().next());
+				//如果套餐不存在，就添加进列表，存在则不添加
+				if (!comboList.contains(combo)) {
+					comboList.add(combo);
+				}
 				//套餐数量
 				iComboNum = map.get(map.keySet().iterator().next());
 				//套餐价格
@@ -110,21 +142,73 @@ public class UserHandle {
 		
 		System.out.println("总价："+price);
 		
-		//扣除费用
 		try {
+			//修改团检表
+			boolean isSuccess = groupBiz.updateGroupInfo(Integer.parseInt(fid), patientList.size(), price);
+			if (isSuccess) {
+				System.out.println("修改团检表成功");
+			}else {
+				System.out.println("修改团检表失败");
+				response.getWriter().print("团检表生成失败");
+				return null;
+			}
+			//扣除费用
 			switch (nurseBiz.deductDeposit(patientList.get(0).getCompany_id(), price)) {
 			case "扣除成功":
+				System.out.println("扣除成功");
+				//当天时间
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String strTime = sdf.format(System.currentTimeMillis());
+				//先插入日志
 				logCompanyBiz.insertLog(
 						patientList.get(0).getCompany_id(), 
-						"开单结算", 
+						"体检结算", 
 						String.valueOf(price), 
-						new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+						strTime);
+				//生成记账表和批次，批次就是当天的日期
+				sdf.applyPattern("yyyyMMdd");
+				String strBatch = sdf.format(System.currentTimeMillis());	//批次
+				//获得团检表信息
+				Group group = groupBiz.queryGroupByFileId(Integer.parseInt(fid));
+				System.out.println(group);
+				isSuccess = billerBiz.insertBiller(group.getGroup_id(), "已结算", strBatch, strTime);
+				if (isSuccess) {
+					System.out.println("生成记账表");
+					
+					//修改体检人员信息列表
+					for(int i =0;i<patientList.size();i++) {
+						for(int j=0;j<comboList.size();j++) {
+							//如果两个相等，就加入套餐id
+							if (patientList.get(i).getComboName().equals(comboList.get(j).getName())) {
+								patientList.get(i).setCombo_id(comboList.get(j).getCombo_id());
+								//顺便生成条形码
+								String jbarCode	 = BarCodeTools.randomNumStr(13);
+								patientList.get(i).setCode(jbarCode);
+							}
+						}
+					}
+					
+					//插入体检人员信息
+					if(patientBiz.insertByBatch(patientList)) {
+						System.out.println("体检人员信息更新成功");
+					}else {
+						System.out.println("体检人员信息更新失败");
+					}
+					
+					//查询记账表
+					Biller biller = billerBiz.queryBiller(group.getGroup_id(), strTime);
+					System.out.println(biller);
+					//插入记账病人关系表
+					isSuccess = nurseBiz.insertRelation(biller.getBiller_id(), patientList);
+					if (isSuccess) {
+						System.out.println("关系表插入成功");
+					}
+					response.getWriter().print("已生成导检单");
+				}else {
+					System.out.println("记账表生成失败");
+					response.getWriter().print("生成导检单失败");
+				}
 				
-				//生成团检表
-				groupBiz.insert(patientList.get(0).getCompany_id(), patientList.size(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
-				
-				
-				response.getWriter().print("已生成导检单");
 				break;
 			case "扣除失败":
 				response.getWriter().print("费用扣除失败，请联系管理员！");
@@ -145,6 +229,7 @@ public class UserHandle {
 	/*
 	 * 添加体检人员
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
 	public ModelAndView addPatient(HttpServletRequest request, HttpServletResponse response, Patient patient) {
 		System.out.println(patient);
@@ -164,13 +249,12 @@ public class UserHandle {
 	}
 	
 	/*
-	 * 导入体检人员，开单
+	 * 导入体检人员
 	 */
 	@RequestMapping(value="/importFile.handle",method = RequestMethod.GET)
 	public ModelAndView importFile(HttpServletRequest request, String file_id) {
 		//得到文件信息
 		companyFile = companyFileBiz.queryFile(file_id);
-		
 		//得到文件
 		File cfile = new File(companyFile.getFpath());
 		System.out.println(cfile.getName());
@@ -240,7 +324,6 @@ public class UserHandle {
 								dataList.get(1), // 性别
 								dataList.get(2), // 年龄
 								dataList.get(3), // 身份证号
-//												code, 					//条形码
 								"-1", dataList.get(4), // 电话号码
 								"-1", dataList.get(5) // 套餐名
 						));
@@ -287,6 +370,17 @@ public class UserHandle {
 		response.setCharacterEncoding("utf-8");
 		try {
 			if (companyFileBiz.updateFileState(Integer.parseInt(fid))) {
+				//获得文件具体信息
+				companyFile = companyFileBiz.queryFile(fid);
+				//得到公司id
+				int cid = companyFile.getCompany_id();
+				//创建团检表
+				if(groupBiz.createGroup(cid, Integer.parseInt(fid))){
+					System.out.println("创建团检表成功");
+				}else {
+					System.out.println("创建团检表失败");
+				}
+				
 				response.getWriter().print("审核通过");
 			} else {
 				response.getWriter().print("审核失败，请联系管理员");
@@ -378,7 +472,6 @@ public class UserHandle {
 										dataList.get(1),		//性别
 										dataList.get(2), 		//年龄
 										dataList.get(3), 		//身份证号
-//										code, 					//条形码
 										"-1",					
 										dataList.get(4), 		//电话号码
 										"-1",
