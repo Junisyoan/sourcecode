@@ -1,5 +1,7 @@
 package xyz.cymedical.biz.imp.jun;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -22,13 +24,38 @@ public class BillerBizImpl extends BaseImpl implements BillerBiz {
 	private BillerMapper billerMapper;
 	
 	@Override
-	public boolean insertBiller(int gid, String bstate, String batch, String btime) {
-		return billerMapper.insertBiller(gid, bstate, batch, btime);
+	public boolean insertBiller(int gid, String bstate, String batch,float price) {
+		return billerMapper.insertBiller(gid, bstate, batch,price);
 	}
 
 	@Override
-	public Biller queryBiller(int gid, String time) {
-		return billerMapper.queryBiller(gid, time);
+	public Biller queryBiller(int gid, String batch) {
+		return billerMapper.queryBiller(gid, batch);
+	}
+
+	@Override
+	public boolean delBiller(String bid) {
+		return billerMapper.delBiller(bid);
+	}
+
+	@Override
+	public boolean payBiller(String bid,String bstate, String btime) {
+		return billerMapper.payBiller(bid, bstate, btime);
+	}
+
+	@Override
+	public List<Biller> queryBillerList(String bstate) {
+		return billerMapper.queryBillerList(bstate);
+	}
+
+	@Override
+	public List<Biller> queryBillerListByCreate(String bcreat) {
+		return billerMapper.queryBillerListByCreate(bcreat);
+	}
+
+	@Override
+	public boolean updateBillerCreate(String bid) {
+		return billerMapper.updateBillerCreate(bid);
 	}
 
 }
