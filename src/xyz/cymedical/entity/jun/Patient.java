@@ -27,8 +27,17 @@ public class Patient {
 		super();
 	}
 	
-	public Patient(int paitent_id, int company_id, int combo_id, String name, String sex, String age, String iD,
-			String code, String phone, String check_num, String comboName) {
+	public Patient(int paitent_id, 
+			int company_id, 
+			int combo_id, 
+			String name, 
+			String sex, 
+			String age, 
+			String iD,
+			String code, 
+			String phone, 
+			String check_num, 
+			String comboName) {
 		super();
 		this.paitent_id = paitent_id;
 		this.company_id = company_id;
