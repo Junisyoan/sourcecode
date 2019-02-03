@@ -14,10 +14,6 @@
 		</foreach>
 	</insert>
 
-<!-- 扣除体检费用 -->
-	<update id="deductDeposit" parameterType="String">
-		update tb_company set deposit=#{price} where company_id = #{company_id}
-	</update>
 <!-- 套餐信息 -->
 	<select id="queryComboByName" parameterType="String" resultType="xyz.cymedical.entity.xin.Combo">
 		select * from tb_combo where name = #{comboName}
