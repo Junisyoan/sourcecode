@@ -25,6 +25,15 @@ public interface CompanyMapper {
 	 */
 	public boolean delFile(String file_id);
 	
+	/**
+	 * 扣除体检费用
+	 * @param company_id 公司id
+	 * @param price      总价格
+	 * @return 是否扣除成功
+	 */
+	public boolean deductDeposit(
+			@Param("company_id")String company_id,
+			@Param("price")String price);
 	
 	//query
 	/**
@@ -77,12 +86,15 @@ public interface CompanyMapper {
 	public Company queryCompanyByAccount(String account);
 	
 	//update
+	
 	/**
 	 * 充值
 	 * @param deposit	金额
 	 * @return	是否充值成功
 	 */
-	public boolean updateDeposit(@Param("deposit")float deposit,@Param("company_id")int company_id);
+	public boolean updateDeposit(
+			@Param("deposit")float deposit,
+			@Param("company_id")int company_id);
 	
 	//insert
 	
