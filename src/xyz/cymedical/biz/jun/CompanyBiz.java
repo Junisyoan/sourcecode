@@ -13,6 +13,14 @@ import xyz.cymedical.entity.jun.Company;
  */
 
 public interface CompanyBiz {
+	
+	
+	/**
+	 * 扣除公司费用
+	 * @param price	价格
+	 * @return	是否扣除成功
+	 */
+	public String deductDeposit(int company_id,float price);
 
 	/**
 	 * 查询公司信息
