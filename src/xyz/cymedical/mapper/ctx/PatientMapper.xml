@@ -4,7 +4,15 @@
 
 <mapper namespace="xyz.cymedical.mapper.ctx.PatientMapper">
 
-
+<!-- 更新病人信息 -->
+<!-- 	<update id="updataPatient" parameterType="xyz.cymedical.entity.jun.Patient"> -->
+<!-- 		update tb_patient set  -->
+<!-- 	</update> -->
+<!-- 插入病人，返回自增id -->
+	<insert id="insertPatient" useGeneratedKeys="true" keyProperty="paitent_id" parameterType="xyz.cymedical.entity.jun.Patient">
+		insert into tb_patient(company_id,combo_id,name,sex,age,ID,code,phone,check_num)
+		values(#{company_id},#{combo_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})	
+	</insert>
 <!-- 批量插入 -->
 	<insert id="insertByBatch" parameterType="java.util.List">
 		insert into tb_patient(company_id,combo_id,name,sex,age,ID,code,phone)
