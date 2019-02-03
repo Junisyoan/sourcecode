@@ -10,6 +10,26 @@ import xyz.cymedical.entity.jun.Patient;
 @Repository
 public interface PatientMapper {
 
+	/**
+	 * 插入体检人员
+	 * @param patient	体检人员信息
+	 * @return	是否插入成功
+	 */
+	public boolean insertPatient(Patient patient);
+	
+	/**
+	 * 更新体检人员信息
+	 * @param patient	体检人员信息
+	 * @return	是否更改成功
+	 */
+//	public boolean updataPatient(Patient patient);
+	
+	/**
+	 * 查询体检人员
+	 * @param IDcard	身份证
+	 * @return	是否存在
+	 */
+	public Patient queryPatient(String IDcard);
 	
 	/**
 	 * 	批量插入数据
