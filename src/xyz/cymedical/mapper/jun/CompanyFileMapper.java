@@ -18,6 +18,13 @@ import xyz.cymedical.entity.jun.CompanyFile;
 public interface CompanyFileMapper {
 	
 	/**
+	 * 通过账单id找到文件id
+	 * @param bid	账单id
+	 * @return	文件信息
+	 */
+	public CompanyFile queryFileByBillerId(String bid);
+	
+	/**
 	 * 查询通过审核的文件列表
 	 * @return	文件列表
 	 */
