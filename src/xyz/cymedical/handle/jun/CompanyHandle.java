@@ -24,10 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.ctx.PatientBiz;
+import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
+import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.tools.jun.ResponseTools;
@@ -52,7 +54,8 @@ public class CompanyHandle {
 	private ComboCheckBiz comboCheckBiz;//套餐业务
 	@Resource
 	private LogCompanyBiz logCompanyBiz;//日志业务
-	
+	@Resource
+	private BillerBiz billerBiz;//账单业务
 	
 	private ModelAndView modelAndView; // 视图和模型
 	private Company company; // 公司信息
@@ -61,6 +64,80 @@ public class CompanyHandle {
 	public CompanyHandle() {
 	}
 
+	
+	/*
+	 * 获取已结算账单
+	 */
+	@RequestMapping(value="/getBillerHasPay.handle",method=RequestMethod.GET)
+	public ModelAndView getBillerHasPay(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("查询已结算账单");
+		List<Biller> billerList = billerBiz.queryBillerList("已结算");
+		System.out.println(billerList);
+		modelAndView = new ModelAndView("WEB-INF/user_admin/biller_list_haspay");
+		modelAndView.addObject("billerList", billerList);
+		return modelAndView;
+	}
+	
+	
+	/*
+	 * 结算
+	 */
+	@RequestMapping(value="/payBiller.handle",method=RequestMethod.POST)
+	public String payBiller(
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			String bid,
+			String totalmoney) {
+		System.out.println("结算账单："+bid+"费用："+totalmoney);
+		String btime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
+		company =(Company) request.getSession().getAttribute("userCompany");
+		//扣除费用
+		try {
+			switch (companyBiz.deductDeposit(company.getCompany_id(), Float.parseFloat(totalmoney))) {
+			case "扣除成功":
+				//先插入日志
+				logCompanyBiz.insertLog(
+						company.getCompany_id(), 
+						"体检结算", 
+						String.valueOf(totalmoney), 
+						btime);
+				if (billerBiz.payBiller(bid, "已结算", btime)) {
+					System.out.println("结算成功");
+					response.getWriter().print("1");
+				} else {
+					System.out.println("结算失败");
+					response.getWriter().print("0");
+				}
+				break;
+			case "扣除失败":
+				response.getWriter().print("-1");
+				break;
+			case "余额不足":
+				response.getWriter().print("-2");
+				break;
+			default:
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/*
+	 * 获取未结算的账单
+	 */
+	@RequestMapping(value="/getBillerNoPay.handle",method=RequestMethod.GET)
+	public ModelAndView getBillerNoPay(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("查询未结算账单");
+		List<Biller> billerList = billerBiz.queryBillerList("未结算");
+		System.out.println(billerList);
+		modelAndView = new ModelAndView("WEB-INF/user_admin/biller_list_nopay");
+		modelAndView.addObject("billerList", billerList);
+		return modelAndView;
+		
+	}
+	
 	
 	/*
 	 * 充值
