@@ -5,6 +5,11 @@
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyMapper">
 
+
+<!-- 扣除体检费用 -->
+	<update id="deductDeposit" parameterType="String">
+		update tb_company set deposit=#{price} where company_id = #{company_id}
+	</update>
 <!-- 充值 -->
 	<update id="updateDeposit">
 		update tb_company set deposit = #{deposit} where company_id = #{company_id}
@@ -14,14 +19,17 @@
 	<select id="queryDepositByCompanyId" parameterType="int" resultType="float">
 		select deposit from tb_company where company_id = #{id}
 	</select>
+	
 <!-- 查询公司信息 -->
 	<select id="queryCompanyById" parameterType="int" resultType="xyz.cymedical.entity.jun.Company">
 		select * from tb_company where company_id = #{id}
 	</select>
+	
 <!-- 查询资金明细列表 -->
 	<select id="queryDepositList" resultType="xyz.cymedical.entity.ctx.LogCompany">
 		select * from tb_log_company where company_id = #{company_id} order by time desc
 	</select>
+	
 <!-- 删除关系表 -->
 	<delete id="delFile" parameterType="String">
 		delete from tb_file_group where file_id = #{file_id}
@@ -36,14 +44,17 @@
 	<select id="queryCompanyByTel" parameterType="String" resultType="xyz.cymedical.entity.jun.Company">
 		select * from tb_company where tel=#{tel}
 	</select>
+	
 <!-- 按名字查找公司 -->
 	<select id="queryCompanyByName" parameterType="xyz.cymedical.entity.jun.Company" resultType="xyz.cymedical.entity.jun.Company">
 		select * from tb_company where name=#{name}
 	</select>
+	
 <!-- 按账户查找公司 -->
 	<select id="queryCompanyByAccount" parameterType="String" resultType="xyz.cymedical.entity.jun.Company">
 		select * from tb_company where account=#{account}
 	</select>
+	
 <!-- 注册公司 -->
 	<insert id="insertCompany" parameterType="xyz.cymedical.entity.jun.Company">
 		insert into tb_company(name,account,pwd,tel,address,people,phone,cstate) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{cstate})
@@ -53,4 +64,5 @@
 	<select id="queryByAccount" parameterType="String" resultType="xyz.cymedical.entity.jun.Company">
 		select * from tb_company where account=#{account}
 	</select>
+	
 </mapper> 
