@@ -3,14 +3,44 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.jun.BillerMapper">
+
+<!-- 修改记账表为开单 -->
+	<update id="updateBillerCreate" parameterType="String">
+		update tb_biller set bcreate='已开单' where biller_id = #{bid}
+	</update>
+<!-- 查询未开单账单 -->
+	<select id="queryBillerListByCreate" parameterType="String" resultType="xyz.cymedical.entity.jun.Biller">
+		select b.*,c.name from (select * from tb_biller where bcreate =#{bcreate} )b 
+		left join tb_group g 
+		on b.group_id = g.group_id 
+		left join tb_company c
+		on g.company_id = c.company_id
+	</select>
+<!-- 查询账单 -->
+	<select id="queryBillerList" resultType="xyz.cymedical.entity.jun.Biller">
+		select b.*,c.name from (select * from tb_biller where bstate =#{bstate} )b 
+		left join tb_group g 
+		on b.group_id = g.group_id 
+		left join tb_company c
+		on g.company_id = c.company_id
+	</select>
+
+<!-- 结账 -->
+	<update id="payBiller">
+		update tb_biller set bstate=#{bstate},btime=#{btime},bcreate='未开单' where biller_id = #{bid}
+	</update>
+<!-- 删除未结算账单 -->
+	<delete id="delBiller">
+		delete from tb_biller where biller_id = #{bid}
+	</delete>
 <!-- 查询记账表 -->
 	<select id="queryBiller" resultType="xyz.cymedical.entity.jun.Biller">
-		select * from tb_biller where group_id = #{gid} and btime = #{time}
+		select * from tb_biller where group_id = #{gid} and batch = #{batch}
 	</select>
 <!-- 生成记账表 -->
 	<insert id="insertBiller">
-		insert into tb_biller(group_id,bstate,batch,btime)
-		values(#{gid},#{bstate},#{batch},#{btime})
+		insert into tb_biller(group_id,bstate,batch,totalmoney)
+		values(#{gid},#{bstate},#{batch},#{price})
 	</insert>
 
 </mapper>
