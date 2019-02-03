@@ -24,12 +24,7 @@ public interface NurseBiz {
 	 */
 	public boolean insertRelation(int bid, List<Patient> pList);
 	
-	/**
-	 * 扣除公司费用
-	 * @param price	价格
-	 * @return	是否扣除成功
-	 */
-	public String deductDeposit(int company_id,float price);
+	
 	
 	/**
 	 * 查询套餐信息
