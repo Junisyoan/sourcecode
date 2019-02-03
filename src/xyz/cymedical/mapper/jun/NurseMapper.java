@@ -27,19 +27,10 @@ public interface NurseMapper {
 	 * @param pList
 	 * @return
 	 */
-	public int insertBatchRelation(@Param("bid")int bid, @Param("pList")List<Patient> pList);
+	public int insertBatchRelation(
+			@Param("bid")int bid, 
+			@Param("pList")List<Patient> pList);
 
-	//delete
-	/**
-	 * 扣除体检费用
-	 * @param company_id	公司id
-	 * @param price	总价格
-	 * @return	是否扣除成功
-	 */
-	public boolean deductDeposit(@Param("company_id")String company_id,@Param("price")String price);
-	
-	
-	
 	//query
 	/**
 	 * 查询套餐
