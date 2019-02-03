@@ -102,14 +102,14 @@
 								name="<%=path %>nurse/getFileList.handle" title="团检表列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检文件列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>已到期询价项目</a></li>
+								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>未结算账单</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="暂存项目.html" title="暂存项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>暂存项目</a></li>
+								name="<%=path %>nurse/getNoCreateList.handle" title="未开单列表" class="iframeurl"><i
+									class="icon-double-angle-right"></i>未开单记账表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="模板维护.html" title="模板维护" class="iframeurl"><i
-									class="icon-double-angle-right"></i>模板维护</a></li>
+								name="<%=path %>nurse/getCreateList.handle" title="已开单列表" class="iframeurl"><i
+									class="icon-double-angle-right"></i>已开单列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="待响应询价.html" title="待响应询价" class="iframeurl"><i
 									class="icon-double-angle-right"></i>（权限）待响应询价</a></li>
