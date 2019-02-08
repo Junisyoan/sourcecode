@@ -109,6 +109,17 @@ public class BriefHandle {
 			return mav;
 
 		}
+		
+		
+		
+		// 跳转至总结
+		@RequestMapping(value = "/tosummarize.handle")
+		public ModelAndView Tosummarize() {
+
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("WEB-INF/doctor.xin/summarize");
+			return mav;
+		}
 	
 
 	
