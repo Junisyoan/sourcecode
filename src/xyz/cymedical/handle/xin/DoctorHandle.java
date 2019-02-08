@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.xin.DoctorBiz;
 
+//单检医生
 @Controller
 @RequestMapping("/doctor")
 public class DoctorHandle {
