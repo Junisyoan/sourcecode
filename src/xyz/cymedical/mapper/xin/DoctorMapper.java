@@ -29,4 +29,7 @@ public interface DoctorMapper {
 
 	//项目细项
 	public List<Map<String, Object>> findMyDetail(int projectid,int patientid);
+
+	//获取条码对应病人所有小结
+	public List<Map<String, Object>> findAllDetail(String onecode);
 }
