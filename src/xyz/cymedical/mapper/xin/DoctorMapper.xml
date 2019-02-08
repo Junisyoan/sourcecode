@@ -14,7 +14,7 @@
 		where
 		a.combo_id=b.combo_id and b.project_id=c.project_id and
 		d.project_id=c.project_id and c.param_id=e.param_id
-		and a.code=#{onecode }
+		and a.code=#{onecode }  order by e.name
 	</select>
 
 	<select id="findMyDetail" parameterType="java.lang.Integer"
@@ -25,13 +25,22 @@
 		and b.project_id=#{0 } and a.patient_id=#{1 }
 	</select>
 
+	<select id="findAllDetail" parameterType="String"
+		resultType="java.util.HashMap">
+		select  a.*,b.project_id proid,c.* from tb_brief a,tb_detail_project b,tb_detail c,tb_patient d
+		where a.detail_id=b.detail_id and time=
+		(SELECT MAX(time) FROM `tb_group` ) and b.detail_id=c.detail_id
+		and a.patient_id=d.patient_id and d.code=#{onecode } order by c.type desc
+	</select>
+
+
 	<update id="receive" parameterType="java.lang.Integer">
 		update
 		tb_patient_project set
 		state ='已接收' where patient_project_id=#{patient_project_id }
 	</update>
 
-
+	
 
 
 </mapper> 
