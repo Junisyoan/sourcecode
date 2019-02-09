@@ -33,4 +33,10 @@ public class TbPowerBizImp implements TbPowerBiz{
 		return tbPowerMapper.addPower(tb_power);
 	}
 
+	@Override
+	public int upPower(Tb_power tbpower) {
+		// TODO Auto-generated method stub
+		return tbPowerMapper.upPower(tbpower);
+	}
+
 }
