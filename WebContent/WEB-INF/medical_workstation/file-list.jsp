@@ -30,6 +30,7 @@
 				<thead>
 					<tr>
 						<th>序号</th>
+						<th>公司</th>
 						<th>文件名</th>
 						<th>文件大小</th>
 						<th>上传日期</th>
@@ -42,6 +43,7 @@
 						<tr>
 							<td>${s.count}</td>
 							<td>${l.name}</td>
+							<td>${l.fname}</td>
 							<td>${l.fsize}</td>
 							<td>${l.ftime}</td>
 							<td>${l.cstate }</td>

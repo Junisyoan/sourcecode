@@ -61,9 +61,9 @@
 							<td>${s.index + 1}</th>
 							<td>${p.n1}</th>
 							<td>${p.time}</th>
-							<td><a href="<%=path%>patient/showmessage.handle">查看</a></th>
-							<td><a href="">查看</a></th>
-							<td><a href="">查看</a></th>
+							<td><a href="<%=path%>patient/showmessage.handle?name=${p.n1}&time=${p.time}">查看</a></th>
+							<td><a href="<%=path%>patient/showproject.handle?name=${p.n1}&time=${p.time}">查看</a></th>
+							<td><a href="<%=path%>patient/showbrief.handle?name=${p.n1}&time=${p.time}">查看</a></th>
 							<td><a href="">查看</a></th>
 							<td><a href="">查看</a></th>
 						</tr>

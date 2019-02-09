@@ -2,21 +2,21 @@ package xyz.cymedical.entity.zsc;
 
 import java.util.List;
 
-import xyz.cymedical.entity.yjn.Param;
+import xyz.cymedical.entity.yjn.Parameter;
 
 public class Project {
 
 	private int project_id;
 	private String name;
 	private String price;
-	private Param param;
+	private Parameter param;
 	private List<Detail> details;
 
 	public Project() {
 		super();
 	}
 
-	public Project(int project_id, String name, String price, Param param, List<Detail> details) {
+	public Project(int project_id, String name, String price, Parameter param, List<Detail> details) {
 		super();
 		this.project_id = project_id;
 		this.name = name;
@@ -31,11 +31,11 @@ public class Project {
 				+ ", details=" + details + "]";
 	}
 
-	public Param getParam() {
+	public Parameter getParam() {
 		return param;
 	}
 
-	public void setParam(Param param) {
+	public void setParam(Parameter param) {
 		this.param = param;
 	}
 

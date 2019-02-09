@@ -36,6 +36,12 @@ public class DoctorBizImpl  implements DoctorBiz {
 		return doctorMapper.findMyDetail(projectid,patientid);
 	}
 
+	@Override
+	public List<Map<String, Object>> findAllDetail(String onecode) {
+		// TODO Auto-generated method stub
+		return doctorMapper.findAllDetail(onecode);
+	}
+
 
 	
 

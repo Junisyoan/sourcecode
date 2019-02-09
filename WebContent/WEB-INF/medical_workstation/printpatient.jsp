@@ -80,18 +80,101 @@ input {
 				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
+				<p>&nbsp;</p>
+				<p style="margin-left: 90px;">尊敬的：${p.n1}</p>
+				<p style="margin-left: 120px;">感谢你来到XXXXXXXX进行健康体检！</p>
+				<p style="margin-left: 120px;">为了增加您对健康体检的认识，我们在此特别向您说明，健康体检检查的目的在于及时的了解自身的健康情况，提</p>
+				<p style="margin-left: 90px;">高健康环保意识，如果此次检查在正常范围内，只表示您选择的体检项目所反映的身体健康情况，由于体检手段及项目</p>
+				<p style="margin-left: 90px;">所限，并不能完全排除身体潜在疾病，若有疾病症状出现，请及时到医院就医。</p>
+				<p style="margin-left: 120px;">"健康是人生最宝贵的"。不良的生活习惯和行为会损坏您的健康，我们真诚希望您保持科学健康的生活方式，定期</p>
+				<p style="margin-left: 90px;">
+					接受健康检查，在您最需要的时候请随时与我们联系，欢迎您再次光临XXXXXXXXXX。
+					<p style="margin-left: 120px;">
+						祝您，健康快乐！
+						<p>&nbsp;</p>
+			</form>
+			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
+				<div style="float: left; margin-left: 75px;">健康体检中心</div>
+				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<p>&nbsp;</p>
+				<hr style="width: 1200px;">
+				<div class="Manager_style">
+					<span class="title_name">体检项目列表</span>
+					<table class="table table-striped table-bordered table-hover"
+						id="item">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>体检人</th>
+								<th>科室</th>
+								<th>项目</th>
+								<th>体检时间</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${patientlist2}" var="p2" varStatus="s2">
+								<tr>
+									<th>${s2.index + 1}</th>
+									<th>${p2.n1}</th>
+									<th>${p2.n2}</th>
+									<th>${p2.n3}</th>
+									<th>${p2.time}</th>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</form>
+			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
+				<div style="float: left; margin-left: 75px;">健康体检中心</div>
+				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<p>&nbsp;</p>
+				<hr style="width: 1200px;">
 					<p>&nbsp;</p>
-					<p style="margin-left: 90px;">尊敬的：XXX</p>
-					<p style="margin-left: 120px;">感谢你来到XXXXXXXX进行健康体检！</p>
-					<p style="margin-left: 120px;">为了增加您对健康体检的认识，我们在此特别向您说明，健康体检检查的目的在于及时的了解自身的健康情况，提</p>
-					<p style="margin-left: 90px;">高健康环保意识，如果此次检查在正常范围内，只表示您选择的体检项目所反映的身体健康情况，由于体检手段及项目</p>
-					<p style="margin-left: 90px;">所限，并不能完全排除身体潜在疾病，若有疾病症状出现，请及时到医院就医。</p>
-					<p style="margin-left: 120px;">"健康是人生最宝贵的"。不良的生活习惯和行为会损坏您的健康，我们真诚希望您保持科学健康的生活方式，定期</p>
-					<p style="margin-left: 90px;">
-						接受健康检查，在您最需要的时候请随时与我们联系，欢迎您再次光临XXXXXXXXXX。
-						<p style="margin-left: 120px;">
-							祝您，健康快乐！
-							<p>&nbsp;</p>
+					<h2 style="margin-left: 80px;">生活健康保健</h2>
+					<p style="margin-left: 80px;">一、保持健康的生活方式</p>
+					<p style="margin-left: 130px;">(1)健康的饮食习惯：食物多样，谷类为主；适合吃季节性蔬菜；吃适量乳类、豆类制品；吃适量新鲜有鱗鱼、蛋、瘦肉，少吃肥肉和荤油；</p>
+					<p style="margin-left: 150px;">食量与活动量要平衡，监测体重，吃清淡少盐食物。</p>
+					<p style="margin-left: 130px;">(2)戒烟戒酒：不但要避免吸烟也要避免被动吸烟，不饮酒或饮少量红葡萄酒。</p>
+					<p style="margin-left: 130px;">(3)适量规律运动：能够预防很多慢性疾病，包括冠心病、高血压、糖尿病、骨质疏松等。</p>
+					<p style="margin-left: 130px;">(4)保持心理平衡：愉悦的心情更有益于健康。</p>
+			</form>
+			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
+				<div style="float: left; margin-left: 75px;">健康体检中心</div>
+				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<p>&nbsp;</p>
+				<hr style="width: 1200px;">
+				<div class="Manager_style">
+					<span class="title_name">体检小结信息</span>
+					<table class="table table-striped table-bordered table-hover"
+						id="item">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>体检人</th>
+								<th>项目</th>
+								<th>结果</th>
+								<th>单位</th>
+								<th>参考值</th>
+								<th>体检时间</th>
+								<th>提示</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
+								<tr>
+									<th>${s3.index + 1}</th>
+									<th>${p3.n1}</th>
+									<th>${p3.n2}</th>
+									<th>${p3.unit}</th>
+									<th>${p3.resulttext}</th>
+									<th>${p3.min}~${p3.max}</th>
+									<th>${gro.time}</th>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</form>
 		</c:if>
 	</c:forEach>

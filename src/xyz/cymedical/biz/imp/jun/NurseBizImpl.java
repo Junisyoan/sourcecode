@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
+import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 import xyz.cymedical.mapper.jun.CompanyMapper;
 import xyz.cymedical.mapper.jun.NurseMapper;
@@ -45,20 +46,15 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	}
 
 	@Override
-	public String deductDeposit(int company_id,float price) {
+	public boolean insertRelation(int bid, List<Patient> pList) {
 		
-		//先取出公司金额
-		double deposit = companyMapper.queryCompanyById(company_id).getDeposit();
-		
-		if (deposit-price>0) {
-			if (nurseMapper.deductDeposit(String.valueOf(company_id),String.valueOf(deposit-price))) {
-				return "扣除成功";
-			} else {
-				return "扣除失败";
-			}
+		int num = nurseMapper.insertBatchRelation(bid, pList);
+		System.out.println("执行结果："+pList.size()+"，"+num);
+		if (pList.size()==num) {
+			isUpdate=true;
 		} else {
-			return "余额不足";
+			isUpdate=false;
 		}
+		return isUpdate;
 	}
-
 }

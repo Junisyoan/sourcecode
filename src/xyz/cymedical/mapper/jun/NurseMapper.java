@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
+import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 
 /**
@@ -18,18 +19,18 @@ import xyz.cymedical.entity.xin.Combo;
 
 @Repository
 public interface NurseMapper {
-
-	//delete
+	
+	//insert
 	/**
-	 * 扣除体检费用
-	 * @param company_id	公司id
-	 * @param price	总价格
-	 * @return	是否扣除成功
+	 * 批量插入记账病人关系表
+	 * @param bid
+	 * @param pList
+	 * @return
 	 */
-	public boolean deductDeposit(@Param("company_id")String company_id,@Param("price")String price);
-	
-	
-	
+	public int insertBatchRelation(
+			@Param("bid")int bid, 
+			@Param("pList")List<Patient> pList);
+
 	//query
 	/**
 	 * 查询套餐

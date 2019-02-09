@@ -61,8 +61,8 @@
 	</div>
 	<div id="opera">
 		<div>
-			<button id="choosed" onclick="chooseOpen('${fid}');">选中开单</button>
-			<button id="all" onclick="allOpen('${fid}');">全部开单</button>
+			<button id="choosed" onclick="chooseOpen('${fid}');">本页选中生成账单</button>
+			<button id="all" onclick="allOpen('${fid}');">全部生成</button>
 		</div>
 	</div>
 	<!-- 弹出框 -->
@@ -105,7 +105,7 @@
 <script type="text/javascript">
 
 function allOpen(fid){
-	var s = confirm("确定全部开单吗？");
+	var s = confirm("确定全部生成吗？");
 	if(s){
 		$.ajax({
 			type:"post",
@@ -121,15 +121,30 @@ function allOpen(fid){
 	}
 }
 
-function chooseOpen(){
+function chooseOpen(fid){
 	var choosed = document.getElementsByName("openBill");
-	
+	var l = "";
 	for(var i=0;i<choosed.length;i++){
-		console.log('当前长度：'+choosed.length);
 		if(choosed[i].checked){
-			alert(choosed[i].value);
+			l=l+","+choosed[i].value;
 		}
 	}
+	if(l==""){
+		return;
+	}
+	l=l.substring(1,l.length);
+	$.ajax({
+		url:"<%=path%>nurse/chooseOpen.handle",
+		type:"post",
+		dataType:"text",
+		data:{data:l,fid:fid},
+		success:function(retData){
+			alert(retData);
+		},
+		error:function(){
+			alert("服务器无响应");
+		}
+	});
 }
 
 $(function(){

@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import xyz.cymedical.biz.jun.GroupBiz;
+import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.mapper.jun.GroupMapper;
 
 /**
@@ -21,8 +22,23 @@ public class GroupBizImpl extends BaseImpl implements GroupBiz {
 	private GroupMapper groupMapper;
 	
 	@Override
-	public boolean insert(int cid, int pnum, String time) {
-		return groupMapper.insert(cid, pnum, time);
+	public Group queryGroupByFileId(int fid) {
+		return groupMapper.queryGroupByFileId(fid);
+	}
+
+	@Override
+	public boolean updateGroupInfo(int fid, int pnum, float price) {
+		if (groupMapper.updateGroupInfo(fid, pnum, price)>0) {
+			isUpdate=true;
+		}else {
+			isUpdate=false;
+		}
+		return isUpdate;
+	}
+
+	@Override
+	public boolean createGroup(int cid, int fid) {
+		return groupMapper.insert(cid, fid);
 	}
 
 }

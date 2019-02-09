@@ -25,16 +25,16 @@
 		<div class="gys_style">
 			<div class="Manager_style">
 				<div class="title_name">参数查询</div>
-				<!-- 查询条码号 -->
-				<form method="post" action="<%=path%>patient/findpatient.handle">
+				<form method="post" action="<%=path%>param/searchparam.handle">
 					<ul class="search_content clearfix">
 						<li><label class="lf">参数ID<input name="param_id"
 								type="text" class="text_add" /></label> <label class="lf">上级参数ID<input
 								name="pid" type="text" class="text_add" />
-						</label> <label class="lf">参数名字<input name="time" type="name"
+						</label> <label class="lf">参数名字<input name="name" type="text"
 								class="text_add" /></label>
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-						</li>
+							<a href="<%=path%>param/showaddparam.handle"><button type="button" class="btn btn-primary"
+									class="btn_search">新增</button></a></li>
 					</ul>
 				</form>
 			</div>
@@ -50,7 +50,7 @@
 						<th>上级参数ID</th>
 						<th>参数名字</th>
 						<th>操作</th>
-						
+
 					</tr>
 				</thead>
 				<tbody>
@@ -60,7 +60,8 @@
 							<td>${p.param_id}</td>
 							<td>${p.pid}</td>
 							<td>${p.name}</td>
-							<td><a href="<%=path%>param/delLog.handle?log_id=${l.log_id}">删除</a></td>
+							<td><a
+								href="<%=path%>param/delparam.handle?param_id=${p.param_id}">删除</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

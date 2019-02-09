@@ -52,4 +52,9 @@ public class CompanyFileBizImpl extends BaseImpl implements CompanyFileBiz {
 		return companyFileMapper.queryPassFileList();
 	}
 
+	@Override
+	public CompanyFile queryFileByBillerId(String bid) {
+		return companyFileMapper.queryFileByBillerId(bid);
+	}
+
 }

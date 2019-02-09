@@ -38,7 +38,7 @@
 				<c:forEach items="${fileList}" var="f" varStatus="s">
 					<tr>
 						<td>${s.count}</td>
-						<td>${f.company_name}</td>
+						<td>${f.name}</td>
 						<td>${f.ftime}</td>
 						<td>${f.cstate}</td>
 						<td><a href='<%=path%>nurse/checkFile.handle?fid=${f.file_id}'>导入审核</a></td>

@@ -1,6 +1,5 @@
 package xyz.cymedical.handle.jun;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,24 +8,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jbarcode.JBarcode;
-import org.jbarcode.encode.EAN13Encoder;
-import org.jbarcode.paint.EAN13TextPainter;
-import org.jbarcode.paint.WidthCodedPainter;
-import org.jbarcode.util.ImageUtil;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,10 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.ctx.PatientBiz;
+import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
+import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.tools.jun.ResponseTools;
@@ -63,18 +54,90 @@ public class CompanyHandle {
 	private ComboCheckBiz comboCheckBiz;//套餐业务
 	@Resource
 	private LogCompanyBiz logCompanyBiz;//日志业务
-	
+	@Resource
+	private BillerBiz billerBiz;//账单业务
 	
 	private ModelAndView modelAndView; // 视图和模型
 	private Company company; // 公司信息
 	private List<CompanyFile> listFile; // 文件列表
 
-	private static Random numGen = new Random();
-	private static char[] numbers = ("0123456789").toCharArray();
-
 	public CompanyHandle() {
 	}
 
+	
+	/*
+	 * 获取已结算账单
+	 */
+	@RequestMapping(value="/getBillerHasPay.handle",method=RequestMethod.GET)
+	public ModelAndView getBillerHasPay(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("查询已结算账单");
+		List<Biller> billerList = billerBiz.queryBillerList("已结算");
+		System.out.println(billerList);
+		modelAndView = new ModelAndView("WEB-INF/user_admin/biller_list_haspay");
+		modelAndView.addObject("billerList", billerList);
+		return modelAndView;
+	}
+	
+	
+	/*
+	 * 结算
+	 */
+	@RequestMapping(value="/payBiller.handle",method=RequestMethod.POST)
+	public String payBiller(
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			String bid,
+			String totalmoney) {
+		System.out.println("结算账单："+bid+"费用："+totalmoney);
+		String btime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
+		company =(Company) request.getSession().getAttribute("userCompany");
+		//扣除费用
+		try {
+			switch (companyBiz.deductDeposit(company.getCompany_id(), Float.parseFloat(totalmoney))) {
+			case "扣除成功":
+				//先插入日志
+				logCompanyBiz.insertLog(
+						company.getCompany_id(), 
+						"体检结算", 
+						String.valueOf(totalmoney), 
+						btime);
+				if (billerBiz.payBiller(bid, "已结算", btime)) {
+					System.out.println("结算成功");
+					response.getWriter().print("1");
+				} else {
+					System.out.println("结算失败");
+					response.getWriter().print("0");
+				}
+				break;
+			case "扣除失败":
+				response.getWriter().print("-1");
+				break;
+			case "余额不足":
+				response.getWriter().print("-2");
+				break;
+			default:
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/*
+	 * 获取未结算的账单
+	 */
+	@RequestMapping(value="/getBillerNoPay.handle",method=RequestMethod.GET)
+	public ModelAndView getBillerNoPay(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("查询未结算账单");
+		List<Biller> billerList = billerBiz.queryBillerList("未结算");
+		System.out.println(billerList);
+		modelAndView = new ModelAndView("WEB-INF/user_admin/biller_list_nopay");
+		modelAndView.addObject("billerList", billerList);
+		return modelAndView;
+		
+	}
+	
 	
 	/*
 	 * 充值
@@ -386,79 +449,5 @@ public class CompanyHandle {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private static final String randomNumStr(int length) {
-		if (length < 1) {
-			return null;
-		}
-		char[] randBuffer = new char[length];
-		for (int i = 0; i < randBuffer.length; i++) {
-			randBuffer[i] = numbers[numGen.nextInt(9)];
-		}
-		return new String(randBuffer);
-	}
-
-	private static final String createBarCode(String savePath, String jbarCode, String imgFormat) {
-		try {
-			BufferedImage bi = null;
-			int len = jbarCode.length();
-			// 实例化JBarcode
-			// 这里三个参数，必要填写
-			JBarcode jbarcode13 = new JBarcode(EAN13Encoder.getInstance(), WidthCodedPainter.getInstance(),
-					EAN13TextPainter.getInstance());
-			// 获取到前12位
-			String barCode = jbarCode.substring(0, len - 1);
-			// 获取到校验位
-			String code = jbarCode.substring(len - 1, len);
-			String checkCode = jbarcode13.calcCheckSum(barCode);
-//			if (!code.equals(checkCode)) {
-//				return "EN-13 条形码最后一位校验码 不对，应该是： " + checkCode;
-//			}
-			
-			/*
-			 * 最重要的是这里的设置，如果明白了这里的设置就没有问题 如果是默认设置， 那么设置就是生成一般的条形码 如果不是默认 设置，那么就可以根据自己需要设置
-			 */
-			// 尺寸，面积，大小
-			jbarcode13.setXDimension(Double.valueOf(0.8).doubleValue());
-			// 条形码高度
-			jbarcode13.setBarHeight(Double.valueOf(30).doubleValue());
-			// 宽度率
-			jbarcode13.setWideRatio(Double.valueOf(20).doubleValue());
-			// 是否校验最后一位，默认是false
-			jbarcode13.setShowCheckDigit(true);
-			// 生成二维码
-			bi = jbarcode13.createBarcode(barCode);
-			// 定义图片名称
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
-			String imgName = sdf.format(new Date()) + "_" + jbarCode;
-			// 保存二维码图片
-			FileOutputStream fileOutputStream = null;
-			String imgPath = savePath + imgName + "." + imgFormat;
-			try {
-				try {
-					savePath = URLDecoder.decode(savePath, "UTF-8");
-				} catch (UnsupportedEncodingException uee) {
-					uee.printStackTrace();
-					savePath = "C://barcode//images//";
-				}
-				File dirFile = new File(savePath);
-
-				if (!dirFile.exists()) {
-					dirFile.mkdirs();
-				}
-				fileOutputStream = new FileOutputStream(imgPath);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-			ImageUtil.encodeAndWrite(bi, imgFormat, fileOutputStream, 96, 96);
-			fileOutputStream.close();
-			// 返回路径
-			return imgPath;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 }

@@ -81,7 +81,7 @@
 		<id property="project_id" column="project_id"/>
 		<result property="name" column="name"/>
 		<result property="price" column="price"/>
-		<association property="param" javaType="xyz.cymedical.entity.yjn.Param">
+		<association property="param" javaType="xyz.cymedical.entity.yjn.Parameter">
 			<id property="param_id" column="param_id"/>
 			<result property="name" column="paname"/>
 		</association>

@@ -5,12 +5,33 @@
 <mapper namespace="xyz.cymedical.mapper.yjn.ParamMapper">
 
 	<select id="findAllParam"
-		parameterType="xyz.cymedical.entity.yjn.Param"
-		resultType="xyz.cymedical.entity.yjn.Param">
+		parameterType="xyz.cymedical.entity.yjn.Parameter"
+		resultType="xyz.cymedical.entity.yjn.Parameter">
 		select * from tb_param
 	</select>
+
 	<delete id="delParam">
 		delete from tb_param where param_id = #{id}
 	</delete>
+
+	<select id="searchParam"
+		parameterType="xyz.cymedical.entity.yjn.Parameter"
+		resultType="java.util.HashMap">
+		select * from tb_param where 1 = 1
+		<if test="name != null and name != ''">
+			and name like '%${name}%'
+		</if>
+		<if test="param_id != null and param_id != ''">
+			and param_id = #{param_id}
+		</if>
+		<if test="pid != null and pid != ''">
+			and pid = #{pid}
+		</if>
+	</select>
+
+	<insert id="insertParam">
+		insert into tb_param(pid,name)
+		values(#{pid},#{name})
+	</insert>
 
 </mapper>

@@ -26,14 +26,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
+import xyz.cymedical.biz.ctx.PatientBiz;
+import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.biz.jun.GroupBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
+import xyz.cymedical.biz.zsc.ComboBiz;
+import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.CompanyFile;
+import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -62,16 +68,292 @@ public class UserHandle {
 	@Resource
 	private GroupBiz groupBiz;
 	
+	@Resource
+	private BillerBiz billerBiz;
+	
+	@Resource
+	private PatientBiz patientBiz;
+	
+	@Resource
+	private ComboBiz comboBiz;
+	
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
+	private boolean isSuccess;
 	
 	/*
-	 * 全部开单
+	 * 
+	 */
+	@RequestMapping(value="/getCreateList.handle",method=RequestMethod.GET)
+	public ModelAndView getCreateList(){
+		List<Biller> billerList = billerBiz.queryBillerListByCreate("已开单");
+		System.out.println("查询未开单列表："+billerList);
+		modelAndView = new ModelAndView("WEB-INF/medical_workstation/create-list");
+		modelAndView.addObject("billerList", billerList);
+		return modelAndView;
+	}
+	
+	/*
+	 * 账单生成导检单
+	 */
+	@RequestMapping(value="/createCheckList.handle",method=RequestMethod.POST)
+	public String createCheckList(
+			HttpServletResponse response,
+			HttpServletRequest request,
+			String bid) {
+		
+		response.setCharacterEncoding("utf-8");
+		//取得文件信息
+		companyFile = companyFileBiz.queryFileByBillerId(bid);
+		
+		//获取体检人员列表
+		List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
+		
+		try {
+			//插入病人
+			List<Patient> pList = patientBiz.insertByBatch(patientList);
+			
+			if (pList!=null) {
+				//创建关系表
+				if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)&&
+						billerBiz.updateBillerCreate(bid)) {
+					//修改记账表为开单
+					response.getWriter().print("1");
+				} else {
+					response.getWriter().print("0");
+				}
+			}else {
+				response.getWriter().print("0");
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/*
+	 * 获取未开单列表
+	 */
+	@RequestMapping(value="/getNoCreateList.handle",method=RequestMethod.GET)
+	public ModelAndView getNoCreateList() {
+		List<Biller> billerList = billerBiz.queryBillerListByCreate("未开单");
+		System.out.println("查询未开单列表："+billerList);
+		modelAndView = new ModelAndView("WEB-INF/medical_workstation/no-create-list");
+		modelAndView.addObject("billerList", billerList);
+		return modelAndView;
+	}
+	
+	/*
+	 * 删除未结算账单
+	 */
+	@RequestMapping(value="/delBiller.handle",method=RequestMethod.POST)
+	public String delBiller(String bid,HttpServletResponse response) {
+		System.out.println("删除账单id："+bid);
+		boolean isSuccess = billerBiz.delBiller(bid);
+		
+		try {
+			if (isSuccess) {
+				response.getWriter().print("1");
+			}else {
+				response.getWriter().print("0");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/*
+	 * 获取未结算的账单
+	 */
+	@RequestMapping(value="/getBillerNoPay.handle",method=RequestMethod.GET)
+	public ModelAndView getBillerNoPay(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("查询未结算账单");
+		List<Biller> billerList = billerBiz.queryBillerList("未结算");
+		System.out.println(billerList);
+		modelAndView = new ModelAndView("WEB-INF/medical_workstation/biller_list_nopay");
+		modelAndView.addObject("billerList", billerList);
+		return modelAndView;
+		
+	}
+	
+	
+	
+	
+	/*
+	 * 选中开单
+	 */
+//	@RequestMapping(value="/chooseOpen.handle",method=RequestMethod.POST)
+//	public String chooseOpen(
+//			HttpServletResponse response,
+//			HttpServletRequest request,
+//			String data,
+//			String fid) {
+//		System.out.println("选中开单的人员序号"+data);
+//		String [] strData = data.split(",");
+//		
+//		//人员列表
+//		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
+//		System.out.println("所有人员列表"+patientList);
+//		//获得选中人员
+//		List<Patient> chooseList = new ArrayList<>();
+//		for(int i =0;i<patientList.size();i++) {
+//			for(int j =0;j<strData.length;j++) {
+//				if (patientList.get(i).getPaitent_id()==Integer.parseInt(strData[j])) {
+//					chooseList.add(patientList.get(i));
+//					break;
+//				}
+//			}
+//		}
+//		System.out.println("选中的人员"+chooseList);
+//		
+//		//获取所有人的套餐数量
+//		HashMap<String, Integer> map = new HashMap<>();
+//		// 基本套餐数量一
+//		int iCombo = 1;
+//		// 计算套餐数量
+//		for (int i = 0; i < chooseList.size(); i++) {
+//			// 如果这个套餐不存在
+//			if (map.get(chooseList.get(i).getComboName()) == null) {
+//				// 放进去
+//				map.put(chooseList.get(i).getComboName(), iCombo);
+//			} else {
+//				// 套餐已经存在，取出，加一
+//				iCombo = map.get(chooseList.get(i).getComboName())+1;
+//				map.put(chooseList.get(i).getComboName(), iCombo);
+//			}
+//		}
+//		System.out.println("一共" + map.keySet().size() + "种套餐，套餐数量"+iCombo);
+//
+//		// 套餐信息
+//		Combo combo = null;
+//		List<Combo> comboList = new ArrayList<>();
+//		// 套餐数量
+//		int iComboNum = 0;
+//		// 计算套餐价格
+//		float price = 0.0f;
+//		for (int j = 0; j < map.keySet().size(); j++) {
+//			if (map.keySet().iterator().hasNext()) {
+//				// 取得套餐价格
+//				combo = nurseBiz.queryComboByName(map.keySet().iterator().next());
+//				// 如果套餐不存在，就添加进列表，存在则不添加
+//				if (!comboList.contains(combo)) {
+//					comboList.add(combo);
+//				}
+//				// 套餐数量
+//				iComboNum = map.get(map.keySet().iterator().next());
+//				// 套餐价格
+//				price += combo.getPrice() * iComboNum;
+//			}
+//		}
+//
+//		System.out.println("总价：" + price);
+//
+//		try {
+//			//修改团检表
+//			boolean isSuccess = groupBiz.updateGroupInfo(Integer.parseInt(fid), patientList.size(), price);
+//			if (isSuccess) {
+//				System.out.println("修改团检表成功");
+//			}else {
+//				System.out.println("修改团检表失败");
+//				response.getWriter().print("团检表生成失败");
+//				return null;
+//			}
+//			//扣除费用
+//			switch (nurseBiz.deductDeposit(patientList.get(0).getCompany_id(), price)) {
+//			case "扣除成功":
+//				System.out.println("扣除成功");
+//				//当天时间
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				String strTime = sdf.format(System.currentTimeMillis());
+//				//先插入日志
+//				logCompanyBiz.insertLog(
+//						patientList.get(0).getCompany_id(), 
+//						"体检结算", 
+//						String.valueOf(price), 
+//						strTime);
+//				//生成记账表和批次，批次就是当天的日期
+//				sdf.applyPattern("yyyyMMdd");
+//				String strBatch = sdf.format(System.currentTimeMillis());	//批次
+//				//获得团检表信息
+//				Group group = groupBiz.queryGroupByFileId(Integer.parseInt(fid));
+//				System.out.println(group);
+//				isSuccess = billerBiz.insertBiller(group.getGroup_id(), "已结算", strBatch,price);
+//				if (isSuccess) {
+//					System.out.println("生成记账表");
+//					
+//					//修改体检人员信息列表
+//					for(int i =0;i<patientList.size();i++) {
+//						for(int j=0;j<comboList.size();j++) {
+//							//如果两个相等，就加入套餐id
+//							if (patientList.get(i).getComboName().equals(comboList.get(j).getName())) {
+//								patientList.get(i).setCombo_id(comboList.get(j).getCombo_id());
+//								//顺便生成条形码
+//								String jbarCode	 = BarCodeTools.randomNumStr(13);
+//								patientList.get(i).setCode(jbarCode);
+//							}
+//						}
+//					}
+//					
+//					//插入体检人员信息
+//					if(patientBiz.insertByBatch(patientList)) {
+//						System.out.println("体检人员信息更新成功");
+//					}else {
+//						System.out.println("体检人员信息更新失败");
+//					}
+//					
+//					//查询记账表
+//					Biller biller = billerBiz.queryBiller(group.getGroup_id(), strTime);
+//					System.out.println(biller);
+//					//插入记账病人关系表
+//					isSuccess = nurseBiz.insertRelation(biller.getBiller_id(), patientList);
+//					if (isSuccess) {
+//						System.out.println("关系表插入成功");
+//					}
+//					response.getWriter().print("已生成导检单");
+//				}else {
+//					System.out.println("记账表生成失败");
+//					response.getWriter().print("生成导检单失败");
+//				}
+//				
+//				break;
+//			case "扣除失败":
+//				response.getWriter().print("费用扣除失败，请联系管理员！");
+//				break;
+//			case "余额不足":
+//				response.getWriter().print("余额不足，请联系用户！");
+//				break;
+//			default:
+//				break;
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+
+	/*
+	 * 全部生成账单
 	 */
 	@RequestMapping(value="/allOpen.handle",method=RequestMethod.POST)
 	public String allOpen(HttpServletResponse response,HttpServletRequest request,String fid) {
+		
 		response.setCharacterEncoding("utf-8");
+		//取得文件信息
+		companyFile = companyFileBiz.queryFile(fid);
+		//查询团检表是否存在，不存在则是未通过审核
+		if (groupBiz.queryGroupByFileId(Integer.parseInt(fid))==null) {
+			try {
+				response.getWriter().print("团检表不存在");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 		@SuppressWarnings("unchecked")
+		//体检人员列表
 		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
 		//获取所有人的套餐数量
 		HashMap<String, Integer> map = new HashMap<>();
@@ -85,7 +367,7 @@ public class UserHandle {
 				map.put(patientList.get(i).getComboName(), iCombo);
 			} else {
 				//套餐已经存在，取出，加一
-				iCombo+=map.get(patientList.get(i).getComboName());
+				iCombo=map.get(patientList.get(i).getComboName())+1;
 				map.put(patientList.get(i).getComboName(), iCombo);
 			}
 		}
@@ -93,6 +375,7 @@ public class UserHandle {
 		
 		//套餐信息
 		Combo combo = null;
+		List<Combo> comboList = new ArrayList<>();
 		//套餐数量
 		int iComboNum = 0;
 		//计算套餐价格
@@ -101,6 +384,10 @@ public class UserHandle {
 			if (map.keySet().iterator().hasNext()) {
 				//取得套餐价格
 				combo = nurseBiz.queryComboByName(map.keySet().iterator().next());
+				//如果套餐不存在，就添加进列表，存在则不添加
+				if (!comboList.contains(combo)) {
+					comboList.add(combo);
+				}
 				//套餐数量
 				iComboNum = map.get(map.keySet().iterator().next());
 				//套餐价格
@@ -110,31 +397,66 @@ public class UserHandle {
 		
 		System.out.println("总价："+price);
 		
-		//扣除费用
 		try {
-			switch (nurseBiz.deductDeposit(patientList.get(0).getCompany_id(), price)) {
-			case "扣除成功":
-				logCompanyBiz.insertLog(
-						patientList.get(0).getCompany_id(), 
-						"开单结算", 
-						String.valueOf(price), 
-						new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
-				
-				//生成团检表
-				groupBiz.insert(patientList.get(0).getCompany_id(), patientList.size(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
-				
-				
-				response.getWriter().print("已生成导检单");
-				break;
-			case "扣除失败":
-				response.getWriter().print("费用扣除失败，请联系管理员！");
-				break;
-			case "余额不足":
-				response.getWriter().print("余额不足，请联系用户！");
-				break;
-			default:
-				break;
+			//修改团检表
+			boolean isSuccess = groupBiz.updateGroupInfo(Integer.parseInt(fid), patientList.size(), price);
+			if (isSuccess) {
+				System.out.println("修改团检表成功");
+			}else {
+				System.out.println("修改团检表失败");
+				response.getWriter().print("团检表生成失败");
+				return null;
 			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			//当天时间
+//			String strTime = sdf.format(System.currentTimeMillis());
+			
+			//生成记账表和批次，批次就是当天的日期
+			sdf.applyPattern("yyyyMMddHHmmss");
+			String strBatch = sdf.format(System.currentTimeMillis());	//批次
+			
+			//获得团检表信息
+			Group group = groupBiz.queryGroupByFileId(Integer.parseInt(fid));
+			System.out.println(group);
+			isSuccess = billerBiz.insertBiller(group.getGroup_id(), "未结算", strBatch,price);
+			
+			if (isSuccess) {
+				System.out.println("生成记账表");
+				
+				//修改体检人员信息列表
+//				for(int i =0;i<patientList.size();i++) {
+//					for(int j=0;j<comboList.size();j++) {
+//						//如果两个相等，就加入套餐id
+//						if (patientList.get(i).getComboName().equals(comboList.get(j).getName())) {
+//							patientList.get(i).setCombo_id(comboList.get(j).getCombo_id());
+//							//顺便生成条形码
+//							String jbarCode	 = BarCodeTools.randomNumStr(13);
+//							patientList.get(i).setCode(jbarCode);
+//						}
+//					}
+//				}
+				
+				//插入体检人员信息
+//				if(patientBiz.insertByBatch(patientList)) {
+//					System.out.println("体检人员信息更新成功");
+//				}else {
+//					System.out.println("体检人员信息更新失败");
+//				}
+				
+				//查询记账表
+//				Biller biller = billerBiz.queryBiller(group.getGroup_id(), strBatch);
+//				System.out.println(biller);
+				//插入记账病人关系表
+//				isSuccess = nurseBiz.insertRelation(biller.getBiller_id(), patientList);
+//				if (isSuccess) {
+//					System.out.println("关系表插入成功");
+//				}
+				response.getWriter().print("已生成账单");
+			}else {
+				System.out.println("账单生成失败");
+				response.getWriter().print("生成账单失败");
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -145,6 +467,7 @@ public class UserHandle {
 	/*
 	 * 添加体检人员
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
 	public ModelAndView addPatient(HttpServletRequest request, HttpServletResponse response, Patient patient) {
 		System.out.println(patient);
@@ -164,16 +487,17 @@ public class UserHandle {
 	}
 	
 	/*
-	 * 导入体检人员，开单
+	 * 导入体检人员
 	 */
 	@RequestMapping(value="/importFile.handle",method = RequestMethod.GET)
 	public ModelAndView importFile(HttpServletRequest request, String file_id) {
 		//得到文件信息
 		companyFile = companyFileBiz.queryFile(file_id);
-		
 		//得到文件
 		File cfile = new File(companyFile.getFpath());
 		System.out.println(cfile.getName());
+		//人员临时id
+		int num=0;
 		// 创建列表
 		List<Patient> patientList = new ArrayList<>();
 		// 创建excel工作区间
@@ -233,17 +557,17 @@ public class UserHandle {
 					} else {
 						System.out.println(dataList);
 						// 添加进数据
-						patientList.add(new Patient(-1, // 病人id
+						patientList.add(new Patient(num, // 病人id
 								companyFile.getCompany_id(), // 公司id
 								-1, // 套餐id
 								dataList.get(0), // 姓名
 								dataList.get(1), // 性别
 								dataList.get(2), // 年龄
 								dataList.get(3), // 身份证号
-//												code, 					//条形码
 								"-1", dataList.get(4), // 电话号码
 								"-1", dataList.get(5) // 套餐名
 						));
+						num++;
 					}
 				}
 			}
@@ -287,6 +611,17 @@ public class UserHandle {
 		response.setCharacterEncoding("utf-8");
 		try {
 			if (companyFileBiz.updateFileState(Integer.parseInt(fid))) {
+				//获得文件具体信息
+				companyFile = companyFileBiz.queryFile(fid);
+				//得到公司id
+				int cid = companyFile.getCompany_id();
+				//创建团检表
+				if(groupBiz.createGroup(cid, Integer.parseInt(fid))){
+					System.out.println("创建团检表成功");
+				}else {
+					System.out.println("创建团检表失败");
+				}
+				
 				response.getWriter().print("审核通过");
 			} else {
 				response.getWriter().print("审核失败，请联系管理员");
@@ -378,7 +713,6 @@ public class UserHandle {
 										dataList.get(1),		//性别
 										dataList.get(2), 		//年龄
 										dataList.get(3), 		//身份证号
-//										code, 					//条形码
 										"-1",					
 										dataList.get(4), 		//电话号码
 										"-1",

@@ -126,8 +126,22 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 
 	@Override
 	public List<Company> queryByAccount(String account) {
-		// TODO Auto-generated method stub
 		return companyMapper.queryByAccount(account);
 	}
 
+	@Override
+	public String deductDeposit(int company_id, float price) {
+		//先取出公司金额
+		double deposit = companyMapper.queryCompanyById(company_id).getDeposit();
+		//扣除费用
+		if (deposit-price>0) {
+			if (companyMapper.deductDeposit(String.valueOf(company_id),String.valueOf(deposit-price))) {
+				return "扣除成功";
+			} else {
+				return "扣除失败";
+			}
+		} else {
+			return "余额不足";
+		}
+	}
 }
