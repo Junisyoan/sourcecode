@@ -219,7 +219,7 @@ function updete(a){
 	if(re){
 //			alert(updetename);
 		var form = document.createElement("Form");
-		form.action="<%=path%>menumanage/updete1.handle";
+		form.action="<%=path%>powermanage/updete1.handle";
 		form.method="post";
 		form.style.display="none";
 		
