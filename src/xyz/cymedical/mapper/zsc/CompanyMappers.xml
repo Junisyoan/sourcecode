@@ -27,7 +27,7 @@
 	</update>
 
 	<!-- 删除细项 -->
-	<delete id="deleteDetail" parameterType = "String">
+	<delete id="deleteCompany" parameterType = "String">
 		delete from tb_patient where company_id = #{company_id};
 		delete from tb_file where company_id = #{company_id};
 		delete from tb_log_company where company_id = #{company_id};
