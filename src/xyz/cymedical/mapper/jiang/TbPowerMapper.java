@@ -14,6 +14,7 @@ public interface TbPowerMapper {
 	public int deletePower(int power_id);
 	
 	public int  addPower(Tb_power tb_power); 
-
-
+ 
+	public int upPower(Tb_power tbpower);
+	
 }
