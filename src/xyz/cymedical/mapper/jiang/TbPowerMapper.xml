@@ -22,6 +22,22 @@
 		insert into tb_power(power_id,menu_id,name) values(#{power_id},#{menu_id},#{name})
 	</insert>
 	
+	<update id="upPower"  parameterType="xyz.cymedical.entity.jiang.Tb_power" >
 	
+			UPDATE tb_power 
+			
+		<trim prefix="SET" suffixOverrides=","  >  
+	
+		<if test="menu_id != null and menu_id != ''">
+			menu_id=#{menu_id},
+		</if>
+		<if test="name != null and name != ''">
+			name=#{name}
+		</if>
+		
+		   where power_id=#{power_id}
+		</trim>
+		 
+	</update>
 	
 </mapper>
