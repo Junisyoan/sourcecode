@@ -16,63 +16,46 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
-<title>体检报告打印</title>
+<title>无标题文档</title>
 </head>
 
 <body>
-	<div class="page-content">
-		<div class="gys_style">
-			<div class="Manager_style">
-				<div class="title_name">体检人报告打印</div>
-				<form method="post" action="<%=path%>patient/printpatient.handle">
-					<ul class="search_content clearfix">
-						<li style="text-align: center;">姓名<input name="name"
-							type="text" class="text_add" />
-						<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-						</li>
-					</ul>
-				</form>
-			</div>
-		</div>
-	</div>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
 	<div class="Manager_style">
-		<span class="title_name">体检人员信息</span>
+		<span class="title_name">体检小结信息</span>
 		<table class="table table-striped table-bordered table-hover"
 			id="item">
 			<thead>
 				<tr>
 					<th>序号</th>
-					<th>姓名</th>
-					<th>公司</th>
-					<th>性别</th>
-					<th>年龄</th>
-					<th>身份证号</th>
-					<th>手机号码</th>
-					<th>条码号</th>
-					<th>体检号</th>
+					<th>体检人</th>
+					<th>项目</th>
+					<th>结果</th>
+					<th>单位</th>
+					<th>参考值</th>
 					<th>体检时间</th>
-					<th>操作</th>
+					<th>提示</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${patientlist}" var="p" varStatus="s">
 					<tr>
-						<td>${s.index + 1}</td>
-						<td>${p.n1}</td>
-						<td>${p.n2}</td>
-						<td>${p.sex}</td>
-						<td>${p.age}</td>
-						<td style="mso-number-format: '\@';">${p.ID}</td>
-						<td>${p.phone}</td>
-						<td>${p.code}</td>
-						<td>${p.check_num}</td>
-						<td style="mso-number-format: 'yyyy\-mm\-dd';">${p.time}</td>
-						<td><a href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}">打印体检报告</a>
-						</th>
+						<th>${s.index + 1}</th>
+						<th>${p.n1}</th>
+						<th>${p.n2}</th>
+						<th>${p.unit}</th>
+						<th>${p.resulttext}</th>
+						<th>${p.min}~${p.max}</th>
+						<th>${gro.time}</th>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	<p align="center">
+		<a
+			href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}">返回</a>
+	</p>
 </body>
 </html>

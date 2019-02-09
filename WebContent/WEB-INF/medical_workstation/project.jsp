@@ -1,11 +1,10 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,38 +16,41 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
-<title>日志查看</title>
+<title>无标题文档</title>
 </head>
 
 <body>
-
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
 	<div class="Manager_style">
-		<span class="title_name">日志查看</span>
-		<table class="table table-striped table-bordered table-hover">
+		<span class="title_name">体检项目列表</span>
+		<table class="table table-striped table-bordered table-hover"
+			id="item">
 			<thead>
 				<tr>
 					<th>序号</th>
-					<th>日志表ID</th>
-					<th>用户表ID</th>
-					<th>具体操作</th>
-					<th>操作时间</th>
-					<th>删除</th>
+					<th>体检人</th>
+					<th>科室</th>
+					<th>项目</th>
+					<th>体检时间</th>
 				</tr>
 			</thead>
 			<tbody>
-				</tr>
-				<c:forEach items="${loglist}" var="l" varStatus="s">
+				<c:forEach items="${patientlist}" var="p" varStatus="s">
 					<tr>
-						<td>${s.index + 1}</td>
-						<td>${l.log_id}</td>
-						<td>${l.user_id}</td>
-						<td>${l.opera}</td>
-						<td>${l.time}</td>
-						<td><a href="<%=path%>log/delLog.handle?log_id=${l.log_id}">删除</a></td>
+						<th>${s.index + 1}</th>
+						<th>${p.n1}</th>
+						<th>${p.n2}</th>
+						<th>${p.n3}</th>
+						<th>${p.time}</th>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	<p align="center">
+		<a
+			href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}">返回</a>
+	</p>
 </body>
 </html>

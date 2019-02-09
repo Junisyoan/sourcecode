@@ -24,31 +24,43 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 
 	@Override
 	public List<Patient> insertByBatch(List<Patient> listRecord) {
-		//成功人数
+		// 成功人数
 		int number = 0;
-		//体检人员信息
+		// 体检人员信息
 		Patient patient = null;
-		//自增长的id
-		for(int i =0;i<listRecord.size();i++) {
-				patient = listRecord.get(i);
-				if (patientMapper.insertPatient(patient)) {
-					isUpdate=true;
-					listRecord.get(i).setPaitent_id(patient.getPaitent_id());
-				} else {
-					isUpdate=false;
-				}
-			//执行成功+1
+		// 自增长的id
+		for (int i = 0; i < listRecord.size(); i++) {
+			patient = listRecord.get(i);
+			if (patientMapper.insertPatient(patient)) {
+				isUpdate = true;
+				listRecord.get(i).setPaitent_id(patient.getPaitent_id());
+			} else {
+				isUpdate = false;
+			}
+			// 执行成功+1
 			if (isUpdate) {
 				number++;
 			}
 		}
-		System.out.println("执行结果"+listRecord.size()+","+number);
-		
-		if (number==listRecord.size()) {
+		System.out.println("执行结果" + listRecord.size() + "," + number);
+
+		if (number == listRecord.size()) {
 			return listRecord;
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Patient> queryproject(String name, String time) {
+		// TODO Auto-generated method stub
+		return patientMapper.queryproject(name, time);
+	}
+
+	@Override
+	public List<Patient> querybrief(String name, String time) {
+		// TODO Auto-generated method stub
+		return patientMapper.querybrief(name, time);
 	}
 
 }

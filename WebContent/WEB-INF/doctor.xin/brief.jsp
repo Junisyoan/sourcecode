@@ -82,8 +82,8 @@
 				<td>${d.name}</td>
 				
 				<c:if test="${d.sstate=='未提交' }">
-					<td><input type="file" id="${d.name}"/></td>
-					<td><textarea rows="4" id="${d.name}${d.name}"> </textarea></td>
+					<td ><input type="file" id="${d.name}" /></td>
+					<td><textarea rows="4" id="${d.name}${d.name}"></textarea></td>
 					<td class="center">
 						<a href="javascript:;" onclick="location ='<%=path %>brief/photo.handle?path='+document.getElementById('${d.name}').value+'&result='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};">
 						<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
@@ -93,7 +93,7 @@
 				
 				<c:if test="${d.sstate=='已提交' }">
 					<td><input type="file" id="${d.name}"/></td>
-					<td><b>${d.resulttext}</b></td>
+					<td>${d.resulttext}</td>
 					<td class="center">
 						<lable class="btn btn-primary" >已提交</lable>
 					</td>

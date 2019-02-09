@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import xyz.cymedical.entity.yjn.Param;
+import xyz.cymedical.entity.yjn.Parameter;
 import xyz.cymedical.entity.zsc.Project;
 import xyz.cymedical.mapper.zsc.ProjectMapper;
 
@@ -20,7 +20,7 @@ public class ProjectBiz {
 	
 	public int insertProject(Project project,int[] idArray) {
 
-		Param param = project.getParam();
+		Parameter param = project.getParam();
 		int param_id = projectMapper.selectParamtId(param.getName());
 		param.setParam_id(param_id);
 		projectMapper.insertProject(project);
@@ -54,7 +54,7 @@ public class ProjectBiz {
 	}
 	
 	public int updateProject(int[] idArray, Project project) {
-		Param param = project.getParam();
+		Parameter param = project.getParam();
 		int param_id = projectMapper.selectParamtId(param.getName());
 		param.setParam_id(param_id);
 		
