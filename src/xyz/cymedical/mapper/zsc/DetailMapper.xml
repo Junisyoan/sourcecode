@@ -27,6 +27,7 @@
 
 	<!-- 删除细项 -->
 	<delete id="deleteDetail" parameterType = "int">
+		delete from tb_brief where detail_id = #{detail_id};
 		delete from tb_detail_project where detail_id = #{detail_id};
 		delete from tb_detail where detail_id = #{detail_id};
 	</delete>
