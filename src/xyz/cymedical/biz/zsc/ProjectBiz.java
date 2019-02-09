@@ -37,6 +37,10 @@ public class ProjectBiz {
 		return projectMapper.selectProject(null);
 	}
 	
+	public List<Param> selectParamList(){
+		return projectMapper.selectParamList();
+	}
+	
 	public int deleteProject(int project_id) {
 		return projectMapper.deleteProject(project_id);
 	};
