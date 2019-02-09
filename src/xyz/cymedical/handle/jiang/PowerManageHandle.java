@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.jiang.TbPowerBiz;
-import xyz.cymedical.entity.jiang.Tb_power; 
+import xyz.cymedical.entity.jiang.Tb_power;
+import xyz.cymedical.entity.jiang.Tb_user; 
 
 
 @Controller
@@ -78,12 +79,39 @@ public class PowerManageHandle {
 				
 				mav.setViewName("WEB-INF/view.jiang/powermanage");
 			}
-			 
-			
+			  
+			return mav;
+ 
+		}
+		//修改第一步
+		@RequestMapping(value = "/updete1.handle", method = RequestMethod.POST)
+		public ModelAndView updete2(HttpServletRequest request, HttpServletResponse response, String updetename) {
+			ModelAndView mav = new ModelAndView();
+
+			System.out.println("修改人员信息=" + updetename);
+			request.setAttribute("updetename", updetename);
+			mav.setViewName("WEB-INF/view.jiang/updetepower");
 			return mav;
 
-
-			
-			
 		}
+		//修改第二步
+	 
+		@RequestMapping(value = "/updetepower2.handle", method = RequestMethod.POST)
+		public ModelAndView updeteuser(HttpServletRequest request, HttpServletResponse response, Tb_power tbpower) {
+			ModelAndView mav = new ModelAndView();
+	 
+				System.out.println(tbpower.getPower_id());
+			 	System.out.println(tbpower.getMenu_id());
+			 	System.out.println(tbpower.getName());
+			 	int ret=TbPowerBiz.upPower(tbpower);
+			 	if(ret==1) {
+			 		
+			 		mav.setViewName("WEB-INF/view.jiang/powermanage");
+			 	}
+
+			return mav;
+
+		}
+		
+		
 }
