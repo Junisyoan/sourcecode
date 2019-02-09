@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import net.sf.json.JSONArray;
 import xyz.cymedical.biz.zsc.DetailBiz;
 import xyz.cymedical.biz.zsc.ProjectBiz;
+import xyz.cymedical.entity.yjn.Param;
 import xyz.cymedical.entity.zsc.Detail;
 import xyz.cymedical.entity.zsc.Project;
 
@@ -108,7 +109,9 @@ public class ProjectHandle {
 	// 查询细项列表并添加到session中
 	private ModelAndView findProjects(HttpServletRequest req) {
 		List<Project> projects = projectBiz.findProjects();
+		List<Param> params = projectBiz.selectParamList();
 		req.setAttribute("projects", projects);
+		req.setAttribute("params", params);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.zsc/projectsVeiw");
 		return mav;
