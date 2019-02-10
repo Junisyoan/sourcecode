@@ -4,6 +4,14 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.CompanyMappers">
 
+	<select id="checkPwd" parameterType = "xyz.cymedical.entity.jun.Company" resultType="int">
+		select count(*) from tb_company where pwd = #{pwd} and company_id != #{id}
+	</select>
+	
+	<update id="changePwd" parameterType = "xyz.cymedical.entity.jun.Company">
+		update tb_company set pwd = #{pwd} where company_id = #{company_id}
+	</update>
+
 	<!-- ajax验证 -->
 	<select id="checkName" parameterType="map" resultType="int">
 		select count(*) from tb_company where account = #{account}
