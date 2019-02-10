@@ -4,7 +4,7 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.ProjectMapper">
 
-	<select id="selectParamList" resultType="xyz.cymedical.entity.yjn.Param">
+	<select id="selectParamList" resultType="xyz.cymedical.entity.yjn.Parameter">
 		select * from tb_param where pid = 
 		(select param_id from tb_param where name = '科室') 
 	</select>
