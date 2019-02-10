@@ -20,11 +20,12 @@ public class Company {
 	private String people;			//领队人
 	private String phone;			//领队人电话
 	private double deposit;			//金额、余额
+	private String state;			//状态
 	public Company() {
 		super();
 	}
 	public Company(int company_id, String name, String account, String pwd, String tel, String address, String people,
-			String phone, double deposit) {
+			String phone, double deposit, String state) {
 		super();
 		this.company_id = company_id;
 		this.name = name;
@@ -35,12 +36,13 @@ public class Company {
 		this.people = people;
 		this.phone = phone;
 		this.deposit = deposit;
+		this.state = state;
 	}
 	@Override
 	public String toString() {
-		return "公司信息 [company_id=" + company_id + ", name=" + name + ", account=" + account + ", pwd=" + pwd
+		return "Company [company_id=" + company_id + ", name=" + name + ", account=" + account + ", pwd=" + pwd
 				+ ", tel=" + tel + ", address=" + address + ", people=" + people + ", phone=" + phone + ", deposit="
-				+ deposit + "]";
+				+ deposit + ", state=" + state + "]";
 	}
 	public int getCompany_id() {
 		return company_id;
@@ -95,6 +97,12 @@ public class Company {
 	}
 	public void setDeposit(double deposit) {
 		this.deposit = deposit;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }
