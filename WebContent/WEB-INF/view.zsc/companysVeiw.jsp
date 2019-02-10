@@ -192,7 +192,30 @@ function stateChange(e){
 	var state = t.innerText;
 	var company_id = t.name;
 	
-	var form = document.createElement("Form");
+	if(state != "禁用"){
+		state="在用";
+	}
+	
+	$.ajax({
+		url:"<%=path%>companys/stateChange.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			"company_id":company_id,
+			"state":state
+		},
+		success:function(msg){
+			alert(msg);
+			if(msg.indexOf("成功") != -1){
+				window.location.href="<%=path%>companys/companysVeiw.handle";
+			}
+		},
+		error:function(){
+			alert("异常");
+		}
+	});
+	
+	<%-- var form = document.createElement("Form");
 	form.action="<%=path%>companys/stateChange.handle";
 	form.method="post";
 	form.style.display="none";
@@ -213,7 +236,7 @@ function stateChange(e){
 	form.appendChild(option2);
 	document.body.appendChild(form);
 		
-	form.submit();
+	form.submit(); --%>
 }
 </script>
 <!-- 查 -->
