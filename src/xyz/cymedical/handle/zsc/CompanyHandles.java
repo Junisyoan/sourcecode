@@ -24,61 +24,36 @@ public class CompanyHandles {
 	@Resource
 	CompanyBizsc companyBizsc;
 
-	@RequestMapping("/insertPage.handle")
-	private ModelAndView insertPage() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.zsc/addCompany");
-		return mav;
-	}
-	
-	@RequestMapping(value="/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String checkName(String account,String id) {
+	// 重命名验证
+	@RequestMapping(value = "/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String checkName(String account, String id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("account", account);
 		map.put("id", id);
 		return companyBizsc.checkName(map);
 	}
-	
-	// 添加用户--ajax
+
+	// 增
 	@RequestMapping(value = "/addCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String addDetail(Company company) {
-		int rt = companyBizsc.insertCompany(company);
-		if (rt > 0) {
-			return "添加成功";
-		} else {
-			return "添加失败";
-		}
+		return companyBizsc.insertCompany(company);
 	}
 
-	// 删除细项--ajax
+	// 删
 	@RequestMapping(value = "/deleteCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String  deleteCompany(String company_id) {
-		companyBizsc.deleteCompany(company_id);
-		List<Company> companies = companyBizsc.findCompanys();
-		String str = JSONArray.fromObject(companies).toString();
-		return str;
+	public @ResponseBody String deleteCompany(HttpServletRequest req, String company_id) {
+		return companyBizsc.deleteCompany(company_id);
 	}
 
-	// 修改细项--表单
+	// 改
 	@RequestMapping(value = "/updateCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String updateCompany(Company company) {
-		int rt = companyBizsc.updateCompany(company);
-		if (rt > 0) {
-			return "修改成功";
-		} else {
-			return "修改失败";
-		}
+		return companyBizsc.updateCompany(company);
 	}
 
-	// 显示细项界面--href
-	@RequestMapping(value = "/companysVeiw.handle")
-	public ModelAndView companysVeiw(HttpServletRequest req) {
-		return findCompanys(req);
-	}
-
-	//查询功能
-	@RequestMapping(value="/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String selectCompany(Company company,String min,String max) {
+	// 查
+	@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String selectCompany(Company company, String min, String max) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("company", company);
 		map.put("min", min);
@@ -87,18 +62,27 @@ public class CompanyHandles {
 		String str = JSONArray.fromObject(companys).toString();
 		return str;
 	}
-	
-	//修改页面
-	@RequestMapping(value = "/updatePage.handle")
-	public ModelAndView updatePage(HttpServletRequest req, String company_id) {
-		Company company = companyBizsc.findCompany(company_id);
-		req.setAttribute("company", company);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.zsc/updateCompany");
-		return mav;
+
+	// 修改状态
+	@RequestMapping("/stateChange.handle")
+	private ModelAndView stateChange(HttpServletRequest req, Company company) {
+		companyBizsc.stateChange(company);
+		return findCompanys(req);
 	}
 
-	// 查询细项列表并添加到session中
+	// 重置密码
+	@RequestMapping(value = "/resetPwd.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String resetPwd(HttpServletRequest req, String company_id) {
+		return companyBizsc.resetPwd(company_id);
+	}
+
+	// 显示
+	@RequestMapping(value = "/companysVeiw.handle")
+	public ModelAndView companysVeiw(HttpServletRequest req) {
+		return findCompanys(req);
+	}
+
+	// 列表
 	private ModelAndView findCompanys(HttpServletRequest req) {
 		List<Company> companys = companyBizsc.findCompanys();
 		req.setAttribute("companys", companys);

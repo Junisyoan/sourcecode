@@ -8,61 +8,162 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>添加细项</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script src="<%=path%>js/jquery.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
+  <script src="<%=path %>assets/js/jquery.min.js"></script>
+  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
+  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
+  <link rel="stylesheet" href="<%=path %>css/style.css"/>
+  <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+  <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
+  <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
+  <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
+    <title>添加细项</title>
+  <style type="text/css">
+	#aFrom input {
+      margin-top:10px;
+ 	}
+</style>
 </head>
 <body>
-<form method = "post" id = "cFrom">
-	<label>名称</label><input type = "text" name="name" id="name"/>
-	<label>类型</label>
-	<select name="type" id="type">
-		<option></option>
-		<option>普通</option>
-		<option>检验</option>
-		<option>影像</option>
-	</select>
-	<input type="button" value="查询" onclick="putIn()">
-	<div>
-		<input type="button" value="新增" onclick="javascript:window.location.href='<%=path %>detail/insertPage.handle'"/>
-	</div>
-	<table>
-		<tr>
-			<th>名称</th>
+<div class="page-content">
+<div class="gys_style">
+ <div class="Manager_style">
+   <div class="title_name">添加细项</div>
+    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加细项</button>
+     <div class="Add_Manager_style">
+     <form method="post" id = "aFrom" method="post">
+     		名称	<input type="text" name="name"/>
+     		类型	<select name="type" style="width:160px;height:30px;margin-left:10px;">
+					<option></option>
+					<option>普通</option>
+					<option>检验</option>
+					<option>影像</option>
+					<option>彩超</option>
+				</select>
+  			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
+  	 </form>
+     <div id="Add_Product_style" style="display:none">
+     <div class="page-content">
+     <div class="add_user_style clearfix">
+    	<form  id = "addForm">
+  			<ul class="clearfix">
+     			<li>
+     				<label class="label_name">名称</label>
+     				<input type = "text" name="name" id="name1" autofocus="autofocus" onblur="checkName1()">
+     			</li>
+        		<li>
+     				<label class="label_name">计量单位</label>
+     				<input type = "text" name="unit" id = "unit1">
+     			</li>
+     			<li>
+     				<label class="label_name">最小值</label>
+     				<input type = "text" name="min" id ="min1">
+     			</li>
+     			<li>
+     				<label class="label_name">最大值</label>
+     				<input type = "text" name="max" id="max1">
+     			</li>
+     			<li>
+     				<label class="label_name">类型</label>
+     				<select name="type" id="type1" style="width:160px;height:30px;margin-left:10px;">
+						<option>普通</option>
+						<option>检验</option>
+						<option>影像</option>
+						<option>彩超</option>
+					</select>
+				</li>
+      		</ul>  
+      	 </form> 
+      </div>       
+    </div>
+  </div>
+  <div id="Update_Product_style" style="display:none">
+     <div class="page-content">
+     <div class="add_user_style clearfix">
+    	<form  id = "updateForm" onsubmit="return putIn()">
+  			<ul class="clearfix">
+     			<li>
+     				<label class="label_name">名称</label>
+     				<input type = "text" name="name" id="name" autofocus="autofocus" onblur="checkName()">
+     			</li>
+        		<li>
+     				<label class="label_name">计量单位</label>
+     				<input type = "text" name="unit" id = "unit">
+     			</li>
+     			<li>
+     				<label class="label_name">最小值</label>
+     				<input type = "text" name="min" id ="min">
+     			</li>
+     			<li>
+     				<label class="label_name">最大值</label>
+     				<input type = "text" name="max" id="max">
+     			</li>
+     			<li>
+     				<label class="label_name">类型</label>
+     				<select name="type" id="type" style="width:160px;height:30px;margin-left:10px;">
+						<option>普通</option>
+						<option>检验</option>
+						<option>影像</option>
+						<option>彩超</option>
+					</select>
+				</li>
+      		</ul> 
+      		<input type = "hidden" id = "detail_id" name = "detail_id">
+      	 </form> 
+      </div>       
+    </div>
+  </div>
+ </div>
+</div>
+ </div>   
+</div>
+<table id="test" class="table table-striped table-bordered" style="60%">   
+      <thead>
+       <tr>
+        	<th>名称</th>
 			<th>计量单位</th>
-			<th>上限</th>
 			<th>下限</th>
+			<th>上限</th>
 			<th>类型</th>
 			<th>操作</th>
-		</tr>
-		<tbody id = "detailBody">
-		<c:forEach items="${details}" var = "d">
+       </tr>
+      </thead>
+      <tbody id = "detailBody">
+		<c:forEach items="${details}" var = "d" varStatus="s">
 		<tr>
 			<td>${d.name}</td>
 			<td>${d.unit}</td>
-			<td>${d.max}</td>
 			<td>${d.min}</td>
+			<td>${d.max}</td>
 			<td>${d.type}</td>
 			<td>
-				<input type = "button" value="删除" onclick="remove()" name="${d.detail_id}">
-				<input type = "button" value="修改" onclick="change()" name="${d.detail_id}">
+           		<button type="button" class="btn btn-warning" onclick="remove()" name="${d.detail_id}">删除</button>
+          		<button type="button" class="btn btn-primary" onclick="change()" name="${d.detail_id}">修改</button>
 			</td>
 		</tr>
 		</c:forEach>
-		</tbody>
-	</table>
-</form>
+	  </tbody>
+    </table>
 </body>
-<script src="<%=path%>js/jquery.min.js"></script>
-<script src="<%=path%>js/jquery.validate.min.js"></script>
-<script src="<%=path%>js/jquery.validate.cn.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#test').DataTable();
+	});
+</script>
+<!-- 查 -->
 <script type="text/javascript">
 function putIn(){
-	
 	$.ajax({
 		url:"<%=path%>detail/selectDetail.handle",
 		type:"POST",
 		dataType:"JSON",
-		data:$("#cFrom").serialize(),
+		data:$("#aFrom").serialize(),
 		success:function(details){
 			show(details);
 		},
@@ -70,27 +171,6 @@ function putIn(){
 			alert("异常");
 		}
 	});
-}
-function remove(e){
-	var e = e || event;
-	var t = e.target || e.srcElement;
-	var detail_id = t.name;
-	
-	var rt = confirm("确定删除此项?");
-	if(rt){
-		$.ajax({
-			url:"<%=path%>detail/deleteDetail.handle",
-			type:"POST",
-			dataType:"JSON",
-			data:"detail_id="+detail_id,
-			success:function(details){
-				show(details);
-			},
-			error:function(){
-				alert("异常");
-			}
-		});
-	}
 }
 function show(details){
 	$("#detailBody").empty();  
@@ -104,8 +184,8 @@ function show(details){
 		var td5=$("<td></td>").text(details[i].type);
 		var td6=$("<td></td>");
 		
-		var input1=$("<input type='button' value='删除' onclick='remove()' name='"+details[i].detail_id+"'/>");
-		var input2=$("<input type='button' value='修改' onclick='change()' name='"+details[i].detail_id+"'/>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+details[i].detail_id+"'>删除</button>");
+		var input2=$("<button type='button' class='btn btn-warning' onclick='change()' name='"+details[i].detail_id+"'>修改</button>");
 
 		var tr=$("<tr></tr>");
 		
@@ -115,25 +195,246 @@ function show(details){
 	}
 }
 </script>
-<script type="text/javascript">
-function change(e){
+<!-- 删 -->
+<script>
+function remove(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var detail_id = t.name;
 	
-	var form = document.createElement("Form");
-	form.action="<%=path%>detail/updatePage.handle";
-	form.method="post";
-	form.style.display="none";
-	
-	var option = document.createElement("input");
-	option.name="detail_id";
-	option.value=detail_id;
-	
-	form.appendChild(option);
-	document.body.appendChild(form);
-	
-	form.submit();
+	var rt = confirm("确定删除此项?");
+	if(rt){
+		$.ajax({
+			url:"<%=path%>detail/deleteDetail.handle",
+			type:"POST",
+			dataType:"text",
+			data:"detail_id="+detail_id,
+			success:function(msg){
+				alert(msg);
+    			if(msg == "删除成功"){
+					window.location.href="<%=path%>detail/detailsVeiw.handle";
+    			}
+			},
+			error:function(){
+				alert("异常");
+			}
+		});
+	}
 }
+</script>
+<!-- 改 -->
+<script>
+var numCheck = /^[0-9]+\.{0,1}[0-9]{0,2}$/;
+var check;
+function checkName(){
+	if($("#name").val() == ""){
+		return;
+	}
+	$.ajax({
+		url:"<%=path%>detail/checkName.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			name:$("#name").val(),
+			id:$("#detail_id").val()
+		},
+		success:function(msg){
+			if(msg == "该名称已存在"){
+				check = 0;
+				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
+			}else{
+				check = 1;
+			} 
+		},
+		error : function() {
+			alert("异常！");
+		}
+	});
+}
+function change(e){
+	var e = e || event;
+	var t = e.target || e.srcElement;
+	document.getElementById("detail_id").value = t.name;
+	
+	var parent = t.parentNode.parentNode;
+	var mag = parent.getElementsByTagName("td");
+	var input = document.getElementById("Update_Product_style").getElementsByTagName("input");
+
+	for(var i=0;i <4;i++){
+		input[i].value = mag[i].innerHTML;
+	}
+	
+	 var sel = document.getElementById("type");
+	    for (var i = 0; i < sel.options.length; i++)
+	    {
+	        if (sel.options[i].text == mag[4].innerHTML)
+	        {
+	        	sel.options[i].remove();
+	            break;  
+	        } 
+	    }
+	$("#type").prepend("<option>"+mag[4].innerHTML+"</option>"); 
+	sel.options[0].selected=true;
+    
+    layer.open({
+        type: 1,
+        title: '修改细项',
+		shadeClose: true, //点击遮罩关闭层
+        area: ['600px' , ''],
+        content: $('#Update_Product_style'),
+		btn:['提交','取消'],
+		yes: function(index, layero){	
+			
+			if($('#name').val()==""){
+				 layer.alert('名称不能为空!',{title: '提示框',icon:0,});
+					return false;
+					
+			}if(check == 0){
+				 layer.alert('该名称已存在!',{title: '提示框',icon:0,});
+					return false;
+				
+			}if($('#unit').val()==""){
+				layer.alert('计量单位不能为空!',{title: '提示框',icon:0,});
+					return false;
+					
+			}if(!numCheck.test($('#min').val())){
+				layer.alert('最小值必须是数值!',{title: '提示框',icon:0,});
+					return false;
+					
+			}if(!numCheck.test($('#max').val())){
+				layer.alert('最大值必须是数值!',{title: '提示框',icon:0,});
+					return false;
+			}
+			var a = Number($('#min').val());
+			var b = Number($('#max').val());
+			if(a > b){
+				layer.alert('最大值必须大于等于最小值!',{title: '提示框',icon:0,});
+					return false;
+			}
+			
+			$.ajax({
+	    		type:"POST",
+	    		dataType:"text",
+	    		url:"<%=path%>detail/updateDetail.handle",
+	    		data:$('#updateForm').serialize(),
+	    		success:function(msg){
+	    			alert(msg);
+	    			if(msg == "修改成功"){
+    					window.location.href="<%=path%>detail/detailsVeiw.handle";
+	    			}else{
+	    				alert(msg);
+	    			} 
+	    		},
+	    		error : function(msg) {
+	    			alert("异常！"+msg);
+	    		}
+	    	});
+			}
+		})
+	};
+</script>
+<!-- 增 -->
+<script>
+var check1;
+function checkName1(){
+	if($("#name1").val() == ""){
+		return;
+	}
+	$.ajax({
+		url:"<%=path%>detail/checkName.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			name:$("#name1").val()
+		},
+		success:function(msg){
+			if(msg == "该名称已存在"){
+				check1 = 0;
+				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
+			}else{
+				check1 = 1;
+			} 
+		},
+		error : function() {
+			alert("异常！");
+		}
+	});
+}
+$('#add_butn').on('click', function(){	
+    layer.open({
+        type: 1,
+        title: '添加细项',
+		shadeClose: true, //点击遮罩关闭层
+        area: ['600px' , ''],
+        content: $('#Add_Product_style'),
+		btn:['提交','取消'],
+		yes: function(index, layero){	
+			
+			if($('#name1').val()==""){
+				 layer.alert('名称不能为空!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}if(check1 == 0){
+				 layer.alert('该名称已存在!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+				return false;
+				
+			}if($('#unit1').val()==""){
+				layer.alert('计量单位不能为空!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}if(!numCheck.test($('#min1').val())){
+				layer.alert('最小值必须是数值!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}if(!numCheck.test($('#max1').val())){
+				layer.alert('最大值必须是数值!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}
+			var a = Number($('#min1').val());
+			var b = Number($('#max1').val());
+			if(a > b){
+				layer.alert('最大值必须大于等于最小值!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+			}
+			
+			$.ajax({
+	    		type:"POST",
+	    		dataType:"text",
+	    		url:"<%=path%>detail/addDetail.handle",
+	    		data:$('#addForm').serialize(),
+	    		success:function(msg){
+	    			alert(msg);
+	    			if(msg == "添加成功"){
+    					window.location.href="<%=path%>detail/detailsVeiw.handle";
+	    			}else{
+	    				alert(msg);
+	    			} 
+	    		},
+	    		error : function(msg) {
+	    			alert("异常！"+msg);
+	    		}
+	    	});
+			}
+		})
+	});
 </script>
 </html>

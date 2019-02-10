@@ -50,12 +50,17 @@ public class ComboBiz {
 		return comboMapper.findCombo(combo_id);
 	}
 	
-	public int updateCombo(int[] idArray, Combo combo) {
+	public String updateCombo(int[] idArray, Combo combo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("idArray", idArray);
 		map.put("combo", combo);
 		
-		return comboMapper.updateCombo(map);
+		int rt = comboMapper.updateCombo(map);
+		if (rt > 0) {
+			return "修改成功";
+		} else {
+			return "修改失败";
+		}
 	}
 	
 

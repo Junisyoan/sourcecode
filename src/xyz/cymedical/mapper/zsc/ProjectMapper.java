@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import xyz.cymedical.entity.yjn.Parameter;
 import xyz.cymedical.entity.zsc.Project;
 
 @Repository
@@ -20,6 +21,8 @@ public interface ProjectMapper {
 	public int deleteProject(int project_id);
 	
 	public List<Project> selectProject(HashMap<String, Object> map);
+	
+	public List<Parameter> selectParamList();
 	
 	public Project findProject(String project_id);
 	
