@@ -16,6 +16,23 @@ public class CompanyBizsc {
 	@Resource
 	CompanyMappers companyMappers;
 
+	public List<Company> findCompanys() {
+		return companyMappers.findCompanys();
+	};
+
+	public Company findCompany(String company_id) {
+		return companyMappers.findCompany(company_id);
+	}
+
+	public List<Company> selectCompany(Map<String, Object> map) {
+		return companyMappers.selectCompany(map);
+	};
+
+	public String deleteCompany(String id) {
+		companyMappers.deleteCompany(id);
+		return "删除成功";
+	};
+
 	public String insertCompany(Company company) {
 		int rt = companyMappers.insertCompany(company);
 
@@ -36,23 +53,6 @@ public class CompanyBizsc {
 		}
 	};
 
-	public String deleteCompany(String id) {
-		companyMappers.deleteCompany(id);
-		return "删除成功";
-	};
-
-	public List<Company> findCompanys() {
-		return companyMappers.findCompanys();
-	};
-
-	public Company findCompany(String company_id) {
-		return companyMappers.findCompany(company_id);
-	}
-
-	public List<Company> selectCompany(Map<String, Object> map) {
-		return companyMappers.selectCompany(map);
-	};
-
 	public String checkName(Map<String, Object> map) {
 		int rt = companyMappers.checkName(map);
 		if (rt > 0) {
@@ -62,12 +62,49 @@ public class CompanyBizsc {
 		}
 	}
 
-	public void stateChange(Company company) {
-		companyMappers.stateChange(company);
+	public String stateChange(Company company) {
+		int rt = companyMappers.stateChange(company);
+		if (rt > 0) {
+			if (company.getState().equals("禁用")) {
+				return "禁用成功";
+			}else {
+				return "启用成功";
+			}
+		} else {
+			if (company.getState().equals("禁用")) {
+				return "禁用失败";
+			}else {
+				return "启用失败";
+			}
+		}
 	};
 
 	public String resetPwd(String company_id) {
-		companyMappers.resetPwd(company_id);
-		return "重置密码成功";
+		int rt = companyMappers.resetPwd(company_id);
+		if (rt > 0) {
+			return "重置密码成功";
+		} else {
+			return "重置密码失败";
+		}
+	};
+
+	//密码验证
+	public String checkPwd(Company company) {
+		int rt = companyMappers.checkPwd(company);
+		if (rt > 0) {
+			return "密码验证成功";
+		} else {
+			return "密码验证失败";
+		}
+	};
+
+	//密码修改
+	public String changePwd(Company company) {
+		int rt = companyMappers.changePwd(company);
+		if (rt > 0) {
+			return "密码修改成功";
+		} else {
+			return "密码修改失败";
+		}
 	};
 }
