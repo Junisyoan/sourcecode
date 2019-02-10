@@ -121,7 +121,7 @@
 <<<<<<< HEAD
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>deptmanage/select.handle" title="科室管理" class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
 =======
-                                <li class="home"><a href="javascript:void(0)" name="用户管理.html" title="用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>powermanage/selectpower.handle" title="权限管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>
                                 <!-- zsc -->
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>detail/detailsVeiw.handle" title="细项管理" class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>project/projectsVeiw.handle" title="项目管理" class="iframeurl"><i class="icon-double-angle-right"></i>项目管理</a></li>
