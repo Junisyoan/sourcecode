@@ -28,50 +28,40 @@ public class ComboHandle {
 	@Resource
 	ProjectBiz projectBiz;
 
-	//获取新增界面
-	@RequestMapping("/addComboPage.handle")
-	public ModelAndView addProjectPage(HttpServletRequest req) {
-		List<Project> projects = projectBiz.findProjects();
-		req.setAttribute("projects", projects);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.zsc/addCombo");
-		return mav;
-	}
-
-	@RequestMapping(value="/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String checkName(String name,String id) {
+	// 重名验证
+	@RequestMapping(value = "/checkName.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String checkName(String name, String id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("name", name);
 		map.put("id", id);
 		return comboBiz.checkName(map);
 	}
-	
-	//新增项目
+
+	// 增
 	@RequestMapping(value = "/addCombo.handle")
-	public @ResponseBody String addProject(int[] idArray,Combo combo) {
+	public @ResponseBody String addProject(int[] idArray, Combo combo) {
 		comboBiz.insertCombo(combo, idArray);
 		return "ok";
 	}
 
-	//获取主页面
-	@RequestMapping(value = "/combosVeiw.handle")
-	public ModelAndView projectsVeiw(HttpServletRequest req) {
+	// 删
+	@RequestMapping(value = "/deleteCombo.handle")
+	public ModelAndView deleteProject(HttpServletRequest req, int combo_id) {
+		comboBiz.deleteCombo(combo_id);
 		return findCombos(req);
 	}
 
-	//删除项目
-	@RequestMapping(value="/deleteCombo.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String deleteProject(HttpServletRequest req,int combo_id) {
-		comboBiz.deleteCombo(combo_id);
-		List<Combo> combos = comboBiz.findCombos();
-		String str = JSONArray.fromObject(combos).toString();
-		return str;
+	// 改
+	@RequestMapping(value = "/updateCombo.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String updateProject(int[] idArray, Combo combo) {
+		return comboBiz.updateCombo(idArray, combo);
+
 	}
-	
-	//条件查询
-	@RequestMapping(value="selectCombo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String selectProject(String name,String min,String max) {
-		HashMap<String,Object> map = new HashMap<String,Object>();
+
+	// 查
+	@RequestMapping(value = "selectCombo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String selectProject(String name, String min, String max) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("min", min);
 		map.put("max", max);
@@ -79,34 +69,19 @@ public class ComboHandle {
 		String str = JSONArray.fromObject(combos).toString();
 		return str;
 	}
-	
-	//获取更新界面
-	@RequestMapping(value="/updatePage.handle")
-	public ModelAndView updatePage(HttpServletRequest req,String combo_id) {
-		List<Project> projects = projectBiz.findProjects();
-		req.setAttribute("projects", projects);
-		Combo combo = comboBiz.findCombo(combo_id);
-		req.setAttribute("combo", combo);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.zsc/updateCombo");
-		return mav;
+
+	// 显示
+	@RequestMapping(value = "/combosVeiw.handle")
+	public ModelAndView projectsVeiw(HttpServletRequest req) {
+		return findCombos(req);
 	}
-	
-	//更新数据
-	@RequestMapping(value="/updateCombo.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String updateProject(int[] idArray,Combo combo){
-		int rt = comboBiz.updateCombo(idArray, combo);
-		if (rt > 0) {
-			return "修改成功";
-		} else {
-			return "修改失败";
-		}
-	}
-	
-	// 查询细项列表并添加到session中
+
+	// 列表
 	private ModelAndView findCombos(HttpServletRequest req) {
 		List<Combo> combos = comboBiz.findCombos();
 		req.setAttribute("combos", combos);
+		List<Project> projects = projectBiz.findProjects();
+		req.setAttribute("projects", projects);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.zsc/combosVeiw");
 		return mav;
