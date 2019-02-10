@@ -19,9 +19,19 @@
 	</insert>
 
 	<!-- 修改细项 -->
+	<update id="stateChange" parameterType = "xyz.cymedical.entity.jun.Company">
+		update tb_company set state = #{state} where company_id = #{company_id}
+	</update>
+	
+	<!-- 修改细项 -->
+	<update id="resetPwd" parameterType = "String">
+		update tb_company set pwd = '123456' where company_id = #{company_id}
+	</update>
+
+	<!-- 修改细项 -->
 	<update id="updateCompany" parameterType = "xyz.cymedical.entity.jun.Company">
 		update tb_company set 
-		name = #{name}, account = #{account},pwd = #{pwd},tel = #{tel},address=#{address}, 
+		name = #{name}, account = #{account},tel = #{tel},address=#{address}, 
 		people = #{people}, phone = #{phone},deposit = #{deposit}
 		where company_id = #{company_id}
 	</update>
@@ -37,19 +47,19 @@
 
 	<!-- 细项集合 -->
 	<select id="findCompanys" resultType = "xyz.cymedical.entity.jun.Company">
-		select company_id,name,account,pwd,tel,address,people,phone,deposit 
+		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
 		from tb_company
 	</select>
 
 	<!-- 修改细项前的查询细项 -->
 	<select id = "findCompany" parameterType="java.lang.String" resultType = "xyz.cymedical.entity.jun.Company">
-		select company_id,name,account,pwd,tel,address,people,phone,deposit 
+		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
 		from tb_company where company_id = #{company_id} 
 	</select>
 
 	<!-- 查询细项 -->
 	<select id = "selectCompany" parameterType="map" resultType = "xyz.cymedical.entity.jun.Company">
-		select company_id,name,account,pwd,tel,address,people,phone,deposit 
+		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
 		from tb_company where 1=1
 		<if test="company.name!=null and company.name!=''">
 			and name like '%${company.name}%'
