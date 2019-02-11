@@ -27,10 +27,10 @@
 
 	<select id="findAllDetail" parameterType="String"
 		resultType="java.util.HashMap">
-		select  a.*,b.project_id proid,c.* from tb_brief a,tb_detail_project b,tb_detail c,tb_patient d
-		where a.detail_id=b.detail_id and time=
-		(SELECT MAX(time) FROM `tb_group` ) and b.detail_id=c.detail_id
-		and a.patient_id=d.patient_id and d.code=#{onecode } order by c.type desc
+		select * from 
+		tb_brief a,tb_detail b,tb_patient c 
+		where a.detail_id=b.detail_id and a.patient_id=c.patient_id and c.code=#{0} 
+		order by b.type desc
 	</select>
 
 
@@ -40,7 +40,12 @@
 		state ='已接收' where patient_project_id=#{patient_project_id }
 	</update>
 
-	
+	<insert id="addsummarize">
+		insert into tb_summarize (advise,guide) values (#{0 },#{1 });
+	</insert>
 
+	<select id="findsumid" resultType="String">
+		select max(summarize_id) from tb_summarize;
+	</select>
 
 </mapper> 
