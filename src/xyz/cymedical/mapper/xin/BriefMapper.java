@@ -25,9 +25,11 @@ public interface BriefMapper {
 
 	//普通小结
 	public boolean Normal(String result, String id);
-	
+	//影像小结
 	public boolean Photo(String result,String path,String id);
-
+	//检验小结
 	public boolean Check(String result, String tips, String id);
+	//为小结添加总结
+	public boolean addsummarize(int briefid, String sumid);
 
 }
