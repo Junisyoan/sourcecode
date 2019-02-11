@@ -42,6 +42,19 @@ public class DoctorBizImpl  implements DoctorBiz {
 		return doctorMapper.findAllDetail(onecode);
 	}
 
+	@Override
+	public boolean addsummarize(String advice, String guide) {
+		// TODO Auto-generated method stub
+		return doctorMapper.addsummarize(advice,guide);
+	}
+
+	//找到插入总结的id
+	@Override
+	public String findsumid() {
+		// TODO Auto-generated method stub
+		return doctorMapper.findsumid();
+	}
+
 
 	
 
