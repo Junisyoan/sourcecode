@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import xyz.cymedical.biz.xin.BriefBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 
 //总检医生
@@ -18,6 +19,9 @@ public class ChiefDoctorHandle {
 
 	@Resource
 	private DoctorBiz doctorbiz; 			//医生的业务逻辑
+	
+	@Resource
+	private BriefBiz briefbiz; 	 			//小结的业务逻辑
 	
 	List<Map<String,Object>> plist;			//项目列表
 	
@@ -44,6 +48,8 @@ public class ChiefDoctorHandle {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("plist", plist);
 		mav.addObject("dlist", dlist);
+		mav.addObject("onecode", onecode);
+		
 		
 		if(dlist!=null && dlist.size()>0) {
 		mav.addObject("flag", "true");
@@ -91,15 +97,23 @@ public class ChiefDoctorHandle {
 		System.out.println("tosummarize....");
 		
 		dlist = doctorbiz.findAllDetail(mycode);
+		
+		System.out.println("跳转至总结dlist..."+dlist);
 
+		String time=(String) dlist.get(0).get("time");
+		
+		System.out.println("time="+time);
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("dlist", dlist);
+		mav.addObject("time", time);
+		mav.addObject("mycode", mycode);
 		
 		mav.setViewName("WEB-INF/doctor.xin/summarize");
 		return mav;
 	}
 	
-	// 跳转至总结
+	// 总结
 	@RequestMapping(value = "/dosummarize.handle")
 	public void summary(String advice, String guide) {
 
@@ -107,6 +121,22 @@ public class ChiefDoctorHandle {
 		System.out.println("advice="+advice);
 		System.out.println("guide="+guide);
 		
-
+		dlist = doctorbiz.findAllDetail(mycode);
+		
+		doctorbiz.addsummarize(advice,guide);
+		
+		String sumid=doctorbiz.findsumid();
+		
+		System.out.println("sumid="+sumid);
+		
+		for(int i=0;i<dlist.size();i++) {
+			
+			int briefid=(Integer) dlist.get(i).get("brief_id");
+			
+			briefbiz.addsummarize(briefid,sumid);
+			
+		}
+		
+		
 	}
 }
