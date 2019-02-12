@@ -1,47 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%String path=request.getScheme()+"://"+request.getServerName()+":"
-	+request.getServerPort()+request.getContextPath()+"/";	%>
-<html>
+<%@ page language="java" import="java.util.*"
+	contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8" />
 <meta name="author" content="order by dede58.com" />
-<title>传一体检系统</title>
-<script type="text/javascript"></script>
-<script src="<%=path %>js/jquery-1.8.3.min.js"></script>
-<script src="<%=path %>js/jquery.validate.min.js"></script>
-<script src="<%=path %>js/jquery.validate.cn.js"></script>
-
+<title>团检工作后台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
+<link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
 <!--[if IE 7]>
-		  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome-ie7.min.css" />
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
-<link rel="stylesheet"
-	href="<%=path %>http://fonts.useso.com/css?family=Open+Sans:400,300" />
-<link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<%=path %>assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="<%=path %>assets/css/ace-skins.min.css" />
-<link rel="stylesheet" href="<%=path %>css/style.css" />
+<!-- <link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:400,300" />
+		 -->
+<link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="<%=path%>assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
 <!--[if lte IE 8]>
-		  <link rel="stylesheet" href="<%=path %>assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
-<script src="<%=path %>assets/js/ace-extra.min.js"></script>
+<script src="<%=path%>assets/js/ace-extra.min.js"></script>
 <!--[if lt IE 9]>
-		<script src="<%=path %>assets/js/html5shiv.js"></script>
-		<script src="<%=path %>assets/js/respond.min.js"></script>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 <!--[if !IE]> -->
-<script src="<%=path %>assets/js/jquery.min.js"></script>
+<script src="<%=path%>assets/js/jquery.min.js"></script>
 <!-- <![endif]-->
+<script src="<%=path%>assets/js/jquery.min.js"></script>
+
+
 </head>
 <body>
 	<div class="navbar navbar-default" id="navbar">
 		<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
+			try {
+				ace.settings.check('navbar', 'fixed')
+			} catch (e) {
+			}
+		</script>
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <img
@@ -68,19 +71,25 @@
 	</div>
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
 		<div class="main-container-inner">
 			<a class="menu-toggler" id="menu-toggler" href="#"> <span
 				class="menu-text"></span>
 			</a>
 			<div class="sidebar" id="sidebar">
 				<script type="text/javascript">
-						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-					</script>
+					try {
+						ace.settings.check('sidebar', 'fixed')
+					} catch (e) {
+					}
+				</script>
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						长江航道局供货管理系统</div>
+						团检工作后台</div>
 					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 						<span class="btn btn-success"></span> <span class="btn btn-info"></span>
 						<span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
@@ -166,31 +175,49 @@
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
-								name="菜单管理.html" title="菜单管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>菜单管理</a></li>
+								name="<%=path%>usermanage/select.handle" title="人员管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="角色管理.html" title="角色管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>角色管理</a></li>
+								name="<%=path%>menumanage/select.handle" title="菜单管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="用户管理.html" title="用户管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>用户管理</a></li>
+								name="<%=path%>rolemanage/select.handle" title="角色管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>deptmanage/select.handle" title="科室管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>powermanage/selectpower.handle" title="权限管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>
+							<!-- zsc -->
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>detail/detailsVeiw.handle" title="细项管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>project/projectsVeiw.handle" title="项目管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>项目管理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>combo/combosVeiw.handle" title="套餐管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>套餐管理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>companys/companysVeiw.handle" title="账号管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li>
+							<!-- zsc -->
 							<!--根据用户权限显示用户管理-->
 							<li class="home"><a href="javascript:void(0)"
-								name="权限用户管理界面.html" title="权限用户管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>权限用户管理</a></li>
+								name="<%=path%>powermanage/select.handle" title="权限用户管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
 							<!--结束-->
 							<li class="home"><a href="javascript:void(0)"
-								name="入围信息管理.html" title="入围信息管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>入围信息管理</a></li>
+								name="<%=path%>log/findAllLog.handle" title="日志管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>日志管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="供应商管理.html" title="供应商管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>供应商管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>log/findAllLog.handle" title="日志管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>日志管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>param/findAllParam.handle" title="参数管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>参数管理</a></li>
+								name="<%=path%>param/findAllParam.handle" title="参数管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>参数管理</a></li>
+							<!--                                 <li class="home"><a href="javascript:void(0)" name="入围信息管理.html" title="入围信息管理" class="iframeurl"><i class="icon-double-angle-right"></i>入围信息管理</a></li> -->
+							<!--                                 <li class="home"><a href="javascript:void(0)" name="供应商管理.html" title="供应商管理" class="iframeurl"><i class="icon-double-angle-right"></i>供应商管理</a></li> -->
+							<!--                                 <li class="home"><a href="javascript:void(0)" name="船只管理.html" title="船只管理" class="iframeurl"><i class="icon-double-angle-right"></i>船只管理</a></li> -->
+							<!--                                 <li class="home"><a href="javascript:void(0)" name="产品管理.html" title="产品管理" class="iframeurl"><i class="icon-double-angle-right"></i>产品管理</a></li> -->
 						</ul></li>
 				</ul>
 				<!-- /.nav-list -->
@@ -200,13 +227,19 @@
 						data-icon2="icon-double-angle-right"></i>
 				</div>
 				<script type="text/javascript">
-						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-					</script>
+					try {
+						ace.settings.check('sidebar', 'collapsed')
+					} catch (e) {
+					}
+				</script>
 			</div>
 			<div class="main-content">
 				<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
+					try {
+						ace.settings.check('breadcrumbs', 'fixed')
+					} catch (e) {
+					}
+				</script>
 				<div class="breadcrumbs" id="breadcrumbs">
 					<ul class="breadcrumb">
 						<li><i class="icon-home home-icon"></i> <a href="index.html">首页</a>
@@ -291,11 +324,14 @@
 	</div>
 	<!-- /.main-container -->
 	<!-- basic scripts -->
-	<script src="<%=path %>js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="js/jquery.js" type="text/javascript"></script>
 	<!--[if !IE]> -->
 	<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
-		</script>
+		window.jQuery
+				|| document
+						.write("<script src='assets/js/jquery-2.0.3.min.js'>"
+								+ "<"+"script>");
+	</script>
 	<!-- <![endif]-->
 	<!--[if IE]>
 <script type="text/javascript">
@@ -303,147 +339,167 @@
 </script>
 <![endif]-->
 	<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
-		</script>
-	<script src="<%=path %>assets/js/bootstrap.min.js"></script>
-	<script src="<%=path %>assets/js/typeahead-bs2.min.js"></script>
+		if ("ontouchend" in document)
+			document
+					.write("<script src='assets/js/jquery.mobile.custom.min.js'>"
+							+ "<"+"script>");
+	</script>
+	<script src="<%=path%>assets/js/jquery.min.js"></script>
+
+	<script src="<%=path%>assets/js/bootstrap.min.js"></script>
+	<script src="<%=path%>assets/js/typeahead-bs2.min.js"></script>
 	<!-- page specific plugin scripts -->
 	<!--[if lte IE 8]>
-		  <script src="<%=path %>assets/js/excanvas.min.js"></script>
+		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 	<!-- ace scripts -->
 	<script src="<%=path%>assets/js/ace-elements.min.js"></script>
 	<script src="<%=path%>assets/js/ace.min.js"></script>
 	<script src="<%=path%>assets/layer/layer.js" type="text/javascript"></script>
 	<!-- inline scripts related to this page -->
-	<script type="text/javascript">		
- jQuery(document).ready(function(){  
-    //初始化宽度、高度    
-    $("#main-container").height($(window).height()-76); 
-	$("#iframe").height($(window).height()-155); 
-	$(".sidebar").height($(window).height()-99); 
-	var thisHeight = $("#nav_list").height($(window).height()-185); 
-	$(".submenu").height($(thisHeight).height()-160);
-	$("#nav_list").children(".submenu").css("height",thisHeight);
-	
-    //当文档窗口发生改变时 触发  
-    $(window).resize(function(){
-	$("#main-container").height($(window).height()-76); 
-	$("#iframe").height($(window).height()-155);
-	$(".sidebar").height($(window).height()-99); 
-	var thisHeight = $("#nav_list").height($(window).height()-185); 
-	$(".submenu").height($(thisHeight).height()-160);
-	$("#nav_list").children(".submenu").css("height",thisHeight);
-  });
-    $(".iframeurl").bind("click",function(){
-                var cid = $(this).attr("name");
-				var cname = $(this).attr("title");
-                $("#iframe").attr("src",cid).ready();
-				$("#Bcrumbs").attr("href",cid).ready();
-				$(".Current_page a").attr('href',cid).ready();	
-				$(".Current_page").html(cname).ready();	
-				$("#parentIframe").html(""). css("display","none").ready();						
-      });  
-	  	
-});
-//jQuery( document).ready(function(){
-//	  $("#submit").click(function(){
-//	// var num=0;
-//     var str="";
-//     $("input[type$='password']").each(function(n){
-//          if($(this).val()=="")
-//          {
-//              // num++;
-//			   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
-//                title: '提示框',				
-//				icon:0,				
-//          }); 
-//             // layer.msg(str+=""+$(this).attr("name")+"不能为空！\r\n");
-//             layer.close(index);
-//          }		  
-//     });    
-//})		
-//	});
-/*********************点击事件*********************/
-$( document).ready(function(){
-  $('#nav_list').find('li.home').click(function(){
-	$('#nav_list').find('li.home').removeClass('active');
-	$(this).addClass('active');
-  });	
-													
-})
-//时间设置
-  function currentTime(){ 
-    var d=new Date(),str=''; 
-    str+=d.getFullYear()+'年'; 
-    str+=d.getMonth() + 1+'月'; 
-    str+=d.getDate()+'日'; 
-    str+=d.getHours()+'时'; 
-    str+=d.getMinutes()+'分'; 
-    str+= d.getSeconds()+'秒'; 
-    return str; 
-} 
-setInterval(function(){$('#time').html(currentTime)},1000); 
-//修改密码
-$('.change_Password').on('click', function(){
-    layer.open({
-    type: 1,
-	title:'修改密码',
-	area: ['300px','300px'],
-	shadeClose: true,
-	content: $('#change_Pass'),
-	btn:['确认修改'],
-	yes:function(index, layero){		
-		   if ($("#password").val()==""){
-			  layer.alert('原密码不能为空!',{
-              title: '提示框',				
-				icon:0,
-			    
-			 });
-			return false;
-          } 
-		  if ($("#Nes_pas").val()==""){
-			  layer.alert('新密码不能为空!',{
-              title: '提示框',				
-				icon:0,
-			    
-			 });
-			return false;
-          } 
-		   
-		  if ($("#c_mew_pas").val()==""){
-			  layer.alert('确认新密码不能为空!',{
-              title: '提示框',				
-				icon:0,
-			    
-			 });
-			return false;
-          }
-		    if(!$("#c_mew_pas").val || $("#c_mew_pas").val() != $("#Nes_pas").val() )
-        {
-            layer.alert('密码不一致!',{
-              title: '提示框',				
-				icon:0,
-			    
-			 });
-			 return false;
-        }   
-		 else{			  
-			  layer.alert('修改成功！',{
-               title: '提示框',				
-			icon:1,		
-			  }); 
-			  layer.close(index);      
-		  }	 
-	}
-    });
-});
-  $('#Exit_system').on('click', function(){
-      layer.confirm('是否确定退出系统？', {
-     btn: ['是','否'] //按钮
-    }, 
-	function(){
-	  location.href="<%=path%>backlogin.jsp";
+	<script type="text/javascript">
+		jQuery(document).ready(
+				function() {
+					//初始化宽度、高度    
+					$("#main-container").height($(window).height() - 76);
+					$("#iframe").height($(window).height() - 155);
+					$(".sidebar").height($(window).height() - 99);
+					var thisHeight = $("#nav_list").height(
+							$(window).height() - 185);
+					$(".submenu").height($(thisHeight).height() - 160);
+					$("#nav_list").children(".submenu").css("height",
+							thisHeight);
+
+					//当文档窗口发生改变时 触发  
+					$(window).resize(
+							function() {
+								$("#main-container").height(
+										$(window).height() - 76);
+								$("#iframe").height($(window).height() - 155);
+								$(".sidebar").height($(window).height() - 99);
+								var thisHeight = $("#nav_list").height(
+										$(window).height() - 185);
+								$(".submenu").height(
+										$(thisHeight).height() - 160);
+								$("#nav_list").children(".submenu").css(
+										"height", thisHeight);
+							});
+					$(".iframeurl").bind(
+							"click",
+							function() {
+								var cid = $(this).attr("name");
+								var cname = $(this).attr("title");
+								$("#iframe").attr("src", cid).ready();
+								$("#Bcrumbs").attr("href", cid).ready();
+								$(".Current_page a").attr('href', cid).ready();
+								$(".Current_page").html(cname).ready();
+								$("#parentIframe").html("").css("display",
+										"none").ready();
+							});
+
+				});
+		//jQuery( document).ready(function(){
+		//	  $("#submit").click(function(){
+		//	// var num=0;
+		//     var str="";
+		//     $("input[type$='password']").each(function(n){
+		//          if($(this).val()=="")
+		//          {
+		//              // num++;
+		//			   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
+		//                title: '提示框',				
+		//				icon:0,				
+		//          }); 
+		//             // layer.msg(str+=""+$(this).attr("name")+"不能为空！\r\n");
+		//             layer.close(index);
+		//          }		  
+		//     });    
+		//})		
+		//	});
+		/*********************点击事件*********************/
+		$(document).ready(function() {
+			$('#nav_list').find('li.home').click(function() {
+				$('#nav_list').find('li.home').removeClass('active');
+				$(this).addClass('active');
+			});
+
+		})
+		//时间设置
+		function currentTime() {
+			var d = new Date(), str = '';
+			str += d.getFullYear() + '年';
+			str += d.getMonth() + 1 + '月';
+			str += d.getDate() + '日';
+			str += d.getHours() + '时';
+			str += d.getMinutes() + '分';
+			str += d.getSeconds() + '秒';
+			return str;
+		}
+		setInterval(function() {
+			$('#time').html(currentTime)
+		}, 1000);
+		//修改密码
+		$('.change_Password').on(
+				'click',
+				function() {
+					layer.open({
+						type : 1,
+						title : '修改密码',
+						area : [ '300px', '300px' ],
+						shadeClose : true,
+						content : $('#change_Pass'),
+						btn : [ '确认修改' ],
+						yes : function(index, layero) {
+							if ($("#password").val() == "") {
+								layer.alert('原密码不能为空!', {
+									title : '提示框',
+									icon : 0,
+
+								});
+								return false;
+							}
+							if ($("#Nes_pas").val() == "") {
+								layer.alert('新密码不能为空!', {
+									title : '提示框',
+									icon : 0,
+
+								});
+								return false;
+							}
+
+							if ($("#c_mew_pas").val() == "") {
+								layer.alert('确认新密码不能为空!', {
+									title : '提示框',
+									icon : 0,
+
+								});
+								return false;
+							}
+							if (!$("#c_mew_pas").val
+									|| $("#c_mew_pas").val() != $("#Nes_pas")
+											.val()) {
+								layer.alert('密码不一致!', {
+									title : '提示框',
+									icon : 0,
+
+								});
+								return false;
+							} else {
+								layer.alert('修改成功！', {
+									title : '提示框',
+									icon : 1,
+								});
+								layer.close(index);
+							}
+						}
+					});
+				});
+		$('#Exit_system').on('click', function() {
+			layer.confirm('是否确定退出系统？', {
+				btn : [ '是', '否' ]
+			//按钮
+			}, function() {
+				location.href = "登录.html";
 
 			});
 		});
