@@ -13,5 +13,7 @@ public interface TbRoleBiz {
 	public int addRole(String name);//添加
 	
 	public int delectrole(int role_id);
+	
+	public int upRole(int role_id,String name);
 
 }
