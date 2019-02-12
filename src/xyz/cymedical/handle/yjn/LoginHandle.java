@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +27,11 @@ public class LoginHandle {
 
 	@RequestMapping(value = "/login.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String login(HttpServletRequest req, String checkCode, Tb_user user) {
-
+		HttpSession session = req.getSession(); 
+		
 		String result = "";
 
-		String mapcode = (String) req.getSession().getAttribute("CODE");
+		String mapcode = (String) session.getAttribute("CODE");
 
 		System.out.println("mapcode=" + mapcode);
 
@@ -46,6 +48,9 @@ public class LoginHandle {
 		} else {
 			result = "账号密码错误";
 		}
+		
+		session.setAttribute("user", userlist.get(0));
+		
 		return result;
 
 	}
