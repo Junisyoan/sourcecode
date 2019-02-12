@@ -120,17 +120,17 @@ public class RoleManageHandle {
 					ModelAndView mav = new ModelAndView();  
 					System.out.println("...=" + nameed);
 					System.out.println("...=" + newname);
-//					int role_id = Integer.valueOf(name);
-//					System.out.println("user_id"+role_id);
-					 
-					
-					
-					
-					
-					mav.setViewName("WEB-INF/view.jiang/rolemanage");
-					 
-
-					return mav;
+					int role_id = Integer.valueOf(nameed);
+					String name=newname;
+					System.out.println("user_id"+role_id);
+					int ret=tbRoleBiz.upRole(role_id, name);
+					if(ret==1) {
+						mav.setViewName("WEB-INF/view.jiang/rolemanage");
+						
+					}else {
+						mav.setViewName("WEB-INF/view.jiang/err");
+					}
+					 return mav;
 
 				}
 }
