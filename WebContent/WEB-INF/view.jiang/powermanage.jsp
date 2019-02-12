@@ -34,6 +34,15 @@
     <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加权限</button>
       <div class="Add_Manager_style">
     		  
+    	<form method="post" id = "aFrom" method="post">
+     		权限id	<input type="text" name="power_id"/>
+     		菜单id	<input type="text" name="menu_id"/>
+     		权限名    <input type="text" name="name"/>
+     		  
+  			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
+  	 	</form>    
+    		  
+    		  
     <div id="Add_Product_style" style="display:none">
      <div class="page-content">
     <div class="add_user_style clearfix">
@@ -68,7 +77,7 @@
  <th>操作</th>
 </tr>
 </thead>
-<tbody>
+<tbody id="companyBody">
 <c:forEach items="${maplist}" var="u" varStatus="s">
 <tr>
 <td>${u.power_id}</td>
@@ -84,20 +93,48 @@
 
 </table>
 </body>
-
-<%-- 		<script src="<%=path %>assets/js/jquery.min.js"></script> --%>
  
-
-<!-- 		<script type="text/javascript"> -->
-<!-- //   			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>"); -->
-<!--  	</script>   -->
-
-	 
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	$('#test').DataTable();
 });
+
+function putIn(){
+	$.ajax({
+		url:"<%=path%>powermanage/selectCompany.handle",
+		type:"POST",
+		dataType:"JSON",
+		data:$("#aFrom").serialize(),
+		success:function(companys){
+			show(companys);
+		},
+		error:function(){
+			alert("异常");
+		}
+	});
+}
+function show(companys){
+	 
+	$("#companyBody").empty();  
+	
+	for(var i = 0;i < companys.length;i++){
+		
+		var td1=$("<td></td>").text(companys[i].power_id); 
+		var td2=$("<td></td>").text(companys[i].menu_id); 
+		var td3=$("<td></td>").text(companys[i].name); 
+		var td4=$("<td></td>");
+		
+		var input1=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].power_id+"'>修改</button>"); 
+	 	var input2=$("<button type='button' class='btn btn-warning' onclick='delect()' name='"+companys[i].power_id+"'>删除</button>");
+		var tr=$("<tr></tr>");
+		
+		$(td4).append(input1,input2);  
+		$(tr).append(td1,td2,td3,td4); 
+		$("#companyBody").append(tr);
+	}
+}
+
 
 
 $('#add_butn').on('click', function(){
