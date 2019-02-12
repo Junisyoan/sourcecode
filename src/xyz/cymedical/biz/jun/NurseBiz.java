@@ -15,6 +15,13 @@ import xyz.cymedical.entity.xin.Combo;
 */
 public interface NurseBiz {
 	
+
+	/**
+	 * 打印导检单
+	 * @param bid	记账表id
+	 * @return	导检单列表
+	 */
+	public List<Patient> getCheckPage(String bid);
 	
 	/**
 	 * 插入记账表和病人表之间的关系
