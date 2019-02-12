@@ -88,7 +88,7 @@ function pAll(){
 	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)); //从开始代码向后取html 
 	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
 	
-	var reg = new RegExp("<input type=\"button\" value=\"打印\" onclick=\"preview((.*?));\">	","g");
+	var reg = new RegExp("<input type=\"button\" value=\"打印\" onclick=\"preview((.*?));\">","g");
 	
 	prnhtml=prnhtml.replace(reg,"");
 	window.document.body.innerHTML=prnhtml; 
