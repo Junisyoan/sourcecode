@@ -112,8 +112,9 @@
 				<p class="left1"><textarea rows="5" cols="150" id="guide" name="guide"></textarea></p>
 
 <%-- 			<c:if test="${flag!=null}"> --%>
-				<div style="width:100px;margin:0 auto">
-					<input type="submit" class="btn btn-warning" onclick="return confirm('确定提交么？') ;" value="提交"/></a>
+				<div style="width:180px;margin:0 auto;border:0px red solid;padding:20px">
+					<a href="<%=path%>chiefdoctor/first.handle"><button type="button" class="btn btn-info Product_Details" >返回</button></a>
+					<input type="submit" class="btn btn-info Product_Details" onClick="return confirm('确定提交么？') ;" value="提交"/>
 				</div>  
 <%-- 			</c:if> --%>
 		</form>
