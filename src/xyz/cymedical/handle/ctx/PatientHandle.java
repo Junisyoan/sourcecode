@@ -20,6 +20,8 @@ public class PatientHandle {
 	private PatientMapper patientMapper;
 
 	private List<Patient> patientlist = new ArrayList<Patient>();
+	private List<Patient> patientlist2 = new ArrayList<Patient>();
+	private List<Patient> patientlist3 = new ArrayList<Patient>();
 
 	public PatientHandle() {
 
@@ -85,25 +87,55 @@ public class PatientHandle {
 
 	// 体检报告人查询
 	@RequestMapping(value = "/print.handle")
-	public ModelAndView print(String name) {
+	public ModelAndView print(String name, String time) {
 
-		patientlist = patientMapper.query(name, "", "", "");
+		patientlist = patientMapper.query(name, "", time, "");
+		patientlist2 = patientMapper.queryproject(name, time);
+		patientlist3 = patientMapper.querybrief(name, time);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/printpatient");
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+			mav.addObject("patientlist2", patientlist2);
+			mav.addObject("patientlist3", patientlist3);
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = "/showmessage.handle")
+	public ModelAndView showmessage(String name, String time) {
+
+		patientlist = patientMapper.query(name, "", time, "");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/message");
 		if (patientlist.size() > 0) {
 			mav.addObject("patientlist", patientlist);
 		}
 		return mav;
 	}
 
-	@RequestMapping(value = "/showmessage.handle")
-	public ModelAndView showmessage(String name) {
+	@RequestMapping(value = "/showproject.handle")
+	public ModelAndView showproject(String name, String time) {
 
-		patientlist = patientMapper.query(name, "", "", "");
+		patientlist = patientMapper.queryproject(name, time);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/medical_workstation/message");
+		mav.setViewName("WEB-INF/medical_workstation/project");
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
+		return mav;
+	}
+
+	@RequestMapping(value = "/showbrief.handle")
+	public ModelAndView showbrief(String name, String time) {
+
+		patientlist = patientMapper.querybrief(name, time);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/brief");
 		if (patientlist.size() > 0) {
 			mav.addObject("patientlist", patientlist);
 		}

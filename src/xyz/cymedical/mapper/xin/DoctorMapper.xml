@@ -9,12 +9,12 @@
 	<select id="findMyProject" parameterType="String"
 		resultType="java.util.HashMap">
 		select a.*,c.project_id,c.name projectname,e.name keshi
-		,d.patient_project_id,d.state from 
-		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e
+		,d.*,f.account from 
+		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_user f
 		where
 		a.combo_id=b.combo_id and b.project_id=c.project_id and
 		d.project_id=c.project_id and c.param_id=e.param_id
-		and a.code=#{onecode }
+		and f.user_id=d.user_id and a.code=#{onecode }  order by e.name
 	</select>
 
 	<select id="findMyDetail" parameterType="java.lang.Integer"
@@ -25,13 +25,27 @@
 		and b.project_id=#{0 } and a.patient_id=#{1 }
 	</select>
 
+	<select id="findAllDetail" parameterType="String"
+		resultType="java.util.HashMap">
+		select * from 
+		tb_brief a,tb_detail b,tb_patient c 
+		where a.detail_id=b.detail_id and a.patient_id=c.patient_id and c.code=#{0} 
+		order by b.type desc
+	</select>
+
+
 	<update id="receive" parameterType="java.lang.Integer">
 		update
 		tb_patient_project set
 		state ='已接收' where patient_project_id=#{patient_project_id }
 	</update>
 
+	<insert id="addsummarize">
+		insert into tb_summarize (advise,guide) values (#{0 },#{1 });
+	</insert>
 
-
+	<select id="findsumid" resultType="String">
+		select max(summarize_id) from tb_summarize;
+	</select>
 
 </mapper> 

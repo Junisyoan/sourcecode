@@ -30,7 +30,7 @@ public class LogHandle {
 		System.out.println(loglist);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/medical_workstation/selectLog");
+		mav.setViewName("WEB-INF/view.jiang/selectLog");
 		mav.addObject("loglist", loglist);
 
 		return mav;
@@ -50,7 +50,7 @@ public class LogHandle {
 
 		loglist = logBiz.findAllLog();
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/medical_workstation/selectLog");
+		mav.setViewName("WEB-INF/view.jiang/selectLog");
 		mav.addObject("loglist", loglist);
 
 		return mav;

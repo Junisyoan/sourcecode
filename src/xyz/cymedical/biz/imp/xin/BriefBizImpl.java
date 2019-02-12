@@ -38,4 +38,11 @@ public class BriefBizImpl  implements BriefBiz {
 	public boolean Normal(String result, String id) {
 		return briefMapper.Normal(result, id);
 	}
+
+	@Override
+	public boolean addsummarize(int briefid, String sumid) {
+		// TODO Auto-generated method stub
+		return briefMapper.addsummarize(briefid,sumid);
+		
+	}
 }

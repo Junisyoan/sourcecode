@@ -24,4 +24,12 @@ public interface DoctorBiz {
 	//项目接收
 	public boolean receive(int patient_project_id);
 
+	//查找条码号对应病人的所有小结
+	public List<Map<String, Object>> findAllDetail(String onecode);
+
+	public boolean addsummarize(String advice, String guide);
+
+	//找到插入总结的id
+	public String findsumid();
+
 }

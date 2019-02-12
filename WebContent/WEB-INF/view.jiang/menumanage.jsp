@@ -38,7 +38,7 @@
      <div class="page-content">
     <div class="add_user_style clearfix">
     
-    	<form action="<%=path%>menumanage/addmenuid.handle" method="post" id="add">
+    	<form action="<%=path%>powermanage/addmenuid.handle" method="post" id="add">
   		   <ul class="clearfix">
      
       

@@ -2,10 +2,17 @@ package xyz.cymedical.biz.yjn;
 
 import java.util.List;
 
-import xyz.cymedical.entity.yjn.Param;
+import org.apache.ibatis.annotations.Param;
+
+import xyz.cymedical.entity.yjn.Parameter;
 
 public interface ParamBiz {
-	public List<Param> findAllParam();
-	
+	public List<Parameter> findAllParam();
+
 	public boolean delParam(String param_id);
+
+	public List<Parameter> searchParam(@Param("param_id") String param_id, @Param("pid") String pid,
+			@Param("name") String name);
+
+	public boolean insertParam(@Param("pid") String pid, @Param("name") String name);
 }

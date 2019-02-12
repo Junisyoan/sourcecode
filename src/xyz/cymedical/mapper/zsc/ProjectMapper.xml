@@ -4,6 +4,11 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.ProjectMapper">
 
+	<select id="selectParamList" resultType="xyz.cymedical.entity.yjn.Parameter">
+		select * from tb_param where pid = 
+		(select param_id from tb_param where name = '科室') 
+	</select>
+	
 	<!-- ajax验证 -->
 	<select id="checkName" parameterType="map" resultType="int">
 		select count(*) from tb_project where name = #{name}
@@ -31,6 +36,7 @@
 	</insert>
 	
 	<delete id="deleteProject" parameterType="int">
+		delete from tb_project_combo where project_id = #{project_id};
 		delete from tb_detail_project where project_id = #{project_id};
 		delete from tb_project where project_id = #{project_id};
 	</delete>
@@ -64,7 +70,7 @@
 			and ${max} > pj.price
 		</if>
 		<if test="deptname!=null and deptname!=''">
-			and pa.name = ${paname}
+			and pa.name = #{deptname}
 		</if>
 	</select>
 	
@@ -81,7 +87,7 @@
 		<id property="project_id" column="project_id"/>
 		<result property="name" column="name"/>
 		<result property="price" column="price"/>
-		<association property="param" javaType="xyz.cymedical.entity.yjn.Param">
+		<association property="param" javaType="xyz.cymedical.entity.yjn.Parameter">
 			<id property="param_id" column="param_id"/>
 			<result property="name" column="paname"/>
 		</association>

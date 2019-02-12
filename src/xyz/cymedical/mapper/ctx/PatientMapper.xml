@@ -4,16 +4,19 @@
 
 <mapper namespace="xyz.cymedical.mapper.ctx.PatientMapper">
 
-<!-- 更新病人信息 -->
-<!-- 	<update id="updataPatient" parameterType="xyz.cymedical.entity.jun.Patient"> -->
-<!-- 		update tb_patient set  -->
-<!-- 	</update> -->
-<!-- 插入病人，返回自增id -->
-	<insert id="insertPatient" useGeneratedKeys="true" keyProperty="paitent_id" parameterType="xyz.cymedical.entity.jun.Patient">
-		insert into tb_patient(company_id,combo_id,name,sex,age,ID,code,phone,check_num)
-		values(#{company_id},#{combo_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})	
+	<!-- 更新病人信息 -->
+	<!-- <update id="updataPatient" parameterType="xyz.cymedical.entity.jun.Patient"> -->
+	<!-- update tb_patient set -->
+	<!-- </update> -->
+	<!-- 插入病人，返回自增id -->
+	<insert id="insertPatient" useGeneratedKeys="true"
+		keyProperty="paitent_id"
+		parameterType="xyz.cymedical.entity.jun.Patient">
+		insert into
+		tb_patient(company_id,combo_id,name,sex,age,ID,code,phone,check_num)
+		values(#{company_id},#{combo_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})
 	</insert>
-<!-- 批量插入 -->
+	<!-- 批量插入 -->
 	<insert id="insertByBatch" parameterType="java.util.List">
 		insert into tb_patient(company_id,combo_id,name,sex,age,ID,code,phone)
 		values
@@ -30,7 +33,7 @@
 		from (select p.company_id,p.name n1,c.name
 		n2,p.sex,p.age,p.ID,p.phone,p.code,p.check_num from tb_patient p left
 		join tb_company c on p.company_id = c.company_id)a left join tb_group
-		g on a.company_id = g.company_id where 1 = 1 
+		g on a.company_id = g.company_id where 1 = 1
 
 		<if test="name != null and name != ''">
 			and a.n1 like '%${name}%'
@@ -43,6 +46,50 @@
 		</if>
 		<if test="code != null  and code != ''">
 			and a.code like '%${code}%'
+		</if>
+	</select>
+
+	<select id="queryproject"
+		parameterType="xyz.cymedical.entity.jun.Patient"
+		resultType="java.util.HashMap">
+		select a3.n1,a3.n2,a3.time,par.`name` n3 from (select
+		a2.n1,a2.n2,a2.param_id,gro.time from (select a1.name n1,pro.`name`
+		n2,a1.project_id,pro.param_id,a1.company_id from (select
+		pp.patient_id,pp.project_id,pat.`name`,pat.company_id from
+		tb_patient_project pp left join tb_patient pat on pp.patient_id =
+		pat.patient_id) a1 left join tb_project pro on a1.project_id =
+		pro.project_id) a2 left join tb_group gro on a2.company_id =
+		gro.company_id) a3 left join tb_param par on a3.param_id =
+		par.param_id where 1 = 1
+
+		<if test="name != null and name != ''">
+			and a3.n1 like '%${name}%'
+		</if>
+		<if test="time != null and time != ''">
+			and a3.time = #{time}
+		</if>
+	</select>
+
+	<select id="querybrief"
+		parameterType="xyz.cymedical.entity.jun.Patient"
+		resultType="java.util.HashMap">
+		select a4.n1,a4.n2,a4.unit,a4.min,a4.max,a4.resulttext,gro.time from
+		(select a3.n1,a3.n2,a3.unit,a3.min,a3.max,br.resulttext,a3.company_id
+		from (select a2.`name` n1,det.`name`
+		n2,det.unit,det.min,det.max,a2.detail_id,a2.company_id from (select
+		a1.`name`,dp.detail_id,a1.company_id from (select
+		pat.`name`,pp.project_id,pat.company_id from tb_patient_project pp
+		left join tb_patient pat on pp.patient_id = pat.patient_id) a1 left
+		join tb_detail_project dp on a1.project_id = dp.project_id) a2 left
+		join tb_detail det on a2.detail_id = det.detail_id) a3 left join
+		tb_brief br on a3.detail_id = br.detail_id) a4 left join tb_group gro
+		on a4.company_id = gro.company_id where 1 = 1
+
+		<if test="name != null and name != ''">
+			and a4.n1 like '%${name}%'
+		</if>
+		<if test="time != null and time != ''">
+			and gro.time = #{time}
 		</if>
 	</select>
 

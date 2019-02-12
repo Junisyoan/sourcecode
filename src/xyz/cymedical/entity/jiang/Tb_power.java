@@ -1,6 +1,9 @@
 package xyz.cymedical.entity.jiang;
 
+import org.springframework.stereotype.Component;
+
 //权限表
+@Component
 public class Tb_power {
 
 	private int power_id;//权限id

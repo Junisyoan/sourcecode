@@ -34,8 +34,9 @@ public class DetailBiz {
 		}
 	};
 	
-	public int deleteDetail(int id) {
-		return detailMapper.deleteDetail(id);
+	public String deleteDetail(int id) {
+		int rt = detailMapper.deleteDetail(id);
+		return "删除成功";
 	};
 	
 	public List<Detail> findDetails(){

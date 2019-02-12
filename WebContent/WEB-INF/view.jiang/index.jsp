@@ -186,11 +186,11 @@
 								name="供应商管理.html" title="供应商管理" class="iframeurl"><i
 									class="icon-double-angle-right"></i>供应商管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="船只管理.html" title="船只管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>船只管理</a></li>
+								name="<%=path%>log/findAllLog.handle" title="日志管理" class="iframeurl"><i
+									class="icon-double-angle-right"></i>日志管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="产品管理.html" title="产品管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>产品管理</a></li>
+								name="<%=path%>param/findAllParam.handle" title="参数管理" class="iframeurl"><i
+									class="icon-double-angle-right"></i>参数管理</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.nav-list -->

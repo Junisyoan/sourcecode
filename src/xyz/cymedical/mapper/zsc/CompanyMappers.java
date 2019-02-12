@@ -23,4 +23,8 @@ public interface CompanyMappers {
 	public List<Company> selectCompany(Map<String, Object> map);
 
 	public int checkName(Map<String, Object> map);
+
+	public int stateChange(Company company);
+	
+	public int resetPwd(String company_id);
 }

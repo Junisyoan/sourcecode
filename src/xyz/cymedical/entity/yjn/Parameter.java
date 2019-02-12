@@ -1,15 +1,15 @@
 package xyz.cymedical.entity.yjn;
 
-public class Param {
+public class Parameter {
 	private int param_id;
 	private int pid;
 	private String name;
 
-	public Param() {
+	public Parameter() {
 		super();
 	}
 
-	public Param(int param_id, int pid, String name) {
+	public Parameter(int param_id, int pid, String name) {
 		super();
 		this.param_id = param_id;
 		this.pid = pid;
@@ -39,5 +39,5 @@ public class Param {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }
