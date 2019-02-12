@@ -147,7 +147,7 @@
 			<th>操作</th>
 		</tr>
       </thead>
-      <tbody id = "projectBody">
+      <tbody id = "comboBody">
 		<c:forEach items="${combos}" var = "c">
 		<tr>
 			<td>${c.name}</td>
@@ -185,7 +185,7 @@ var row = 3;
 var totalPage;
 var state;
 
-var numCheck = /^[0-9]+\.{0,1}[0-9]{0,2}$/;
+var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 
 function createProject(project_id,project_name){
 	var project = new Object();
@@ -247,13 +247,27 @@ function next(){
 <!-- 查 -->
 <script type="text/javascript">
 function putIn(){
+	if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+		layer.alert('最小值必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
+	if($('#max').val() != ""&&!(numCheck.test($('#max').val())||numCheck1.test($('#max').val()))){
+		layer.alert('最大值必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
 	$.ajax({
 		url:"<%=path%>combo/selectCombo.handle",
 		type:"POST",
 		dataType:"JSON",
 		data:$("#aFrom").serialize(),
-		success:function(combo){
-			showCombos(combo);
+		success:function(combos){
+			showCombos(combos);
 		},
 		error:function(){
 			alert("异常");
@@ -442,11 +456,6 @@ function change(e){
 					 });
 					return false;
 			}
-			
-			console.log($("#combo_id").val());
-			console.log($("#name").val());
-			console.log($("#price").val());
-			console.log(idArray.length);
 			
 			$.ajax({
 	    		type:"POST",

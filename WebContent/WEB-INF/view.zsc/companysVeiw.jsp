@@ -40,12 +40,12 @@
      <form method="post" id = "aFrom" method="post">
      		公司名	<input type="text" name="name"/>
      		账户名	<input type="text" name="account"/>
-     		电话号码	<input type="text" name="tel"/>
+     		电话号码	<input type="text" name="tel" id = "tel2"/>
      		地址		<input type="text" name="address"/><br/>
      		领队人	<input type="text" name="people"/>
-     		领队人电话	<input type="text" name="phone"/>
-     		账户金额	<input type="text" name="min"/>
-     		至		<input type="text" name="max"/>
+     		领队人电话	<input type="text" name="phone" id = "phone2"/>
+     		账户金额	<input type="text" name="min" id = "min"/>
+     		至		<input type="text" name="max" id = "max"/>
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 </form>
      <div id="Add_Product_style" style="display:none">
@@ -184,6 +184,8 @@
 	$(function(){
 		$('#test').DataTable();
 	});
+	var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
+	var numCheck1 = /^[0-9]*$/;
 </script>
 <script type="text/javascript">
 function stateChange(e){
@@ -192,33 +194,61 @@ function stateChange(e){
 	var state = t.innerText;
 	var company_id = t.name;
 	
-	var form = document.createElement("Form");
-	form.action="<%=path%>companys/stateChange.handle";
-	form.method="post";
-	form.style.display="none";
-		
-	var option1 = document.createElement("input");
-	option1.name="company_id";
-	option1.value=company_id;
-	
-	var option2 = document.createElement("input");
-	option2.name="state";
-	if(state == "禁用"){
-		option2.value="禁用";
-	}else{
-		option2.value="在用";
+	if(state != "禁用"){
+		state="在用";
 	}
 	
-	form.appendChild(option1);
-	form.appendChild(option2);
-	document.body.appendChild(form);
-		
-	form.submit();
+	$.ajax({
+		url:"<%=path%>companys/stateChange.handle",
+		type:"POST",
+		dataType:"text",
+		data:{
+			"company_id":company_id,
+			"state":state
+		},
+		success:function(msg){
+			alert(msg);
+			if(msg.indexOf("成功") != -1){
+				window.location.href="<%=path%>companys/companysVeiw.handle";
+			}
+		},
+		error:function(){
+			alert("异常");
+		}
+	});
 }
 </script>
 <!-- 查 -->
 <script type="text/javascript">
 function putIn(){
+	if($('#tel2').val() != ""&&!numCheck.test($('#tel2').val())){
+		layer.alert('电话号码必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
+	if($('#phone2').val() != ""&&!numCheck.test($('#phone2').val())){
+		layer.alert('手机号必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
+	if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+		layer.alert('最小值必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
+	if($('#max').val() != ""&&!(numCheck.test($('#max').val())||numCheck1.test($('#max').val()))){
+		layer.alert('最大值必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
 	$.ajax({
 		url:"<%=path%>companys/selectCompany.handle",
 		type:"POST",
@@ -249,9 +279,9 @@ function show(companys){
 		var input1;
 		
 		if(companys[i].state == "禁用"){
-			input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+companys[i].company_id+"'>启用</button>");
+			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>启用</button>");
 		}else{
-			input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+companys[i].company_id+"'>禁用</button>");
+			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>禁用</button>");
 		}
 		
 		var input2=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+companys[i].company_id+"'>删除</button>");
@@ -398,7 +428,7 @@ function change(e){
 			}if(!numCheck.test($('#phone').val())){
 				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
 					return false;
-			}if(!numCheck.test($('#deposit').val())){
+			}if($('#deposit').val()==""||!(numCheck.test($('#deposit').val())||numCheck1.test($('#deposit').val()))	){
 				layer.alert('金额必须是数值!',{title: '提示框',icon:0,});
 				return false;
 			}
@@ -473,6 +503,14 @@ $('#add_butn').on('click', function(){
 				layer.alert('账号不能为空!',{title: '提示框',icon:0,});
 					return false;
 					
+			}if($('#pwd1').val()==""){
+				layer.alert('密码不能为空!',{title: '提示框',icon:0,});
+				return false;
+				
+			}if($('#confirmPwd1').val()!=$('#pwd1').val()){
+				layer.alert('两次输入密码不同!',{title: '提示框',icon:0,});
+				return false;
+				
 			}if(!numCheck.test($('#tel1').val())){
 				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
 					return false;
@@ -488,7 +526,8 @@ $('#add_butn').on('click', function(){
 			}if(!numCheck.test($('#phone1').val())){
 				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
 					return false;
-			}if(!numCheck.test($('#deposit1').val())){
+					
+			}if($('#deposit1').val()==""||!(numCheck.test($('#deposit1').val())||numCheck1.test($('#deposit1').val()))){
 				layer.alert('金额必须是数值!',{title: '提示框',icon:0,});
 				return false;
 			}
