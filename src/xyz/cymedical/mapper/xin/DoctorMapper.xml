@@ -9,7 +9,7 @@
 	<select id="findMyProject" parameterType="String"
 		resultType="java.util.HashMap">
 		select a.*,c.project_id,c.name projectname,e.name keshi
-		,d.*,f.account from 
+		,d.*,f.name docname from 
 		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_user f
 		where
 		a.combo_id=b.combo_id and b.project_id=c.project_id and
@@ -33,6 +33,9 @@
 		order by b.type desc
 	</select>
 
+	<select id="login" resultType="xyz.cymedical.entity.jiang.Tb_user" >
+		select * from tb_user where account=#{0} and pwd=#{1};
+	</select>
 
 	<update id="receive" parameterType="java.lang.Integer">
 		update
@@ -47,5 +50,15 @@
 	<select id="findsumid" resultType="String">
 		select max(summarize_id) from tb_summarize;
 	</select>
+	
+	<select id="getMyMenu" parameterType="java.lang.Integer" resultType="xyz.cymedical.entity.jiang.Tb_menu">
+		select * from 
+		tb_user a,tb_role_dept b,tb_role_power c,tb_power d,tb_menu e
+		WHERE
+		a.role_dept_id=b.role_dept_id and b.role_id=c.role_id 
+		and c.power_id = d.power_id and d.menu_id=e.menu_id and 
+		user_id=#{0} and a.role_dept_id=#{1} 
+	</select>
+	
 
-</mapper> 
+</mapper>

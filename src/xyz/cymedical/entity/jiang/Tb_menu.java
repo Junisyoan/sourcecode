@@ -42,6 +42,11 @@ public class Tb_menu {
 	public void setLink(String link) {
 		this.link = link;
 	}
+
+	@Override
+	public String toString() {
+		return "Tb_menu [menu_id=" + menu_id + ", name=" + name + ", link=" + link + "]";
+	}
 	
 	  
 	
