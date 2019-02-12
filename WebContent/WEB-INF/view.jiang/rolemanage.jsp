@@ -33,6 +33,13 @@
       <div class="title_name">添加角色</div>
     <button type="button" class="btn btn-primary" id="Add_Product_btn">添加角色</button>
     <div class="Add_Manager_style">
+    
+    	<form method="post" id = "aFrom" method="post">
+     		角色名	<input type="text" name="name"/>
+     		  
+  			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
+  	 	</form>  
+    
     <div id="Add_Product_style" style="display:none">
      <div class="page-content">
     <div class="add_user_style clearfix">
@@ -59,7 +66,7 @@
         
        </tr>
 </thead>
-<tbody>
+<tbody id="companyBody">
 <c:forEach items="${roleall}" var="u" varStatus="s">
        <tr>
         <td>${u.role_id}</td><td>${u.name}</td> 
@@ -103,6 +110,40 @@ $(function(){
 	$('#test').DataTable();
 });
 
+
+function putIn(){
+	$.ajax({
+		url:"<%=path%>rolemanage/selectCompany.handle",
+		type:"POST",
+		dataType:"JSON",
+		data:$("#aFrom").serialize(),
+		success:function(companys){
+			show(companys);
+		},
+		error:function(){
+			alert("异常");
+		}
+	});
+}
+function show(companys){
+	 
+	$("#companyBody").empty();  
+	
+	for(var i = 0;i < companys.length;i++){
+		
+		var td1=$("<td></td>").text(companys[i].role_id); 
+		var td2=$("<td></td>").text(companys[i].name); 
+		var td3=$("<td></td>");
+		
+		var input1=$("<button type='button' class='btn btn-warning' onclick='updect()' name='"+companys[i].role_id+"'>修改</button>"); 
+	 	var input2=$("<button type='button' class='btn btn-warning' onclick='delectrole()' name='"+companys[i].role_id+"'>删除</button>");
+		var tr=$("<tr></tr>");
+		
+		$(td3).append(input1,input2);  
+		$(tr).append(td1,td2,td3); 
+		$("#companyBody").append(tr);
+	}
+}
 
 $('#Add_Product_btn').on('click', function(){
     layer.open({
