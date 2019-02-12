@@ -63,4 +63,10 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 		return patientMapper.querybrief(name, time);
 	}
 
+	@Override
+	public List<Patient> queryadvise(String name, String time) {
+		// TODO Auto-generated method stub
+		return patientMapper.queryadvise(name, time);
+	}
+
 }
