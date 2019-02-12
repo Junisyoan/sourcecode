@@ -166,10 +166,7 @@ function show(companys){
 		var td10=$("<td></td>");
 		
 		var input1=$("<button type='button' class='btn btn-warning' onclick='updetestate()' name='"+companys[i].state+"&"+companys[i].user_id+"'>切换状态</button>");
-// 	 考试
-			 
-		 
-		
+  	
 		var input2=$("<button type='button' class='btn btn-warning' onclick='delect()' name='"+companys[i].user_id+"'>删除</button>");
 		var input3=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].company_id+"'>修改</button>"); 
 		var tr=$("<tr></tr>");
