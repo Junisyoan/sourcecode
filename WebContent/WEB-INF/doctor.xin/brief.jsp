@@ -152,7 +152,7 @@
   				</form>
 				
 				<c:if test="${d.sstate=='已提交' }">
-					<td>
+					<td style="width:350px;">
 					<img src="${pageContext.servletContext.contextPath}/upload/${d.resultpath}" style="width:350px;"/>
 					</td>
 					<td>${d.resulttext}</td>
