@@ -140,7 +140,7 @@
 							</c:if>
 							
 						</table>
-
+					<div style="float: right">${p.keshi }:${p.account }</div>
 					</div>
 
 				</div>
