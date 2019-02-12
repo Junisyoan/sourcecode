@@ -22,8 +22,8 @@
 
 	<!-- 插入细项 -->
 	<insert id="insertCompany" parameterType = "xyz.cymedical.entity.jun.Company">
-		insert into tb_company(name,account,pwd,tel,address,people,phone,deposit) 
-		values (#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{deposit});
+		insert into tb_company(name,account,pwd,tel,address,people,phone,deposit,state) 
+		values (#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{deposit},'在用');
 	</insert>
 
 	<!-- 修改细项 -->
@@ -45,30 +45,26 @@
 	</update>
 
 	<!-- 删除细项 -->
-	<delete id="deleteCompany" parameterType = "String">
-		delete from tb_patient where company_id = #{company_id};
-		delete from tb_file where company_id = #{company_id};
-		delete from tb_log_company where company_id = #{company_id};
-		delete from tb_group where company_id = #{company_id};
-		delete from tb_company where company_id = #{company_id};
-	</delete>
+	<update id="deleteCompany" parameterType = "String">
+		update tb_company set state = '已删除' where company_id = #{company_id}
+	</update>
 
 	<!-- 细项集合 -->
 	<select id="findCompanys" resultType = "xyz.cymedical.entity.jun.Company">
 		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
-		from tb_company
+		from tb_company where state != '已删除'
 	</select>
 
 	<!-- 修改细项前的查询细项 -->
 	<select id = "findCompany" parameterType="java.lang.String" resultType = "xyz.cymedical.entity.jun.Company">
 		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
-		from tb_company where company_id = #{company_id} 
+		from tb_company where company_id = #{company_id} and state != '已删除'
 	</select>
 
 	<!-- 查询细项 -->
 	<select id = "selectCompany" parameterType="map" resultType = "xyz.cymedical.entity.jun.Company">
 		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
-		from tb_company where 1=1
+		from tb_company where 1=1 and state != '已删除'
 		<if test="company.name!=null and company.name!=''">
 			and name like '%${company.name}%'
 		</if>
