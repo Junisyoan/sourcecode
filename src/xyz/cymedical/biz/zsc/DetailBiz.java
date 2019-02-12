@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.entity.zsc.Detail;
 import xyz.cymedical.mapper.zsc.DetailMapper;
@@ -16,6 +18,7 @@ public class DetailBiz {
 	@Resource
 	DetailMapper detailMapper;
 	
+	@Transactional(rollbackFor=Exception.class)
 	public String insertDetail(Detail detail) {
 		int rt = detailMapper.insertDetail(detail);
 		if (rt > 0) {
