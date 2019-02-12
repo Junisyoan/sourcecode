@@ -1,5 +1,7 @@
 package xyz.cymedical.handle.jiang;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.entity.jiang.Tb_role_dept;
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.jun.Company;
 
 @Controller
 @RequestMapping("/usermanage")
@@ -67,6 +71,21 @@ public class UserManageHandle {
 		return mav;
 
 	}
+	
+	// 查
+		@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+		public @ResponseBody String selectCompany(Tb_user tb_user, String dept) {
+			System.out.println("过");
+			Map<String, Object> map = new HashMap<String, Object>(); 
+			map.put("tb_user", tb_user);
+			
+			map.put("dept", dept); 
+			List<Map<String,Object>> companys = tbUserBiz.selectCompany(map);
+//			List<Tb_user> companys = companyBizsc.selectCompany(map);
+			String str = JSONArray.fromObject(companys).toString();
+			System.out.println(companys.get(0).get(dept));
+			return str;
+		}
 
 	// 显示
 	@RequestMapping(value = "/select.handle")
@@ -142,7 +161,7 @@ public class UserManageHandle {
 			} else {
 				addrole = "管理员";
 			}
-		}
+		}  
 		request.setAttribute("addrole", addrole);
 
 		mav.setViewName("WEB-INF/view.jiang/usermanage");

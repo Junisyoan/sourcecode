@@ -44,6 +44,13 @@ public class TbRoleBizImp implements TbRoleBiz{
 	}
 
 
+	@Override
+	public int upRole(int role_id, String name) {
+		// TODO Auto-generated method stub
+		return tbRoleMapper.upRole(role_id, name);
+	}
+
+
 	 
 
 }

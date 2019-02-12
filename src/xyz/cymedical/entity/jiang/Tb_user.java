@@ -9,6 +9,7 @@ public class Tb_user {
 	private int role_dept_id;//role_dept_id
 	private String account;//账号
 	private String pwd;//密码
+	private String name;//
 	private String sex;//性别
 	private String address;//地址
 	private String phone;//电话
@@ -40,7 +41,21 @@ public class Tb_user {
 		this.state = state;
 		this.doctor = doctor;
 	}
-
+	public Tb_user(int user_id, int role_dept_id, String account, String pwd, String name, String sex, String address,
+			String phone, String iDcard, String state, String doctor) {
+		super();
+		this.user_id = user_id;
+		this.role_dept_id = role_dept_id;
+		this.account = account;
+		this.pwd = pwd;
+		this.name = name;
+		this.sex = sex;
+		this.address = address;
+		this.phone = phone;
+		IDcard = iDcard;
+		this.state = state;
+		this.doctor = doctor;
+	}
 
 
 
@@ -58,6 +73,24 @@ public class Tb_user {
 		this.phone = phone;
 		IDcard = iDcard;
 		this.state = state;
+	}
+
+
+
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
