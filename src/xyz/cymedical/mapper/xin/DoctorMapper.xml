@@ -9,12 +9,12 @@
 	<select id="findMyProject" parameterType="String"
 		resultType="java.util.HashMap">
 		select a.*,c.project_id,c.name projectname,e.name keshi
-		,d.patient_project_id,d.state from 
-		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e
+		,d.*,f.account from 
+		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_user f
 		where
 		a.combo_id=b.combo_id and b.project_id=c.project_id and
 		d.project_id=c.project_id and c.param_id=e.param_id
-		and a.code=#{onecode }  order by e.name
+		and f.user_id=d.user_id and a.code=#{onecode }  order by e.name
 	</select>
 
 	<select id="findMyDetail" parameterType="java.lang.Integer"
