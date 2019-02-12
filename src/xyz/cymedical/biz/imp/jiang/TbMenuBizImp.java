@@ -21,28 +21,24 @@ public class TbMenuBizImp implements TbMenuBiz{
 	
 	@Override
 	public List<Tb_menu> selectMenu() {
-		// TODO Auto-generated method stub
 		return tbMenuMapper.selectMenu();
 	}
 
 
 	@Override
 	public int addMenuid(String name) {
-		// TODO Auto-generated method stub
 		return tbMenuMapper.addMenuid(name);
 	}
 
 
 	@Override
 	public int delete(int menu_id) {
-		// TODO Auto-generated method stub
 		return tbMenuMapper.delete(menu_id);
 	}
 
 
 	@Override
 	public int upMenu(Tb_menu tb_menu) {
-		// TODO Auto-generated method stub
 		return tbMenuMapper.upMenu(tb_menu);
 	}
 
