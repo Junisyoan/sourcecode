@@ -44,8 +44,9 @@
 			<div class="navbar-container" id="navbar-container">
 				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand">
-						<small>					
-						<img src="images/logo.png">
+						<small>
+									团检工作后台			
+<!-- 						<img src="images/head.png"> -->
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -86,31 +87,14 @@
 				     <li class="home"><a href="javascript:void(0)" name="home.html" class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a></li>
                      <li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> 询价管理 </span><b class="arrow icon-angle-down"></b></a>
 					   <ul class="submenu">
-                         <li class="home"><a  href="javascript:void(0)" name="项目立项.html"  title="项目立项" class="iframeurl"><i class="icon-double-angle-right"></i>项目立项</a></li>
-						 <li class="home"><a  href="javascript:void(0)" name="未到期询价项目.html" title="未到期询价项目"  class="iframeurl"><i class="icon-double-angle-right"></i>未到期询价项目</a></li>
-						 <li class="home"><a href="javascript:void(0)" name="已到期询价项目.html" title="已到期询价项目"  class="iframeurl"><i class="icon-double-angle-right"></i>已到期询价项目</a></li>
-						 <li class="home"><a href="javascript:void(0)" name="暂存项目.html" title="暂存项目"  class="iframeurl"><i class="icon-double-angle-right"></i>暂存项目</a></li>
-						 <li class="home"><a href="javascript:void(0)" name="模板维护.html" title="模板维护"  class="iframeurl"><i class="icon-double-angle-right"></i>模板维护</a></li>
-                         <li class="home"><a href="javascript:void(0)" name="待响应询价.html" title="待响应询价"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）待响应询价</a></li>
-                         <li class="home"><a href="javascript:void(0)" name="已响应询价.html" title="已响应询价"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）已响应询价</a></li>
-                         <li class="home"><a href="javascript:void(0)" name="已到期询价.html" title="已到期询价"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）已到期询价</a></li>
+                         <li class="home"><a  href="javascript:void(0)" name="项目立项.html"  title="项目立项" class="iframeurl"><i class="icon-double-angle-right"></i>菜单1</a></li>
+						 <li class="home"><a href="javascript:void(0)" name="已到期询价.html" title="已到期询价"  class="iframeurl"><i class="icon-double-angle-right"></i>菜单2</a></li>
 						</ul>
 					</li>
 					<li>
 					<a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> 订单管理 </span><b class="arrow icon-angle-down"></b></a>
                     <ul class="submenu">
-                    <li class="home"><a href="javascript:void(0)" name="待确认订单.html" title="待确认订单"  class="iframeurl"><i class="icon-double-angle-right"></i>待确认订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="在执行订单.html" title="在执行订单"  class="iframeurl"><i class="icon-double-angle-right"></i>在执行订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="作废订单.html" title="作废订单"  class="iframeurl"><i class="icon-double-angle-right"></i>作废订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="待加油订单.html" title="待加油订单"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）待加油订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="（船只权限）待加油订单.html" title="(船只权限)待加油订单"  class="iframeurl"><i class="icon-double-angle-right"></i>(船只权限)待加油订单</a></li>
-                     <li class="home"><a href="javascript:void(0)" name="(船只权限)已完结订单.html" title="(船只权限)已完结订单"  class="iframeurl"><i class="icon-double-angle-right"></i>(船只权限)已完结订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="已加油订单.html" title="已加油订单"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）已加油订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="已完结订单.html" title="已完结订单"  class="iframeurl"><i class="icon-double-angle-right"></i>已完结订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="异常订单.html" title="异常订单"  class="iframeurl"><i class="icon-double-angle-right"></i>异常订单</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="异常订单处理.html" title="异常订单处理"  class="iframeurl"><i class="icon-double-angle-right"></i>（权限）异常订单处理</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="供应商评价.html" title="供应商评价"  class="iframeurl"><i class="icon-double-angle-right"></i>供应商评价</a></li>
-                    <li class="home"><a href="javascript:void(0)" name="订单评价.html" title="订单评价"  class="iframeurl"><i class="icon-double-angle-right"></i>（评价）订单评价</a></li>
+                  <li class="home"><a href="javascript:void(0)" name="订单评价.html" title="订单评价"  class="iframeurl"><i class="icon-double-angle-right"></i>菜单3</a></li>
                    </ul>
 				  </li>
 						<li><a href="#" class="dropdown-toggle"><i class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b class="arrow icon-angle-down"></b></a>
@@ -118,17 +102,18 @@
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>usermanage/select.handle" title="人员管理" class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>menumanage/select.handle" title="菜单管理" class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
 								<li class="home"><a href="javascript:void(0)" name="<%=path%>rolemanage/select.handle" title="角色管理"  class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
-<<<<<<< HEAD
+
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>deptmanage/select.handle" title="科室管理" class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
-=======
+
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>powermanage/selectpower.handle" title="权限管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>
                                 <!-- zsc -->
+                                ******************
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>detail/detailsVeiw.handle" title="细项管理" class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>project/projectsVeiw.handle" title="项目管理" class="iframeurl"><i class="icon-double-angle-right"></i>项目管理</a></li>
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>combo/combosVeiw.handle" title="套餐管理" class="iframeurl"><i class="icon-double-angle-right"></i>套餐管理</a></li>
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>companys/companysVeiw.handle" title="账号管理" class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li>
                                 <!-- zsc -->
->>>>>>> 1c9b39fc9e0bcbb4673e6f15790522aa64340a30
+
                                 <!--根据用户权限显示用户管理-->
                                 <li class="home"><a href="javascript:void(0)" name="<%=path%>powermanage/select.handle" title="权限用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
                                 <!--结束-->
