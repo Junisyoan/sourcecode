@@ -32,8 +32,12 @@ input {
 	<c:forEach items="${patientlist}" var="p" varStatus="s">
 		<c:if test="${s.index == 0}">
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
-				<div style="float: left; margin-left: 75px;">健康体检中心</div>
-				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<div style="float: left; margin-left: 75px;">
+					<h3>健康体检中心</h3>
+				</div>
+				<div style="float: right; margin-right: 75px;">
+					<h3>体检日期：${p.time}</h3>
+				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px; color: black;">
 				<p>&nbsp;</p>
@@ -76,8 +80,12 @@ input {
 				<p>&nbsp;</p>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
-				<div style="float: left; margin-left: 75px;">健康体检中心</div>
-				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<div style="float: left; margin-left: 75px;">
+					<h3>健康体检中心</h3>
+				</div>
+				<div style="float: right; margin-right: 75px;">
+					<h3>体检日期：${p.time}</h3>
+				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
 				<p>&nbsp;</p>
@@ -94,8 +102,12 @@ input {
 						<p>&nbsp;</p>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
-				<div style="float: left; margin-left: 75px;">健康体检中心</div>
-				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<div style="float: left; margin-left: 75px;">
+					<h3>健康体检中心</h3>
+				</div>
+				<div style="float: right; margin-right: 75px;">
+					<h3>体检日期：${p.time}</h3>
+				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
 				<div class="Manager_style">
@@ -126,22 +138,57 @@ input {
 				</div>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
-				<div style="float: left; margin-left: 75px;">健康体检中心</div>
-				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<div style="float: left; margin-left: 75px;">
+					<h3>健康体检中心</h3>
+				</div>
+				<div style="float: right; margin-right: 75px;">
+					<h3>体检日期：${p.time}</h3>
+				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
 					<p>&nbsp;</p>
-					<h2 style="margin-left: 80px;">生活健康保健</h2>
-					<p style="margin-left: 80px;">一、保持健康的生活方式</p>
-					<p style="margin-left: 130px;">(1)健康的饮食习惯：食物多样，谷类为主；适合吃季节性蔬菜；吃适量乳类、豆类制品；吃适量新鲜有鱗鱼、蛋、瘦肉，少吃肥肉和荤油；</p>
-					<p style="margin-left: 150px;">食量与活动量要平衡，监测体重，吃清淡少盐食物。</p>
-					<p style="margin-left: 130px;">(2)戒烟戒酒：不但要避免吸烟也要避免被动吸烟，不饮酒或饮少量红葡萄酒。</p>
-					<p style="margin-left: 130px;">(3)适量规律运动：能够预防很多慢性疾病，包括冠心病、高血压、糖尿病、骨质疏松等。</p>
-					<p style="margin-left: 130px;">(4)保持心理平衡：愉悦的心情更有益于健康。</p>
+					<h3 style="margin-left: 80px;">体检总结及建议</h3>
+					<p style="margin-left: 80px;">【综述】</p>
+					<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
+						<p style="margin-left: 100px;">${p3.n3}:${p3.resulttext}${p3.unit}</p>
+					</c:forEach>
+				<p style="margin-left: 80px;">【建议】</p>
+				<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
+					<p style="margin-left: 100px;">（${s4.index + 1}）${p4.guide}</p>
+				</c:forEach>
+
+				</div>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
-				<div style="float: left; margin-left: 75px;">健康体检中心</div>
-				<div style="float: right; margin-right: 75px;">体检日期：${p.time}</div>
+				<div style="float: left; margin-left: 75px;">
+					<h3>健康体检中心</h3>
+				</div>
+				<div style="float: right; margin-right: 75px;">
+					<h3>体检日期：${p.time}</h3>
+				</div>
+				<p>&nbsp;</p>
+				<hr style="width: 1200px;">
+				<p>&nbsp;</p>
+				<h3 style="margin-left: 80px;">生活健康保健</h3>
+				<p style="margin-left: 80px;">一、保持健康的生活方式</p>
+				<p style="margin-left: 100px;">（1）健康的饮食习惯：食物多样，谷类为主；适合吃季节性蔬菜；吃适量乳类、豆类制品；吃适量新鲜有鱗鱼、蛋、瘦肉，</p>
+				<p style="margin-left: 120px;">少吃肥肉和荤油；食量与活动量要平衡，监测体重，吃清淡少盐食物。</p>
+				<p style="margin-left: 100px;">（2）戒烟戒酒：不但要避免吸烟也要避免被动吸烟，不饮酒或饮少量红葡萄酒。</p>
+				<p style="margin-left: 100px;">（3）适量规律运动：能够预防很多慢性疾病，包括冠心病、高血压、糖尿病、骨质疏松等。</p>
+				<p style="margin-left: 100px;">（4）保持心理平衡：愉悦的心情更有益于健康。</p>
+				<p style="margin-left: 80px;">&nbsp;</p>
+				<p style="margin-left: 80px;">二、指导</p>
+				<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
+					<p style="margin-left: 100px;">（${s4.index + 1}）${p4.advise}</p>
+				</c:forEach>
+			</form>
+			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
+				<div style="float: left; margin-left: 75px;">
+					<h3>健康体检中心</h3>
+				</div>
+				<div style="float: right; margin-right: 75px;">
+					<h3>体检日期：${p.time}</h3>
+				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
 				<div class="Manager_style">
@@ -152,12 +199,14 @@ input {
 							<tr>
 								<th>序号</th>
 								<th>体检人</th>
+								<th>套餐</th>
 								<th>项目</th>
+								<th>细项</th>
 								<th>结果</th>
 								<th>单位</th>
 								<th>参考值</th>
 								<th>体检时间</th>
-								<th>提示</th>
+								<th>体检医生</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -165,11 +214,19 @@ input {
 								<tr>
 									<th>${s3.index + 1}</th>
 									<th>${p3.n1}</th>
+									<th>${p3.n4}</th>
+									<th>${p3.n3}</th>
 									<th>${p3.n2}</th>
 									<th>${p3.unit}</th>
 									<th>${p3.resulttext}</th>
-									<th>${p3.min}~${p3.max}</th>
-									<th>${gro.time}</th>
+									<c:if test="${p3.min == null}">
+										<th>${p3.min}</th>
+									</c:if>
+									<c:if test="${p3.min != null}">
+										<th>${p3.min}~${p3.max}</th>
+									</c:if>
+									<th>${p3.time}</th>
+									<th>${p3.n5}</th>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -177,6 +234,12 @@ input {
 				</div>
 			</form>
 		</c:if>
+		<p align="center">
+			<a
+				href="<%=path%>patient/printpatient.handle?name=${p.n1}&time=${p.time}">返回</a>&nbsp;&nbsp;&nbsp;<a
+				href="">打印</a>
+		</p>
 	</c:forEach>
+
 </body>
 </html>
