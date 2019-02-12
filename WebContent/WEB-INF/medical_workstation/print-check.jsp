@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
-<script src="<%=path%>js/webprinter.js"></script>
 <title>体检报告打印</title>
 </head>
 
@@ -71,7 +70,7 @@
 		</div>
 		<!-- end -->
 		<div style="page-break-after: always;"></div>
-		<input type="button" value="打印" onclick="preview('${s.count }');" />
+		<input type="button" value="打印" onclick="preview(${s.count });"/>
 		<hr />
 		<br />
 		<br />
@@ -88,8 +87,12 @@ function pAll(){
 	eprnstr="<!-- aend -->";//设置打印结束区域 
 	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)); //从开始代码向后取html 
 	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
+	
+	var reg = new RegExp("<input type=\"button\" value=\"打印\" onclick=\"preview((.*?));\">	","g");
+	
+	prnhtml=prnhtml.replace(reg,"");
 	window.document.body.innerHTML=prnhtml; 
- 	window.print(); 
+ 	window.print(); 	
 	window.document.body.innerHTML=bdhtml; 
 }
 
@@ -99,7 +102,6 @@ function preview(k) {
 	eprnstr="<!-- end -->";//设置打印结束区域 
 	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)); //从开始代码向后取html 
 	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
-	alert(prnhtml);
 	window.document.body.innerHTML=prnhtml; 
  	window.print(); 
 	window.document.body.innerHTML=bdhtml; 
