@@ -100,8 +100,8 @@
 							<td>${p.age}</td>
 							<td style="mso-number-format: '\@';">${p.ID}</td>
 							<td>${p.phone}</td>
-							<td>${p.code}</td>
-							<td>${p.check_num}</td>
+							<td style="mso-number-format: '\@';">${p.code}</td>
+							<td style="mso-number-format: '\@';">${p.check_num}</td>
 							<td style="mso-number-format: 'yyyy\-mm\-dd';">${p.time}</td>
 						</tr>
 					</c:forEach>
