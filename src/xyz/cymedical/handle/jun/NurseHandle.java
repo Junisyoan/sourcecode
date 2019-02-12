@@ -90,19 +90,28 @@ public class NurseHandle {
 	public ModelAndView getCheckPage(String bid) {
 		System.out.println("打印导检单："+bid);
 		List<Patient> cps = nurseBiz.getCheckPage(bid);
+		System.out.println("体检人员信息："+cps);
 		HashMap<String, List<Patient>> checkMap = new HashMap<>();
 		List<Patient> tmpList = new ArrayList<>();
 		String tmpName = cps.get(0).getName();
 		String ctime = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
 		for(int i = 0;i<cps.size();i++) {
 			if (!tmpName.equals(cps.get(i).getName())) {
-				System.out.println(tmpName);
 				checkMap.put(tmpName, tmpList);
 				tmpName=cps.get(i).getName();
-				tmpList.clear();
+				tmpList = new ArrayList<>();
 			}
+			System.out.println(cps.get(i));
 			tmpList.add(cps.get(i));
+			if (i==cps.size()-1) {
+				checkMap.put(cps.get(i).getName(), tmpList);
+			}
 		}
+		
+		for(String n:checkMap.keySet()) {
+			System.out.println(n+"--"+checkMap.get(n));
+		}
+		
 		modelAndView = new ModelAndView("WEB-INF/medical_workstation/print-check");
 		modelAndView.addObject("checkMap", checkMap);
 		modelAndView.addObject("ctime", ctime);
@@ -134,18 +143,18 @@ public class NurseHandle {
 		//取得文件信息
 		companyFile = companyFileBiz.queryFileByBillerId(bid);
 		
-		//获取体检人员列表
+		//	获取体检人员列表
 		List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
 		
 		try {
-			//插入病人
+			//	插入病人
 			List<Patient> pList = patientBiz.insertByBatch(patientList);
 			
 			if (pList!=null) {
-				//创建关系表
+				//	创建关系表
 				if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)&&
 						billerBiz.updateBillerCreate(bid)) {
-					//修改记账表为开单
+					//	修改记账表为开单
 					response.getWriter().print("1");
 					
 				} else {
