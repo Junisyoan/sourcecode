@@ -16,6 +16,14 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="<%=path%>js/datatables.bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#item").dataTable();
+	});
+</script>
 <title>无标题文档</title>
 </head>
 
@@ -40,8 +48,8 @@
 					<tr>
 						<th>${s.index + 1}</th>
 						<th>${p.n1}</th>
-						<th>${p.n2}</th>
 						<th>${p.n3}</th>
+						<th>${p.n2}</th>
 						<th>${p.time}</th>
 					</tr>
 				</c:forEach>
