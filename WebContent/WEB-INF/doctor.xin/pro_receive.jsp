@@ -35,30 +35,7 @@
 						</li>
 					</ul>
 				</form>
-				
-				
-				<!--     <button type="button" class="btn btn-primary" id="Add_Product_btn">添加产品</button> -->
-<!-- 				<div class="Add_Manager_style"> -->
-<!-- 						<div class="page-content"> -->
-<!-- 							<div class="add_user_style clearfix"> -->
-<!-- 								<ul class="clearfix"> -->
-<!-- 									<li><label class="label_name">产品名称</label> <input -->
-<!-- 										name="产品名称" type="text" class="text_add" id="name_text" /><i -->
-<!-- 										style="color: #F60;">*</i></li> -->
-<!-- 									<li><label class="label_name">产品联系人</label><input name="" -->
-<!-- 										type="text" class="text_add" /></li> -->
-<!-- 									<li><label class="label_name">产品联系电话</label><input name="" -->
-<!-- 										type="text" class="text_add" /></li> -->
-<!-- 								</ul> -->
-<!-- 								<div class="Remark"> -->
-<!-- 									<label class="label_name">备注</label> -->
-<!-- 									<textarea name="" cols="" rows="" -->
-<!-- 										style="width: 436px; height: 200px; padding: 5px;"></textarea> -->
-<!-- 								</div> -->
-<!-- 								    <div class="btn_operating"><button  type="button" class="btn btn-primary" id="submit">保存</button><button  type="button" class="btn btn-warning">重置</button></div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+		
 				</div>
 			</div>
 
@@ -69,12 +46,10 @@
 					<thead>
 						<tr>
 							<th>序号</th>
-							<th>病人姓名</th>
-							<th>年龄</th>
-							<th>电话</th>
 							<th>科室</th>
 							<th>项目</th>
-							<th>状态</th>
+							<th>接收状态</th>
+							<th>结算状态</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -82,8 +57,6 @@
 						<tr>
 							<td>1</td>
 							<td>13505140602</td>
-							<td>备注信息</td>
-							<td>备注信息</td>
 							<td>备注信息</td>
 							<td>备注信息</td>
 							<td>备注信息</td>
@@ -96,14 +69,12 @@
 						<c:forEach items="${prolist }" var="p" varStatus="s">
 							<tr>
 								<td>${s.index + 1}</td>
-								<td>${p.name}</td>
-								<td>${p.age}</td>
-								<td>${p.phone}</td>
 								<td>${p.keshi}</td>
 								<td>${p.projectname}</td>
 								<td>${p.state}</td>
+								<td>${p.balance}</td>
 								<td class="center">
-								<c:if test="${p.state=='未接收' }">
+								<c:if test="${p.state=='未接收' && p.balance=='已结算'}">
 									<a href="<%=path %>doctor/receive.handle?patient_project_id=${p.patient_project_id}&onecode=${p.code } "><button type="button" class="btn btn-primary" onclick="return confirm('确定接收么？') ;">接收</button></a>
 								</c:if> 
 								<c:if test="${p.state=='已接收' }">
@@ -243,69 +214,6 @@
 </script>
 <![endif]-->
 	<script src="<%=path%>assets/layer/layer.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		$('.Product_Details').on('click', function() {
-			alert("111");
-			layer.open({
-				type : 1,
-				title : '产品详情',
-				maxmin : true,
-				shadeClose : true, //点击遮罩关闭层
-				area : [ '720px', '500px' ],
-				content : $('#Product_Details')
-			});
-		});
-		$('.Attribute_btn').on('click', function() {
-			layer.open({
-				type : 1,
-				title : '添加属性',
-				shadeClose : true, //点击遮罩关闭层
-				area : [ '330px', '180px' ],
-				content : $('#add_Attributes_style'),
-				btn : [ '提交', '取消' ],
-				yes : function(index, layero) {
-					if ($("#shuxin").val() == "") {
-						layer.alert('属性名称不能为空!', {
-							title : '提示框',
-							icon : 0,
-						});
-						return false;
-					} else {
-						layer.alert('添加成功！', {
-							title : '提示框',
-							icon : 1,
-						});
-						layer.close(index);
-					}
 
-				}
-			});
-		});
-		$('#Add_Product_btn').on('click', function() {
-			layer.open({
-				type : 1,
-				title : '添加/修改产品',
-				shadeClose : true, //点击遮罩关闭层
-				area : [ '600px', '' ],
-				content : $('#Add_Product_style'),
-				btn : [ '提交', '取消' ],
-				yes : function(index, layero) {
-					if ($("#name_text").val() == "") {
-						layer.alert('产品名称不能为空!', {
-							title : '提示框',
-							icon : 0,
-						});
-						return false;
-					} else {
-						layer.alert('添加成功！', {
-							title : '提示框',
-							icon : 1,
-						});
-						layer.close(index);
-					}
-				}
-			})
-		});
-	</script>
 </body>
 </html>
