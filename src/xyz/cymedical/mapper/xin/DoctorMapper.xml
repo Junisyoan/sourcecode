@@ -52,7 +52,7 @@
 	</select>
 	
 	<select id="getMyMenu" parameterType="java.lang.Integer" resultType="xyz.cymedical.entity.jiang.Tb_menu">
-		select * from 
+		select a.name uname,d.name pname,e.menu_id,e.name,e.link,e.superior from 
 		tb_user a,tb_role_dept b,tb_role_power c,tb_power d,tb_menu e
 		WHERE
 		a.role_dept_id=b.role_dept_id and b.role_id=c.role_id 
