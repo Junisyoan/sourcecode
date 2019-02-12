@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.xin.DoctorBiz;
+import xyz.cymedical.entity.jiang.Tb_menu;
+import xyz.cymedical.entity.jiang.Tb_user;
 
 //单检医生
 @Controller
@@ -34,6 +37,43 @@ public class DoctorHandle {
 	public static String onecode;
 	
 
+	
+	// 查询一维码对应病人的导检单
+	@RequestMapping(value = "/login.handle")
+	public ModelAndView login(HttpServletRequest request,String account,String pwd) {
+
+		System.out.println("username="+account);
+		System.out.println("pwd="+pwd);
+		
+		Tb_user user = new Tb_user();
+		user=doctorbiz.login(account,pwd);
+		System.out.println("user="+user);
+		
+
+		if(user!=null) {
+			ModelAndView mav = new ModelAndView();
+			request.getSession().setAttribute("USER", user);
+			
+			
+			//用户对应菜单列表
+			List<Tb_menu> mlist = doctorbiz.getMyMenu(user.getUser_id(),user.getRole_dept_id());
+			System.out.println("mlist="+mlist);
+			
+			
+			mav.addObject("USER", user);
+			mav.setViewName("WEB-INF/doctor.xin/doctorindex");
+			return mav;
+			
+		}else {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("doctorlogin");
+			return mav;
+		}
+		
+
+	}
+	
+	
 	// 查询一维码对应病人的导检单
 	@RequestMapping(value = "/findProject.handle")
 	public ModelAndView index(String onecode) {
