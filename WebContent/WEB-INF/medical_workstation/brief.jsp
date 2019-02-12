@@ -16,6 +16,14 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="<%=path%>js/datatables.bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#item").dataTable();
+	});
+</script>
 <title>无标题文档</title>
 </head>
 
@@ -30,12 +38,14 @@
 				<tr>
 					<th>序号</th>
 					<th>体检人</th>
+					<th>套餐</th>
 					<th>项目</th>
+					<th>细项</th>
 					<th>结果</th>
 					<th>单位</th>
 					<th>参考值</th>
 					<th>体检时间</th>
-					<th>提示</th>
+					<th>体检医生</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,11 +53,19 @@
 					<tr>
 						<th>${s.index + 1}</th>
 						<th>${p.n1}</th>
+						<th>${p.n4}</th>
+						<th>${p.n3}</th>
 						<th>${p.n2}</th>
 						<th>${p.unit}</th>
 						<th>${p.resulttext}</th>
-						<th>${p.min}~${p.max}</th>
-						<th>${gro.time}</th>
+						<c:if test="${p.min == null}">
+							<th>${p.min}</th>
+						</c:if>
+						<c:if test="${p.min != null}">
+							<th>${p.min}~${p.max}</th>
+						</c:if>
+						<th>${p.time}</th>
+						<th>${p.n5}</th>
 					</tr>
 				</c:forEach>
 			</tbody>
