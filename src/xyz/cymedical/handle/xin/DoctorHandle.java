@@ -60,6 +60,7 @@ public class DoctorHandle {
 			System.out.println("mlist="+mlist);
 			
 			
+			mav.addObject("mlist", mlist);
 			mav.addObject("USER", user);
 			mav.setViewName("WEB-INF/doctor.xin/doctorindex");
 			return mav;
