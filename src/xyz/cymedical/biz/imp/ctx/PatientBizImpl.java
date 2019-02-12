@@ -53,13 +53,11 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 
 	@Override
 	public List<Patient> queryproject(String name, String time) {
-		// TODO Auto-generated method stub
 		return patientMapper.queryproject(name, time);
 	}
 
 	@Override
 	public List<Patient> querybrief(String name, String time) {
-		// TODO Auto-generated method stub
 		return patientMapper.querybrief(name, time);
 	}
 
