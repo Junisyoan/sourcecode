@@ -4,6 +4,7 @@
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 	<head>
@@ -86,22 +87,18 @@
 				     <li class="home"><a href="javascript:void(0)" name="" class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a></li>
 				     
 				      <c:forEach items="${mlist }" var="m" varStatus="s">
-				      	<c:forEach items="${mlist }" var="p" varStatus="s">
-				      	
-					      	<c:if  test="${d.superior==0}">
-					      		<li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> ${d.name } </span><b class="arrow icon-angle-down"></b></a> 
-					      		 <c:if  test="${d.menu_id==p.superior}">
-							      	<li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> ${p.name } </span><b class="arrow icon-angle-down"></b></a> 
-				 					  
-				 					   <ul class="submenu"> 
-				 					   
-				                          <li class="home"><a  href="javascript:void(0)" name="${p.link} "  title="${p.name}" class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li> 
-										
-				 						</ul> 
-				 					</li>
-	 							</c:if>
+					      	<c:if test="${m.superior==0}">
+					      		 <li>
+					      		 <a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> ${m.name} </span><b class="arrow icon-angle-down"></b></a>
+				 				 <ul class="submenu"> 
+						      	   <c:forEach items="${mlist }" var="p" varStatus="s">
+						      		  <c:if test="${m.menu_id==p.superior}">
+					                          <li class="home"><a  href="javascript:void(0)" name="<%=path %>${p.link }"  title="${p.name}" class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li> 
+		 							  </c:if>
+	 							   </c:forEach>
+				 				</ul> 
+				 				</li>
 				     		 </c:if>
-				      	</c:forEach>
 				      </c:forEach>
 				     
 <!--                      <li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> 工作事项 </span><b class="arrow icon-angle-down"></b></a> -->
