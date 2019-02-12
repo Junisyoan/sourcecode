@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jiang.TbDeptMapper">
+
+
+<!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
+
+	<select id="selectDept"   parameterType="xyz.cymedical.entity.jiang.Tb_dept"
+	resultType="xyz.cymedical.entity.jiang.Tb_dept">
+		select * from tb_dept  
+	</select>
+ 
+<!--  	 <delete id="deletePower" parameterType="int" > -->
+	
+<!-- 		delete from tb_dept where power_id = #{power_id} -->
+	
+<!-- 	</delete> -->
+	
+	<insert id="addDept" parameterType="xyz.cymedical.entity.jiang.Tb_dept">
+		insert into tb_dept(dept_id,name) values(#{dept_id},#{name})
+	</insert>
+	
+	<update id="upDept"  parameterType="xyz.cymedical.entity.jiang.Tb_dept" >
+	
+			UPDATE tb_dept 
+			
+		<trim prefix="SET" suffixOverrides=","  >  
+	
+		 
+		<if test="name != null and name != ''">
+			name=#{name}
+		</if>
+		
+		   where dept_id=#{dept_id}
+		</trim>
+		 
+	</update>
+	
+	<delete id="delectDept" parameterType="int" >
+	
+		delete from tb_dept where dept_id = #{dept_id}
+	
+	</delete>
+	
+</mapper>

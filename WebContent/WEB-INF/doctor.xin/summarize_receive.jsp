@@ -68,7 +68,7 @@
 								<tbody>
 									<c:forEach items="${dlist }" var="d" varStatus="s">
 										<tr>
-											<c:if test="${d.proid==p.project_id}">
+											<c:if test="${d.project_id==p.project_id}">
 												<td>${s.index + 1}</td>
 												<td>${d.name}</td>
 												<td>${d.unit}</td>
@@ -102,7 +102,7 @@
 								<tbody>
 									<c:forEach items="${dlist }" var="d" varStatus="s">
 										<tr>
-											<c:if test="${d.proid==p.project_id}">
+											<c:if test="${d.project_id==p.project_id}">
 												<td>${s.index + 1}</td>
 												<td>${d.name}</td>
 												<td>${d.resulttext}</td>
@@ -126,7 +126,7 @@
 								<tbody>
 									<c:forEach items="${dlist }" var="d" varStatus="s">
 										<tr>
-											<c:if test="${d.proid==p.project_id}">
+											<c:if test="${d.project_id==p.project_id}">
 												<td>${s.index + 1}</td>
 												<td>${d.name}</td>
 												<td>${d.resulttext}</td>
@@ -140,13 +140,13 @@
 							</c:if>
 							
 						</table>
-
+					<div style="float: right">${p.keshi }:${p.account }</div>
 					</div>
 
 				</div>
 			</c:forEach>
 			
-			<c:if test="${flag!=null}">
+			<c:if test="${flag!=null && flag!=''}">
 				<div style="width:100px;margin:0 auto">
 					<a href="<%=path %>chiefdoctor/tosummarize.handle"><input type="button" class="btn btn-warning" value="总结"/></a>
 				</div>  

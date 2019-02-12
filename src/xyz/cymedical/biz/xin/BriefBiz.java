@@ -24,6 +24,9 @@ public interface BriefBiz {
 	
 	public boolean Check(String result,String tips,String id);
 
+	//为小结表添加总结id
+	public boolean addsummarize(int briefid, String sumid);
+
 
 
 }

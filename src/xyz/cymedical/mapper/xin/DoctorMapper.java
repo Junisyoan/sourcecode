@@ -32,4 +32,10 @@ public interface DoctorMapper {
 
 	//获取条码对应病人所有小结
 	public List<Map<String, Object>> findAllDetail(String onecode);
+
+	//添加总结
+	public boolean addsummarize(String advice, String guide);
+
+	//找到插入总结的id
+	public String findsumid();
 }

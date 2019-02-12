@@ -15,28 +15,41 @@ public class CompanyBizsc {
 
 	@Resource
 	CompanyMappers companyMappers;
-	
-	public int insertCompany(Company company) {
-		return companyMappers.insertCompany(company);
+
+	public String insertCompany(Company company) {
+		int rt = companyMappers.insertCompany(company);
+
+		if (rt > 0) {
+			return "添加成功";
+		} else {
+			return "添加失败";
+		}
 	};
-	
-	public int updateCompany(Company company) {
-		return companyMappers.updateCompany(company);
+
+	public String updateCompany(Company company) {
+		int rt = companyMappers.updateCompany(company);
+
+		if (rt > 0) {
+			return "修改成功";
+		} else {
+			return "修改失败";
+		}
 	};
-	
-	public int deleteCompany(String id) {
-		return companyMappers.deleteCompany(id);
+
+	public String deleteCompany(String id) {
+		companyMappers.deleteCompany(id);
+		return "删除成功";
 	};
-	
-	public List<Company> findCompanys(){
+
+	public List<Company> findCompanys() {
 		return companyMappers.findCompanys();
 	};
-	
+
 	public Company findCompany(String company_id) {
 		return companyMappers.findCompany(company_id);
 	}
-	
-	public List<Company> selectCompany(Map<String, Object> map){
+
+	public List<Company> selectCompany(Map<String, Object> map) {
 		return companyMappers.selectCompany(map);
 	};
 
@@ -47,5 +60,14 @@ public class CompanyBizsc {
 		} else {
 			return "该账号可使用";
 		}
+	}
+
+	public void stateChange(Company company) {
+		companyMappers.stateChange(company);
+	};
+
+	public String resetPwd(String company_id) {
+		companyMappers.resetPwd(company_id);
+		return "重置密码成功";
 	};
 }

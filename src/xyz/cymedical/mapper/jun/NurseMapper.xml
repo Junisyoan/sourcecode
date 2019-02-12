@@ -4,7 +4,27 @@
 
 <mapper namespace="xyz.cymedical.mapper.jun.NurseMapper">
 
-
+<!-- 根据记账表查询导检单 -->
+	<!-- 病人实体类查询 -->
+	<select id="getCheckPage" parameterType="String" resultType="xyz.cymedical.entity.jun.Patient">
+	select
+	t1.name,t1.sex,t1.age,t1.code,t1.check_num,pr.name prname,c.name comboName,p.name pname,d.name dname
+	from (
+		select 
+		p.*
+		from tb_biller bi,tb_biller_patient bp,tb_patient p
+		where bi.biller_id = bp.biller_id
+		and bp.patient_id = p.patient_id
+		and bi.biller_id = #{bid}
+	)t1
+	left join tb_combo c on t1.combo_id = c.combo_id
+	left join tb_project_combo pc on c.combo_id = pc.combo_id
+	left join tb_project p on pc.project_id = p.project_id
+	left join tb_param pr on p.param_id = pr.param_id
+	left join tb_detail_project dp on p.project_id = dp.project_id
+	left join tb_detail d on d.detail_id = dp.detail_id
+	order by name asc,pname asc;
+	</select>
 <!-- 批量插入 -->
 	<insert id="insertBatchRelation">
 		insert into tb_biller_patient(biller_id,patient_id)

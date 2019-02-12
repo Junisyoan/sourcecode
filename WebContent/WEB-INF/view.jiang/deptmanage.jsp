@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" /> 
   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
   <link rel="stylesheet" href="<%=path %>css/style.css"/>
-<title>无标题文档</title>
+<title>权限管理</title>
   
 <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -30,21 +30,23 @@
 <div class="page-content">
 <div class="gys_style">
 <div class="Manager_style">
-   <div class="title_name">添加菜单</div>
-    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加菜单</button>
+   <div class="title_name">部门管理</div>
+    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加部门</button>
       <div class="Add_Manager_style">
     		  
     <div id="Add_Product_style" style="display:none">
      <div class="page-content">
     <div class="add_user_style clearfix">
     
-    	<form action="<%=path%>powermanage/addmenuid.handle" method="post" id="add">
+    	<form action="<%=path%>deptmanage/adddept.handle" method="post" id="add">
   		   <ul class="clearfix">
      
       
 <!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
-      <li><label class="label_name">菜单名</label><input name="name" type="text"  class="text_add" id="name" onblur="loadAjax()"/></li>
-      <li><label class="label_name">路径</label><input name="link" type="text"  class="text_add" id="link"/></li>
+<!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id" onblur="loadAjax()"/></li> -->
+      <li><label class="label_name">部门id</label><input name="dept_id" type="text"  class="text_add" id="dept_id"/></li>
+<!--       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li> -->
+      <li><label class="label_name">部门名</label><input name="name" type="text"  class="text_add" id="name"/></li>
      
          
       </ul>  
@@ -60,20 +62,20 @@
 <thead>
  
 <tr>
-<th>菜单序号</th>
-<th>菜单名</th>
-<th>路径</th>
+<th>部门id</th>
+<!-- <th>菜单id</th> -->
+<th>部门名</th>
  <th>操作</th>
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${tbmenuall}" var="u" varStatus="s">
+<c:forEach items="${maplist}" var="u" varStatus="s">
 <tr>
-<td>${u.menu_id}</td>
+<td>${u.dept_id}</td>
+<%-- <td>${u.menu_id}</td> --%>
 <td>${u.name}</td>
-<td>${u.link}</td>
-<td>  <button type="button" class="btn btn-primary" onclick="updete()" name="${u.menu_id}">修改</button>
-  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.menu_id}">刪除</button></td>
+<td>  <button type="button" class="btn btn-primary" onclick="updete()" name="${u.dept_id}">修改</button>
+  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.dept_id}">刪除</button></td>
 <!-- <td><input type="checkbox" value="5" /></td> -->
 </tr>
     </c:forEach> 
@@ -102,7 +104,7 @@ $('#add_butn').on('click', function(){
  
     layer.open({
         type: 1,
-        title: '添加菜單',
+        title: '添加权限',
 		shadeClose: true, //点击遮罩关闭层
         area: ['600px' , ''],
         content: $('#Add_Product_style'),
@@ -110,16 +112,18 @@ $('#add_butn').on('click', function(){
 		yes: function(index, layero){		
 		 
 // 		 ------------------------------------------
-			 if($("#name").val()==""){
-				  layer.alert('菜单名不能为空!',{
+			 if($("#dept_id").val()==""){
+				  layer.alert('部门id不能为空!',{
 	             title: '提示框',								
 				  icon:0,			    
 				 });
 				return false;
 	              } 
 // 			 ------------------------------------------
-			 if($("#link").val()==""){
-				  layer.alert('地址不能为空!',{
+			 
+// 	             -------------------------
+			 if($("#name").val()==""){
+				  layer.alert('部门名不能为空!',{
 	            title: '提示框',								
 				  icon:0,			    
 				 });
@@ -178,7 +182,7 @@ function delect(e){
 	alert(delectname);
 	 $.ajax({
 		 type:"POST",
-		 url:"<%=path%>menumanage/delect.handle", 
+		 url:"<%=path%>deptmanage/delect.handle", 
 		 data:{
 			 "delectname":delectname
 			 },
@@ -209,7 +213,7 @@ function updete(a){
 	if(re){
 //			alert(updetename);
 		var form = document.createElement("Form");
-		form.action="<%=path%>menumanage/updete1.handle";
+		form.action="<%=path%>deptmanage/updete1.handle";
 		form.method="post";
 		form.style.display="none";
 		

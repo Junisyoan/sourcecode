@@ -40,7 +40,7 @@ public class UserManageHandle {
 	@RequestMapping(value = "/adduser.handle")
 	public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, Tb_user adduser) {
 
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(); 
 //		adduser.setRole_dept_id(1);
 //		System.out.println("doctor="+adduser.getDoctor());
 		System.out.println(adduser.getRole_dept_id());

@@ -1,5 +1,6 @@
 package xyz.cymedical.entity.jun;
 
+import java.util.List;
 
 /**
 *	@author Junisyoan;
@@ -9,14 +10,16 @@ package xyz.cymedical.entity.jun;
 */
 public class Biller {
 
-	private int biller_id;			//记账表id
-	private int group_id;			//团检表id
-	private String batch;			//批次
-	private String name;			//公司名
-	private String bstate;			//是否结算
-	private double totalMoney;		//总金额
-	private String btime;			//结算时间
-	private String bcreate;			//是否开单
+	private int biller_id;				//记账表id
+	private int group_id;				//团检表id
+	private String batch;				//批次
+	private String name;				//公司名
+	private String bstate;				//是否结算
+	private double totalMoney;			//总金额
+	private String btime;				//结算时间
+	private String bcreate;				//是否开单
+	private List<Patient> patientList;	//病人信息
+	
 	
 	public Biller() {
 		super();
@@ -97,6 +100,14 @@ public class Biller {
 
 	public void setBcreate(String bcreate) {
 		this.bcreate = bcreate;
+	}
+
+	public List<Patient> getPatientList() {
+		return patientList;
+	}
+
+	public void setPatientList(List<Patient> patientList) {
+		this.patientList = patientList;
 	}
 
 	@Override
