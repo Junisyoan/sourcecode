@@ -16,6 +16,14 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="<%=path%>js/datatables.bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#item").dataTable();
+	});
+</script>
 <title>体检综合查询</title>
 </head>
 
@@ -59,13 +67,17 @@
 					<c:forEach items="${patientlist}" var="p" varStatus="s">
 						<tr>
 							<td>${s.index + 1}</th>
-							<td>${p.n1}</th>
-							<td>${p.time}</th>
-							<td><a href="<%=path%>patient/showmessage.handle?name=${p.n1}&time=${p.time}">查看</a></th>
-							<td><a href="<%=path%>patient/showproject.handle?name=${p.n1}&time=${p.time}">查看</a></th>
-							<td><a href="<%=path%>patient/showbrief.handle?name=${p.n1}&time=${p.time}">查看</a></th>
-							<td><a href="">查看</a></th>
-							<td><a href="">查看</a></th>
+								<td>${p.n1}</th>
+									<td>${p.time}</th>
+										<td><a
+											href="<%=path%>patient/showmessage.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+							<td><a
+								href="<%=path%>patient/showproject.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+							<td><a
+								href="<%=path%>patient/showbrief.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+							<td><a
+								href="<%=path%>patient/showsummarize.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+							<td><a href="<%=path%>patient/showall.handle?name=${p.n1}&time=${p.time}">查看</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
