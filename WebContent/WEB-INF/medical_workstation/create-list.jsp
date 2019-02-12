@@ -10,16 +10,9 @@
 			+ request.getContextPath() + "/";
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
-<!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
-<link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<%=path%>css/style.css" />
+<link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
-<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
-<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <title>人员列表</title>
 </head>
 
