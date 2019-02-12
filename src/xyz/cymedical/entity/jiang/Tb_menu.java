@@ -59,8 +59,10 @@ public class Tb_menu {
 
 	@Override
 	public String toString() {
-		return "Tb_menu [menu_id=" + menu_id + ", name=" + name + ", link=" + link + "]";
+		return "Tb_menu [menu_id=" + menu_id + ", name=" + name + ", link=" + link + ", superior=" + superior + "]";
 	}
+
+
 	
 	  
 	
