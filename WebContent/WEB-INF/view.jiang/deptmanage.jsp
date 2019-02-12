@@ -38,7 +38,7 @@
      <div class="page-content">
     <div class="add_user_style clearfix">
     
-    	<form action="<%=path%>powermanage/addPower.handle" method="post" id="add">
+    	<form action="<%=path%>deptmanage/adddept.handle" method="post" id="add">
   		   <ul class="clearfix">
      
       
@@ -46,7 +46,7 @@
 <!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id" onblur="loadAjax()"/></li> -->
       <li><label class="label_name">部门id</label><input name="dept_id" type="text"  class="text_add" id="dept_id"/></li>
 <!--       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li> -->
-      <li><label class="label_name">科室名</label><input name="name" type="text"  class="text_add" id="name"/></li>
+      <li><label class="label_name">部门名</label><input name="name" type="text"  class="text_add" id="name"/></li>
      
          
       </ul>  
@@ -112,24 +112,18 @@ $('#add_butn').on('click', function(){
 		yes: function(index, layero){		
 		 
 // 		 ------------------------------------------
-			 if($("#power_id").val()==""){
-				  layer.alert('权限id不能为空!',{
+			 if($("#dept_id").val()==""){
+				  layer.alert('部门id不能为空!',{
 	             title: '提示框',								
 				  icon:0,			    
 				 });
 				return false;
 	              } 
 // 			 ------------------------------------------
-			 if($("#menu_id").val()==""){
-				  layer.alert('带单id不能为空!',{
-	            title: '提示框',								
-				  icon:0,			    
-				 });
-				return false;
-	             }
+			 
 // 	             -------------------------
 			 if($("#name").val()==""){
-				  layer.alert('权限名不能为空!',{
+				  layer.alert('部门名不能为空!',{
 	            title: '提示框',								
 				  icon:0,			    
 				 });
@@ -188,7 +182,7 @@ function delect(e){
 	alert(delectname);
 	 $.ajax({
 		 type:"POST",
-		 url:"<%=path%>powermanage/delect.handle", 
+		 url:"<%=path%>deptmanage/delect.handle", 
 		 data:{
 			 "delectname":delectname
 			 },
@@ -219,7 +213,7 @@ function updete(a){
 	if(re){
 //			alert(updetename);
 		var form = document.createElement("Form");
-		form.action="<%=path%>powermanage/updete1.handle";
+		form.action="<%=path%>deptmanage/updete1.handle";
 		form.method="post";
 		form.style.display="none";
 		

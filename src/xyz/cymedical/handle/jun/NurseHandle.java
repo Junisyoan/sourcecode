@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import oracle.net.aso.i;
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.ctx.PatientBiz;
 import xyz.cymedical.biz.jun.BillerBiz;
@@ -51,7 +54,7 @@ import xyz.cymedical.tools.jun.ResponseTools;
 
 @Controller
 @RequestMapping("/nurse")
-public class UserHandle {
+public class NurseHandle {
 
 	@Resource
 	private CompanyBiz companyBiz;
@@ -79,15 +82,49 @@ public class UserHandle {
 	
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
-	private boolean isSuccess;
 	
 	/*
-	 * 
+	 * 已开单账单再次开单
+	 */
+	@RequestMapping(value="/getCheckPage.handle",method=RequestMethod.GET)
+	public ModelAndView getCheckPage(String bid) {
+		System.out.println("打印导检单："+bid);
+		List<Patient> cps = nurseBiz.getCheckPage(bid);
+		System.out.println("体检人员信息："+cps);
+		HashMap<String, List<Patient>> checkMap = new HashMap<>();
+		List<Patient> tmpList = new ArrayList<>();
+		String tmpName = cps.get(0).getName();
+		String ctime = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
+		for(int i = 0;i<cps.size();i++) {
+			if (!tmpName.equals(cps.get(i).getName())) {
+				checkMap.put(tmpName, tmpList);
+				tmpName=cps.get(i).getName();
+				tmpList = new ArrayList<>();
+			}
+			System.out.println(cps.get(i));
+			tmpList.add(cps.get(i));
+			if (i==cps.size()-1) {
+				checkMap.put(cps.get(i).getName(), tmpList);
+			}
+		}
+		
+		for(String n:checkMap.keySet()) {
+			System.out.println(n+"--"+checkMap.get(n));
+		}
+		
+		modelAndView = new ModelAndView("WEB-INF/medical_workstation/print-check");
+		modelAndView.addObject("checkMap", checkMap);
+		modelAndView.addObject("ctime", ctime);
+		return modelAndView;
+	}
+	
+	/*
+	 * 查询已开单列表
 	 */
 	@RequestMapping(value="/getCreateList.handle",method=RequestMethod.GET)
 	public ModelAndView getCreateList(){
 		List<Biller> billerList = billerBiz.queryBillerListByCreate("已开单");
-		System.out.println("查询未开单列表："+billerList);
+		System.out.println("查询已开单列表："+billerList);
 		modelAndView = new ModelAndView("WEB-INF/medical_workstation/create-list");
 		modelAndView.addObject("billerList", billerList);
 		return modelAndView;
@@ -106,19 +143,20 @@ public class UserHandle {
 		//取得文件信息
 		companyFile = companyFileBiz.queryFileByBillerId(bid);
 		
-		//获取体检人员列表
+		//	获取体检人员列表
 		List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
 		
 		try {
-			//插入病人
+			//	插入病人
 			List<Patient> pList = patientBiz.insertByBatch(patientList);
 			
 			if (pList!=null) {
-				//创建关系表
+				//	创建关系表
 				if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)&&
 						billerBiz.updateBillerCreate(bid)) {
-					//修改记账表为开单
+					//	修改记账表为开单
 					response.getWriter().print("1");
+					
 				} else {
 					response.getWriter().print("0");
 				}
@@ -177,9 +215,6 @@ public class UserHandle {
 		return modelAndView;
 		
 	}
-	
-	
-	
 	
 	/*
 	 * 选中开单
@@ -564,8 +599,10 @@ public class UserHandle {
 								dataList.get(1), // 性别
 								dataList.get(2), // 年龄
 								dataList.get(3), // 身份证号
-								"-1", dataList.get(4), // 电话号码
-								"-1", dataList.get(5) // 套餐名
+								"-1", 
+								dataList.get(4), // 电话号码
+								"-1", 
+								dataList.get(5) // 套餐名
 						));
 						num++;
 					}

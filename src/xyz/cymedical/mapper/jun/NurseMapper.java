@@ -32,6 +32,14 @@ public interface NurseMapper {
 			@Param("pList")List<Patient> pList);
 
 	//query
+	
+	/**
+	 * 打印导检单
+	 * @param bid	记账表id
+	 * @return	导检单列表
+	 */
+	public List<Patient> getCheckPage(String bid);
+	
 	/**
 	 * 查询套餐
 	 * @param comboName	套餐名

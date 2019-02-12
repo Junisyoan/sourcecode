@@ -14,9 +14,12 @@
 		update tb_brief set sstate='已提交' ,resulttext=#{0 },resultpath=#{1 } where brief_id=#{2 }
 	</update>
 	
-	
 	<update id="Check" parameterType="String" >
 		update tb_brief set sstate='已提交' ,resulttext=#{0 },tips=#{1 } where brief_id=#{2 }
+	</update>
+	
+	<update id="addsummarize"  >
+		update tb_brief set summarize_id=#{1 }  where brief_id=#{0 }
 	</update>
 	
 

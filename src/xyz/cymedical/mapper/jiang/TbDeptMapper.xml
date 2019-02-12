@@ -18,26 +18,30 @@
 	
 <!-- 	</delete> -->
 	
-<!-- 	<insert id="addPower" parameterType="xyz.cymedical.entity.jiang.Tb_power"> -->
-<!-- 		insert into tb_power(power_id,menu_id,name) values(#{power_id},#{menu_id},#{name}) -->
-<!-- 	</insert> -->
+	<insert id="addDept" parameterType="xyz.cymedical.entity.jiang.Tb_dept">
+		insert into tb_dept(dept_id,name) values(#{dept_id},#{name})
+	</insert>
 	
-<!-- 	<update id="upPower"  parameterType="xyz.cymedical.entity.jiang.Tb_power" > -->
+	<update id="upDept"  parameterType="xyz.cymedical.entity.jiang.Tb_dept" >
 	
-<!-- 			UPDATE tb_power  -->
+			UPDATE tb_dept 
 			
-<!-- 		<trim prefix="SET" suffixOverrides=","  >   -->
+		<trim prefix="SET" suffixOverrides=","  >  
 	
-<!-- 		<if test="menu_id != null and menu_id != ''"> -->
-<!-- 			menu_id=#{menu_id}, -->
-<!-- 		</if> -->
-<!-- 		<if test="name != null and name != ''"> -->
-<!-- 			name=#{name} -->
-<!-- 		</if> -->
-		
-<!-- 		   where power_id=#{power_id} -->
-<!-- 		</trim> -->
 		 
-<!-- 	</update> -->
+		<if test="name != null and name != ''">
+			name=#{name}
+		</if>
+		
+		   where dept_id=#{dept_id}
+		</trim>
+		 
+	</update>
+	
+	<delete id="delectDept" parameterType="int" >
+	
+		delete from tb_dept where dept_id = #{dept_id}
+	
+	</delete>
 	
 </mapper>

@@ -48,7 +48,7 @@
 							<td>${b.bcreate}</td>
 							<td>${b.bstate}</td>
 							<td>${b.batch}</td>
-							<td><input type="button" name="createList" onclick="createList('${b.biller_id}');" value="开单"></input></td>
+							<td><input type="button" name="createList" onclick="createList('${s.count}','${b.biller_id}');" value="开单"></input></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -58,8 +58,9 @@
 </body>
 <script type="text/javascript">
 
-function createList(bid){
-	var s = confirm("确认开单？");
+
+function createList(cid,bid){
+	var s = confirm("确认开单？序号："+cid);
 	if(s){
 		$.ajax({
 			url:"<%=path%>nurse/createCheckList.handle",
@@ -69,12 +70,15 @@ function createList(bid){
 			success:function(retData){
 				if(retData=="1"){
 					alert('开单成功');
-<%-- 					location.href="<%=path %>nurse/getBillerNoPay.handle"; --%>
+					location.href="<%=path %>nurse/getNoCreateList.handle";
 				}else{
 					alert('开单失败');
 				}
 				
 			},
+			error:function(){
+				alert('服务器无响应');
+			}
 		});
 	}
 }

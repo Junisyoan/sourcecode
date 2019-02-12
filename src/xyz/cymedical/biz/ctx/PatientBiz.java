@@ -22,5 +22,7 @@ public interface PatientBiz {
 	public List<Patient> queryproject(@Param("name") String name, @Param("time") String time);
 	
 	public List<Patient> querybrief(@Param("name") String name, @Param("time") String time);
+	
+	public List<Patient> queryadvise(@Param("name") String name, @Param("time") String time);
 
 }

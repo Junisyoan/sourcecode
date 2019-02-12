@@ -26,7 +26,7 @@
 <body>
 	<div class="page-content">
 		<div class="Manager_style">
-			<span class="title_name">未开单列表</span>
+			<span class="title_name">已开单列表</span>
 			<table id="patientTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
@@ -36,6 +36,7 @@
 						<th>是否开单</th>
 						<th>是否结算</th>
 						<th>批次</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,6 +48,7 @@
 							<td>${b.bcreate}</td>
 							<td>${b.bstate}</td>
 							<td>${b.batch}</td>
+							<td><input type="button" value="生成导检单" onclick="createCheckpage('${b.biller_id}','${b.batch}');"></input></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -55,6 +57,13 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function createCheckpage(bid,batch){
+	var s = confirm("是否开单？批次："+batch);
+	if(s){
+		location.href="<%=path%>nurse/getCheckPage.handle?bid="+bid;
+	}
+}
 
 $(function(){
 	$('#patientTable').DataTable();

@@ -86,6 +86,7 @@ public class DoctorHandle {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("projectname", projectname);
+		mav.addObject("projectid", projectid);
 		mav.addObject("keshi", keshi);
 		mav.addObject("dlist", dlist);
 		mav.addObject("code", code);
@@ -112,15 +113,15 @@ public class DoctorHandle {
 		return mav;
 	}
 
-	//小结
-	@RequestMapping(value = "/brief.handle")
-	public ModelAndView brief(String data) {
-
-		System.out.println("data...."+data);
-		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
-
-		return mav;
-	}
+//	//小结
+//	@RequestMapping(value = "/brief.handle")
+//	public ModelAndView brief(String data) {
+//
+//		System.out.println("data...."+data);
+//		ModelAndView mav = new ModelAndView();
+////		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
+//
+//		return mav;
+//	}
 
 }

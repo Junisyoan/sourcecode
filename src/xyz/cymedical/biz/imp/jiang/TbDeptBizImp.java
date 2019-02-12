@@ -23,5 +23,26 @@ public class TbDeptBizImp implements  TbDeptBiz{
 		return tbDeptMapper.selectDept();
 	}
 
+
+	@Override
+	public int addDept(Tb_dept tb_dept) {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.addDept(tb_dept);
+	}
+
+
+	@Override
+	public int upDept(Tb_dept tb_dept) {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.upDept(tb_dept);
+	}
+
+
+	@Override
+	public int delectDept(int dept_id) {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.delectDept(dept_id);
+	}
+
 	
 }
