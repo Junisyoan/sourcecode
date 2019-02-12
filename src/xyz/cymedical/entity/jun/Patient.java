@@ -20,9 +20,13 @@ public class Patient {
 	private String phone; // 手机号
 	private String check_num; // 体检号
 	private String comboName;	//套餐名字
+	private String prname;		//检查科室
+	private String pname;		//项目名字
+	private String dname;		//细项名字
+	
 	
 	private Company company;
-
+//	private Combo combo;
 	public Patient() {
 		super();
 	}
@@ -148,10 +152,43 @@ public class Patient {
 		this.company = company;
 	}
 
+//	public Combo getCombo() {
+//		return combo;
+//	}
+
+//	public void setCombo(Combo combo) {
+//		this.combo = combo;
+//	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+	
+	public String getPrname() {
+		return prname;
+	}
+
+	public void setPrname(String prname) {
+		this.prname = prname;
+	}
+
 	@Override
 	public String toString() {
 		return "Patient [paitent_id=" + paitent_id + ", company_id=" + company_id + ", combo_id=" + combo_id + ", name="
 				+ name + ", sex=" + sex + ", age=" + age + ", ID=" + ID + ", code=" + code + ", phone=" + phone
-				+ ", check_num=" + check_num + ", comboName=" + comboName + ", company=" + company + "]";
+				+ ", check_num=" + check_num + ", comboName=" + comboName + ", prname=" + prname + ", pname=" + pname
+				+ ", dname=" + dname + ", company=" + company + "]";
 	}
 }

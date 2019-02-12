@@ -146,12 +146,12 @@ input {
 				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
-					<p>&nbsp;</p>
-					<h3 style="margin-left: 80px;">体检总结及建议</h3>
-					<p style="margin-left: 80px;">【综述】</p>
-					<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
-						<p style="margin-left: 100px;">${p3.n3}:${p3.resulttext}${p3.unit}</p>
-					</c:forEach>
+				<p>&nbsp;</p>
+				<h3 style="margin-left: 80px;">体检总结及建议</h3>
+				<p style="margin-left: 80px;">【综述】</p>
+				<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
+					<p style="margin-left: 100px;">${p3.n3}:${p3.resulttext}${p3.unit}</p>
+				</c:forEach>
 				<p style="margin-left: 80px;">【建议】</p>
 				<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
 					<p style="margin-left: 100px;">（${s4.index + 1}）${p4.guide}</p>
@@ -234,12 +234,10 @@ input {
 				</div>
 			</form>
 		</c:if>
-		<p align="center">
-			<a
-				href="<%=path%>patient/printpatient.handle?name=${p.n1}&time=${p.time}">返回</a>&nbsp;&nbsp;&nbsp;<a
-				href="">打印</a>
-		</p>
 	</c:forEach>
-
+	<p align="center">
+		<a
+			href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}">返回</a>
+	</p>
 </body>
 </html>

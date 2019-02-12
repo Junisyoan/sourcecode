@@ -18,6 +18,50 @@
   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
   <link rel="stylesheet" href="<%=path %>css/style.css"/>
 <title>项目小结</title>
+
+        <script type="text/javascript">            
+            //判断浏览器是否支持FileReader接口
+            if (typeof FileReader == 'undefined') {
+                document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
+                //使选择控件不可操作
+                document.getElementById("file").setAttribute("disabled", "disabled");
+            }
+
+            //选择图片，马上预览
+            function xmTanUploadImg(obj) {
+                var file = obj.files[0];
+                
+                console.log(obj);console.log(file);
+                console.log("file.size = " + file.size);  //file.size 单位为byte
+
+                var reader = new FileReader();
+
+                //读取文件过程方法
+                reader.onloadstart = function (e) {
+                    console.log("开始读取....");
+                }
+                reader.onprogress = function (e) {
+                    console.log("正在读取中....");
+                }
+                reader.onabort = function (e) {
+                    console.log("中断读取....");
+                }
+                reader.onerror = function (e) {
+                    console.log("读取异常....");
+                }
+                reader.onload = function (e) {
+                    console.log("成功读取....");
+
+                    var img = document.getElementById("xmTanImg");
+                    img.src = e.target.result;
+                    //或者 img.src = this.result;  //e.target == this
+                }
+
+                reader.readAsDataURL(file)
+            }
+        </script>
+
+
 </head>
 <body>
 
@@ -39,7 +83,7 @@
    <tbody>
    <c:forEach items="${dlist }" var="d" varStatus="s">
 		<tr>
-			<c:if test="${d.type=='普通' }">
+			<c:if test="${d.type=='普通' && d.project_id==projectid}">
 				<td>${s.index + 1}</td>
 				<td>${d.name}</td>
 				<td>${d.unit}</td>
@@ -77,22 +121,40 @@
    
    <c:forEach items="${dlist }" var="d" varStatus="s">
 		<tr>
-			<c:if test="${d.type=='彩超' }">
+			<c:if test="${d.type=='彩超' && d.project_id==projectid}">
 				<td>${s.index + 1}</td>
 				<td>${d.name}</td>
 				
+  				<form method="post" action="<%=path %>brief/photoUpload.handle" enctype="multipart/form-data">
 				<c:if test="${d.sstate=='未提交' }">
-					<td ><input type="file" id="${d.name}" /></td>
-					<td><textarea rows="4" id="${d.name}${d.name}"></textarea></td>
+					<td >
+<%-- 					<input type="file" id="${d.name}" name="file" id="file" onclick="show()"/> --%>
+					 <p>
+                <input type="file" id="file" name="file" onchange="xmTanUploadImg(this)" accept="image/*"/>
+<!--                 <input type="button" value="隐藏图片" onclick="document.getElementById('xmTanImg').style.display = 'none';"/> -->
+<!--                 <input type="button" value="显示图片" onclick="document.getElementById('xmTanImg').style.display = 'block';"/> -->
+            </p>
+            <img id="xmTanImg" style="width:350px;height:200px"/>
+            <div id="xmTanDiv"></div>
+        <hr />
+
+					
+					</td>
+					
+					<td><textarea rows="8" id="${d.name}${d.name}" name="result"></textarea></td>
 					<td class="center">
-						<a href="javascript:;" onclick="location ='<%=path %>brief/photo.handle?path='+document.getElementById('${d.name}').value+'&result='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};">
-						<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
-						</a>
+ 						<a href="javascript:;" onclick="location ='<%=path %>brief/photo.handle?path='+document.getElementById('${d.name}').value+'&result='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};"> 
+						<button type="submit" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
+						<input type="hidden" name="id" value="${d.brief_id}"/>
+						</a> 
 					</td>
 				</c:if> 
+  				</form>
 				
 				<c:if test="${d.sstate=='已提交' }">
-					<td><input type="file" id="${d.name}"/></td>
+					<td style="width:350px;">
+					<img src="${pageContext.servletContext.contextPath}/upload/${d.resultpath}" style="width:350px;"/>
+					</td>
 					<td>${d.resulttext}</td>
 					<td class="center">
 						<lable class="btn btn-primary" >已提交</lable>
@@ -103,8 +165,8 @@
 	</c:forEach>
   </tbody>
  
+
   </c:if>
-  
     <c:if test="${keshi=='检验室' }">
   
    <thead>
@@ -114,7 +176,7 @@
    
    <c:forEach items="${dlist }" var="d" varStatus="s">
 		<tr>
-			<c:if test="${d.type=='检验' }">
+			<c:if test="${d.type=='检验'  && d.project_id==projectid}">
 				<td>${s.index + 1}</td>
 				<td>${d.name}</td>
 				<td>${d.unit}</td>
@@ -126,7 +188,7 @@
 				<td><input type="text" name="tips" id="${d.name}${d.name}"/></td>
 				<td class="center">
 				<a href="javascript:;" onclick="location ='<%=path %>brief/check.handle?result='+document.getElementById('${d.name}').value+'&tips='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};">
-					<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
+					<button type="button" class="btn btn-primary" onclick="return confirm('提交成功了哟！');">提交</button>
 				</a>
 				</td>
 				</c:if>

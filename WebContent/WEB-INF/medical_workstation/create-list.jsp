@@ -10,23 +10,16 @@
 			+ request.getContextPath() + "/";
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
-<!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
-<link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<%=path%>css/style.css" />
+<link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
-<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
-<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <title>人员列表</title>
 </head>
 
 <body>
 	<div class="page-content">
 		<div class="Manager_style">
-			<span class="title_name">未开单列表</span>
+			<span class="title_name">已开单列表</span>
 			<table id="patientTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
@@ -36,6 +29,7 @@
 						<th>是否开单</th>
 						<th>是否结算</th>
 						<th>批次</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -47,6 +41,7 @@
 							<td>${b.bcreate}</td>
 							<td>${b.bstate}</td>
 							<td>${b.batch}</td>
+							<td><input type="button" value="生成导检单" onclick="createCheckpage('${b.biller_id}','${b.batch}');"></input></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -55,6 +50,13 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function createCheckpage(bid,batch){
+	var s = confirm("是否开单？批次："+batch);
+	if(s){
+		location.href="<%=path%>nurse/getCheckPage.handle?bid="+bid;
+	}
+}
 
 $(function(){
 	$('#patientTable').DataTable();

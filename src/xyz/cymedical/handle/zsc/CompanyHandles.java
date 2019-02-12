@@ -64,10 +64,9 @@ public class CompanyHandles {
 	}
 
 	// 修改状态
-	@RequestMapping("/stateChange.handle")
-	private ModelAndView stateChange(HttpServletRequest req, Company company) {
-		companyBizsc.stateChange(company);
-		return findCompanys(req);
+	@RequestMapping(value = "/stateChange.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	private @ResponseBody String stateChange(HttpServletRequest req, Company company) {
+		return companyBizsc.stateChange(company);
 	}
 
 	// 重置密码

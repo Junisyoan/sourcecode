@@ -67,8 +67,8 @@
      
      <form method="post" id = "aFrom" method="post">
      		名称	<input type="text" name="name"/>
-     		价钱	<input type="text" name="min"/>
-     		至	<input type="text" name="max"/>
+     		价钱	<input type="text" name="min" id = "min"/>
+     		至	<input type="text" name="max" id = "max"/>
      		科室	<select name="deptname" style="width:160px;height:30px;margin-left:10px;">
      				<option></option>
      				<c:forEach items="${params}" var = "p" varStatus="s">
@@ -210,7 +210,8 @@ var row = 3;
 var totalPage;
 var state;
 
-var numCheck = /^[0-9]+\.{0,1}[0-9]{0,2}$/;
+var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
+var numCheck1 = /^[0-9]*$/;
 
 function createDetail(detail_id,detail_name){
 	var detail = new Object();
@@ -272,6 +273,20 @@ function next(){
 <!-- 查 -->
 <script type="text/javascript">
 function putIn(){
+	if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+		layer.alert('最小值必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
+	if($('#max').val() != ""&&!(numCheck.test($('#max').val())||numCheck1.test($('#max').val()))){
+		layer.alert('最大值必须是数值!',{
+              title: '提示框',								
+			  icon:0,			    
+			 });
+			return false;
+	}
 	$.ajax({
 		url:"<%=path%>project/selectProject.handle",
 		type:"POST",
@@ -540,11 +555,6 @@ $(document).ready(function(){
 		detailList.push(detail);
 	</c:forEach>
 });
-
-$(document).ready(function(){
-	
-});
-
 var check1;
 function checkName1(){
 	if($("#name1").val() == ""){

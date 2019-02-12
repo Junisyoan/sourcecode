@@ -31,14 +31,12 @@
 	<p>&nbsp;</p>
 	<p>&nbsp;</p>
 	<div class="Manager_style">
-		<span class="title_name">体检小结信息</span>
+		<span class="title_name">体检总结信息</span> <span class="title_name">体检小结信息</span>
 		<table class="table table-striped table-bordered table-hover"
 			id="item">
 			<thead>
 				<tr>
 					<th>序号</th>
-					<th>体检人</th>
-					<th>套餐</th>
 					<th>项目</th>
 					<th>细项</th>
 					<th>结果</th>
@@ -50,10 +48,11 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${patientlist}" var="p" varStatus="s">
+					<c:if test="${s.index == 0}">
+						<h2 align="center">${p.n1}</h2>
+					</c:if>
 					<tr>
 						<th>${s.index + 1}</th>
-						<th>${p.n1}</th>
-						<th>${p.n4}</th>
 						<th>${p.n3}</th>
 						<th>${p.n2}</th>
 						<th>${p.unit}</th>

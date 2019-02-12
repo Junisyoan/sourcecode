@@ -17,6 +17,14 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="<%=path%>js/datatables.bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#item").dataTable();
+	});
+</script>
 <title>参数管理</title>
 </head>
 
@@ -42,7 +50,7 @@
 
 		<div class="Manager_style">
 			<span class="title_name">参数信息</span>
-			<table class="table table-striped table-bordered table-hover">
+			<table class="table table-striped table-bordered table-hover" id="item">
 				<thead>
 					<tr>
 						<th>序号</th>

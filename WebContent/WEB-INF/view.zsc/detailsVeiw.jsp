@@ -224,7 +224,7 @@ function remove(e){
 </script>
 <!-- 改 -->
 <script>
-var numCheck = /^[0-9]+\.{0,1}[0-9]{0,2}$/;
+var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 var check;
 function checkName(){
 	if($("#name").val() == ""){

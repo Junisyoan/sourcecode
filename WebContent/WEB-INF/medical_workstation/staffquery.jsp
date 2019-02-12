@@ -40,6 +40,14 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="<%=path%>js/datatables.bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#item").dataTable();
+	});
+</script>
 <title>项目接收</title>
 </head>
 

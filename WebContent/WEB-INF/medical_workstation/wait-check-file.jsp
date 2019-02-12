@@ -17,6 +17,9 @@
   <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
+<script src="<%=path%>js/jquery.dataTables.min.js"></script>
 <title>文件审核</title>
 </head>
 
@@ -24,7 +27,7 @@
 
 	<div class="Manager_style">
 		<span class="title_name">文件审核</span>
-		<table class="table table-striped table-bordered table-hover">
+		<table id="waitTable" class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>序号</th>
@@ -48,4 +51,10 @@
 		</table>
 	</div>
 </body>
+
+<script type="text/javascript">
+$(function(){
+	$('#waitTable').DataTable();
+});
+</script>
 </html>

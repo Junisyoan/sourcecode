@@ -44,7 +44,6 @@ public class RoleManageHandle {
 
 				response.getWriter().print("<script type='text/javascript'>alert('账号已存在');window.history.back();</script>");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -97,7 +96,6 @@ public class RoleManageHandle {
 			try {
 				response.getWriter().print("<script type='text/javascript'>alert('删除成功');window.history.back();</script>");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

@@ -10,7 +10,7 @@
 			+ request.getContextPath() + "/";
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="<%=path%>css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
 <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />

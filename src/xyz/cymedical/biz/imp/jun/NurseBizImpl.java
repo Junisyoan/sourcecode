@@ -57,4 +57,9 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 		}
 		return isUpdate;
 	}
+
+	@Override
+	public List<Patient> getCheckPage(String bid) {
+		return nurseMapper.getCheckPage(bid);
+	}
 }

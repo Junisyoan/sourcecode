@@ -16,11 +16,16 @@ public interface PatientBiz {
 	 */
 	public List<Patient> insertByBatch(List<Patient> listRecord);
 
-	public List<Patient> query(@Param("name") String name, @Param("phone") String phone, @Param("time") String time,
+	public List<Patient> query(
+			@Param("name") String name, 
+			@Param("phone") String phone, 
+			@Param("time") String time,
 			@Param("code") String code);
 
 	public List<Patient> queryproject(@Param("name") String name, @Param("time") String time);
 	
 	public List<Patient> querybrief(@Param("name") String name, @Param("time") String time);
+	
+	public List<Patient> queryadvise(@Param("name") String name, @Param("time") String time);
 
 }

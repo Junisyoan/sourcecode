@@ -58,7 +58,7 @@
 			
 		<form method="post" action="<%=path %>chiefdoctor/dosummarize.handle">
 			<div style="float: left; margin-left: 75px;font-size:20px;padding:5px">健康体检中心</div>
-			<div style="float: right; margin-right: 75px;font-size:20px">体检日期： 2019-01-19</div>
+			<div style="float: right; margin-right: 75px;font-size:20px">体检日期： ${time }</div>
 			
 				<hr style="width: 1200px;">
 				
@@ -71,16 +71,16 @@
 				<div class="left2">
 				<p>一、检验室：</p>
 					<c:forEach items="${dlist }" var="d" varStatus="s">
-							<c:if test="${d.tips!=null && d.type=='检验'}">
+							<c:if test="${d.tips!=null && d.type=='检验' && d.code==mycode}">
 								${d.name}&nbsp;&nbsp;
-								${d.unit}&nbsp;&nbsp;
+								${d.resulttext}&nbsp;${d.unit}&nbsp;
 								${d.tips}<br/>
 							</c:if> 
 					</c:forEach>
 					<br/>
 				<p>二、身高体重血压：</p>
 					<c:forEach items="${dlist }" var="d" varStatus="s">
-							<c:if test="${d.type=='普通'}">
+							<c:if test="${d.type=='普通' && d.code==mycode}">
 								${d.name}&nbsp;&nbsp;
 								${d.resulttext}&nbsp;${d.unit}&nbsp;
 								${d.tips}<br/>
@@ -96,13 +96,25 @@
 					<h3 style="margin-left: 80px;">生活保健指导</h3>
 				<hr/>
 				
+				<p style="margin-left: 80px;">一、保持健康的生活方式</p>
+				<p style="margin-left: 130px;">(1)健康的饮食习惯：食物多样，谷类为主；适合吃季节性蔬菜；吃适量乳类、豆类制品；吃适量
+
+					新鲜有鱗鱼、蛋、瘦肉，少吃肥肉和荤油；</p>
+				<p style="margin-left: 150px;">食量与活动量要平衡，监测体重，吃清淡少盐食物。</p>
+				<p style="margin-left: 130px;">(2)戒烟戒酒：不但要避免吸烟也要避免被动吸烟，不饮酒或饮少量红葡萄酒。</p>
+				<p style="margin-left: 130px;">(3)适量规律运动：能够预防很多慢性疾病，包括冠心病、高血压、糖尿病、骨质疏松等。</p>
+				<p style="margin-left: 130px;">(4)保持心理平衡：愉悦的心情更有益于健康。</p>
+				
+				
+				
 				<h4 style="margin-left: 80px;">【指导】</h4>
 		
 				<p class="left1"><textarea rows="5" cols="150" id="guide" name="guide"></textarea></p>
 
 <%-- 			<c:if test="${flag!=null}"> --%>
-				<div style="width:100px;margin:0 auto">
-					<input type="submit" class="btn btn-warning" onclick="return confirm('确定提交么？') ;" value="提交"/></a>
+				<div style="width:180px;margin:0 auto;border:0px red solid;padding:20px">
+					<a href="<%=path%>chiefdoctor/first.handle"><button type="button" class="btn btn-info Product_Details" >返回</button></a>
+					<input type="submit" class="btn btn-info Product_Details" onClick="return confirm('确定提交么？') ;" value="提交"/>
 				</div>  
 <%-- 			</c:if> --%>
 		</form>

@@ -8,14 +8,14 @@ public class Combo {
 
 	private int combo_id; // 套餐id
 	private String name; // 套餐名
-	private float price; // 价格
+	private double price; // 价格
 	private List<Project> projects;
 
 	public Combo() {
 		super();
 	}
 
-	public Combo(int combo_id, String name, float price) {
+	public Combo(int combo_id, String name, double price) {
 		super();
 		this.combo_id = combo_id;
 		this.name = name;
@@ -43,8 +43,12 @@ public class Combo {
 		this.name = name;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public void setPrice(float price) {
