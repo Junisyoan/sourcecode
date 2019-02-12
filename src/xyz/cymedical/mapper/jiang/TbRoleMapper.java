@@ -1,6 +1,7 @@
 package xyz.cymedical.mapper.jiang;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,6 @@ public interface TbRoleMapper {
 	public int delectrole(int role_id);
 	
 	public int upRole(int role_id,String name);
+	
+	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 }
