@@ -26,19 +26,16 @@ public class BriefBizImpl  implements BriefBiz {
 
 	@Override
 	public boolean Photo(String result,String path,String id) {
-		// TODO Auto-generated method stub
 		return briefMapper.Photo(result,path,id);
 	}
 
 	@Override
 	public boolean Check(String result, String tips, String id) {
-		// TODO Auto-generated method stub
 		return briefMapper.Check(result, tips, id);
 	}
 
 	@Override
 	public boolean Normal(String result, String id) {
-		// TODO Auto-generated method stub
 		return briefMapper.Normal(result, id);
 	}
 }
