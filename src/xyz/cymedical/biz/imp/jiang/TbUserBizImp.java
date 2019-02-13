@@ -50,4 +50,14 @@ public class TbUserBizImp implements TbUserBiz{
 	public List<Map<String,Object>> selUser(String depts, String users,  String phones ) {
 		return tbUserMapper.selUser(depts, users, phones);
 	}
+	@Override
+	public List<Tb_user> findUserRole(Tb_user user) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.findUserRole(user);
+	}
+	public  List<Map<String,Object>> selectCompany(Map<String, Object> map) {
+		// TODO Auto-generated method stub 
+			return tbUserMapper.selectCompany(map);
+		 
+	}
 }
