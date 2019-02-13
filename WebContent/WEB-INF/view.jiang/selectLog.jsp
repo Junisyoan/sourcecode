@@ -63,7 +63,7 @@
 				<tr>
 					<th>序号</th>
 					<th>日志表ID</th>
-					<th>用户表ID</th>
+					<th>用户</th>
 					<th>具体操作</th>
 					<th>操作时间</th>
 					<th>删除</th>
@@ -75,7 +75,7 @@
 					<tr>
 						<td>${s.index + 1}</td>
 						<td>${l.log_id}</td>
-						<td>${l.user_id}</td>
+						<td>${l.name}</td>
 						<td>${l.opera}</td>
 						<td>${l.time}</td>
 						<td><a href="<%=path%>log/delLog.handle?log_id=${l.log_id}">删除</a></td>
