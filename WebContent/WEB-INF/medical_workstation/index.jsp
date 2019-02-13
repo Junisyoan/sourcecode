@@ -96,21 +96,23 @@
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/queryCheckFile.handle?pageNum=1" title="待审核文件"
-								class="iframeurl"><i class="icon-double-angle-right"></i>待审核文件</a></li>
+								name="<%=path %>nurse/queryCheckFile.handle?pageNum=1"
+								title="待审核文件" class="iframeurl"><i
+									class="icon-double-angle-right"></i>待审核文件</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/getFileList.handle" title="团检表列表" class="iframeurl"><i
-									class="icon-double-angle-right"></i>团检文件列表</a></li>
+								name="<%=path %>nurse/getFileList.handle" title="团检表列表"
+								class="iframeurl"><i class="icon-double-angle-right"></i>团检文件列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>未结算账单</a></li>
+								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单"
+								class="iframeurl"><i class="icon-double-angle-right"></i>未结算账单</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/getNoCreateList.handle" title="未开单列表" class="iframeurl"><i
-									class="icon-double-angle-right"></i>未开单记账表</a></li>
+								name="<%=path %>nurse/getNoCreateList.handle" title="未开单列表"
+								class="iframeurl"><i class="icon-double-angle-right"></i>未开单记账表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/getCreateList.handle" title="已开单列表" class="iframeurl"><i
-									class="icon-double-angle-right"></i>已开单列表</a></li>
+								name="<%=path %>nurse/getCreateList.handle" title="已开单列表"
+								class="iframeurl"><i class="icon-double-angle-right"></i>已开单列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
+<<<<<<< HEAD
 								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
@@ -154,14 +156,18 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="订单评价.html" title="订单评价" class="iframeurl"><i
 									class="icon-double-angle-right"></i>（评价）订单评价</a></li>
+=======
+								name="<%=path%>patient/showpatient.handle" title="体检报告打印"
+								class="iframeurl"><i class="icon-double-angle-right"></i>体检报告打印</a></li>
+>>>>>>> 9c6fc6cf9a3593f7058c9e94572d6484fb7f93e4
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)" name="<%=path%>patient/findpatientall.handle"
-								title="体检综合查询" class="iframeurl"><i
-									class="icon-double-angle-right"></i>体检综合查询</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>patient/findpatientall.handle" title="体检综合查询"
+								class="iframeurl"><i class="icon-double-angle-right"></i>体检综合查询</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/findpatient.handle" title="体检人员查询"
 								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询
@@ -252,8 +258,8 @@
 	<!--底部样式-->
 
 	<div class="footer_style" id="footerstyle">
-		<p class="lf">版权所有：长江南京航道局 苏ICP备11011739号</p>
-		<p class="rf">地址：南京市鼓楼区阅江楼街道公共路64号 邮编：210011 技术支持：XXXX</p>
+		<p class="lf">版权所有：厦门市传一信息科技有限公司 闽公网安备 35020602000054号</p>
+		<p class="rf">地址：厦门市思明区软件园二期观日路56号101号 邮编：361000 技术支持：黄俊彦组</p>
 	</div>
 	<!--修改密码样式-->
 	<div class="change_Pass_style" id="change_Pass">
@@ -437,7 +443,8 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>login_user.html";
+				location.href = "<%=path%>
+		login_user.html";
 
 			});
 		});
