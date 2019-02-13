@@ -55,8 +55,8 @@
 						<th>${s.index + 1}</th>
 						<th>${p.n3}</th>
 						<th>${p.n2}</th>
-						<th>${p.unit}</th>
 						<th>${p.resulttext}</th>
+						<th>${p.unit}</th>
 						<c:if test="${p.min == null}">
 							<th>${p.min}</th>
 						</c:if>
