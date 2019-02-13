@@ -28,7 +28,7 @@ public interface GroupBiz {
 	public Group queryGroupByFileId(int fid);
 
 	/**
-	 * 创建团检表
+	 * 创建团检表以及关联表
 	 * @param cid	公司id
 	 * @param fid	文件id
 	 * @return	是否创建成功
