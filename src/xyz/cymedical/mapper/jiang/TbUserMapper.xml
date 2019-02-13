@@ -13,6 +13,7 @@
 		select * from tb_user where account = #{account} and
 		pwd=#{pwd}
 	</select>
+<<<<<<< HEAD
 
 	<select id="findUserRole"
 		parameterType="xyz.cymedical.entity.jiang.Tb_user"
@@ -27,6 +28,15 @@
 
 	<select id="findAll2" resultType="java.util.HashMap">
 
+=======
+	
+	<select id="findAll2"    resultType="java.util.HashMap">
+		 	select a.*,b.*,c.name deptname from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id
+<!-- 		select * from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id   -->
+ 	</select>  
+ 
+ 	<select id="findAll" resultType="xyz.cymedical.entity.jiang.Tb_user">
+>>>>>>> 74c24be28705c4c6f485b00672b4d7a4bc62a601
 		select * from tb_user
 		a,tb_role_dept b,tb_dept c where
 		a.role_dept_id=b.role_dept_id and
@@ -107,7 +117,45 @@
 			and a.account=#{1}
 		</if>
 		<if test="#{2} !=null and #{2} !=''">
+<<<<<<< HEAD
 			and a.phone=#{2}
+=======
+		  and a.phone=#{2}
+		</if>  
+ 	</select>  
+ 	
+ 	<select id = "selectCompany" parameterType="map" resultType="map">
+ 		select a.*,b.*,c.name deptname from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id
+ 	 
+		<if test="tb_user.user_id!=0 and tb_user.user_id!=''">
+			and a.user_id like '%${tb_user.user_id}%'
+		</if>
+		<if test="tb_user.account!=null and tb_user.account!=''">
+			and a.account like '%${tb_user.account}%'
+		</if>
+		<if test="tb_user.pwd!=null and tb_user.pwd!=''">
+			and a.pwd like '%${tb_user.pwd}%'
+		</if>
+		<if test="tb_user.name!=null and tb_user.name!=''">
+			and a.name like '%${tb_user.name}%'
+		</if>
+		<if test="tb_user.sex!=null and tb_user.sex!=''">
+			and a.sex like '%${tb_user.sex}%'
+		</if>
+		<if test="tb_user.address!=null and tb_user.address!=''">
+			and a.address like '%${tb_user.address}%'
+		</if>
+		 
+		<if test="tb_user.phone!=null and tb_user.phone!=''">
+			and a.phone like '%${tb_user.phone}%'
+		</if>
+		 
+		<if test="tb_user.state!=null and tb_user.state!=''">
+			and a.state like '%${tb_user.state}%'
+		</if>
+		<if test="dept!=null and dept!=''">
+			and c.name like '%${dept}%'
+>>>>>>> 74c24be28705c4c6f485b00672b4d7a4bc62a601
 		</if>
 	</select>
 
