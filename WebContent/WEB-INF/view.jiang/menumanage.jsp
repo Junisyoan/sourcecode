@@ -34,6 +34,18 @@
     <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加菜单</button>
       <div class="Add_Manager_style">
     		  
+    		  	  
+    		<form method="post" id = "aFrom" method="post">
+     		菜单id	<input type="text" name="menu_id"/>
+     		菜单名	<input type="text" name="name"/>
+     		菜单路径<input type="text" name="link"/>
+     		上级菜单<input type="text" name="superior"/>
+     		  
+  			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
+  	 	</form>  
+    		  
+    		  
+    		  
     <div id="Add_Product_style" style="display:none">
      <div class="page-content">
     <div class="add_user_style clearfix">
@@ -42,9 +54,10 @@
   		   <ul class="clearfix">
      
       
-<!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
+      <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">菜单名</label><input name="name" type="text"  class="text_add" id="name" onblur="loadAjax()"/></li>
       <li><label class="label_name">路径</label><input name="link" type="text"  class="text_add" id="link"/></li>
+      <li><label class="label_name">上级菜单</label><input name="superior" type="text"  class="text_add" id="superior"/></li>
      
          
       </ul>  
@@ -63,15 +76,17 @@
 <th>菜单序号</th>
 <th>菜单名</th>
 <th>路径</th>
+<th>上级菜单</th>
  <th>操作</th>
 </tr>
 </thead>
-<tbody>
+<tbody id="companyBody">
 <c:forEach items="${tbmenuall}" var="u" varStatus="s">
 <tr>
 <td>${u.menu_id}</td>
 <td>${u.name}</td>
 <td>${u.link}</td>
+<td>${u.superior}</td>
 <td>  <button type="button" class="btn btn-primary" onclick="updete()" name="${u.menu_id}">修改</button>
   <button type="button" class="btn btn-primary" onclick="delect()" name="${u.menu_id}">刪除</button></td>
 <!-- <td><input type="checkbox" value="5" /></td> -->
@@ -97,6 +112,42 @@ $(function(){
 	$('#test').DataTable();
 });
 
+function putIn(){
+	$.ajax({
+		url:"<%=path%>menumanage/selectCompany.handle",
+		type:"POST",
+		dataType:"JSON",
+		data:$("#aFrom").serialize(),
+		success:function(companys){
+			show(companys);
+		},
+		error:function(){
+			alert("异常");
+		}
+	});
+}
+
+function show(companys){
+	 
+	$("#companyBody").empty();  
+	
+	for(var i = 0;i < companys.length;i++){
+		
+		var td1=$("<td></td>").text(companys[i].menu_id); 
+		var td2=$("<td></td>").text(companys[i].name); 
+		var td3=$("<td></td>").text(companys[i].link); 
+		var td4=$("<td></td>").text(companys[i].superior); 
+		var td5=$("<td></td>");
+		
+		var input1=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].menu_id+"'>修改</button>"); 
+	 	var input2=$("<button type='button' class='btn btn-warning' onclick='delect()' name='"+companys[i].menu_id+"'>删除</button>");
+		var tr=$("<tr></tr>");
+		
+		$(td5).append(input1,input2);  
+		$(tr).append(td1,td2,td3,td4,td5); 
+		$("#companyBody").append(tr);
+	}
+}
 
 $('#add_butn').on('click', function(){
  
@@ -160,7 +211,7 @@ function loadAjax(){
 				
 // 				 var datato=data.val();
 				
-				 window.location.href="<%=path%>usermanage/adddeptto.action";
+				 window.location.href="<%=path%>menumanage/adddeptto.action";
 			 }
 		
 		});
