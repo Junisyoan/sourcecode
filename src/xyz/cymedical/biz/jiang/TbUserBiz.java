@@ -10,6 +10,8 @@ public interface TbUserBiz {
 	
 	public List<Tb_user>  findUser(Tb_user user);
 	
+	public List<Tb_user>  findUserRole(Tb_user user);
+	
 	public List<Tb_user> findAll();
 	
 	public List<Map<String,Object>> findAll2();
