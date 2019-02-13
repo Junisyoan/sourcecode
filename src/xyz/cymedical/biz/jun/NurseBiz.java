@@ -21,7 +21,7 @@ public interface NurseBiz {
 	 * @param patients	体检人列表
 	 * @return	是否成功
 	 */
-	public boolean insertPatientGroup(List<Patient> patients);
+	public boolean insertPaitentCombo(List<Patient> patients,String bid);
 	
 	/**
 	 * 打印导检单
