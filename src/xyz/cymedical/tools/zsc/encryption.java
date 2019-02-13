@@ -3,7 +3,7 @@ package xyz.cymedical.tools.zsc;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
-public class Encryption {
+public class encryption {
    public static final String KEY_SHA = "SHA";   
 
    public static  String  getResult(String inputStr)
