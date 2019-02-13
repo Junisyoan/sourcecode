@@ -107,21 +107,21 @@
 							class="arrow icon-angle-down"></b></a>
 							
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>usermanage/select.handle" title="人员管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>menumanage/select.handle" title="菜单管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>rolemanage/select.handle" title="角色管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>deptmanage/select.handle" title="科室管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>powermanage/selectpower.handle" title="权限管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li> 
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>menumanage/select.handle" title="菜单管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>rolemanage/select.handle" title="角色管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>deptmanage/select.handle" title="科室管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>powermanage/selectpower.handle" title="权限管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>  -->
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>detail/detailsVeiw.handle" title="细项管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
