@@ -11,6 +11,8 @@ import xyz.cymedical.entity.jiang.Tb_user;
 public interface TbUserMapper {
 
 	public List<Tb_user>  findUser(Tb_user user);
+	
+	public List<Tb_user>  findUserRole(Tb_user user);
 
 	public List<Tb_user>  findAll();
 	
@@ -27,4 +29,6 @@ public interface TbUserMapper {
 	public int upUser(Tb_user user);//修改人員信息
 	
 	public List<Map<String,Object>> selUser(String depts, String users,  String phones ) ;
+	
+	public  List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 }
