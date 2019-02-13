@@ -39,12 +39,6 @@ public class LoginHandle {
 
 		String result = "";
 
-		String mapcode = (String) session.getAttribute("CODE");
-
-		System.out.println("mapcode=" + mapcode);
-
-		System.out.println("checkCode=" + checkCode);
-
 		userlist = tbUserBiz.findUser(user);
 		userlist2 = tbUserBiz.findUserRole(user);
 
