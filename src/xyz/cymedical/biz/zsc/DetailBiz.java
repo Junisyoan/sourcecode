@@ -9,16 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import xyz.cymedical.aop.zsc.Log;
 import xyz.cymedical.entity.zsc.Detail;
 import xyz.cymedical.mapper.zsc.DetailMapper;
 
+@Transactional(rollbackFor=Exception.class)
 @Service
 public class DetailBiz {
 
 	@Resource
 	DetailMapper detailMapper;
 	
-	@Transactional(rollbackFor=Exception.class)
+	@Log(action = "添加细项")
 	public String insertDetail(Detail detail) {
 		int rt = detailMapper.insertDetail(detail);
 		if (rt > 0) {
@@ -28,6 +30,7 @@ public class DetailBiz {
 		}
 	};
 	
+	@Log(action ="修改细项")
 	public String updateDetail(Detail detail) {
 		int rt = detailMapper.updateDetail(detail);
 		if (rt > 0) {
@@ -37,6 +40,7 @@ public class DetailBiz {
 		}
 	};
 	
+	@Log(action ="删除细项")
 	public String deleteDetail(int id) {
 		int rt = detailMapper.deleteDetail(id);
 		return "删除成功";

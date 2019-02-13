@@ -6,12 +6,18 @@
 
 	<select id="findAllLog"
 		parameterType="xyz.cymedical.entity.yjn.Log"
-		resultType="xyz.cymedical.entity.yjn.Log">
-		select * from tb_log
+		resultType="java.util.HashMap">
+		select a1.log_id,a1.opera,a1.time,a1.name from (select
+		l.log_id,l.opera,l.time,us.name from tb_log l left join tb_user us on
+		l.user_id = us.user_id) a1
 	</select>
 
 	<delete id="delLog">
 		delete from tb_log where log_id = #{id}
 	</delete>
+
+	<insert id="insertLog" parameterType = "map">
+		insert into tb_log (user_id,opera,time) values(#{user_id},#{opera},#{time});
+	</insert>
 
 </mapper>
