@@ -29,5 +29,36 @@
 	
 	</delete>
 
+<!-- 	<update id="upRole"  parameterType="xyz.cymedical.entity.jiang.Tb_role" > -->
+	
+<!-- 			UPDATE tb_role  -->
+			
+<!-- 		<trim prefix="SET" suffixOverrides=","  >   -->
+	
+	 
+<!-- 		<if test="name != null and name != ''"> -->
+<!-- 			name=#{2} -->
+<!-- 		</if> -->
+		
+<!-- 		   where role_id=#{1} -->
+<!-- 		</trim> -->
+		 
+<!-- 	</update> -->
+
+		<update id="upRole" >
+	
+		update  tb_role set name = #{1} where role_id=#{0}
+	
+	</update>
+	
+	<select id = "selectCompany" parameterType="map" resultType="map">
+ 		select * from tb_role  where 1=1
+ 	 
+		<if test="tb_role.name!=null and tb_role.name!=''"> 
+			and name like '%${tb_role.name}%'
+		</if>
+	 
+		 
+	</select>
 
 </mapper>
