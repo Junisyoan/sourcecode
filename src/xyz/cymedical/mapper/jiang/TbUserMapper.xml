@@ -29,13 +29,6 @@
 		 	select a.*,b.*,c.name deptname from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id
 <!-- 		select * from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id   -->
  	</select>  
- 
- 	<select id="findAll" resultType="xyz.cymedical.entity.jiang.Tb_user">
-		select * from tb_user
-		a,tb_role_dept b,tb_dept c where
-		a.role_dept_id=b.role_dept_id and
-		b.dept_id=c.dept_id
-	</select>
 
 	<select id="findAll"
 		resultType="xyz.cymedical.entity.jiang.Tb_user">
