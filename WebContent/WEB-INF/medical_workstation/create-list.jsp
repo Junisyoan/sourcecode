@@ -59,7 +59,7 @@
 <script type="text/javascript">
 
 function createCheckpage(bid,batch){
-	var s = confirm("是否开单？批次："+batch);
+	var s = confirm("是否生成导检单？批次："+batch);
 	if(s){
 		location.href="<%=path%>nurse/getCheckPage.handle?bid="+bid;
 	}
