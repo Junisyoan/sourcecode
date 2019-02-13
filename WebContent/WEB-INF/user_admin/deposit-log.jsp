@@ -14,12 +14,12 @@
 <link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
 <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
+ <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
-<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
-<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
 <title>资金明细</title>
 </head>
 
@@ -28,11 +28,8 @@
 
 	<div class="Manager_style">
 		<div class="title_name">充值</div>
-		<form method="post" action="<%=path%>company/pay.handle">
-			<input type="text" name="deposit"/>
-			<input type="submit" value="充值" />
-		</form>
-		
+			<input type="text" id="m" name="deposit"/>
+			<input type="button" value="充值" onclick="recharge();"/>
 		余额：${userCompany.deposit }
 	</div>
 	<div class="Manager_style">
@@ -60,6 +57,28 @@
 	</div>
 </body>
 <script type="text/javascript">
+function recharge(){
+	var m = document.getElementById("m").value;
+	if(confirm("确认充值？")){
+		$.ajax({
+			url:"<%=path%>company/pay.handle",
+			type:"post",
+			dataType:"text",
+			data:{deposit:m},
+			success:function(ret){
+				if(ret=="1"){
+					alert("充值成功");
+				}else{
+					alert("充值失败");
+				}
+				location.href="<%=path %>company/getDepositDetail.handle";
+			},
+			error:function(){
+				alert('错误');
+			}
+		});
+	}
+}
 $(function(){
 	$('#depositTable').DataTable();
 });
