@@ -14,4 +14,8 @@
 		delete from tb_log where log_id = #{id}
 	</delete>
 
+	<insert id="insertLog" parameterType = "map">
+		insert into tb_log (user_id,opera,time) values(#{user_id},#{opera},#{time});
+	</insert>
+
 </mapper>
