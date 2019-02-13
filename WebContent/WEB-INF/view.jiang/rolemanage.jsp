@@ -1,30 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%String path=request.getScheme()+"://"+request.getServerName()+":"
-	+request.getServerPort()+request.getContextPath()+"/";	%>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@ page language="java" import="java.util.*"
+	contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
+	  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+%>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" /> 
   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
   <link rel="stylesheet" href="<%=path %>css/style.css"/>
 <title>角色管理</title>
-<script type="text/javascript"></script>
-<script src="<%=path %>js/jquery.min.js"></script>
-<script src="<%=path %>js/jquery.validate.min.js"></script>
-<script src="<%=path %>js/jquery.validate.cn.js"></script>
+  
+<link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
+<script src="<%=path %>js2/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
 <div class="page-content">
 <div class="gys_style">
- <div class="Manager_style">
-    <div class="title_name">添加角色</div>
+<div class="Manager_style">
+      <div class="title_name">添加角色</div>
     <button type="button" class="btn btn-primary" id="Add_Product_btn">添加角色</button>
     <div class="Add_Manager_style">
+    
+    	<form method="post" id = "aFrom" method="post">
+     		角色名	<input type="text" name="name"/>
+     		  
+  			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
+  	 	</form>  
+    
     <div id="Add_Product_style" style="display:none">
      <div class="page-content">
     <div class="add_user_style clearfix">
@@ -38,41 +53,21 @@
       </div>
     </div>
     </div>
-<!--     ------------ -->
-<!--      <div class="Manager_style"> -->
-<!-- <!--     <div class="title_name">修改角色</div> --> -->
-<!-- <!--     <button type="button" class="btn btn-primary" id="updect">修改角色</button> --> -->
-<!--     <div class="Add_Manager_style"> -->
-<!--     <div id="Add_Product_style" style="display:none"> -->
-<!--      <div class="page-content"> -->
-<!--     <div class="add_user_style clearfix"> -->
-<%--      <form action="<%=path%>rolemanage/updect.handle" method="post" id="ccc" > --%>
-<!--      <ul class="clearfix"> -->
-<!-- <!--       <li><label class="label_name">新角色</label> <input name="name" type="text"  class="text_add" id="name"/><i style="color:#F60; ">*</i></li> --> -->
-<!--       </ul>     -->
-<!--    		 </form> -->
-<!--      </div>        -->
-<!--       </div> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--     </div> -->
-    
-    
-<!--     ----------- -->
-
-    <div class="Manager_style">
-     <span class="title_name">角色信息</span>
-     <table class="table table-striped table-bordered table-hover">
-      <thead>
-       <tr>
+    </div>
+    </div>
+<table id="test" class="table table-striped table-bordered" style="60%">   
+<thead>
+ 
+ 
+      <tr>
         <th>序号</th>
         <th>角色</th>
         <th>操作</th>
         
        </tr>
-      </thead>
-      <tbody>
-       <c:forEach items="${roleall}" var="u" varStatus="s">
+</thead>
+<tbody id="companyBody">
+<c:forEach items="${roleall}" var="u" varStatus="s">
        <tr>
         <td>${u.role_id}</td><td>${u.name}</td> 
         <td><button type="button" class="btn btn-info Product_Details">详情</button>
@@ -103,28 +98,52 @@
          <button type="button" class="btn btn-warning" onclick="delectrole()" name="${u.role_id}">删除</button></td>
        </tr>
        </c:forEach> 
-      </tbody>
-     </table>
-  
-  </div> 
- </div>    
-</div>
+ 
+</tbody>
 
-<!--添加属性样式-->
-<div class="Attributes_style" id="add_Attributes_style" style="display:none">
- <input name="" type="text"  class="Attributestext" id="shuxin"/><!--<button type="button" class="btn btn-primary">添加</button>-->
-</div>
-
-		<script src="<%=path %>assets/js/jquery.min.js"></script>
-		
-
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-
-	
+</table>
+</body>
+   
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
+$(function(){
+	$('#test').DataTable();
+});
+
+
+function putIn(){
+	$.ajax({
+		url:"<%=path%>rolemanage/selectCompany.handle",
+		type:"POST",
+		dataType:"JSON",
+		data:$("#aFrom").serialize(),
+		success:function(companys){
+			show(companys);
+		},
+		error:function(){
+			alert("异常");
+		}
+	});
+}
+function show(companys){
+	 
+	$("#companyBody").empty();  
+	
+	for(var i = 0;i < companys.length;i++){
+		
+		var td1=$("<td></td>").text(companys[i].role_id); 
+		var td2=$("<td></td>").text(companys[i].name); 
+		var td3=$("<td></td>");
+		
+		var input1=$("<button type='button' class='btn btn-warning' onclick='updect()' name='"+companys[i].role_id+"'>修改</button>"); 
+	 	var input2=$("<button type='button' class='btn btn-warning' onclick='delectrole()' name='"+companys[i].role_id+"'>删除</button>");
+		var tr=$("<tr></tr>");
+		
+		$(td3).append(input1,input2);  
+		$(tr).append(td1,td2,td3); 
+		$("#companyBody").append(tr);
+	}
+}
 
 $('#Add_Product_btn').on('click', function(){
     layer.open({
@@ -236,7 +255,4 @@ function updeterole(a){
 }
 
 </script>
-</body>
 </html>
-
-  
