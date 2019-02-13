@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%
+<%
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 	+ request.getContextPath() + "/";
 %>
@@ -9,192 +9,209 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script src="<%=path%>js/jquery.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
-  <script src="<%=path %>assets/js/jquery.min.js"></script>
-  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
-  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-  <link rel="stylesheet" href="<%=path %>css/style.css"/>
-  <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
-  <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
-  <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
-  <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
-    <title>添加细项</title>
-  <style type="text/css">
-  	#aFrom input {
-      margin-top:10px;
- 	}
-	.textarea {
-      width:150px;
-      border:1px solid #ccc;
-      min-height:80px;
-      max-height:80px;
-      overflow: auto;
-      font-size: 14px;
-      outline: none;
-      margin:0 auto;
- 	}
- 	.checkList{
- 		width:400px;
- 		margin:0 auto;
- 	}
- 	.btnList{
- 		width:250px;
- 		height:50px;
- 		margin:10px 0 0 260px;
- 	}
- 	.checkList th,.checkList td {
-    border: 1px #E6E6FA solid;
-    font-weight: 100;
-    line-height: 25px;
-    font-size: 15px;
-    text-align: center;
+<script src="<%=path%>js/jquery.min.js"></script>
+<script src="<%=path%>js/jquery.validate.min.js"></script>
+<script src="<%=path%>js/jquery.validate.cn.js"></script>
+<script src="<%=path %>assets/js/jquery.min.js"></script>
+<script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
+<link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
+<link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path %>css/style.css" />
+<link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
+<script src="<%=path %>js2/jquery.dataTables.min.js"></script>
+<title>项目管理</title>
+<style type="text/css">
+#aFrom input {
+	margin-top: 10px;
 }
- 	
+
+.textarea {
+	width: 150px;
+	border: 1px solid #ccc;
+	min-height: 80px;
+	max-height: 80px;
+	overflow: auto;
+	font-size: 14px;
+	outline: none;
+	margin: 0 auto;
+}
+
+.checkList {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.btnList {
+	width: 300px;
+	height: 50px;
+	margin: 10px 0 0 160px;
+}
+
+.checkList th, .checkList td {
+	border: 1px #E6E6FA solid;
+	font-weight: 100;
+	line-height: 25px;
+	font-size: 15px;
+	text-align: center;
+}
 </style>
 </head>
 <body>
-<div class="page-content">
-<div class="gys_style">
- <div class="Manager_style">
-   <div class="title_name">添加项目</div>
-    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加项目</button>
-     <div class="Add_Manager_style">
-     
-     <form method="post" id = "aFrom" method="post">
-     		名称	<input type="text" name="name"/>
-     		价钱	<input type="text" name="min" id = "min"/>
-     		至	<input type="text" name="max" id = "max"/>
-     		科室	<select name="deptname" style="width:160px;height:30px;margin-left:10px;">
-     				<option></option>
-     				<c:forEach items="${params}" var = "p" varStatus="s">
-						<option>${p.name}</option>
-					</c:forEach>
-				</select>
-  			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
-  	 </form>
-  	 
-     <div id="Add_Product_style" style="display:none">
-     <div class="page-content">
-     <div class="add_user_style clearfix">
-    	<form  id = "addForm">
-  			<ul class="clearfix">
-     			<li>
-     				<label class="label_name">名称</label>
-     				<input type = "text" name="name" id="name1" autofocus="autofocus" onblur="checkName1()">
-     			</li>
-     			<li>
-     				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price1">
-     			</li>
-        		<li>
-     				<label class="label_name">科室</label>
-     				<select name="deptname" id="deptname1"  style="width:160px;height:30px;margin-left:10px;">
-     				<c:forEach items="${params}" var = "p" varStatus="s">
-						<option>${p.name}</option>
-					</c:forEach>
-				</select>
-     			</li>
-      		</ul>  
-      			<label class="label_name">选择细项</label>
-     				<table class="checkList">
-						<tr>
-							<th style="width:50px;">选择</th>
-							<th>名称</th>
-						</tr>
-						<tbody id = "detailBody1"></tbody>
-					</table>
-				<div class="btnList">
-					<input type="button" value="上一页" onclick="prev()"/>
-					<input type="button" value="下一页" onclick="next()"/>
-				</div>
-      	 </form> 
-      </div>       
-    </div>
-  </div>
-  	 
-  	 <div id="Update_Product_style" style="display:none">
-     <div class="page-content">
-     <div class="add_user_style clearfix">
-    	<form  id = "updateForm">
-  			<ul class="clearfix">
-     			<li>
-     				<label class="label_name">名称</label>
-     				<input type = "text" name="name" id="name" autofocus="autofocus" onblur="checkName1()">
-     			</li>
-     			<li>
-     				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price">
-     			</li>
-        		<li>
-     				<label class="label_name">科室</label>
-     				<select name="deptname" id="deptname" style="width:160px;height:30px;margin-left:10px;">
-     				<c:forEach items="${params}" var = "p" varStatus="s">
-						<option>${p.name}</option>
-					</c:forEach>
-				</select>
-     			</li>
-      		</ul>  
-      		<label class="label_name">选择细项</label>
-     				<table class="checkList">
-						<tr>
-							<th style="width:50px;">选择</th>
-							<th>名称</th>
-						</tr>
-						<tbody id = "detailBody"></tbody>
-					</table>
-					<div class="btnList">
-					<input type="button" value="上一页" onclick="prev()"/>
-					<input type="button" value="下一页" onclick="next()"/>
+	<div class="page-content">
+		<div class="gys_style">
+			<div class="Manager_style">
+				<div class="title_name">查询项目</div>
+				<button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加项目</button>
+				<div class="Add_Manager_style">
+
+					<form method="post" id="aFrom" method="post">
+						名称 <input type="text" name="name" /> 价钱 <input type="text"
+							name="min" id="min" /> 至 <input type="text" name="max" id="max" />
+						科室 <select name="deptname"
+							style="width: 160px; height: 30px; margin-left: 10px;">
+							<option></option>
+							<c:forEach items="${params}" var="p" varStatus="s">
+								<option>${p.name}</option>
+							</c:forEach>
+						</select> <input type="button" class="<%=path%>btn btn-primary" value="查询"
+							onclick="putIn()">
+					</form>
+
+					<div id="Add_Product_style" style="display: none">
+						<div class="page-content">
+							<div class="add_user_style clearfix">
+								<form id="addForm">
+									<ul class="clearfix">
+										<li><label class="label_name">名称</label> <input
+											type="text" name="name" id="name1" autofocus="autofocus"
+											onblur="checkName1()"></li>
+										<li><label class="label_name">价钱</label> <input
+											type="text" name="price" id="price1"></li>
+										<li><label class="label_name">科室</label> <select
+											name="deptname" id="deptname1"
+											style="width: 160px; height: 30px; margin-left: 10px;">
+												<c:forEach items="${params}" var="p" varStatus="s">
+													<option>${p.name}</option>
+												</c:forEach>
+										</select></li>
+									</ul>
+									<label class="label_name">选择细项</label>
+									<table class="checkList">
+										<tr>
+											<th style="width: 50px;">选择</th>
+											<th>名称</th>
+										</tr>
+										<tbody id="detailBody1"></tbody>
+									</table>
+									<div class="btnList">
+										<input type="button" value="上一页" onclick="prev()" /> 
+										<span id = "current1"></span>
+										<span>/</span>
+										<span id = "total1"></span>
+										<input type="button" value="下一页" onclick="next()" />
+										<input type="text" id = "page1" style = "width:50px;"/>
+										<input type="button" value="跳转" onclick="jump()" />
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
-      				<input type="hidden" id = "project_id" name = "project_id">
-      	 </form> 
-      </div>       
-    </div>
-  </div>
- 
- </div>
-</div>
-</div>   
-</div>
-<table id="test" class="table table-striped table-bordered" style="60%">   
-      <thead>
-       <tr>
-			<th>名称</th>
-			<th>价钱</th>
-			<th>科室</th>
-			<th>包含细项</th>
-			<th>操作</th>
-		</tr>
-      </thead>
-      <tbody id = "projectBody">
-		<c:forEach items="${projects}" var = "p">
-		<tr>
-			<td>${p.name}</td>
-			<td>${p.price}</td>
-			<td>${p.param.name}</td>
-			<td>
-				<div class="textarea">
-					<c:forEach items="${p.details}" var = "d">
-						<span>${d.name}</span><br/>
-					</c:forEach>
+
+					<div id="Update_Product_style" style="display: none">
+						<div class="page-content">
+							<div class="add_user_style clearfix">
+								<form id="updateForm">
+									<ul class="clearfix">
+										<li><label class="label_name">名称</label> <input
+											type="text" name="name" id="name" autofocus="autofocus"
+											onblur="checkName1()"></li>
+										<li><label class="label_name">价钱</label> <input
+											type="text" name="price" id="price"></li>
+										<li><label class="label_name">科室</label> <select
+											name="deptname" id="deptname"
+											style="width: 160px; height: 30px; margin-left: 10px;">
+												<c:forEach items="${params}" var="p" varStatus="s">
+													<option>${p.name}</option>
+												</c:forEach>
+										</select></li>
+									</ul>
+									<label class="label_name">选择细项</label>
+									<table class="checkList">
+										<tr>
+											<th style="width: 50px;">选择</th>
+											<th>名称</th>
+										</tr>
+										<tbody id="detailBody"></tbody>
+									</table>
+									<div class="btnList">
+										<input type="button" value="上一页" onclick="prev()" /> 
+										<span id = "current"></span>
+										<span>/</span>
+										<span id = "total"></span>
+										<input type="button" value="下一页" onclick="next()" />
+										<input type="text" id = "page" style = "width:50px;"/>
+										<input type="button" value="跳转" onclick="jump()" />
+									</div>
+									<input type="hidden" id="project_id" name="project_id">
+								</form>
+							</div>
+						</div>
+					</div>
+
 				</div>
-			</td>
-			<td>
-				<button type="button" class="btn btn-warning" onclick="remove()" name="${p.project_id}">删除</button>
-          		<button type="button" class="btn btn-primary" onclick="change()" name="${p.project_id}">修改</button>
-			</td>
-			<c:forEach items="${p.details}" var = "d">
-					<input type="hidden" name = "detailId" value="${d.detail_id}">
-			</c:forEach>
-		</tr>
-		</c:forEach>
-		</tbody>
-    </table>
+			</div>
+		</div>
+	</div>
+	<div class="page-content">
+		<div class="Manager_style">
+			<div class="title_name">项目列表</div>
+			<table id="test" class="table table-striped table-bordered" style="">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>名称</th>
+						<th>价钱</th>
+						<th>科室</th>
+						<th>包含细项</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="projectBody">
+					<c:forEach items="${projects}" var="p" varStatus="s">
+						<tr>
+							<td>${s.count}</td>
+							<td>${p.name}</td>
+							<td>${p.price}</td>
+							<td>${p.param.name}</td>
+							<td>
+								<div class="textarea">
+									<c:forEach items="${p.details}" var="d">
+										<span>${d.name}</span>
+										<br />
+									</c:forEach>
+								</div>
+							</td>
+							<td>
+								<button type="button" class="btn btn-warning" onclick="remove()"
+									name="${p.project_id}">删除</button>
+								<button type="button" class="btn btn-primary" onclick="change()"
+									name="${p.project_id}">修改</button>
+							</td>
+							<c:forEach items="${p.details}" var="d">
+								<input type="hidden" name="detailId" value="${d.detail_id}">
+							</c:forEach>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	$(function(){
@@ -206,7 +223,7 @@
 var detailList = new Array();
 var idArray  = new Array();
 var current;
-var row = 3;
+var row = 5;
 var totalPage;
 var state;
 
@@ -219,6 +236,13 @@ function createDetail(detail_id,detail_name){
 	detail.name = detail_name;
 	return detail;
 }
+
+$(document).ready(function(){
+	<c:forEach items="${details}" var = "d" >
+		var detail = createDetail("${d.detail_id}","${d.name}");
+		detailList.push(detail);
+	</c:forEach>
+});
 
 function save(){
 	var checkBoxs = $('input[type="checkbox"]');
@@ -251,8 +275,10 @@ function prev(){
 		current --;
 		if(state=="add"){
 			show1();
+			$("#current1").text(current+1);
 		}else{
 			show();
+			$("#current").text(current+1);
 		}
 	}
 }
@@ -264,9 +290,45 @@ function next(){
 		current ++;
 		if(state=="add"){
 			show1();
+			$("#current1").text(current+1);
 		}else{
 			show();
+			$("#current").text(current+1);
 		}
+	}
+}
+
+function jump(){
+	if(state=="add"){
+		var page = $("#page1").val();
+		if(!numCheck1.test($('#page1').val())){
+			layer.alert('跳转时必须是数值!',{title: '提示框',icon:0,});
+				return false;
+		}
+		var a = Number($('#page1').val());
+		if(a<1||a>totalPage+1){
+			layer.alert('输入数值不在跳转范围!',{title: '提示框',icon:0,});
+			return false;
+		}
+		save();
+		current = a-1;
+		show1();
+		$("#current1").text(current+1);
+	}else{
+		var page = $("#page").val();
+		if(!numCheck1.test($('#page').val())){
+			layer.alert('跳转时必须是数值!',{title: '提示框',icon:0,});
+				return false;
+		}
+		var a = Number($('#page').val());
+		if(a<1||a>totalPage+1){
+			layer.alert('输入数值不在跳转范围!',{title: '提示框',icon:0,});
+			return false;
+		}
+		save();
+		current = a-1;
+		show();
+		$("#current").text(current+1);
 	}
 }
 </script>
@@ -304,7 +366,7 @@ function showProject(projects){
 	$("#projectBody").empty();  
 	
 	for(var i = 0;i < projects.length;i++){
-		
+		var td0=$("<td></td>").text(i+1);
 		var td1=$("<td></td>").text(projects[i].name);
 		var td2=$("<td></td>").text(projects[i].price);
 		var td3=$("<td></td>");
@@ -323,7 +385,7 @@ function showProject(projects){
 		
 		$(td3).append(div);  
 		$(td4).append(input1,input2);  
-		$(tr).append(td1,td2,td5,td3,td4); 
+		$(tr).append(td0,td1,td2,td5,td3,td4); 
 		
 		for(var j = 0;j < projects[i].details.length;j++){
 			var detailId = $("<input type='hidden' name = 'detailId' value='"+projects[i].details[j].detail_id+"'>");
@@ -418,7 +480,6 @@ function show(){
 function change(e){
 	state = "update";
 	current = 0;
-	row = 3;
 	idArray  = new Array();
 	var len = detailList.length;
 	
@@ -427,6 +488,9 @@ function change(e){
 	}else{
 		totalPage = Math.floor(len/row);
 	}
+
+	$("#total").text(totalPage+1);
+	$("#current").text("1");
 	
 	var e = e || event;
 	var t = e.target || e.srcElement;
@@ -549,12 +613,6 @@ function show1(){
 	}
 }
 
-$(document).ready(function(){
-	<c:forEach items="${details}" var = "d" >
-		var detail = createDetail("${d.detail_id}","${d.name}");
-		detailList.push(detail);
-	</c:forEach>
-});
 var check1;
 function checkName1(){
 	if($("#name1").val() == ""){
@@ -580,10 +638,10 @@ function checkName1(){
 		}
 	});
 }
+
 $('#add_butn').on('click', function(){	
 	state = "add";
 	current = 0;
-	row = 3;
 	idArray  = new Array();
 	var len = detailList.length;
 	
@@ -592,6 +650,9 @@ $('#add_butn').on('click', function(){
 	}else{
 		totalPage = Math.floor(len/row);
 	}
+	
+	$("#total1").text(totalPage+1);
+	$("#current1").text("1");
 	
 	show1();
 	
@@ -650,16 +711,16 @@ $('#add_butn').on('click', function(){
 	    			if(msg == "ok"){
 	    				alert("添加成功");
     					window.location.href="<%=path%>project/projectsVeiw.handle";
-	    			}else{
-	    				alert("添加失败");
-	    			}
-	    		},
-	    		error : function(msg) {
-	    			alert("异常！"+msg);
-	    		}
-	    	});
-			}
-		})
-	});
+					} else {
+						alert("添加失败");
+						   }
+					},
+					error : function(msg) {
+						alert("异常！" + msg);
+						}
+					});
+				}
+			})
+		});
 </script>
 </html>
