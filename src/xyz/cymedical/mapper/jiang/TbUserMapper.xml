@@ -5,87 +5,110 @@
 <mapper namespace="xyz.cymedical.mapper.jiang.TbUserMapper">
 
 
-<!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
+	<!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
 
-	<select id="findUser"   parameterType="xyz.cymedical.entity.jiang.Tb_user"
+	<select id="findUser"
+		parameterType="xyz.cymedical.entity.jiang.Tb_user"
 		resultType="xyz.cymedical.entity.jiang.Tb_user">
-		select * from tb_user where account = #{account} and pwd=#{pwd}
+		select * from tb_user where account = #{account} and
+		pwd=#{pwd}
 	</select>
-	
-	<select id="findAll2"    resultType="java.util.HashMap">
-		 
-		select * from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id  
- 	</select>  
- 
- 	<select id="findAll" resultType="xyz.cymedical.entity.jiang.Tb_user">
+
+	<select id="findUserRole"
+		parameterType="xyz.cymedical.entity.jiang.Tb_user"
+		resultType="java.util.HashMap">
+		select a2.account,a2.pwd,a2.`name` from(select
+		a1.account,a1.pwd,a1.role_id,ro.`name` from(select
+		us.account,us.pwd,rd.role_id from tb_user us left join tb_role_dept rd
+		on us.role_dept_id = rd.role_dept_id) a1 left join tb_role ro on
+		a1.role_id = ro.role_id) a2 where account = #{account} and
+		pwd=#{pwd}
+	</select>
+
+	<select id="findAll2" resultType="java.util.HashMap">
+
+		select * from tb_user
+		a,tb_role_dept b,tb_dept c where
+		a.role_dept_id=b.role_dept_id and
+		b.dept_id=c.dept_id
+	</select>
+
+	<select id="findAll"
+		resultType="xyz.cymedical.entity.jiang.Tb_user">
 		select * from tb_user
 	</select>
-	<insert id="addUser" parameterType="xyz.cymedical.entity.jiang.Tb_user">
-		insert into tb_user(role_dept_id,account,pwd,sex,address,phone,IDcard,state) values(#{role_dept_id},#{account},#{pwd},#{sex},#{address},#{phone},#{IDcard},#{state})
+	<insert id="addUser"
+		parameterType="xyz.cymedical.entity.jiang.Tb_user">
+		insert into
+		tb_user(role_dept_id,account,pwd,sex,address,phone,IDcard,state)
+		values(#{role_dept_id},#{account},#{pwd},#{sex},#{address},#{phone},#{IDcard},#{state})
 	</insert>
-	
-	<delete id="deleteUser" parameterType="int" >
-	
-		delete from tb_user where user_id = #{user_id}
-	
+
+	<delete id="deleteUser" parameterType="int">
+
+		delete from tb_user where
+		user_id = #{user_id}
+
 	</delete>
-	
-	<update id="upState" >
-	
-		update  tb_user set state = #{1} where user_id=#{0}
-	
+
+	<update id="upState">
+
+		update tb_user set state = #{1} where user_id=#{0}
+
 	</update>
-	
-	  
-	<update id="upUser"  parameterType="xyz.cymedical.entity.jiang.Tb_user" >
-	
-			UPDATE tb_user 
-			
-		<trim prefix="SET" suffixOverrides=","  >  
-	
-		  
-		<if test="role_dept_id != null and role_dept_id != ''">
-			role_dept_id=#{role_dept_id},
-		</if>
-		<if test="account != null and account != ''">
-			account=#{account},
-		</if>
-		<if test="pwd != null and pwd != ''">
-			pwd=#{pwd},
-		</if>
-		<if test="sex != null and sex != ''">
-			sex=#{sex},
-		</if>
-		<if test="address != null and address != ''">
-			address=#{address},
-		</if>
-		<if test="phone != null and phone != ''">
-			phone=#{phone},
-		</if>
-		<if test="IDcard != null and IDcard != ''">
-			IDcard=#{IDcard},
-		</if>
-		<if test="state != null and state != ''">
-			state=#{state}
-		</if>
-		   where user_id=#{user_id}
+
+
+	<update id="upUser"
+		parameterType="xyz.cymedical.entity.jiang.Tb_user">
+
+		UPDATE tb_user
+
+		<trim prefix="SET" suffixOverrides=",">
+
+
+			<if test="role_dept_id != null and role_dept_id != ''">
+				role_dept_id=#{role_dept_id},
+			</if>
+			<if test="account != null and account != ''">
+				account=#{account},
+			</if>
+			<if test="pwd != null and pwd != ''">
+				pwd=#{pwd},
+			</if>
+			<if test="sex != null and sex != ''">
+				sex=#{sex},
+			</if>
+			<if test="address != null and address != ''">
+				address=#{address},
+			</if>
+			<if test="phone != null and phone != ''">
+				phone=#{phone},
+			</if>
+			<if test="IDcard != null and IDcard != ''">
+				IDcard=#{IDcard},
+			</if>
+			<if test="state != null and state != ''">
+				state=#{state}
+			</if>
+			where user_id=#{user_id}
 		</trim>
-		 
+
 	</update>
-	
-	<select id="selUser"    resultType="java.util.HashMap">
-		 
-		select * from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id  
- 	 
-		 <if test="#{0} !=null and #{0} !=''">
-		  and c.name=#{0}
-		</if> 
+
+	<select id="selUser" resultType="java.util.HashMap">
+
+		select * from tb_user a,tb_role_dept b,tb_dept c where
+		a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id
+
+		<if test="#{0} !=null and #{0} !=''">
+			and c.name=#{0}
+		</if>
 		<if test="#{1} !=null and #{1} !=''">
-		  and a.account=#{1}    
-		</if> 
+			and a.account=#{1}
+		</if>
 		<if test="#{2} !=null and #{2} !=''">
-		  and a.phone=#{2}
-		</if>  
- 	</select>  
+			and a.phone=#{2}
+		</if>
+	</select>
 
 </mapper>
