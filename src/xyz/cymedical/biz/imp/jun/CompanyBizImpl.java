@@ -94,7 +94,7 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 		File file = new File(path);
 		System.out.println("准备删除" + file.getName());
 		if (file.exists()) {
-			if (file.delete() && companyFileMapper.delFile(file_id)) {
+			if (file.delete() && companyFileMapper.delFile(Integer.parseInt(file_id))) {
 				System.out.println("文件删除成功");
 				isUpdate = true;
 			}
