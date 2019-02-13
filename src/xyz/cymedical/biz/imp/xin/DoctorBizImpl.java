@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import xyz.cymedical.biz.xin.DoctorBiz;
+import xyz.cymedical.entity.jiang.Tb_menu;
+import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.mapper.xin.DoctorMapper;
 
 /**
@@ -53,6 +55,18 @@ public class DoctorBizImpl  implements DoctorBiz {
 	public String findsumid() {
 		// TODO Auto-generated method stub
 		return doctorMapper.findsumid();
+	}
+
+	@Override
+	public Tb_user login(String account, String pwd) {
+		// TODO Auto-generated method stub
+		return doctorMapper.login(account,pwd);
+	}
+
+	@Override
+	public List<Tb_menu> getMyMenu(int user_id, int role_dept_id) {
+		// TODO Auto-generated method stub
+		return doctorMapper.getMyMenu(user_id,role_dept_id);
 	}
 
 
