@@ -9,16 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import xyz.cymedical.aop.zsc.Log;
 import xyz.cymedical.entity.zsc.Detail;
 import xyz.cymedical.mapper.zsc.DetailMapper;
 
+@Transactional(rollbackFor=Exception.class)
 @Service
 public class DetailBiz {
 
 	@Resource
 	DetailMapper detailMapper;
 	
-	@Transactional(rollbackFor=Exception.class)
+	@Log(action ="增加细项")
 	public String insertDetail(Detail detail) {
 		int rt = detailMapper.insertDetail(detail);
 		if (rt > 0) {
