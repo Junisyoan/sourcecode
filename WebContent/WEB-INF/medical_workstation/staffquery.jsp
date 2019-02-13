@@ -65,7 +65,7 @@
 								class="text_add" /></label> <label class="lf">条码号<input
 								name="code" type="text" class="text_add" /></label>
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-							<button type="button" onclick="tableToExcel('item','data')">导出</button>
+							<button type="button" onclick="tableToExcel('item','data')">导出Excel</button>
 						</li>
 					</ul>
 				</form>
@@ -100,8 +100,8 @@
 							<td>${p.age}</td>
 							<td style="mso-number-format: '\@';">${p.ID}</td>
 							<td>${p.phone}</td>
-							<td>${p.code}</td>
-							<td>${p.check_num}</td>
+							<td style="mso-number-format: '\@';">${p.code}</td>
+							<td style="mso-number-format: '\@';">${p.check_num}</td>
 							<td style="mso-number-format: 'yyyy\-mm\-dd';">${p.time}</td>
 						</tr>
 					</c:forEach>
