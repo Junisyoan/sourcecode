@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.mapper.zsc.CompanyMappers;
-import xyz.cymedical.tools.zsc.encryption;
+import xyz.cymedical.tools.zsc.Encryption;
 
 @Service
 public class CompanyBizsc {
@@ -35,7 +35,7 @@ public class CompanyBizsc {
 	};
 
 	public String insertCompany(Company company) {
-		company.setPwd(encryption.getResult(company.getPwd()));
+		company.setPwd(Encryption.getResult(company.getPwd()));
 		
 		int rt = companyMappers.insertCompany(company);
 
