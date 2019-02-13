@@ -40,4 +40,20 @@
 		 
 	</update>
 	
+	<select id = "selectCompany" parameterType="map" resultType="map">
+ 		select * from tb_power  where 1=1
+ 	 
+		<if test="tb_power.power_id!=0 and tb_power.power_id!=''"> 
+			and power_id like '%${tb_power.power_id}%'
+		</if>
+		<if test="tb_power.menu_id!=0 and tb_power.menu_id!=''"> 
+			and menu_id like '%${tb_power.menu_id}%'
+		</if>
+		<if test="tb_power.name!=null and tb_power.name!=''"> 
+			and name like '%${tb_power.name}%'
+		</if>
+	 
+		 
+	</select>
+	
 </mapper>

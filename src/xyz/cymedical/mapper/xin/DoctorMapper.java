@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import xyz.cymedical.entity.jiang.Tb_menu;
+import xyz.cymedical.entity.jiang.Tb_user;
+
 /**
 * 2019年1月30日
 * @author xin
@@ -38,4 +41,10 @@ public interface DoctorMapper {
 
 	//找到插入总结的id
 	public String findsumid();
+
+	//登录
+	public Tb_user login(String account, String pwd);
+
+	//获取用户菜单
+	public List<Tb_menu> getMyMenu(int user_id, int role_dept_id);
 }
