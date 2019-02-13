@@ -1,7 +1,9 @@
 package xyz.cymedical.handle.jiang;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbRoleBiz;
+import xyz.cymedical.entity.jiang.Tb_dept;
 import xyz.cymedical.entity.jiang.Tb_role;
 import xyz.cymedical.entity.jiang.Tb_user;
 
@@ -118,17 +122,29 @@ public class RoleManageHandle {
 					ModelAndView mav = new ModelAndView();  
 					System.out.println("...=" + nameed);
 					System.out.println("...=" + newname);
-//					int role_id = Integer.valueOf(name);
-//					System.out.println("user_id"+role_id);
-					 
-					
-					
-					
-					
-					mav.setViewName("WEB-INF/view.jiang/rolemanage");
-					 
+					int role_id = Integer.valueOf(nameed);
+					String name=newname;
+					System.out.println("user_id"+role_id);
+					int ret=tbRoleBiz.upRole(role_id, name);
+					if(ret==1) {
+						mav.setViewName("WEB-INF/view.jiang/rolemanage");
+						
+					}else {
+						mav.setViewName("WEB-INF/view.jiang/err");
+					}
+					 return mav;
 
-					return mav;
-
+				}
+				
+				// 查
+				@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+				public @ResponseBody String selectCompany(Tb_role tb_role) { 
+					Map<String, Object> map = new HashMap<String, Object>(); 
+					map.put("tb_role", tb_role);
+					 
+					List<Map<String,Object>> companys = tbRoleBiz.selectCompany(map);
+//					List<Tb_user> companys = companyBizsc.selectCompany(map);
+					String str = JSONArray.fromObject(companys).toString();  
+					return str;
 				}
 }
