@@ -151,7 +151,7 @@ public class NurseHandle {
 				//	创建关系表
 				if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)
 						&& billerBiz.updateBillerCreate(bid)
-						&& nurseBiz.insertPatientGroup(pList)) {
+						&& nurseBiz.insertPaitentCombo(pList,bid)) {
 					response.getWriter().print("1");
 				} else {
 					response.getWriter().print("0");
