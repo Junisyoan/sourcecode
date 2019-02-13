@@ -26,7 +26,9 @@ public interface NurseMapper {
 	 * @param patients	体检人列表
 	 * @return	是否成功
 	 */
-	public int insertPaitentGroup(List<Patient> patients);
+	public int insertPaitentCombo(
+			@Param("bid")int bid,
+			@Param("pList")List<Patient> pList);
 	
 	/**
 	 * 批量插入记账病人关系表
