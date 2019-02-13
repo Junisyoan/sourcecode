@@ -34,7 +34,7 @@
 	</insert>
 	
 	<delete id="deleteCombo" parameterType="int">
-		delete from tb_project_combo where combo_id = #{combo_id};
+		delete from tb_patient_combo where combo_id = #{combo_id};
 		delete from tb_project_combo where combo_id = #{combo_id};
 		delete from tb_combo where combo_id = #{combo_id};
 	</delete>
