@@ -65,7 +65,7 @@
 								class="text_add" /></label> <label class="lf">条码号<input
 								name="code" type="text" class="text_add" /></label>
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-							<button type="button" onclick="tableToExcel('item','data')">导出</button>
+							<button type="button" onclick="tableToExcel('item','data')">导出Excel</button>
 						</li>
 					</ul>
 				</form>
