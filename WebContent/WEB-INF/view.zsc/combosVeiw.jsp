@@ -23,7 +23,7 @@
   <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
   <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
   <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
-    <title>添加细项</title>
+    <title>套餐查询</title>
   <style type="text/css">
   	#aFrom input {
       margin-top:10px;
@@ -43,9 +43,9 @@
  		margin:0 auto;
  	}
  	.btnList{
- 		width:250px;
- 		height:50px;
- 		margin:10px 0 0 260px;
+		width: 300px;
+		height: 50px;
+		margin: 10px 0 0 160px;
  	}
  	.checkList th,.checkList td {
     border: 1px #E6E6FA solid;
@@ -60,8 +60,8 @@
 <div class="page-content">
 <div class="gys_style">
  <div class="Manager_style">
-   <div class="title_name">添加套餐</div>
-    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加项目</button>
+   <div class="title_name">套餐查询</div>
+    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加套餐</button>
      <div class="Add_Manager_style">
      
      <form method="post" id = "aFrom" method="post">
@@ -94,8 +94,13 @@
 					<tbody id = "projectBody1"></tbody>
 				</table>
 				<div class="btnList">
-					<input type="button" value="上一页" onclick="prev()"/>
-					<input type="button" value="下一页" onclick="next()"/>
+					<input type="button" value="上一页" onclick="prev()" /> 
+						<span id = "current1"></span>
+						<span>/</span>
+						<span id = "total1"></span>
+					<input type="button" value="下一页" onclick="next()" />
+					<input type="text" id = "page1" style = "width:50px;"/>
+					<input type="button" value="跳转" onclick="jump()" />
 				</div>
       	 </form> 
       </div>       
@@ -125,8 +130,13 @@
 					<tbody id = "projectBody"></tbody>
 				</table>
 				<div class="btnList">
-					<input type="button" value="上一页" onclick="prev()"/>
-					<input type="button" value="下一页" onclick="next()"/>
+					<input type="button" value="上一页" onclick="prev()" /> 
+						<span id = "current"></span>
+						<span>/</span>
+						<span id = "total"></span>
+					<input type="button" value="下一页" onclick="next()" />
+					<input type="text" id = "page" style = "width:50px;"/>
+					<input type="button" value="跳转" onclick="jump()" />
 				</div> 
       		<input type="hidden" id = "combo_id" name = "combo_id">
       	 </form> 
@@ -138,38 +148,48 @@
 </div>
 </div>   
 </div>
-<table id="test" class="table table-striped table-bordered" style="60%">   
-      <thead>
-       <tr>
-			<th>名称</th>
-			<th>价钱</th>
-			<th>包含细项</th>
-			<th>操作</th>
-		</tr>
-      </thead>
-      <tbody id = "comboBody">
-		<c:forEach items="${combos}" var = "c">
-		<tr>
-			<td>${c.name}</td>
-			<td>${c.price}</td>
-			<td>
-				<div class="textarea">
-					<c:forEach items="${c.projects}" var = "p">
-						<span>${p.name}</span><br/>
+	<div class="page-content">
+		<div class="Manager_style">
+			<div class="title_name">套餐列表</div>
+			<table id="test" class="table table-striped table-bordered" style="">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>名称</th>
+						<th>价钱</th>
+						<th>包含项目</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="comboBody">
+					<c:forEach items="${combos}" var="c" varStatus="s">
+						<tr>
+							<td>${s.count}</td>
+							<td>${c.name}</td>
+							<td>${c.price}</td>
+							<td>
+								<div class="textarea">
+									<c:forEach items="${c.projects}" var="p">
+										<span>${p.name}</span>
+										<br />
+									</c:forEach>
+								</div>
+							</td>
+							<td>
+								<button type="button" class="btn btn-warning" onclick="remove()"
+									name="${c.combo_id}">删除</button>
+								<button type="button" class="btn btn-primary" onclick="change()"
+									name="${c.combo_id}">修改</button>
+							</td>
+							<c:forEach items="${c.projects}" var="p">
+								<input type="hidden" name="projectId" value="${p.project_id}">
+							</c:forEach>
+						</tr>
 					</c:forEach>
-				</div>
-			</td>
-			<td>
-				<button type="button" class="btn btn-warning" onclick="remove()" name="${c.combo_id}">删除</button>
-          		<button type="button" class="btn btn-primary" onclick="change()" name="${c.combo_id}">修改</button>
-			</td>
-			<c:forEach items="${c.projects}" var = "p">
-					<input type="hidden" name = "projectId" value="${p.project_id}">
-			</c:forEach>
-		</tr>
-		</c:forEach>
-		</tbody>
-    </table>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	$(function(){
@@ -181,7 +201,7 @@
 var projectList = new Array();
 var idArray  = new Array();
 var current;
-var row = 3;
+var row = 5;
 var totalPage;
 var state;
 
@@ -225,8 +245,10 @@ function prev(){
 		current --;
 		if(state=="add"){
 			show1();
+			$("#current1").text(current+1);
 		}else{
 			show();
+			$("#current").text(current+1);
 		}
 	}
 }
@@ -238,9 +260,45 @@ function next(){
 		current ++;
 		if(state=="add"){
 			show1();
+			$("#current1").text(current+1);
 		}else{
 			show();
+			$("#current").text(current+1);
 		}
+	}
+}
+
+function jump(){
+	if(state=="add"){
+		var page = $("#page1").val();
+		if(!numCheck1.test($('#page1').val())){
+			layer.alert('跳转时必须是数值!',{title: '提示框',icon:0,});
+				return false;
+		}
+		var a = Number($('#page1').val());
+		if(a<1||a>totalPage+1){
+			layer.alert('输入数值不在跳转范围!',{title: '提示框',icon:0,});
+			return false;
+		}
+		save();
+		current = a-1;
+		show1();
+		$("#current1").text(current+1);
+	}else{
+		var page = $("#page").val();
+		if(!numCheck1.test($('#page').val())){
+			layer.alert('跳转时必须是数值!',{title: '提示框',icon:0,});
+				return false;
+		}
+		var a = Number($('#page').val());
+		if(a<1||a>totalPage+1){
+			layer.alert('输入数值不在跳转范围!',{title: '提示框',icon:0,});
+			return false;
+		}
+		save();
+		current = a-1;
+		show();
+		$("#current").text(current+1);
 	}
 }
 </script>
@@ -278,7 +336,7 @@ function showCombos(combos){
 	$("#comboBody").empty();  
 	
 	for(var i = 0;i < combos.length;i++){
-		
+		var td0=$("<td></td>").text(i+1);
 		var td1=$("<td></td>").text(combos[i].name);
 		var td2=$("<td></td>").text(combos[i].price);
 		var td3=$("<td></td>");
@@ -296,7 +354,7 @@ function showCombos(combos){
 		
 		$(td3).append(div);  
 		$(td4).append(input1,input2);  
-		$(tr).append(td1,td2,td3,td4); 
+		$(tr).append(td0,td1,td2,td3,td4); 
 		
 		for(var j = 0;j < combos[i].projects.length;j++){
 			var projectId = $("<input type='hidden' name = 'detailId' value='"+combos[i].projects[j].project_id+"'>");
@@ -389,7 +447,6 @@ function show(){
 function change(e){
 	state = "update";
 	current = 0;
-	row = 3;
 	idArray  = new Array();
 	var len = projectList.length;
 	
@@ -398,6 +455,9 @@ function change(e){
 	}else{
 		totalPage = Math.floor(len/row);
 	}
+	
+	$("#total").text(totalPage+1);
+	$("#current").text("1");
 	
 	var e = e || event;
 	var t = e.target || e.srcElement;
@@ -543,7 +603,6 @@ function checkName1(){
 $('#add_butn').on('click', function(){	
 	state = "add";
 	current = 0;
-	row = 3;
 	idArray  = new Array();
 	var len = projectList.length;
 	
@@ -552,6 +611,9 @@ $('#add_butn').on('click', function(){
 	}else{
 		totalPage = Math.floor(len/row);
 	}
+
+	$("#total1").text(totalPage+1);
+	$("#current1").text("1");
 	
 	show1();
 	
