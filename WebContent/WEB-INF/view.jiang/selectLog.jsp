@@ -56,14 +56,14 @@
 
 	<div class="Manager_style">
 		<span class="title_name">日志查看</span>
-		<p align="center"><button type="button" onclick="tableToExcel('item','data')">导出</button></p>
+		<p align="center"><button type="button" onclick="tableToExcel('item','data')">导出Excel</button></p>
 		<p align="center">&nbsp;</p>
 		<table class="table table-striped table-bordered table-hover" id="item">
 			<thead>
 				<tr>
 					<th>序号</th>
 					<th>日志表ID</th>
-					<th>用户表ID</th>
+					<th>用户</th>
 					<th>具体操作</th>
 					<th>操作时间</th>
 					<th>删除</th>
@@ -75,7 +75,7 @@
 					<tr>
 						<td>${s.index + 1}</td>
 						<td>${l.log_id}</td>
-						<td>${l.user_id}</td>
+						<td>${l.name}</td>
 						<td>${l.opera}</td>
 						<td>${l.time}</td>
 						<td><a href="<%=path%>log/delLog.handle?log_id=${l.log_id}">删除</a></td>
