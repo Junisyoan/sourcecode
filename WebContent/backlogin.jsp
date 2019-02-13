@@ -23,14 +23,12 @@ function passwordIsTrue(){
 	
 	var account = document.getElementById("account").value;
 	var pwd = document.getElementById("pwd").value;
-	var kcode =  document.getElementById("checkCode").value;
 	 $.ajax({
 		 type:"POST",
 		 url:"user/login.handle",
 		 data:{
 			 "account":account,
 			 "pwd":pwd,
-			 "checkCode":kcode
 			 },
 		 dataType:"text",
 		 error:function(){
@@ -40,16 +38,7 @@ function passwordIsTrue(){
 			if(data=="管理员"){
 				alert("登陆成功！您的身份为管理员！");
 				window.location.href="<%=path%>user/index.handle";
-			}else if(data=="医生"){
-				alert("登陆成功！您的身份为医生！");
-				window.location.href="<%=path%>doctor/index.handle";
-			}else if(data=="后台"){
-				alert("登陆成功！");
-				window.location.href="<%=path%>user/index.handle";
-			}
-			else{
-				document.getElementById("checkCode").value = "";
-				document.getElementById("img").src="<%=path%>admin/checkcode.action?c="+Math.random();
+			}else{
 				alert(data);
 			}
 			
@@ -58,15 +47,6 @@ function passwordIsTrue(){
  }
 
 
-</script>
-
-<script>
-
-	function Code() {
-		document.getElementById("img").src="<%=path%>
-	admin/checkcode.action?p="
-				+ Math.random();
-	}
 </script>
 </head>
 
@@ -81,26 +61,16 @@ function passwordIsTrue(){
 				</tr>
 				<tr>
 					<td width="65" height="30">用户名:</td>
-					<td width="222" colspan="2"><input type="text" name="account" id="account" /></td>
+					<td width="222" colspan="2"><input type="text" name="account"
+						id="account" /></td>
 				</tr>
 				<tr>
 					<td height="23">密码:</td>
 					<td colspan="2"><input type="password" name="pwd" id="pwd" /></td>
 				</tr>
-
-				<tr>
-					<td>验证码:</td>
-					<td><input type="text" name="checkCode" id="checkCode"
-						style="width: 90px; margin-left: 10px" /></td>
-					<td><img id="img" src="<%=path%>admin/checkcode.action"
-						onclick="Code()" style="padding-left: 0px"></td>
-				</tr>
-
 				<tr>
 					<td height="35" colspan="3"><input type="button"
-						onClick="passwordIsTrue()" value="登录" style="width: 100px;" /> <a
-						href="<%=path%>register.jsp"><input type="button" value="注册"
-							style="width: 100px;" /></a></td>
+						onClick="passwordIsTrue()" value="登录" style="width: 100px;" /></td>
 				</tr>
 			</table>
 		</form>
