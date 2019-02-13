@@ -1,5 +1,6 @@
 package xyz.cymedical.handle.jiang;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbPowerBiz;
+import xyz.cymedical.entity.jiang.Tb_dept;
 import xyz.cymedical.entity.jiang.Tb_power;
 import xyz.cymedical.entity.jiang.Tb_user; 
 
@@ -111,6 +114,20 @@ public class PowerManageHandle {
 
 			return mav;
 
+		}
+		
+		// 查
+		@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+		public @ResponseBody String selectCompany(Tb_power tb_power) { 
+			System.out.println("权限模糊查询进...");
+			Map<String, Object> map = new HashMap<String, Object>(); 
+			map.put("tb_power", tb_power);
+			 
+			List<Map<String,Object>> companys = TbPowerBiz.selectCompany(map);
+			String str = JSONArray.fromObject(companys).toString();  
+			
+			System.out.println("权限查询="+companys.size());
+			return str;
 		}
 		
 		
