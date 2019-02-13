@@ -1,6 +1,7 @@
 package xyz.cymedical.biz.imp.jiang;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -37,6 +38,12 @@ public class TbPowerBizImp implements TbPowerBiz{
 	public int upPower(Tb_power tbpower) {
 		// TODO Auto-generated method stub
 		return tbPowerMapper.upPower(tbpower);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCompany(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return tbPowerMapper.selectCompany(map);
 	}
 
 }
