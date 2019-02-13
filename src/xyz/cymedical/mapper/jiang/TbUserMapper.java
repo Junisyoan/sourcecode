@@ -11,6 +11,8 @@ import xyz.cymedical.entity.jiang.Tb_user;
 public interface TbUserMapper {
 
 	public List<Tb_user>  findUser(Tb_user user);
+	
+	public List<Tb_user>  findUserRole(Tb_user user);
 
 	public List<Tb_user>  findAll();
 	
