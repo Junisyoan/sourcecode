@@ -7,17 +7,21 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import xyz.cymedical.aop.zsc.Log;
 import xyz.cymedical.entity.yjn.Parameter;
 import xyz.cymedical.entity.zsc.Project;
 import xyz.cymedical.mapper.zsc.ProjectMapper;
 
+@Transactional(rollbackFor=Exception.class)
 @Service
 public class ProjectBiz {
 
 	@Resource
 	ProjectMapper projectMapper;
 	
+	@Log(action = "添加项目")
 	public String insertProject(Project project,int[] idArray) {
 
 		Parameter param = project.getParam();
@@ -36,28 +40,14 @@ public class ProjectBiz {
 			return "Failure";
 		}
 	}
-	
-	public List<Project> findProjects(){
-		return projectMapper.selectProject(null);
-	}
-	
-	public List<Parameter> selectParamList(){
-		return projectMapper.selectParamList();
-	}
-	
+
+	@Log(action ="删除细项")
 	public String deleteProject(int project_id) {
 		projectMapper.deleteProject(project_id);
 		return "删除成功";
 	};
-	
-	public List<Project> selectProject(HashMap<String, Object> map){
-		return projectMapper.selectProject(map);
-	}
-	
-	public Project findProject(String project_id){
-		return projectMapper.findProject(project_id);
-	}
-	
+
+	@Log(action ="修改细项")
 	public String updateProject(int[] idArray, Project project) {
 		Parameter param = project.getParam();
 		int param_id = projectMapper.selectParamtId(param.getName());
@@ -75,6 +65,22 @@ public class ProjectBiz {
 		}
 	}
 
+	public List<Project> findProjects(){
+		return projectMapper.selectProject(null);
+	}
+	
+	public List<Parameter> selectParamList(){
+		return projectMapper.selectParamList();
+	}
+	
+	public List<Project> selectProject(HashMap<String, Object> map){
+		return projectMapper.selectProject(map);
+	}
+	
+	public Project findProject(String project_id){
+		return projectMapper.findProject(project_id);
+	}
+	
 	public String checkName(Map<String, Object> map) {
 		int rt = projectMapper.checkName(map);
 		if (rt > 0) {
