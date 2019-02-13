@@ -123,6 +123,10 @@
 </div>
  </div>   
 </div>
+<div class="page-content">
+<div class="gys_style">
+ <div class="Manager_style">
+   <div class="title_name">添加细项</div>
 <table id="test" class="table table-striped table-bordered" style="60%">   
       <thead>
        <tr>
@@ -150,6 +154,9 @@
 		</c:forEach>
 	  </tbody>
     </table>
+</div>
+</div>
+</div>
 </body>
 <script type="text/javascript">
 	$(function(){
