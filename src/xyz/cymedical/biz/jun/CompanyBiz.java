@@ -14,7 +14,6 @@ import xyz.cymedical.entity.jun.Company;
 
 public interface CompanyBiz {
 	
-	
 	/**
 	 * 扣除公司费用
 	 * @param price	价格
