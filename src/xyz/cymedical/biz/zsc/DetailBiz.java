@@ -20,7 +20,7 @@ public class DetailBiz {
 	@Resource
 	DetailMapper detailMapper;
 	
-	@Log(action ="增加细项")
+	@Log(action = "添加细项")
 	public String insertDetail(Detail detail) {
 		int rt = detailMapper.insertDetail(detail);
 		if (rt > 0) {
@@ -30,6 +30,7 @@ public class DetailBiz {
 		}
 	};
 	
+	@Log(action ="修改细项")
 	public String updateDetail(Detail detail) {
 		int rt = detailMapper.updateDetail(detail);
 		if (rt > 0) {
@@ -39,6 +40,7 @@ public class DetailBiz {
 		}
 	};
 	
+	@Log(action ="删除细项")
 	public String deleteDetail(int id) {
 		int rt = detailMapper.deleteDetail(id);
 		return "删除成功";
