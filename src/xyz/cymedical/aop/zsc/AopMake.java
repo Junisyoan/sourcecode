@@ -1,7 +1,12 @@
 package xyz.cymedical.aop.zsc;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,10 +19,14 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.mapper.yjn.LogMapper;
 
 @Aspect    // 切面注解
 @Component //通用注解
 public class AopMake {
+	
+	@Resource
+	LogMapper logMapper;
 	
 	@Pointcut("execution (* xyz.cymedical.biz..*.*(..))")
 	public void pointCut() {
@@ -41,7 +50,7 @@ public class AopMake {
 			//遍历所有方法
 			for (Method m : methods) {
 				
-				//如果方法有Log注解，并且方法名和指定方法名一致，说明找到要找的方法了
+				//如果方法有Log注解，并且方法名和指定方法名一致
 				if (m.getAnnotation(Log.class)!=null && m.getName().equals(methodName)) {
 					
 					//获取方法的参数
@@ -53,11 +62,21 @@ public class AopMake {
 						//通过sesion获取用户信息
 						HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 				                .getRequestAttributes()).getRequest();    
-				        HttpSession session = request.getSession();  
-						
+				        HttpSession session = request.getSession();
 				        Tb_user user = (Tb_user) session.getAttribute("user");
 				        
-//				        m.getAnnotation(Log.class).action()
+				        //获取当前时间
+				        String format = "yyyy-MM-dd";
+				        String time = new SimpleDateFormat(format).format(new Date());
+				        
+				        //存储在一个map中，传入sql
+				        Map<String, Object> map = new HashMap<>();
+				        map.put("user_id", user.getUser_id());
+				        map.put("opera", m.getAnnotation(Log.class).action());
+				        map.put("time", time);
+				        
+				        //添加到数据库中
+				        logMapper.insertLog(map);
 				        
 						break;
 					}
