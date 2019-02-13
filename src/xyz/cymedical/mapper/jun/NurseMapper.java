@@ -22,6 +22,13 @@ public interface NurseMapper {
 	
 	//insert
 	/**
+	 * 创建体检人套餐关系表
+	 * @param patients	体检人列表
+	 * @return	是否成功
+	 */
+	public int insertPaitentGroup(List<Patient> patients);
+	
+	/**
 	 * 批量插入记账病人关系表
 	 * @param bid
 	 * @param pList
