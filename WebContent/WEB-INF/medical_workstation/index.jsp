@@ -111,12 +111,6 @@
 								name="<%=path %>nurse/getCreateList.handle" title="已开单列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已开单列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="待响应询价.html" title="待响应询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）待响应询价</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已响应询价.html" title="已响应询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）已响应询价</a></li>
-							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
