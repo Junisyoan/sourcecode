@@ -68,13 +68,13 @@ public class CompanyBizsc {
 	public String stateChange(Company company) {
 		int rt = companyMappers.stateChange(company);
 		if (rt > 0) {
-			if (company.getState().equals("禁用")) {
+			if (company.getCstate().equals("禁用")) {
 				return "禁用成功";
 			}else {
 				return "启用成功";
 			}
 		} else {
-			if (company.getState().equals("禁用")) {
+			if (company.getCstate().equals("禁用")) {
 				return "禁用失败";
 			}else {
 				return "启用失败";
