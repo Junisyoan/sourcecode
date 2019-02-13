@@ -62,4 +62,15 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	public List<Patient> getCheckPage(String bid) {
 		return nurseMapper.getCheckPage(bid);
 	}
+
+	@Override
+	public boolean insertPatientGroup(List<Patient> patients) {
+		System.out.println("体检人数量："+patients.size());
+		if (nurseMapper.insertPaitentGroup(patients)==patients.size()) {
+			isUpdate=true;
+		}else {
+			isUpdate=false;
+		}
+		return isUpdate;
+	}
 }
