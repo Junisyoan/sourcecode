@@ -13,7 +13,6 @@
 		select * from tb_user where account = #{account} and
 		pwd=#{pwd}
 	</select>
-<<<<<<< HEAD
 
 	<select id="findUserRole"
 		parameterType="xyz.cymedical.entity.jiang.Tb_user"
@@ -26,17 +25,12 @@
 		pwd=#{pwd}
 	</select>
 
-	<select id="findAll2" resultType="java.util.HashMap">
-
-=======
-	
 	<select id="findAll2"    resultType="java.util.HashMap">
 		 	select a.*,b.*,c.name deptname from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id
 <!-- 		select * from tb_user a,tb_role_dept b,tb_dept c where a.role_dept_id=b.role_dept_id and b.dept_id=c.dept_id   -->
  	</select>  
  
  	<select id="findAll" resultType="xyz.cymedical.entity.jiang.Tb_user">
->>>>>>> 74c24be28705c4c6f485b00672b4d7a4bc62a601
 		select * from tb_user
 		a,tb_role_dept b,tb_dept c where
 		a.role_dept_id=b.role_dept_id and
@@ -117,10 +111,7 @@
 			and a.account=#{1}
 		</if>
 		<if test="#{2} !=null and #{2} !=''">
-<<<<<<< HEAD
 			and a.phone=#{2}
-=======
-		  and a.phone=#{2}
 		</if>  
  	</select>  
  	
@@ -155,7 +146,6 @@
 		</if>
 		<if test="dept!=null and dept!=''">
 			and c.name like '%${dept}%'
->>>>>>> 74c24be28705c4c6f485b00672b4d7a4bc62a601
 		</if>
 	</select>
 
