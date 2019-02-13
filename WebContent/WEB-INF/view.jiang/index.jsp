@@ -4,6 +4,7 @@
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
 <head>
@@ -12,27 +13,13 @@
 <title>团检工作后台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
-<!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-<!-- <link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:400,300" />
-		 -->
+<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" /> 
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>assets/css/ace-rtl.min.css" />
 <link rel="stylesheet" href="<%=path%>assets/css/ace-skins.min.css" />
-<link rel="stylesheet" href="<%=path%>css/style.css" />
-<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-<script src="<%=path%>assets/js/ace-extra.min.js"></script>
-<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
-<!--[if !IE]> -->
-<script src="<%=path%>assets/js/jquery.min.js"></script>
-<!-- <![endif]-->
+<link rel="stylesheet" href="<%=path%>css/style.css" /> 
+<script src="<%=path%>assets/js/ace-extra.min.js"></script> 
+<script src="<%=path%>assets/js/jquery.min.js"></script> 
 <script src="<%=path%>assets/js/jquery.min.js"></script>
 
 
@@ -50,10 +37,8 @@
 				<a href="#" class="navbar-brand"> <small> <img
 						src="images/logo.png">
 				</small>
-				</a>
-				<!-- /.brand -->
-			</div>
-			<!-- /.navbar-header -->
+				</a> 
+			</div> 
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
 					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,管理员</span>
@@ -62,12 +47,9 @@
 					<li><a href="javascript:ovid(0)" class="change_Password">修改密码</a></li>
 					<li><a href="javascript:ovid(0)" id="Exit_system">退出系统</a></li>
 
-				</ul>
-				<!-- /.ace-nav -->
-			</div>
-			<!-- /.navbar-header -->
-		</div>
-		<!-- /.container -->
+				</ul> 
+			</div> 
+		</div> 
 	</div>
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
@@ -94,40 +76,22 @@
 						<span class="btn btn-success"></span> <span class="btn btn-info"></span>
 						<span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
 					</div>
-				</div>
-				<!-- #sidebar-shortcuts -->
+				</div> 
 				<ul class="nav nav-list" id="nav_list">
 					<li class="home"><a href="javascript:void(0)" name="home.html"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
 					<li><a href="#" class="dropdown-toggle"><i
-							class="icon-desktop"></i><span class="menu-text"> 询价管理 </span><b
+							class="icon-desktop"></i><span class="menu-text"> 1231 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
 								name="项目立项.html" title="项目立项" class="iframeurl"><i
-									class="icon-double-angle-right"></i>项目立项</a></li>
+									class="icon-double-angle-right"></i>1234</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="未到期询价项目.html" title="未到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>未到期询价项目</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已到期询价项目.html" title="已到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>已到期询价项目</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="暂存项目.html" title="暂存项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>暂存项目</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="模板维护.html" title="模板维护" class="iframeurl"><i
-									class="icon-double-angle-right"></i>模板维护</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="待响应询价.html" title="待响应询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）待响应询价</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已响应询价.html" title="已响应询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）已响应询价</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已到期询价.html" title="已到期询价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）已到期询价</a></li>
+									class="icon-double-angle-right"></i>12345</a></li>
+							 
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
@@ -135,61 +99,29 @@
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
 								name="待确认订单.html" title="待确认订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>待确认订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="在执行订单.html" title="在执行订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>在执行订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="作废订单.html" title="作废订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>作废订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="待加油订单.html" title="待加油订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）待加油订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="（船只权限）待加油订单.html" title="(船只权限)待加油订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>(船只权限)待加油订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="(船只权限)已完结订单.html" title="(船只权限)已完结订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>(船只权限)已完结订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已加油订单.html" title="已加油订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）已加油订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="已完结订单.html" title="已完结订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>已完结订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="异常订单.html" title="异常订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>异常订单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="异常订单处理.html" title="异常订单处理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（权限）异常订单处理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="供应商评价.html" title="供应商评价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>供应商评价</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="订单评价.html" title="订单评价" class="iframeurl"><i
-									class="icon-double-angle-right"></i>（评价）订单评价</a></li>
+									class="icon-double-angle-right"></i>123</a></li>
+							 
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b
 							class="arrow icon-angle-down"></b></a>
+							
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>usermanage/select.handle" title="人员管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>menumanage/select.handle" title="菜单管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>rolemanage/select.handle" title="角色管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>deptmanage/select.handle" title="科室管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>powermanage/selectpower.handle" title="权限管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>
-							<!-- zsc -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>menumanage/select.handle" title="菜单管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>rolemanage/select.handle" title="角色管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>deptmanage/select.handle" title="科室管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li> -->
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>powermanage/selectpower.handle" title="权限管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>  -->
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>detail/detailsVeiw.handle" title="细项管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
@@ -201,26 +133,34 @@
 								class="iframeurl"><i class="icon-double-angle-right"></i>套餐管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>companys/companysVeiw.handle" title="账号管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li>
-							<!-- zsc -->
-							<!--根据用户权限显示用户管理-->
+								class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li> 
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>powermanage/select.handle" title="权限用户管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
-							<!--结束-->
+								class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li> 
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>log/findAllLog.handle" title="日志管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>日志管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>param/findAllParam.handle" title="参数管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>参数管理</a></li>
-							<!--                                 <li class="home"><a href="javascript:void(0)" name="入围信息管理.html" title="入围信息管理" class="iframeurl"><i class="icon-double-angle-right"></i>入围信息管理</a></li> -->
-							<!--                                 <li class="home"><a href="javascript:void(0)" name="供应商管理.html" title="供应商管理" class="iframeurl"><i class="icon-double-angle-right"></i>供应商管理</a></li> -->
-							<!--                                 <li class="home"><a href="javascript:void(0)" name="船只管理.html" title="船只管理" class="iframeurl"><i class="icon-double-angle-right"></i>船只管理</a></li> -->
-							<!--                                 <li class="home"><a href="javascript:void(0)" name="产品管理.html" title="产品管理" class="iframeurl"><i class="icon-double-angle-right"></i>产品管理</a></li> -->
-						</ul></li>
-				</ul>
-				<!-- /.nav-list -->
+				 		</ul></li> 
+				 		
+				 		<c:forEach items="${mlist }" var="m" varStatus="s">
+					      	<c:if test="${m.superior==0}">
+					      		 <li>
+					      		 <a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> ${m.name} </span><b class="arrow icon-angle-down"></b></a>
+				 				 <ul class="submenu"> 
+						      	   <c:forEach items="${mlist }" var="p" varStatus="s">
+						      		  <c:if test="${m.menu_id==p.superior}">
+					                          <li class="home"><a  href="javascript:void(0)" name="<%=path %>${p.link }"  title="${p.name}" class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li> 
+		 							  </c:if>
+	 							   </c:forEach>
+				 				</ul> 
+				 				</li>
+				     		 </c:if>
+				      </c:forEach>
+						
+				</ul> 
 				<div class="sidebar-collapse" id="sidebar-collapse">
 					<i class="icon-double-angle-left"
 						data-icon1="icon-double-angle-left"

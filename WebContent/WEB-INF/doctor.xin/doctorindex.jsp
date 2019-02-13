@@ -69,7 +69,7 @@
 					<span class="menu-text"></span>
 				</a>
 				<div class="sidebar" id="sidebar">
-<script type="text/javascript">
+			<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>
 					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
