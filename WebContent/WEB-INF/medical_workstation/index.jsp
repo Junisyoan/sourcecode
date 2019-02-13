@@ -112,7 +112,6 @@
 								name="<%=path %>nurse/getCreateList.handle" title="已开单列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>已开单列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-<<<<<<< HEAD
 								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
@@ -443,8 +442,7 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>
-		login_user.html";
+				location.href = "<%=path%>login_user.html";
 
 			});
 		});
