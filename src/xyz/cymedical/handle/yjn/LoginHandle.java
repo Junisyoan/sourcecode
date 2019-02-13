@@ -41,6 +41,9 @@ public class LoginHandle {
 		userlist = tbUserBiz.findUser(user);
 		userlist2 = tbUserBiz.findUserRole(user);
 
+		System.out.println("User"+userlist.size());
+		System.out.println("UserRole"+userlist2.size());
+		
 		if (userlist.size() > 0 && userlist2.size() > 0) {
 			result = "管理员";
 		} else {
