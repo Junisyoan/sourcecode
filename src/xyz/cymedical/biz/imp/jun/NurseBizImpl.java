@@ -49,10 +49,11 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	public boolean insertRelation(int bid, List<Patient> pList) {
 		
 		int num = nurseMapper.insertBatchRelation(bid, pList);
-		System.out.println("执行结果："+pList.size()+"，"+num);
 		if (pList.size()==num) {
+			System.out.println("体检人员和账单关系表建立成功");
 			isUpdate=true;
 		} else {
+			System.out.println("体检人员和账单关系表建立失败");
 			isUpdate=false;
 		}
 		return isUpdate;
@@ -64,9 +65,9 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	}
 
 	@Override
-	public boolean insertPatientGroup(List<Patient> patients) {
+	public boolean insertPaitentCombo(List<Patient> patients,String bid) {
 		System.out.println("体检人数量："+patients.size());
-		if (nurseMapper.insertPaitentGroup(patients)==patients.size()) {
+		if (nurseMapper.insertPaitentCombo(Integer.parseInt(bid),patients)==patients.size()) {
 			isUpdate=true;
 		}else {
 			isUpdate=false;
