@@ -22,7 +22,9 @@
 			参数名字：<input name="name" type="text" />
 		</p>
 		<p align="center">
-			<input type="submit" value="提交">
+			<input type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+				href="<%=path%>param/findAllParam.handle"><input type="button"
+				value="返回"></a>
 		</p>
 	</form>
 </body>

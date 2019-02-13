@@ -56,7 +56,7 @@
 
 	<div class="Manager_style">
 		<span class="title_name">日志查看</span>
-		<p align="center"><button type="button" onclick="tableToExcel('item','data')">导出</button></p>
+		<p align="center"><button type="button" onclick="tableToExcel('item','data')">导出Excel</button></p>
 		<p align="center">&nbsp;</p>
 		<table class="table table-striped table-bordered table-hover" id="item">
 			<thead>

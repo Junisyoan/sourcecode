@@ -128,8 +128,8 @@ input {
 								<tr>
 									<th>${s2.index + 1}</th>
 									<th>${p2.n1}</th>
-									<th>${p2.n2}</th>
 									<th>${p2.n3}</th>
+									<th>${p2.n2}</th>
 									<th>${p2.time}</th>
 								</tr>
 							</c:forEach>
@@ -217,8 +217,8 @@ input {
 									<th>${p3.n4}</th>
 									<th>${p3.n3}</th>
 									<th>${p3.n2}</th>
-									<th>${p3.unit}</th>
 									<th>${p3.resulttext}</th>
+									<th>${p3.unit}</th>
 									<c:if test="${p3.min == null}">
 										<th>${p3.min}</th>
 									</c:if>
