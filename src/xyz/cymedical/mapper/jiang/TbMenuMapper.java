@@ -1,6 +1,7 @@
 package xyz.cymedical.mapper.jiang;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface TbMenuMapper {
 	public int delete(int menu_id);
 	
 	public int upMenu(Tb_menu tb_menu);
+	
+	public List<Map<String,Object>> selectCompany(Map<String, Object> map); 
 }
