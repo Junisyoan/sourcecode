@@ -17,6 +17,13 @@ public interface NurseBiz {
 	
 
 	/**
+	 * 创建体检人套餐关系表
+	 * @param patients	体检人列表
+	 * @return	是否成功
+	 */
+	public boolean insertPatientGroup(List<Patient> patients);
+	
+	/**
 	 * 打印导检单
 	 * @param bid	记账表id
 	 * @return	导检单列表
