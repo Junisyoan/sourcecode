@@ -24,6 +24,7 @@ public class LoginHandle {
 	public TbUserBiz tbUserBiz;
 
 	private List<Tb_user> userlist = new ArrayList<>();
+	private List<Tb_user> userlist2 = new ArrayList<>();
 
 	@RequestMapping(value = "/login.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String login(HttpServletRequest req, String checkCode, Tb_user user) {
@@ -38,13 +39,10 @@ public class LoginHandle {
 		System.out.println("checkCode=" + checkCode);
 
 		userlist = tbUserBiz.findUser(user);
+		userlist2 = tbUserBiz.findUserRole(user);
 
-		if (userlist.size() > 0 && userlist.get(0).getRole_dept_id() == 3) {
+		if (userlist.size() > 0 && userlist2.size() > 0) {
 			result = "管理员";
-		} else if (user.getAccount().equals("admin") && user.getPwd().equals("1234")) {
-			result = "医生";
-		} else if (user.getAccount().equals("admin") && user.getPwd().equals("123456")) {
-			result = "后台";
 		} else {
 			result = "账号密码错误";
 		}
