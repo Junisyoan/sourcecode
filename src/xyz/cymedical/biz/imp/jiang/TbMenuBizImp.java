@@ -1,6 +1,7 @@
 package xyz.cymedical.biz.imp.jiang;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -40,6 +41,13 @@ public class TbMenuBizImp implements TbMenuBiz{
 	@Override
 	public int upMenu(Tb_menu tb_menu) {
 		return tbMenuMapper.upMenu(tb_menu);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectCompany(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return tbMenuMapper.selectCompany(map);
 	}
 
 }
