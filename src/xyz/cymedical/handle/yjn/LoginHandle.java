@@ -28,8 +28,8 @@ public class LoginHandle {
 
 	@RequestMapping(value = "/login.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String login(HttpServletRequest req, String checkCode, Tb_user user) {
-		HttpSession session = req.getSession(); 
-		
+		HttpSession session = req.getSession();
+
 		String result = "";
 
 		String mapcode = (String) session.getAttribute("CODE");
@@ -46,9 +46,9 @@ public class LoginHandle {
 		} else {
 			result = "账号密码错误";
 		}
-		
+
 		session.setAttribute("user", userlist.get(0));
-		
+
 		return result;
 
 	}
@@ -59,6 +59,16 @@ public class LoginHandle {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.jiang/index");
 		return mav;
+
+	}
+
+	@RequestMapping(value = "/modify.handle")
+	public ModelAndView modify(String oldpwd, String newpwd) {
+		
+		System.out.println(oldpwd);
+		System.out.println(newpwd);
+
+		return null;
 
 	}
 
