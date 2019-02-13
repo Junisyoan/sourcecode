@@ -1,6 +1,7 @@
 package xyz.cymedical.biz.imp.jiang;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -42,6 +43,13 @@ public class TbDeptBizImp implements  TbDeptBiz{
 	public int delectDept(int dept_id) {
 		// TODO Auto-generated method stub
 		return tbDeptMapper.delectDept(dept_id);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectCompany(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.selectCompany(map);
 	}
 
 	
