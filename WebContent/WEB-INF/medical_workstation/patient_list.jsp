@@ -170,9 +170,12 @@ $(function(){
 			url:"<%=path%>company/queryCombo.handle?comboName="+comboName,
 			dataType:"text",
 			success:function(retData){
-				if(retData!=""){
-					alert(retData);
+				if(retData=="1"){
+					alert("生成成功");
+				}else if(retData=="0"){
+					alert("生成失败");
 				}
+					location.href="<%=path %>nurse/getBillerNoPay.handle";
 			},
 			error:function(){
 				alert("服务器无响应");
