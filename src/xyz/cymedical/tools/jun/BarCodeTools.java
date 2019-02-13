@@ -60,8 +60,8 @@ public class BarCodeTools {
 			// 获取到前12位
 			String barCode = jbarCode.substring(0, len - 1);
 			// 获取到校验位
-			String code = jbarCode.substring(len - 1, len);
-			String checkCode = jbarcode13.calcCheckSum(barCode);
+//			String code = jbarCode.substring(len - 1, len);
+//			String checkCode = jbarcode13.calcCheckSum(barCode);
 //			if (!code.equals(checkCode)) {
 //				return "EN-13 条形码最后一位校验码 不对，应该是： " + checkCode;
 //			}

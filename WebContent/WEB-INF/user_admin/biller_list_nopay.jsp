@@ -14,12 +14,12 @@
 <link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
 <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
+ <![endif]-->
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
-<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
-<script src="<%=path%>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
 <title>人员列表</title>
 </head>
 

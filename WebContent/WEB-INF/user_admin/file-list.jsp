@@ -63,7 +63,25 @@ function downloadFile(file_id){
 function delFile(fid,fname){
 	var s = confirm("确认删除  "+fname+"  ?");
 	if(s){
-		location.href="<%=path%>company/delFile.handle?file_id="+fid;
+		
+		$.ajax({
+			url:"<%=path%>company/delFile.handle",
+			type:"POST",
+			dataType:"text",
+			data:{fid:fid,fname:fname},
+			success:function(retData){
+				if(retData=="1"){
+					alert("删除成功");
+				}else if(retData=="0"){
+					alert("删除失败");
+				}
+				location.href="<%=path %>company/getFileList.handle?pageNum=1";
+			},
+			error:function(){
+				alert("服务器无响应");
+			}
+			
+		});
 	}
 }
 

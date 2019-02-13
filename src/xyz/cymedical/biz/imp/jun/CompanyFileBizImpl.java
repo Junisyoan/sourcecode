@@ -57,4 +57,14 @@ public class CompanyFileBizImpl extends BaseImpl implements CompanyFileBiz {
 		return companyFileMapper.queryFileByBillerId(bid);
 	}
 
+	@Override
+	public boolean delFile(String fid) {
+		int id = Integer.parseInt(fid);
+		if (companyFileMapper.queryFileGroup(id)>0) {
+			return companyFileMapper.delFileAndGroup(id);
+		}else {
+			return companyFileMapper.delFile(id);
+		}
+	}
+
 }

@@ -112,8 +112,53 @@
 								name="<%=path %>nurse/getCreateList.handle" title="已开单列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>已开单列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
+									class="icon-double-angle-right"></i>体检报告打印</a></li>
+						</ul></li>
+					<li><a href="#" class="dropdown-toggle"><i
+							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
+							class="arrow icon-angle-down"></b></a>
+						<ul class="submenu">
+							<li class="home"><a href="javascript:void(0)"
+								name="待确认订单.html" title="待确认订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>待确认订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="在执行订单.html" title="在执行订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>在执行订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="作废订单.html" title="作废订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>作废订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="待加油订单.html" title="待加油订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>（权限）待加油订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="（船只权限）待加油订单.html" title="(船只权限)待加油订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>(船只权限)待加油订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="(船只权限)已完结订单.html" title="(船只权限)已完结订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>(船只权限)已完结订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="已加油订单.html" title="已加油订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>（权限）已加油订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="已完结订单.html" title="已完结订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>已完结订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="异常订单.html" title="异常订单" class="iframeurl"><i
+									class="icon-double-angle-right"></i>异常订单</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="异常订单处理.html" title="异常订单处理" class="iframeurl"><i
+									class="icon-double-angle-right"></i>（权限）异常订单处理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="供应商评价.html" title="供应商评价" class="iframeurl"><i
+									class="icon-double-angle-right"></i>供应商评价</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="订单评价.html" title="订单评价" class="iframeurl"><i
+									class="icon-double-angle-right"></i>（评价）订单评价</a></li>
+=======
 								name="<%=path%>patient/showpatient.handle" title="体检报告打印"
 								class="iframeurl"><i class="icon-double-angle-right"></i>体检报告打印</a></li>
+>>>>>>> 9c6fc6cf9a3593f7058c9e94572d6484fb7f93e4
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
@@ -397,8 +442,7 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>
-		login_user.html";
+				location.href = "<%=path%>login_user.html";
 
 			});
 		});

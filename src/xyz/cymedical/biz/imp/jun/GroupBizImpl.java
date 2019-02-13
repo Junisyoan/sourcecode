@@ -38,7 +38,20 @@ public class GroupBizImpl extends BaseImpl implements GroupBiz {
 
 	@Override
 	public boolean createGroup(int cid, int fid) {
-		return groupMapper.insert(cid, fid);
+		Group group = new Group();
+		group.setCompany_id(cid);
+		//创建团检表
+		isUpdate = groupMapper.insert(group);
+		if (isUpdate) {
+			//创建关联表
+			isUpdate = groupMapper.insertFileGroup(fid, group.getGroup_id());
+			if (isUpdate) {
+				System.out.println("关联表创建成功");
+			} else {
+				System.out.println("关联表创建失败");
+			}
+		}
+		return isUpdate;
 	}
 
 }

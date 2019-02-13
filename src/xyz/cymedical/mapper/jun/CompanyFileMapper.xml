@@ -3,14 +3,22 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyFileMapper">
-
+<!-- 删除关联信息 -->
+	<select id="delFileAndGroup" parameterType="int">
+		delete from tb_file_group where file_id=#{fid}
+		delete from tb_file where file_id = #{fid}
+	</select>
+<!-- 查询文件关联 -->
+	<select id="queryFileGroup" parameterType="int" resultType="int">
+		select count(*) from tb_file_group where file_id = #{fid}
+	</select>
 <!-- 根据记账表id找文件 -->
 	<select id="queryFileByBillerId" resultType="xyz.cymedical.entity.jun.CompanyFile">
 		select * from tb_file where file_id = (select file_id from tb_group where group_id = (select group_id from tb_biller where biller_id = #{bid}))
 	</select>
 <!-- 查询已审核文件列表 -->
 	<select id="queryPassFileList" resultType="xyz.cymedical.entity.jun.CompanyFile">
-		select * from tb_file f join tb_company c on cstate='已审核' and f.company_id = c.company_id
+		select * from tb_file f join tb_company c on f.cstate='已审核' and f.company_id = c.company_id
 	</select>
 
 <!-- 修改文件状态 -->
@@ -18,8 +26,8 @@
 		update tb_file set cstate = '已审核' where file_id = #{fid}
 	</update>
 <!-- 删除文件 -->
-	<delete id="delFile" parameterType="String">
-		delete from tb_file where file_id = #{file_id}
+	<delete id="delFile" parameterType="int">
+		delete from tb_file where file_id = #{fid}
 	</delete>
 <!-- 根据文件id查询文件 -->
 	<select id="queryFileById" parameterType="String" resultType="xyz.cymedical.entity.jun.CompanyFile">

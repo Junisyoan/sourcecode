@@ -57,7 +57,7 @@
 	
 <!-- 注册公司 -->
 	<insert id="insertCompany" parameterType="xyz.cymedical.entity.jun.Company">
-		insert into tb_company(name,account,pwd,tel,address,people,phone,cstate) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{cstate})
+		insert into tb_company(name,account,pwd,tel,address,people,phone,cstate,deposit) values(#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{cstate},0)
 	</insert>
 	
 <!-- 按账户查找公司 -->

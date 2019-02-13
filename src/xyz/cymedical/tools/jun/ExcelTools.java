@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -31,6 +32,7 @@ public class ExcelTools {
 	 * 解析excel得到人员具体信息
 	 * 
 	 * @param companyFile 文件
+	 * @param combos	套餐列表
 	 * @return 人员信息列表
 	 */
 	public static List<Patient> getPatientList(CompanyFile companyFile,List<Combo> combos) {
@@ -89,6 +91,7 @@ public class ExcelTools {
 							isNull = true;
 							break;
 						} else if (cell != null) {
+							cell.setCellType(CellType.STRING);
 							dataList.add(cell.toString());
 						}
 					}

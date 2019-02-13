@@ -75,7 +75,12 @@ function passFile(fid){
 		dataType:"text",
 		url:"<%=path%>nurse/passFile.handle?fid="+fid,
 		success:function(retData){
-			alert(retData);
+			if(retData=="1"){
+				alert("审核通过");
+				location.href="<%=path %>nurse/queryCheckFile.handle?pageNum=1";
+			}else if(retData=="0"){
+				alert("审核失败");
+			}
 		},
 		error:function(){
 			alert("服务器无响应");

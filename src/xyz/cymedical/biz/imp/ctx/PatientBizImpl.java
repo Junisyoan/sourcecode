@@ -28,7 +28,7 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 		int number = 0;
 		// 体检人员信息
 		Patient patient = null;
-		// 自增长的id
+		
 		for (int i = 0; i < listRecord.size(); i++) {
 			patient = listRecord.get(i);
 			if (patientMapper.insertPatient(patient)) {
@@ -42,11 +42,11 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 				number++;
 			}
 		}
-		System.out.println("执行结果" + listRecord.size() + "," + number);
-
 		if (number == listRecord.size()) {
+			System.out.println("插入成功");
 			return listRecord;
 		} else {
+			System.out.println("插入失败");
 			return null;
 		}
 	}
