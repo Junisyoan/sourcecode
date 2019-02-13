@@ -4,6 +4,14 @@
 
 <mapper namespace="xyz.cymedical.mapper.jun.NurseMapper">
 
+<!-- 创建体检人和套餐关系表 -->
+	<insert id="insertPaitentGroup" parameterType="java.util.List">
+		insert into tb_patient_group(patient_id,group_id)
+		values
+		<foreach collection="patients" item="p" separator=",">
+			(#{p.patient_id},#{p.combo_id})
+		</foreach>
+	</insert>
 <!-- 根据记账表查询导检单 -->
 	<!-- 病人实体类查询 -->
 	<select id="getCheckPage" parameterType="String" resultType="xyz.cymedical.entity.jun.Patient">
