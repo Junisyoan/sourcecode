@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.jun.Company;
  
   
 public interface TbUserBiz {
@@ -25,4 +26,7 @@ public interface TbUserBiz {
 	public int upUser(Tb_user user);//修改人員信息
 	
 	public List<Map<String,Object>> selUser(String depts, String users,  String phones );
+	
+	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
+	 
 }
