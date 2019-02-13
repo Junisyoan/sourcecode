@@ -30,6 +30,109 @@
 		<script src="assets/js/html5shiv.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+<<<<<<< HEAD
+        		<!--[if !IE]> -->
+		<script src="<%=path%>assets/js/jquery.min.js"></script>        
+		<!-- <![endif]-->
+			<script src="<%=path%>assets/js/jquery.min.js"></script>        
+	
+		 
+	</head>
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+        <script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+			<div class="navbar-container" id="navbar-container">
+				<div class="navbar-header pull-left">
+					<a href="#" class="navbar-brand">
+						<small>
+									团检工作后台			
+<!-- 						<img src="images/head.png"> -->
+						</small>
+					</a><!-- /.brand -->
+				</div><!-- /.navbar-header -->
+				<div class="navbar-header pull-right" role="navigation">
+                   <div class="get_time" ><span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,管理员</span></div>
+					<ul class="nav ace-nav">	
+						<li><a href="javascript:ovid(0)" class="change_Password">修改密码</a></li>
+                        <li><a href="javascript:ovid(0)" id="Exit_system">退出系统</a></li>
+                       
+					</ul><!-- /.ace-nav -->
+				</div><!-- /.navbar-header -->
+			</div><!-- /.container -->
+		</div>
+		<div class="main-container" id="main-container">
+        <script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+				<div class="sidebar" id="sidebar">
+<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+					</script>
+					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                     <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						团检工作后台
+						</div>
+						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+							<span class="btn btn-success"></span>
+							<span class="btn btn-info"></span>
+							<span class="btn btn-warning"></span>
+							<span class="btn btn-danger"></span>
+						</div>
+					</div><!-- #sidebar-shortcuts -->
+					<ul class="nav nav-list" id="nav_list">
+				     <li class="home"><a href="javascript:void(0)" name="home.html" class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a></li>
+                     <li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> 询价管理 </span><b class="arrow icon-angle-down"></b></a>
+					   <ul class="submenu">
+                         <li class="home"><a  href="javascript:void(0)" name="项目立项.html"  title="项目立项" class="iframeurl"><i class="icon-double-angle-right"></i>菜单1</a></li>
+						 <li class="home"><a href="javascript:void(0)" name="已到期询价.html" title="已到期询价"  class="iframeurl"><i class="icon-double-angle-right"></i>菜单2</a></li>
+						</ul>
+					</li>
+					<li>
+					<a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> 订单管理 </span><b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                  <li class="home"><a href="javascript:void(0)" name="订单评价.html" title="订单评价"  class="iframeurl"><i class="icon-double-angle-right"></i>菜单3</a></li>
+                   </ul>
+				  </li>
+						<li><a href="#" class="dropdown-toggle"><i class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b class="arrow icon-angle-down"></b></a>
+							<ul class="submenu">
+								<li class="home"><a href="javascript:void(0)" name="<%=path%>usermanage/select.handle" title="人员管理" class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li>
+								<li class="home"><a href="javascript:void(0)" name="<%=path%>menumanage/select.handle" title="菜单管理" class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li>
+								<li class="home"><a href="javascript:void(0)" name="<%=path%>rolemanage/select.handle" title="角色管理"  class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li>
+
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>deptmanage/select.handle" title="科室管理" class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li>
+
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>powermanage/selectpower.handle" title="权限管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>
+                                <!-- zsc -->
+                                ******************
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>detail/detailsVeiw.handle" title="细项管理" class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>project/projectsVeiw.handle" title="项目管理" class="iframeurl"><i class="icon-double-angle-right"></i>项目管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>combo/combosVeiw.handle" title="套餐管理" class="iframeurl"><i class="icon-double-angle-right"></i>套餐管理</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>companys/companysVeiw.handle" title="账号管理" class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li>
+                                <!-- zsc -->
+
+                                <!--根据用户权限显示用户管理-->
+                                <li class="home"><a href="javascript:void(0)" name="<%=path%>powermanage/select.handle" title="权限用户管理" class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
+                                <!--结束-->
+<!--                                 <li class="home"><a href="javascript:void(0)" name="入围信息管理.html" title="入围信息管理" class="iframeurl"><i class="icon-double-angle-right"></i>入围信息管理</a></li> -->
+<!--                                 <li class="home"><a href="javascript:void(0)" name="供应商管理.html" title="供应商管理" class="iframeurl"><i class="icon-double-angle-right"></i>供应商管理</a></li> -->
+<!--                                 <li class="home"><a href="javascript:void(0)" name="船只管理.html" title="船只管理" class="iframeurl"><i class="icon-double-angle-right"></i>船只管理</a></li> -->
+<!--                                 <li class="home"><a href="javascript:void(0)" name="产品管理.html" title="产品管理" class="iframeurl"><i class="icon-double-angle-right"></i>产品管理</a></li> -->
+							</ul>
+						</li>
+					</ul><!-- /.nav-list -->
+					<div class="sidebar-collapse" id="sidebar-collapse">
+						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+					</div>
+                    <script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+					</script>
+=======
 <!--[if !IE]> -->
 <script src="<%=path%>assets/js/jquery.min.js"></script>
 <!-- <![endif]-->
@@ -57,6 +160,7 @@
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
 					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,管理员</span>
+>>>>>>> c24925bbf197f033099dfa63695a13ebd4e801a5
 				</div>
 				<ul class="nav ace-nav">
 					<li><a href="javascript:ovid(0)" class="change_Password">修改密码</a></li>
