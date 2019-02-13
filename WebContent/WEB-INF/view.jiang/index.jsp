@@ -144,6 +144,21 @@
 								name="<%=path%>param/findAllParam.handle" title="参数管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>参数管理</a></li>
 				 		</ul></li> 
+				 		
+				 		<c:forEach items="${mlist }" var="m" varStatus="s">
+					      	<c:if test="${m.superior==0}">
+					      		 <li>
+					      		 <a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> ${m.name} </span><b class="arrow icon-angle-down"></b></a>
+				 				 <ul class="submenu"> 
+						      	   <c:forEach items="${mlist }" var="p" varStatus="s">
+						      		  <c:if test="${m.menu_id==p.superior}">
+					                          <li class="home"><a  href="javascript:void(0)" name="<%=path %>${p.link }"  title="${p.name}" class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li> 
+		 							  </c:if>
+	 							   </c:forEach>
+				 				</ul> 
+				 				</li>
+				     		 </c:if>
+				      </c:forEach>
 						
 				</ul> 
 				<div class="sidebar-collapse" id="sidebar-collapse">
