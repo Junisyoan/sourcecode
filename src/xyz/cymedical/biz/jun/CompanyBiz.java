@@ -110,4 +110,7 @@ public interface CompanyBiz {
 	 * @return 公司信息
 	 */
 	public List<Company> queryByAccount(String account);
+
+	//退费余额
+	public boolean Refund(int companyid,double deposit);
 }
