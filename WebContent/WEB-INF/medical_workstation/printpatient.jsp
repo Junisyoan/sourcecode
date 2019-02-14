@@ -335,14 +335,12 @@ input {
 	<!-- aend -->
 	<c:forEach items="${patientlist}" var="p" varStatus="s">
 		<c:if test="${s.index == 0}">
-			<p align="center">
+			<h3 align="center">
 				<a
-					href="<%=path%>patient/printpatient.handle?name=${p.n1}&time=${p.time}">返回</a>
-			</p>
+					href="<%=path%>patient/printpatient.handle?name=${p.n1}&time=${p.time}">返回</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+					href="" onclick="pAll();">打印</a>
+			</h3>
 		</c:if>
 	</c:forEach>
-	<p align="center">
-		<a href="" onclick="pAll();">打印</a>
-	</p>
 </body>
 </html>
