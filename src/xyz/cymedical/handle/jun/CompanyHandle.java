@@ -34,6 +34,7 @@ import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
+import xyz.cymedical.mapper.jun.CompanyMapper;
 import xyz.cymedical.tools.jun.ResponseTools;
 
 /**
@@ -61,6 +62,8 @@ public class CompanyHandle {
 	
 	@Resource
 	private DoctorBiz doctorbiz;//医生业务
+
+	private boolean isSuccess;//是否成功
 	
 	private ModelAndView modelAndView; // 视图和模型
 	private Company company; // 公司信息
@@ -108,6 +111,7 @@ public class CompanyHandle {
 						"体检结算", 
 						String.valueOf(totalmoney), 
 						btime);
+				System.out.println("扣除费用成功");
 				if (billerBiz.payBiller(bid, "已结算", btime)) {
 					System.out.println("结算成功");
 					response.getWriter().print("1");
@@ -166,9 +170,9 @@ public class CompanyHandle {
 		try {
 			if (isSuccess) {
 				
-				response.getWriter().print("<script type='text/javascript'>alert('充值成功!');location.href='<%=path %>company/getDepositDetail.handle';</script>");
+				response.getWriter().print("1");
 			} else {
-				response.getWriter().print(ResponseTools.returnMsgAndBack("充值失败！请联系管理员"));
+				response.getWriter().print("0");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -199,24 +203,6 @@ public class CompanyHandle {
 	}
 	
 	/*
-	 * 删除文件
-	 */
-	@RequestMapping(value="/delFile.handle",method=RequestMethod.GET)
-	public String delFile(HttpServletResponse response, String file_id) {
-		response.setCharacterEncoding("utf-8");
-		try {
-			if(companyBiz.delCompanyFile(file_id)) {
-				response.getWriter().print(ResponseTools.returnMsgAndBack("删除成功，请刷新页面"));
-			}else {
-				response.getWriter().print(ResponseTools.returnMsgAndBack("文件删除失败"));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	/*
 	 * 获取文件列表
 	 */
 	@RequestMapping(value = "/getFileList.handle", method = RequestMethod.GET)
@@ -244,7 +230,7 @@ public class CompanyHandle {
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("multipart/form-data");	//设置内容类型为多媒体文件
 				//设置文件头
-				response.setHeader("Content-Disposition","attachment;fileName="+URLEncoder.encode(file.getName(), "utf-8"));
+				response.setHeader("Content-Disposition","attachment;fileName="+URLEncoder.encode(file.getName(), "UTF-8"));
 				//设置文件流
 				InputStream is = new FileInputStream(file);
 				OutputStream os = response.getOutputStream();
@@ -265,6 +251,39 @@ public class CompanyHandle {
 			e.printStackTrace();
 		}
 		
+		return null;
+	}
+	
+	
+	
+	/*
+	 * 删除文件
+	 */
+	@RequestMapping(value = "/delFile.handle",method=RequestMethod.POST)
+	public String delelteFile(String fid,String fname, HttpServletResponse response) {
+		System.out.println("删除文件："+fname+"--文件id："+fid);
+		response.setCharacterEncoding("utf-8");
+		//获得文件信息
+		CompanyFile cf = companyFileBiz.queryFile(fid);
+		
+		isSuccess=false;
+		
+		try {
+			if (companyFileBiz.delFile(fid)) {
+				//1成功，删除文件
+				File file = new File(cf.getFpath());
+				if (file.delete()) {
+					response.getWriter().print("1");
+					isSuccess = true;
+				}
+			}
+			//0失败
+			if (!isSuccess) {
+				response.getWriter().print("0");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
