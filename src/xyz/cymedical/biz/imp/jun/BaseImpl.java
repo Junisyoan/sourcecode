@@ -6,7 +6,6 @@ package xyz.cymedical.biz.imp.jun;
 * @version 1.0
 */
 public class BaseImpl {
-
 	protected boolean isExsit;
 	protected boolean isUpdate;
 	protected int pageNo;
