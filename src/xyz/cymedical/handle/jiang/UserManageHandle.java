@@ -21,30 +21,30 @@ import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.entity.jiang.Tb_role_dept;
 import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.tools.zsc.Encryption;
 
 @Controller
 @RequestMapping("/usermanage")
 public class UserManageHandle {
 
-	 
 	private Tb_user user;
- 
+
 	private List<Tb_user> userall;
- 
+
 	private List<Tb_role_dept> roledept;
 	@Resource
 	private TbUserBiz tbUserBiz;
 	@Resource
 	private TbRoleDept tbRoleDept;
-	 
-	private List<Map<String,Object>> maplist;
-	
+
+	private List<Map<String, Object>> maplist;
+
 	// 添加后台人员
 
 	@RequestMapping(value = "/adduser.handle")
 	public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, Tb_user adduser) {
 
-		ModelAndView mav = new ModelAndView(); 
+		ModelAndView mav = new ModelAndView();
 //		adduser.setRole_dept_id(1);
 //		System.out.println("doctor="+adduser.getDoctor());
 		System.out.println(adduser.getRole_dept_id());
@@ -71,21 +71,21 @@ public class UserManageHandle {
 		return mav;
 
 	}
-	
+
 	// 查
-		@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-		public @ResponseBody String selectCompany(Tb_user tb_user, String dept) {
-			System.out.println("过");
-			Map<String, Object> map = new HashMap<String, Object>(); 
-			map.put("tb_user", tb_user);
-			
-			map.put("dept", dept); 
-			List<Map<String,Object>> companys = tbUserBiz.selectCompany(map);
+	@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String selectCompany(Tb_user tb_user, String dept) {
+		System.out.println("过");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("tb_user", tb_user);
+
+		map.put("dept", dept);
+		List<Map<String, Object>> companys = tbUserBiz.selectCompany(map);
 //			List<Tb_user> companys = companyBizsc.selectCompany(map);
-			String str = JSONArray.fromObject(companys).toString();
-			System.out.println(companys.get(0).get(dept));
-			return str;
-		}
+		String str = JSONArray.fromObject(companys).toString();
+		System.out.println(companys.get(0).get(dept));
+		return str;
+	}
 
 	// 显示
 	@RequestMapping(value = "/select.handle")
@@ -94,12 +94,12 @@ public class UserManageHandle {
 		ModelAndView mav = new ModelAndView();
 
 		userall = tbUserBiz.findAll();
-		maplist=tbUserBiz.findAll2();
-		System.out.println("99999="+maplist.get(0).get("name"));
-		
+		maplist = tbUserBiz.findAll2();
+		System.out.println("99999=" + maplist.get(0).get("name"));
+
 		System.out.println("aaaa....=" + userall);
 		if (null != maplist && maplist.size() > 0) {
-			
+
 			request.setAttribute("maplist", maplist);
 		} else {
 			System.out.println("沒有數據");
@@ -161,7 +161,7 @@ public class UserManageHandle {
 			} else {
 				addrole = "管理员";
 			}
-		}  
+		}
 		request.setAttribute("addrole", addrole);
 
 		mav.setViewName("WEB-INF/view.jiang/usermanage");
@@ -212,27 +212,28 @@ public class UserManageHandle {
 	@RequestMapping(value = "/updeteuser.handle", method = RequestMethod.POST)
 	public ModelAndView updeteuser(HttpServletRequest request, HttpServletResponse response, Tb_user upuser) {
 		ModelAndView mav = new ModelAndView();
- 
+
 		tbUserBiz.upUser(upuser);
 
 		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		return mav;
 
 	}
-	
+
 	@RequestMapping(value = "/selectlittle.handle", method = RequestMethod.POST)
-	public ModelAndView selectlittle(HttpServletRequest request, HttpServletResponse response, String depts, String users,  String phones) {
+	public ModelAndView selectlittle(HttpServletRequest request, HttpServletResponse response, String depts,
+			String users, String phones) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("11-="+depts);
-		System.out.println("11-="+users);
-		System.out.println("11-="+phones);
+		System.out.println("11-=" + depts);
+		System.out.println("11-=" + users);
+		System.out.println("11-=" + phones);
 //		String account= "'%"+users+"%'";
 //		System.out.println(account);
 //		String sql="select * from tb_user where account like '%"+users+"%'";
 //		System.out.println(sql);
-		maplist=tbUserBiz.selUser(depts, users, phones);
+		maplist = tbUserBiz.selUser(depts, users, phones);
 		if (null != maplist && maplist.size() > 0) {
-			
+
 			request.setAttribute("maplist", maplist);
 		} else {
 			System.out.println("沒有數據");
@@ -242,5 +243,27 @@ public class UserManageHandle {
 		return mav;
 
 	}
-	
+
+	// 重名验证
+	@RequestMapping(value = "/checkPwd.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String checkPwd(HttpServletRequest request, String pwd) {
+		Tb_user user = (Tb_user) request.getSession().getAttribute("user");
+		String encryption = Encryption.getResult(pwd);
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", user.getUser_id());
+		map.put("pwd", encryption);
+		return tbUserBiz.checkPwd(map);
+	}
+
+	// 重名验证
+	@RequestMapping(value = "/changePwd.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String changePwd(HttpServletRequest request,String pwd) {
+		Tb_user user = (Tb_user) request.getSession().getAttribute("user");
+		String encryption = Encryption.getResult(pwd);
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", user.getUser_id());
+		map.put("pwd",encryption);
+		return tbUserBiz.changePwd(map);
+	}
+
 }
