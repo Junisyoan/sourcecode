@@ -111,4 +111,7 @@ public interface CompanyMapper {
 	 * @return	公司信息
 	 */
 	public List<Company> queryByAccount(String account);
+
+	//退费
+	public boolean Refund(int companyid, double deposit);
 }
