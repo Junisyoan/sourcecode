@@ -144,4 +144,12 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 			return "余额不足";
 		}
 	}
+
+	@Override
+	public boolean Refund(int companyid, double deposit) {
+		// TODO Auto-generated method stub
+		return companyMapper.Refund(companyid,deposit);
+	}
+
+
 }
