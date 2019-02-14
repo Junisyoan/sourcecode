@@ -47,7 +47,7 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 
 	@Override
 	public boolean insertRelation(int bid, List<Patient> pList) {
-		
+		System.out.println("创建体检人员和账单关系表"+pList);
 		int num = nurseMapper.insertBatchRelation(bid, pList);
 		if (pList.size()==num) {
 			System.out.println("体检人员和账单关系表建立成功");
