@@ -49,10 +49,9 @@ public interface NurseBiz {
 	
 	/**
 	 * 查询待审核文件列表
-	 * @param pageNum	页码
 	 * @return	文件列表
 	 */
-	public List<CompanyFile> queryCheckFile(String pageNum);
+	public List<CompanyFile> queryCheckFile();
 
 	/**
 	 * 登录查询
