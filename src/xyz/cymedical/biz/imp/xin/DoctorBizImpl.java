@@ -29,8 +29,8 @@ public class DoctorBizImpl  implements DoctorBiz {
 	}
 
 	@Override
-	public boolean receive(int patient_project_id) {
-		return doctorMapper.receive(patient_project_id);
+	public boolean receive(int patient_project_id,int userid) {
+		return doctorMapper.receive(patient_project_id,userid);
 	}
 
 	@Override
@@ -67,6 +67,13 @@ public class DoctorBizImpl  implements DoctorBiz {
 	public List<Tb_menu> getMyMenu(int user_id, int role_dept_id) {
 		// TODO Auto-generated method stub
 		return doctorMapper.getMyMenu(user_id,role_dept_id);
+	}
+
+	//将项目结算状态改为已退费
+	@Override
+	public boolean BalanceChange(int patient_project_id) {
+		// TODO Auto-generated method stub
+		return doctorMapper.BalanceChange(patient_project_id);
 	}
 
 
