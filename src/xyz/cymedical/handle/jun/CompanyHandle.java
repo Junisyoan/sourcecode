@@ -318,7 +318,7 @@ public class CompanyHandle {
 					if (companyFileBiz.insertFile(insertFile)) {
 						System.out.println("写入成功"+file.getName());
 
-						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件成功"));
+						response.getWriter().println(ResponseTools.returnMsgAndRedirect("上传文件成功", "<%=path %>company/getUpFilePath.handle"));
 					} else {
 						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
 					}

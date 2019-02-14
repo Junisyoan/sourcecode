@@ -56,6 +56,7 @@ public class BillerBizImpl extends BaseImpl implements BillerBiz {
 
 	@Override
 	public boolean updateBillerCreate(String bid) {
+		System.out.println("修改账单状态");
 		if (billerMapper.updateBillerCreate(bid)) {
 			isUpdate=true;
 			System.out.println("账单状态修改成功");

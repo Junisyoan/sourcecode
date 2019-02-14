@@ -164,12 +164,13 @@ public class NurseHandle {
 			String bid) {
 		
 		response.setCharacterEncoding("utf-8");
+		System.out.println("生成导检单："+bid);
 		//取得文件信息
 		companyFile = companyFileBiz.queryFileByBillerId(bid);
 		
 		//	获取体检人员列表
 		List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
-		
+		System.out.println(patientList);
 		//获得公司存储路径
 		String path = companyFile.getFpath();
 		File file = new File(path);
@@ -180,7 +181,7 @@ public class NurseHandle {
 		for(int i = 0;i<patientList.size();i++) {
 			BarCodeTools.createBarCode(path, patientList.get(i).getCode(), imgFormat);
 		}
-		
+		System.out.println("条形码生成成功");
 		try {
 			//	插入病人
 			List<Patient> pList = patientBiz.insertByBatch(patientList);

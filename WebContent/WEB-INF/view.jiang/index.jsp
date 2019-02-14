@@ -254,11 +254,11 @@
 	<div class="change_Pass_style" id="change_Pass">
 		<ul class="xg_style">
 			<li><label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label><input
-				name="原密码" type="password" class="" id="password"></li>
+				name="原密码" type="password" class="" id="password" onblur="checkPwd()"/></li>
 			<li><label class="label_name">新&nbsp;&nbsp;密&nbsp;码</label><input
-				name="新密码" type="password" class="" id="Nes_pas"></li>
+				name="新密码" type="password" class="" id="Nes_pas"/></li>
 			<li><label class="label_name">确认密码</label><input name="再次确认密码"
-				type="password" class="" id="c_mew_pas"></li>
+				type="password" class="" id="c_mew_pas"/></li>
 
 		</ul>
 		<!--       <div class="center"> <button class="btn btn-primary" type="button" id="submit">确认修改</button></div>-->
@@ -299,7 +299,33 @@
 	<script src="<%=path%>assets/layer/layer.js" type="text/javascript"></script>
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
-		jQuery(document).ready(
+	var check;
+	function checkPwd(){
+		if($("#password").val() == ""){
+			return;
+		}
+		$.ajax({
+			url:"<%=path%>usermanage/checkPwd.handle",
+			type:"POST",
+			dataType:"text",
+			data:{
+				pwd:$("#password").val()
+			},
+			success:function(msg){
+				if(msg == "error"){
+					check = 0;
+					layer.alert('密码输入有误!',{title: '提示框',icon:0,});
+				}else{
+					check = 1;
+				} 
+			},
+			error : function() {
+				alert("异常！");
+			}
+		});
+	}
+	
+	jQuery(document).ready(
 				function() {
 					//初始化宽度、高度    
 					$("#main-container").height($(window).height() - 76);
@@ -400,6 +426,14 @@
 								});
 								return false;
 							}
+							if (check == 0) {
+								layer.alert('原密码有误!', {
+									title : '提示框',
+									icon : 0,
+
+								});
+								return false;
+							}
 							if ($("#Nes_pas").val() == "") {
 								layer.alert('新密码不能为空!', {
 									title : '提示框',
@@ -426,16 +460,24 @@
 
 								});
 								return false;
-							} else {
-								var oldpwd = document.getElementById("password").value;
-								var newpwd = document.getElementById("Nes_pas").value;
-								location.href = "<%=path%>user/modify.handle?oldpwd="+oldpwd+"&newpwd="+newpwd;
-								/*layer.alert('修改成功！', {
-									title : '提示框',
-									icon : 1,
-								});
-								layer.close(index);*/
-							}
+							} 
+							$.ajax({
+								url:"<%=path%>usermanage/changePwd.handle",
+								type:"POST",
+								dataType:"text",
+								data:{
+									"pwd":$("#Nes_pas").val()
+								},
+								success:function(msg){
+									alert(msg);
+					    			if(msg == "密码修改成功"){
+					    				layer.close(index);
+					    			}
+								},
+								error:function(){
+									alert("异常");
+								}
+							});
 						}
 					});
 				});
@@ -444,9 +486,7 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>
-		backlogin.jsp";
-
+				window.top.location.href = "<%=path%>user/exit.handle";
 			});
 		});
 	</script>

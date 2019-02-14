@@ -31,7 +31,9 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 		
 		for (int i = 0; i < listRecord.size(); i++) {
 			patient = listRecord.get(i);
+			System.out.println("准备插入："+patient);
 			if (patientMapper.insertPatient(patient)) {
+				System.out.println(patient.getPaitent_id());
 				isUpdate = true;
 				listRecord.get(i).setPaitent_id(patient.getPaitent_id());
 			} else {
@@ -65,6 +67,12 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 	public List<Patient> queryadvise(String name, String time) {
 		// TODO Auto-generated method stub
 		return patientMapper.queryadvise(name, time);
+	}
+
+	@Override
+	public List<Patient> queryByAccount(String account, String name, String time) {
+		// TODO Auto-generated method stub
+		return patientMapper.queryByAccount(account, name, time);
 	}
 
 }

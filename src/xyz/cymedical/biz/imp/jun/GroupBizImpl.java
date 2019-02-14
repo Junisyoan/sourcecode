@@ -44,6 +44,7 @@ public class GroupBizImpl extends BaseImpl implements GroupBiz {
 		group.setCompany_id(cid);
 		//创建团检表
 		isUpdate = groupMapper.insert(group);
+		System.out.println(group.getGroup_id());
 		if (isUpdate) {
 			//创建关联表
 			isUpdate = groupMapper.insertFileGroup(fid, group.getGroup_id());

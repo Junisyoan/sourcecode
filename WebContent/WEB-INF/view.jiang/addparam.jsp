@@ -18,7 +18,7 @@
 		<p align="center">
 			上级参数ID：<input name="pid" type="text" />
 		</p>
-		<p style="margin-left: 472px;">
+		<p style="margin-left: 567px;">
 			参数名字：<input name="name" type="text" />
 		</p>
 		<p align="center">

@@ -59,7 +59,7 @@
 				<div class="title_name">操作</div>
 				<form method="post" action="<%=path%>patient/findpatientall.handle">
 					<input type="button" id="pass" onclick="passFile('${fid}');" value="通过" />
-					<input type="button" id="invalid" onclick="invalid('${fid}');" value="不合格" />
+					<input type="button" id="invalid" onclick="invalidFile('${fid}');" value="不合格" />
 				</form>
 			</div>
 		</div>
@@ -88,7 +88,7 @@ function passFile(fid){
 		
 	});
 }
-function invalid(fid){
+function invalidFile(fid){
 	$.ajax({
 		type:"post",
 		dataType:"text",

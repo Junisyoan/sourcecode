@@ -4,17 +4,17 @@
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyFileMapper">
 <!-- 删除关联信息 -->
-	<select id="delFileAndGroup" parameterType="int">
-		delete from tb_file_group where file_id=#{fid}
+	<delete id="delFileAndGroup" parameterType="int">
+		delete from tb_file_group where file_id=#{fid};
 		delete from tb_file where file_id = #{fid}
-	</select>
+	</delete>
 <!-- 查询文件关联 -->
 	<select id="queryFileGroup" parameterType="int" resultType="int">
 		select count(*) from tb_file_group where file_id = #{fid}
 	</select>
 <!-- 根据记账表id找文件 -->
 	<select id="queryFileByBillerId" resultType="xyz.cymedical.entity.jun.CompanyFile">
-		select * from tb_file where file_id = (select file_id from tb_group where group_id = (select group_id from tb_biller where biller_id = #{bid}))
+		select * from tb_file where file_id = (select file_id from tb_file_group where group_id = (select group_id from tb_biller where biller_id = #{bid}))
 	</select>
 <!-- 查询已审核文件列表 -->
 	<select id="queryPassFileList" resultType="xyz.cymedical.entity.jun.CompanyFile">
@@ -22,7 +22,7 @@
 	</select>
 
 <!-- 修改文件状态 -->
-	<update id="updateFileState" parameterType="int">
+	<update id="updateFileState">
 		update tb_file set cstate = #{cstate} where file_id = #{fid}
 	</update>
 <!-- 删除文件 -->

@@ -32,7 +32,8 @@
 		<div class="gys_style">
 			<div class="Manager_style">
 				<div class="title_name">体检人报告打印</div>
-				<form method="post" action="<%=path%>patient/printpatient.handle">
+				<form method="post"
+					action="<%=path%>patient/printcompanypatient.handle">
 					<ul class="search_content clearfix">
 						<li style="text-align: center;">姓名<input name="name"
 							type="text" class="text_add" />
