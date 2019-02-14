@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.mapper.ctx.PatientMapper;
 
@@ -23,6 +25,8 @@ public class PatientHandle {
 	private List<Patient> patientlist2 = new ArrayList<Patient>();
 	private List<Patient> patientlist3 = new ArrayList<Patient>();
 	private List<Patient> patientlist4 = new ArrayList<Patient>();
+
+	private Company company; // 公司信息
 
 	public PatientHandle() {
 
@@ -62,7 +66,7 @@ public class PatientHandle {
 
 	}
 
-	// 打印界面显示
+	// 医院打印界面显示
 	@RequestMapping(value = "/showpatient.handle")
 	public ModelAndView showpatient() {
 		ModelAndView mav = new ModelAndView();
@@ -71,7 +75,16 @@ public class PatientHandle {
 
 	}
 
-	// 体检报告人查询
+	// 公司打印界面显示
+	@RequestMapping(value = "/showcompanypatient.handle")
+	public ModelAndView showcompanypatient() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/printcompany");
+		return mav;
+
+	}
+
+	// 医院体检报告人查询
 	@RequestMapping(value = "/printpatient.handle")
 	public ModelAndView printpatient(String name, String time) {
 
@@ -86,7 +99,24 @@ public class PatientHandle {
 
 	}
 
-	// 体检报告人查询
+	// 公司体检报告人查询
+	@RequestMapping(value = "/printcompanypatient.handle")
+	public ModelAndView printcompanypatient(HttpServletRequest req, String name, String time) {
+
+		company = (Company) req.getSession().getAttribute("userCompany");
+
+		patientlist = patientMapper.queryByAccount(company.getAccount(), name, time);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/printcompany");
+		if (patientlist.size() > 0) {
+			mav.addObject("patientlist", patientlist);
+		}
+		return mav;
+
+	}
+
+	// 体检报告人打印
 	@RequestMapping(value = "/print.handle")
 	public ModelAndView print(String name, String time) {
 
@@ -106,6 +136,7 @@ public class PatientHandle {
 		return mav;
 	}
 
+	// 显示体检人信息
 	@RequestMapping(value = "/showmessage.handle")
 	public ModelAndView showmessage(String name, String time) {
 
@@ -119,6 +150,7 @@ public class PatientHandle {
 		return mav;
 	}
 
+	// 显示项目信息
 	@RequestMapping(value = "/showproject.handle")
 	public ModelAndView showproject(String name, String time) {
 
@@ -132,6 +164,7 @@ public class PatientHandle {
 		return mav;
 	}
 
+	// 显示小结信息
 	@RequestMapping(value = "/showbrief.handle")
 	public ModelAndView showbrief(String name, String time) {
 
@@ -145,6 +178,7 @@ public class PatientHandle {
 		return mav;
 	}
 
+	// 显示总结信息
 	@RequestMapping(value = "/showsummarize.handle")
 	public ModelAndView showsummarize(String name, String time) {
 
@@ -158,6 +192,7 @@ public class PatientHandle {
 		return mav;
 	}
 
+	// 体检报告预览
 	@RequestMapping(value = "/showall.handle")
 	public ModelAndView showall(String name, String time) {
 

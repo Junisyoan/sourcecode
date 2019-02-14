@@ -24,5 +24,7 @@ public interface LogCompanyBiz {
 	public boolean insertLog(int cid,String op,String deposit,String t);
 	
 	public List<LogCompany> queryByName(String name);
+	
+	public List<LogCompany> queryAll();
 
 }

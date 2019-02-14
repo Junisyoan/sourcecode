@@ -65,4 +65,10 @@
 		select * from tb_company where account=#{account}
 	</select>
 	
+<!--  -->
+	<update id="Refund">
+		update tb_company set deposit=#{1} where company_id=#{0}
+	</update>
+	
+	
 </mapper> 
