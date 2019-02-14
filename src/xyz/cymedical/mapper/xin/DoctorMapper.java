@@ -25,7 +25,7 @@ public interface DoctorMapper {
 	 * @return	细项列表
 	 */
 	//项目接收
-	public boolean receive(int patient_project_id);
+	public boolean receive(int patient_project_id,int userid);
 
 	//获取项目列表
 	public List<Map<String,Object>> findMyProject(String onecode);
@@ -47,4 +47,7 @@ public interface DoctorMapper {
 
 	//获取用户菜单
 	public List<Tb_menu> getMyMenu(int user_id, int role_dept_id);
+
+	//修改项目状态为已退费
+	public boolean BalanceChange(int patient_project_id);
 }
