@@ -17,6 +17,13 @@ public interface NurseBiz {
 	
 
 	/**
+	 * 创建体检人套餐关系表
+	 * @param patients	体检人列表
+	 * @return	是否成功
+	 */
+	public boolean insertPaitentCombo(List<Patient> patients,String bid);
+	
+	/**
 	 * 打印导检单
 	 * @param bid	记账表id
 	 * @return	导检单列表
@@ -42,10 +49,9 @@ public interface NurseBiz {
 	
 	/**
 	 * 查询待审核文件列表
-	 * @param pageNum	页码
 	 * @return	文件列表
 	 */
-	public List<CompanyFile> queryCheckFile(String pageNum);
+	public List<CompanyFile> queryCheckFile();
 
 	/**
 	 * 登录查询
