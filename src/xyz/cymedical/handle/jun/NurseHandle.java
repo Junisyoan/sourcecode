@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +35,10 @@ import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.biz.jun.GroupBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
+import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.biz.zsc.ComboBiz;
 import xyz.cymedical.entity.jun.Biller;
+import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.entity.jun.Nurse;
@@ -83,6 +86,14 @@ public class NurseHandle {
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
 	
+	
+	private List<Map<String,Object>> plist; //项目列表
+	
+	
+	@Resource
+	private DoctorBiz doctorbiz;//医生业务
+	
+	private String mycode;
 	/*
 	 * 已开单账单再次开单
 	 */
@@ -692,5 +703,116 @@ public class NurseHandle {
 		}
 
 	}
+	
+	
+	
+	/*
+	 * toRefund xinyang
+	 */
+	@RequestMapping(value = "/toRefund.handle")
+	public ModelAndView toRefund(HttpServletRequest req) {
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/Refund_receive");
+		return mav;
+	}
+	/*
+	 * findProject xinyang
+	 */
+	// 查询一维码对应病人的导检单
+		@RequestMapping(value = "/findProject.handle")
+		public ModelAndView findProject(String onecode) {
+
+			mycode=onecode;
+			System.out.println("onecode=" + onecode);
+			System.out.println(doctorbiz.findMyProject(onecode));
+			
+			String flag="true";//初始化flag，用于控制状态
+			
+			//根据条码获取项目列表
+			plist=doctorbiz.findMyProject(onecode);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("prolist", plist);
+			
+			if(plist!=null && plist.size()>0) {
+				
+				//若存在退费项目，返回false
+				for (int i = 0; i < plist.size(); i++) {
+					if(plist.get(i).get("balance").equals("已退费")) {
+						flag="false";
+						break;
+					}
+				}
+				
+				mav.addObject("flag", flag);
+				mav.addObject("patient", plist.get(0));//该列表已包含病人信息
+			}
+			mav.setViewName("WEB-INF/medical_workstation/Refund_receive");
+			return mav;
+
+		}
+		
+		
+		//退费操作
+		@RequestMapping(value = "/Refund.handle")
+		public ModelAndView Refund() {
+			
+			//根据条码获取项目列表
+			plist=doctorbiz.findMyProject(mycode);
+			System.out.println("plist2="+plist);
+			//初始化退费金额
+			Double sum = 0.0;
+			
+			for (int i = 0; i < plist.size(); i++) {
+				Map m=plist.get(i);
+				if(m.get("state").equals("未接收")) {
+					
+					//将已结算项目改为已退费项目
+					Integer id=Integer.parseInt(m.get("patient_project_id").toString());
+					System.out.println(id);
+					doctorbiz.BalanceChange(id);
+					
+					//累计未接收项目的金额
+					sum=sum+Double.parseDouble(m.get("price").toString());
+				}
+			}
+			
+			System.out.println("sum="+sum);
+			
+			//找到公司信息
+			int id=Integer.parseInt(plist.get(0).get("company_id").toString());
+			Company company=companyBiz.findCompany(id);
+			
+			//当前余额
+			double deposit=company.getDeposit();
+			deposit=deposit+sum;
+			
+			companyBiz.Refund(company.getCompany_id(),deposit);
+			
+			//根据条码获取项目列表
+			plist=doctorbiz.findMyProject(mycode);
+			
+			//插入日志
+			logCompanyBiz.insertLog(company.getCompany_id(),    
+					"退费", 
+					""+sum, 
+					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("prolist", plist);
+			mav.addObject("flag", "false");
+			mav.addObject("patient", plist.get(0));
+			
+			mav.setViewName("WEB-INF/medical_workstation/Refund_receive");
+			return mav;
+
+		}
+	
+	
+	
+	
+	
 	
 }

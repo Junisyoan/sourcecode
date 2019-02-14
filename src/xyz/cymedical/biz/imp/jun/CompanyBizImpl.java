@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.mapper.jun.CompanyFileMapper;
 import xyz.cymedical.mapper.jun.CompanyMapper;
 
@@ -151,6 +152,12 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 	public boolean Refund(int companyid, double deposit) {
 		// TODO Auto-generated method stub
 		return companyMapper.Refund(companyid,deposit);
+	}
+
+	@Override
+	public Company findCompany(int company_id) {
+		// TODO Auto-generated method stub
+		return companyMapper.findCompany(company_id);
 	}
 
 

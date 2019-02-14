@@ -65,10 +65,14 @@
 		select * from tb_company where account=#{account}
 	</select>
 	
-<!--  -->
+<!-- 退费 -->
 	<update id="Refund">
 		update tb_company set deposit=#{1} where company_id=#{0}
 	</update>
 	
+<!-- 按id查找公司 -->
+	<select id="findCompany" parameterType="int" resultType="xyz.cymedical.entity.jun.Company">
+		select * from tb_company where company_id=#{company_id}
+	</select>
 	
 </mapper> 

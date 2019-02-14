@@ -105,9 +105,7 @@
 								name="<%=path %>company/getDepositDetail.handle" title="费用管理" class="iframeurl"><i
 									class="icon-double-angle-right"></i>费用管理</a></li>
 									
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/toRefund.handle" title="团检退费" class="iframeurl"><i
-									class="icon-double-angle-right"></i>团检退费</a></li>
+
 									
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>company/getBillerNoPay.handle" title="未结算账单" class="iframeurl"><i

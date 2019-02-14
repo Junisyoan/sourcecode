@@ -30,7 +30,7 @@
 				<div class="title_name">项目读取</div>
 				
 				<!-- 查询条码号 -->
-				<form method="post" action="<%=path %>company/findProject.handle">
+				<form method="post" action="<%=path %>nurse/findProject.handle">
 					<ul class="search_content clearfix">
 						<li><label class="lf">条码号</label><input name="onecode" type="text"
 							class="text_add" />
@@ -49,6 +49,10 @@
 						<td>电话号码：${patient.phone }&nbsp;&nbsp;</td>
 						<td>检查号：${patient.check_num }</td>
 					</tr>
+					<tr>
+						<td>公司名称：${patient.cname }&nbsp;&nbsp;</td>
+						<td>余额：${patient.deposit }</td>
+					</tr>
 					</table>
 					</div>
 					
@@ -57,7 +61,6 @@
 
 			<div class="Manager_style">
 				<span class="title_name">体检信息</span>
-			<form method="post" action="<%=path %>doctor/findProject.handle">
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
@@ -95,10 +98,9 @@
 						</c:forEach>
 					</tbody>
 				 </table>
-				</form>
 				<c:if test="${flag=='true' }">
 					<div style="width:100px;margin:0 auto">
-						<a href="<%=path %>company/Refund.handle" onclick="return confirm('确定退费么')"><input type="button" class="btn btn-warning" value="退费"/></a>
+						<a href="<%=path %>nurse/Refund.handle" onclick="return confirm('确定退费么')"><input type="button" class="btn btn-warning" value="退费"/></a>
 					</div>
 				</c:if>
 				<c:if test="${flag=='false' }">
