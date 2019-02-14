@@ -10,9 +10,16 @@
 			+ request.getContextPath() + "/";
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
+<!--[if IE 7]>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+ <![endif]-->
+<link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
-<script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
 <title>人员列表</title>
 </head>
 
@@ -52,7 +59,7 @@
 <script type="text/javascript">
 
 function createCheckpage(bid,batch){
-	var s = confirm("是否开单？批次："+batch);
+	var s = confirm("是否生成导检单？批次："+batch);
 	if(s){
 		location.href="<%=path%>nurse/getCheckPage.handle?bid="+bid;
 	}

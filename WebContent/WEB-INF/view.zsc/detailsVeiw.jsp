@@ -23,7 +23,7 @@
   <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
   <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
   <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
-    <title>添加细项</title>
+    <title>细项管理</title>
   <style type="text/css">
 	#aFrom input {
       margin-top:10px;
@@ -34,7 +34,7 @@
 <div class="page-content">
 <div class="gys_style">
  <div class="Manager_style">
-   <div class="title_name">添加细项</div>
+   <div class="title_name">细项查询</div>
     <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加细项</button>
      <div class="Add_Manager_style">
      <form method="post" id = "aFrom" method="post">
@@ -123,33 +123,42 @@
 </div>
  </div>   
 </div>
-<table id="test" class="table table-striped table-bordered" style="60%">   
-      <thead>
-       <tr>
-        	<th>名称</th>
-			<th>计量单位</th>
-			<th>下限</th>
-			<th>上限</th>
-			<th>类型</th>
-			<th>操作</th>
-       </tr>
-      </thead>
-      <tbody id = "detailBody">
-		<c:forEach items="${details}" var = "d" varStatus="s">
-		<tr>
-			<td>${d.name}</td>
-			<td>${d.unit}</td>
-			<td>${d.min}</td>
-			<td>${d.max}</td>
-			<td>${d.type}</td>
-			<td>
-           		<button type="button" class="btn btn-warning" onclick="remove()" name="${d.detail_id}">删除</button>
-          		<button type="button" class="btn btn-primary" onclick="change()" name="${d.detail_id}">修改</button>
-			</td>
-		</tr>
-		</c:forEach>
-	  </tbody>
-    </table>
+	<div class="page-content">
+		<div class="Manager_style">
+			<div class="title_name">细项列表</div>
+			<table id="test" class="table table-striped table-bordered" style="">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>名称</th>
+						<th>计量单位</th>
+						<th>下限</th>
+						<th>上限</th>
+						<th>类型</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="detailBody">
+					<c:forEach items="${details}" var="d" varStatus="s">
+						<tr>
+							<td>${s.count}</td>
+							<td>${d.name}</td>
+							<td>${d.unit}</td>
+							<td>${d.min}</td>
+							<td>${d.max}</td>
+							<td>${d.type}</td>
+							<td>
+								<button type="button" class="btn btn-warning" onclick="remove()"
+									name="${d.detail_id}">删除</button>
+								<button type="button" class="btn btn-primary" onclick="change()"
+									name="${d.detail_id}">修改</button>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	$(function(){
@@ -176,7 +185,7 @@ function show(details){
 	$("#detailBody").empty();  
 	
 	for(var i = 0;i < details.length;i++){
-		
+		var td0=$("<td></td>").text(i+1);
 		var td1=$("<td></td>").text(details[i].name);
 		var td2=$("<td></td>").text(details[i].unit);
 		var td3=$("<td></td>").text(details[i].max);
@@ -190,7 +199,7 @@ function show(details){
 		var tr=$("<tr></tr>");
 		
 		$(td6).append(input1,input2);  
-		$(tr).append(td1,td2,td3,td4,td5,td6); 
+		$(tr).append(td0,td1,td2,td3,td4,td5,td6); 
 		$("#detailBody").append(tr);
 	}
 }

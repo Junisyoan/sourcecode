@@ -23,7 +23,7 @@
   <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
   <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
   <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
-    <title>添加细项</title>
+    <title>账号管理</title>
    <style type="text/css">
 	#aFrom input {
       margin-top:10px;
@@ -34,8 +34,8 @@
 <div class="page-content">
 <div class="gys_style">
  <div class="Manager_style">
-   <div class="title_name">添加账号</div>
-    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加细项</button>
+   <div class="title_name">查询账号</div>
+    <button type="button" class="<%=path%>btn btn-primary" id="add_butn">添加账号</button>
      <div class="Add_Manager_style">
      <form method="post" id = "aFrom" method="post">
      		公司名	<input type="text" name="name"/>
@@ -137,48 +137,58 @@
 </div>
  </div>   
 </div>
-<table id="test" class="table table-striped table-bordered" style="60%">   
-      <thead>
-       <tr>
-			<th>公司名</th>
-			<th>账户名</th>
-			<th>电话号码</th>
-			<th>地址</th>
-			<th>领队人</th>
-			<th>领队人电话</th>
-			<th>账户金额</th>
-			<th>状态</th>
-			<th>操作</th>
-		</tr>
-      </thead>
-      <tbody id = "companyBody">
-      	<c:forEach items="${companys}" var = "c">
-		<tr>
-			<td>${c.name}</td>
-			<td>${c.account}</td>
-			<td>${c.tel}</td>
-			<td>${c.address}</td>
-			<td>${c.people}</td>
-			<td>${c.phone}</td>
-			<td>${c.deposit}</td>
-			<td>${c.state}</td>
-			<td>
-				<c:choose>
-					<c:when test="${c.state == '禁用'}">
-						<button type="button" class="btn btn-warning" onclick="stateChange()" name="${c.company_id}">启用</button>
-					</c:when>
-					<c:otherwise>
-						<button type="button" class="btn btn-warning" onclick="stateChange()" name="${c.company_id}">禁用</button>
-					</c:otherwise>
-				</c:choose>
-				<button type="button" class="btn btn-warning" onclick="remove()" name="${c.company_id}">删除</button>
-          		<button type="button" class="btn btn-primary" onclick="change()" name="${c.company_id}">修改</button>
-				<button type="button" class="btn btn-warning" onclick="resetPwd()" name="${c.company_id}">重置密码</button>
-			</td>
-		</tr>
-		</c:forEach>
-	  </tbody>
-    </table>
+	<div class="page-content">
+		<div class="Manager_style">
+			<div class="title_name">账号列表</div>
+			<table id="test" class="table table-striped table-bordered" style="">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>公司名</th>
+						<th>账户名</th>
+						<th>电话号码</th>
+						<th>地址</th>
+						<th>领队人</th>
+						<th>领队人电话</th>
+						<th>账户金额</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="companyBody">
+					<c:forEach items="${companys}" var="c" varStatus="s">
+						<tr>
+							<td>${s.count}</td>
+							<td>${c.name}</td>
+							<td>${c.account}</td>
+							<td>${c.tel}</td>
+							<td>${c.address}</td>
+							<td>${c.people}</td>
+							<td>${c.phone}</td>
+							<td>${c.deposit}</td>
+							<td>${c.state}</td>
+							<td><c:choose>
+									<c:when test="${c.state == '禁用'}">
+										<button type="button" class="btn btn-warning"
+											onclick="stateChange()" name="${c.company_id}">启用</button>
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="btn btn-warning"
+											onclick="stateChange()" name="${c.company_id}">禁用</button>
+									</c:otherwise>
+								</c:choose>
+								<button type="button" class="btn btn-warning" onclick="remove()"
+									name="${c.company_id}">删除</button>
+								<button type="button" class="btn btn-primary" onclick="change()"
+									name="${c.company_id}">修改</button>
+								<button type="button" class="btn btn-warning"
+									onclick="resetPwd()" name="${c.company_id}">重置密码</button></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	$(function(){
@@ -266,6 +276,7 @@ function show(companys){
 	$("#companyBody").empty();  
 	
 	for(var i = 0;i < companys.length;i++){
+		var td0=$("<td></td>").text(i+1);
 		var td1=$("<td></td>").text(companys[i].name);
 		var td2=$("<td></td>").text(companys[i].account);
 		var td3=$("<td></td>").text(companys[i].tel);
@@ -290,7 +301,7 @@ function show(companys){
 		var tr=$("<tr></tr>");
 		
 		$(td9).append(input1,input2,input3,input4);  
-		$(tr).append(td1,td2,td3,td4,td5,td6,td7,td8,td9); 
+		$(tr).append(td0,td1,td2,td3,td4,td5,td6,td7,td8,td9); 
 		$("#companyBody").append(tr);
 	}
 }

@@ -27,7 +27,7 @@
 	<div class="page-content">
 		<div class="Manager_style">
 			<span class="title_name">人员列表</span>
-			<input type="button" value="添加人员" onclick="javascript:$('#addDialog').dialog('open');"/>
+			<input type="button" value="临时添加人员" onclick="javascript:$('#addDialog').dialog('open');"/>
 			<table id="patientTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
@@ -61,8 +61,7 @@
 	</div>
 	<div id="opera">
 		<div>
-			<button id="choosed" onclick="chooseOpen('${fid}');">本页选中生成账单</button>
-			<button id="all" onclick="allOpen('${fid}');">全部生成</button>
+			<button id="all" onclick="allOpen('${fid}');">生成</button>
 		</div>
 	</div>
 	<!-- 弹出框 -->
@@ -170,9 +169,12 @@ $(function(){
 			url:"<%=path%>company/queryCombo.handle?comboName="+comboName,
 			dataType:"text",
 			success:function(retData){
-				if(retData!=""){
-					alert(retData);
+				if(retData=="1"){
+					alert("生成成功");
+				}else if(retData=="0"){
+					alert("生成失败");
 				}
+					location.href="<%=path %>nurse/getBillerNoPay.handle";
 			},
 			error:function(){
 				alert("服务器无响应");

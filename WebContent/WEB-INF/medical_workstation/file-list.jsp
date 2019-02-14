@@ -19,7 +19,7 @@
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path %>js/jquery.dataTables.min.js"></script>
 <script src="<%=path %>js/datatables.bootstrap.min.js"></script>
-<title>项目接收</title>
+<title>文件列表</title>
 </head>
 
 <body>

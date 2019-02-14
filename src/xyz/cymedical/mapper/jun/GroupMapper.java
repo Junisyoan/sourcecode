@@ -16,6 +16,14 @@ import xyz.cymedical.entity.jun.Group;
 public interface GroupMapper {
 	
 	/**
+	 * 创建关联表
+	 * @param fid	文件id
+	 * @param gid	团检表id
+	 * @return	是否成功
+	 */
+	public boolean insertFileGroup(@Param("fid")int fid,@Param("gid")int gid);
+	
+	/**
 	 * 更新软件表信息
 	 * @param fid	文件表id
 	 * @param pnum	人数
@@ -35,12 +43,9 @@ public interface GroupMapper {
 	public Group queryGroupByFileId(int fid);
 	
 	/**
-	 * 生成团检表
-	 * @param cid	公司id
-	 * @param pnum	人数
+	 * 生成团检表，并返回自增id
+	 * @param group	团检表
 	 * @return	是否成功
 	 */
-	public boolean insert(
-			@Param("cid")int cid,
-			@Param("fid")int fid);
+	public boolean insert(Group group);
 }
