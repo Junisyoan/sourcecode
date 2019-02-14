@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
@@ -20,6 +21,7 @@ import xyz.cymedical.mapper.jun.CompanyMapper;
  * @version 1.0
  */
 
+@Transactional(rollbackFor=Exception.class)
 @Service("companyBiz")
 public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 
