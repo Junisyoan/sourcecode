@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+	pageEncoding="utf-8" import="java.util.*,java.text.*"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
+	String datetime = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()); //获取系统时间
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -68,7 +69,8 @@ input {
 						style="width: 410px; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</h4>
 				<h4 style="margin-left: 280px;">
-					团体序号: <input type="text" value="XXXXXXXX" disabled="disabled"
+					团体序号: <input type="text" value="${p.company_id}"
+						disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 					体检号码： <input type="text" value="${p.check_num}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
@@ -90,7 +92,7 @@ input {
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</h4>
 				<h4 style="margin-left: 330px;">
-					打印时间：<input type="text" value="XXXX-XX-XX" disabled="disabled"
+					打印时间：<input type="text" value="<%=datetime%>" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</h4>
 				<p>&nbsp;</p>
@@ -223,19 +225,23 @@ input {
 				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
-					<p>&nbsp;</p>
-					<h3 style="margin-left: 80px;">体检总结及建议</h3>
-					<p style="margin-left: 80px;">【综述】</p>
-					<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
-						<p style="margin-left: 100px;">${p3.n3}:${p3.resulttext}${p3.unit}</p>
-					</c:forEach>
-					<p style="margin-left: 80px;">【建议】</p>
-					<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
-						<p style="margin-left: 100px;">（${s4.index + 1}）${p4.guide}</p>
-					</c:forEach>
-					</div>
-					<h4 align="center">4</h4>
-					<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<h4 style="margin-left: 80px;">体检总结及建议</h4>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">【综述】</blockquote>
+				<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
+					<blockquote
+						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">${p3.n3}:${p3.resulttext}${p3.unit}</blockquote>
+				</c:forEach>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">【建议】</blockquote>
+				<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
+					<blockquote
+						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15 px; line-height: 1.5;">（${s4.index + 1}）${p4.guide}</blockquote>
+				</c:forEach>
+				</div>
+				<h4 align="center">4</h4>
+				<p>&nbsp;</p>
 				<div class="PageNext"></div>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
@@ -247,24 +253,30 @@ input {
 				</div>
 				<p>&nbsp;</p>
 				<hr style="width: 1200px;">
-					<p>&nbsp;</p>
-					<h3 style="margin-left: 80px;">生活健康保健</h3>
-					<p style="margin-left: 80px;">一、保持健康的生活方式</p>
-					<p style="margin-left: 100px;">（1）健康的饮食习惯：食物多样，谷类为主；适合吃季节性蔬菜；吃适量乳类、豆类制品；吃适量新鲜有鱗鱼、蛋、瘦肉，</p>
-					<p style="margin-left: 120px;">少吃肥肉和荤油；食量与活动量要平衡，监测体重，吃清淡少盐食物。</p>
-					<p style="margin-left: 100px;">（2）戒烟戒酒：不但要避免吸烟也要避免被动吸烟，不饮酒或饮少量红葡萄酒。</p>
-					<p style="margin-left: 100px;">（3）适量规律运动：能够预防很多慢性疾病，包括冠心病、高血压、糖尿病、骨质疏松等。</p>
-					<p style="margin-left: 100px;">（4）保持心理平衡：愉悦的心情更有益于健康。</p>
-					<p style="margin-left: 80px;">&nbsp;</p>
-					<p style="margin-left: 80px;">二、指导</p>
-					<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
-						<p style="margin-left: 100px;">（${s4.index + 1}）${p4.advise}</p>
-					</c:forEach>
-					<p>&nbsp;</p>
-					<p>&nbsp;</p>
-					<p>&nbsp;</p>
-					<h4 align="center">5</h4>
-					<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<h4 style="margin-left: 80px;">生活健康保健</h4>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">一、保持健康的生活方式</blockquote>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">（1）健康的饮食习惯：食物多样，谷类为主；适合吃季节性蔬菜；吃适量乳类、豆类制品；吃适量新鲜有鱗鱼、蛋、瘦肉，少吃肥肉和荤油；食量与活动量要平衡，监测体重，吃清淡少盐食物。</blockquote>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">（2）戒烟戒酒：不但要避免吸烟也要避免被动吸烟，不饮酒或饮少量红葡萄酒。</blockquote>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">（3）适量规律运动：能够预防很多慢性疾病，包括冠心病、高血压、糖尿病、骨质疏松等。</blockquote>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">（4）保持心理平衡：愉悦的心情更有益于健康。</blockquote>
+				<p style="margin-left: 80px;">&nbsp;</p>
+				<blockquote
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">二、指导</blockquote>
+				<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
+					<blockquote
+						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">（${s4.index + 1}）${p4.advise}</blockquote>
+				</c:forEach>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<h4 align="center">5</h4>
+				<p>&nbsp;</p>
 				<div class="PageNext"></div>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
@@ -275,48 +287,48 @@ input {
 					<h3>体检日期：${p.time}</h3>
 				</div>
 				<hr style="width: 1200px;">
-					<div class="Manager_style">
-						<span class="title_name">体检小结信息</span>
-						<table class="table table-striped table-bordered table-hover"
-							id="item">
-							<thead>
+				<div class="Manager_style">
+					<span class="title_name">体检小结信息</span>
+					<table class="table table-striped table-bordered table-hover"
+						id="item">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>体检人</th>
+								<th>套餐</th>
+								<th>项目</th>
+								<th>细项</th>
+								<th>结果</th>
+								<th>单位</th>
+								<th>参考值</th>
+								<th>体检时间</th>
+								<th>体检医生</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
 								<tr>
-									<th>序号</th>
-									<th>体检人</th>
-									<th>套餐</th>
-									<th>项目</th>
-									<th>细项</th>
-									<th>结果</th>
-									<th>单位</th>
-									<th>参考值</th>
-									<th>体检时间</th>
-									<th>体检医生</th>
+									<th>${s3.index + 1}</th>
+									<th>${p3.n1}</th>
+									<th>${p3.n4}</th>
+									<th>${p3.n3}</th>
+									<th>${p3.n2}</th>
+									<th>${p3.resulttext}</th>
+									<th>${p3.unit}</th>
+									<c:if test="${p3.min == null}">
+										<th>${p3.min}</th>
+									</c:if>
+									<c:if test="${p3.min != null}">
+										<th>${p3.min}~${p3.max}</th>
+									</c:if>
+									<th>${p3.time}</th>
+									<th>${p3.n5}</th>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
-									<tr>
-										<th>${s3.index + 1}</th>
-										<th>${p3.n1}</th>
-										<th>${p3.n4}</th>
-										<th>${p3.n3}</th>
-										<th>${p3.n2}</th>
-										<th>${p3.resulttext}</th>
-										<th>${p3.unit}</th>
-										<c:if test="${p3.min == null}">
-											<th>${p3.min}</th>
-										</c:if>
-										<c:if test="${p3.min != null}">
-											<th>${p3.min}~${p3.max}</th>
-										</c:if>
-										<th>${p3.time}</th>
-										<th>${p3.n5}</th>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<h4 align="center">6</h4>
-					</div>
+							</c:forEach>
+						</tbody>
+					</table>
+					<h4 align="center">6</h4>
+				</div>
 			</form>
 		</c:if>
 	</c:forEach>
