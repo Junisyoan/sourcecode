@@ -112,7 +112,6 @@ public class ExcelTools {
 						
 						//生成条码
 						String code = BarCodeTools.randomNumStr(13);
-						
 						// 添加进数据
 						patientList.add(
 								new Patient(
