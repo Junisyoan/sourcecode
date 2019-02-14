@@ -3,6 +3,7 @@ package xyz.cymedical.biz.imp.jun;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.mapper.jun.ComboCheckMapper;
@@ -13,7 +14,7 @@ import xyz.cymedical.mapper.jun.ComboCheckMapper;
 *	时间：下午10:18:12
 *	类说明：
 */
-
+@Transactional(rollbackFor=Exception.class)
 @Service("comboCheckBiz")
 public class ComboCheckBizImpl extends BaseImpl implements ComboCheckBiz {
 
