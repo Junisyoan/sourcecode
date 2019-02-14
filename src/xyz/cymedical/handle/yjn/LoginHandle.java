@@ -24,10 +24,10 @@ public class LoginHandle {
 
 	@Resource
 	public TbUserBiz tbUserBiz;
-	
+
 	@Resource
 	private DoctorBiz doctorbiz;
-	
+
 	private Tb_user userr;
 
 	private List<Tb_user> userlist = new ArrayList<>();
@@ -42,9 +42,9 @@ public class LoginHandle {
 		userlist = tbUserBiz.findUser(user);
 		userlist2 = tbUserBiz.findUserRole(user);
 
-		System.out.println("User"+userlist.size());
-		System.out.println("UserRole"+userlist2.size());
-		
+		System.out.println("User" + userlist.size());
+		System.out.println("UserRole" + userlist2.size());
+
 		if (userlist.size() > 0 && userlist2.size() > 0) {
 			result = "管理员";
 		} else {
@@ -61,25 +61,26 @@ public class LoginHandle {
 	public ModelAndView find(HttpServletRequest req) {
 
 		ModelAndView mav = new ModelAndView();
-		userr=(Tb_user) req.getSession().getAttribute("user");
-		
-		if(userr!=null) {
-			//用户对应菜单列表
-			List<Tb_menu> mlist = doctorbiz.getMyMenu(userr.getUser_id(),userr.getRole_dept_id());
+		userr = (Tb_user) req.getSession().getAttribute("user");
+
+		if (userr != null) {
+			// 用户对应菜单列表
+			List<Tb_menu> mlist = doctorbiz.getMyMenu(userr.getUser_id(), userr.getRole_dept_id());
 			mav.addObject("mlist", mlist);
 			mav.addObject("USER", userr);
 		}
-		
-		
-		
+
 		mav.setViewName("WEB-INF/view.jiang/index");
 		return mav;
 
 	}
 
 	@RequestMapping(value = "/modify.handle")
-	public ModelAndView modify(String oldpwd, String newpwd) {
+	public ModelAndView modify(String oldpwd, String newpwd, HttpServletRequest req) {
 		
+		userr = (Tb_user) req.getSession().getAttribute("user");
+
+		System.out.println(userr.getAccount());
 		System.out.println(oldpwd);
 		System.out.println(newpwd);
 
