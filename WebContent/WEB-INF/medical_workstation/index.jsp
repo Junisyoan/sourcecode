@@ -127,7 +127,7 @@
 								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询
 							</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>logcompany/findlogcompany.handle" title="团检单位对账"
+								name="<%=path%>logcompany/findalllogcompany.handle" title="团检单位对账"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检单位对账
 							</a></li>
 						</ul></li>

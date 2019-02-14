@@ -46,9 +46,12 @@ public interface PatientMapper {
 			@Param("code") String code);
 
 	public List<Patient> queryproject(@Param("name") String name, @Param("time") String time);
-	
+
 	public List<Patient> querybrief(@Param("name") String name, @Param("time") String time);
-	
+
 	public List<Patient> queryadvise(@Param("name") String name, @Param("time") String time);
+
+	public List<Patient> queryByAccount(@Param("account") String account, @Param("name") String name,
+			@Param("time") String time);
 
 }

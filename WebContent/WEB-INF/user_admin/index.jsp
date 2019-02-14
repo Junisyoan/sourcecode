@@ -116,7 +116,7 @@
 								name="<%=path %>company/getBillerHasPay.handle" title="已结算账单" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已结算账单</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
+								name="<%=path%>patient/showcompanypatient.handle" title="体检报告打印" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
 				</ul>

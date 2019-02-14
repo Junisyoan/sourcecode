@@ -41,39 +41,40 @@
 						</label> <label class="lf">参数名字<input name="name" type="text"
 								class="text_add" /></label>
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
-							<a href="<%=path%>param/showaddparam.handle"><button type="button" class="btn btn-primary"
-									class="btn_search">新增</button></a></li>
+							<a href="<%=path%>param/showaddparam.handle"><button
+									type="button" class="btn btn-primary" class="btn_search">新增</button></a></li>
 					</ul>
 				</form>
 			</div>
 		</div>
+	</div>
+	<div class="Manager_style">
+		<span class="title_name">参数信息</span>
+		<table class="table table-striped table-bordered table-hover"
+			id="item">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>参数ID</th>
+					<th>上级参数ID</th>
+					<th>参数名字</th>
+					<th>操作</th>
 
-		<div class="Manager_style">
-			<span class="title_name">参数信息</span>
-			<table class="table table-striped table-bordered table-hover" id="item">
-				<thead>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${paramlist}" var="p" varStatus="s">
 					<tr>
-						<th>序号</th>
-						<th>参数ID</th>
-						<th>上级参数ID</th>
-						<th>参数名字</th>
-						<th>操作</th>
-
+						<td>${s.index + 1}</td>
+						<td>${p.param_id}</td>
+						<td>${p.pid}</td>
+						<td>${p.name}</td>
+						<td><a
+							href="<%=path%>param/delparam.handle?param_id=${p.param_id}">删除</a></td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${paramlist}" var="p" varStatus="s">
-						<tr>
-							<td>${s.index + 1}</td>
-							<td>${p.param_id}</td>
-							<td>${p.pid}</td>
-							<td>${p.name}</td>
-							<td><a
-								href="<%=path%>param/delparam.handle?param_id=${p.param_id}">删除</a></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>
