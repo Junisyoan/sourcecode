@@ -30,9 +30,5 @@ public interface TbUserMapper {
 	
 	public List<Map<String,Object>> selUser(String depts, String users,  String phones ) ;
 	
-	public  List<Map<String,Object>> selectCompany(Map<String, Object> map);
-
-	public int checkPwd(Map<String, Object> map);
-
-	public int changePwd(Map<String, Object> map);  
+	public  List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 }

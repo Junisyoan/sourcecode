@@ -60,24 +60,4 @@ public class TbUserBizImp implements TbUserBiz{
 			return tbUserMapper.selectCompany(map);
 		 
 	}
-	@Override
-	public String checkPwd(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		int rt = tbUserMapper.checkPwd(map);
-		if (rt > 0) {
-			return "ok";
-		}else {
-			return "error";
-		}
-	}
-	@Override
-	public String changePwd(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		int rt = tbUserMapper.changePwd(map);
-		if (rt > 0) {
-			return "密码修改成功";
-		}else {
-			return "密码修改失败";
-		}
-	}
 }

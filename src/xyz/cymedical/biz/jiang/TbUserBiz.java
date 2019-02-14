@@ -27,10 +27,6 @@ public interface TbUserBiz {
 	
 	public List<Map<String,Object>> selUser(String depts, String users,  String phones );
 	
-	public List<Map<String,Object>> selectCompany(Map<String, Object> map);
-
-	public String checkPwd(Map<String, Object> map);
-
-	public String changePwd(Map<String, Object> map);  
+	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 	 
 }
