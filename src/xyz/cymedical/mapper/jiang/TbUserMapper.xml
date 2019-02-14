@@ -141,5 +141,12 @@
 			and c.name like '%${dept}%'
 		</if>
 	</select>
-
+	
+	<select id="checkPwd" parameterType = "map" resultType="int">
+		select count(*) from tb_user where user_id = #{id} and pwd = #{pwd}
+	</select>
+	
+	<update id="changePwd" parameterType = "map">
+		update tb_user set pwd = #{pwd} where user_id = #{id}
+	</update> 
 </mapper>

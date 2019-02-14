@@ -41,13 +41,14 @@ public class ProjectBiz {
 		}
 	}
 
-	@Log(action ="删除细项")
+	@Log(action ="删除项目")
 	public String deleteProject(int project_id) {
-		projectMapper.deleteProject(project_id);
+		int rt = projectMapper.deleteProject(project_id);
+		System.out.println(rt);
 		return "删除成功";
 	};
 
-	@Log(action ="修改细项")
+	@Log(action ="修改项目")
 	public String updateProject(int[] idArray, Project project) {
 		Parameter param = project.getParam();
 		int param_id = projectMapper.selectParamtId(param.getName());
