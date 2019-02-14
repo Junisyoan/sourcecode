@@ -15,7 +15,7 @@
 	</update>
 <!-- 查询团检表 -->
 	<select id="queryGroupByFileId" parameterType="int" resultType="xyz.cymedical.entity.jun.Group">
-		select g.* from tb_file_group fg,tb_group g where fg.file_id = 3 and fg.group_id = g.group_id;
+		select g.* from tb_file_group fg,tb_group g where fg.file_id = #{fid} and fg.group_id = g.group_id;
 	</select>
 <!-- 生成团检表 -->
 	<insert id="insert" useGeneratedKeys="true" keyProperty="group_id" parameterType="xyz.cymedical.entity.jun.Group">

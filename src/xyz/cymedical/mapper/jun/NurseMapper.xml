@@ -17,7 +17,7 @@
 	<select id="getCheckPage" parameterType="String" resultType="xyz.cymedical.entity.jun.Patient">
 	select p.name,p.sex,p.age,p.code, p.check_num,c.name cname,pr.name pname,par.name prname,d.name dname
 	from tb_patient_combo pac
-	LEFT JOIN tb_patient p ON pac.patient_id=p.patient_id and pac.biller_id = #{bid}
+	INNER JOIN tb_patient p ON pac.patient_id=p.patient_id and pac.biller_id = #{bid}
 	LEFT JOIN tb_combo c ON c.combo_id=pac.combo_id
 	LEFT JOIN tb_project_combo pc ON pc.combo_id=c.combo_id
 	LEFT JOIN tb_project pr ON pr.project_id=pc.project_id

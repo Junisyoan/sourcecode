@@ -111,7 +111,11 @@ function allOpen(fid){
 			dataType:"text",
 			url:"<%=path%>nurse/allOpen.handle?fid="+fid,
 			success:function(retData){
-				alert(retData);
+				if(retData=="1"){
+					alert("生成成功");
+				}else{
+					alert("生成失败");
+				}
 			},
 			error:function(){
 				alert('服务器无响应');

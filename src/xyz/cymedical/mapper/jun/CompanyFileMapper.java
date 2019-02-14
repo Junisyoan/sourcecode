@@ -51,7 +51,9 @@ public interface CompanyFileMapper {
 	 * @param fid	文件id
 	 * @return	是否修改成功
 	 */
-	public boolean updateFileState(@Param("fid")int fid,@Param("cstate")String cstate);
+	public boolean updateFileState(
+			@Param("fid")int fid,
+			@Param("cstate")String cstate);
 	
 	/**
 	 * 查询文件

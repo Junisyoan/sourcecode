@@ -12,10 +12,18 @@
 	<insert id="insertPatient" useGeneratedKeys="true"
 		keyProperty="paitent_id"
 		parameterType="xyz.cymedical.entity.jun.Patient">
-		insert into	tb_patient(company_id,name,sex,age,ID,code,phone,check_num)
-		values(#{company_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})
-		ON DUPLICATE KEY UPDATE
-		age = values(#{age})
+<!-- 		<selectKey keyProperty="a" resultType="int" order="BEFORE"> -->
+<!-- 			select count(*) from tb_patient where ID = #{ID} -->
+<!-- 		</selectKey> -->
+<!-- 		<if test="a>0"> -->
+<!-- 			update tb_patient set sex=#{sex},age=#{age},code=#{code},phone=#{phone} where ID = #{ID} -->
+<!-- 		</if> -->
+<!-- 		<if test="a==0"> -->
+			insert into	tb_patient(company_id,name,sex,age,ID,code,phone,check_num,a)
+			values(#{company_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num},1)
+			on duplicate key update
+			sex=#{sex},age=#{age},code=#{code},phone=#{phone}
+<!-- 		</if> -->
 	</insert>
 	<!-- 批量插入 -->
 	<insert id="insertByBatch" parameterType="java.util.List">
