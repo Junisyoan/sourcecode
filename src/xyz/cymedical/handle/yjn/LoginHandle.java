@@ -17,6 +17,7 @@ import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.tools.zsc.Encryption;
 
 @Controller // 此注释的含义是将该类设置成为浏览器提交的上来的类
 @RequestMapping("/user")
@@ -36,22 +37,22 @@ public class LoginHandle {
 	@RequestMapping(value = "/login.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String login(HttpServletRequest req, String checkCode, Tb_user user) {
 		HttpSession session = req.getSession();
-
+		user.setPwd(Encryption.getResult(user.getPwd()));
+		req.setAttribute("filterPass", "filterPass");
 		String result = "";
-
+		
 		userlist = tbUserBiz.findUser(user);
 		userlist2 = tbUserBiz.findUserRole(user);
-
-		System.out.println("User" + userlist.size());
-		System.out.println("UserRole" + userlist2.size());
 
 		if (userlist.size() > 0 && userlist2.size() > 0) {
 			result = "管理员";
 		} else {
 			result = "账号密码错误";
 		}
-
-		session.setAttribute("user", userlist.get(0));
+		
+		if (userlist!=null && userlist.size() > 0) {
+			session.setAttribute("user", userlist.get(0));
+		}
 
 		return result;
 
@@ -87,5 +88,12 @@ public class LoginHandle {
 		return null;
 
 	}
+	
+	@RequestMapping(value = "/exit.handle")
+	public String exit(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.removeAttribute("user");
 
+		return "backlogin";
+	}
 }
