@@ -2,7 +2,9 @@ package xyz.cymedical.mapper.jun;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.entity.jun.CompanyFile;
 
@@ -13,9 +15,23 @@ import xyz.cymedical.entity.jun.CompanyFile;
 *	类说明：
 */
 
-
 @Repository
+@Transactional
 public interface CompanyFileMapper {
+	
+	/**
+	 * 删除关联信息
+	 * @param fid	文件id
+	 * @return	是否删除成功
+	 */
+	public boolean delFileAndGroup(int fid);
+	
+	/**
+	 * 查询文件表是否已经关联团检表
+	 * @param fid	文件id
+	 * @return	关联个数
+	 */
+	public int queryFileGroup(int fid);
 	
 	/**
 	 * 通过账单id找到文件id
@@ -35,7 +51,7 @@ public interface CompanyFileMapper {
 	 * @param fid	文件id
 	 * @return	是否修改成功
 	 */
-	public boolean updateFileState(int fid);
+	public boolean updateFileState(@Param("fid")int fid,@Param("cstate")String cstate);
 	
 	/**
 	 * 查询文件
@@ -49,7 +65,7 @@ public interface CompanyFileMapper {
 	 * @param file_id	文件id
 	 * @return	是否删除成功
 	 */
-	public boolean delFile(String file_id);
+	public boolean delFile(int fid);
 	
 	/**
 	 * 查询文件列表

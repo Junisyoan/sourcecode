@@ -12,16 +12,17 @@
 	<insert id="insertPatient" useGeneratedKeys="true"
 		keyProperty="paitent_id"
 		parameterType="xyz.cymedical.entity.jun.Patient">
-		insert into
-		tb_patient(company_id,combo_id,name,sex,age,ID,code,phone,check_num)
-		values(#{company_id},#{combo_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})
+		insert into	tb_patient(company_id,name,sex,age,ID,code,phone,check_num)
+		values(#{company_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})
+		ON DUPLICATE KEY UPDATE
+		age = values(#{age})
 	</insert>
 	<!-- 批量插入 -->
 	<insert id="insertByBatch" parameterType="java.util.List">
-		insert into tb_patient(company_id,combo_id,name,sex,age,ID,code,phone)
+		insert into tb_patient(company_id,name,sex,age,ID,code,phone)
 		values
 		<foreach collection="listRecord" item="p" separator=",">
-			(#{p.company_id},#{p.combo_id},#{p.name},#{p.sex},#{p.age},#{p.ID},#{p.code},#{p.phone})
+			(#{p.company_id},#{p.name},#{p.sex},#{p.age},#{p.ID},#{p.code},#{p.phone})
 		</foreach>
 	</insert>
 

@@ -14,7 +14,6 @@ import xyz.cymedical.entity.jun.Company;
 
 public interface CompanyBiz {
 	
-	
 	/**
 	 * 扣除公司费用
 	 * @param price	价格
@@ -110,4 +109,7 @@ public interface CompanyBiz {
 	 * @return 公司信息
 	 */
 	public List<Company> queryByAccount(String account);
+
+	//退费余额
+	public boolean Refund(int companyid,double deposit);
 }

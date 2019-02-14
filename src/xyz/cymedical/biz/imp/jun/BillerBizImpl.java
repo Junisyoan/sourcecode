@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.entity.jun.Biller;
@@ -16,7 +17,7 @@ import xyz.cymedical.mapper.jun.BillerMapper;
 *	时间：下午1:36:56
 *	类说明：
 */
-
+@Transactional(rollbackFor=Exception.class)
 @Service("billerBiz")
 public class BillerBizImpl extends BaseImpl implements BillerBiz {
 
@@ -55,7 +56,14 @@ public class BillerBizImpl extends BaseImpl implements BillerBiz {
 
 	@Override
 	public boolean updateBillerCreate(String bid) {
-		return billerMapper.updateBillerCreate(bid);
+		if (billerMapper.updateBillerCreate(bid)) {
+			isUpdate=true;
+			System.out.println("账单状态修改成功");
+		} else {
+			isUpdate=false;
+			System.out.println("账单状态修改失败");
+		}
+		return isUpdate;
 	}
 
 }

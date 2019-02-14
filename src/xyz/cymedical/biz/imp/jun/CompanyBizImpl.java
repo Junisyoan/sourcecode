@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
@@ -20,6 +21,7 @@ import xyz.cymedical.mapper.jun.CompanyMapper;
  * @version 1.0
  */
 
+@Transactional(rollbackFor=Exception.class)
 @Service("companyBiz")
 public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 
@@ -94,7 +96,7 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 		File file = new File(path);
 		System.out.println("准备删除" + file.getName());
 		if (file.exists()) {
-			if (file.delete() && companyFileMapper.delFile(file_id)) {
+			if (file.delete() && companyFileMapper.delFile(Integer.parseInt(file_id))) {
 				System.out.println("文件删除成功");
 				isUpdate = true;
 			}
@@ -144,4 +146,12 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 			return "余额不足";
 		}
 	}
+
+	@Override
+	public boolean Refund(int companyid, double deposit) {
+		// TODO Auto-generated method stub
+		return companyMapper.Refund(companyid,deposit);
+	}
+
+
 }

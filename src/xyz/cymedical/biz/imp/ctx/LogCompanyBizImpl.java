@@ -33,4 +33,10 @@ public class LogCompanyBizImpl implements LogCompanyBiz {
 		return logCompanyMapper.insertLog(cid, op, deposit, t);
 	}
 
+	@Override
+	public List<LogCompany> queryAll() {
+		// TODO Auto-generated method stub
+		return logCompanyMapper.queryAll();
+	}
+
 }

@@ -4,18 +4,22 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.jun.GroupMapper">
-
+<!-- 创建关联表 -->
+	<insert id="insertFileGroup">
+		insert into tb_file_group(file_id,group_id)
+		values(#{fid},#{gid})
+	</insert>
 <!-- 更新表信息 -->
 	<update id="updateGroupInfo">
-		update tb_group set pamount=#{pnum}, totalmoney=#{price} where file_id = #{fid}
+		update tb_group set pamount=#{pnum}, totalmoney=#{price} where group_id = (select group_id from tb_file_group where file_id=#{fid})
 	</update>
 <!-- 查询团检表 -->
 	<select id="queryGroupByFileId" parameterType="int" resultType="xyz.cymedical.entity.jun.Group">
-		select * from tb_group where file_id = #{fid}
+		select g.* from tb_file_group fg,tb_group g where fg.file_id = 3 and fg.group_id = g.group_id;
 	</select>
 <!-- 生成团检表 -->
-	<insert id="insert">
-		insert into tb_group(company_id,file_id)
-		values(#{cid},#{fid})
+	<insert id="insert" useGeneratedKeys="true" keyProperty="group_id" parameterType="xyz.cymedical.entity.jun.Group">
+		insert into tb_group(company_id)
+		values(#{company_id})
 	</insert>
 </mapper>

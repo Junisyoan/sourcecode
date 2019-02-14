@@ -25,7 +25,7 @@ public interface DoctorBiz {
 	public List<Map<String,Object>> findMyDetail(int projectid,int patientid);
 	
 	//项目接收
-	public boolean receive(int patient_project_id);
+	public boolean receive(int patient_project_id,int userid);
 
 	//查找条码号对应病人的所有小结
 	public List<Map<String, Object>> findAllDetail(String onecode);
@@ -40,5 +40,9 @@ public interface DoctorBiz {
 
 	//获取菜单列表
 	public List<Tb_menu> getMyMenu(int user_id, int role_dept_id);
+
+	//修改项目为已退费
+	public boolean BalanceChange(int patient_project_id);
+
 
 }

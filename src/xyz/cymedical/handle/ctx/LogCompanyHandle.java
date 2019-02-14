@@ -28,6 +28,7 @@ public class LogCompanyHandle {
 	public CompanyBiz companyBiz;
 
 	private List<LogCompany> logCompanylist = new ArrayList<LogCompany>();
+	private List<LogCompany> logCompanylist2 = new ArrayList<LogCompany>();
 
 	private List<Company> Companylist = new ArrayList<Company>();
 
@@ -46,6 +47,21 @@ public class LogCompanyHandle {
 		logCompanylist = logCompanyBiz.queryByName(Companylist.get(0).getName());
 
 		System.out.println(logCompanylist.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/logcompany");
+		if (logCompanylist.size() > 0) {
+			mav.addObject("logCompanylist", logCompanylist);
+		}
+		return mav;
+
+	}
+
+	// 医院记账
+	@RequestMapping(value = "/findalllogcompany.handle")
+	public ModelAndView findallcompanylog() {
+
+		logCompanylist2 = logCompanyBiz.queryAll();
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/logcompany");
