@@ -27,7 +27,7 @@ public interface CompanyFileBiz {
 	 * @param fid	文件id
 	 * @return	是否修改成功
 	 */
-	public boolean updateFileState(int fid);
+	public boolean updateFileState(int fid,String cstate);
 	
 	//query
 	/**

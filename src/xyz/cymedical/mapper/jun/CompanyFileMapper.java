@@ -2,6 +2,7 @@ package xyz.cymedical.mapper.jun;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +51,7 @@ public interface CompanyFileMapper {
 	 * @param fid	文件id
 	 * @return	是否修改成功
 	 */
-	public boolean updateFileState(int fid);
+	public boolean updateFileState(@Param("fid")int fid,@Param("cstate")String cstate);
 	
 	/**
 	 * 查询文件

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.entity.jun.CompanyFile;
@@ -16,6 +17,7 @@ import xyz.cymedical.mapper.jun.CompanyFileMapper;
 *	时间：上午11:32:16
 *	类说明：
 */
+@Transactional(rollbackFor=Exception.class)
 @Service("companyFileBiz")
 public class CompanyFileBizImpl extends BaseImpl implements CompanyFileBiz {
 
@@ -43,8 +45,8 @@ public class CompanyFileBizImpl extends BaseImpl implements CompanyFileBiz {
 	}
 
 	@Override
-	public boolean updateFileState(int fid) {
-		return companyFileMapper.updateFileState(fid);
+	public boolean updateFileState(int fid,String cstate) {
+		return companyFileMapper.updateFileState(fid,cstate);
 	}
 
 	@Override

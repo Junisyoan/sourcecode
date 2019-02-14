@@ -23,7 +23,7 @@
 
 <!-- 修改文件状态 -->
 	<update id="updateFileState" parameterType="int">
-		update tb_file set cstate = '已审核' where file_id = #{fid}
+		update tb_file set cstate = #{cstate} where file_id = #{fid}
 	</update>
 <!-- 删除文件 -->
 	<delete id="delFile" parameterType="int">

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.entity.jun.CompanyFile;
@@ -20,7 +21,7 @@ import xyz.cymedical.mapper.jun.NurseMapper;
 *	时间：下午1:26:55
 *	类说明：
 */
-
+@Transactional(rollbackFor=Exception.class)
 @Service("nurseBiz")
 public class NurseBizImpl extends BaseImpl implements NurseBiz {
 
@@ -35,9 +36,8 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	}
 
 	@Override
-	public List<CompanyFile> queryCheckFile(String pageNum) {
-		int pn = Integer.parseInt(pageNum);
-		return nurseMapper.queryCheckFile(pn-1);
+	public List<CompanyFile> queryCheckFile() {
+		return nurseMapper.queryCheckFile();
 	}
 
 	@Override

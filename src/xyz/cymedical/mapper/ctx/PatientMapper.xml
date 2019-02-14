@@ -14,6 +14,8 @@
 		parameterType="xyz.cymedical.entity.jun.Patient">
 		insert into	tb_patient(company_id,name,sex,age,ID,code,phone,check_num)
 		values(#{company_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})
+		ON DUPLICATE KEY UPDATE
+		age = values(#{age})
 	</insert>
 	<!-- 批量插入 -->
 	<insert id="insertByBatch" parameterType="java.util.List">

@@ -21,6 +21,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jbarcode.util.ImageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +41,7 @@ import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
 
@@ -88,6 +90,20 @@ public class NurseHandle {
 	public ModelAndView getCheckPage(String bid) {
 		System.out.println("打印导检单："+bid);
 		List<Patient> cps = nurseBiz.getCheckPage(bid);
+		
+		companyFile = companyFileBiz.queryFileByBillerId(bid);
+		String path = companyFile.getFpath();
+		File file = new File(path);
+		path = file.getPath();
+		
+		//生成条形码
+		String imgFormat = "jpeg";
+		for(int i = 0;i<cps.size();i++) {
+			System.out.println(cps.get(i).getCode());
+			BarCodeTools.createBarCode(path, cps.get(i).getCode(), imgFormat);
+		}
+		
+		
 		System.out.println("体检人员信息："+cps);
 		HashMap<String, List<Patient>> checkMap = new HashMap<>();
 		List<Patient> tmpList = new ArrayList<>();
@@ -142,6 +158,17 @@ public class NurseHandle {
 		
 		//	获取体检人员列表
 		List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
+		
+		//获得公司存储路径
+		String path = companyFile.getFpath();
+		File file = new File(path);
+		path = file.getPath();
+		
+		//生成条形码
+		String imgFormat = ImageUtil.JPEG;
+		for(int i = 0;i<patientList.size();i++) {
+			BarCodeTools.createBarCode(path, patientList.get(i).getCode(), imgFormat);
+		}
 		
 		try {
 			//	插入病人
@@ -453,6 +480,29 @@ public class NurseHandle {
 		return modelAndView;
 	}
 	
+	
+	
+	/*
+	 * 审核不通过
+	 */
+	@RequestMapping(value="/invalidFile.handle",method=RequestMethod.POST)
+	public String invalidFile(HttpServletResponse response, String fid) {
+		System.out.println("文件审核不通过："+fid);
+		response.setCharacterEncoding("utf-8");
+		try {
+			if(companyFileBiz.updateFileState(Integer.parseInt(fid),"不合格")){
+				response.getWriter().print("1");
+			}else {
+				response.getWriter().print("0");
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/*
 	 * 通过审核
 	 */
@@ -461,7 +511,7 @@ public class NurseHandle {
 		
 		response.setCharacterEncoding("utf-8");
 		try {
-			if (companyFileBiz.updateFileState(Integer.parseInt(fid))) {
+			if (companyFileBiz.updateFileState(Integer.parseInt(fid),"已审核")) {
 				//获得文件具体信息
 				companyFile = companyFileBiz.queryFile(fid);
 				//得到公司id
@@ -598,8 +648,8 @@ public class NurseHandle {
 	 * 查询待审核文件
 	 */
 	@RequestMapping(value="/queryCheckFile.handle",method=RequestMethod.GET)
-	public ModelAndView queryCheckFile(String pageNum) {
-		List<CompanyFile> fileList = nurseBiz.queryCheckFile(pageNum);
+	public ModelAndView queryCheckFile() {
+		List<CompanyFile> fileList = nurseBiz.queryCheckFile();
 		modelAndView = new ModelAndView();
 		modelAndView.setViewName("WEB-INF/medical_workstation/wait-check-file");
 		modelAndView.addObject("fileList",fileList);

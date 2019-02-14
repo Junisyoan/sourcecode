@@ -55,7 +55,9 @@ public class BarCodeTools {
 			int len = jbarCode.length();
 			// 实例化JBarcode
 			// 这里三个参数，必要填写
-			JBarcode jbarcode13 = new JBarcode(EAN13Encoder.getInstance(), WidthCodedPainter.getInstance(),
+			JBarcode jbarcode13 = new JBarcode(
+					EAN13Encoder.getInstance(), 
+					WidthCodedPainter.getInstance(),
 					EAN13TextPainter.getInstance());
 			// 获取到前12位
 			String barCode = jbarCode.substring(0, len - 1);
