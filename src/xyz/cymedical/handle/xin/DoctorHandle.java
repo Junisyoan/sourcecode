@@ -26,16 +26,15 @@ public class DoctorHandle {
 	
 	List<Map<String,Object>> dlist;			//细项列表
 	
-	public static String patientid;
+	public static String patientid;			//病人id
 	
-	public static String projectid;
+	public static String projectid;			//项目id
 	
-	public static String projectname;
+	public static String projectname;		//项目名称
 	
-	public static String keshi;
+	public static String keshi;				//科室名称
 	
-	public static String onecode;
-	
+	public static String onecode;			//条码号
 
 	
 	// 查询一维码对应病人的导检单
@@ -44,11 +43,11 @@ public class DoctorHandle {
 
 		System.out.println("username="+account);
 		System.out.println("pwd="+pwd);
-		
+
 		Tb_user user = new Tb_user();
 		user=doctorbiz.login(account,pwd);
 		System.out.println("user="+user);
-		
+
 
 		if(user!=null) {
 			ModelAndView mav = new ModelAndView();
@@ -89,6 +88,9 @@ public class DoctorHandle {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("prolist", plist);
+		if(plist!=null && plist.size()>0) {
+			mav.addObject("patient", plist.get(0));//已包含病人信息
+		}
 		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
 		return mav;
 
@@ -138,13 +140,16 @@ public class DoctorHandle {
 
 	//项目接收
 	@RequestMapping(value = "/receive.handle")
-	public ModelAndView receive(String patient_project_id,String onecode) {
+	public ModelAndView receive(HttpServletRequest req,String patient_project_id,String onecode) {
 
 		System.out.println("receive....");
 		System.out.println("patient_project_id=" + patient_project_id);
 		System.out.println("onecode=" + onecode);
 
-		boolean f=doctorbiz.receive(Integer.valueOf(patient_project_id));
+		Tb_user user=(Tb_user) req.getSession().getAttribute("USER");
+		
+		boolean f=doctorbiz.receive(Integer.valueOf(patient_project_id),user.getUser_id());
+		
 		System.out.println("f="+f);
 		plist=doctorbiz.findMyProject(onecode);
 
