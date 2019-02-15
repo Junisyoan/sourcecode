@@ -3,6 +3,7 @@ package xyz.cymedical.biz.jiang;
 import java.util.List;
 import java.util.Map;
 
+import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_role;
 
 public interface TbRoleBiz {
@@ -18,5 +19,7 @@ public interface TbRoleBiz {
 	public int upRole(int role_id,String name);
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
+	
+	public List<Tb_menu> findMenu(int role_idd);  
 
 }
