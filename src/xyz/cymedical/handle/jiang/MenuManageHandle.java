@@ -73,7 +73,7 @@ public class MenuManageHandle {
 
 	}
 //
-//	// 菜单序号查询
+//	// 添加第一步菜单名查询
 	@RequestMapping(value = "/addmenuid.handle", method = RequestMethod.POST) 
 	public @ResponseBody String addMenuid(HttpServletRequest request, HttpServletResponse response, String name) {
 		String addrole;
@@ -81,14 +81,28 @@ public class MenuManageHandle {
 		int ret=tbMenuBiz.addMenuid(name);
 		System.out.println("ret="+ret);
 		
-		if (ret==1) {
-			addrole = "01";
-		} else {
+		if (ret>1) {
 			addrole = "02";
+		} else {
+			addrole = "01";
 		}
 		System.out.println("xxxxxxj" + addrole);
 		return addrole;
 
+	}
+	//添加第二步 正式添加
+	@RequestMapping(value = "/addmenu.handle", method = RequestMethod.POST) 
+	public ModelAndView  addMenu(HttpServletRequest request, HttpServletResponse response, Tb_menu tb_menu) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("-1");
+		int ret=tbMenuBiz.addMenu(tb_menu);
+		if(ret==1) { 
+			mav.setViewName("WEB-INF/view.jiang/menumanage");
+		}else { 
+			mav.setViewName("WEB-INF/view.jiang/err");
+		} 
+
+		return mav;
 	}
 // 
 	//修改第一步
