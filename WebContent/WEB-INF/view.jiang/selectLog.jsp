@@ -49,6 +49,38 @@
 		$("#item").dataTable();
 	});
 </script>
+<script>
+	function delLog(a) {
+		
+		var log_id = a;
+		
+		var b = confirm("是否删除");
+		
+		if(b == true){
+			$.ajax({
+				 type:"POST",
+				 url:"<%=path%>log/delLog.handle",
+				 data:{
+					 "log_id":log_id
+					 },
+				 dataType:"text",
+				 error:function(){
+					 alert('ajax请求请求错误...');
+				 },
+				 success:function(data){
+					if(data=="success"){
+						alert("删除成功！");
+						window.location.href="<%=path%>log/findAllLog.handle";
+					}else{
+						alert(data);
+					}
+					
+				 },
+			 });
+		}
+
+	}
+</script>
 <title>日志查看</title>
 </head>
 
@@ -56,13 +88,15 @@
 
 	<div class="Manager_style">
 		<span class="title_name">日志查看</span>
-		<p align="center"><button type="button" onclick="tableToExcel('item','data')">导出Excel</button></p>
+		<p align="center">
+			<button type="button" onclick="tableToExcel('item','data')">导出Excel</button>
+		</p>
 		<p align="center">&nbsp;</p>
-		<table class="table table-striped table-bordered table-hover" id="item">
+		<table class="table table-striped table-bordered table-hover"
+			id="item">
 			<thead>
 				<tr>
 					<th>序号</th>
-					<th>日志表ID</th>
 					<th>用户</th>
 					<th>具体操作</th>
 					<th>操作时间</th>
@@ -74,11 +108,11 @@
 				<c:forEach items="${loglist}" var="l" varStatus="s">
 					<tr>
 						<td>${s.index + 1}</td>
-						<td>${l.log_id}</td>
 						<td>${l.name}</td>
 						<td>${l.opera}</td>
 						<td>${l.time}</td>
-						<td><a href="<%=path%>log/delLog.handle?log_id=${l.log_id}">删除</a></td>
+						<td><input type="button" onclick="delLog('${l.log_id}')" value="删除"
+							style="width: 100px;" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

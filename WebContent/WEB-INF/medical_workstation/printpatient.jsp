@@ -95,9 +95,8 @@ input {
 					打印时间：<input type="text" value="<%=datetime%>" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 						<c:forEach items="${patientlist5}" var="p5" varStatus="s5">
-							<c:if test="${s5.index == 0}">
-							<img src="${p5.fpath}${p5.code}.jpeg"/>
-							
+							<c:if test="${s5.index == 1}">
+							<img src="${p5.fpath}${p5.code}.jpeg" width="180" height="50"/>
 							</c:if>
 						</c:forEach>
 				</h4>
