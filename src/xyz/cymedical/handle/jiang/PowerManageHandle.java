@@ -1,5 +1,6 @@
 package xyz.cymedical.handle.jiang;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,9 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbPowerBiz;
-import xyz.cymedical.entity.jiang.Tb_dept;
+import xyz.cymedical.biz.jiang.TbRoleBiz;
+import xyz.cymedical.biz.jiang.TbRolePower;
+import xyz.cymedical.biz.jiang.TbUserBiz;
+import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_power;
-import xyz.cymedical.entity.jiang.Tb_user; 
+import xyz.cymedical.entity.jiang.Tb_role; 
 
 
 @Controller
@@ -26,11 +31,18 @@ import xyz.cymedical.entity.jiang.Tb_user;
 public class PowerManageHandle {
 	    
 		@Resource
-		private TbPowerBiz TbPowerBiz; 
+		private TbRolePower tbRolePower;
+		@Resource
+		private TbPowerBiz TbPowerBiz;  
+		
+		private List<Tb_role> roleall;
+		@Resource
+		private TbRoleBiz tbRoleBiz;
 		
 		private Tb_power tbpower;
 		   
 //		private List<Map<String,Object>> maplist;
+		 
 		
 		private List<Tb_power> maplist;
 		
@@ -73,8 +85,11 @@ public class PowerManageHandle {
 		 
 		
 		@RequestMapping(value = "/addPower.handle")
-		public ModelAndView addPower(HttpServletRequest request, HttpServletResponse response, Tb_power tb_power) {
+		public ModelAndView addPower(HttpServletRequest request, HttpServletResponse response, Tb_power tb_power,String roleid) {
 			ModelAndView mav = new ModelAndView();  
+//			int role_id=Integer.valueOf(roleid); 
+//			int power_id=tb_power.getPower_id();
+//			tbRolePower.addmanage(role_id, power_id);////////c此处存在错误
 			 
 			int ret=TbPowerBiz.addPower(tb_power);
 			
@@ -129,6 +144,87 @@ public class PowerManageHandle {
 			System.out.println("权限查询="+companys.size());
 			return str;
 		}
+		//新权限显示用户
+		@RequestMapping(value = "/newpower.handle")
+		public ModelAndView newPower(HttpServletRequest request) {
+			ModelAndView mav = new ModelAndView();
+			System.out.println("youmei有進入新权限");
+			roleall=tbRoleBiz.selectRole();
+			
+			request.setAttribute("roleall", roleall);
+			System.out.println("juese="+roleall.get(0).getName());
+			
+			mav.setViewName("WEB-INF/view.jiang/menu_grant");
+			return mav;
+  
+		}
+		/**
+		 * 查找已分配权限
+		 * 
+		 *  
+		 */
+		@ResponseBody
+		@RequestMapping(value= "/allot.handle")
+		public List<Map<String, Object>> allot(String role_id) {
+
+			System.out.println(1);
+//			List<Menu> menuList = menuBiz.findMenu(role.getRole_id());
+			System.out.println(role_id);
+			int role_idd=Integer.valueOf(role_id);
+			
+			System.out.println("点击权限名 弹出id="+role_idd);
+			List<Tb_menu> menuList=tbRoleBiz.findMenu(role_idd);
+ 
+			System.out.println("menuList="+menuList);
+			
+			List<Map<String, Object>> mapList = menuToMap(menuList); 
+			
+			JSONArray jb=JSONArray.fromObject(mapList) ;
+			System.out.println("json="+jb); 
+//			System.out.println("bbb="+);
+			return jb;
+//			return mapList;
+
+		}
+		
+		/**
+		 * 将查询到到menuList转为map
+		 * 
+		 * @param menuList
+		 * @return
+		 */
+		private List<Map<String, Object>> menuToMap(List<Tb_menu> menuList) {
+
+			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
+
+			for (Tb_menu menu : menuList) {
+				Map<String, Object> node = new HashMap<String, Object>();
+ 
+				node.put("id", menu.getMenu_id());
+				node.put("name", menu.getName());
+				node.put("pId", menu.getSuperior());
+				System.out.println("555555555555="+menu.getMenu_id()+"111"+menu.getSuperior());
+
+				if (menu.getSuperior()!= 0) {
+					mapList.add(node);
+				} else {
+//					node.put("open", true);// 节点展开
+
+					for (Tb_menu m : menuList) {
+						if (m.getSuperior() == menu.getMenu_id()) {
+
+							// 如果有子节点则添加
+							mapList.add(node);
+							break;
+						}
+					}
+				}
+			}
+			System.out.println("mapList========"+mapList);
+			return mapList;
+		}
+ 
+		
 		
 		
 }
