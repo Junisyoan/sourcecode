@@ -27,11 +27,8 @@
 </script>
 <script>
 	function delparam(a) {
-		
 		var param_id = a;
-		
 		var b = confirm("是否删除");
-		
 		if(b == true){
 			$.ajax({
 				 type:"POST",
@@ -50,11 +47,9 @@
 					}else{
 						alert(data);
 					}
-					
 				 },
 			 });
 		}
-
 	}
 </script>
 <title>参数管理</title>
