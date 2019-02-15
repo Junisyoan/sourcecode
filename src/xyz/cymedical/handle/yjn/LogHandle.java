@@ -1,5 +1,6 @@
 package xyz.cymedical.handle.yjn;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,21 +45,24 @@ public class LogHandle {
 
 	}
 
-	//删除方法
+	// 删除方法
 	@RequestMapping(value = "/delLog.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String delLog(HttpServletRequest req, String log_id) {
+	public @ResponseBody String delLog(HttpServletRequest req, @RequestParam(value = "arrin") String[] arrin) {
 		String result = "";
-		
-		flag = logBiz.delLog(log_id);
 
-		if (flag == true) {
-			result = "success";
-		} else {
-			result = "failure";
+		System.out.println("arrin="+arrin[0]);
+		
+		for (int i = 0; i < arrin.length; i++) {
+			flag = logBiz.delLog(arrin[i]);
+			if(i == arrin.length - 1) {
+				if (flag == true) {
+					result = "success";
+				} else {
+					result = "failure";
+				}
+			}
 		}
-		
 		return result;
-
 	}
-	
+
 }
