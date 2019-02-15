@@ -67,5 +67,19 @@
 		 
 	</select>
 	
+	<select id="getCount" parameterType="xyz.cymedical.entity.jiang.Tb_menu"  resultType="int">
+	
+	select count(*) from tb_role_power rp ,tb_power tp where rp.power_id =tp.power_id and tp.menu_id in (select menu_id from tb_menu where superior=${menu_id})and rp.role_id=${role_id}
+	
+	</select>
+	
+	<select id="selectId"   parameterType="int"
+	resultType="xyz.cymedical.entity.jiang.Tb_power">
+		select * from tb_power where menu_id=#{menu_idddd}  
+	</select>
+	
+	 <insert id="insert" parameterType="xyz.cymedical.entity.jiang.Tb_menu" >
+		insert into tb_role_power(power_id,role_id) values(#{power_id},#{role_id})
+	</insert>
 	
 </mapper>

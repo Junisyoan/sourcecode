@@ -1,5 +1,6 @@
 package xyz.cymedical.handle.jiang;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
+import xyz.cymedical.biz.jiang.TbMenuBiz;
 import xyz.cymedical.biz.jiang.TbPowerBiz;
 import xyz.cymedical.biz.jiang.TbRoleBiz;
 import xyz.cymedical.biz.jiang.TbRolePower;
@@ -40,9 +42,15 @@ public class PowerManageHandle {
 		private TbRoleBiz tbRoleBiz;
 		
 		private Tb_power tbpower;
+		
+		private Tb_menu tb_menu;
+		
+		@Resource
+		private TbMenuBiz tbMenuBiz;
 		   
 //		private List<Map<String,Object>> maplist;
 		 
+		int  rett;
 		
 		private List<Tb_power> maplist;
 		
@@ -180,11 +188,8 @@ public class PowerManageHandle {
 			
 			List<Map<String, Object>> mapList = menuToMap(menuList); 
 			
-			JSONArray jb=JSONArray.fromObject(mapList) ;
-			//System.out.println("json="+jb); 
-//			System.out.println("bbb="+);
-			//return jb;
-		//String dddd="132"; 
+			JSONArray jb=JSONArray.fromObject(mapList) ; 
+			
 			return jb.toString();
 
 		}
@@ -195,15 +200,17 @@ public class PowerManageHandle {
 		 * @return
 		 */ 
 		@RequestMapping(value= "/unallot.handle" ,method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-		public  @ResponseBody String  unallot( String role_id) {
+		public  @ResponseBody String  unallot(String role_id) {
  
-			System.out.println("未分配权限");
-			int role_idd=Integer.valueOf(role_id);
+			System.out.println("未分配权限1="+role_id);
+			int role_idd=Integer.parseInt(role_id);
+			System.out.println("未分配权限2");
 			List<Tb_menu> menuList=tbRoleBiz.findUnMenu(role_idd);
-
+			System.out.println("未分配权限3");
 			List<Map<String, Object>> mapList = menuToMap(menuList);
-
+			System.out.println("未分配权限4");
 			JSONArray jb=JSONArray.fromObject(mapList) ;
+			System.out.println("未分配权限5");
 			return jb.toString();
 		}
 		
@@ -245,6 +252,68 @@ public class PowerManageHandle {
 		}
  
 	
+		/**
+		 * 添加权限菜单
+		 * 
+		 * @return
+		 */ 
+		@RequestMapping(value="/addmenu.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8") 
+		public String addMenu( Tb_menu rm,HttpServletRequest request,HttpServletResponse resp) {
+			System.out.println("请选择要添加的权");
+			String ret="请选择要添加的权限！";
+			System.out.println("-----"+rm.toString()+"---"+ret+"----");
+			System.out.println("rm.getsuperior="+rm.getSuperior());
+			boolean flag = false;
+			
+			if (rm.getMids()==null||rm.getMids()=="") {
+				return ret;
+			}
+			int r_id = Integer.valueOf(rm.getRole_id());
+			System.out.println("r_id="+r_id);
+			System.out.println("222="+rm.getMids());
+			String[] menuids = rm.getMids().split(","); 
+			System.out.println(menuids[0]);
+			System.out.println(menuids[1]);
+			System.out.println("menuids="+menuids.toString());
+//
+//			// 插入数据
+			for (int i = 0; i < menuids.length; i++) { 
+				int m_id = Integer.valueOf(menuids[i]);
+				
+				// 如果有子节点就不插入
+				rm.setMenu_id(m_id);
+				rm.setRole_id(r_id); 
+				int count = tbMenuBiz.getCount(rm);
+				System.out.println("count="+count);
+				if (count > 0) {
+					continue;
+				}
+				//用菜單id查找权限id  权限id和角色id同时添加一张表 
+				int menu_idddd=rm.getMenu_id(); 
+				List<Tb_power> plist=tbMenuBiz.selectId(menu_idddd); 
+				
+				for(int j = 0; j < menuids.length; j++) {
+					
+				}
+ 				 
+				System.out.println("插入数据菜单--" + m_id + "角色：" + r_id);
+				
+			}
+			if(rett>0) {
+				ret="添加成功";
+			}else {
+				ret="添加失败wangxing";
+			}
+			
+//			try {
+//				resp.getWriter().print(ret);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+			return ret;
+		}
+		
+		
  
 	 
 		

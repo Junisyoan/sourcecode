@@ -8,21 +8,61 @@ public class Tb_menu {
 	private String name;//菜单名字
 	private String link;//路径
 	private int superior;
+	private int role_id;
+	
+	private String mids;
 	
 	public Tb_menu() {
 		super();
 	}
  
-	public Tb_menu(int menu_id, String name, String link, int superior) {
+	  
+
+	public Tb_menu(int menu_id, String name, String link, int superior, int role_id, String mids) {
 		super();
 		this.menu_id = menu_id;
 		this.name = name;
 		this.link = link;
 		this.superior = superior;
+		this.role_id = role_id;
+		this.mids = mids;
+	}
+
+ 
+
+	public int getRole_id() {
+		return role_id;
+	}
+
+ 
+
+
+
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
 	}
 
 
  
+
+
+
+	public String getMids() {
+		return mids;
+	}
+
+
+
+
+
+
+	public void setMids(String mids) {
+		this.mids = mids;
+	}
+
+
+
+
 
 
 	public int getSuperior() {
