@@ -105,11 +105,10 @@ public class NurseHandle {
 		companyFile = companyFileBiz.queryFileByBillerId(bid);
 		String path = companyFile.getFpath();
 		File file = new File(path);
-		path = file.getParent()+File.separator;
 		//生成条形码
 		String imgFormat = "jpeg";
 		for(int i = 0;i<cps.size();i++) {
-			BarCodeTools.createBarCode(path, cps.get(i).getCode(), imgFormat);
+			BarCodeTools.createBarCode(file.getPath(), cps.get(i).getCode(), imgFormat);
 		}
 		
 		

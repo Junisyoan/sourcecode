@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.yjn.LogBiz;
+import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.yjn.Log;
+import xyz.cymedical.tools.zsc.Encryption;
 
 @Controller
 @RequestMapping("/log")
@@ -37,22 +43,21 @@ public class LogHandle {
 
 	}
 
-	// 删除方法
-	@RequestMapping(value = "/delLog.handle")
-	public ModelAndView dellog(String log_id) {
-
+	//删除方法
+	@RequestMapping(value = "/delLog.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String delLog(HttpServletRequest req, String log_id) {
+		String result = "";
+		
 		flag = logBiz.delLog(log_id);
+
 		if (flag == true) {
-			System.out.println("成功");
+			result = "success";
 		} else {
-			System.out.println("失败");
+			result = "failure";
 		}
+		
+		return result;
 
-		loglist = logBiz.findAllLog();
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.jiang/selectLog");
-		mav.addObject("loglist", loglist);
-
-		return mav;
 	}
+	
 }
