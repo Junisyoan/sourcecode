@@ -38,6 +38,7 @@
      		权限id	<input type="text" name="power_id"/>
      		菜单id	<input type="text" name="menu_id"/>
      		权限名    <input type="text" name="name"/>
+
      		  
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 	</form>    
@@ -56,6 +57,7 @@
       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id"/></li>
       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li>
       <li><label class="label_name">权限名</label><input name="name" type="text"  class="text_add" id="name"/></li>
+      <li><label class="label_name">角色id</label><input name="roleid" type="text"  class="text_add" id="roleid"/></li>
      
          
       </ul>  
