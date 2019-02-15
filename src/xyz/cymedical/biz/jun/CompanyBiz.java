@@ -4,6 +4,7 @@ import java.util.List;
 
 import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.jun.Patient;
 
 /**
  * 2019年1月19日
@@ -13,7 +14,6 @@ import xyz.cymedical.entity.jun.Company;
  */
 
 public interface CompanyBiz {
-	
 	
 	/**
 	 * 扣除公司费用
@@ -110,4 +110,10 @@ public interface CompanyBiz {
 	 * @return 公司信息
 	 */
 	public List<Company> queryByAccount(String account);
+
+	//退费余额
+	public boolean Refund(int companyid,double deposit);
+
+	//根据id查找公司
+	public Company findCompany(int company_id);
 }

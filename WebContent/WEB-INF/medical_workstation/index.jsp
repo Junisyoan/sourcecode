@@ -91,6 +91,7 @@
 					<li class="home"><a href="javascript:void(0)" name="home.html"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
+							
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-desktop"></i><span class="menu-text">团检人员管理 </span><b
 							class="arrow icon-angle-down"></b></a>
@@ -102,6 +103,11 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getFileList.handle" title="团检表列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检文件列表</a></li>
+								
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path %>nurse/toRefund.handle" title="团检退费" class="iframeurl"><i
+									class="icon-double-angle-right"></i>团检退费</a></li>
+								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单"
 								class="iframeurl"><i class="icon-double-angle-right"></i>未结算账单</a></li>
@@ -112,8 +118,8 @@
 								name="<%=path %>nurse/getCreateList.handle" title="已开单列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>已开单列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>patient/showpatient.handle" title="体检报告打印"
-								class="iframeurl"><i class="icon-double-angle-right"></i>体检报告打印</a></li>
+								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
+									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
@@ -126,8 +132,11 @@
 								name="<%=path%>patient/findpatient.handle" title="体检人员查询"
 								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询
 							</a></li>
+							
+							
+							
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>logcompany/findlogcompany.handle" title="团检单位对账"
+								name="<%=path%>logcompany/findalllogcompany.handle" title="团检单位对账"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检单位对账
 							</a></li>
 						</ul></li>
@@ -397,8 +406,7 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>
-		login_user.html";
+				location.href = "<%=path%>login_user.html";
 
 			});
 		});

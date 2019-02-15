@@ -11,6 +11,15 @@ import xyz.cymedical.entity.jun.CompanyFile;
 *	类说明：文件库
 */
 public interface CompanyFileBiz {
+	
+	
+	//delete
+	/**
+	 * 删除文件
+	 * @param fid	文件id
+	 * @return	是否删除成功
+	 */
+	public boolean delFile(String fid);
 
 	//update
 	/**
@@ -18,7 +27,7 @@ public interface CompanyFileBiz {
 	 * @param fid	文件id
 	 * @return	是否修改成功
 	 */
-	public boolean updateFileState(int fid);
+	public boolean updateFileState(int fid,String cstate);
 	
 	//query
 	/**

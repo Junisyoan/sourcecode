@@ -30,5 +30,7 @@ public interface LogCompanyMapper {
 			@Param("time")String t);
 	
 	public List<LogCompany> queryByName(String name);
+	
+	public List<LogCompany> queryAll();
 
 }

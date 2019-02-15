@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.entity.jun.CompanyFile;
@@ -20,7 +21,7 @@ import xyz.cymedical.mapper.jun.NurseMapper;
 *	时间：下午1:26:55
 *	类说明：
 */
-
+@Transactional(rollbackFor=Exception.class)
 @Service("nurseBiz")
 public class NurseBizImpl extends BaseImpl implements NurseBiz {
 
@@ -35,9 +36,8 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	}
 
 	@Override
-	public List<CompanyFile> queryCheckFile(String pageNum) {
-		int pn = Integer.parseInt(pageNum);
-		return nurseMapper.queryCheckFile(pn-1);
+	public List<CompanyFile> queryCheckFile() {
+		return nurseMapper.queryCheckFile();
 	}
 
 	@Override
@@ -47,12 +47,13 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 
 	@Override
 	public boolean insertRelation(int bid, List<Patient> pList) {
-		
+		System.out.println("创建体检人员和账单关系表"+pList);
 		int num = nurseMapper.insertBatchRelation(bid, pList);
-		System.out.println("执行结果："+pList.size()+"，"+num);
 		if (pList.size()==num) {
+			System.out.println("体检人员和账单关系表建立成功");
 			isUpdate=true;
 		} else {
+			System.out.println("体检人员和账单关系表建立失败");
 			isUpdate=false;
 		}
 		return isUpdate;
@@ -61,5 +62,16 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	@Override
 	public List<Patient> getCheckPage(String bid) {
 		return nurseMapper.getCheckPage(bid);
+	}
+
+	@Override
+	public boolean insertPaitentCombo(List<Patient> patients,String bid) {
+		System.out.println("体检人数量："+patients.size());
+		if (nurseMapper.insertPaitentCombo(Integer.parseInt(bid),patients)==patients.size()) {
+			isUpdate=true;
+		}else {
+			isUpdate=false;
+		}
+		return isUpdate;
 	}
 }

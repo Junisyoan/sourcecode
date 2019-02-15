@@ -28,10 +28,12 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 		int number = 0;
 		// 体检人员信息
 		Patient patient = null;
-		// 自增长的id
+		
 		for (int i = 0; i < listRecord.size(); i++) {
 			patient = listRecord.get(i);
+			System.out.println("准备插入："+patient);
 			if (patientMapper.insertPatient(patient)) {
+				System.out.println(patient.getPaitent_id());
 				isUpdate = true;
 				listRecord.get(i).setPaitent_id(patient.getPaitent_id());
 			} else {
@@ -42,11 +44,11 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 				number++;
 			}
 		}
-		System.out.println("执行结果" + listRecord.size() + "," + number);
-
 		if (number == listRecord.size()) {
+			System.out.println("插入成功");
 			return listRecord;
 		} else {
+			System.out.println("插入失败");
 			return null;
 		}
 	}
@@ -65,6 +67,12 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 	public List<Patient> queryadvise(String name, String time) {
 		// TODO Auto-generated method stub
 		return patientMapper.queryadvise(name, time);
+	}
+
+	@Override
+	public List<Patient> queryByAccount(String account, String name, String time) {
+		// TODO Auto-generated method stub
+		return patientMapper.queryByAccount(account, name, time);
 	}
 
 }

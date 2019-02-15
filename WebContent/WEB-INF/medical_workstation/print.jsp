@@ -36,7 +36,7 @@
 					<ul class="search_content clearfix">
 						<li style="text-align: center;">姓名<input name="name"
 							type="text" class="text_add" />
-						<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
+							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
 						</li>
 					</ul>
 				</form>
@@ -75,8 +75,9 @@
 						<td>${p.code}</td>
 						<td>${p.check_num}</td>
 						<td style="mso-number-format: 'yyyy\-mm\-dd';">${p.time}</td>
-						<td><a href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}">打印体检报告</a>
-						</th>
+						<td><a
+							href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}">打印体检报告</a>
+							</th>
 					</tr>
 				</c:forEach>
 			</tbody>

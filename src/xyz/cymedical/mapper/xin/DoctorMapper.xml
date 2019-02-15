@@ -8,13 +8,14 @@
 
 	<select id="findMyProject" parameterType="String"
 		resultType="java.util.HashMap">
-		select a.*,c.project_id,c.name projectname,e.name keshi
-		,d.*,f.name docname from 
-		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_user f
-		where
-		a.combo_id=b.combo_id and b.project_id=c.project_id and
-		d.project_id=c.project_id and c.param_id=e.param_id
-		and f.user_id=d.user_id and a.code=#{onecode }  order by e.name
+		select s.user_id,s.name docname,z.* from tb_user s right join 
+		(select a.*,c.project_id,c.name projectname,c.price,e.name keshi,d.patient_id patid,d.project_id proid,d.state,d.user_id uid,d.balance,d.patient_project_id,h.company_id cid,h.name cname,h.deposit
+		from 
+		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_patient_combo g,tb_company h
+		where 
+		a.patient_id=g.patient_id and g.combo_id=b.combo_id and b.project_id=c.project_id and 
+		c.project_id=d.project_id and c.param_id=e.param_id and a.`code`=#{0} and h.company_id=a.company_id)z 
+		on s.user_id=z.uid  order by z.name
 	</select>
 
 	<select id="findMyDetail" parameterType="java.lang.Integer"
@@ -40,7 +41,7 @@
 	<update id="receive" parameterType="java.lang.Integer">
 		update
 		tb_patient_project set
-		state ='已接收' where patient_project_id=#{patient_project_id }
+		state ='已接收',user_id=#{1} where patient_project_id=#{0 }
 	</update>
 
 	<insert id="addsummarize">
@@ -59,6 +60,11 @@
 		and c.power_id = d.power_id and d.menu_id=e.menu_id and 
 		user_id=#{0} and a.role_dept_id=#{1} 
 	</select>
+	
+	<update id="BalanceChange" parameterType="java.lang.Integer" >
+		update tb_patient_project set balance='已退费'  where patient_project_id=#{patient_project_id} 
+	</update>
+
 	
 
 </mapper>

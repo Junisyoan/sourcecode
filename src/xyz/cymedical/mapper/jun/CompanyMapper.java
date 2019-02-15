@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.jun.Patient;
 
 /**
 * 2019年1月19日
@@ -111,4 +112,13 @@ public interface CompanyMapper {
 	 * @return	公司信息
 	 */
 	public List<Company> queryByAccount(String account);
+
+	//退费
+	public boolean Refund(int companyid, double deposit);
+
+	//查询人对应病人
+	public List<Patient> findMyPatient(int company_id);
+
+	//根据id找公司
+	public Company findCompany(int company_id);
 }
