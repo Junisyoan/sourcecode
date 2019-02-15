@@ -50,4 +50,11 @@ public class TbMenuBizImp implements TbMenuBiz{
 		return tbMenuMapper.selectCompany(map);
 	}
 
+
+	@Override
+	public int addMenu(Tb_menu tb_menu) {
+		// TODO Auto-generated method stub
+		return tbMenuMapper.addMenu(tb_menu);
+	}
+
 }
