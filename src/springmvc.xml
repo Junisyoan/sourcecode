@@ -51,8 +51,14 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="myDataSource" />
 	</bean>
+<<<<<<< HEAD
+ 
+	<context:component-scan
+		base-package="xyz.cymedical"></context:component-scan>
+=======
 
 	<context:component-scan base-package="xyz.cymedical"></context:component-scan>
+>>>>>>> 4d11fba0541c1037ccbfc71a52e4a93144022be9
 
 	<!-- mvc的注解驱动，通过它可以省去上面的两行bean的配置 -->
 	<mvc:annotation-driven></mvc:annotation-driven>

@@ -21,5 +21,7 @@ public interface TbRoleBiz {
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 	
 	public List<Tb_menu> findMenu(int role_idd);  
+	
+	public List<Tb_menu> findUnMenu(int role_idd);  
 
 }
