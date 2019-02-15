@@ -92,7 +92,7 @@ function allot(rid) {
 		        enable: true,
 		        url:"${path}/powermanage/unallot.handle",
 				autoParam : [ "id", "name" ],
-				//contentType : "application/json;charset=utf-8",
+// 				contentType : "application/json;charset=utf-8",
 				 dataType:'json',
 				type:'GET',
 				otherParam: { "role_id":rid},
@@ -167,14 +167,17 @@ var r_id;
 	}
 	
 	//处理点击添加事件
-	function addMenu(){
+	function addMenu(){ 
 		$.ajax({
 			type: "POST",
-			url: "${path}/menu/addmenu.action",
-			contentType:"application/json;charset=utf-8",
-			data:'{"role_id":'+r_id+',"mids":'+JSON.stringify(getNodesId())+'}',
+			url: "${path}/powermanage/addmenu.handle",
+// 			contentType:"application/json;charset=utf-8",
+			data:{"role_id":r_id,"mids":getNodesId()}, 
+// 			data:'{"role_id":'+r_id+',"mids":'+JSON.stringify(getMyNodesId())+'}',
 			dataType:"text",
+			
 			success : function(data) {
+				alert("77777");
 				var treeObj = $.fn.zTree.getZTreeObj("alloted");
 				treeObj.reAsyncChildNodes(null, "refresh");
 				
@@ -182,7 +185,7 @@ var r_id;
 				treeObj.reAsyncChildNodes(null, "refresh");
 				alert(data);
 			},
-			error:function(data){
+			error:function(data){ 
 				alert("添加异常");
 			}
 		});

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import xyz.cymedical.biz.jiang.TbMenuBiz;
 import xyz.cymedical.entity.jiang.Tb_menu;
+import xyz.cymedical.entity.jiang.Tb_power;
 import xyz.cymedical.mapper.jiang.TbMenuMapper;
 
 
@@ -55,6 +56,27 @@ public class TbMenuBizImp implements TbMenuBiz{
 	public int addMenu(Tb_menu tb_menu) {
 		// TODO Auto-generated method stub
 		return tbMenuMapper.addMenu(tb_menu);
+	}
+
+
+	@Override
+	public int getCount(Tb_menu rm) {
+		// TODO Auto-generated method stub
+		return tbMenuMapper.getCount(rm);
+	}
+
+
+	@Override
+	public List<Tb_power> selectId(int menu_idddd) {
+		// TODO Auto-generated method stub
+		return tbMenuMapper.selectId(menu_idddd);
+	}
+
+
+	@Override
+	public int insert(Tb_menu tb_menu) {
+		// TODO Auto-generated method stub
+		return tbMenuMapper.insert(tb_menu);
 	}
 
 }

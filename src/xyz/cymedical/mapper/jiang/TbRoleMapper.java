@@ -3,6 +3,7 @@ package xyz.cymedical.mapper.jiang;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jiang.Tb_menu;
@@ -23,7 +24,7 @@ public interface TbRoleMapper {
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 	
-	public List<Tb_menu> findMenu(int role_id);
+	public List<Tb_menu> findMenu(int role_idd);
 	
-	public List<Tb_menu> findUnMenu(int role_idd);  
+	public List<Tb_menu> findUnMenu(@Param("rid")int rid);  
 }
