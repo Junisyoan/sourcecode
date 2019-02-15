@@ -51,11 +51,8 @@
 </script>
 <script>
 	function delLog(a) {
-		
 		var log_id = a;
-		
 		var b = confirm("是否删除");
-		
 		if(b == true){
 			$.ajax({
 				 type:"POST",
@@ -74,11 +71,9 @@
 					}else{
 						alert(data);
 					}
-					
 				 },
 			 });
 		}
-
 	}
 </script>
 <title>日志查看</title>
