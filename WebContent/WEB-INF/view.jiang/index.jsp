@@ -34,8 +34,9 @@
 		</script>
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
-				<a href="#" class="navbar-brand"> <small> <img
-						src="images/logo.png">
+				<a href="#" class="navbar-brand"> <small> 
+<!-- 				<img src="images/logo.png"> -->
+					 	团检工作后台 
 				</small>
 				</a> 
 			</div> 
@@ -119,9 +120,9 @@
 <!-- 							<li class="home"><a href="javascript:void(0)" -->
 <%-- 								name="<%=path%>deptmanage/select.handle" title="科室管理" --%>
 <!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li> -->
-<!-- 							<li class="home"><a href="javascript:void(0)" -->
-<%-- 								name="<%=path%>powermanage/selectpower.handle" title="权限管理" --%>
-<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>  -->
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>powermanage/newpower.handle" title="权限管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>新权限管理</a></li> 
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>detail/detailsVeiw.handle" title="细项管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
