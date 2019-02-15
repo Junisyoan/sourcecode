@@ -1,5 +1,6 @@
 package xyz.cymedical.handle.ctx;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class PatientHandle {
 	private List<Patient> patientlist2 = new ArrayList<Patient>();
 	private List<Patient> patientlist3 = new ArrayList<Patient>();
 	private List<Patient> patientlist4 = new ArrayList<Patient>();
+	private List<Patient> patientlist5 = new ArrayList<Patient>();
 
 	private Company company; // 公司信息
 
@@ -120,6 +122,7 @@ public class PatientHandle {
 	@RequestMapping(value = "/print.handle")
 	public ModelAndView print(String name, String time) {
 
+		patientlist5 = patientMapper.querypath(name, time);
 		patientlist = patientMapper.query(name, "", time, "");
 		patientlist2 = patientMapper.queryproject(name, time);
 		patientlist3 = patientMapper.querybrief(name, time);
@@ -132,6 +135,7 @@ public class PatientHandle {
 			mav.addObject("patientlist2", patientlist2);
 			mav.addObject("patientlist3", patientlist3);
 			mav.addObject("patientlist4", patientlist4);
+			mav.addObject("patientlist5", patientlist5);
 		}
 		return mav;
 	}

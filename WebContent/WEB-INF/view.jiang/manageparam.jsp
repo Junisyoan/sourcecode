@@ -25,6 +25,33 @@
 		$("#item").dataTable();
 	});
 </script>
+<script>
+	function delparam(a) {
+		var param_id = a;
+		var b = confirm("是否删除");
+		if(b == true){
+			$.ajax({
+				 type:"POST",
+				 url:"<%=path%>param/delparam.handle",
+				 data:{
+					 "param_id":param_id
+					 },
+				 dataType:"text",
+				 error:function(){
+					 alert('ajax请求请求错误...');
+				 },
+				 success:function(data){
+					if(data=="success"){
+						alert("删除成功！");
+						window.location.href="<%=path%>param/findAllParam.handle";
+					}else{
+						alert(data);
+					}
+				 },
+			 });
+		}
+	}
+</script>
 <title>参数管理</title>
 </head>
 
@@ -69,8 +96,8 @@
 						<td>${p.param_id}</td>
 						<td>${p.pid}</td>
 						<td>${p.name}</td>
-						<td><a
-							href="<%=path%>param/delparam.handle?param_id=${p.param_id}">删除</a></td>
+						<td><input type="button" onclick="delparam('${p.param_id}')"
+							value="删除" style="width: 100px;" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

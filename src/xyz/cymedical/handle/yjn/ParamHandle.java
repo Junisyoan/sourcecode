@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.yjn.ParamBiz;
@@ -35,23 +38,20 @@ public class ParamHandle {
 	}
 
 	// 删除方法
-	@RequestMapping(value = "/delparam.handle")
-	public ModelAndView delparam(String param_id) {
+	@RequestMapping(value = "/delparam.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String delLog(HttpServletRequest req, String param_id) {
+		String result = "";
 
 		flag = paramBiz.delParam(param_id);
+
 		if (flag == true) {
-			System.out.println("成功");
+			result = "success";
 		} else {
-			System.out.println("失败");
+			result = "failure";
 		}
 
-		paramlist = paramBiz.findAllParam();
+		return result;
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.jiang/manageparam");
-		mav.addObject("paramlist", paramlist);
-
-		return mav;
 	}
 
 	// 查找参数

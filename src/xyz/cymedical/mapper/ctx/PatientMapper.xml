@@ -153,4 +153,19 @@
 		</if>
 	</select>
 
+	<select id="querypath"
+		parameterType="xyz.cymedical.entity.jun.Patient"
+		resultType="java.util.HashMap">
+		select a.name,a.fpath,a.code,gro.time from(select
+		pat.`name`,fi.fpath,pat.`code`,pat.company_id from tb_patient pat left
+		join tb_file fi on pat.company_id = fi.company_id)a left join tb_group
+		gro on a.company_id = gro.company_id where 1 = 1
+		<if test="name != null and name != ''">
+			and a.name = #{name}
+		</if>
+		<if test="time != null and time != ''">
+			and gro.time = #{time}
+		</if>
+	</select>
+
 </mapper>

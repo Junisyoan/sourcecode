@@ -34,19 +34,15 @@
 		</script>
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
-<<<<<<< HEAD
 				<a href="#" class="navbar-brand"> <small> 
 <!-- 				<img src="images/logo.png"> -->
 					 	团检工作后台 
 				</small>
 				</a> 
 			</div> 
-=======
-				<a href="#" class="navbar-brand"> <small> <img
-						src="images/logo.png"></small>
+				<a href="#" class="navbar-brand"> <small> <img src="images/logo.png"/></small>
 				</a>
 			</div>
->>>>>>> b1a084f1401f5ab9568495159f10b37956371a23
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
 					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,管理员</span>
@@ -115,7 +111,6 @@
 							class="arrow icon-angle-down"></b></a>
 
 						<ul class="submenu">
-<<<<<<< HEAD
 <!-- 							<li class="home"><a href="javascript:void(0)" -->
 <%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
 <!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
@@ -131,7 +126,6 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>powermanage/newpower.handle" title="权限管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>新权限管理</a></li> 
-=======
 							<!-- 							<li class="home"><a href="javascript:void(0)" -->
 							<%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
 							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
@@ -147,7 +141,6 @@
 							<!-- 							<li class="home"><a href="javascript:void(0)" -->
 							<%-- 								name="<%=path%>powermanage/selectpower.handle" title="权限管理" --%>
 							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>  -->
->>>>>>> b1a084f1401f5ab9568495159f10b37956371a23
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>detail/detailsVeiw.handle" title="细项管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>

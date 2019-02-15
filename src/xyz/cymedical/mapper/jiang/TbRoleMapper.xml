@@ -69,7 +69,7 @@
 	
 		<select id="findUnMenu" parameterType="int" resultType="xyz.cymedical.entity.jiang.Tb_menu" >
 	
-	select * from tb_menu where menu_id not in(select menu_id from tb_power a,tb_role_power b where a.power_id=b.power_id and b.role_id=${role_id}) or superior=0	
+	select * from tb_menu where menu_id not in(select menu_id from tb_power a,tb_role_power b where a.power_id=b.power_id and b.role_id=${rid}) or superior=0	
 	
 	</select>
 

@@ -53,5 +53,7 @@ public interface PatientMapper {
 
 	public List<Patient> queryByAccount(@Param("account") String account, @Param("name") String name,
 			@Param("time") String time);
+	
+	public List<Patient> querypath(@Param("name") String name, @Param("time") String time);
 
 }

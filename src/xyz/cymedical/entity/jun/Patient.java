@@ -26,6 +26,7 @@ public class Patient {
 	private double a;			//临时存储变量
 	
 	private Company company;
+	private CompanyFile companyFile;
 //	private Combo combo;
 	public Patient() {
 		super();
@@ -151,7 +152,7 @@ public class Patient {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-
+	
 //	public Combo getCombo() {
 //		return combo;
 //	}
@@ -159,6 +160,14 @@ public class Patient {
 //	public void setCombo(Combo combo) {
 //		this.combo = combo;
 //	}
+
+	public CompanyFile getCompanyFile() {
+		return companyFile;
+	}
+
+	public void setCompanyFile(CompanyFile companyFile) {
+		this.companyFile = companyFile;
+	}
 
 	public String getPname() {
 		return pname;
