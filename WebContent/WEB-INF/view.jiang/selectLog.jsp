@@ -71,14 +71,80 @@
 					if(data=="success"){
 						alert("删除成功！");
 						window.location.href="<%=path%>log/findAllLog.handle";
-					}else{
-						alert(data);
-					}
-					
-				 },
-			 });
+							} else {
+								alert(data);
+							}
+
+						},
+					});
 		}
 
+	}
+</script>
+<script>
+	function selectAll() {
+		
+		var arr = document.getElementsByName("checkin");
+		for(var i = 0; i < arr.length; i++){
+			if(!arr[i].disabled){
+				arr[i].checked = true;
+			}
+		}
+	}
+	
+	function cancelAll() {
+		
+		var arr = document.getElementsByName("checkin");
+		for(var i = 0; i < arr.length; i++){
+				arr[i].checked = false;
+		}
+		
+	}
+</script>
+<script>
+	function del() {
+		
+		var arr = document.getElementsByName("checkin");
+		var arrin = new Array();
+		for(i = 0; i < arr.length; i++){
+			if(arr[i].checked){
+				arrin.push(arr[i].value);
+			}
+		}
+		if(arrin.length > 0){
+			alert(arrin);
+			var b = confirm("是否删除");
+			
+			if(b == true){
+				
+				$.ajax({
+					 type:"POST",
+					 url:"<%=path%>log/delLog.handle",
+					 data:{
+						 "arrin":arrin
+						 },
+					 dataType:"json",
+					 traditional:true,
+					 error:function(){
+						 alert("删除成功！");
+						 window.location.href="<%=path%>log/findAllLog.handle";
+						 <!--alert('ajax请求请求错误...');-->
+					 },
+					 success:function(data){
+						if(data=="success"){
+							alert("删除成功！");
+							window.location.href="<%=path%>log/findAllLog.handle";
+								} else {
+									alert(data);
+								}
+
+							},
+						});
+				
+			}
+		}else{
+			alert("未勾选正确的移动项");
+		}
 	}
 </script>
 <title>日志查看</title>
@@ -90,6 +156,9 @@
 		<span class="title_name">日志查看</span>
 		<p align="center">
 			<button type="button" onclick="tableToExcel('item','data')">导出Excel</button>
+			<button type="button" onclick="selectAll()">全选</button>
+			<button type="button" onclick="cancelAll()">全不选</button>
+			<button type="button" onclick="del()">删除</button>
 		</p>
 		<p align="center">&nbsp;</p>
 		<table class="table table-striped table-bordered table-hover"
@@ -100,19 +169,17 @@
 					<th>用户</th>
 					<th>具体操作</th>
 					<th>操作时间</th>
-					<th>删除</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				</tr>
 				<c:forEach items="${loglist}" var="l" varStatus="s">
 					<tr>
 						<td>${s.index + 1}</td>
 						<td>${l.name}</td>
 						<td>${l.opera}</td>
 						<td>${l.time}</td>
-						<td><input type="button" onclick="delLog('${l.log_id}')" value="删除"
-							style="width: 100px;" /></td>
+						<td><input type="checkbox" name="checkin" value="${l.log_id}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
