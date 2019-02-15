@@ -82,8 +82,8 @@ public class BarCodeTools {
 			// 生成二维码
 			bi = jbarcode13.createBarcode(barCode);
 			// 定义图片名称
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
-			String imgName = sdf.format(new Date()) + "_" + jbarCode;
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+			String imgName = jbarCode;
 			// 保存二维码图片
 			FileOutputStream fileOutputStream = null;
 			String imgPath = savePath + imgName + "." + imgFormat;

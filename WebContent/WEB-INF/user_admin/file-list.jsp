@@ -46,8 +46,8 @@
 							<td>${l.ftime}</td>
 							<td>${l.cstate }</td>
 							<td>
-								<a href="javascript:;" onclick="delFile('${l.file_id}','${l.fname }');">删除</a>|
-								<a href="javascript:;" onclick="downloadFile('${l.file_id}');">导出</a>
+								<button type="button" class="btn btn-warning" onclick="delFile('${l.file_id}','${l.fname }');">删除</button> 
+								<button type="button" class="btn btn-primary" onclick="downloadFile('${l.file_id}');">导出</button> 
 							</td>
 						</tr>
 					</c:forEach>

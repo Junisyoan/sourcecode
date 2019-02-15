@@ -105,12 +105,10 @@ public class NurseHandle {
 		companyFile = companyFileBiz.queryFileByBillerId(bid);
 		String path = companyFile.getFpath();
 		File file = new File(path);
-		path = file.getPath();
-		
+		path = file.getParent()+File.separator;
 		//生成条形码
 		String imgFormat = "jpeg";
 		for(int i = 0;i<cps.size();i++) {
-			System.out.println(cps.get(i).getCode());
 			BarCodeTools.createBarCode(path, cps.get(i).getCode(), imgFormat);
 		}
 		
@@ -688,7 +686,7 @@ public class NurseHandle {
 			
 			//设置属性
 			request.getSession().setAttribute("path", path);
-			request.getSession().setAttribute("user", nurse);
+			request.getSession().setAttribute("nurse", nurse);
 			
 			//设置地址和模型
 			modelAndView.setViewName("WEB-INF/medical_workstation/index");
