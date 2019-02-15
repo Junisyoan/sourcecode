@@ -329,6 +329,11 @@ public class CompanyHandle {
 				}
 			}
 		} else {
+			try {
+				response.getWriter().println(ResponseTools.returnMsgAndBack("文件存在"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			System.out.println("目录不存在");
 		}
 		return null;
