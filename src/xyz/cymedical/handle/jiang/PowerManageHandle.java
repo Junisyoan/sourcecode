@@ -145,7 +145,7 @@ public class PowerManageHandle {
 			return str;
 		}
 		//新权限显示用户
-		@RequestMapping(value = "/newpower.handle")
+		@RequestMapping(value = "/newpower.handle",method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 		public ModelAndView newPower(HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView();
 			System.out.println("youmei有進入新权限");
@@ -163,14 +163,15 @@ public class PowerManageHandle {
 		 * 
 		 *  
 		 */
-		@ResponseBody
-		@RequestMapping(value= "/allot.handle")
-		public List<Map<String, Object>> allot(String role_id) {
+		 
+		@RequestMapping(value= "/allot.handle",method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+		public @ResponseBody String allot( String role_id) {
 
 			System.out.println(1);
 //			List<Menu> menuList = menuBiz.findMenu(role.getRole_id());
-			System.out.println(role_id);
+//			System.out.println(role_id);
 			int role_idd=Integer.valueOf(role_id);
+//		 	int role_idd=role.getRole_id();
 			
 			System.out.println("点击权限名 弹出id="+role_idd);
 			List<Tb_menu> menuList=tbRoleBiz.findMenu(role_idd);
@@ -180,11 +181,30 @@ public class PowerManageHandle {
 			List<Map<String, Object>> mapList = menuToMap(menuList); 
 			
 			JSONArray jb=JSONArray.fromObject(mapList) ;
-			System.out.println("json="+jb); 
+			//System.out.println("json="+jb); 
 //			System.out.println("bbb="+);
-			return jb;
-//			return mapList;
+			//return jb;
+		//String dddd="132"; 
+			return jb.toString();
 
+		}
+		
+		/**
+		 * 查找未分配权限
+		 * 
+		 * @return
+		 */ 
+		@RequestMapping(value= "/unallot.handle" ,method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+		public  @ResponseBody String  unallot( String role_id) {
+ 
+			System.out.println("未分配权限");
+			int role_idd=Integer.valueOf(role_id);
+			List<Tb_menu> menuList=tbRoleBiz.findUnMenu(role_idd);
+
+			List<Map<String, Object>> mapList = menuToMap(menuList);
+
+			JSONArray jb=JSONArray.fromObject(mapList) ;
+			return jb.toString();
 		}
 		
 		/**
@@ -208,7 +228,7 @@ public class PowerManageHandle {
 				if (menu.getSuperior()!= 0) {
 					mapList.add(node);
 				} else {
-//					node.put("open", true);// 节点展开
+					node.put("open", true);// 节点展开
 
 					for (Tb_menu m : menuList) {
 						if (m.getSuperior() == menu.getMenu_id()) {
@@ -224,7 +244,9 @@ public class PowerManageHandle {
 			return mapList;
 		}
  
-		
+	
+ 
+	 
 		
 		
 }

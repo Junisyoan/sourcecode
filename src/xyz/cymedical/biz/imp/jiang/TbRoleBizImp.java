@@ -67,6 +67,13 @@ public class TbRoleBizImp implements TbRoleBiz{
 	}
 
 
+	@Override
+	public List<Tb_menu> findUnMenu(int role_idd) {
+		// TODO Auto-generated method stub
+		return tbRoleMapper.findUnMenu(role_idd);
+	}
+
+
 	 
 
 }

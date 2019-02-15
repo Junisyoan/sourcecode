@@ -41,7 +41,7 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="myDataSource" />
 	</bean>
-
+ 
 	<context:component-scan
 		base-package="xyz.cymedical"></context:component-scan>
 

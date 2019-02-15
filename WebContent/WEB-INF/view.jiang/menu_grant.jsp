@@ -35,12 +35,15 @@ function allot(rid) {
 	        enable: true,
 		    url:"${path}/powermanage/allot.handle",
 			autoParam : [ "id", "name" ],
-// 			contentType : "application/json;charset=utf-8",
+		 //	contentType : "application/json;charset=utf-8",
+			 dataType:'json',
+			type:'GET',
 			otherParam: { "role_id":rid},
-			dataType:"json",
+// 			dataType:"json",
 			dataFilter : function filter(treeId, parentNode, childNodes) {
 							if (!childNodes) return null;
 							for (var i = 0, l = childNodes.length; i < l; i++) {
+// 							alert(childNodes[i].name);
 								childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
 							}
 							return childNodes;
@@ -49,7 +52,7 @@ function allot(rid) {
 						  {
 						   alert(msg);
 						  },
-			 failure:function (result) {  
+			 error:function (result) {  
 					            alert('Failed');  
 					         }
 		},
@@ -60,21 +63,17 @@ function allot(rid) {
 				pIdKey : "pId",
 				rootPId : "0"
 			}
- 		}
-		//	,
-// 		callback : {
-// 		onSuccess: function(){
-// 				alter("jb")
-// 				},
-// 		onClick : function(treeId, treeNode) {
-// 				alter("(0)jb")
-// 				var treeObj = $.fn.zTree.getZTreeObj(treeNode);
-// 				var selectedNode = treeObj.getSelectedNodes()[0];
-// 				$("#txtId").val(selectedNode.id);
-// 				$("#txtAddress").val(selectedNode.name);
-// 			}
-// 		}
-	//节点点击事件
+ 		},
+		callback : {
+			onClick : function (treeId, treeNode) {
+				var treeObj = $.fn.zTree.getZTreeObj(treeNode);
+// 				var treeObj = $.fn.zTree.getZTreeObj("#alloted");
+				var selectedNode = treeObj.getSelectedNodes()[0];
+				$("#txtId").val(selectedNode.id);
+				$("#txtAddress").val(selectedNode.name);
+				
+			}
+		}
 	};
 	return setting;
 }
@@ -87,13 +86,15 @@ function allot(rid) {
 			check : {
 				chkStyle: "checkbox",
 				enable : true,
-				chkboxType: { "Y": "ps", "N": "ps" }
+// 				chkboxType: { "Y": "ps", "N": "ps" }
 			},
 		    async: {
 		        enable: true,
-			    url:"${path}/menu/unallot.action",
+		        url:"${path}/powermanage/unallot.handle",
 				autoParam : [ "id", "name" ],
-				contentType : "application/json;charset=utf-8",
+				//contentType : "application/json;charset=utf-8",
+				 dataType:'json',
+				type:'GET',
 				otherParam: { "role_id":rid},
 				dataFilter : function filter(treeId, parentNode, childNodes) {
 								if (!childNodes) return null;
@@ -114,7 +115,7 @@ function allot(rid) {
 			callback : {
 				onClick : function (treeId, treeNode) {
 					var treeObj = $.fn.zTree.getZTreeObj(treeNode);
-					//var treeObj = $.fn.zTree.getZTreeObj("#alloted");
+// 					var treeObj = $.fn.zTree.getZTreeObj("#alloted");
 					var selectedNode = treeObj.getSelectedNodes()[0];
 					$("#txtId").val(selectedNode.id);
 					$("#txtAddress").val(selectedNode.name);
@@ -130,9 +131,9 @@ var r_id;
 		
 		$("#rId").val(rid);
 		r_id=rid;
-
+		 
 		var zTree1 = $.fn.zTree.init($("#alloted"), allot(rid));
-// 		var zTree2 = $.fn.zTree.init($("#unallot"), unAllot(rid));
+		var zTree2 = $.fn.zTree.init($("#unallot"), unAllot(rid));
 		
 	}
 	
