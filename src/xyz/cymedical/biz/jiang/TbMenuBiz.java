@@ -11,6 +11,8 @@ public interface TbMenuBiz {
 	
 	public int addMenuid(String name);
 	
+	public int addMenu(Tb_menu tb_menu);
+	  
 	public int delete(int menu_id);
 	
 	public int upMenu(Tb_menu tb_menu);
