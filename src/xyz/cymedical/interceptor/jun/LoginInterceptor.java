@@ -40,6 +40,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 		//没有附带数据，判断是不是已经登录
 		}else {
 			Tb_user user = (Tb_user)request.getSession().getAttribute("user");
+			
+			System.out.println("user="+user);
+			
 			Company company = (Company)request.getSession().getAttribute("userCompany");
 			Nurse nurse =(Nurse) request.getSession().getAttribute("nurse");
 			if (user==null&&company==null&nurse==null) {

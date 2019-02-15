@@ -35,8 +35,8 @@ public class BriefBizImpl  implements BriefBiz {
 	}
 
 	@Override
-	public boolean Normal(String result, String id) {
-		return briefMapper.Normal(result, id);
+	public boolean Normal(String result,String tips, String id) {
+		return briefMapper.Normal(result,tips, id);
 	}
 
 	@Override

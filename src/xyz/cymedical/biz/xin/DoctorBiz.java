@@ -5,6 +5,7 @@ import java.util.Map;
 
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.xin.Summarize;
 
 
 /**
@@ -43,6 +44,12 @@ public interface DoctorBiz {
 
 	//修改项目为已退费
 	public boolean BalanceChange(int patient_project_id);
+
+	//根据角色部门id查找身份
+	public String getStatus(int role_dept_id);
+
+	//根据id找总结
+	public Summarize findMySummarize(int sumid);
 
 
 }

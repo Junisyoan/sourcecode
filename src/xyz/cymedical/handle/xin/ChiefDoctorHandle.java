@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.xin.BriefBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
+import xyz.cymedical.entity.xin.Summarize;
 
 //总检医生
 @Controller
@@ -47,6 +48,9 @@ public class ChiefDoctorHandle {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("plist", plist);
+		if(plist!=null && plist.size()>0) {
+			mav.addObject("patient", plist.get(0));//项目信息里携带了病人信息
+		}
 		mav.addObject("dlist", dlist);
 		mav.addObject("onecode", onecode);
 		
@@ -95,16 +99,28 @@ public class ChiefDoctorHandle {
 	public ModelAndView tosummarize(String patientid, String projectid, String projectname,String keshi,String code) {
 
 		System.out.println("tosummarize....");
+		//初始化
+		ModelAndView mav=new ModelAndView();
 		
 		dlist = doctorbiz.findAllDetail(mycode);
 		
 		System.out.println("跳转至总结dlist..."+dlist);
 
 		String time=(String) dlist.get(0).get("time");
-		
 		System.out.println("time="+time);
 		
-		ModelAndView mav=new ModelAndView();
+		//判断是否已总结
+		int sumid=Integer.parseInt(dlist.get(0).get("summarize_id").toString());
+		
+		if(sumid>0) {
+			Summarize summarize=doctorbiz.findMySummarize(Integer.valueOf(sumid));			//总结列表
+			System.out.println("summarize="+summarize);
+			mav.addObject("flag", "true");
+			mav.addObject("summarize", summarize);
+		}else {
+			mav.addObject("flag", "false");
+		}
+		
 		mav.addObject("dlist", dlist);
 		mav.addObject("time", time);
 		mav.addObject("mycode", mycode);
@@ -115,15 +131,15 @@ public class ChiefDoctorHandle {
 	
 	// 总结
 	@RequestMapping(value = "/dosummarize.handle")
-	public void summary(String advice, String guide) {
+	public void summary(String advise, String guide) {
 
 		System.out.println("dosummarize");
-		System.out.println("advice="+advice);
+		System.out.println("advice="+advise);
 		System.out.println("guide="+guide);
 		
 		dlist = doctorbiz.findAllDetail(mycode);
 		
-		doctorbiz.addsummarize(advice,guide);
+		doctorbiz.addsummarize(advise,guide);
 		
 		String sumid=doctorbiz.findsumid();
 		

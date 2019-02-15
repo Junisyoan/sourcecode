@@ -1,13 +1,17 @@
 package xyz.cymedical.handle.xin;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.xin.DoctorBiz;
@@ -38,8 +42,8 @@ public class DoctorHandle {
 
 	
 	// 查询一维码对应病人的导检单
-	@RequestMapping(value = "/login.handle")
-	public ModelAndView login(HttpServletRequest request,String account,String pwd) {
+	@RequestMapping(value = "/login.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String login(HttpServletRequest request,String account,String pwd) {
 
 		System.out.println("username="+account);
 		System.out.println("pwd="+pwd);
@@ -47,31 +51,62 @@ public class DoctorHandle {
 		Tb_user user = new Tb_user();
 		user=doctorbiz.login(account,pwd);
 		System.out.println("user="+user);
-
-
+		String Status="";
+		
 		if(user!=null) {
-			ModelAndView mav = new ModelAndView();
-			request.getSession().setAttribute("USER", user);
-			
-			
-			//用户对应菜单列表
-			List<Tb_menu> mlist = doctorbiz.getMyMenu(user.getUser_id(),user.getRole_dept_id());
-			System.out.println("mlist="+mlist);
-			
-			
-			mav.addObject("mlist", mlist);
-			mav.addObject("USER", user);
-			mav.setViewName("WEB-INF/doctor.xin/doctorindex");
-			return mav;
-			
-		}else {
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("doctorlogin");
-			return mav;
+			request.getSession().setAttribute("user", user);
+			//身份判断,只有身份为医生或总检医生才能登陆
+			String type=doctorbiz.getStatus(user.getRole_dept_id());
+			if(type.equals("医生") || type.equals("总检医生")) {
+				Status=type;
+			}
 		}
+		return Status;
+		
+		
+//		if(user!=null) {
+//			ModelAndView mav = new ModelAndView();
+//			request.getSession().setAttribute("user", user);
+//			
+//			//用户对应菜单列表
+//			List<Tb_menu> mlist = doctorbiz.getMyMenu(user.getUser_id(),user.getRole_dept_id());
+//			System.out.println("mlist="+mlist);
+//			
+//			mav.addObject("mlist", mlist);
+//			mav.addObject("user", user);
+//			mav.setViewName("WEB-INF/doctor.xin/doctorindex");
+//			return mav;
+//			
+//		}else {
+//			ModelAndView mav = new ModelAndView();
+//			mav.setViewName("doctorlogin");
+//			return mav;
+//		}
 		
 
 	}
+	
+	//去往index
+	@RequestMapping(value = "/toindex.handle")
+	public ModelAndView toindex(HttpServletRequest req) {
+		
+		ModelAndView mav = new ModelAndView();
+		Tb_user user=(Tb_user) req.getSession().getAttribute("user");
+		
+		//用户对应菜单列表
+		List<Tb_menu> mlist = doctorbiz.getMyMenu(user.getUser_id(),user.getRole_dept_id());
+		System.out.println("mlist="+mlist);
+		
+		mav.addObject("mlist", mlist);
+		mav.addObject("user", user);
+		mav.setViewName("WEB-INF/doctor.xin/doctorindex");
+		return mav;
+
+	}
+	
+	
+	
+	
 	
 	
 	// 查询一维码对应病人的导检单
@@ -146,7 +181,7 @@ public class DoctorHandle {
 		System.out.println("patient_project_id=" + patient_project_id);
 		System.out.println("onecode=" + onecode);
 
-		Tb_user user=(Tb_user) req.getSession().getAttribute("USER");
+		Tb_user user=(Tb_user) req.getSession().getAttribute("user");
 		
 		boolean f=doctorbiz.receive(Integer.valueOf(patient_project_id),user.getUser_id());
 		
@@ -159,15 +194,22 @@ public class DoctorHandle {
 		return mav;
 	}
 
-//	//小结
-//	@RequestMapping(value = "/brief.handle")
-//	public ModelAndView brief(String data) {
-//
-//		System.out.println("data...."+data);
+	//退出
+	@RequestMapping(value = "/exit.handle")
+	public void brief(HttpServletRequest request,HttpServletResponse resp) {
+		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/";
+		//退出时销毁登录信息
+		request.getSession().invalidate();
 //		ModelAndView mav = new ModelAndView();
-////		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
-//
+//		mav.setViewName("doctorlogin");
 //		return mav;
-//	}
+		try {
+			resp.sendRedirect(path+"doctorlogin.jsp?login=3");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

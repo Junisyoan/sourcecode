@@ -11,8 +11,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>登录</title>
+<link href="<%=path %>css/login.css" rel="stylesheet" type="text/css" />
+<script src="<%=path%>js/jquery-1.4.2.min.js" ></script>
 
-<link href="<%=path %>css/login.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" >
+
+function login(){
+	 var account = document.getElementById("account").value;
+	 var pwd = document.getElementById("pwd").value;
+
+	 $.ajax({
+		 type:"POST",
+		 url:"<%=path%>doctor/login.handle?login=1",
+		 data:{
+			 "account":account,
+			 "pwd":pwd,
+			 },
+		 dataType:"text",
+		 error:function(){
+			 alert('ajax请求请求错误...');
+		 },
+		 success:function(data){
+			if(data!=""){
+				alert("登陆成功！您的身份为"+data+"!");
+						window.location.href="<%=path %>doctor/toindex.handle?login=2";
+			}else{
+				alert("登录失败，账号密码错误");
+			}
+			
+		 },
+	 });
+
+}
+	</script>
+
+
 
 </head>
 
@@ -21,29 +54,31 @@
 <div class="login_m">
 	<div class="login_boder">
 	
-	<form  action="<%=path%>doctor/login.handle" method="post">
+<%-- 	<form  action="<%=path%>doctor/login.handle?login=1" method="post"> --%>
 	
 		<div class="login_padding">
 			<h2>用户名</h2>
 			<label>
-				<input type="text" id="account" name="account" class="txt_input txt_input2">
+				<input type="text" id="account" name="account" class="txt_input txt_input2" />
 			</label>
 			<h2>密码</h2>
 			<label>
-				<input type="password" name="pwd" id="pwd" class="txt_input">
+				<input type="password" name="pwd" id="pwd" class="txt_input" />
 			</label>
 			<div class="rem_sub">
 				<div class="rem_sub_l">
-					<input type="checkbox" name="checkbox" id="save_me">
+					<input type="checkbox" name="checkbox" id="save_me" />
 					<label for="checkbox">记住</label>
 				</div>
 				<label>
-					<input type="submit" class="sub_button" name="button" id="button" value="登录" style="opacity: 0.7;">
+				<a onclick="login()">
+					<input type="button" class="sub_button" name="button" value="登录" style="opacity: 0.7;" />
+				</a>
 				</label>
 			</div>
 		</div>
 		
-		</form>
+<!-- 		</form> -->
 	</div><!--login_boder end-->
 </div><!--login_m end-->
 

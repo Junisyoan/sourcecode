@@ -24,7 +24,7 @@ public interface BriefMapper {
 	
 
 	//普通小结
-	public boolean Normal(String result, String id);
+	public boolean Normal(String result,String tips, String id);
 	//影像小结
 	public boolean Photo(String result,String path,String id);
 	//检验小结

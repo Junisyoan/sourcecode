@@ -15,7 +15,7 @@ public interface BriefBiz {
 	 * @return	
 //	 */
 	
-	public boolean Normal(String result,String id);
+	public boolean Normal(String result,String tips,String id);
 	
 	public boolean Photo(String result,String path,String id);
 	
