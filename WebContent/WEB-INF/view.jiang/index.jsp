@@ -13,13 +13,13 @@
 <title>团检工作后台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" /> 
+<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>assets/css/ace-rtl.min.css" />
 <link rel="stylesheet" href="<%=path%>assets/css/ace-skins.min.css" />
-<link rel="stylesheet" href="<%=path%>css/style.css" /> 
-<script src="<%=path%>assets/js/ace-extra.min.js"></script> 
-<script src="<%=path%>assets/js/jquery.min.js"></script> 
+<link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>assets/js/ace-extra.min.js"></script>
+<script src="<%=path%>assets/js/jquery.min.js"></script>
 <script src="<%=path%>assets/js/jquery.min.js"></script>
 
 
@@ -34,12 +34,19 @@
 		</script>
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
+<<<<<<< HEAD
 				<a href="#" class="navbar-brand"> <small> 
 <!-- 				<img src="images/logo.png"> -->
 					 	团检工作后台 
 				</small>
 				</a> 
 			</div> 
+=======
+				<a href="#" class="navbar-brand"> <small> <img
+						src="images/logo.png"></small>
+				</a>
+			</div>
+>>>>>>> b1a084f1401f5ab9568495159f10b37956371a23
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
 					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,管理员</span>
@@ -48,9 +55,9 @@
 					<li><a href="javascript:ovid(0)" class="change_Password">修改密码</a></li>
 					<li><a href="javascript:ovid(0)" id="Exit_system">退出系统</a></li>
 
-				</ul> 
-			</div> 
-		</div> 
+				</ul>
+			</div>
+		</div>
 	</div>
 	<div class="main-container" id="main-container">
 		<script type="text/javascript">
@@ -77,13 +84,13 @@
 						<span class="btn btn-success"></span> <span class="btn btn-info"></span>
 						<span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
 					</div>
-				</div> 
+				</div>
 				<ul class="nav nav-list" id="nav_list">
 					<li class="home"><a href="javascript:void(0)" name="home.html"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
-					<li><a href="#" class="dropdown-toggle"><i
-							class="icon-desktop"></i><span class="menu-text"> 1231 </span><b
+					<li><a href="#" class="dropdown-toggle">
+							<i class="icon-desktop"></i><span class="menu-text"> 1231 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
@@ -92,7 +99,7 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="未到期询价项目.html" title="未到期询价项目" class="iframeurl"><i
 									class="icon-double-angle-right"></i>12345</a></li>
-							 
+
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
@@ -101,13 +108,14 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="待确认订单.html" title="待确认订单" class="iframeurl"><i
 									class="icon-double-angle-right"></i>123</a></li>
-							 
+
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b
 							class="arrow icon-angle-down"></b></a>
-							
+
 						<ul class="submenu">
+<<<<<<< HEAD
 <!-- 							<li class="home"><a href="javascript:void(0)" -->
 <%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
 <!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
@@ -123,6 +131,23 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>powermanage/newpower.handle" title="权限管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>新权限管理</a></li> 
+=======
+							<!-- 							<li class="home"><a href="javascript:void(0)" -->
+							<%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
+							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
+							<!-- 							<li class="home"><a href="javascript:void(0)" -->
+							<%-- 								name="<%=path%>menumanage/select.handle" title="菜单管理" --%>
+							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>菜单管理</a></li> -->
+							<!-- 							<li class="home"><a href="javascript:void(0)" -->
+							<%-- 								name="<%=path%>rolemanage/select.handle" title="角色管理" --%>
+							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>角色管理</a></li> -->
+							<!-- 							<li class="home"><a href="javascript:void(0)" -->
+							<%-- 								name="<%=path%>deptmanage/select.handle" title="科室管理" --%>
+							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li> -->
+							<!-- 							<li class="home"><a href="javascript:void(0)" -->
+							<%-- 								name="<%=path%>powermanage/selectpower.handle" title="权限管理" --%>
+							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>  -->
+>>>>>>> b1a084f1401f5ab9568495159f10b37956371a23
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>detail/detailsVeiw.handle" title="细项管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>细项管理</a></li>
@@ -134,34 +159,36 @@
 								class="iframeurl"><i class="icon-double-angle-right"></i>套餐管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>companys/companysVeiw.handle" title="账号管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li> 
+								class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>powermanage/select.handle" title="权限用户管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li> 
+								class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>log/findAllLog.handle" title="日志管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>日志管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>param/findAllParam.handle" title="参数管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>参数管理</a></li>
-				 		</ul></li> 
-				 		
-				 		<c:forEach items="${mlist }" var="m" varStatus="s">
-					      	<c:if test="${m.superior==0}">
-					      		 <li>
-					      		 <a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span class="menu-text"> ${m.name} </span><b class="arrow icon-angle-down"></b></a>
-				 				 <ul class="submenu"> 
-						      	   <c:forEach items="${mlist }" var="p" varStatus="s">
-						      		  <c:if test="${m.menu_id==p.superior}">
-					                          <li class="home"><a  href="javascript:void(0)" name="<%=path %>${p.link }"  title="${p.name}" class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li> 
-		 							  </c:if>
-	 							   </c:forEach>
-				 				</ul> 
-				 				</li>
-				     		 </c:if>
-				      </c:forEach>
-						
-				</ul> 
+						</ul></li>
+
+					<c:forEach items="${mlist }" var="m" varStatus="s">
+						<c:if test="${m.superior==0}">
+							<li><a href="#" class="dropdown-toggle"><i
+									class="icon-desktop"></i><span class="menu-text">
+										${m.name} </span><b class="arrow icon-angle-down"></b></a>
+								<ul class="submenu">
+									<c:forEach items="${mlist }" var="p" varStatus="s">
+										<c:if test="${m.menu_id==p.superior}">
+											<li class="home"><a href="javascript:void(0)"
+												name="<%=path %>${p.link }" title="${p.name}"
+												class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li>
+										</c:if>
+									</c:forEach>
+								</ul></li>
+						</c:if>
+					</c:forEach>
+
+				</ul>
 				<div class="sidebar-collapse" id="sidebar-collapse">
 					<i class="icon-double-angle-left"
 						data-icon1="icon-double-angle-left"
@@ -254,11 +281,11 @@
 	<div class="change_Pass_style" id="change_Pass">
 		<ul class="xg_style">
 			<li><label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label><input
-				name="原密码" type="password" class="" id="password"></li>
+				name="原密码" type="password" class="" id="password" onblur="checkPwd()"/></li>
 			<li><label class="label_name">新&nbsp;&nbsp;密&nbsp;码</label><input
-				name="新密码" type="password" class="" id="Nes_pas"></li>
+				name="新密码" type="password" class="" id="Nes_pas"/></li>
 			<li><label class="label_name">确认密码</label><input name="再次确认密码"
-				type="password" class="" id="c_mew_pas"></li>
+				type="password" class="" id="c_mew_pas"/></li>
 
 		</ul>
 		<!--       <div class="center"> <button class="btn btn-primary" type="button" id="submit">确认修改</button></div>-->
@@ -299,7 +326,33 @@
 	<script src="<%=path%>assets/layer/layer.js" type="text/javascript"></script>
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
-		jQuery(document).ready(
+	var check;
+	function checkPwd(){
+		if($("#password").val() == ""){
+			return;
+		}
+		$.ajax({
+			url:"<%=path%>usermanage/checkPwd.handle",
+			type:"POST",
+			dataType:"text",
+			data:{
+				pwd:$("#password").val()
+			},
+			success:function(msg){
+				if(msg == "error"){
+					check = 0;
+					layer.alert('密码输入有误!',{title: '提示框',icon:0,});
+				}else{
+					check = 1;
+				} 
+			},
+			error : function() {
+				alert("异常！");
+			}
+		});
+	}
+	
+	jQuery(document).ready(
 				function() {
 					//初始化宽度、高度    
 					$("#main-container").height($(window).height() - 76);
@@ -367,6 +420,7 @@
 		})
 		//时间设置
 		function currentTime() {
+			var oldpwd = document.getElementById("password").value;
 			var d = new Date(), str = '';
 			str += d.getFullYear() + '年';
 			str += d.getMonth() + 1 + '月';
@@ -399,6 +453,14 @@
 								});
 								return false;
 							}
+							if (check == 0) {
+								layer.alert('原密码有误!', {
+									title : '提示框',
+									icon : 0,
+
+								});
+								return false;
+							}
 							if ($("#Nes_pas").val() == "") {
 								layer.alert('新密码不能为空!', {
 									title : '提示框',
@@ -425,13 +487,24 @@
 
 								});
 								return false;
-							} else {
-								layer.alert('修改成功！', {
-									title : '提示框',
-									icon : 1,
-								});
-								layer.close(index);
-							}
+							} 
+							$.ajax({
+								url:"<%=path%>usermanage/changePwd.handle",
+								type:"POST",
+								dataType:"text",
+								data:{
+									"pwd":$("#Nes_pas").val()
+								},
+								success:function(msg){
+									alert(msg);
+					    			if(msg == "密码修改成功"){
+					    				layer.close(index);
+					    			}
+								},
+								error:function(){
+									alert("异常");
+								}
+							});
 						}
 					});
 				});
@@ -440,8 +513,7 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "登录.html";
-
+				window.top.location.href = "<%=path%>user/exit.handle";
 			});
 		});
 	</script>
