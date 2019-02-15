@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import xyz.cymedical.biz.jiang.TbRoleBiz;
+import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_role;
 import xyz.cymedical.mapper.jiang.TbRoleMapper;
 
@@ -56,6 +57,13 @@ public class TbRoleBizImp implements TbRoleBiz{
 	public List<Map<String, Object>> selectCompany(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return tbRoleMapper.selectCompany(map);
+	}
+
+
+	@Override
+	public List<Tb_menu>  findMenu(int role_idd) {
+		// TODO Auto-generated method stub
+		return tbRoleMapper.findMenu(role_idd);
 	}
 
 

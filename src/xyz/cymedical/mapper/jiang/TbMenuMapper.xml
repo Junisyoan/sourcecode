@@ -13,8 +13,13 @@
 	</select>
  
  	<select id="addMenuid"   parameterType="String" resultType="int">
-		select * from tb_menu  where name=#{name}
+		select count(*) from tb_menu  where name = #{name}
 	</select>
+  
+ 	 <insert id="addMenu" parameterType="xyz.cymedical.entity.jiang.Tb_menu">
+		insert into tb_menu(menu_id,name,link,superior) values(#{menu_id},#{name},#{link},#{superior})
+	</insert>
+  
   
   
 	<delete id="delete" parameterType="int" >

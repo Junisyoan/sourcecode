@@ -34,6 +34,7 @@ import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
+import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.mapper.jun.CompanyMapper;
 import xyz.cymedical.tools.jun.ResponseTools;
 

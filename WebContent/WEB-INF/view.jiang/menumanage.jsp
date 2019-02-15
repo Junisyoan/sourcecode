@@ -50,7 +50,7 @@
      <div class="page-content">
     <div class="add_user_style clearfix">
     
-    	<form action="<%=path%>powermanage/addmenuid.handle" method="post" id="add">
+    	<form action="<%=path%>menumanage/addmenu.handle" method="post" id="add">
   		   <ul class="clearfix">
      
       
@@ -211,7 +211,7 @@ function loadAjax(){
 				
 // 				 var datato=data.val();
 				
-				 window.location.href="<%=path%>menumanage/adddeptto.action";
+<%-- 				 window.location.href="<%=path%>menumanage/adddeptto.action"; --%>
 			 }
 		
 		});

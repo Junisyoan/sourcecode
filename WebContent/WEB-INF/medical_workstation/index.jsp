@@ -91,6 +91,7 @@
 					<li class="home"><a href="javascript:void(0)" name="home.html"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
+							
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-desktop"></i><span class="menu-text">团检人员管理 </span><b
 							class="arrow icon-angle-down"></b></a>
@@ -102,6 +103,11 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getFileList.handle" title="团检表列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检文件列表</a></li>
+								
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path %>nurse/toRefund.handle" title="团检退费" class="iframeurl"><i
+									class="icon-double-angle-right"></i>团检退费</a></li>
+								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单"
 								class="iframeurl"><i class="icon-double-angle-right"></i>未结算账单</a></li>
@@ -126,6 +132,9 @@
 								name="<%=path%>patient/findpatient.handle" title="体检人员查询"
 								class="iframeurl"><i class="icon-double-angle-right"></i>体检人员查询
 							</a></li>
+							
+							
+							
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>logcompany/findalllogcompany.handle" title="团检单位对账"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检单位对账

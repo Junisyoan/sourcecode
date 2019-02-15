@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_role;
 
 @Repository 
@@ -21,4 +22,6 @@ public interface TbRoleMapper {
 	public int upRole(int role_id,String name);
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
+	
+	public List<Tb_menu> findMenu(int role_id);
 }
