@@ -51,6 +51,8 @@
      </div>       
       </div>
       </div>
+      
+      
     </div>
     </div>
     </div>
@@ -70,10 +72,11 @@
 <c:forEach items="${roleall}" var="u" varStatus="s">
        <tr>
         <td>${u.role_id}</td><td>${u.name}</td> 
-        <td><button type="button" class="btn btn-info Product_Details">详情</button>
+        <td>
+<!--         <button type="button" class="btn btn-info Product_Details">详情</button> -->
     
 <!-- ----------------------- -->
- <div class="Manager_style">
+<!--  <div class="Manager_style"> -->
    
       <button type="button" class="btn btn-primary" onclick="updect()"  name="${u.role_id}">修改</button>
     <div class="Add_Manager_style">
@@ -90,11 +93,11 @@
       </div>
       </div>
     </div>
-    </div>
+<!--     </div> -->
 
 
 <!-- ----------------- -->
-    
+    </br>
          <button type="button" class="btn btn-warning" onclick="delectrole()" name="${u.role_id}">删除</button></td>
        </tr>
        </c:forEach> 
