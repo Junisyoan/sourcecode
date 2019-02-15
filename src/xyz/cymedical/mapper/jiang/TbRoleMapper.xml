@@ -60,5 +60,11 @@
 	 
 		 
 	</select>
+	
+	<select id="findMenu" parameterType="int" resultType="xyz.cymedical.entity.jiang.Tb_menu" >
+	
+	select a.*,b.name name,b.link link,b.superior superior,c.* from tb_role_power a,tb_menu b,tb_power c where a.power_id=c.power_id and b.menu_id=c.menu_id and a.role_id=#{role_idd}
+		
+	</select>
 
 </mapper>
