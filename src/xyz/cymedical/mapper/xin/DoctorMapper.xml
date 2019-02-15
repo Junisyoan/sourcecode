@@ -21,9 +21,8 @@
 	<select id="findMyDetail" parameterType="java.lang.Integer"
 		resultType="java.util.HashMap">
 		select distinct * from tb_brief a,tb_detail_project b,tb_detail c
-		where a.detail_id=b.detail_id and time=
-		(SELECT MAX(time) FROM `tb_group` ) and b.detail_id=c.detail_id
-		and b.project_id=#{0 } and a.patient_id=#{1 }
+		where a.detail_id=b.detail_id and b.detail_id=c.detail_id
+		and b.project_id=#{0} and a.patient_id=#{1} order by c.type
 	</select>
 
 	<select id="findAllDetail" parameterType="String"
@@ -65,6 +64,12 @@
 		update tb_patient_project set balance='已退费'  where patient_project_id=#{patient_project_id} 
 	</update>
 
+	<select id="getStatus" parameterType="java.lang.Integer" resultType="String">
+		select b.name from tb_role_dept a,tb_role b where a.role_id=b.role_id and a.role_dept_id=#{role_dept_id}
+	</select>
 	
+	<select id="findMySummarize" parameterType="java.lang.Integer" resultType="xyz.cymedical.entity.xin.Summarize">
+		select * from tb_summarize where summarize_id=#{sumid}
+	</select>
 
 </mapper>

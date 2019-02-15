@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.xin.Summarize;
 
 /**
 * 2019年1月30日
@@ -50,4 +51,10 @@ public interface DoctorMapper {
 
 	//修改项目状态为已退费
 	public boolean BalanceChange(int patient_project_id);
+
+	//根据角色部门id查找身份
+	public String getStatus(int role_dept_id);
+
+	//根据id找总结
+	public Summarize findMySummarize(int sumid);
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.xin.Summarize;
 import xyz.cymedical.mapper.xin.DoctorMapper;
 
 /**
@@ -74,6 +75,18 @@ public class DoctorBizImpl  implements DoctorBiz {
 	public boolean BalanceChange(int patient_project_id) {
 		// TODO Auto-generated method stub
 		return doctorMapper.BalanceChange(patient_project_id);
+	}
+
+	@Override
+	public String getStatus(int role_dept_id) {
+		// TODO Auto-generated method stub
+		return doctorMapper.getStatus(role_dept_id);
+	}
+
+	@Override
+	public Summarize findMySummarize(int sumid) {
+		// TODO Auto-generated method stub
+		return doctorMapper.findMySummarize(sumid);
 	}
 
 

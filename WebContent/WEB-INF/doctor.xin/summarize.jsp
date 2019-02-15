@@ -22,6 +22,20 @@
 	.left1{margin:10px 80px;}
 	.left2{margin:10px 100px;}
 </style>
+
+<script type="text/javascript">
+	function checknull(){
+		var a=document.getElementById("advice").value;
+		var b=document.getElementById("guide").value;
+		if(a!='' && b!=''){
+			return true;
+		}else{
+			alert('信息不能为空！');
+			return false;
+		}
+	}
+</script>
+
 </head>
 
 <body>
@@ -56,7 +70,7 @@
 		<div class="Manager_style">
 			<span class="title_name">总结信息</span>
 			
-		<form method="post" action="<%=path %>chiefdoctor/dosummarize.handle">
+		<form method="post" action="<%=path %>chiefdoctor/dosummarize.handle" onsubmit="return checknull()">
 			<div style="float: left; margin-left: 75px;font-size:20px;padding:5px">健康体检中心</div>
 			<div style="float: right; margin-right: 75px;font-size:20px">体检日期： ${time }</div>
 			
@@ -88,10 +102,15 @@
 					</c:forEach>
 				</div>
 				
+				
 				<h4 style="margin-left: 80px;">【建议】</h4>
 				
-				<p class="left1"><textarea rows="5" cols="150" id="advice" name="advice"></textarea></p>
-				 
+				<c:if test="${flag=='false'}">
+					<p class="left1"><textarea rows="5" cols="150" id="advise" name="advise"></textarea></p>
+				</c:if>
+				 <c:if test="${flag=='true'}">
+				 	<div class="left2">${summarize.advise}</div>
+				 </c:if>
 				<hr style="width: 1200px;">
 					<h3 style="margin-left: 80px;">生活保健指导</h3>
 				<hr/>
@@ -107,16 +126,23 @@
 				
 				
 				
-				<h4 style="margin-left: 80px;">【指导】</h4>
-		
-				<p class="left1"><textarea rows="5" cols="150" id="guide" name="guide"></textarea></p>
-
-<%-- 			<c:if test="${flag!=null}"> --%>
+					<h4 style="margin-left: 80px;">【指导】</h4>
+				
+				
+				
+				<c:if test="${flag=='true'}">
+					<div class="left2">${summarize.guide}</div>
+				</c:if>
+				<c:if test="${flag=='false'}">
+					<p class="left1"><textarea rows="5" cols="150" id="guide" name="guide"></textarea></p>
+				</c:if>
 				<div style="width:180px;margin:0 auto;border:0px red solid;padding:20px">
+					<c:if test="${flag=='false'}">
+						<input type="submit" class="btn btn-info Product_Details" onClick="return confirm('确定提交么？') ;" value="提交"/>
+					</c:if>
 					<a href="<%=path%>chiefdoctor/first.handle"><button type="button" class="btn btn-info Product_Details" >返回</button></a>
-					<input type="submit" class="btn btn-info Product_Details" onClick="return confirm('确定提交么？') ;" value="提交"/>
-				</div>  
-<%-- 			</c:if> --%>
+				</div>
+				  
 		</form>
 		</div>
 

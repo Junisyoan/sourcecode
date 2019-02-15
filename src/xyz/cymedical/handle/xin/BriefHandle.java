@@ -37,9 +37,9 @@ public class BriefHandle {
 
 	//普通小结
 	@RequestMapping(value = "/normal.handle")
-	public ModelAndView check(String result,String id) {
+	public ModelAndView normal(String result,String tips,String id) {
 		
-		boolean f=briefbiz.Normal(result,id);
+		boolean f=briefbiz.Normal(result,tips,id);
 		
 		dlist=doctorbiz.findMyDetail(Integer.valueOf(DoctorHandle.projectid),Integer.valueOf(DoctorHandle.patientid));
 		
@@ -91,8 +91,8 @@ public class BriefHandle {
 		System.out.println("id="+id);
 		
 		
-		
 		boolean f=briefbiz.Check(result,tips,id);
+		
 		
 		dlist=doctorbiz.findMyDetail(Integer.valueOf(DoctorHandle.projectid),Integer.valueOf(DoctorHandle.patientid));
 		
