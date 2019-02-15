@@ -78,7 +78,7 @@ body{
 }
 /*navigation*/
 .nav1-bg{
-	background:url('../images/nav-bg.jpg');
+	background:url('../image/index1/nav-bg.jpg');
 }
 .nav ul{
 	font-size:19px;
@@ -95,10 +95,10 @@ body{
 	position:relative;
 }
 .nav ul li.active {
-	background:url('../images/nav-bg-hv.jpg');
+	background:url('../image/index1/nav-bg-hv.jpg');
 }
 .nav ul li:hover{
-	background:url('../images/nav-bg-hv.jpg');
+	background:url('../image/index1/nav-bg-hv.jpg');
 }
 pre{
 	font-family: "Source Code Pro", monospace;
@@ -159,7 +159,7 @@ p.bjqs-caption{
 }
 /*body-content*/
 .body-content{
-	background:url('../images/cont-bg.jpg');
+	background:url('../image/index1/cont-bg.jpg');
 	padding:15px 0px;
 }
 .slider{
