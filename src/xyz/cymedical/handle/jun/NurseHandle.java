@@ -677,7 +677,7 @@ public class NurseHandle {
 			
 			//设置属性
 			request.getSession().setAttribute("path", path);
-			request.getSession().setAttribute("user", nurse);
+			request.getSession().setAttribute("nurse", nurse);
 			
 			//设置地址和模型
 			modelAndView.setViewName("WEB-INF/medical_workstation/index");

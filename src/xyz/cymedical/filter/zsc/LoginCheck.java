@@ -13,31 +13,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.jun.Nurse;
 
 public class LoginCheck implements Filter{
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		
-		if (req.getParameter("login")!=null) {
-			chain.doFilter(request, response);
-		}
+		System.out.println(request.getParameter("a"));
 		
 		Tb_user user= (Tb_user) session.getAttribute("user");
-		
-		if (user==null&&req.getAttribute("filterPass")==null) {
-			String path = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort()
-			+ req.getContextPath() +"/backlogin.jsp";
+		Company company = (Company) session.getAttribute("userCompany");
+		Nurse nurse = (Nurse) session.getAttribute("nurse");
+		String path = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort()
+		+ req.getContextPath();
+		if (user==null&&req.getAttribute("filterPass")==null
+				&& company==null
+				&& nurse==null) {
 			
 			PrintWriter out = response.getWriter();
 			

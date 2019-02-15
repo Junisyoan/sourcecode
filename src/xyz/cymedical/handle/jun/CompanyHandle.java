@@ -515,7 +515,6 @@ public class CompanyHandle {
 			
 			
 			
-			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("prolist", plist);
 			

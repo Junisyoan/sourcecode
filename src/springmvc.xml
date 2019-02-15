@@ -36,14 +36,23 @@
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 	</bean>
 
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 拦截未登录 -->
+			<mvc:mapping path="/**"/>
+			<bean class="xyz.cymedical.interceptor.jun.LoginInterceptor" />
+			
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 	<!-- 事务回滚配置 -->
 	<tx:annotation-driven />
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="myDataSource" />
 	</bean>
 
-	<context:component-scan
-		base-package="xyz.cymedical"></context:component-scan>
+	<context:component-scan base-package="xyz.cymedical"></context:component-scan>
 
 	<!-- mvc的注解驱动，通过它可以省去上面的两行bean的配置 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
@@ -66,5 +75,6 @@
 		</property>
 	</bean>
 
+	<!-- 切点代理 -->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>		
