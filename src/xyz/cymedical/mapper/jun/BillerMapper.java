@@ -17,6 +17,14 @@ import xyz.cymedical.entity.jun.Biller;
 @Repository
 public interface BillerMapper {
 	
+	
+	/**
+	 * 医院查询账单
+	 * @param bstate
+	 * @return
+	 */
+	public List<Biller> queryBillerList(String bstate);
+	
 	/**
 	 * 修改记账表为开单
 	 * @param bid	记账表id
@@ -36,7 +44,7 @@ public interface BillerMapper {
 	 * @param bstate	结算状态
 	 * @return	账单列表
 	 */
-	public List<Biller> queryBillerList(String bstate);
+	public List<Biller> queryCompanyBillerList(@Param("bstate")String bstate,@Param("cid")int cid);
 	
 	/**
 	 * 结账

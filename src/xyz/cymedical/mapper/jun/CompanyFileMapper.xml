@@ -35,7 +35,7 @@
 	</select>
 <!-- 查询文件列表 -->
 	<select id="queryFileList" parameterType="int" resultType="xyz.cymedical.entity.jun.CompanyFile">
-		select * from tb_file limit #{pageNo}, 10
+		select * from tb_file where company_id=#{cid}
 	</select>
 <!-- 插入文件 -->
 	<insert id="insertFile" parameterType="xyz.cymedical.entity.jun.CompanyFile">

@@ -33,6 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("拦截器执行");
 		//是否附带登录数据
 		if (request.getParameter("login")!=null) {
 			return HandlerInterceptor.super.preHandle(request, response, handler);

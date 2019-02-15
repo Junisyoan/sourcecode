@@ -6,7 +6,7 @@
  	</div>
 	<div class="search">
 	    <button class="yellow-button" onclick="javascript:location.href='login_company.html'"><span>登录</span></button>
-        <button class="yellow-button" onclick="javascript:location.href='reg_company.html'"><span>注册</span></button>
+        <button class="yellow-button" onclick="javascript:location.href='./reg/reg.jsp'"><span>注册</span></button>
 	</div>
    <div class="clear"></div>
 </div>

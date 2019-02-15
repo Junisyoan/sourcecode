@@ -24,8 +24,6 @@
 </head>
 
 <body>
-
-
 	<div class="Manager_style">
 		<div class="title_name">充值</div>
 			<input type="text" id="m" name="deposit"/>
@@ -71,7 +69,7 @@ function recharge(){
 				}else{
 					alert("充值失败");
 				}
-				location.href="<%=path %>company/getDepositDetail.handle";
+				location.href="<%=path %>company/getDepositDetail.handle?cid=${userCompany.company_id }";
 			},
 			error:function(){
 				alert('错误');

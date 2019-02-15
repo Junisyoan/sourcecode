@@ -71,10 +71,10 @@ public interface CompanyFileMapper {
 	
 	/**
 	 * 查询文件列表
-	 * @param pageNo	页码
+	 * @param cid	
 	 * @return	文件列表
 	 */
-	public List<CompanyFile> queryFileList(int pageNo);
+	public List<CompanyFile> queryFileList(int cid);
 	
 	/**
 	 * 文件信息插入数据库

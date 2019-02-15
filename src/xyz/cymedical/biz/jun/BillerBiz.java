@@ -11,6 +11,19 @@ import xyz.cymedical.entity.jun.Biller;
 *	类说明：记账表相关操作
 */
 public interface BillerBiz {
+	/**
+	 * 打印发票
+	 * @param bid
+	 * @return
+	 */
+	public List<Biller> getReceipt(int bid);
+	
+	/**
+	 * 体检工作站查询账单列表
+	 * @param bstate
+	 * @return
+	 */
+	public List<Biller> queryBillerList(String bstate);
 	
 	/**
 	 * 修改记账表为开单
@@ -31,7 +44,7 @@ public interface BillerBiz {
 	 * @param bstate	是否结算
 	 * @return	账单列表
 	 */
-	public List<Biller> queryBillerList(String bstate);
+	public List<Biller> queryCompanyBillerList(String bstate,int cid);
 	
 	/**
 	 * 结算账单

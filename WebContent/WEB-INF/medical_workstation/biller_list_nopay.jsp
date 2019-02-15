@@ -46,7 +46,7 @@
 							<td>${b.totalMoney }</td>
 							<td>${b.bstate}</td>
 							<td>${b.batch}</td>
-							<td><input type="button" name="delBiller" onclick="delBiller('${b.biller_id}');" value="删除账单"></input></td>
+							<td><button type="button" class="btn btn-warning" onclick="delBiller('${b.biller_id}');">删除账单</button>							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

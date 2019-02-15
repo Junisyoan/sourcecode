@@ -30,13 +30,17 @@ import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
+import xyz.cymedical.biz.zsc.ComboBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Patient;
+import xyz.cymedical.entity.xin.Combo;
 import xyz.cymedical.mapper.jun.CompanyMapper;
+import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
+import xyz.cymedical.tools.zsc.Encryption;
 
 /**
  * 2019年1月19日
@@ -60,6 +64,8 @@ public class CompanyHandle {
 	private LogCompanyBiz logCompanyBiz;//日志业务
 	@Resource
 	private BillerBiz billerBiz;//账单业务
+	@Resource
+	private ComboBiz comboBiz;
 	
 	@Resource
 	private DoctorBiz doctorbiz;//医生业务
@@ -75,14 +81,38 @@ public class CompanyHandle {
 	public CompanyHandle() {
 	}
 
+	/*
+	 * 打印发票
+	 */
+	@RequestMapping(value="/getReceipt.handle",method=RequestMethod.GET)
+	public ModelAndView getReceipt(String bid) {
+		System.out.println("打印发票"+bid);
+		CompanyFile companyFile = companyFileBiz.queryFileByBillerId(bid);
+		List<Patient> patients = ExcelTools.getPatientList(companyFile);
+		List<Combo> combos = comboBiz.findCombos();
+		for(int j=0;j<patients.size();j++) {
+			for(int i=0;i<combos.size();i++) {
+				if (patients.get(j).getComboName().equals(combos.get(i).getName())) {
+					patients.get(j).setA(combos.get(i).getPrice());
+					break;
+				}
+			}
+		}
+		modelAndView = new ModelAndView();
+		modelAndView.setViewName("WEB-INF/user_admin/receipt");
+		modelAndView.addObject("pList", patients);
+		return modelAndView;
+	}
+	
+	
 	
 	/*
 	 * 获取已结算账单
 	 */
 	@RequestMapping(value="/getBillerHasPay.handle",method=RequestMethod.GET)
-	public ModelAndView getBillerHasPay(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView getBillerHasPay(HttpServletRequest request, HttpServletResponse response,String cid) {
 		System.out.println("查询已结算账单");
-		List<Biller> billerList = billerBiz.queryBillerList("已结算");
+		List<Biller> billerList = billerBiz.queryCompanyBillerList("已结算",Integer.parseInt(cid));
 		System.out.println(billerList);
 		modelAndView = new ModelAndView("WEB-INF/user_admin/biller_list_haspay");
 		modelAndView.addObject("billerList", billerList);
@@ -140,9 +170,9 @@ public class CompanyHandle {
 	 * 获取未结算的账单
 	 */
 	@RequestMapping(value="/getBillerNoPay.handle",method=RequestMethod.GET)
-	public ModelAndView getBillerNoPay(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView getBillerNoPay(HttpServletRequest request, HttpServletResponse response,String cid) {
 		System.out.println("查询未结算账单");
-		List<Biller> billerList = billerBiz.queryBillerList("未结算");
+		List<Biller> billerList = billerBiz.queryCompanyBillerList("未结算",Integer.parseInt(cid));
 		System.out.println(billerList);
 		modelAndView = new ModelAndView("WEB-INF/user_admin/biller_list_nopay");
 		modelAndView.addObject("billerList", billerList);
@@ -170,7 +200,6 @@ public class CompanyHandle {
 		response.setCharacterEncoding("utf-8");
 		try {
 			if (isSuccess) {
-				
 				response.getWriter().print("1");
 			} else {
 				response.getWriter().print("0");
@@ -186,12 +215,9 @@ public class CompanyHandle {
 	 * 查询费用明细
 	 */
 	@RequestMapping(value="/getDepositDetail.handle",method=RequestMethod.GET)
-	public ModelAndView getDepositDetail(HttpServletRequest request) {
-		//得到操作用户
-		company = (Company)request.getSession().getAttribute("userCompany");
-		System.out.println(company);
+	public ModelAndView getDepositDetail(HttpServletRequest request,String cid) {
 		//更新数据
-		company = companyBiz.queryCompanyById(company.getCompany_id());
+		company = companyBiz.queryCompanyById(Integer.parseInt(cid));
 		request.getSession().setAttribute("userCompany", company);
 		//查询日志
 		List<LogCompany> logList = companyBiz.queryDepositList(String.valueOf(company.getCompany_id()));
@@ -207,9 +233,9 @@ public class CompanyHandle {
 	 * 获取文件列表
 	 */
 	@RequestMapping(value = "/getFileList.handle", method = RequestMethod.GET)
-	public ModelAndView getFileList(String pageNum) {
-		System.out.println("查询文件列表，页码" + pageNum);
-		listFile = companyFileBiz.queryFileList(pageNum);
+	public ModelAndView getFileList(String cid) {
+		System.out.println("查询文件列表" );
+		listFile = companyFileBiz.queryFileList(Integer.parseInt(cid));
 		modelAndView = new ModelAndView("WEB-INF/user_admin/file-list");
 		modelAndView.addObject("listFile", listFile);
 		return modelAndView;
@@ -359,7 +385,7 @@ public class CompanyHandle {
 	public ModelAndView companyLogin(HttpServletRequest request, HttpServletResponse response, String userName,
 			String password) {
 		System.out.println("用户登录" + userName);
-		Company company = companyBiz.companyLogin(userName, password);
+		Company company = companyBiz.companyLogin(userName, Encryption.getResult(password));
 		System.out.println(company);
 		ModelAndView modelAndView = new ModelAndView();
 		if (company != null) {
@@ -386,9 +412,10 @@ public class CompanyHandle {
 	/*
 	 * 公司注册
 	 */
-	@RequestMapping(value = "/regCompany.handle", method = RequestMethod.POST)
+	@RequestMapping(value = "/regCompany.so", method = RequestMethod.POST)
 	public String regCompany(HttpServletResponse response, HttpServletRequest request, Company company) {
 		System.out.println(company);
+		company.setPwd(Encryption.getResult(company.getPwd()));
 		// 执行注册
 		String res = companyBiz.regCompany(company);
 		try {
@@ -431,16 +458,16 @@ public class CompanyHandle {
 	/*
 	 * 查询公司名字
 	 */
-	@RequestMapping(value = "/queryName.handle", method = RequestMethod.POST)
+	@RequestMapping(value = "/queryName.so", method = RequestMethod.POST)
 	public String queryName(HttpServletResponse response, String name) {
 		System.out.println("查询要注册的公司名：" + name);
 		try {
 			if (companyBiz.queryName(name)) {
 				System.out.println("公司已存在");
-				response.getWriter().print("公司已存在");
+				response.getWriter().print("0");
 			} else {
-				System.out.println("可用");
-				response.getWriter().print("可用");
+				System.out.println("公司名可用");
+				response.getWriter().print("1");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -451,14 +478,16 @@ public class CompanyHandle {
 	/*
 	 * 查询账户是否存在
 	 */
-	@RequestMapping(value = "/queryAccount.handle", method = RequestMethod.POST)
+	@RequestMapping(value = "/queryAccount.so", method = RequestMethod.POST)
 	public String queryAccount(HttpServletResponse response, String account) {
 		System.out.println("查询要注册的用户名：" + account);
 		try {
 			if (companyBiz.queryAccount(account)) {
-				response.getWriter().print("用户已存在");
+				System.out.println("用户名不可用");
+				response.getWriter().print("0");
 			} else {
-				response.getWriter().print("可用");
+				System.out.println("用户名可用");
+				response.getWriter().print("1");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -466,30 +495,28 @@ public class CompanyHandle {
 		return null;
 	}
 	
-	
-	
-
-
-
-
-
 	/*
 	 * 查询公司座机号
 	 */
-	@RequestMapping(value = "/queryTel.handle", method = RequestMethod.POST)
+	@RequestMapping(value = "/queryTel.so", method = RequestMethod.POST)
 	public String queryTel(HttpServletResponse response, String tel) {
 		System.out.println("查询公司座机：" + tel);
 		try {
 			if (companyBiz.queryTel(tel)) {
-				response.getWriter().print("座机已存在");
+				System.out.println("座机不可用" );
+				response.getWriter().print("0");
 			} else {
-				response.getWriter().print("可用");
+				System.out.println("座机可用");
+				response.getWriter().print("1");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+	
+	//************************************************************************
+	//************************************************************************
 	
 	
 	/*

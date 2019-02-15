@@ -31,10 +31,8 @@ public class CompanyFileBizImpl extends BaseImpl implements CompanyFileBiz {
 	}
 
 	@Override
-	public List<CompanyFile> queryFileList(String pageNum) {
-		pageNo = Integer.parseInt(pageNum);
-		pageNo=(pageNo-1)*10;
-		List<CompanyFile> list = companyFileMapper.queryFileList(pageNo);
+	public List<CompanyFile> queryFileList(int cid) {
+		List<CompanyFile> list = companyFileMapper.queryFileList(cid);
 		System.out.println(list);
 		return list;
 	}

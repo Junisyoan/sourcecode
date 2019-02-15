@@ -9,7 +9,7 @@
 		insert into tb_patient_combo(patient_id,combo_id,biller_id) 
 		values
 		<foreach collection="pList" item="p" separator=",">
-			(#{p.paitent_id},#{p.combo_id},#{bid})
+			((select patient_id from tb_patient where ID = #{p.ID}),#{p.combo_id},#{bid})
 		</foreach>
 	</insert>
 <!-- 根据记账表查询导检单 -->
@@ -31,7 +31,7 @@
 		insert into tb_biller_patient(biller_id,patient_id)
 		values
 		<foreach collection="pList" item="p" separator=",">
-			(#{bid},#{p.paitent_id})
+			(#{bid},(select patient_id from tb_patient where ID = #{p.ID}))
 		</foreach>
 	</insert>
 
@@ -42,7 +42,7 @@
 
 <!-- 查询待审核文件列表 -->
 	<select id="queryCheckFile" parameterType="int" resultType="xyz.cymedical.entity.jun.CompanyFile">
-		select f.*,c.name from tb_file f join tb_company c on f.company_id = c.company_id and f.cstate!='已审核'
+		select f.*,c.name name from tb_file f join tb_company c on f.company_id = c.company_id and f.cstate!='已审核'
 	</select>
 	
 <!-- 登录查询 -->
