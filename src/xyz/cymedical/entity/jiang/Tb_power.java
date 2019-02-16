@@ -36,6 +36,10 @@ public class Tb_power {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
+	public String toString() {
+		return "Tb_power [power_id=" + power_id + ", menu_id=" + menu_id + ", name=" + name + "]";
+	}
 	
 	
 }
