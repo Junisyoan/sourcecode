@@ -40,8 +40,8 @@
 				</small>
 				</a> 
 			</div> 
-				<a href="#" class="navbar-brand"> <small> <img src="images/logo.png"/></small>
-				</a>
+<!-- 				<a href="#" class="navbar-brand"> <small> <img src="images/logo.png"/></small> -->
+<!-- 				</a> -->
 			</div>
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
