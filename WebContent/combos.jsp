@@ -40,11 +40,11 @@
 			</div>
 			<div class="prod-main">
 				<div class="body-logo">
-					<h3>product names</h3>
+					<h3>套餐介绍：</h3>
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic1.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic1.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>Sed nisi turpis, pellentesque at ultrices in, dapibus in
 							magna. Nunc easi diam risus, placerat ut scelerisque et, sus
@@ -53,7 +53,7 @@
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic2.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic2.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>Sed nisi turpis, pellentesque at ultrices in, dapibus in
 							magna. Nunc easi diam risus, placerat ut scelerisque et, sus
@@ -62,7 +62,7 @@
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic3.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic3.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>The standard chunk of Lorem Ipsum used since the 1500s is
 							reproduced below for those interested. Sections 1.10.32 and
@@ -71,7 +71,7 @@
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic4.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic4.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>Sed nisi turpis, pellentesque at ultrices in, dapibus in
 							magna. Nunc easi diam risus, placerat ut scelerisque et, sus
@@ -80,7 +80,7 @@
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic5.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic5.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>The standard chunk of Lorem Ipsum used since the 1500s is
 							reproduced below for those interested. Sections 1.10.32 and
@@ -89,7 +89,7 @@
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic6.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic6.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>Sed nisi turpis, pellentesque at ultrices in, dapibus in
 							magna. Nunc easi diam risus, placerat ut scelerisque et, sus
@@ -98,7 +98,7 @@
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic7.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic7.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>The standard chunk of Lorem Ipsum used since the 1500s is
 							reproduced below for those interested. Sections 1.10.32 and
@@ -107,7 +107,7 @@
 				</div>
 				<div class="prod-grids">
 					<div class="grid">
-						<img src="./image/index1/prod-pic8.jpg" alt="">
+<!-- 						<img src="./image/index1/prod-pic8.jpg" alt=""> -->
 						<h4>product name</h4>
 						<p>Sed nisi turpis, pellentesque at ultrices in, dapibus in
 							magna. Nunc easi diam risus, placerat ut scelerisque et, sus

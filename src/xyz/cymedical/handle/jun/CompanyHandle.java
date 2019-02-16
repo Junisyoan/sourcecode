@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -20,8 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.ctx.PatientBiz;
@@ -38,6 +45,7 @@ import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 import xyz.cymedical.mapper.jun.CompanyMapper;
+import xyz.cymedical.tools.jun.AlipayConfig;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
 import xyz.cymedical.tools.zsc.Encryption;
@@ -180,13 +188,13 @@ public class CompanyHandle {
 		
 	}
 	
-	
 	/*
 	 * 充值
 	 */
 	@RequestMapping(value="/pay.handle",method=RequestMethod.POST)
-	public ModelAndView payForDeposit(HttpServletResponse response,HttpServletRequest request, String deposit) {
+	public @ResponseBody String payForDeposit(HttpServletRequest request, String deposit) {
 		System.out.println("存款："+deposit);
+				
 		//得到操作用户
 		company = (Company)request.getSession().getAttribute("userCompany");
 		//插入日志
@@ -197,19 +205,31 @@ public class CompanyHandle {
 		//先查询余额
 		float balance = companyBiz.queryDepositCompanyId(company.getCompany_id());
 		boolean isSuccess = companyBiz.updateDeposit(Float.parseFloat(deposit)+balance,company.getCompany_id());
-		response.setCharacterEncoding("utf-8");
-		try {
+		String strRet="";
 			if (isSuccess) {
-				response.getWriter().print("1");
+				strRet="1";
 			} else {
-				response.getWriter().print("0");
+				strRet="0";
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return strRet;
 	}
 
+	/*
+	 * 转发
+	 */
+	@RequestMapping(value="/send.so")
+	public @ResponseBody String sendUrl(HttpServletRequest request,String deposit) {
+		System.out.println("");
+		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/";
+		
+		String strForm = "<form name=\"punchout_form\" method=\"post\" action=\""+path+"pay.handle\">\r\n" + 
+				"<input type=\"hidden\" name=\"biz_content\" value=\""+deposit+"\">\r\n" + 
+				"<input type=\"submit\" value=\"????\" style=\"display:none\" >\r\n" + 
+				"</form>\r\n" + 
+				"<script>document.forms[0].submit();</script>";
+		return strForm;
+	}
 	
 	/*
 	 * 查询费用明细

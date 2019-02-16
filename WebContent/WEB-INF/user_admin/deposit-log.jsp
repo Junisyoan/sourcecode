@@ -26,8 +26,15 @@
 <body>
 	<div class="Manager_style">
 		<div class="title_name">充值</div>
-			<input type="text" id="m" name="deposit"/>
-			<input type="button" value="充值" onclick="recharge();"/>
+		<form action="<%=path%>alipay.trade.page.pay.jsp" method="post" target="_blank" onsubmit="return check11();">
+			<input type="text" id="m" name="WIDtotal_amount"/>
+			<div style="display:none">
+				<input type="text" id="subject" name="WIDsubject"/>
+				<input type="text" id="sNow" name="WIDout_trade_no"/>
+				<input type="text" id="WIDbody" name="WIDbody"/>
+			</div>
+			<input type="submit" value="充值" />
+		</form>
 		余额：${userCompany.deposit }
 	</div>
 	<div class="Manager_style">
@@ -55,26 +62,70 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function check11(){
+	var m =document.getElementById('m').value;
+	var s = false;
+	if(m==""){
+		return s;
+	}else if(m<0||m==0){
+		alert('不能充值小于0！');
+		return s;
+	}else if(m>0){
+		var vNow = new Date();
+		var sNow = "";
+		sNow += String(vNow.getFullYear());
+		sNow += String(vNow.getMonth() + 1);
+		sNow += String(vNow.getDate());
+		sNow += String(vNow.getHours());
+		sNow += String(vNow.getMinutes());
+		sNow += String(vNow.getSeconds());
+		sNow += String(vNow.getMilliseconds());
+		document.getElementById("sNow").value =  sNow;
+		document.getElementById("subject").value =  '充值';
+		document.getElementById("WIDbody").value =  '充值';
+		return true;
+	}
+	
+}
+
+
 function recharge(){
 	var m = document.getElementById("m").value;
 	if(confirm("确认充值？")){
-		$.ajax({
-			url:"<%=path%>company/pay.handle",
-			type:"post",
-			dataType:"text",
-			data:{deposit:m},
-			success:function(ret){
-				if(ret=="1"){
-					alert("充值成功");
-				}else{
-					alert("充值失败");
-				}
-				location.href="<%=path %>company/getDepositDetail.handle?cid=${userCompany.company_id }";
-			},
-			error:function(){
-				alert('错误');
-			}
-		});
+			var vNow = new Date();
+			var sNow = "";
+			sNow += String(vNow.getFullYear());
+			sNow += String(vNow.getMonth() + 1);
+			sNow += String(vNow.getDate());
+			sNow += String(vNow.getHours());
+			sNow += String(vNow.getMinutes());
+			sNow += String(vNow.getSeconds());
+			sNow += String(vNow.getMilliseconds());
+// 			document.getElementById("WIDout_trade_no").value =  sNow;
+// 			document.getElementById("WIDsubject").value = "测试";
+// 			document.getElementById("WIDtotal_amount").value = "0.01";
+
+
+		location.href='<%=path%>alipay.trade.page.pay.jsp?money='+m+'&sNow='+sNow+'&subject=充值&WIDbody=充值';
+// 		$.ajax({
+<%-- 			url:"<%=path%>alipay.trade.page.pay.jsp", --%>
+// 			type:"post",
+// 			dataType:"text",
+// 			data:{'money':m,'sNow':sNow,'subject':'充值','WIDbody':"充值"},
+// 			success:function(ret){
+// 				out.println(ret);
+// 				if(ret=="1"){
+// 					alert("充值成功");
+// 				}else{
+// 					alert("充值失败");
+// 				}
+<%-- 				location.href="<%=path %>company/getDepositDetail.handle?cid=${userCompany.company_id }"; --%>
+// 			},
+// 			error:function(){
+// 				alert('错误');
+// 			}
+// 		});
 	}
 }
 $(function(){
