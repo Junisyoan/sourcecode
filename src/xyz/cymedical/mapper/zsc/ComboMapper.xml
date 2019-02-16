@@ -22,7 +22,7 @@
 	
 	<!-- 添加项目 -->
 	<insert id="insertCombo" parameterType="xyz.cymedical.entity.xin.Combo" useGeneratedKeys="true" keyProperty="combo_id">
-  		insert into tb_combo(name,price) values(#{name}, #{price})
+  		insert into tb_combo(name,price,info) values(#{name}, #{price},#{info})
 	</insert>
 	
 	<!-- 添加项目细项关系 -->
@@ -46,7 +46,7 @@
 			(#{combo.combo_id},#{d})
 		</foreach>
 		update tb_combo set 
-		name = #{combo.name},price = 
+		name = #{combo.name},info = #{info},price = 
 		<choose>
 			<when test="combo.price != 0">
 				#{combo.price}
@@ -63,7 +63,7 @@
 	
 	<!-- 按条件查询 -->
 	<select id="selectCombo" parameterType="map" resultMap = "comboMap">
-		select cb.combo_id,cb.name,cb.price,pj.project_id,pj.name pjname
+		select cb.combo_id,cb.name,cb.price,cb.info,pj.project_id,pj.name pjname
 		from tb_combo cb
 		left join tb_project_combo pc on pc.combo_id = cb.combo_id
 		left join tb_project pj on pc.project_id = pj.project_id
@@ -81,7 +81,7 @@
 	</select>
 	
 	<select id="findCombo" parameterType="java.lang.String" resultMap="comboMap">
-		select cb.combo_id,cb.name,cb.price,pj.project_id,pj.name pjname
+		select cb.combo_id,cb.name,cb.price,cb.info,pj.project_id,pj.name pjname
 		from tb_combo cb
 		left join tb_project_combo pc on pc.combo_id = cb.combo_id
 		left join tb_project pj on pc.project_id = pj.project_id
@@ -93,6 +93,7 @@
 		<id property="combo_id" column="combo_id"/>
 		<result property="name" column="name"/>
 		<result property="price" column="price"/>
+		<result property="info" column="info"/>
 		<collection  property="projects" ofType="xyz.cymedical.entity.zsc.Project">
 			<id property="project_id" column="project_id"/>
 			<result property="name" column="pjname"/>
