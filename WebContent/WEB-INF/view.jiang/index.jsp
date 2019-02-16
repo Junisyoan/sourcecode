@@ -123,9 +123,9 @@
 <!-- 							<li class="home"><a href="javascript:void(0)" -->
 <%-- 								name="<%=path%>deptmanage/select.handle" title="科室管理" --%>
 <!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li> -->
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>powermanage/newpower.handle" title="权限管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>新权限管理</a></li> 
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>powermanage/newpower.handle" title="权限管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限配置</a></li>  -->
 							<!-- 							<li class="home"><a href="javascript:void(0)" -->
 							<%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
 							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
