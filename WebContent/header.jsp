@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-<<<<<<< HEAD
-			+ request.getContextPath() + "/";
-=======
-	+ request.getContextPath() + "/";
->>>>>>> 913a1fbc9f69b47369d61595ee77865e690e91a4
+			+ request.getContextPath() + "/"+ request.getContextPath() + "/";
 %>
 <div class="header-bg">
 <div class="wrap">
