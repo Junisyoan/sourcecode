@@ -45,8 +45,8 @@ public class BillerBizImpl extends BaseImpl implements BillerBiz {
 	}
 
 	@Override
-	public List<Biller> queryBillerList(String bstate) {
-		return billerMapper.queryBillerList(bstate);
+	public List<Biller> queryCompanyBillerList(String bstate,int cid) {
+		return billerMapper.queryCompanyBillerList(bstate,cid);
 	}
 
 	@Override
@@ -65,6 +65,17 @@ public class BillerBizImpl extends BaseImpl implements BillerBiz {
 			System.out.println("账单状态修改失败");
 		}
 		return isUpdate;
+	}
+
+	@Override
+	public List<Biller> queryBillerList(String bstate) {
+		return billerMapper.queryBillerList(bstate);
+	}
+
+	@Override
+	public List<Biller> getReceipt(int bid) {
+		System.out.println("打印发票没写");
+		return null;
 	}
 
 }

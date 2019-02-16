@@ -48,7 +48,7 @@
 							<td>${b.batch}</td>
 							<td>
 								<input type="button" name="payBiller" onclick="payBiller('${b.biller_id}','${b.totalMoney }' );" value="结算"></input>
-								<input type="button" name="payBiller" onclick="payBiller('${b.biller_id}' );" value="打印发票"></input>
+								<input type="button" name="payBiller" onclick="getReceipt('${b.biller_id}' );" value="打印发票"></input>
 							</td>
 						</tr>
 					</c:forEach>
@@ -58,7 +58,12 @@
 	</div>
 </body>
 <script type="text/javascript">
-
+function getReceipt(bid){
+	var s = confirm("确认打印?");
+	if(s){
+		location.href="<%=path%>company/getReceipt.handle?bid="+bid;
+	}
+}
 function payBiller(bid,totalmoney){
 	var s = confirm("总金额"+totalmoney+"确认结算？");
 	if(s){

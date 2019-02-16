@@ -37,6 +37,19 @@
 					</ul>
 				</form>
 
+					<div>
+					<table align="center" style="width:1000px;font-size: 15px;">
+					<tr style="margin:0 5px">
+						<td>姓名：${patient.name }&nbsp;&nbsp;</td>
+						<td>年龄：${patient.age }&nbsp;&nbsp;</td>
+						<td>性别：${patient.sex }&nbsp;&nbsp;</td>
+						<td>身份证号：${patient.ID }&nbsp;&nbsp;</td>
+						<td>电话号码：${patient.phone }&nbsp;&nbsp;</td>
+						<td>检查号：${patient.check_num }</td>
+					</tr>
+					</table>
+					</div>
+
 			</div>
 		</div>
 

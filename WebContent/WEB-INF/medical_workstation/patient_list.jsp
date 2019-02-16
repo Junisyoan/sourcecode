@@ -10,13 +10,13 @@
 			+ request.getContextPath() + "/";
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
+<link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
 <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
   <![endif]-->
-<link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<%=path%>css/style.css" />
+<link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path %>css/style.css" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
 <script src="<%=path%>js/jquery.dataTables.min.js"></script>
@@ -38,7 +38,7 @@
 						<th>身份证号</th>
 						<th>手机号</th>
 						<th>套餐</th>
-						<th>选择</th>
+<!-- 						<th>选择</th> -->
 						
 					</tr>
 				</thead>
@@ -52,7 +52,7 @@
 							<td>${p.ID}</td>
 							<td>${p.phone}</td>
 							<td>${p.comboName }</td>
-							<td><input type="checkbox" name="openBill" value="${p.paitent_id }"></input></td>
+<%-- 							<td><input type="checkbox" name="openBill" value="${p.paitent_id }"></input></td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -61,7 +61,7 @@
 	</div>
 	<div id="opera">
 		<div>
-			<button id="all" onclick="allOpen('${fid}');">生成</button>
+			<button type="button" id="all" class="btn btn-primary" onclick="allOpen('${fid}');">生成账单</button>	
 		</div>
 	</div>
 	<!-- 弹出框 -->

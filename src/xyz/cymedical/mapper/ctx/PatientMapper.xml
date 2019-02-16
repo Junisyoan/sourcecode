@@ -9,14 +9,17 @@
 	<!-- update tb_patient set -->
 	<!-- </update> -->
 	<!-- 插入病人，返回自增id -->
-	<insert id="insertPatient" useGeneratedKeys="true"
-		keyProperty="paitent_id"
-		parameterType="xyz.cymedical.entity.jun.Patient">
-		insert into
-		tb_patient(company_id,name,sex,age,ID,code,phone,check_num)
-		values(#{company_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})
-		ON DUPLICATE KEY UPDATE
-		age = values(#{age})
+	<insert id="insertPatient" parameterType="xyz.cymedical.entity.jun.Patient">
+		<selectKey keyProperty="a" resultType="int" order="BEFORE">
+			select count(*) from tb_patient where ID=#{ID}
+		</selectKey>
+		<if test="a>0">
+			update tb_patient set age=#{age},code=#{code},phone=#{phone},check_num=#{check_num} where ID=#{ID}
+		</if>
+		<if test="a==0">
+			insert into	tb_patient(company_id,name,sex,age,ID,code,phone,check_num)
+			values(#{company_id},#{name},#{sex},#{age},#{ID},#{code},#{phone},#{check_num})
+		</if>
 	</insert>
 	<!-- 批量插入 -->
 	<insert id="insertByBatch" parameterType="java.util.List">

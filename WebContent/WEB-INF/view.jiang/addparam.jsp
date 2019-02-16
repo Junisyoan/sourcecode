@@ -8,21 +8,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="<%=path%>js/jquery-1.4.2.min.js"></script>
 <title>添加参数</title>
+<script>
+
+function addparam(){
+	
+	var pid = document.getElementById("pid").value;
+	var name = document.getElementById("name").value;
+	
+	$.ajax({
+		 type:"POST",
+		 url:"<%=path%>param/addparam.handle",
+		 data:{
+			 "pid":pid,
+			 "name":name
+			 },
+		 dataType:"text",
+		 error:function(){
+			 alert('ajax请求请求错误...');
+		 },
+		 success:function(data){
+			if(data=="success"){
+				alert("增加参数成功");
+				window.location.href="<%=path%>param/findAllParam.handle";
+			}else{
+				alert(data);
+			}
+			
+		 },
+	 });
+ }
+</script>
 </head>
 <body>
-	<form action="<%=path%>param/addparam.handle" method="post">
+	<form method="post">
 		<p align="center">&nbsp;</p>
 		<p align="center">&nbsp;</p>
 		<p align="center">&nbsp;</p>
 		<p align="center">
-			上级参数ID：<input name="pid" type="text" />
+			上级参数ID：<input name="pid" type="text" id="pid"/>
 		</p>
 		<p align="center">
-			参&nbsp;数&nbsp;名&nbsp;字：<input name="name" type="text" />
+			参&nbsp;数&nbsp;名&nbsp;字：<input name="name" type="text" id="name"/>
 		</p>
 		<p align="center">
-			<input type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+			<input type="button" value="提交" onclick="addparam()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
 				href="<%=path%>param/findAllParam.handle"><input type="button"
 				value="返回"></a>
 		</p>

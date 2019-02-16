@@ -45,10 +45,9 @@ public interface CompanyFileBiz {
 	
 	/**
 	 * 查询文件列表
-	 * @param pageNum	页码
 	 * @return	文件列表
 	 */
-	public List<CompanyFile> queryFileList(String pageNum);
+	public List<CompanyFile> queryFileList(int cid);
 	
 	/**
 	 * 	查询文件

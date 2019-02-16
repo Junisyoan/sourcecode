@@ -6,7 +6,7 @@
  	</div>
 	<div class="search">
 	    <button class="yellow-button" onclick="javascript:location.href='login_company.html'"><span>登录</span></button>
-        <button class="yellow-button" onclick="javascript:location.href='reg_company.html'"><span>注册</span></button>
+        <button class="yellow-button" onclick="javascript:location.href='./reg/reg.jsp'"><span>注册</span></button>
 	</div>
    <div class="clear"></div>
 </div>
@@ -19,7 +19,7 @@
  		<li class="active"><a href="index.jsp">HOME</a></li>
  		<li><a href="about.jsp">关于</a></li>
  		<li><a href="services.html">服务类别</a></li>
- 		<li><a href="products.jsp">套餐介绍</a></li>
+ 		<li><a href="combos.jsp">套餐介绍</a></li>
 		<li><a href="projects.jsp">项目介绍</a></li>
  		<li><a href="contact.jsp">联系我们</a></li>
  	</ul>      

@@ -61,6 +61,27 @@
             }
         </script>
 
+ 		<script type="text/javascript">            
+			
+ 		function normal(a,b,c){
+ 			var flag = confirm("是否提交");
+ 			if(flag){
+ 				window.location.href="<%=path %>brief/normal.handle?result="+a+"&tips="+b+"&id="+c;
+ 				 };
+ 			}
+ 		
+ 		
+ 		function check(a,b,c){
+ 			var flag = confirm("是否提交");
+ 			if(flag){
+ 				window.location.href="<%=path %>brief/check.handle?result="+a+"&tips="+b+"&id="+c;
+ 				 };
+ 			}
+ 		
+
+ 		
+        </script>
+
 
 </head>
 <body>
@@ -78,7 +99,7 @@
      <c:if test="${keshi=='常规检查室' }">
   
    <thead>
-    <tr><th>序号</th><th>项目名称</th><th>单位</th><th>结果</th><th>操作</th></tr>
+    <tr><th>序号</th><th>项目名称</th><th>单位</th><th>结果</th><th>提示</th><th>操作</th></tr>
    </thead>
    <tbody>
    <c:forEach items="${dlist }" var="d" varStatus="s">
@@ -90,15 +111,18 @@
 				
 				<c:if test="${d.sstate=='未提交' }">
 				<td><input type="text" name="data" id="${d.name}" /></td>
+				<td><input type="text" name="tips" id="${d.name}${d.name}"/>
+				</td>
 				<td class="center">
 				
-				<a href="javascript:;" onclick="location ='<%=path %>brief/normal.handle?result='+document.getElementById('${d.name}').value+'&id='+${d.brief_id};">
-					<button type="button" class="btn btn-primary" onclick="return confirm('确定提交么？');">提交</button>
-				</a>
+<%-- 				<a href="javascript:;"  click="location ='<%=path %>brief/normal.handle?result='+document.getElementById('${d.name}').value+'&id='+${d.brief_id};"> --%>
+					<button type="button" class="btn btn-primary" onclick="check(document.getElementById('${d.name}').value,document.getElementById('${d.name}${d.name}').value,${d.brief_id})">提交</button>
+<!-- 				</a> -->
 				</td>
 				</c:if> 
 				<c:if test="${d.sstate=='已提交' }">
 				<td>${d.resulttext}</td>
+				<td>${d.tips}</td>
 				<td class="center">
 					已提交
 				</td>
@@ -187,9 +211,9 @@
 				<td><input type="text" name="result" id="${d.name}" /></td>
 				<td><input type="text" name="tips" id="${d.name}${d.name}"/></td>
 				<td class="center">
-				<a href="javascript:;" onclick="location ='<%=path %>brief/check.handle?result='+document.getElementById('${d.name}').value+'&tips='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};">
-					<button type="button" class="btn btn-primary" onclick="return confirm('提交成功了哟！');">提交</button>
-				</a>
+<%-- 				<a href="javascript:;" onclick="location ='<%=path %>brief/check.handle?result='+document.getElementById('${d.name}').value+'&tips='+document.getElementById('${d.name}${d.name}').value+'&id='+${d.brief_id};"> --%>
+					<button type="button" class="btn btn-primary" onclick="check(document.getElementById('${d.name}').value,document.getElementById('${d.name}${d.name}').value,${d.brief_id})">提交</button>
+<!-- 				</a> -->
 				</td>
 				</c:if>
 				<c:if test="${d.sstate=='已提交' }">

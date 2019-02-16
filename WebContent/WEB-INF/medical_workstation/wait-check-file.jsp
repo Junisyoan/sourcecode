@@ -32,6 +32,7 @@
 				<tr>
 					<th>序号</th>
 					<th>所属公司</th>
+					<th>文件名</th>
 					<th>上传时间</th>
 					<th>状态</th>
 					<th>操作</th>
@@ -42,6 +43,7 @@
 					<tr>
 						<td>${s.count}</td>
 						<td>${f.name}</td>
+						<td>${f.fname}</td>
 						<td>${f.ftime}</td>
 						<td>${f.cstate}</td>
 						<td><a href='<%=path%>nurse/checkFile.handle?fid=${f.file_id}'>导入审核</a></td>

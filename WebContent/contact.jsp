@@ -47,31 +47,30 @@ import="java.sql.*" errorPage=""%>
 							<tbody>
 								<tr>
 									<td colspan="6"><input type="text" class="textbox"
-										value="Name:" onfocus="this.value = '';"
-										onblur="if (this.value == '') {this.value = 'Name';}"></td>
+										value="昵称:" onfocus="this.value = '';"
+										onblur="if (this.value == '') {this.value = '昵称';}"></td>
 								</tr>
 								<tr>
 									<td colspan="6"><input type="text" class="textbox"
-										value="Email:" onfocus="this.value = '';"
-										onblur="if (this.value == '') {this.value = 'Name';}"></td>
+										value="邮箱:" onfocus="this.value = '';"
+										onblur="if (this.value == '') {this.value = '邮箱';}"></td>
 								</tr>
 								<tr>
 									<td colspan="6"><input type="text" class="textbox"
-										value="Phone:" onfocus="this.value = '';"
-										onblur="if (this.value == '') {this.value = 'Name';}"></td>
+										value="电话:" onfocus="this.value = '';"
+										onblur="if (this.value == '') {this.value = '电话';}"></td>
 								</tr>
 								<tr>
-									<td colspan="6"><textarea value="Message:"
+									<td colspan="6"><textarea value="留言:"
 											onfocus="this.value = '';"
-											onblur="if (this.value == '') {this.value = 'Message';}">Message</textarea>
+											onblur="if (this.value == '') {this.value = '留言';}">留言</textarea>
 									</td>
 								</tr>
-								<td>
 							</tbody>
 						</table>
 						<div class="contact-form">
 							<form>
-								<input type="button" value="Send">
+								<input type="button" value="发送">
 							</form>
 						</div>
 					</div>
@@ -79,21 +78,25 @@ import="java.sql.*" errorPage=""%>
 			</div>
 			<div class="contact-right">
 				<h3>联系地址</h3>
+				<!-- 
 				<div class="map">
 					<iframe width="498" height="200" frameborder="0" scrolling="no"
 						marginheight="0" marginwidth="0"
-						src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=america&amp;aq=&amp;sll=14.440706,80.001154&amp;sspn=0.039274,0.075188&amp;ie=UTF8&amp;hq=&amp;hnear=United+States&amp;ll=37.09024,-95.712891&amp;spn=32.912722,76.992187&amp;t=m&amp;z=5&amp;output=embed"></iframe>
+						src="https://map.qq.com/api/js?v=2.exp&key=YOUR_KEY"></iframe>
 					<br />
 					<small><a
 						href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=america&amp;aq=&amp;sll=14.440706,80.001154&amp;sspn=0.039274,0.075188&amp;ie=UTF8&amp;hq=&amp;hnear=United+States&amp;ll=37.09024,-95.712891&amp;spn=32.912722,76.992187&amp;t=m&amp;z=5"
 						style="color: #999; text-align: left">View Larger Map</a></small>
 				</div>
+				 -->
 				<div class="grids">
-					<h4>The Company Name</h4>
-					<span>marmora road</span><br> <span>glasgow,do4 89gr</span><br>
-					<span>Freephone: +1 800 559 6580</span>?<br> <span>Telephone:
-						+1 959 603 6035</span> <br> <span>FAX: +1 800 889 9898</span><br>
-					<span>email:<a href="">sup.healthcare(at)com</a></span>
+					<h4>公司：HuaCtxZscLxyJuan</h4><br>
+					<span>福建省--厦门市</span><br>
+					<span>软件园二期--观日路--56号楼--一层</span><br>
+					<span>公司座机: +400 820 8820</span><br>
+					<span>手机: +18054803621</span><br>
+					<span>传真: +1 800 889 9898</span><br>
+					<span>email:<a href="">810076219@qq.com</a></span>
 				</div>
 			</div>
 			<div class="clear"></div>

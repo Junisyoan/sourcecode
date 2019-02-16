@@ -71,25 +71,112 @@
 					if(data=="success"){
 						alert("删除成功！");
 						window.location.href="<%=path%>log/findAllLog.handle";
-					}else{
-						alert(data);
-					}
-					
-				 },
-			 });
+							} else {
+								alert(data);
+							}
+
+						},
+					});
 		}
 
+	}
+</script>
+<script>
+	function selectAll() {
+		
+		var arr = document.getElementsByName("checkin");
+		for(var i = 0; i < arr.length; i++){
+			if(!arr[i].disabled){
+				arr[i].checked = true;
+			}
+		}
+	}
+	
+	function cancelAll() {
+		
+		var arr = document.getElementsByName("checkin");
+		for(var i = 0; i < arr.length; i++){
+				arr[i].checked = false;
+		}
+		
+	}
+</script>
+<script>
+	function del() {
+		
+		var arr = document.getElementsByName("checkin");
+		var arrin = new Array();
+		for(i = 0; i < arr.length; i++){
+			if(arr[i].checked){
+				arrin.push(arr[i].value);
+			}
+		}
+		if(arrin.length > 0){
+			alert(arrin);
+			var b = confirm("是否删除");
+			
+			if(b == true){
+				
+				$.ajax({
+					 type:"POST",
+					 url:"<%=path%>log/delLog.handle",
+					 data:{
+						 "arrin":arrin
+						 },
+					 dataType:"json",
+					 traditional:true,
+					 error:function(){
+						 alert("删除成功！");
+						 window.location.href="<%=path%>log/findAllLog.handle";
+						 <!--alert('ajax请求请求错误...');-->
+					 },
+					 success:function(data){
+						if(data=="success"){
+							alert("删除成功！");
+							window.location.href="<%=path%>log/findAllLog.handle";
+								} else {
+									alert(data);
+								}
+
+							},
+						});
+				
+			}
+		}else{
+			alert("未勾选正确的移动项");
+		}
 	}
 </script>
 <title>日志查看</title>
 </head>
 
 <body>
-
+	
+	<div class="page-content">
+		<div class="gys_style">
+			<div class="Manager_style">
+				<div class="title_name">日志查询</div>
+				<form method="post" action="<%=path%>log/searchlog.handle">
+					<ul class="search_content clearfix">
+						<li><label class="lf">用户<input name="name"
+								type="text" class="text_add" /></label> <label class="lf">具体操作<input
+								name="opera" type="text" class="text_add" />
+						</label> <label class="lf">操作时间<input name="time" type="date"
+								class="text_add" /></label>
+							<button type="submit" class="btn btn-primary" class="btn_search">查询</button></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	<div class="Manager_style">
 		<span class="title_name">日志查看</span>
 		<p align="center">
-			<button type="button" onclick="tableToExcel('item','data')">导出Excel</button>
+			<button type="button" class="btn btn-primary" onclick="tableToExcel('item','data')">导出Excel</button>
+			<button type="button" class="btn btn-primary" onclick="selectAll()">全选</button>
+			<button type="button" class="btn btn-primary" onclick="cancelAll()">全不选</button>
+			<button type="button" class="btn btn-primary" onclick="del()">删除</button>
 		</p>
 		<p align="center">&nbsp;</p>
 		<table class="table table-striped table-bordered table-hover"
@@ -100,19 +187,17 @@
 					<th>用户</th>
 					<th>具体操作</th>
 					<th>操作时间</th>
-					<th>删除</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				</tr>
 				<c:forEach items="${loglist}" var="l" varStatus="s">
 					<tr>
 						<td>${s.index + 1}</td>
 						<td>${l.name}</td>
 						<td>${l.opera}</td>
 						<td>${l.time}</td>
-						<td><input type="button" onclick="delLog('${l.log_id}')" value="删除"
-							style="width: 100px;" /></td>
+						<td><input type="checkbox" name="checkin" value="${l.log_id}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

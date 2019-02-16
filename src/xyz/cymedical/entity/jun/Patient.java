@@ -23,7 +23,7 @@ public class Patient {
 	private String prname;		//检查科室
 	private String pname;		//项目名字
 	private String dname;		//细项名字
-	private int a;			//临时存储变量
+	private double a;			//临时存储变量
 	
 	private Company company;
 	private CompanyFile companyFile;
@@ -193,11 +193,11 @@ public class Patient {
 		this.prname = prname;
 	}
 
-	public int getA() {
+	public double getA() {
 		return a;
 	}
 
-	public void setA(int a) {
+	public void setA(double a) {
 		this.a = a;
 	}
 

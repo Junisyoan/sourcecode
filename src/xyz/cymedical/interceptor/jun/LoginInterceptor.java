@@ -33,12 +33,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("拦截器执行");
 		//是否附带登录数据
 		if (request.getParameter("login")!=null) {
 			return HandlerInterceptor.super.preHandle(request, response, handler);
 		//没有附带数据，判断是不是已经登录
 		}else {
 			Tb_user user = (Tb_user)request.getSession().getAttribute("user");
+			
+			System.out.println("user="+user);
+			
 			Company company = (Company)request.getSession().getAttribute("userCompany");
 			Nurse nurse =(Nurse) request.getSession().getAttribute("nurse");
 			if (user==null&&company==null&nurse==null) {

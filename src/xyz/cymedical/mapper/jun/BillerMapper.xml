@@ -16,15 +16,24 @@
 		left join tb_company c
 		on g.company_id = c.company_id
 	</select>
-<!-- 查询账单 -->
-	<select id="queryBillerList" resultType="xyz.cymedical.entity.jun.Biller">
-		select b.*,c.name from (select * from tb_biller where bstate =#{bstate} )b 
-		left join tb_group g 
-		on b.group_id = g.group_id 
-		left join tb_company c
-		on g.company_id = c.company_id
+<!-- 公司查询账单 -->
+	<select id="queryCompanyBillerList" resultType="xyz.cymedical.entity.jun.Biller">
+		select b.*,c.name from 
+		tb_company c,tb_group g,tb_biller b 
+		where c.company_id = #{cid} 
+		and c.company_id=g.company_id 
+		and g.group_id=b.group_id 
+		and b.bstate=#{bstate}
 	</select>
-
+<!-- 医院查询账单 -->
+	<select id="queryBillerList" resultType="xyz.cymedical.entity.jun.Biller">
+	
+	select b.*,c.name 
+	from tb_biller b ,tb_group g,tb_company c 
+	where b.group_id=g.group_id 
+	and g.company_id = c.company_id 
+	and b.bstate=#{bstate}
+	</select>
 <!-- 结账 -->
 	<update id="payBiller">
 		update tb_biller set bstate=#{bstate},btime=#{btime},bcreate='未开单' where biller_id = #{bid}

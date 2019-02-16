@@ -19,5 +19,23 @@
 	<insert id="insertLog" parameterType = "map">
 		insert into tb_log (user_id,opera,time) values(#{user_id},#{opera},#{time});
 	</insert>
+	
+	<select id="searchLog"
+		parameterType="xyz.cymedical.entity.yjn.Log"
+		resultType="java.util.HashMap">
+		select a1.log_id,a1.opera,a1.time,a1.name from (select
+		l.log_id,l.opera,l.time,us.name from tb_log l left join tb_user us on
+		l.user_id = us.user_id) a1 where 1 = 1
+		<if test="opera != null and opera != ''">
+			and a1.opera like '%${opera}%'
+		</if>
+		<if test="time != null and time != ''">
+			and a1.time = #{time}
+		</if>
+		<if test="name != null and name != ''">
+			and a1.name like '%${name}%'
+		</if>
+		
+	</select>
 
 </mapper>

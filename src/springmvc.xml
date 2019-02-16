@@ -41,8 +41,9 @@
 		<mvc:interceptor>
 			<!-- 拦截未登录 -->
 			<mvc:mapping path="/**"/>
+			<!-- 不拦截查询 -->
+			<mvc:exclude-mapping path="/**/*.so"/>
 			<bean class="xyz.cymedical.interceptor.jun.LoginInterceptor" />
-			
 		</mvc:interceptor>
 	</mvc:interceptors>
 
@@ -51,7 +52,6 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="myDataSource" />
 	</bean>
- 
 	<context:component-scan
 		base-package="xyz.cymedical"></context:component-scan>
 

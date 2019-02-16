@@ -99,19 +99,16 @@
 								name="<%=path %>company/getUpFilePath.handle" title="团检文件上传"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检文件上传</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getFileList.handle?pageNum=1" title="团检文件列表" class="iframeurl"><i
+								name="<%=path %>company/getFileList.handle?cid=${userCompany.company_id }" title="团检文件列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检文件列表</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getDepositDetail.handle" title="费用管理" class="iframeurl"><i
+								name="<%=path %>company/getDepositDetail.handle?cid=${userCompany.company_id }" title="费用管理" class="iframeurl"><i
 									class="icon-double-angle-right"></i>费用管理</a></li>
-									
-
-									
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getBillerNoPay.handle" title="未结算账单" class="iframeurl"><i
+								name="<%=path %>company/getBillerNoPay.handle?cid=${userCompany.company_id }" title="未结算账单" class="iframeurl"><i
 									class="icon-double-angle-right"></i>未结算账单</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getBillerHasPay.handle" title="已结算账单" class="iframeurl"><i
+								name="<%=path %>company/getBillerHasPay.handle?cid=${userCompany.company_id }" title="已结算账单" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已结算账单</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/showcompanypatient.handle" title="体检报告打印" class="iframeurl"><i
