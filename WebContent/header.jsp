@@ -21,7 +21,7 @@
  		<li><a href="services.html">服务类别</a></li>
  		<li><a href="combos.jsp">套餐介绍</a></li>
 		<li><a href="projects.jsp">项目介绍</a></li>
- 		<li><a href="contact.jsp">联系我们</a></li>
+ 		<li><a href="contact/fornt.so">联系我们</a></li>
  	</ul>      
   	</div>
   	<div class="clear"></div>
