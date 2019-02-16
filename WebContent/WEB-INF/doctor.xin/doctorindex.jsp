@@ -51,14 +51,10 @@
 				},
 				success:function(msg){
 					if(msg == "error"){
-// 						label.innerText="X"; 
-// 						$("#utxt").html("X"); 
 						check = 0;
 						layer.alert('密码有误!',{title: '提示框',icon:0,});
 					}else{
 						check = 1;
-// 						label.innerText="√"; 
-// 						$("#utxt").html("√");
 					} 
 				},
 				error : function() {
@@ -78,15 +74,16 @@
 				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand">
 						<small>					
-						<img src="images/logo.png">
+						<img src="<%=path %>images/logo.png">
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
 				<div class="navbar-header pull-right" role="navigation">
                    <div class="get_time" ><span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,${user.name }</span></div>
-					<ul class="nav ace-nav">	
+					<ul class="nav ace-nav">
 						<li><a href="javascript:ovid(0)" class="change_Password">修改密码</a></li>
                         <li><a href="javascript:ovid(0)" id="Exit_system">退出系统</a></li>
+					    <li><a href="javascript:ovid(0)">所属科室：${depart }</a></li>
                        
 					</ul><!-- /.ace-nav -->
 				</div><!-- /.navbar-header -->
@@ -116,7 +113,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 					<ul class="nav nav-list" id="nav_list">
-				     <li class="home"><a href="javascript:void(0)" name="" class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a></li>
+				     <li class="home"><a href="javascript:void(0)" name="<%=path %>home.html" class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a></li>
 				     
 				      <c:forEach items="${mlist }" var="m" varStatus="s">
 					      	<c:if test="${m.superior==0}">
@@ -164,7 +161,7 @@
 						</ul>
 					</div>
                     
-                 <iframe id="iframe" style="border:0; width:100%; background-color:#FFF;"  frameborder="0" src="home.html">  </iframe>
+                 <iframe id="iframe" style="border:0; width:100%; background-color:#FFF;"  frameborder="0" src="<%=path %>home.html">  </iframe>
 				 
 
 <!-- /.page-content -->
@@ -220,7 +217,6 @@
          <div class="change_Pass_style" id="change_Pass">
             <ul class="xg_style">
              <li><label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label><input name="原密码" type="password" class="" id="password" onblur="checkPwd()"></li>
-             <label id="utxt" name="utxt" style="margin-left:120px">123123</label>
              <li><label class="label_name">新&nbsp;&nbsp;密&nbsp;码</label><input name="新密码" type="password" class="" id="Nes_pas"></li>
              <li><label class="label_name">确认密码</label><input name="再次确认密码" type="password" class="" id="c_mew_pas"></li>
               

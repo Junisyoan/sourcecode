@@ -89,6 +89,12 @@ public class DoctorBizImpl  implements DoctorBiz {
 		return doctorMapper.findMySummarize(sumid);
 	}
 
+	@Override
+	public String getDepart(int param_id) {
+		// TODO Auto-generated method stub
+		return doctorMapper.getDepart(param_id);
+	}
+
 
 	
 
