@@ -25,5 +25,26 @@
 		com.`name`,lc.operate,lc.money,lc.time from tb_company com left join
 		tb_log_company lc on com.company_id = lc.company_id
 	</select>
+	
+	<select id="searchLog"
+		parameterType="xyz.cymedical.entity.ctx.LogCompany"
+		resultType="java.util.HashMap">
+		select
+		com.`name`,lc.operate,lc.money,lc.time from tb_company com left join
+		tb_log_company lc on com.company_id = lc.company_id where 1 = 1
+		<if test="name != null and name != ''">
+			and com.name like '%${name}%'
+		</if>
+		<if test="operate != null and operate != ''">
+			and lc.operate like '%${operate}%'
+		</if>
+		<if test="money != null and money != ''">
+			and lc.money like '%${money}%'
+		</if>
+		<if test="time != null and time != ''">
+			and lc.time like '%${time}%'
+		</if>
+		
+	</select>
 
 </mapper>

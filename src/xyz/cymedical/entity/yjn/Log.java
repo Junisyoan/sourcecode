@@ -2,12 +2,16 @@ package xyz.cymedical.entity.yjn;
 
 import org.springframework.stereotype.Component;
 
+import xyz.cymedical.entity.jiang.Tb_user;
+
 @Component
 public class Log {
 	private int log_id;
 	private int user_id;
 	private String opera;
 	private String time;
+
+	private Tb_user user;
 
 	public Log() {
 		super();
@@ -51,6 +55,14 @@ public class Log {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public Tb_user getUser() {
+		return user;
+	}
+
+	public void setUser(Tb_user user) {
+		this.user = user;
 	}
 
 }

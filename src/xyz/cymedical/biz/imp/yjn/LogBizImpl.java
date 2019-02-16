@@ -26,4 +26,10 @@ public class LogBizImpl implements LogBiz {
 		return logmapper.delLog(log_id);
 	}
 
+	@Override
+	public List<Log> searchLog(String name, String opera, String time) {
+		// TODO Auto-generated method stub
+		return logmapper.searchLog(name, opera, time);
+	}
+
 }
