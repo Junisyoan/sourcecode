@@ -613,5 +613,23 @@ public class CompanyHandle {
 			return mav;
 
 		}
+		
+		@RequestMapping(value = "/home.handle")
+		public ModelAndView turnhome() {
+
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("WEB-INF/user_admin/index");
+			return mav;
+
+		}
+		
+		@RequestMapping(value = "/systemhome.handle")
+		public ModelAndView turnsystemhome() {
+
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("WEB-INF/user_admin/welcome");
+			return mav;
+
+		}
 	
 }
