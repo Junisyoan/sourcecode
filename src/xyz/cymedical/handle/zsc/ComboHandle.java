@@ -61,17 +61,12 @@ public class ComboHandle {
 	// 查
 	@RequestMapping(value = "selectCombo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String selectProject(String name, String min, String max) {
-		System.out.println(name);
-		System.out.println(min);
-		System.out.println(max);
-		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("min", min);
 		map.put("max", max);
 		List<Combo> combos = comboBiz.selectCombo(map);
 		
-		System.out.println(combos);
 		String str = JSONArray.fromObject(combos).toString();
 		return str;
 	}
