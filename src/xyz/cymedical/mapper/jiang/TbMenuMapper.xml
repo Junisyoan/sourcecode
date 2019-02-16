@@ -78,8 +78,14 @@
 		select * from tb_power where menu_id=#{menu_idddd}  
 	</select>
 	
-	 <insert id="insert" parameterType="xyz.cymedical.entity.jiang.Tb_menu" >
+	 <insert id="insert" parameterType="xyz.cymedical.entity.jiang.Tb_role_power" >
 		insert into tb_role_power(power_id,role_id) values(#{power_id},#{role_id})
 	</insert>
+	
+	<delete id="del" parameterType="xyz.cymedical.entity.jiang.Tb_role_power" >
+	
+		delete from tb_role_power where power_id = #{power_id} and role_id=#{role_id}
+	
+	</delete>
 	
 </mapper>
