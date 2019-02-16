@@ -631,5 +631,10 @@ public class CompanyHandle {
 			return mav;
 
 		}
+		
+		
+		/*
+		 * 公司信息查询
+		 * */
 	
 }
