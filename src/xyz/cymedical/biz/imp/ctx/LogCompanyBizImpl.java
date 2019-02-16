@@ -39,4 +39,10 @@ public class LogCompanyBizImpl implements LogCompanyBiz {
 		return logCompanyMapper.queryAll();
 	}
 
+	@Override
+	public List<LogCompany> searchLog(String name, String operate, String money, String time) {
+		// TODO Auto-generated method stub
+		return logCompanyMapper.searchLog(name, operate, money, time);
+	}
+
 }

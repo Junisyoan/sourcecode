@@ -151,14 +151,32 @@
 </head>
 
 <body>
-
+	
+	<div class="page-content">
+		<div class="gys_style">
+			<div class="Manager_style">
+				<div class="title_name">日志查询</div>
+				<form method="post" action="<%=path%>log/searchlog.handle">
+					<ul class="search_content clearfix">
+						<li><label class="lf">用户<input name="name"
+								type="text" class="text_add" /></label> <label class="lf">具体操作<input
+								name="opera" type="text" class="text_add" />
+						</label> <label class="lf">操作时间<input name="time" type="date"
+								class="text_add" /></label>
+							<button type="submit" class="btn btn-primary" class="btn_search">查询</button></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	<div class="Manager_style">
 		<span class="title_name">日志查看</span>
 		<p align="center">
-			<button type="button" onclick="tableToExcel('item','data')">导出Excel</button>
-			<button type="button" onclick="selectAll()">全选</button>
-			<button type="button" onclick="cancelAll()">全不选</button>
-			<button type="button" onclick="del()">删除</button>
+			<button type="button" class="btn btn-primary" onclick="tableToExcel('item','data')">导出Excel</button>
+			<button type="button" class="btn btn-primary" onclick="selectAll()">全选</button>
+			<button type="button" class="btn btn-primary" onclick="cancelAll()">全不选</button>
+			<button type="button" class="btn btn-primary" onclick="del()">删除</button>
 		</p>
 		<p align="center">&nbsp;</p>
 		<table class="table table-striped table-bordered table-hover"

@@ -15,4 +15,7 @@ public interface ParamBiz {
 			@Param("name") String name);
 
 	public boolean insertParam(@Param("pid") String pid, @Param("name") String name);
+	
+	public boolean modifyParam(@Param("param_id") String param_id, @Param("pid") String pid,
+			@Param("name") String name);
 }

@@ -58,6 +58,7 @@ public class UserManageHandle {
 		}
 
 		System.out.println("qqqqqqqqqqqq+Role_dept_id=" + adduser.getRole_dept_id());
+		adduser.setPwd(Encryption.getResult(adduser.getPwd()));
 		int ret = tbUserBiz.addUser(adduser);
 
 		if (ret == 1) {
@@ -76,10 +77,15 @@ public class UserManageHandle {
 	@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String selectCompany(Tb_user tb_user, String dept) {
 		System.out.println("过");
+//		----加密
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("tb_user", tb_user);
+		Tb_user tb_userr=tb_user;
+		tb_userr.setPwd(Encryption.getResult(tb_userr.getPwd()));
+//		---
+		map.put("tb_user", tb_userr);
 
 		map.put("dept", dept);
+		
 		List<Map<String, Object>> companys = tbUserBiz.selectCompany(map);
 //			List<Tb_user> companys = companyBizsc.selectCompany(map);
 		String str = JSONArray.fromObject(companys).toString();
