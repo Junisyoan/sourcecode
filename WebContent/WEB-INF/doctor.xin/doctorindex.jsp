@@ -33,10 +33,40 @@
         		<!--[if !IE]> -->
 		<script src="<%=path%>assets/js/jquery.min.js"></script>        
 		<!-- <![endif]-->
-			<script src="<%=path%>assets/js/jquery.min.js"></script>        
-	
+		<script src="<%=path%>assets/js/jquery.min.js"></script>        
+		<script type="text/javascript">
+		var check;
+// 		var label=document.getElementById("utxt"); 
 
-		 
+		function checkPwd(){
+			if($("#password").val() == ""){
+				return;
+			}
+			$.ajax({
+				url:"<%=path%>usermanage/checkPwd.handle",
+				type:"POST",
+				dataType:"text",
+				data:{
+					pwd:$("#password").val()
+				},
+				success:function(msg){
+					if(msg == "error"){
+// 						label.innerText="X"; 
+// 						$("#utxt").html("X"); 
+						check = 0;
+						layer.alert('密码有误!',{title: '提示框',icon:0,});
+					}else{
+						check = 1;
+// 						label.innerText="√"; 
+// 						$("#utxt").html("√");
+					} 
+				},
+				error : function() {
+					alert("异常！");
+				}
+			});
+		}
+		</script>
 		 
 	</head>
 	<body>
@@ -183,13 +213,14 @@
          <!--底部样式-->
        
          <div class="footer_style" id="footerstyle">  
-          <p class="lf">版权所有：长江南京航道局  苏ICP备11011739号</p>
-          <p class="rf">地址：南京市鼓楼区阅江楼街道公共路64号  邮编：210011 技术支持：XXXX</p>
+          <p class="lf">版权所有：传一科技  </p>
+          <p class="rf">地址：观日路软件园二期56号  邮编：XXXXXX 技术支持：XXXX</p>
          </div>
          <!--修改密码样式-->
          <div class="change_Pass_style" id="change_Pass">
             <ul class="xg_style">
-             <li><label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label><input name="原密码" type="password" class="" id="password"></li>
+             <li><label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label><input name="原密码" type="password" class="" id="password" onblur="checkPwd()"></li>
+             <label id="utxt" name="utxt" style="margin-left:120px">123123</label>
              <li><label class="label_name">新&nbsp;&nbsp;密&nbsp;码</label><input name="新密码" type="password" class="" id="Nes_pas"></li>
              <li><label class="label_name">确认密码</label><input name="再次确认密码" type="password" class="" id="c_mew_pas"></li>
               
@@ -311,6 +342,14 @@ $('.change_Password').on('click', function(){
 			 });
 			return false;
           } 
+		   if(check!=1){
+			   layer.alert('原密码有误!',{
+		            title: '提示框',				
+					icon:0,
+					    
+					 });
+					return false;
+		   }
 		  if ($("#Nes_pas").val()==""){
 			  layer.alert('新密码不能为空!',{
               title: '提示框',				
@@ -337,15 +376,25 @@ $('.change_Password').on('click', function(){
 			 });
 			 return false;
         }   
-		 else{			  
-			  layer.alert('修改成功！',{
-               title: '提示框',				
-			icon:1,		
-			  }); 
-			  layer.close(index);      
-		  }	 
-	}
-    });
+		    $.ajax({
+				url:"<%=path%>usermanage/changePwd.handle",
+				type:"POST",
+				dataType:"text",
+				data:{
+					"pwd":$("#Nes_pas").val(),
+				},
+				success:function(msg){
+					alert(msg);
+	    			if(msg == "密码修改成功"){
+	    				layer.close(index);
+	    			}
+				},
+				error:function(){
+					alert("异常");
+				}
+			});
+		}
+	});
 });
   $('#Exit_system').on('click', function(){
       layer.confirm('是否确定退出系统？', {

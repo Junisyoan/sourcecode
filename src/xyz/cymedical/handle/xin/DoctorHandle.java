@@ -201,9 +201,6 @@ public class DoctorHandle {
 		+ request.getContextPath() + "/";
 		//退出时销毁登录信息
 		request.getSession().invalidate();
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("doctorlogin");
-//		return mav;
 		try {
 			resp.sendRedirect(path+"doctorlogin.jsp?login=3");
 		} catch (IOException e) {
