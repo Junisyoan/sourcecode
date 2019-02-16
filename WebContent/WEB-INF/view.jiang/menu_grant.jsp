@@ -67,7 +67,7 @@ function allot(rid) {
 		callback : {
 			onClick : function (treeId, treeNode) {
 				var treeObj = $.fn.zTree.getZTreeObj(treeNode);
-// 				var treeObj = $.fn.zTree.getZTreeObj("#alloted");
+				var treeObj = $.fn.zTree.getZTreeObj("#alloted");
 				var selectedNode = treeObj.getSelectedNodes()[0];
 				$("#txtId").val(selectedNode.id);
 				$("#txtAddress").val(selectedNode.name);
@@ -115,7 +115,7 @@ function allot(rid) {
 			callback : {
 				onClick : function (treeId, treeNode) {
 					var treeObj = $.fn.zTree.getZTreeObj(treeNode);
-// 					var treeObj = $.fn.zTree.getZTreeObj("#alloted");
+					var treeObj = $.fn.zTree.getZTreeObj("#alloted");
 					var selectedNode = treeObj.getSelectedNodes()[0];
 					$("#txtId").val(selectedNode.id);
 					$("#txtAddress").val(selectedNode.name);
@@ -176,8 +176,7 @@ var r_id;
 // 			data:'{"role_id":'+r_id+',"mids":'+JSON.stringify(getMyNodesId())+'}',
 			dataType:"text",
 			
-			success : function(data) {
-				alert("77777");
+			success : function(data) { 
 				var treeObj = $.fn.zTree.getZTreeObj("alloted");
 				treeObj.reAsyncChildNodes(null, "refresh");
 				
@@ -196,19 +195,23 @@ var r_id;
 	function removeMenu(){
 		$.ajax({
 			type: "POST",
-			url: "${path}/menu/removemenu.action",
-			contentType:"application/json;charset=utf-8",
-			data:'{"role_id":'+r_id+',"mids":'+JSON.stringify(getMyNodesId())+'}',
+			url: "${path}/powermanage/removemenu.handle",
+// 			contentType:"application/json;charset=utf-8",
+// 			data:'{"role_id":'+r_id+',"mids":'+JSON.stringify(getMyNodesId())+'}',
+			data:{"role_id":r_id,"mids":getMyNodesId()}, 
 			dataType:"text",
+			
 			success : function(data) {
 				var treeObj = $.fn.zTree.getZTreeObj("alloted");
 				treeObj.reAsyncChildNodes(null, "refresh");
 				
 				var treeObj = $.fn.zTree.getZTreeObj("unallot");
 				treeObj.reAsyncChildNodes(null, "refresh");
+// 				alert(getNodesId())
 				alert("移除成功");
 			},
 			error:function(data){
+// 				alert(getNodesId())
 				alert("删除失败");
 			}
 		});
