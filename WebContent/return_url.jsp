@@ -1,4 +1,3 @@
-<%@page import="xyz.cymedical.entity.jun.Company"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,13 +38,10 @@
 		valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
 		params.put(name, valueStr);
 	}
-	
-	boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
-
-	
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 	+ request.getContextPath() + "/";
-	
+	boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
+
 	//——请在这里编写您的程序（以下代码仅作参考）——
 	if(signVerified) {
 		//商户订单号
@@ -56,10 +52,8 @@
 	
 		//付款金额
 		String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
-		
-// 		out.println("trade_no:"+trade_no+"<br/>out_trade_no:"+out_trade_no+"<br/>total_amount:"+total_amount);
-		System.out.print((Company)request.getSession().getAttribute("userCompany"));
-		response.sendRedirect(path+"pay.handle");
+		String str = "<form name='a' method='post' action='company/pay.handle'><input type='text' name='deposit' value='"+total_amount+"'><input type='submit' value='????' style='display:none' ></form><script>document.forms[0].submit();</script>";
+		out.println(str);
 		
 	}else {
 		out.println("验签失败");
