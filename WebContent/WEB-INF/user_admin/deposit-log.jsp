@@ -52,8 +52,8 @@
 		<div class="title_name">充值</div>
 			<input type="text" id="m" name="deposit"/>
 			<input type="button" class="btn btn-primary" value="充值" onclick="recharge();"/>
-		余额：${userCompany.deposit }
 		<button type="button" class="btn btn-primary" onclick="tableToExcel('depositTable','data')">导出Excel</button>
+		余额：${userCompany.deposit }
 	</div>
 	<div class="Manager_style">
 		<span class="title_name">金额明细</span>

@@ -97,7 +97,8 @@
 						<td>${p.pid}</td>
 						<td>${p.name}</td>
 						<td><input type="button" onclick="delparam('${p.param_id}')"
-							value="删除" style="width: 100px;" /></td>
+							value="删除" style="width: 100px;" />
+							<a href="<%=path%>param/showmodifyparam.handle?param_id=${p.param_id}"><input type="button" value="修改" style="width: 100px;" /></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

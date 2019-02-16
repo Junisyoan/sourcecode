@@ -39,7 +39,7 @@ public class ParamHandle {
 
 	// 删除方法
 	@RequestMapping(value = "/delparam.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-	public @ResponseBody String delLog(HttpServletRequest req, String param_id) {
+	public @ResponseBody String delLog(String param_id) {
 		String result = "";
 
 		flag = paramBiz.delParam(param_id);
@@ -78,22 +78,49 @@ public class ParamHandle {
 	}
 
 	// 增加参数
-	@RequestMapping(value = "addparam.handle")
-	public ModelAndView addparam(String pid, String name) {
+	@RequestMapping(value = "/addparam.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String addparam(String pid, String name) {
+		String result = "";
 
 		flag = paramBiz.insertParam(pid, name);
+
 		if (flag == true) {
-			System.out.println("成功");
+			result = "success";
 		} else {
-			System.out.println("失败");
+			result = "failure";
 		}
 
-		paramlist = paramBiz.findAllParam();
+		return result;
+	}
+
+	// 修改界面显示
+	@RequestMapping(value = "showmodifyparam.handle")
+	public ModelAndView showmodifyparam(String param_id) {
+		
+		paramlist = paramBiz.searchParam(param_id, "", "");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.jiang/manageparam");
+		mav.setViewName("WEB-INF/view.jiang/modifyparam");
 		mav.addObject("paramlist", paramlist);
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/modifyparam.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String modifyparam(String param_id,String pid, String name) {
+		String result = "";
+
+		System.out.println(param_id+"+"+pid+"+"+name);
+		
+		flag = paramBiz.modifyParam(param_id, pid, name);
+
+		if (flag == true) {
+			result = "success";
+		} else {
+			result = "failure";
+		}
+
+		return result;
+	}
+
 }

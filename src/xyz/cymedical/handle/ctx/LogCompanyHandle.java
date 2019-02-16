@@ -36,27 +36,6 @@ public class LogCompanyHandle {
 
 	}
 
-//	// 公司记账
-//	@RequestMapping(value = "/findlogcompany.handle")
-//	public ModelAndView findcompanylog(HttpServletRequest request, HttpServletResponse response, String name) {
-//
-//		System.out.println(request.getSession().getAttribute("userName"));
-//
-//		Companylist = companyBiz.queryByAccount((String) request.getSession().getAttribute("userName"));
-//
-//		logCompanylist = logCompanyBiz.queryByName(Companylist.get(0).getName());
-//
-//		System.out.println(logCompanylist.size());
-//
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("WEB-INF/medical_workstation/logcompany");
-//		if (logCompanylist.size() > 0) {
-//			mav.addObject("logCompanylist", logCompanylist);
-//		}
-//		return mav;
-//
-//	}
-
 	// 医院记账
 	@RequestMapping(value = "/findalllogcompany.handle")
 	public ModelAndView findallcompanylog() {

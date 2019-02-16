@@ -48,8 +48,6 @@ public class LogHandle {
 	public @ResponseBody String delLog(HttpServletRequest req, @RequestParam(value = "arrin") String[] arrin) {
 		String result = "";
 
-		System.out.println("arrin=" + arrin[0]);
-
 		for (int i = 0; i < arrin.length; i++) {
 			flag = logBiz.delLog(arrin[i]);
 			if (i == arrin.length - 1) {
@@ -68,8 +66,6 @@ public class LogHandle {
 	public ModelAndView searchlog(String name, String opera, String time) {
 
 		loglist = logBiz.searchLog(name, opera, time);
-
-		System.out.println(loglist);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.jiang/selectLog");
