@@ -2,14 +2,19 @@
 import="java.sql.*" errorPage=""%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+%>
+
 <head>
 <title>体检中心</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="./css/index.css" rel="stylesheet" media="all" />
-<link rel="stylesheet" href="./css/bjqs.css">
-<script src="./js/jquery-1.7.2.min.js"></script>
-<script src="./js/bjqs-1.3.js"></script>
-<script src="./js/jquery.secret-source.min.js"></script>
+<link href="<%=path %>/css/index.css" rel="stylesheet" media="all" />
+<link rel="stylesheet" href="<%=path %>/css/bjqs.css">
+<script src="<%=path %>/js/jquery-1.7.2.min.js"></script>
+<script src="<%=path %>/js/bjqs-1.3.js"></script>
+<script src="<%=path %>/js/jquery.secret-source.min.js"></script>
 <script>
 	jQuery(function($) {
 		$('.secret-source').secretSource({
@@ -89,15 +94,25 @@ import="java.sql.*" errorPage=""%>
 						style="color: #999; text-align: left">View Larger Map</a></small>
 				</div>
 				 -->
-				<div class="grids">
-					<h4>公司：HuaCtxZscLxyJuan</h4><br>
-					<span>福建省--厦门市</span><br>
-					<span>软件园二期--观日路--56号楼--一层</span><br>
-					<span>公司座机: +400 820 8820</span><br>
-					<span>手机: +18054803621</span><br>
-					<span>传真: +1 800 889 9898</span><br>
-					<span>email:<a href="">810076219@qq.com</a></span>
+<!-- 				<div class="grids"> -->
+<!-- 					<h4>公司：HuaCtxZscLxyJuan</h4><br> -->
+<!-- 					<span>福建省--厦门市</span><br> -->
+<!-- 					<span>软件园二期--观日路--56号楼--一层</span><br> -->
+<!-- 					<span>公司座机: +400 820 8820</span><br> -->
+<!-- 					<span>手机: +18054803621</span><br> -->
+<!-- 					<span>传真: +1 800 889 9898</span><br> -->
+<!-- 					<span>email:<a href="">810076219@qq.com</a></span> -->
+<!-- 				</div> -->
+			 <div class="grids"> 
+					<h4>公司：${tb_contact.name} </h4><br>
+					<span>${tb_contact.province}</span><br>
+					<span>${tb_contact.area}</span><br>
+					<span>公司座机:${tb_contact.tel}</span><br>
+					<span>手机: + ${tb_contact.phone}</span><br>
+					<span>传真: +1 ${tb_contact.fax}</span><br>
+					<span>email:<a href="mailto:${tb_contact.email}?123">${tb_contact.email}</a></span>
 				</div>
+			
 			</div>
 			<div class="clear"></div>
 		</div>
