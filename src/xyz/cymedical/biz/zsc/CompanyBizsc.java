@@ -1,5 +1,6 @@
 package xyz.cymedical.biz.zsc;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +71,11 @@ public class CompanyBizsc {
 
 	@Log(action = "重置账号密码")
 	public String resetPwd(String company_id) {
-		int rt = companyMappers.resetPwd(company_id);
+		Map<String, Object> map = new HashMap<>();
+		map.put("company_id", company_id);
+		String pwd = Encryption.getResult("123456");
+		map.put("pwd", pwd);
+		int rt = companyMappers.resetPwd(map);
 		if (rt > 0) {
 			return "重置密码成功";
 		} else {

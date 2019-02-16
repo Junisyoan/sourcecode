@@ -42,18 +42,22 @@
  		width:400px;
  		margin:0 auto;
  	}
+ 	.info{
+ 		resize: none;
+ 		margin-left:20px;
+ 	}
  	.btnList{
 		width: 300px;
 		height: 50px;
 		margin: 10px 0 0 160px;
  	}
  	.checkList th,.checkList td {
-    border: 1px #E6E6FA solid;
-    font-weight: 100;
-    line-height: 25px;
-    font-size: 15px;
-    text-align: center;
-}
+    	border: 1px #E6E6FA solid;
+    	font-weight: 100;
+    	line-height: 25px;
+    	font-size: 15px;
+    	text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -102,6 +106,12 @@
 					<input type="text" id = "page1" style = "width:50px;"/>
 					<input type="button" value="跳转" onclick="jump()" />
 				</div>
+				<label class="label_name">套餐描述</label>
+				<div>
+					<textarea rows="4" cols="50" class = "info" name = "info" id = "info1"></textarea>
+      				<!-- <span id = "number1"></span>
+					<span>/100</span> -->
+				</div>
       	 </form> 
       </div>       
     </div>
@@ -138,6 +148,12 @@
 					<input type="text" id = "page" style = "width:50px;"/>
 					<input type="button" value="跳转" onclick="jump()" />
 				</div> 
+				<label class="label_name">套餐描述</label>
+				<div>
+					<textarea rows="4" cols="50" class = "info" name = "info" id = "info"></textarea>
+      				<!-- <span id = "number1"></span>
+					<span>/100</span> -->
+				</div>
       		<input type="hidden" id = "combo_id" name = "combo_id">
       	 </form> 
       </div>       
@@ -176,6 +192,7 @@
 								</div>
 							</td>
 							<td>
+								<input type = "hidden" value = "${c.info}">
 								<button type="button" class="btn btn-warning" onclick="remove()"
 									name="${c.combo_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
@@ -472,6 +489,11 @@ function change(e){
 		input[i].value = mag[i].innerHTML;
 	}
 	
+	var info = document.getElementById("info");
+	var info2 = t.parentNode.getElementsByTagName("input");
+	info.value = info2[0].value;
+	
+	//describe
 	for(var i=0;i <project_id.length;i++){
 		idArray.push(project_id[i].value);
 	}
@@ -525,6 +547,7 @@ function change(e){
 	    			"combo_id":$("#combo_id").val(),
 	    			"name":$("#name").val(),
 	    			"price":$("#price").val(),
+	    			"info":$("#info").val(),
 	    			"idArray":idArray
 	    		},
 	    		traditional: true,
@@ -664,6 +687,7 @@ $('#add_butn').on('click', function(){
 	    		data:{
 	    			"name":$("#name1").val(),
 	    			"price":$("#price1").val(),
+	    			"info":$("#info1").val(),
 	    			"idArray":idArray
 	    		},
 	    		traditional: true,

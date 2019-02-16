@@ -4,6 +4,10 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.CompanyMappers">
 
+	<update id="resetPwd" parameterType = "map">
+		update tb_company set pwd = #{pwd} where company_id = #{company_id}
+	</update>
+
 	<select id="checkPwd" parameterType = "xyz.cymedical.entity.jun.Company" resultType="int">
 		select count(*) from tb_company where pwd = #{pwd} and company_id != #{id}
 	</select>
@@ -20,23 +24,15 @@
 		</if>
 	</select>
 
-	<!-- 插入细项 -->
 	<insert id="insertCompany" parameterType = "xyz.cymedical.entity.jun.Company">
-		insert into tb_company(name,account,pwd,tel,address,people,phone,deposit,state) 
+		insert into tb_company(name,account,pwd,tel,address,people,phone,deposit,cstate) 
 		values (#{name},#{account},#{pwd},#{tel},#{address},#{people},#{phone},#{deposit},'在用');
 	</insert>
 
-	<!-- 修改细项 -->
 	<update id="stateChange" parameterType = "xyz.cymedical.entity.jun.Company">
-		update tb_company set state = #{state} where company_id = #{company_id}
+		update tb_company set cstate = #{cstate} where company_id = #{company_id}
 	</update>
 	
-	<!-- 修改细项 -->
-	<update id="resetPwd" parameterType = "String">
-		update tb_company set pwd = '123456' where company_id = #{company_id}
-	</update>
-
-	<!-- 修改细项 -->
 	<update id="updateCompany" parameterType = "xyz.cymedical.entity.jun.Company">
 		update tb_company set 
 		name = #{name}, account = #{account},tel = #{tel},address=#{address}, 
@@ -44,27 +40,23 @@
 		where company_id = #{company_id}
 	</update>
 
-	<!-- 删除细项 -->
 	<update id="deleteCompany" parameterType = "String">
 		update tb_company set state = '已删除' where company_id = #{company_id}
 	</update>
 
-	<!-- 细项集合 -->
 	<select id="findCompanys" resultType = "xyz.cymedical.entity.jun.Company">
-		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
-		from tb_company where state != '已删除'
+		select company_id,name,account,pwd,tel,address,people,phone,deposit,cstate
+		from tb_company where cstate != '已删除'
 	</select>
 
-	<!-- 修改细项前的查询细项 -->
 	<select id = "findCompany" parameterType="java.lang.String" resultType = "xyz.cymedical.entity.jun.Company">
-		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
-		from tb_company where company_id = #{company_id} and state != '已删除'
+		select company_id,name,account,pwd,tel,address,people,phone,deposit,cstate
+		from tb_company where company_id = #{company_id} and cstate != '已删除'
 	</select>
 
-	<!-- 查询细项 -->
 	<select id = "selectCompany" parameterType="map" resultType = "xyz.cymedical.entity.jun.Company">
-		select company_id,name,account,pwd,tel,address,people,phone,deposit,state
-		from tb_company where 1=1 and state != '已删除'
+		select company_id,name,account,pwd,tel,address,people,phone,deposit,cstate
+		from tb_company where 1=1 and cstate != '已删除'
 		<if test="company.name!=null and company.name!=''">
 			and name like '%${company.name}%'
 		</if>
@@ -88,6 +80,9 @@
 		</if>
 		<if test="max!=null and max!=''">
 			and #{max} > deposit
+		</if>
+		<if test="company.cstate!=null and company.cstate!=''">
+			and cstate = #{company.cstate}
 		</if>
 	</select>
 </mapper>

@@ -96,8 +96,7 @@ public class LoginHandle {
 	
 	@RequestMapping(value = "/exit.handle")
 	public String exit(HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		session.removeAttribute("user");
+		req.getSession().invalidate();
 
 		return "backlogin";
 	}
