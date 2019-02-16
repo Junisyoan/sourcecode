@@ -244,7 +244,6 @@ public class UserManageHandle {
 
 	}
 
-	// 重名验证
 	@RequestMapping(value = "/checkPwd.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String checkPwd(HttpServletRequest request, String pwd) {
 		Tb_user user = (Tb_user) request.getSession().getAttribute("user");
@@ -255,7 +254,6 @@ public class UserManageHandle {
 		return tbUserBiz.checkPwd(map);
 	}
 
-	// 重名验证
 	@RequestMapping(value = "/changePwd.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String changePwd(HttpServletRequest request,String pwd) {
 		Tb_user user = (Tb_user) request.getSession().getAttribute("user");
