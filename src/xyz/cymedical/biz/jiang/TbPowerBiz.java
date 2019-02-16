@@ -17,5 +17,11 @@ public interface TbPowerBiz {
 	public int upPower(Tb_power tbpower);
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
+	
+	public Tb_power selectid(int menu_id);
+	
+	public int delectMenuId(int power_id);/*删除菜单前 先删除权限*/
+	
+	public int deletepower_role(int power_id);/*删除权限前 先删除权限角色表*/
 
 }
