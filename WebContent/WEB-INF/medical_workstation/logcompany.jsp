@@ -25,9 +25,56 @@
 		$("#item").dataTable();
 	});
 </script>
-<title>项目接收</title>
+<script type="text/javascript">
+	function base64(content) {
+		return window.btoa(unescape(encodeURIComponent(content)));
+	}
+	/*
+	 *@tableId: table的Id
+	 *@fileName: 要生成excel文件的名字（不包括后缀，可随意填写）
+	 */
+	function tableToExcel(tableID, fileName) {
+		var table = document.getElementById(tableID);
+		var excelContent = table.innerHTML;
+		var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
+		excelFile += "<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>";
+		excelFile += "<body><table>";
+		excelFile += excelContent;
+		excelFile += "</table></body>";
+		excelFile += "</html>";
+		var link = "data:application/vnd.ms-excel;base64," + base64(excelFile);
+		var a = document.createElement("a");
+		a.download = fileName + ".xls";
+		a.href = link;
+		a.click();
+	}
+</script>
+<title>团检单位对账</title>
 </head>
 <body>
+
+	<div class="page-content">
+		<div class="gys_style">
+			<div class="Manager_style">
+				<div class="title_name">日志查询</div>
+				<form method="post" action="<%=path%>logcompany/searchlog.handle">
+					<ul class="search_content clearfix">
+						<li><label class="lf">公司名字<input name="name"
+								type="text" class="text_add" /></label> <label class="lf">具体操作<input
+								name="operate" type="text" class="text_add" />
+						</label> <label class="lf">金额<input name="money" type="text"
+								class="text_add" /></label>
+						<label class="lf">操作时间<input name="time" type="date"
+								class="text_add" /></label>
+							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
+							<button type="button" class="btn btn-primary" onclick="tableToExcel('item','data')">导出Excel</button>
+							</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+
 	<div class="Manager_style">
 		<span class="title_name">团检单位对账</span>
 		<p>&nbsp;</p>

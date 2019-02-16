@@ -808,9 +808,22 @@ public class NurseHandle {
 
 		}
 	
-	
-	
-	
-	
+		@RequestMapping(value = "/home.handle")
+		public ModelAndView turnhome() {
+
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("WEB-INF/medical_workstation/index");
+			return mav;
+
+		}
+		
+		@RequestMapping(value = "/systemhome.handle")
+		public ModelAndView turnsystemhome() {
+
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("WEB-INF/medical_workstation/welcome");
+			return mav;
+
+		}
 	
 }

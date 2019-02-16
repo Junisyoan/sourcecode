@@ -18,6 +18,9 @@
 	
 	</delete>
 	
+	
+	
+	
 	<insert id="addPower" parameterType="xyz.cymedical.entity.jiang.Tb_power">
 		insert into tb_power(power_id,menu_id,name) values(#{power_id},#{menu_id},#{name})
 	</insert>
@@ -55,5 +58,23 @@
 	 
 		 
 	</select>
+	
+	<select id="selectid" parameterType="int" resultType="xyz.cymedical.entity.jiang.Tb_power">
+	
+		select * from tb_power where menu_id=#{menu_id}
+	
+	</select>
+	
+	<delete id="delectMenuId" parameterType="int">
+	
+		 delete from tb_power where power_id=#{power_id}
+	
+	</delete>
+	
+	 <delete id="deletepower_role" parameterType="int">
+	
+		 delete from tb_role_power where power_id=#{power_id}
+	
+	</delete>
 	
 </mapper>

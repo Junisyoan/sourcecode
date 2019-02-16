@@ -35,8 +35,6 @@ public class LogHandle {
 	public ModelAndView findlog() {
 		loglist = logBiz.findAllLog();
 
-		System.out.println(loglist);
-
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.jiang/selectLog");
 		mav.addObject("loglist", loglist);
@@ -50,11 +48,9 @@ public class LogHandle {
 	public @ResponseBody String delLog(HttpServletRequest req, @RequestParam(value = "arrin") String[] arrin) {
 		String result = "";
 
-		System.out.println("arrin="+arrin[0]);
-		
 		for (int i = 0; i < arrin.length; i++) {
 			flag = logBiz.delLog(arrin[i]);
-			if(i == arrin.length - 1) {
+			if (i == arrin.length - 1) {
 				if (flag == true) {
 					result = "success";
 				} else {
@@ -63,6 +59,20 @@ public class LogHandle {
 			}
 		}
 		return result;
+	}
+
+	// 查询日志
+	@RequestMapping(value = "/searchlog.handle")
+	public ModelAndView searchlog(String name, String opera, String time) {
+
+		loglist = logBiz.searchLog(name, opera, time);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/selectLog");
+		mav.addObject("loglist", loglist);
+
+		return mav;
+
 	}
 
 }

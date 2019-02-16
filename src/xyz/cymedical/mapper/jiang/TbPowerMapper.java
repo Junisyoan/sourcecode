@@ -20,4 +20,11 @@ public interface TbPowerMapper {
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 	
+	public Tb_power selectid(int menu_id);/*删除菜单时 查询的权限id*/
+	
+	public int delectMenuId(int power_id);
+	
+	public int deletepower_role(int power_id);/*删除权限前 先删除权限角色表*/
+
+	
 }

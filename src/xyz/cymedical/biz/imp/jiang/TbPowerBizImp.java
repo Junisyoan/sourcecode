@@ -46,4 +46,22 @@ public class TbPowerBizImp implements TbPowerBiz{
 		return tbPowerMapper.selectCompany(map);
 	}
 
+	@Override
+	public Tb_power selectid(int menu_id) {
+		// TODO Auto-generated method stub
+		return tbPowerMapper.selectid(menu_id);
+	}
+
+	@Override
+	public int delectMenuId(int power_id) {
+		// TODO Auto-generated method stub
+		return tbPowerMapper.delectMenuId(power_id);
+	}
+
+	@Override
+	public int deletepower_role(int power_id) {
+		// TODO Auto-generated method stub
+		return tbPowerMapper.deletepower_role(power_id);
+	}
+
 }

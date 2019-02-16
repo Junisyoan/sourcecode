@@ -2,6 +2,8 @@ package xyz.cymedical.biz.ctx;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import xyz.cymedical.entity.ctx.LogCompany;
 
 /**
@@ -26,5 +28,8 @@ public interface LogCompanyBiz {
 	public List<LogCompany> queryByName(String name);
 	
 	public List<LogCompany> queryAll();
+	
+	public List<LogCompany> searchLog(@Param("name") String name, @Param("operate") String operate,
+			@Param("money") String money, @Param("time") String time);
 
 }

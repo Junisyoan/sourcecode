@@ -25,7 +25,8 @@ import xyz.cymedical.biz.jiang.TbRolePower;
 import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_power;
-import xyz.cymedical.entity.jiang.Tb_role; 
+import xyz.cymedical.entity.jiang.Tb_role;
+import xyz.cymedical.entity.jiang.Tb_role_power; 
 
 
 @Controller
@@ -42,6 +43,9 @@ public class PowerManageHandle {
 		private TbRoleBiz tbRoleBiz;
 		
 		private Tb_power tbpower;
+		
+		@Resource
+		private Tb_role_power tb_role_power;
 		
 		private Tb_menu tb_menu;
 		
@@ -258,7 +262,7 @@ public class PowerManageHandle {
 		 * @return
 		 */ 
 		@RequestMapping(value="/addmenu.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8") 
-		public String addMenu( Tb_menu rm,HttpServletRequest request,HttpServletResponse resp) {
+		public @ResponseBody String addMenu( Tb_menu rm,HttpServletRequest request,HttpServletResponse resp) {
 			System.out.println("请选择要添加的权");
 			String ret="请选择要添加的权限！";
 			System.out.println("-----"+rm.toString()+"---"+ret+"----");
@@ -290,12 +294,23 @@ public class PowerManageHandle {
 				}
 				//用菜單id查找权限id  权限id和角色id同时添加一张表 
 				int menu_idddd=rm.getMenu_id(); 
-				List<Tb_power> plist=tbMenuBiz.selectId(menu_idddd); 
+				int role_id=rm.getRole_id();
+				System.out.println("role_id="+role_id);
+				System.out.println("menu_idddd="+menu_idddd);
 				
-				for(int j = 0; j < menuids.length; j++) {
-					
-				}
- 				 
+				
+				
+				Tb_power plist=tbMenuBiz.selectId(menu_idddd);  
+				int power_id=plist.getPower_id();
+				System.out.println("quanxid="+power_id);
+				System.out.println("role_id="+role_id);
+			 
+				tb_role_power.setRole_id(role_id);
+				tb_role_power.setPower_id(power_id);
+				rett=tbMenuBiz.insert(tb_role_power);
+				
+				
+// 
 				System.out.println("插入数据菜单--" + m_id + "角色：" + r_id);
 				
 			}
@@ -314,7 +329,62 @@ public class PowerManageHandle {
 		}
 		
 		
- 
+		/**
+		 * 移除权限菜单
+		 * 
+		 * @return
+		 */
+		
+		@RequestMapping(value="/removemenu.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8") 
+		public   String removeMenu(  Tb_menu rm,HttpServletRequest request,HttpServletResponse resp) {
+	 	 	 
+			System.out.println("移除 移除");
+			String ret="请选择要移除的权限！";
+			System.out.println("-----"+rm.toString()+"---"+ret+"----");
+			
+			boolean flag = false; 
+			System.out.println("rm.getsuperior="+rm.getSuperior());
+			
+			if (rm.getMids()==null||rm.getMids()=="") {
+				return ret;
+			}
+			int r_id = Integer.valueOf(rm.getRole_id());
+			System.out.println("r_id="+r_id);
+			System.out.println("222="+rm.getMids());
+			String[] menuids = rm.getMids().split(",");
+			System.out.println(menuids[0]);
+			System.out.println(menuids[1]);
+			System.out.println("menuids="+menuids.toString());
+			// 插入数据
+			for (int i = menuids.length - 1; i >= 0; i--) {
+				int m_id = Integer.valueOf(menuids[i]);
+				
+				// 如果有子节点就不插入
+				rm.setMenu_id(m_id);
+				rm.setRole_id(r_id);
+				int count = tbMenuBiz.getCount(rm);
+				if (count > 0) {
+					continue;
+				}
+				int menu_idddd=rm.getMenu_id(); 
+				int role_id=rm.getRole_id();
+				Tb_power plist=tbMenuBiz.selectId(menu_idddd);  
+				int power_id=plist.getPower_id();
+				tb_role_power.setRole_id(role_id);
+				tb_role_power.setPower_id(power_id);
+				rett=tbMenuBiz.del(tb_role_power);
+				//没有子节点执行删除操作
+//				flag = roleMenuBiz.del(rm);s
+				System.out.println("插入数据菜单--" + m_id + "角色：" + r_id+"--flag="+flag);
+				
+				if(rett>0) {
+					ret="移除成功";
+				}else {
+					ret="移除失败";
+				}
+			}
+			return null;
+		}
 	 
 		
 		

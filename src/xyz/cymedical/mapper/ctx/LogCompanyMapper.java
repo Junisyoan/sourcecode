@@ -15,22 +15,23 @@ import xyz.cymedical.entity.ctx.LogCompany;
 
 @Repository
 public interface LogCompanyMapper {
-	
+
 	/**
 	 * @author Junisyoan
-	 * @param cid	公司id
-	 * @param op	操作
-	 * @param deposit	金额
-	 * @param t	操作时间
-	 * @return	是否插入成功
+	 * @param cid     公司id
+	 * @param op      操作
+	 * @param deposit 金额
+	 * @param t       操作时间
+	 * @return 是否插入成功
 	 */
-	public boolean insertLog(@Param("company_id")int cid,
-			@Param("operate")String op,
-			@Param("deposit")String deposit,
-			@Param("time")String t);
-	
+	public boolean insertLog(@Param("company_id") int cid, @Param("operate") String op,
+			@Param("deposit") String deposit, @Param("time") String t);
+
 	public List<LogCompany> queryByName(String name);
-	
+
 	public List<LogCompany> queryAll();
+
+	public List<LogCompany> searchLog(@Param("name") String name, @Param("operate") String operate,
+			@Param("money") String money, @Param("time") String time);
 
 }

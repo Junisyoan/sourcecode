@@ -1,6 +1,9 @@
 package xyz.cymedical.entity.jiang;
 
+import org.springframework.stereotype.Component;
+
 //角色权限表
+@Component
 public class Tb_role_power {
 
 	private int role_powerid;//角色权限id
@@ -32,6 +35,10 @@ public class Tb_role_power {
 	}
 	public void setRole_id(int role_id) {
 		this.role_id = role_id;
+	}
+	@Override
+	public String toString() {
+		return "Tb_role_power [role_powerid=" + role_powerid + ", power_id=" + power_id + ", role_id=" + role_id + "]";
 	}
  
 

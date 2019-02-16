@@ -38,4 +38,10 @@ public class ParamBizImpl implements ParamBiz {
 		return parammapper.insertParam(pid, name);
 	}
 
+	@Override
+	public boolean modifyParam(String param_id, String pid, String name) {
+		// TODO Auto-generated method stub
+		return parammapper.modifyParam(param_id, pid, name);
+	}
+
 }

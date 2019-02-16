@@ -33,5 +33,20 @@
 		insert into tb_param(pid,name)
 		values(#{pid},#{name})
 	</insert>
+	
+	<update id="modifyParam"
+		parameterType="xyz.cymedical.entity.yjn.Parameter">
+		
+		update tb_param 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="pid != null and pid != ''">
+				pid = #{pid},
+			</if>
+			<if test="name != null and name != ''">
+				name = #{name}
+			</if>
+			where param_id = #{param_id}
+		</trim>
+	</update>
 
 </mapper>
