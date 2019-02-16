@@ -58,6 +58,7 @@ public class UserManageHandle {
 		}
 
 		System.out.println("qqqqqqqqqqqq+Role_dept_id=" + adduser.getRole_dept_id());
+		adduser.setPwd(Encryption.getResult(adduser.getPwd()));
 		int ret = tbUserBiz.addUser(adduser);
 
 		if (ret == 1) {
