@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_power;
+import xyz.cymedical.entity.jiang.Tb_role_power;
 
 @Repository
 public interface TbMenuMapper {
@@ -25,7 +26,9 @@ public interface TbMenuMapper {
 	
 	public int getCount(Tb_menu rm);
 	
-	public List<Tb_power> selectId(int menu_idddd);
+	public Tb_power selectId(int menu_idddd);
 	
-	public int insert(Tb_menu tb_menu);
+	public int insert(Tb_role_power tb_role_power);
+	
+	public int del(Tb_role_power tb_role_power);
 }
