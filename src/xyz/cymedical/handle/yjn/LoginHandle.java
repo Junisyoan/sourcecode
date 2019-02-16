@@ -75,17 +75,22 @@ public class LoginHandle {
 		return mav;
 
 	}
+	
+	@RequestMapping(value = "/home.handle")
+	public ModelAndView turnhome() {
 
-	@RequestMapping(value = "/modify.handle")
-	public ModelAndView modify(String oldpwd, String newpwd, HttpServletRequest req) {
-		
-		userr = (Tb_user) req.getSession().getAttribute("user");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/index");
+		return mav;
 
-		System.out.println(userr.getAccount());
-		System.out.println(oldpwd);
-		System.out.println(newpwd);
+	}
+	
+	@RequestMapping(value = "/systemhome.handle")
+	public ModelAndView turnsystemhome() {
 
-		return null;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/welcome");
+		return mav;
 
 	}
 	
