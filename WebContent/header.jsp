@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+	+ request.getContextPath() + "/";
+%>
 <div class="header-bg">
 <div class="wrap">
 	<div class="logo">
@@ -17,11 +21,11 @@
 	<div class="nav"> 
  	<ul>
  		<li class="active"><a href="index.jsp">HOME</a></li>
- 		<li><a href="about.jsp">关于</a></li>
- 		<li><a href="services.html">服务类别</a></li>
- 		<li><a href="products.jsp">套餐介绍</a></li>
-		<li><a href="projects.jsp">项目介绍</a></li>
- 		<li><a href="contact.jsp">联系我们</a></li>
+ 		<li><a href="<%=path %>about.jsp">关于</a></li>
+ 		<li><a href="<%=path %>services.html">服务类别</a></li>
+ 		<li><a href="<%=path %>comboshow/introduce.so">套餐介绍</a></li>
+		<li><a href="<%=path %>projects.jsp">项目介绍</a></li>
+ 		<li><a href="<%=path %>contact.jsp">联系我们</a></li>
  	</ul>      
   	</div>
   	<div class="clear"></div>
