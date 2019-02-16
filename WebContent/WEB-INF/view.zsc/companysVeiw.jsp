@@ -41,11 +41,16 @@
      		公司名	<input type="text" name="name"/>
      		账户名	<input type="text" name="account"/>
      		电话号码	<input type="text" name="tel" id = "tel2"/>
-     		地址		<input type="text" name="address"/><br/>
+     		地址		<input type="text" name="address"/>
      		领队人	<input type="text" name="people"/>
      		领队人电话	<input type="text" name="phone" id = "phone2"/>
      		账户金额	<input type="text" name="min" id = "min"/>
      		至		<input type="text" name="max" id = "max"/>
+     		状态		<select name="cstate" style="width: 160px; height: 30px; margin-left: 10px;">
+							<option></option>
+							<option>在用</option>
+							<option>禁用</option>
+					</select>
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 </form>
      <div id="Add_Product_style" style="display:none">
@@ -166,9 +171,9 @@
 							<td>${c.people}</td>
 							<td>${c.phone}</td>
 							<td>${c.deposit}</td>
-							<td>${c.state}</td>
+							<td>${c.cstate}</td>
 							<td><c:choose>
-									<c:when test="${c.state == '禁用'}">
+									<c:when test="${c.cstate == '禁用'}">
 										<button type="button" class="btn btn-warning"
 											onclick="stateChange()" name="${c.company_id}">启用</button>
 									</c:when>
@@ -201,11 +206,11 @@
 function stateChange(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
-	var state = t.innerText;
+	var cstate = t.innerText;
 	var company_id = t.name;
 	
-	if(state != "禁用"){
-		state="在用";
+	if(cstate != "禁用"){
+		cstate="在用";
 	}
 	
 	$.ajax({
@@ -214,7 +219,7 @@ function stateChange(e){
 		dataType:"text",
 		data:{
 			"company_id":company_id,
-			"state":state
+			"cstate":cstate
 		},
 		success:function(msg){
 			alert(msg);
@@ -284,12 +289,12 @@ function show(companys){
 		var td5=$("<td></td>").text(companys[i].people);
 		var td6=$("<td></td>").text(companys[i].phone);
 		var td7=$("<td></td>").text(companys[i].deposit);
-		var td8=$("<td></td>").text(companys[i].state);
+		var td8=$("<td></td>").text(companys[i].cstate);
 		var td9=$("<td></td>");
 		
 		var input1;
 		
-		if(companys[i].state == "禁用"){
+		if(companys[i].cstate == "禁用"){
 			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>启用</button>");
 		}else{
 			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>禁用</button>");
