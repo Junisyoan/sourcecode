@@ -77,4 +77,9 @@ public class ComboBiz {
 			return "该名称可使用";
 		}
 	};
+	
+	public List<Combo> queryCombo(){
+		return comboMapper.queryCombo();
+		
+	}
 }

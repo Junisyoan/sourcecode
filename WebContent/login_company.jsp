@@ -1,3 +1,9 @@
+<%@ page contentType="text/html; charset=utf-8" language="java"
+import="java.sql.*" errorPage=""%>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +31,7 @@
 <body>
     <div class="container">
         <div class="wrap">
-            <header><em>Logo</em><span>传一团检体检中心</span></header>
+            <header><em><img src="<%=path%>/image/index1/logo.png"></em><span>传一团检体检中心</span></header>
             <article>
                 <section>
                     <aside>

@@ -10,6 +10,8 @@ public class Combo {
 	private String name; // 套餐名
 	private double price; // 价格
 	private List<Project> projects;
+	
+	private Project project;
 
 	public Combo() {
 		super();
@@ -61,6 +63,14 @@ public class Combo {
 
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 }

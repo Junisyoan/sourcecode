@@ -1,15 +1,19 @@
 <%@ page contentType="text/html; charset=utf-8" language="java"
 import="java.sql.*" errorPage=""%>
+<%
+	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>体检中心</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="./css/index.css" rel="stylesheet" media="all" />
-<link rel="stylesheet" href="./css/bjqs.css">
-<script src="./js/jquery-1.7.2.min.js"></script>
-<script src="./js/bjqs-1.3.js"></script>
-<script src="./js/jquery.secret-source.min.js"></script>
+<link href="<%=path%>css/index.css" rel="stylesheet" media="all" />
+<link rel="stylesheet" href="<%=path%>css/bjqs.css">
+<script src="<%=path%>js/jquery-1.7.2.min.js"></script>
+<script src="<%=path%>js/bjqs-1.3.js"></script>
+<script src="<%=path%>js/jquery.secret-source.min.js"></script>
 <script>
 	jQuery(function($) {
 		$('.secret-source').secretSource({
