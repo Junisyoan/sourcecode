@@ -57,4 +57,7 @@ public interface DoctorMapper {
 
 	//根据id找总结
 	public Summarize findMySummarize(int sumid);
+
+	//根据id找科室
+	public String getDepart(int param_id);
 }

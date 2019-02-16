@@ -26,7 +26,7 @@ public interface CompanyMappers {
 
 	public int stateChange(Company company);
 	
-	public int resetPwd(String company_id);
+	public int resetPwd(Map<String, Object> map);
 	
 	public int checkPwd(Company company);
 	

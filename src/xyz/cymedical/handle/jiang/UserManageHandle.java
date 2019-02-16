@@ -77,10 +77,15 @@ public class UserManageHandle {
 	@RequestMapping(value = "/selectCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String selectCompany(Tb_user tb_user, String dept) {
 		System.out.println("过");
+//		----加密
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("tb_user", tb_user);
+		Tb_user tb_userr=tb_user;
+		tb_userr.setPwd(Encryption.getResult(tb_userr.getPwd()));
+//		---
+		map.put("tb_user", tb_userr);
 
 		map.put("dept", dept);
+		
 		List<Map<String, Object>> companys = tbUserBiz.selectCompany(map);
 //			List<Tb_user> companys = companyBizsc.selectCompany(map);
 		String str = JSONArray.fromObject(companys).toString();
@@ -245,7 +250,6 @@ public class UserManageHandle {
 
 	}
 
-	// 重名验证
 	@RequestMapping(value = "/checkPwd.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String checkPwd(HttpServletRequest request, String pwd) {
 		Tb_user user = (Tb_user) request.getSession().getAttribute("user");
@@ -256,7 +260,6 @@ public class UserManageHandle {
 		return tbUserBiz.checkPwd(map);
 	}
 
-	// 重名验证
 	@RequestMapping(value = "/changePwd.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String changePwd(HttpServletRequest request,String pwd) {
 		Tb_user user = (Tb_user) request.getSession().getAttribute("user");

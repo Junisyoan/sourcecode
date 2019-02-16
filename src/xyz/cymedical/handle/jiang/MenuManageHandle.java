@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbMenuBiz;
+import xyz.cymedical.biz.jiang.TbPowerBiz;
 import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.entity.jiang.Tb_dept;
 import xyz.cymedical.entity.jiang.Tb_menu;
+import xyz.cymedical.entity.jiang.Tb_power;
 import xyz.cymedical.entity.jiang.Tb_role_dept;
 import xyz.cymedical.entity.jiang.Tb_user;
 
@@ -34,7 +36,11 @@ public class MenuManageHandle {
 	@Resource
 	private TbMenuBiz tbMenuBiz;
 	@Resource
+	private TbPowerBiz tbPowerBiz;
+	@Resource
 	private TbRoleDept tbRoleDept;
+	
+	private Tb_power tb_power;
 	 
 	private List<Map<String,Object>> maplist;
 	
@@ -63,10 +69,26 @@ public class MenuManageHandle {
 		String data = null;
 		System.out.println("...=" + delectname);
 		int menu_id = Integer.valueOf(delectname);
+		tb_power=tbPowerBiz.selectid(menu_id);
+		int power_id=tb_power.getPower_id();
+		System.out.println("power_id="+power_id);
 		
-		int ret = tbMenuBiz.delete(menu_id);
-		if (ret == 1) {
-			data = "00";
+		/*删除权限id前 先删除权限角色表*/
+		int rettt=tbPowerBiz.deletepower_role(power_id);
+		if(rettt==1) {
+			
+		
+		/*删除菜单前 先删除权限*/
+		int rett=tbPowerBiz.delectMenuId(power_id);
+		System.err.println("rett="+rett);
+		 if(rett==1) {
+			 int ret = tbMenuBiz.delete(menu_id); 
+			 if (ret == 1) {
+				 data = "00";
+			 }
+		 }else {
+			 data = "11";
+		 }
 		}
 
 		return data;
@@ -124,11 +146,15 @@ public class MenuManageHandle {
 		public ModelAndView updeteuser(HttpServletRequest request, HttpServletResponse response, Tb_menu tb_menu) {
 			System.out.println("修改");
 			ModelAndView mav = new ModelAndView();
-	 
-			tbMenuBiz.upMenu(tb_menu);
-			  
+			System.out.println("修改内容为="+tb_menu);
+			int ret=tbMenuBiz.upMenu(tb_menu);
+			  if(ret==1) {
 			System.out.println("修改成功");
 			mav.setViewName("WEB-INF/view.jiang/menumanage");
+			  }else {
+				  
+				  mav.setViewName("WEB-INF/view.jiang/err");
+			  }
 			return mav;
 
 		}

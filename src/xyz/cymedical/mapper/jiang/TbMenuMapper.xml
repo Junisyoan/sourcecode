@@ -35,11 +35,14 @@
 		<trim prefix="SET" suffixOverrides=","  >  
 	
 		  
-		<if test="#{name} != null and #{name} != ''">
+		<if test="name != null and name != ''">
 			name=#{name},
 		</if>
-		<if test="#{link} != null and #{link} != ''">
+		<if test="link != null and link != ''">
 			link=#{link},
+		</if>
+		<if test="superior != null and superior != ''">
+			superior=#{superior}
 		</if>
 		  
 		   where menu_id=#{menu_id}
