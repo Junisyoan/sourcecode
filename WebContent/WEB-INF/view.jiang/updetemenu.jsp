@@ -20,6 +20,7 @@
      <li> <label class="label_name"   >序号</label>  <input name="menu_id" type="text"  readonly="readonly" class="text_add" id="menu_id" value="${updetename}"/></li>
      	<li> <label class="label_name"   >菜单名</label><input name="name" type="text"  class="text_add" id="name"/><i style="color:#F60; ">只能修改成未拥有的菜单名</i></li>
      	  <li><label class="label_name">路径</label><input name="link" type="text"  class="text_add" id="link"/><i style="color:#F60; ">*</i></li>
+     	  <li><label class="label_name">上级菜单</label><input name="superior" type="text"  class="text_add" id="superior"/><i style="color:#F60; ">*</i></li>
       	
      	</ul>
 <input type="submit" value="提交">

@@ -80,7 +80,7 @@
 					</script>
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						后台管理</div>
+						后台管理系统</div>
 					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 						<span class="btn btn-success"></span> <span class="btn btn-info"></span>
 						<span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
@@ -88,7 +88,7 @@
 				</div>
 				<!-- #sidebar-shortcuts -->
 				<ul class="nav nav-list" id="nav_list">
-					<li class="home"><a href="javascript:void(0)" name="home.html"
+					<li class="home"><a href="javascript:void(0)" name="<%=path%>nurse/systemhome.handle"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
 							
@@ -157,7 +157,7 @@
 						</script>
 				<div class="breadcrumbs" id="breadcrumbs">
 					<ul class="breadcrumb">
-						<li><i class="icon-home home-icon"></i> <a href="index.html">首页</a>
+						<li><i class="icon-home home-icon"></i> <a href="<%=path%>nurse/home.handle">首页</a>
 						</li>
 						<li class="active"><span class="Current_page"></span></li>
 						<li class="active" id="parentIframe"><span
@@ -167,7 +167,7 @@
 
 				<iframe id="iframe"
 					style="border: 0; width: 100%; background-color: #FFF;"
-					frameborder="0" src="home.html"> </iframe>
+					frameborder="0" src="<%=path%>nurse/systemhome.handle"> </iframe>
 
 
 				<!-- /.page-content -->

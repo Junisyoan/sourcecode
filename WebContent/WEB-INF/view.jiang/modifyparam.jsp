@@ -12,15 +12,17 @@
 <title>添加参数</title>
 <script>
 
-function addparam(){
+function modifyparam(){
 	
+	var param_id = document.getElementById("param_id").value;
 	var pid = document.getElementById("pid").value;
 	var name = document.getElementById("name").value;
 	
 	$.ajax({
 		 type:"POST",
-		 url:"<%=path%>param/addparam.handle",
+		 url:"<%=path%>param/modifyparam.handle",
 		 data:{
+			 "param_id":param_id,
 			 "pid":pid,
 			 "name":name
 			 },
@@ -30,15 +32,15 @@ function addparam(){
 		 },
 		 success:function(data){
 			if(data=="success"){
-				alert("增加参数成功");
+				alert("修改参数成功");
 				window.location.href="<%=path%>param/findAllParam.handle";
-			}else{
-				alert(data);
-			}
-			
-		 },
-	 });
- }
+						} else {
+							alert(data);
+						}
+
+					},
+				});
+	}
 </script>
 </head>
 <body>
@@ -46,17 +48,24 @@ function addparam(){
 		<p align="center">&nbsp;</p>
 		<p align="center">&nbsp;</p>
 		<p align="center">&nbsp;</p>
-		<p align="center">
-			上级参数ID：<input name="pid" type="text" id="pid"/>
-		</p>
-		<p align="center">
-			参&nbsp;数&nbsp;名&nbsp;字：<input name="name" type="text" id="name"/>
-		</p>
-		<p align="center">
-			<input type="button" value="提交" onclick="addparam()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-				href="<%=path%>param/findAllParam.handle"><input type="button"
-				value="返回"></a>
-		</p>
+		<c:forEach items="${paramlist}" var="p" varStatus="s">
+			<p align="center">
+				上级参数ID：<input name="pid" type="text" id="pid" value="${p.pid}" />
+			</p>
+			<p align="center">
+				参&nbsp;数&nbsp;名&nbsp;字：<input name="name" type="text" id="name"
+					value="${p.name}" />
+			</p>
+			<p align="center">
+				<input name="param_id" type="hidden" id="param_id"
+					value="${p.param_id}" />
+			</p>
+			<p align="center">
+				<input type="button" value="提交" onclick="modifyparam()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+					href="<%=path%>param/findAllParam.handle"><input type="button"
+					value="返回"></a>
+			</p>
+		</c:forEach>
 	</form>
 </body>
 </html>

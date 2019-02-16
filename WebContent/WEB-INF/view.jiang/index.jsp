@@ -82,7 +82,7 @@
 					</div>
 				</div>
 				<ul class="nav nav-list" id="nav_list">
-					<li class="home"><a href="javascript:void(0)" name="home.html"
+					<li class="home"><a href="javascript:void(0)" name="<%=path%>user/systemhome.handle"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
 					<li><a href="#" class="dropdown-toggle">
@@ -123,9 +123,9 @@
 <!-- 							<li class="home"><a href="javascript:void(0)" -->
 <%-- 								name="<%=path%>deptmanage/select.handle" title="科室管理" --%>
 <!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>科室管理</a></li> -->
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>powermanage/newpower.handle" title="权限管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>新权限管理</a></li> 
+<!-- 							<li class="home"><a href="javascript:void(0)" -->
+<%-- 								name="<%=path%>powermanage/newpower.handle" title="权限管理" --%>
+<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限配置</a></li>  -->
 							<!-- 							<li class="home"><a href="javascript:void(0)" -->
 							<%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
 							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
@@ -203,7 +203,7 @@
 				</script>
 				<div class="breadcrumbs" id="breadcrumbs">
 					<ul class="breadcrumb">
-						<li><i class="icon-home home-icon"></i> <a href="index.html">首页</a>
+						<li><i class="icon-home home-icon"></i> <a href="<%=path%>user/home.handle">首页</a>
 						</li>
 						<li class="active"><span class="Current_page"></span></li>
 						<li class="active" id="parentIframe"><span
@@ -213,7 +213,7 @@
 
 				<iframe id="iframe"
 					style="border: 0; width: 100%; background-color: #FFF;"
-					frameborder="0" src="home.html"> </iframe>
+					frameborder="0" src="<%=path%>user/systemhome.handle"> </iframe>
 
 
 				<!-- /.page-content -->

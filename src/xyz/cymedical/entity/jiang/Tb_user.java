@@ -135,6 +135,13 @@ public class Tb_user {
 		this.doctor = doctor;
 	}
 
+	@Override
+	public String toString() {
+		return "Tb_user [user_id=" + user_id + ", role_dept_id=" + role_dept_id + ", account=" + account + ", pwd="
+				+ pwd + ", name=" + name + ", sex=" + sex + ", address=" + address + ", phone=" + phone + ", IDcard="
+				+ IDcard + ", state=" + state + ", param_id=" + param_id + ", doctor=" + doctor + "]";
+	}
+
  
 
 	 

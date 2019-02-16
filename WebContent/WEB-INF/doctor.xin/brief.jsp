@@ -10,13 +10,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  <!--[if IE 7]>
+<link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
+<!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
-  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-  <link rel="stylesheet" href="<%=path %>css/style.css"/>
+ <![endif]-->
+<link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
+
+
 <title>项目小结</title>
 
         <script type="text/javascript">            
@@ -79,7 +84,9 @@
  			}
  		
 
- 		
+ 		 $(function(){
+ 			$('#briefTable').DataTable();
+ 		});
         </script>
 
 
@@ -88,16 +95,15 @@
 
 
 
-<div class="page-content">
+
 <h3 class="header smaller lighter blue">
 	<div style="float:left">${projectname }</div>
 	<div style="float:right">${keshi }</div>
 </h3>
-  <div class="">
+	<div class="Manager_style">
   
-  <table id="" class="table table-striped table-bordered table-hover">
+  <table id="briefTable" class="table table-striped table-bordered table-hover">
      <c:if test="${keshi=='常规检查室' }">
-  
    <thead>
     <tr><th>序号</th><th>项目名称</th><th>单位</th><th>结果</th><th>提示</th><th>操作</th></tr>
    </thead>
@@ -131,9 +137,6 @@
 		</tr>
 	</c:forEach>
   </tbody>
-
- 
-
   </c:if>
   
   <c:if test="${keshi=='彩超室' }">
@@ -191,7 +194,7 @@
  
 
   </c:if>
-    <c:if test="${keshi=='检验室' }">
+  <c:if test="${keshi=='检验室' }">
   
    <thead>
     <tr><th>序号</th><th>项目名称</th><th>单位</th><th>参考值</th><th>结果</th><th>提示</th><th>操作</th></tr>
@@ -230,20 +233,19 @@
   </tbody>
  
   </c:if>
-  
+
   </table>
+  
 	<div style="width:100px;margin:0 auto">
 		<a href="<%=path %>brief/turnback.handle"><input type="button" class="btn btn-warning" value="返回"/></a>
 	</div>
   </div>
- </div>
- 
 
 
 
 
 	<!--[if !IE]> -->
-		<script src="<%=path %>assets/js/jquery.min.js"></script>
+<%-- 		<script src="<%=path %>assets/js/jquery.min.js"></script> --%>
 		<!-- <![endif]-->
 		<!--[if !IE]> -->
 		<script type="text/javascript">
@@ -259,9 +261,7 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='<%=path %>assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-<script src="<%=path %>assets/js/bootstrap.min.js"></script>
-<script src="<%=path %>assets/layer/layer.js" type="text/javascript" ></script>
-<script src="<%=path %>assets/laydate/laydate.js" type="text/javascript"></script>
+
 <script type="text/javascript">
  //弹出一个iframe层
 
@@ -302,6 +302,7 @@ laydate({
     
 });
  });
+
 </script>
 </body>
 </html>

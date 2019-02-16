@@ -36,34 +36,26 @@ public class LogCompanyHandle {
 
 	}
 
-//	// 公司记账
-//	@RequestMapping(value = "/findlogcompany.handle")
-//	public ModelAndView findcompanylog(HttpServletRequest request, HttpServletResponse response, String name) {
-//
-//		System.out.println(request.getSession().getAttribute("userName"));
-//
-//		Companylist = companyBiz.queryByAccount((String) request.getSession().getAttribute("userName"));
-//
-//		logCompanylist = logCompanyBiz.queryByName(Companylist.get(0).getName());
-//
-//		System.out.println(logCompanylist.size());
-//
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("WEB-INF/medical_workstation/logcompany");
-//		if (logCompanylist.size() > 0) {
-//			mav.addObject("logCompanylist", logCompanylist);
-//		}
-//		return mav;
-//
-//	}
-
 	// 医院记账
 	@RequestMapping(value = "/findalllogcompany.handle")
 	public ModelAndView findallcompanylog() {
 
 		logCompanylist2 = logCompanyBiz.queryAll();
-		
-		System.out.println(logCompanylist2.size()+"a11111");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/medical_workstation/logcompany");
+		if (logCompanylist2.size() > 0) {
+			mav.addObject("logCompanylist2", logCompanylist2);
+		}
+		return mav;
+
+	}
+
+	// 医院记账
+	@RequestMapping(value = "/searchlog.handle")
+	public ModelAndView searchlog(String name, String operate, String money, String time) {
+
+		logCompanylist2 = logCompanyBiz.searchLog(name, operate, money, time);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/medical_workstation/logcompany");

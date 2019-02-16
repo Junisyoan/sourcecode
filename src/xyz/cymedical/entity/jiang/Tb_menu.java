@@ -18,6 +18,25 @@ public class Tb_menu {
  
 	  
 
+	public Tb_menu(int menu_id, String name, String link, int superior) {
+		super();
+		this.menu_id = menu_id;
+		this.name = name;
+		this.link = link;
+		this.superior = superior;
+	}
+
+
+
+	public Tb_menu(int menu_id, String name, String link) {
+		super();
+		this.menu_id = menu_id;
+		this.name = name;
+		this.link = link;
+	}
+
+
+
 	public Tb_menu(int menu_id, String name, String link, int superior, int role_id, String mids) {
 		super();
 		this.menu_id = menu_id;

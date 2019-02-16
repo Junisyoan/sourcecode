@@ -67,11 +67,12 @@ function getReceipt(bid){
 function payBiller(bid,totalmoney){
 	var s = confirm("总金额"+totalmoney+"确认结算？");
 	if(s){
+		
 		$.ajax({
 			url:"<%=path%>company/payBiller.handle",
 			type:"post",
 			dataType:"text",
-			data:{bid:bid,totalmoney:totalmoney},
+			data:{'bid':bid,'totalmoney':totalmoney},
 			success:function(retData){
 				if(retData=="1"){
 					alert('支付成功');
