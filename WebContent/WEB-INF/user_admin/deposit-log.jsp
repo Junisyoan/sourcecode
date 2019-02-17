@@ -20,39 +20,13 @@
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path %>js/jquery.dataTables.min.js"></script>
 <script src="<%=path %>js/datatables.bootstrap.min.js"></script>
-<script type="text/javascript">
-	function base64(content) {
-		return window.btoa(unescape(encodeURIComponent(content)));
-	}
-	/*
-	 *@tableId: table的Id
-	 *@fileName: 要生成excel文件的名字（不包括后缀，可随意填写）
-	 */
-	function tableToExcel(tableID, fileName) {
-		var table = document.getElementById(tableID);
-		var excelContent = table.innerHTML;
-		var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
-		excelFile += "<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>";
-		excelFile += "<body><table>";
-		excelFile += excelContent;
-		excelFile += "</table></body>";
-		excelFile += "</html>";
-		var link = "data:application/vnd.ms-excel;base64," + base64(excelFile);
-		var a = document.createElement("a");
-		a.download = fileName + ".xls";
-		a.href = link;
-		a.click();
-	}
-</script>
 <title>资金明细</title>
 </head>
 
 <body>
 	<div class="Manager_style">
 		<div class="title_name">充值</div>
-			<input type="text" id="m" name="deposit"/>
-			<input type="button" class="btn btn-primary" value="充值" onclick="recharge();"/>
-		<button type="button" class="btn btn-primary" onclick="tableToExcel('depositTable','data')">导出Excel</button>
+		<a href="<%=path %>recharge.jsp" target="_blank">充值</a>
 		余额：${userCompany.deposit }
 	</div>
 	<div class="Manager_style">
@@ -80,26 +54,21 @@
 	</div>
 </body>
 <script type="text/javascript">
+
 function recharge(){
 	var m = document.getElementById("m").value;
 	if(confirm("确认充值？")){
-		$.ajax({
-			url:"<%=path%>company/pay.handle",
-			type:"post",
-			dataType:"text",
-			data:{deposit:m},
-			success:function(ret){
-				if(ret=="1"){
-					alert("充值成功");
-				}else{
-					alert("充值失败");
-				}
-				location.href="<%=path %>company/getDepositDetail.handle?cid=${userCompany.company_id }";
-			},
-			error:function(){
-				alert('错误');
-			}
-		});
+			var vNow = new Date();
+			var sNow = "";
+			sNow += String(vNow.getFullYear());
+			sNow += String(vNow.getMonth() + 1);
+			sNow += String(vNow.getDate());
+			sNow += String(vNow.getHours());
+			sNow += String(vNow.getMinutes());
+			sNow += String(vNow.getSeconds());
+			sNow += String(vNow.getMilliseconds());
+
+			location.href='<%=path%>alipay.trade.page.pay.jsp?money='+m+'&sNow='+sNow+'&subject=充值&WIDbody=充值';
 	}
 }
 $(function(){

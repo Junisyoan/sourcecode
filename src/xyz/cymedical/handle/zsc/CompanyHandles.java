@@ -36,6 +36,7 @@ public class CompanyHandles {
 	// 增
 	@RequestMapping(value = "/addCompany.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String addDetail(Company company) {
+		System.out.println("company="+company);
 		return companyBizsc.insertCompany(company);
 	}
 

@@ -30,8 +30,9 @@
 				<form method="post"
 					action="<%=path %>chiefdoctor/findProject.handle">
 					<ul class="search_content clearfix">
-						<li><label class="lf">条码号</label><input name="onecode"
-							type="text" class="text_add" />
+						<li>
+						<label class="lf">条码号/手机号</label>
+						<input name="onecode" type="text" class="text_add" />
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
 						</li>
 					</ul>

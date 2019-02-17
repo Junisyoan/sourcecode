@@ -26,4 +26,6 @@ public interface ComboMapper {
 	public int updateCombo(Map<String, Object> map);
 
 	public int checkName(Map<String, Object> map);
+	
+	public List<Combo> queryCombo();
 }

@@ -2,6 +2,7 @@ package xyz.cymedical.handle.xin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.xin.BriefBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
+import xyz.cymedical.entity.jiang.Tb_user;
 
 @Controller
 @RequestMapping("/brief")
@@ -111,16 +113,28 @@ public class BriefHandle {
 	
 	// 查询一维码对应病人的导检单
 		@RequestMapping(value = "/turnback.handle")
-		public ModelAndView turnback() {
+		public ModelAndView turnback(HttpServletRequest req) {
 
 			System.out.println("onecode=" + DoctorHandle.onecode);
 
 			System.out.println(doctorbiz.findMyProject(DoctorHandle.onecode));
 			
+			Tb_user user=(Tb_user) req.getSession().getAttribute("user");
 			plist=doctorbiz.findMyProject(DoctorHandle.onecode);
 
+			List<Map<String,Object>> pplist = new ArrayList<Map<String,Object>>();//
+
+			if(plist!=null && plist.size()>0) {
+				for (int i = 0; i < plist.size(); i++) {
+					Map m=plist.get(i);
+					if(user.getParam_id()==Integer.parseInt(m.get("param_id").toString())) {
+						pplist.add(m);
+					}
+				}
+			}
+			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("prolist", plist);
+			mav.addObject("prolist", pplist);
 			mav.setViewName("WEB-INF/doctor.xin/pro_receive");
 			return mav;
 
@@ -174,9 +188,19 @@ public class BriefHandle {
 	                    String realPath=request.getSession().getServletContext().getRealPath("/");
 	                    // 自定义的文件名称
 	                    String trueFileName=String.valueOf(System.currentTimeMillis())+fileName;
+	                    
+	                    String uploadpath=realPath+"\\upload";
+	                    if(!new File(uploadpath).exists()) {
+	                    	new File(uploadpath).mkdirs();
+	                    }
+	                    
+	                    
 	                    // 设置存放图片文件的路径
 	                    path=realPath+"\\upload\\"+trueFileName;
 	                    System.out.println("存放图片文件的路径:"+path);
+	                    
+	                    
+	                    
 	                    // 转存文件到指定的路径
 	                    file.transferTo(new File(path));
 	                    System.out.println("文件成功上传到指定目录下");

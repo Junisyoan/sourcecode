@@ -9,12 +9,12 @@
 	<select id="findMyProject" parameterType="String"
 		resultType="java.util.HashMap">
 		select s.user_id,s.name docname,z.* from tb_user s right join 
-		(select a.*,c.project_id,c.name projectname,c.price,e.name keshi,d.patient_id patid,d.project_id proid,d.state,d.user_id uid,d.balance,d.patient_project_id,h.company_id cid,h.name cname,h.deposit
+		(select a.*,c.project_id,c.name projectname,c.price,e.param_id,e.name keshi,d.patient_id patid,d.project_id proid,d.state,d.user_id uid,d.balance,d.patient_project_id,h.company_id cid,h.name cname,h.deposit
 		from 
 		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_patient_combo g,tb_company h
 		where 
 		a.patient_id=g.patient_id and g.combo_id=b.combo_id and b.project_id=c.project_id and 
-		c.project_id=d.project_id and c.param_id=e.param_id and a.`code`=#{0} and h.company_id=a.company_id)z 
+		c.project_id=d.project_id and c.param_id=e.param_id and (a.`code`=#{0} or a.phone=#{0}) and h.company_id=a.company_id)z 
 		on s.user_id=z.uid  order by z.name
 	</select>
 
@@ -70,6 +70,10 @@
 	
 	<select id="findMySummarize" parameterType="java.lang.Integer" resultType="xyz.cymedical.entity.xin.Summarize">
 		select * from tb_summarize where summarize_id=#{sumid}
+	</select>
+	
+	<select id="getDepart" parameterType="java.lang.Integer" resultType="String">
+		select name from tb_param where param_id=#{param_id}
 	</select>
 
 </mapper>

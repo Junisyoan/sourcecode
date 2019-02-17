@@ -1,6 +1,8 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@page import="xyz.cymedical.entity.jiang.Tb_user"%>
+
 <%
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
@@ -21,6 +23,9 @@
 </head>
 
 <body>
+	<%Tb_user user=(Tb_user)request.getSession().getAttribute("user"); %>
+
+
 	<div class="page-content">
 		<div class="gys_style">
 			<div class="Manager_style">
@@ -29,7 +34,7 @@
 				<!-- 查询条码号 -->
 				<form method="post" action="<%=path %>doctor/findProject.handle">
 					<ul class="search_content clearfix">
-						<li><label class="lf">条码号</label><input name="onecode" type="text"
+						<li><label class="lf">条码号/手机号</label><input name="onecode" type="text"
 							class="text_add" />
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
 						</li>
@@ -100,102 +105,10 @@
 				 </table>
 				</form>
 			</div>
-
-			<!--     <div class="Manager_style"> -->
-			<!--      <span class="title_name">产品信息</span> -->
-			<!--      <table class="table table-striped table-bordered table-hover"> -->
-			<!--       <thead> -->
-			<!--        <tr> -->
-			<!--         <th>序号</th> -->
-			<!--         <th>细项</th> -->
-			<!--         <th>结果</th> -->
-			<!--         <th>单位</th> -->
-			<!--         <th>参考值</th> -->
-			<!--         <th>提示</th> -->
-			<!--         <th>操作</th> -->
-			<!--        </tr> -->
-			<!--       </thead> -->
-			<!--       <tbody> -->
-			<!--        <tr> -->
-			<!--         <td>1</td><td>#0号柴油</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
-			<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
-			<!--        </tr> -->
-			<!--        <tr> -->
-			<!--         <td>2</td><td>#0号柴油A</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
-			<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
-			<!--        </tr> -->
-			<!--        <tr> -->
-			<!--         <td>3</td><td>#0号柴油B</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
-			<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
-			<!--        </tr> -->
-			<!--        <tr> -->
-			<!--         <td>4</td><td>#18号柴油</td><td>刘怀帮</td><td>13505140602</td><td>备注信息</td><td>备注信息</td> -->
-			<!--         <td><button type="button" class="btn btn-info Product_Details">详情</button><button type="button" class="btn btn-primary">修改</button> <button type="button" class="btn btn-warning">删除</button></td> -->
-			<!--        </tr> -->
-			<!--       </tbody> -->
-			<!--      </table> -->
-			<!--   </div>  -->
-
-
 		</div>
 	</div>
 	<div class="" id="Product_Details" style="display: none">
 		<div class="page-content">
-
-<!-- 			<div class="Product_Details Order_Details_style"> -->
-<!-- 				<div class="Numbering"> -->
-<!-- 					<b>#0号柴油产品详细</b> -->
-<!-- 				</div> -->
-<!-- 				<div> -->
-<!-- 					<ul class="clearfix"> -->
-<!-- 						<li><label class="label_name">产品名称</label><span>2016年询价项目</span></li> -->
-<!-- 						<li><label class="label_name">产品联系人</label><span>南京扬子江码头</span></li> -->
-<!-- 						<li><label class="label_name">联系电话</label><span>2016-4-15 -->
-<!-- 								12:34</span></li> -->
-<!-- 						<li><label class="label_name">产品备注</label><span>长江号</span></li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<div class="add_Attributes"> -->
-<!-- 					<button class="btn btn-primary Attribute_btn" type="button">添加属性</button> -->
-<!-- 				</div> -->
-<!-- 				<table class="table table-striped table-bordered table-hover"> -->
-<!-- 					<thead> -->
-<!-- 						<tr> -->
-<!-- 							<th>序号</th> -->
-<!-- 							<th>产品属性</th> -->
-<!-- 							<th>操作</th> -->
-<!-- 						</tr> -->
-<!-- 					</thead> -->
-<!-- 					<tbody> -->
-<!-- 						<tr> -->
-<!-- 							<td>1</td> -->
-<!-- 							<td>属性名称1</td> -->
-<!-- 							<td><button type="button" class="btn btn-primary">修改属性</button> -->
-<!-- 								<button type="button" class="btn btn-warning">删除</button></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td>2</td> -->
-<!-- 							<td>属性名称2</td> -->
-<!-- 							<td><button type="button" class="btn btn-primary">修改属性</button> -->
-<!-- 								<button type="button" class="btn btn-warning">删除</button></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td>3</td> -->
-<!-- 							<td>属性名称3</td> -->
-<!-- 							<td><button type="button" class="btn btn-primary">修改属性</button> -->
-<!-- 								<button type="button" class="btn btn-warning">删除</button></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td>4</td> -->
-<!-- 							<td>属性名称4</td> -->
-<!-- 							<td><button type="button" class="btn btn-primary">修改属性</button> -->
-<!-- 								<button type="button" class="btn btn-warning">删除</button></td> -->
-<!-- 						</tr> -->
-<!-- 					</tbody> -->
-<!-- 				</table> -->
-<!-- 			</div> -->
 			<div class="add_Attributes">
 				<button class="btn btn-primary Attribute_btn" type="button">添加属性</button>
 			</div>
