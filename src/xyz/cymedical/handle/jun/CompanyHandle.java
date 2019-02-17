@@ -93,11 +93,33 @@ public class CompanyHandle {
 	public CompanyHandle() {
 	}
 
-	
-	
+	//退出
+	@RequestMapping(value = "/exit.handle")
+	public void brief(HttpServletRequest request,HttpServletResponse resp) {
+		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/";
+		//退出时销毁登录信息
+		request.getSession().invalidate();
+		System.out.println("已销毁用户");
+		try {
+			resp.sendRedirect(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/*
-	 * 
+	 * 获取充值链接地址
+	 */
+	@RequestMapping(value="/getUrl.handle",method=RequestMethod.GET)
+	public ModelAndView getUrl() {
+		System.out.println("获取充值链接");
+		modelAndView=new ModelAndView("WEB-INF/user_admin/recharge");
+		return modelAndView;
+	}
+	
+	/*
+	 * 支付宝异步通知
 	 */
 	@RequestMapping(value="/notify.handle")
 	public @ResponseBody String notify(HttpServletRequest request,HttpServletResponse response) {
@@ -148,7 +170,6 @@ public class CompanyHandle {
 
 				trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

@@ -94,6 +94,25 @@ public class NurseHandle {
 	private DoctorBiz doctorbiz;//医生业务
 	
 	private String mycode;
+	
+	
+	
+	
+	//退出
+		@RequestMapping(value = "/exit.handle")
+		public void brief(HttpServletRequest request,HttpServletResponse resp) {
+			String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+			//退出时销毁登录信息
+			request.getSession().invalidate();
+			System.out.println("已销毁用户");
+			try {
+				resp.sendRedirect(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
 	/*
 	 * 已开单账单再次开单
 	 */

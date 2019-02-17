@@ -406,9 +406,21 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>login_user.html";
+				location.href = "<%=path%>nurse/exit.handle";
 
 			});
+		});
+		
+		//在刷新或关闭时调用的事件 
+		$(window).bind('beforeunload',function(){ 
+			$.ajax({ 
+				url:"<%=path%>nurse/exit.handle", 
+				type:"post", 
+				dataType:"text",
+				success:function(){ 
+					alert("您已退出登录"); 
+				} 
+			}); 
 		});
 	</script>
 </body>
