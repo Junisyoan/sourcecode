@@ -14,7 +14,7 @@
 	
 	<update id="upcontact" parameterType="xyz.cymedical.entity.jiang.Tb_contact">
 	
-		update tb_contact set contact_id=#{contact_id} and name=#{name} and province=#{province} and area=#{area} and tel=#{tel} and phone=#{phone} and fax=#{fax} and email=#{email}
+		update tb_contact set name=#{name} and province=#{province} and area=#{area} and tel=#{tel} and phone=#{phone} and fax=#{fax} and email=#{email} where contact_id=#{contact_id}
 		
 	</update>
   
