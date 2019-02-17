@@ -45,83 +45,67 @@
 			</div>
 			<div class="prod-main">
 				<div class="body-logo">
-					<h3>product names</h3>
+					<h3>热门套餐</h3>
 				</div>
-				<c:forEach items="${combolist}" var="c" varStatus="s">
-					<c:if test="${c.combo_id == 1}">
-						<c:if test="${s.index == 0}">
+				<c:forEach items="${combolist1}" var="c1" varStatus="s1">
+						<c:if test="${s1.index == 0}">
 							<div class="prod-grids">
 								<div class="grid">
 									<img src="<%=path%>image/index1/5.png"/>
-									<c:forEach items="${combolist}" var="c2" varStatus="s2">
-										<c:if test="${c2.combo_id == 1}">
+									<c:forEach items="${combolist1}" var="c2" varStatus="s2">
 											<c:if test="${s2.index == 0}">
 												<h4>${c2.n1}&nbsp;&nbsp;&nbsp;${c2.price}</h4>
 											</c:if>
 											<p>（${s2.index + 1}）${c2.n2}</p>
-										</c:if>
 									</c:forEach>
 								</div>
 							</div>
 						</c:if>
-					</c:if>
 				</c:forEach>
-				<c:forEach items="${combolist}" var="c" varStatus="s">
-					<c:if test="${c.combo_id == 2}">
-						<c:if test="${s.index == 3}">
+				<c:forEach items="${combolist2}" var="c1" varStatus="s1">
+						<c:if test="${s1.index == 0}">
 							<div class="prod-grids">
 								<div class="grid">
 									<img src="<%=path%>image/index1/6.png"/>
-									<c:forEach items="${combolist}" var="c2" varStatus="s2">
-										<c:if test="${c2.combo_id == 2}">
-											<c:if test="${s2.index == 3}">
+									<c:forEach items="${combolist2}" var="c2" varStatus="s2">
+											<c:if test="${s2.index == 0}">
 												<h4>${c2.n1}&nbsp;&nbsp;&nbsp;${c2.price}</h4>
 											</c:if>
-											<p>（${s2.index - 2}）${c2.n2}</p>
-										</c:if>
+											<p>（${s2.index + 1}）${c2.n2}</p>
 									</c:forEach>
 								</div>
 							</div>
 						</c:if>
-					</c:if>
 				</c:forEach>
-				<c:forEach items="${combolist}" var="c" varStatus="s">
-					<c:if test="${c.combo_id == 3}">
-						<c:if test="${s.index == 6}">
+				<c:forEach items="${combolist3}" var="c1" varStatus="s1">
+						<c:if test="${s1.index == 0}">
 							<div class="prod-grids">
 								<div class="grid">
 									<img src="<%=path%>image/index1/7.png"/>
-									<c:forEach items="${combolist}" var="c2" varStatus="s2">
-										<c:if test="${c2.combo_id == 3}">
-											<c:if test="${s2.index == 6}">
+									<c:forEach items="${combolist3}" var="c2" varStatus="s2">
+											<c:if test="${s2.index == 0}">
 												<h4>${c2.n1}&nbsp;&nbsp;&nbsp;${c2.price}</h4>
 											</c:if>
-											<p>（${s2.index - 5}）${c2.n2}</p>
-										</c:if>
+											<p>（${s2.index + 1}）${c2.n2}</p>
 									</c:forEach>
 								</div>
 							</div>
 						</c:if>
-					</c:if>
 				</c:forEach>
-				<c:forEach items="${combolist}" var="c" varStatus="s">
-					<c:if test="${c.combo_id == 4}">
-						<c:if test="${s.index == 9}">
+				<c:forEach items="${combolist4}" var="c1" varStatus="s1">
+						<c:if test="${s1.index == 0}">
 							<div class="prod-grids">
 								<div class="grid">
 									<img src="<%=path%>image/index1/7.png"/>
-									<c:forEach items="${combolist}" var="c2" varStatus="s2">
-										<c:if test="${c2.combo_id == 4}">
-											<c:if test="${s2.index == 9}">
+									<c:forEach items="${combolist4}" var="c2" varStatus="s2">
+											<c:if test="${s2.index == 0}">
 												<h4>${c2.n1}&nbsp;&nbsp;&nbsp;${c2.price}</h4>
 											</c:if>
-											<p>（${s2.index - 8}）${c2.n2}</p>
-										</c:if>
+											<p>（${s2.index + 1}）${c2.n2}</p>
 									</c:forEach>
 								</div>
 							</div>
 						</c:if>
-					</c:if>
 				</c:forEach>
 				<div class="clear"></div>
 			</div>
