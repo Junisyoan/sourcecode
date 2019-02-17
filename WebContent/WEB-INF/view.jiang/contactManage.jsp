@@ -38,8 +38,8 @@
      <div class="page-content">
     <div class="add_user_style clearfix">
     
-   <form action="<%=path%>contact/upcontact.handle"  method="post" id = "aFrom"  > 
-    		序号    <input type="text" name="name" value="${tb_contact.contact_id}"/>&nbsp
+   <form action="<%=path%>contact/upcontact.so"  method="post" id = "aFrom"  > 
+    		序号    <input type="text" name="name"  readonly="readonly" value="${tb_contact.contact_id}"/>&nbsp
      		公司名&nbsp&nbsp	&nbsp<input type="text" name="power_id" value="${tb_contact.name}"/>&nbsp </br>
      		地区	<input type="text" name="menu_id" value="${tb_contact.province}"/>&nbsp
      		详细地址    <input type="text" name="name" value="${tb_contact.area}"/>&nbsp</br>
