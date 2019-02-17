@@ -72,7 +72,7 @@
  <td>  ${u.email} </td>
  <td>  ${u.phone} </td>
  <td>  ${u.msg} </td>
- <td>  ${u.state} </td> 
+ <td> <a href="<%=path%>contact/adelete.handle?id=${u.msg_id}">${u.state}</a>   </td> 
  </tr>
  </c:if>
  </c:forEach>

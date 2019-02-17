@@ -1,8 +1,10 @@
 package xyz.cymedical.entity.jiang;
 
+import org.springframework.stereotype.Component;
+
 //import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class Tb_msg {
 	
 	private int msg_id;

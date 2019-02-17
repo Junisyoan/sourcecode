@@ -35,4 +35,10 @@ public class TbMsgBizImp implements TbMsgBiz{
 		return tbMsgMapper.deleteall(id);
 	}
 
+	@Override
+	public int upstate(Tb_msg tb_msg) {
+		// TODO Auto-generated method stub
+		return tbMsgMapper.upstate(tb_msg);
+	}
+
 }

@@ -16,4 +16,6 @@ public interface TbMsgMapper {
 
 	
 	public int deleteall(int id);/*批量删除*/
+	
+	public int upstate(Tb_msg tb_msg);/*改变未读状态*/
 }

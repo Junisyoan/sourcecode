@@ -30,7 +30,8 @@ public class ContactManageHandle {
 	private TbMsgBiz tbMsgBiz;
 	
 	private List<Tb_msg> msglist;
-	
+	@Resource
+	private Tb_msg tb_msg;
 
 	private Tb_contact tb_contact;
 	
@@ -126,6 +127,20 @@ public class ContactManageHandle {
 			  i++;
 		 }
 		  
+		 ma.setViewName("WEB-INF/view.jiang/msgmanage");
+		 return ma;
+	 }
+	 @RequestMapping(value="/adelete.handle")
+	 public ModelAndView adelete(HttpServletRequest rq,String id) {
+		 ModelAndView ma=new ModelAndView();	
+		 System.out.println("未读信息变已读");
+		 System.out.println("未读信息变已读="+id);
+		 int msg_id=Integer.valueOf(id);
+		 String state="已读";
+		 System.out.println("id="+msg_id+"and="+state);
+		 tb_msg.setMsg_id(msg_id);
+		 tb_msg.setState(state);
+		 tbMsgBiz.upstate(tb_msg); 
 		 ma.setViewName("WEB-INF/view.jiang/msgmanage");
 		 return ma;
 	 }

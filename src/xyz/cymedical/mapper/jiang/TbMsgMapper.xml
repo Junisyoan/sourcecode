@@ -26,4 +26,10 @@
   
   </delete>
 	
+	<update id="upstate" parameterType="xyz.cymedical.entity.jiang.Tb_msg"> 
+	update tb_msg set state=#{state} where msg_id=#{msg_id}
+	
+	</update>
+	
+	
 </mapper>
