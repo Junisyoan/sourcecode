@@ -106,7 +106,7 @@
 		select a1.`name` n1,a1.price,pro.`name` n2,a1.combo_id 
 		from(select com.combo_id,com.`name`,com.price,pc.project_id 
 		from tb_combo com left join tb_project_combo pc on com.combo_id = pc.combo_id) a1 
-		left join tb_project pro on a1.project_id = pro.project_id
+		left join tb_project pro on a1.project_id = pro.project_id where a1.combo_id = #{combo_id}
 
 	</select>
 	

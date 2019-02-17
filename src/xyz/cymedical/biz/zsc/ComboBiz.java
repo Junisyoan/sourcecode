@@ -78,8 +78,8 @@ public class ComboBiz {
 		}
 	};
 	
-	public List<Combo> queryCombo(){
-		return comboMapper.queryCombo();
+	public List<Combo> queryCombo(int combo_id){
+		return comboMapper.queryCombo(combo_id);
 		
 	}
 }
