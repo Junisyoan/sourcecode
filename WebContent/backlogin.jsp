@@ -51,7 +51,7 @@ function passwordIsTrue(){
 		 },
 		 success:function(data){
 			if(data=="管理员"){
-				alert("登陆成功！您的身份为管理员！");
+				alert("登陆后台成功！！");
 				window.location.href="<%=path%>user/index.handle";
 			}else{
 				alert(data);

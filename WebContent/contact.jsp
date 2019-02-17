@@ -6,27 +6,21 @@ import="java.sql.*" errorPage=""%>
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%
-	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ request.getContextPath() + "/";
-%>
+ 
 
 <head>
 <title>体检中心</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<<<<<<< HEAD
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <link href="<%=path %>/css/index.css" rel="stylesheet" media="all" />
 <link rel="stylesheet" href="<%=path %>/css/bjqs.css">
 <script src="<%=path %>/js/jquery-1.7.2.min.js"></script>
 <script src="<%=path %>/js/bjqs-1.3.js"></script>
-<script src="<%=path %>/js/jquery.secret-source.min.js"></script>
-=======
+<script src="<%=path %>/js/jquery.secret-source.min.js"></script> 
 <link href="<%=path%>css/index.css" rel="stylesheet" media="all" />
 <link rel="stylesheet" href="<%=path%>css/bjqs.css">
 <script src="<%=path%>js/jquery-1.7.2.min.js"></script>
 <script src="<%=path%>js/bjqs-1.3.js"></script>
-<script src="<%=path%>js/jquery.secret-source.min.js"></script>
->>>>>>> 6191ecffcccb5a58018ddd5b8b3cb94a4f384196
+<script src="<%=path%>js/jquery.secret-source.min.js"></script> 
 <script>
 	jQuery(function($) {
 		$('.secret-source').secretSource({
@@ -122,7 +116,7 @@ import="java.sql.*" errorPage=""%>
 					<span>公司座机:${tb_contact.tel}</span><br>
 					<span>手机: + ${tb_contact.phone}</span><br>
 					<span>传真: +1 ${tb_contact.fax}</span><br>
-					<span>email:<a href="mailto:${tb_contact.email}?123">${tb_contact.email}</a></span>
+					<span>email:<a href="mailto:${tb_contact.email}">${tb_contact.email}</a></span>
 				</div>
 			
 			</div>
