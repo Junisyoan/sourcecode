@@ -17,6 +17,14 @@ import xyz.cymedical.mapper.zsc.ComboMapper;
 @Service
 public class ComboBiz {
 
+	public boolean queryComboByName(String name) {
+		if (comboMapper.queryComboByName(name)!=null) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 	@Resource
 	ComboMapper comboMapper;
 

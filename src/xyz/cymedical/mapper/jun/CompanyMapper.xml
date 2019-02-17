@@ -4,8 +4,6 @@
 
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyMapper">
-
-
 <!-- 扣除体检费用 -->
 	<update id="deductDeposit" parameterType="String">
 		update tb_company set deposit=#{price} where company_id = #{company_id}

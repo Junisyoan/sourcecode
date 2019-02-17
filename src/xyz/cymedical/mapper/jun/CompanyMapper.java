@@ -37,6 +37,7 @@ public interface CompanyMapper {
 			@Param("price")String price);
 	
 	//query
+	
 	/**
 	 * 查询余额
 	 * @param id	公司id
