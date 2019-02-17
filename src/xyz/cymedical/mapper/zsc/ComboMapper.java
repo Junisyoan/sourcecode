@@ -29,5 +29,5 @@ public interface ComboMapper {
 
 	public int checkName(Map<String, Object> map);
 	
-	public List<Combo> queryCombo();
+	public List<Combo> queryCombo(int combo_id);
 }

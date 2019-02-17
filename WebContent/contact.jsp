@@ -48,34 +48,37 @@ import="java.sql.*" errorPage=""%>
 				<div class="contact-left">
 					<h3>您的联系方式</h3>
 					<div class="table-form">
+					<div class="contact-form">
+							<form action="<%=path%>contact/msg.so"  method="post" id = "aFrom">
 						<table cellspacing="8">
 							<tbody>
+							
 								<tr>
-									<td colspan="6"><input type="text" class="textbox"
+									<td colspan="6"><input type="text" class="textbox" name="name"
 										value="昵称:" onfocus="this.value = '';"
 										onblur="if (this.value == '') {this.value = '昵称';}"></td>
 								</tr>
 								<tr>
-									<td colspan="6"><input type="text" class="textbox"
+									<td colspan="6"><input type="text" class="textbox"  name="email"
 										value="邮箱:" onfocus="this.value = '';"
 										onblur="if (this.value == '') {this.value = '邮箱';}"></td>
 								</tr>
 								<tr>
-									<td colspan="6"><input type="text" class="textbox"
+									<td colspan="6"><input type="text" class="textbox"  name="phone"
 										value="电话:" onfocus="this.value = '';"
 										onblur="if (this.value == '') {this.value = '电话';}"></td>
 								</tr>
 								<tr>
-									<td colspan="6"><textarea value="留言:"
+									<td colspan="6"><textarea value="留言:"  name="msg"
 											onfocus="this.value = '';"
 											onblur="if (this.value == '') {this.value = '留言';}">留言</textarea>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-						<div class="contact-form">
-							<form>
-								<input type="button" value="发送">
+<!-- 						<div class="contact-form"> -->
+<!-- 							<form> -->
+								<input type="submit" value="发送">
 							</form>
 						</div>
 					</div>
