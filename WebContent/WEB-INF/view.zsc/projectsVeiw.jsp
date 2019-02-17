@@ -502,19 +502,19 @@ function change(e){
 	var detail_id = parent.getElementsByTagName("input");
 	
 	for(var i=0;i <2;i++){
-		input[i].value = mag[i].innerHTML;
+		input[i].value = mag[i+1].innerHTML;
 	}
 	
 	 var sel = document.getElementById("deptname");
 	    for (var i = 0; i < sel.options.length; i++)
 	    {
-	        if (sel.options[i].text == mag[2].innerHTML)
+	        if (sel.options[i].text == mag[3].innerHTML)
 	        {
 	        	sel.options[i].remove();
 	            break;  
 	        } 
 	    }
-	$("#deptname").prepend("<option>"+mag[2].innerHTML+"</option>"); 
+	$("#deptname").prepend("<option>"+mag[3].innerHTML+"</option>"); 
 	sel.options[0].selected=true;
 
 	for(var i=0;i <detail_id.length;i++){

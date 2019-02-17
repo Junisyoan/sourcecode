@@ -251,8 +251,8 @@ var r_id;
 		<!-- 配置菜单按钮 -->
 		<div id="btn_select">
 			<h1>选择按钮</h1>
-			<input type="button" id="addLimit" class="limitbtn" onmousedown="addMenu();" value=" <添　加　" /><br />
-			<input type="button" id="removeLimit" onmousedown="removeMenu()" class="limitbtn" value=" 移　除> " /><br /> 
+			<input type="button" id="addLimit" class="limitbtn" onmousedown="addMenu();" value=" &lt;添　加　" /><br />
+			<input type="button" id="removeLimit" onmousedown="removeMenu()" class="limitbtn" value=" 移　除 >" /><br /> 
 		</div>
 
 		<!-- 未分配的菜单 -->
