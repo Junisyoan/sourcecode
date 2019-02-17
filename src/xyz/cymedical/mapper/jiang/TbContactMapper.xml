@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jiang.TbContactMapper">
+
+
+<!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
+
+	<select id="fornt"   
+	resultType="xyz.cymedical.entity.jiang.Tb_contact">
+		select * from tb_contact  
+	</select>
+	
+	<update id="upcontact" parameterType="xyz.cymedical.entity.jiang.Tb_contact">
+	
+		update tb_contact set name=#{name} and province=#{province} and area=#{area} and tel=#{tel} and phone=#{phone} and fax=#{fax} and email=#{email} where contact_id=#{contact_id}
+		
+	</update>
+  
+	
+</mapper>

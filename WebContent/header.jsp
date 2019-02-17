@@ -24,8 +24,13 @@
  		<li><a href="<%=path%>home/findabout.so">关于</a></li>
  		<li><a href="<%=path%>home/findcombo.so">热门套餐</a></li>
  		<li><a href="combos.jsp">套餐介绍</a></li>
+<<<<<<< HEAD
+		<li><a href="projects.jsp">项目介绍</a></li>
+ 		<li><a href="contact/fornt.so">联系我们</a></li>
+=======
 		<li><a href="<%=path%>home/findencyclopedia.so">体检百科</a></li>
  		<li><a href="<%=path%>home/findcontact.so">联系我们</a></li>
+>>>>>>> 6191ecffcccb5a58018ddd5b8b3cb94a4f384196
  	</ul>      
   	</div>
   	<div class="clear"></div>
