@@ -25,7 +25,7 @@
  		<li><a href="<%=path%>home/findcombo.so">热门套餐</a></li>
  		<li><a href="<%=path %>comboshow/introduce.so">套餐介绍</a></li>
 		<li><a href="<%=path%>home/findencyclopedia.so">体检百科</a></li>
- 		<li><a href="<%=path%>home/findcontact.so">联系我们</a></li>
+ 		<li><a href="<%=path%>contact/fornt.so">联系我们</a></li>
  	</ul>      
   	</div>
   	<div class="clear"></div>

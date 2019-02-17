@@ -127,6 +127,9 @@
 <%-- 								name="<%=path%>powermanage/newpower.handle" title="权限管理" --%>
 <!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限配置</a></li>  -->
 							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>contact/selectmsg.handle" title="客户留言"
+								class="iframeurl"><i class="icon-double-angle-right"></i>留言信息</a></li> 
+							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>contact/select.handle" title="公司信息"
 								class="iframeurl"><i class="icon-double-angle-right"></i>公司信息</a></li> 
 							<!-- 							<li class="home"><a href="javascript:void(0)" -->
