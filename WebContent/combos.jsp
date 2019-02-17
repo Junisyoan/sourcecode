@@ -55,9 +55,11 @@
 				<div class="box">
 					<c:forEach items="${combos}" var="c" varStatus="s">
 						<div class="grid-list">
-							<img src="<%=path %>image/index1/${c.img}" alt="">
-							<h4>${c.name}</h4>
-							<p style="height: 50px;">${c.info}</p>
+								<img src="<%=path %>image/index1/${c.img}" alt="">
+							<div style = "height:50px;">
+								<h4>${c.name}</h4>
+								<p style="height: 50px;">${c.info}</p>
+							</div>
 						</div>
 					</c:forEach>
 				</div>

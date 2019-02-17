@@ -26,6 +26,11 @@ public class HomeHandle {
 	private NurseBiz nurseBiz;
 	
 	private List<Combo> combolist = new ArrayList<Combo>();
+	private List<Combo> combolist1 = new ArrayList<Combo>();
+	private List<Combo> combolist2 = new ArrayList<Combo>();
+	private List<Combo> combolist3 = new ArrayList<Combo>();
+	private List<Combo> combolist4 = new ArrayList<Combo>();
+
 
 	public HomeHandle() {
 
@@ -35,12 +40,18 @@ public class HomeHandle {
 	@RequestMapping(value = "/findcombo.so", method = RequestMethod.GET)
 	public ModelAndView findcombo() {
 
-		combolist = comboMapper.queryCombo();
+		combolist1 = comboMapper.queryCombo(1);
+		combolist2 = comboMapper.queryCombo(2);
+		combolist3 = comboMapper.queryCombo(3);
+		combolist4 = comboMapper.queryCombo(4);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("hotcombos");
-		if (combolist.size() > 0) {
-			mav.addObject("combolist", combolist);
+		if (combolist1.size() > 0) {
+			mav.addObject("combolist1", combolist1);
+			mav.addObject("combolist2", combolist2);
+			mav.addObject("combolist3", combolist3);
+			mav.addObject("combolist4", combolist4);
 		}
 		return mav;
 

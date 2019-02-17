@@ -270,19 +270,19 @@ function change(e){
 	var input = document.getElementById("Update_Product_style").getElementsByTagName("input");
 
 	for(var i=0;i <4;i++){
-		input[i].value = mag[i].innerHTML;
+		input[i].value = mag[i+1].innerHTML;
 	}
 	
 	 var sel = document.getElementById("type");
 	    for (var i = 0; i < sel.options.length; i++)
 	    {
-	        if (sel.options[i].text == mag[4].innerHTML)
+	        if (sel.options[i].text == mag[5].innerHTML)
 	        {
 	        	sel.options[i].remove();
 	            break;  
 	        } 
 	    }
-	$("#type").prepend("<option>"+mag[4].innerHTML+"</option>"); 
+	$("#type").prepend("<option>"+mag[5].innerHTML+"</option>"); 
 	sel.options[0].selected=true;
     
     layer.open({
