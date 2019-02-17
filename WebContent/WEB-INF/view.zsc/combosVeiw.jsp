@@ -223,6 +223,7 @@ var totalPage;
 var state;
 
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
+var numCheck1 = /^[0-9]*$/;
 
 function createProject(project_id,project_name){
 	var project = new Object();
@@ -322,7 +323,7 @@ function jump(){
 <!-- 查 -->
 <script type="text/javascript">
 function putIn(){
-	if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+	/* if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
 		layer.alert('最小值必须是数值!',{
               title: '提示框',								
 			  icon:0,			    
@@ -335,7 +336,7 @@ function putIn(){
 			  icon:0,			    
 			 });
 			return false;
-	}
+	}  */
 	$.ajax({
 		url:"<%=path%>combo/selectCombo.handle",
 		type:"POST",
@@ -486,15 +487,13 @@ function change(e){
 	var project_id = parent.getElementsByTagName("input");
 	
 	for(var i=0;i <2;i++){
-		input[i].value = mag[i].innerHTML;
+		input[i].value = mag[i+1].innerHTML;
 	}
 	
 	var info = document.getElementById("info");
-	var info2 = t.parentNode.getElementsByTagName("input");
-	info.value = info2[0].value;
+	info.value = project_id[0].value;
 	
-	//describe
-	for(var i=0;i <project_id.length;i++){
+	for(var i=1;i <project_id.length;i++){
 		idArray.push(project_id[i].value);
 	}
 	
@@ -509,7 +508,7 @@ function change(e){
 		btn:['提交','取消'],
 		yes: function(index, layero){	
 			save();
-			
+
 			if($('#name').val()==""){
 				 layer.alert('名称不能为空!',{
 		              title: '提示框',								

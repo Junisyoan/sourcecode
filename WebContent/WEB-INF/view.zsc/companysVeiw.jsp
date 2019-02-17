@@ -406,7 +406,7 @@ function change(e){
 	var input = document.getElementById("Update_Product_style").getElementsByTagName("input");
 
 	for(var i=0;i <7;i++){
-		input[i].value = mag[i].innerHTML;
+		input[i].value = mag[i+1].innerHTML;
 	}
 
     layer.open({

@@ -8,9 +8,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>一卡通系统后台登录</title>
+<title>健康团检系统后台登录</title>
 <link rel="stylesheet" type="text/css" href="<%=path%>css/backlogin.css" />
-<script src="<%=path%>js/jquery-1.4.2.min.js"></script>
+<script src="<%=path%>js/jquery.min.js"></script>
 <script>
 
 // function turn(){
@@ -27,7 +27,7 @@ function passwordIsTrue(){
 	var val = $(".input-val").val().toLowerCase();
     var num = show_num.join("");
     
-    /* if(val==''){
+    if(val==''){
         alert('请输入验证码！');
         return false;
     }else if(val != num){
@@ -35,7 +35,7 @@ function passwordIsTrue(){
          $(".input-val").val('');
          draw(show_num);
          return false;
-    } */
+    } 
     
 	 $.ajax({
 		 type:"POST",
@@ -124,6 +124,14 @@ function randomColor() {//得到随机的颜色值
 }
 
 </script>
+<style>
+.left{
+	text-align:left
+}
+.right{
+ 	text-align:right
+}
+</style>
 </head>
 
 <body background="<%=path%>image/bkg.jpg">
@@ -136,19 +144,21 @@ function randomColor() {//得到随机的颜色值
 					<td height="33" colspan="3">后台登录</td>
 				</tr>
 				<tr>
-					<td width="65" height="30">用户名:</td>
-					<td width="222" colspan="2"><input type="text" name="account"
+					<td width="65" height="30" class="right">用户名:</td>
+					<td width="222" colspan="2" class="left"><input type="text" name="account"
 						id="account" /></td>
 				</tr>
 				<tr>
-					<td height="23">密码:</td>
-					<td colspan="2"><input type="password" name="pwd" id="pwd" /></td>
+					<td height="23" class="right">密码:</td>
+					<td colspan="2" class="left"><input type="password" name="pwd" id="pwd" /></td>
 				</tr>
 				<tr>
-            	<td class="tbText">验证码</td>
-            		<td>
-            			<input type="text" value="" placeholder="请输入验证码（不区分大小写）" class="input-val" style="width:100px;"/>
-            			<canvas id="canvas" width="100" height="43"></canvas>
+            	<td class="right">验证码:</td>
+            		<td class="left" style="width:82px;">
+            			<input type="text" value="" placeholder="请输入验证码" class="input-val" style="width:80px;"/>
+            		</td>
+            		<td class="left">
+            			<canvas id="canvas" width="100" height="40"></canvas>
             		</td>
            		</tr>
 				<tr>
