@@ -26,7 +26,7 @@
 <body>
 	<div class="Manager_style">
 		<div class="title_name">充值</div>
-		<a href="<%=path %>recharge.jsp" target="_blank">充值</a>
+		<button id="get" onclick="getUrl();" >充值</button>
 		余额：${userCompany.deposit }
 	</div>
 	<div class="Manager_style">
@@ -54,7 +54,9 @@
 	</div>
 </body>
 <script type="text/javascript">
-
+function getUrl(){
+	window.open("<%=path%>company/getUrl.handle");
+}
 function recharge(){
 	var m = document.getElementById("m").value;
 	if(confirm("确认充值？")){

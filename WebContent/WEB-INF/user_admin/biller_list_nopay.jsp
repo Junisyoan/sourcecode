@@ -47,8 +47,8 @@
 							<td>${b.totalMoney }</td>
 							<td>${b.batch}</td>
 							<td>
-								<input type="button" name="payBiller" onclick="payBiller('${b.biller_id}','${b.totalMoney }' );" value="结算"></input>
-								<input type="button" name="payBiller" onclick="getReceipt('${b.biller_id}' );" value="打印发票"></input>
+								<button class="btn btn-info" onclick="payBiller('${b.biller_id}','${b.totalMoney }' );">结算</button>
+								<button class="btn btn-warning" onclick="getReceipt('${b.biller_id}' );">打印发票</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -76,7 +76,7 @@ function payBiller(bid,totalmoney){
 			success:function(retData){
 				if(retData=="1"){
 					alert('支付成功');
-					location.href="";
+					location.href="<%=path %>company/getBillerNoPay.handle?cid=${userCompany.company_id }";
 				}else if(retData=="0"){
 					alert('支付失败');
 				}else if(retData=="-1"){

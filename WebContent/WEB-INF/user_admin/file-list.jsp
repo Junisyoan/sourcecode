@@ -24,6 +24,18 @@
 
 <body>
 	<div class="page-content">
+	<div class="Manager_style">
+		<span class="title_name">文件上传</span>
+		<div>
+		<form action="${path}company/fileUpload.handle" id="companyFile" method="post" enctype="multipart/form-data" onsubmit="return check();">
+			<input type="file" name="companyFile" id="cFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+			<input type="submit" value="上传" />
+		</form>
+		</div>
+		<div>
+			<button type="button" class="btn btn-info" onclick="javascript:location.href='${path}XX公司团检表.xls';">下载文档模板</button>
+		</div>
+	</div>
 		<div class="Manager_style">
 			<span class="title_name">文件列表</span>
 			<table id="listTable" class="table table-striped table-bordered table-hover">
@@ -56,6 +68,15 @@
 		</div>
 	</div>
 <script type="text/javascript">
+
+
+function check(){
+	var f = document.getElementById("cFile").value;
+	if(f==""){
+		return false;
+	}
+	return true;
+}
 
 function downloadFile(file_id){
 	location.href='<%=path%>company/downloadFile.handle?file_id='+file_id;

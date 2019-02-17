@@ -4,6 +4,10 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.ComboMapper">
 
+	<select id="queryComboByName" resultType="xyz.cymedical.entity.xin.Combo">
+		select * from tb_combo where name = #{name}
+	</select>
+
 	<!-- ajax验证 -->
 	<select id="checkName" parameterType="map" resultType="int">
 		select count(*) from tb_combo where name = #{name}

@@ -58,8 +58,8 @@
 			<div class="Manager_style">
 				<div class="title_name">操作</div>
 				<form method="post" action="<%=path%>patient/findpatientall.handle">
-					<input type="button" id="pass" onclick="passFile('${fid}');" value="通过" />
-					<input type="button" id="invalid" onclick="invalidFile('${fid}');" value="不合格" />
+					<button class="btn btn-info" id="pass" onclick="passFile('${fid}');">通过</button>
+					<button class="btn btn-warning" id="pass" onclick="invalidFile('${fid}');">不合格</button>
 				</form>
 			</div>
 		</div>

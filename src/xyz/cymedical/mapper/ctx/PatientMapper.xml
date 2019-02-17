@@ -4,6 +4,15 @@
 
 <mapper namespace="xyz.cymedical.mapper.ctx.PatientMapper">
 
+	<select id="queryPhone" resultType="xyz.cymedical.entity.jun.Patient" parameterType="String">
+		select * from tb_patient where phone = #{p}
+	</select>
+
+	<select id="queryID" resultType="xyz.cymedical.entity.jun.Patient" parameterType="String">
+		select * from tb_patient where ID = #{ID}
+	</select>
+
+
 	<!-- 更新病人信息 -->
 	<!-- <update id="updataPatient" parameterType="xyz.cymedical.entity.jun.Patient"> -->
 	<!-- update tb_patient set -->

@@ -57,7 +57,7 @@
 				</div>
 				<ul class="nav ace-nav">
 					<li><a href="javascript:void(0)" class="change_Password">修改密码</a></li>
-					<li><a href="javascript:oid(0)" id="Exit_system">退出系统</a></li>
+					<li><a href="javascript:void(0)" id="Exit_system">退出系统</a></li>
 
 				</ul>
 				<!-- /.ace-nav -->
@@ -380,11 +380,23 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>login_company.html";
+				location.href = "<%=path%>company/exit.handle";
 
 			});
 		});
+		//在刷新或关闭时调用的事件 
+		$(window).bind('beforeunload',function(){ 
+			$.ajax({ 
+				url:"<%=path%>company/exit.handle", 
+				type:"post", 
+				dataType:"text",
+				success:function(){ 
+					alert("您已退出登录"); 
+				} 
+			}); 
+		});
 	</script>
 </body>
+
 </html>
 
