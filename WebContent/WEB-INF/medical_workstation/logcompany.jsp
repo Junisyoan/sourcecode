@@ -74,7 +74,7 @@
 			</div>
 		</div>
 	</div>
-
+<div class="page-content">
 	<div class="Manager_style">
 		<span class="title_name">团检单位对账</span>
 		<p>&nbsp;</p>
@@ -101,5 +101,6 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 </body>
 </html>

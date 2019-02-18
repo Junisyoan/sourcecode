@@ -26,7 +26,7 @@
 		<p style="margin-left: 500px;">体&nbsp;&nbsp;检&nbsp;&nbsp;号：${p.check_num}</p>
 		<p style="margin-left: 500px;">体检时间：${p.time}</p>
 		<p align="center">
-			<a href="<%=path%>patient/findpatientall.handle">返回</a>
+			<a href="<%=path%>patient/findpatientall.handle"><button class="btn btn-info">返回</button></a>
 		</p>
 	</c:forEach>
 </body>

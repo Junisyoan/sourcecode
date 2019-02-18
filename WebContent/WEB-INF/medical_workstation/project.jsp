@@ -58,7 +58,7 @@
 	</div>
 	<p align="center">
 		<a
-			href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}">返回</a>
+			href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">返回</button></a>
 	</p>
 </body>
 </html>
