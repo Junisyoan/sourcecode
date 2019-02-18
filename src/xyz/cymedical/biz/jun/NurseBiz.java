@@ -71,4 +71,16 @@ public interface NurseBiz {
 	//条件查询
 	public List<News> searchNews(Map<String, Object> map);
 
+	//添加新闻
+	public boolean addNews(News news);
+
+	//根据id查找
+	public News findMyNews(int newsid);
+
+	//修改
+	public boolean updateNews(News news);
+
+	//删除
+	public boolean delNews(String newsid);
+
 }

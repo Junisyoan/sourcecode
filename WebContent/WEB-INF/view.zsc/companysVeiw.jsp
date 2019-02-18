@@ -209,6 +209,12 @@ function stateChange(e){
 	var cstate = t.innerText;
 	var company_id = t.name;
 	
+	var rt = confirm('确定'+cstate+'该账号吗?');
+	
+	if(rt <= 0){
+		return false;
+	}
+	
 	if(cstate != "禁用"){
 		cstate="在用";
 	}
@@ -318,8 +324,9 @@ function resetPwd(e){
 	var t = e.target || e.srcElement;
 	var company_id = t.name;
 	
-	var rt = confirm("确定重置此账号密码?");
-	if(rt){
+	var rt = confirm('确定重置密码?');
+	
+	if(rt > 0){
 		$.ajax({
 			url:"<%=path%>companys/resetPwd.handle",
 			type:"POST",
@@ -347,8 +354,9 @@ function remove(e){
 	var t = e.target || e.srcElement;
 	var company_id = t.name;
 	
-	var rt = confirm("确定删除此项?");
-	if(rt){
+	var rt = confirm('确定删除此项?');
+	
+	if(rt > 0){
 		$.ajax({
 			url:"<%=path%>companys/deleteCompany.handle",
 			type:"POST",

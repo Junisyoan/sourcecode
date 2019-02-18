@@ -11,6 +11,7 @@ public class Combo {
 	private double price; // 价格
 	private String info;// 描述
 	private String img;// 图片
+	private String strPrice; // 价格
 	private List<Project> projects;
 
 	public Combo() {
@@ -83,6 +84,14 @@ public class Combo {
 
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
+	}
+
+	public String getStrPrice() {
+		return strPrice;
+	}
+
+	public void setStrPrice(String strPrice) {
+		this.strPrice = strPrice;
 	}
 
 }

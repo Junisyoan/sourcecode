@@ -211,8 +211,9 @@ function remove(e){
 	var t = e.target || e.srcElement;
 	var detail_id = t.name;
 	
-	var rt = confirm("确定删除此项?");
-	if(rt){
+	var rt = confirm('确定删除此项?');
+	
+	if(rt > 0){
 		$.ajax({
 			url:"<%=path%>detail/deleteDetail.handle",
 			type:"POST",

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
+import xyz.cymedical.aop.zsc.Log;
 import xyz.cymedical.biz.zsc.ComboBiz;
 import xyz.cymedical.biz.zsc.ProjectBiz;
 import xyz.cymedical.entity.xin.Combo;
@@ -45,17 +46,15 @@ public class ComboHandle {
 	}
 
 	// 删
-	@RequestMapping(value = "/deleteCombo.handle")
-	public ModelAndView deleteProject(HttpServletRequest req, int combo_id) {
-		comboBiz.deleteCombo(combo_id);
-		return findCombos(req);
+	@RequestMapping(value = "/deleteCombo.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String deleteProject(HttpServletRequest req, int combo_id) {
+		return comboBiz.deleteCombo(combo_id);
 	}
 
 	// 改
 	@RequestMapping(value = "/updateCombo.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 	public @ResponseBody String updateProject(int[] idArray, Combo combo) {
 		return comboBiz.updateCombo(idArray, combo);
-
 	}
 
 	// 查
@@ -66,7 +65,9 @@ public class ComboHandle {
 		map.put("min", min);
 		map.put("max", max);
 		List<Combo> combos = comboBiz.selectCombo(map);
-		
+		for (Combo combo : combos) {
+			combo.setStrPrice(combo.getPrice()+"");
+		}
 		String str = JSONArray.fromObject(combos).toString();
 		return str;
 	}

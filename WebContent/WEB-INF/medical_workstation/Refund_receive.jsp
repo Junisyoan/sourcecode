@@ -98,14 +98,19 @@
 						</c:forEach>
 					</tbody>
 				 </table>
-				<c:if test="${flag=='true' }">
+				<c:if test="${flag=='可退费' }">
 					<div style="width:100px;margin:0 auto">
 						<a href="<%=path %>nurse/Refund.handle" onclick="return confirm('确定退费么')"><input type="button" class="btn btn-warning" value="退费"/></a>
 					</div>
 				</c:if>
-				<c:if test="${flag=='false' }">
+				<c:if test="${flag=='已退费' }">
 					<div style="width:100px;margin:0 auto">
 						<input type="button" class="btn btn-warning" value="已退费"/>
+					</div>
+				</c:if>
+				<c:if test="${flag=='无需退费' }">
+					<div style="width:100px;margin:0 auto">
+						<input type="button" class="btn btn-warning" value="无需退费"/>
 					</div>
 				</c:if>
 			</div>
