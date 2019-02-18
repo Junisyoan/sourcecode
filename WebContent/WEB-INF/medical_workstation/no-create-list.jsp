@@ -48,7 +48,9 @@
 							<td>${b.bcreate}</td>
 							<td>${b.bstate}</td>
 							<td>${b.batch}</td>
-							<td><input type="button" name="createList" onclick="createList('${s.count}','${b.biller_id}');" value="开单"></input></td>
+							<td>
+							<button onclick="createList('${s.count}','${b.biller_id}');" class="btn btn-primary">开单</button>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

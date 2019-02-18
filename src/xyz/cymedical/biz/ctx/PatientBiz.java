@@ -8,7 +8,7 @@ import xyz.cymedical.entity.jun.Patient;
 
 public interface PatientBiz {
 
-	public boolean queryPhone(String phone);
+	public Patient queryPhone(String phone);
 	
 	/**
 	 * 批量插入病人数据
@@ -18,8 +18,7 @@ public interface PatientBiz {
 	 */
 	public List<Patient> insertByBatch(List<Patient> listRecord);
 
-	
-	public boolean queryID(String ID);
+	public Patient queryID(String ID);
 	
 	public List<Patient> query(@Param("name") String name, @Param("phone") String phone, @Param("time") String time,
 			@Param("code") String code);

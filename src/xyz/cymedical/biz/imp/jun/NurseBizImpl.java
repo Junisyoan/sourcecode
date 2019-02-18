@@ -40,8 +40,8 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	}
 
 	@Override
-	public List<CompanyFile> queryCheckFile() {
-		return nurseMapper.queryCheckFile();
+	public List<CompanyFile> queryCheckFile(String state) {
+		return nurseMapper.queryCheckFile(state);
 	}
 
 	@Override

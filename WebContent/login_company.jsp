@@ -9,7 +9,7 @@ import="java.sql.*" errorPage=""%>
 <head>
     <meta charset="UTF-8">
     <title>登陆页面</title>
-    <link rel="stylesheet" type="text/css" href="css/medical_workstation_css/company-login.css">
+    <link rel="stylesheet" type="text/css" href="<%=path%>css/medical_workstation_css/company-login.css">
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
         $(function(){

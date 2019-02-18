@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jun.InvalideMapper">
+
+	<insert id="insert" parameterType="xyz.cymedical.entity.jun.Invalide">
+		insert into tb_invalide(file_id,name,reason,state)
+		values(#{file_id},#{name},#{reason},"未查看")
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from tb_invalide where file_id = #{fid};
+		delete from tb_file where file_id = #{fid}
+	</delete>
+	
+	<select id ="queryInvalide" parameterType="int" resultType="xyz.cymedical.entity.jun.CompanyFile">
+		SELECT DISTINCT i.state vs,f.*,c.name from tb_file f,tb_invalide i,tb_company c where f.file_id = i.file_id and c.company_id = f.company_id
+	</select>
+	
+	<select id ="queryInvalideByFileId" parameterType="int" resultType="xyz.cymedical.entity.jun.Invalide">
+		update tb_invalide set state="已查看" where file_id = #{fid};
+		select * from tb_invalide where file_id = #{fid}
+	</select>
+</mapper>

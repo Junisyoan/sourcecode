@@ -93,7 +93,7 @@
 							class="menu-text"> 系统首页 </span></a></li>
 							
 					<li><a href="#" class="dropdown-toggle"><i
-							class="icon-desktop"></i><span class="menu-text">团检人员管理 </span><b
+							class="icon-desktop"></i><span class="menu-text">文件管理 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
@@ -103,15 +103,16 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getFileList.handle" title="团检表列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>团检文件列表</a></li>
-								
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>nurse/toRefund.handle" title="团检退费" class="iframeurl"><i
-									class="icon-double-angle-right"></i>团检退费</a></li>
-								
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>nurse/newslist.handle" title="新闻列表"
-								class="iframeurl"><i class="icon-double-angle-right"></i>新闻列表</a></li>
-								
+						<li class="home"><a href="javascript:void(0)"
+								name="<%=path %>nurse/getInvalideFile.handle" title="不合格文件列表"
+								class="iframeurl"><i class="icon-double-angle-right"></i>不合格文件列表</a></li>
+						
+						</ul></li>
+				<li><a href="#" class="dropdown-toggle"><i
+							class="icon-desktop"></i><span class="menu-text">账单管理 </span><b
+							class="arrow icon-angle-down"></b></a>
+						<ul class="submenu">
+						
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单"
 								class="iframeurl"><i class="icon-double-angle-right"></i>未结算账单</a></li>
@@ -123,14 +124,30 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getCreateList.handle" title="已开单列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>已开单列表</a></li>
+								
+						</ul></li>
 						
+						
+						<li><a href="#" class="dropdown-toggle"><i
+							class="icon-desktop"></i><span class="menu-text">其他操作 </span><b
+							class="arrow icon-angle-down"></b></a>
+						<ul class="submenu">
+								
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path %>nurse/toRefund.handle" title="团检退费" class="iframeurl"><i
+									class="icon-double-angle-right"></i>团检退费</a></li>
+								
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>nurse/newslist.handle" title="新闻列表"
+								class="iframeurl"><i class="icon-double-angle-right"></i>新闻列表</a></li>
 								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检报告打印</a></li>
-									
-							
 						</ul></li>
+						
+						
+						
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
 							class="arrow icon-angle-down"></b></a>

@@ -55,7 +55,7 @@ public interface NurseBiz {
 	 * 查询待审核文件列表
 	 * @return	文件列表
 	 */
-	public List<CompanyFile> queryCheckFile();
+	public List<CompanyFile> queryCheckFile(String state);
 
 	/**
 	 * 登录查询
