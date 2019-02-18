@@ -68,8 +68,8 @@
      
      <form method="post" id = "aFrom" method="post">
      		名称	<input type="text" name="name"/>
-     		价钱	<input type="text" name="min"/>
-     		至	<input type="text" name="max"/>
+     		价钱	<input type="text" name="min" id = "min"/>
+     		至	<input type="text" name="max" id = "max"/>
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 </form>
   	 
@@ -323,12 +323,13 @@ function jump(){
 <!-- 查 -->
 <script type="text/javascript">
 function putIn(){
-	/* if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+	if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
 		layer.alert('最小值必须是数值!',{
               title: '提示框',								
 			  icon:0,			    
 			 });
 			return false;
+		
 	}
 	if($('#max').val() != ""&&!(numCheck.test($('#max').val())||numCheck1.test($('#max').val()))){
 		layer.alert('最大值必须是数值!',{
@@ -336,7 +337,7 @@ function putIn(){
 			  icon:0,			    
 			 });
 			return false;
-	}  */
+	}
 	$.ajax({
 		url:"<%=path%>combo/selectCombo.handle",
 		type:"POST",
@@ -529,7 +530,7 @@ function change(e){
 					 });
 				return false;
 				
-			}if(!numCheck.test($('#price').val())){
+			}if(!(numCheck.test($('#price').val())||numCheck1.test($('#price').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
@@ -682,7 +683,7 @@ $('#add_butn').on('click', function(){
 					 });
 				return false;
 				
-			}if(!numCheck.test($('#price1').val())){
+			}if(!(numCheck.test($('#price1').val())||numCheck1.test($('#price1').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    

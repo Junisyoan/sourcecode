@@ -56,9 +56,10 @@
 					<c:forEach items="${combos}" var="c" varStatus="s">
 						<div class="grid-list">
 								<img src="<%=path %>image/index1/${c.img}" alt="">
-							<div style = "height:50px;">
+							<div style = "height:115px;overflow:hidden;">
 								<h4>${c.name}</h4>
-								<p style="height: 50px;">${c.info}</p>
+								<p style = "color:blue">价格：￥${c.price}元</p>
+								<p title="${c.info}">${c.info}</p>
 							</div>
 						</div>
 					</c:forEach>
