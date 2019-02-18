@@ -547,7 +547,7 @@ function change(e){
 					 });
 				return false;
 				
-			}if(!numCheck.test($('#price').val())){
+			}if(!(numCheck.test($('#price').val())||numCheck1.test($('#price').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
@@ -680,7 +680,7 @@ $('#add_butn').on('click', function(){
 					 });
 				return false;
 				
-			}if(!numCheck.test($('#price1').val())){
+			}if(!(numCheck.test($('#price1').val())||numCheck1.test($('#price1').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
