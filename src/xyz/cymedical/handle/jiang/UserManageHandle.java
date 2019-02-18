@@ -79,10 +79,10 @@ public class UserManageHandle {
 		System.out.println("过");
 //		----加密
 		Map<String, Object> map = new HashMap<String, Object>();
-		Tb_user tb_userr=tb_user;
-		tb_userr.setPwd(Encryption.getResult(tb_userr.getPwd()));
+//		Tb_user tb_userr=tb_user;
+//		tb_userr.setPwd(Encryption.getResult(tb_userr.getPwd()));
 //		---
-		map.put("tb_user", tb_userr);
+		map.put("tb_user", tb_user);
 
 		map.put("dept", dept);
 		

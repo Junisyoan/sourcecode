@@ -52,5 +52,12 @@ public class TbDeptBizImp implements  TbDeptBiz{
 		return tbDeptMapper.selectCompany(map);
 	}
 
+
+	@Override
+	public List<Map<String, Object>> select(String sta) {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.select(sta);
+	}
+
 	
 }

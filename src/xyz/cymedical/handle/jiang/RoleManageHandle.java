@@ -17,8 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbRoleBiz;
+import xyz.cymedical.biz.jiang.TbRoleDept;
+import xyz.cymedical.biz.jiang.TbRolePower;
 import xyz.cymedical.entity.jiang.Tb_dept;
 import xyz.cymedical.entity.jiang.Tb_role;
+import xyz.cymedical.entity.jiang.Tb_role_dept;
+import xyz.cymedical.entity.jiang.Tb_role_power;
 import xyz.cymedical.entity.jiang.Tb_user;
 
 @Controller
@@ -31,14 +35,25 @@ public class RoleManageHandle {
 	@Resource
 	private TbRoleBiz tbRoleBiz;
 	
+	@Resource
+	private TbRoleDept tbRoleDept;
+	@Resource
+	private Tb_role_dept tb_role_dept;
+	
+	@Resource
+	private TbRolePower tbRolePower;/*0biz*/
+	
+	@Resource
+	private Tb_role_power tb_role_power;
+	
 	
 	
 	
 	@RequestMapping(value = "/addrole.handle")
-	public ModelAndView addRole(HttpServletRequest request, HttpServletResponse response, String  name) {
+	public ModelAndView addRole(HttpServletRequest request, HttpServletResponse response, Tb_role tb_role) {
 
 		ModelAndView mav = new ModelAndView();  
-		
+			String name=tb_role.getName();
 			role=tbRoleBiz.selectName(name);
 			if(role!=null) {
 			System.out.println("账号已存在");
@@ -56,6 +71,23 @@ public class RoleManageHandle {
 			
 		 System.out.println("++++++="+name);
 		int ret= tbRoleBiz.addRole(name);
+		
+//		int dept_id=Integer.valueOf(dept_id);
+//		tb_role_dept.setDept_id(dept_id);
+		String state="在用";
+		int dept_id=tb_role.getDept_id();
+		int role_id=tb_role.getRole_id();
+		System.out.println("~~~"+dept_id);
+		System.out.println(""+role_id);
+		
+		tb_role_dept.setDept_id(dept_id);
+		tb_role_dept.setRole_id(role_id);
+		tb_role_dept.setState(state);
+		
+		System.out.println(tb_role_dept.toString());
+		
+		tbRoleDept.addroledept(tb_role_dept);
+		 
 		 System.out.println("ret="+ret);
 		 if(ret==1) {
 			 System.out.println("添加成功"); 
@@ -93,7 +125,16 @@ public class RoleManageHandle {
 			ModelAndView mav = new ModelAndView();  
 			System.out.println("...=" + updetename);
 			int role_id = Integer.valueOf(updetename);
-			System.out.println("user_id"+role_id);
+			System.out.println("role_id="+role_id);
+			/*删除角色之前要先查询 本id是否在角色权限表中存在 如存在 需要先删除角色权限表*/
+			tb_role_power.setRole_id(role_id);
+			List<Tb_role_power> tbrolepower=tbRolePower.selectrprid(tb_role_power);
+			System.out.println("tbrolepower="+tbrolepower);
+			if(tbrolepower.size()>0) {
+				tbRolePower.delectrprid(tb_role_power);
+			}
+			
+			
 			int ret=tbRoleBiz.delectrole(role_id);
 			System.out.println("ret="+ret);
 			

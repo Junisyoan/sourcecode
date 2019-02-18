@@ -35,8 +35,8 @@
       <div class="Add_Manager_style">
     		  
     	<form method="post" id = "aFrom" method="post">
-     		权限id	<input type="text" name="power_id"/>
-     		菜单id	<input type="text" name="menu_id"/>
+     		<i style="color:#F60; ">必填</i>权限id	<input type="text" name="power_id"/>
+     		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/>
      		权限名    <input type="text" name="name"/>
 
      		  

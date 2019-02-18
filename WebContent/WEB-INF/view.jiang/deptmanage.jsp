@@ -55,6 +55,7 @@
       <li><label class="label_name">部门id</label><input name="dept_id" type="text"  class="text_add" id="dept_id"/></li>
 <!--       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li> -->
       <li><label class="label_name">部门名</label><input name="name" type="text"  class="text_add" id="name"/></li>
+<!--       <li><label class="label_name">角色</label><input name="name" type="text"  class="text_add" id="name"/></li> -->
      
          
       </ul>  

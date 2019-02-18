@@ -39,14 +39,14 @@
     <div class="add_user_style clearfix">
     
    <form action="<%=path%>contact/upcontact.so"  method="post" id = "aFrom"  > 
-    		序号    <input type="text" name="name"  readonly="readonly" value="${tb_contact.contact_id}"/>&nbsp
-     		公司名&nbsp&nbsp	&nbsp<input type="text" name="power_id" value="${tb_contact.name}"/>&nbsp </br>
-     		地区	<input type="text" name="menu_id" value="${tb_contact.province}"/>&nbsp
-     		详细地址    <input type="text" name="name" value="${tb_contact.area}"/>&nbsp</br>
-     		固话    <input type="text" name="name" value="${tb_contact.tel}"/>&nbsp
-     		手机 &nbsp&nbsp &nbsp&nbsp&nbsp  <input type="text" name="name" value="${tb_contact.phone}"/>&nbsp</br>
-     		传真    <input type="text" name="name" value="${tb_contact.fax}"/>&nbsp
-     		邮箱 &nbsp&nbsp &nbsp &nbsp&nbsp <input type="text" name="name" value="${tb_contact.email}"/>&nbsp</br>
+    		序号    <input type="text" name="contact_id"  readonly="readonly" value="${tb_contact.contact_id}"/>&nbsp
+     		公司名&nbsp&nbsp	&nbsp<input type="text" name="name" value="${tb_contact.name}"/>&nbsp </br>
+     		地区	<input type="text" name="province" value="${tb_contact.province}"/>&nbsp
+     		详细地址    <input type="text" name="area" value="${tb_contact.area}"/>&nbsp</br>
+     		固话    <input type="text" name="tel" value="${tb_contact.tel}"/>&nbsp
+     		手机 &nbsp&nbsp &nbsp&nbsp&nbsp  <input type="text" name="phone" value="${tb_contact.phone}"/>&nbsp</br>
+     		传真    <input type="text" name="fax" value="${tb_contact.fax}"/>&nbsp
+     		邮箱 &nbsp&nbsp &nbsp &nbsp&nbsp <input type="text" name="email" value="${tb_contact.email}"/>&nbsp</br>
      		  
   	 	</form>
        </div>       

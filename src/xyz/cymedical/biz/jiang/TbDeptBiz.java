@@ -9,6 +9,8 @@ public interface TbDeptBiz {
   
 	public List<Tb_dept> selectDept();
 	
+	public List<Map<String, Object>>  select(String sta);/*新版查询 带状态*/
+	
 	public int addDept(Tb_dept tb_dept);
 	
 	public int upDept(Tb_dept tb_dept);

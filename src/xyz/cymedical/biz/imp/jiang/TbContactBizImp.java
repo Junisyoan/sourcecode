@@ -16,13 +16,11 @@ public class TbContactBizImp implements TbContactBiz{
 	
 	@Override
 	public Tb_contact fornt() {
-		// TODO Auto-generated method stub
 		return tbContactMapper.fornt();
 	}
 
 	@Override
 	public int upcontact(Tb_contact tb_contact) {
-		// TODO Auto-generated method stub
 		return tbContactMapper.upcontact(tb_contact);
 	}
 

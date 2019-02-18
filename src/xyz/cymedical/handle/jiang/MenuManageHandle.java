@@ -70,6 +70,7 @@ public class MenuManageHandle {
 		System.out.println("...=" + delectname);
 		int menu_id = Integer.valueOf(delectname);
 		tb_power=tbPowerBiz.selectid(menu_id);
+		if(tb_power!=null) { 
 		int power_id=tb_power.getPower_id();
 		System.out.println("power_id="+power_id);
 		
@@ -90,7 +91,14 @@ public class MenuManageHandle {
 			 data = "11";
 		 }
 		}
-
+		}
+		 int ret = tbMenuBiz.delete(menu_id); 
+		 if (ret == 1) {
+			 data = "00";
+		 
+	 }else {
+		 data = "11";
+	 }
 		return data;
 
 	}

@@ -17,10 +17,7 @@
 		delete from tb_power where power_id = #{power_id}
 	
 	</delete>
-	
-	
-	
-	
+	 
 	<insert id="addPower" parameterType="xyz.cymedical.entity.jiang.Tb_power">
 		insert into tb_power(power_id,menu_id,name) values(#{power_id},#{menu_id},#{name})
 	</insert>
