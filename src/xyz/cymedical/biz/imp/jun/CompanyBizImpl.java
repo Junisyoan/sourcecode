@@ -150,15 +150,12 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 
 	@Override
 	public boolean Refund(int companyid, double deposit) {
-		// TODO Auto-generated method stub
 		return companyMapper.Refund(companyid,deposit);
 	}
 
 	@Override
 	public Company findCompany(int company_id) {
-		// TODO Auto-generated method stub
 		return companyMapper.findCompany(company_id);
 	}
-
 
 }

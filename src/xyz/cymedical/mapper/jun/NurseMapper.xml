@@ -49,4 +49,30 @@
 	<select id="queryNurseByLogin" parameterType="String" resultType="xyz.cymedical.entity.jun.Nurse">
 		select * from tb_user where account = #{account} and pwd = #{pwd}
 	</select>
+	
+	<!-- 新闻查询 -->
+	<select id="findAllNews"  resultType="xyz.cymedical.entity.xin.News">
+		select * from tb_new order by time desc;
+	</select>	
+	
+	<!-- 条件查询 -->
+	<select id="searchNews" parameterType="hashmap" resultType="xyz.cymedical.entity.xin.News">
+		
+		select * from tb_new where 1=1 	
+		
+		<if test="title!=null and title!=''">
+			and title like '%${title}%'
+		</if>
+		<if test="mindate!=null and mindate!=''">
+			and time &gt;= #{mindate}
+		</if>
+		<if test="maxdate!=null and maxdate!=''">
+			and time &lt;= #{maxdate}
+		</if>  
+		<if test="info!=null and info!=''">
+			and info like '%${info}%'
+		</if>
+	</select>	
+	
+	
 </mapper>

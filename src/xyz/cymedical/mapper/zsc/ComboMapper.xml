@@ -4,6 +4,10 @@
 
 <mapper namespace="xyz.cymedical.mapper.zsc.ComboMapper">
 
+	<select id="queryComboByName" resultType="xyz.cymedical.entity.xin.Combo">
+		select * from tb_combo where name = #{name}
+	</select>
+
 	<!-- ajax验证 -->
 	<select id="checkName" parameterType="map" resultType="int">
 		select count(*) from tb_combo where name = #{name}
@@ -99,5 +103,15 @@
 			<result property="name" column="pjname"/>
 		</collection>
 	</resultMap>
+	
+	<select id="queryCombo"
+		parameterType="xyz.cymedical.entity.xin.Combo"
+		resultType="java.util.HashMap">
+		select a1.`name` n1,a1.price,pro.`name` n2,a1.combo_id 
+		from(select com.combo_id,com.`name`,com.price,pc.project_id 
+		from tb_combo com left join tb_project_combo pc on com.combo_id = pc.combo_id) a1 
+		left join tb_project pro on a1.project_id = pro.project_id where a1.combo_id = #{combo_id}
+
+	</select>
 	
 </mapper>

@@ -11,6 +11,8 @@ import xyz.cymedical.entity.xin.Combo;
 @Repository
 public interface ComboMapper {
 
+	public Combo queryComboByName(String name);
+	
 	public int selectPrice(Map<String, Object> map);
 	
 	public int insertCombo(Combo combo);
@@ -26,4 +28,6 @@ public interface ComboMapper {
 	public int updateCombo(Map<String, Object> map);
 
 	public int checkName(Map<String, Object> map);
+	
+	public List<Combo> queryCombo(int combo_id);
 }

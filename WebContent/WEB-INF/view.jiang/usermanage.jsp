@@ -327,7 +327,7 @@ function loadAjax(){
 			 },
 			 success:function(data){
 				 alert("ajax="+data); 
-				 if(data=="01"){
+				 if(data=="03"){
 					 $("#doctor").val("内科医生");
 				 }else if(data=="02"){
 					 $("#doctor").val("外科医生");

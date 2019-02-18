@@ -51,5 +51,8 @@ public interface DoctorBiz {
 	//根据id找总结
 	public Summarize findMySummarize(int sumid);
 
+	//获取科室
+	public String getDepart(int param_id);
+
 
 }

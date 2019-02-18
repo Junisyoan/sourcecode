@@ -1,6 +1,7 @@
 package xyz.cymedical.handle.xin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,10 +52,18 @@ public class DoctorHandle {
 		Tb_user user = new Tb_user();
 		user=doctorbiz.login(account,pwd);
 		System.out.println("user="+user);
+		
+		
 		String Status="";
 		
 		if(user!=null) {
+			//保存到session
 			request.getSession().setAttribute("user", user);
+			
+			//获取用户所属科室
+			String depart = doctorbiz.getDepart(user.getParam_id());
+			request.getSession().setAttribute("depart", depart);
+			
 			//身份判断,只有身份为医生或总检医生才能登陆
 			String type=doctorbiz.getStatus(user.getRole_dept_id());
 			if(type.equals("医生") || type.equals("总检医生")) {
@@ -62,26 +71,6 @@ public class DoctorHandle {
 			}
 		}
 		return Status;
-		
-		
-//		if(user!=null) {
-//			ModelAndView mav = new ModelAndView();
-//			request.getSession().setAttribute("user", user);
-//			
-//			//用户对应菜单列表
-//			List<Tb_menu> mlist = doctorbiz.getMyMenu(user.getUser_id(),user.getRole_dept_id());
-//			System.out.println("mlist="+mlist);
-//			
-//			mav.addObject("mlist", mlist);
-//			mav.addObject("user", user);
-//			mav.setViewName("WEB-INF/doctor.xin/doctorindex");
-//			return mav;
-//			
-//		}else {
-//			ModelAndView mav = new ModelAndView();
-//			mav.setViewName("doctorlogin");
-//			return mav;
-//		}
 		
 
 	}
@@ -111,18 +100,28 @@ public class DoctorHandle {
 	
 	// 查询一维码对应病人的导检单
 	@RequestMapping(value = "/findProject.handle")
-	public ModelAndView index(String onecode) {
+	public ModelAndView index(HttpServletRequest req,String onecode) {
 
-		System.out.println("onecode=" + onecode);
 
 		this.onecode=onecode;
 		
-		System.out.println(doctorbiz.findMyProject(onecode));
-		
-		plist=doctorbiz.findMyProject(onecode);
+		Tb_user user=(Tb_user) req.getSession().getAttribute("user");
 
+		plist=doctorbiz.findMyProject(onecode);
+		List<Map<String,Object>> pplist = new ArrayList<Map<String,Object>>();//
+
+		if(plist!=null && plist.size()>0) {
+			for (int i = 0; i < plist.size(); i++) {
+				Map m=plist.get(i);
+				if(user.getParam_id()==Integer.parseInt(m.get("param_id").toString())) {
+					pplist.add(m);
+				}
+			}
+		}
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("prolist", plist);
+		mav.addObject("prolist", pplist);
+		
 		if(plist!=null && plist.size()>0) {
 			mav.addObject("patient", plist.get(0));//已包含病人信息
 		}
@@ -208,5 +207,5 @@ public class DoctorHandle {
 			e.printStackTrace();
 		}
 	}
-
+	
 }

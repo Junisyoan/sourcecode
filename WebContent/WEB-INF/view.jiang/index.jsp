@@ -40,8 +40,8 @@
 				</small>
 				</a> 
 			</div> 
-				<a href="#" class="navbar-brand"> <small> <img src="images/logo.png"/></small>
-				</a>
+<!-- 				<a href="#" class="navbar-brand"> <small> <img src="images/logo.png"/></small> -->
+<!-- 				</a> -->
 			</div>
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
@@ -105,6 +105,12 @@
 <!-- 							<li class="home"><a href="javascript:void(0)" -->
 <%-- 								name="<%=path%>powermanage/newpower.handle" title="权限管理" --%>
 <!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>权限配置</a></li>  -->
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>contact/selectmsg.handle" title="客户留言"
+								class="iframeurl"><i class="icon-double-angle-right"></i>留言信息</a></li> 
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>contact/select.handle" title="公司信息"
+								class="iframeurl"><i class="icon-double-angle-right"></i>公司信息</a></li> 
 							<!-- 							<li class="home"><a href="javascript:void(0)" -->
 							<%-- 								name="<%=path%>usermanage/select.handle" title="人员管理" --%>
 							<!-- 								class="iframeurl"><i class="icon-double-angle-right"></i>人员管理</a></li> -->
@@ -141,6 +147,9 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>param/findAllParam.handle" title="参数管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>参数管理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>company/findAllCompany.handle" title="用户管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
 						</ul></li>
 
 					<c:forEach items="${mlist }" var="m" varStatus="s">
@@ -246,8 +255,8 @@
 	<!--底部样式-->
 
 	<div class="footer_style" id="footerstyle">
-		<p class="lf">版权所有：长江南京航道局 苏ICP备11011739号</p>
-		<p class="rf">地址：南京市鼓楼区阅江楼街道公共路64号 邮编：210011 技术支持：XXXX</p>
+		<p class="lf">版权所有：厦门市传一信息科技有限公司 闽公网安备 35020602000054号</p>
+		<p class="rf">地址：厦门市思明区软件园二期观日路56号101号 邮编：361000 技术支持：黄俊彦组</p>
 	</div>
 	<!--修改密码样式-->
 	<div class="change_Pass_style" id="change_Pass">

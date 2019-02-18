@@ -142,11 +142,11 @@ input {
 				<blockquote
 					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 17px; line-height: 1.8;">尊敬的：${p.n1}</blockquote>
 				<blockquote
-					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 17px; line-height: 1.8;">感谢你来到XXXXXXXX进行健康体检！</blockquote>
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 17px; line-height: 1.8;">感谢你来到HealthCare体检中心进行健康体检！</blockquote>
 				<blockquote
 					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 17px; line-height: 1.8;">为了增加您对健康体检的认识，我们在此特别向您说明，健康体检检查的目的在于及时的了解自身的健康情况，提高健康环保意识，如果此次检查在正常范围内，只表示您选择的体检项目所反映的身体健康情况，由于体检手段及项目所限，并不能完全排除身体潜在疾病，若有疾病症状出现，请及时到医院就医。</blockquote>
 				<blockquote
-					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 17px; line-height: 1.8;">健康的生活方式，定期接受健康检查，在您最需要的时候请随时与我们联系，欢迎您再次光临XXXXXXXXXX。</blockquote>
+					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 17px; line-height: 1.8;">健康的生活方式，定期接受健康检查，在您最需要的时候请随时与我们联系，欢迎您再次光临HealthCare体检中心。</blockquote>
 				<blockquote
 					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 17px; line-height: 1.8;">祝您，健康快乐！</blockquote>
 				<p>&nbsp;</p>
