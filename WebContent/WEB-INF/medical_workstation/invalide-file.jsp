@@ -35,19 +35,21 @@
 					<th>文件名</th>
 					<th>上传时间</th>
 					<th>状态</th>
+					<th>是否已查看</th>
 					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${fileList}" var="f" varStatus="s">
+				<c:forEach items="${invalides}" var="i" varStatus="s">
 					<tr>
 						<td>${s.count}</td>
-						<td>${f.name}</td>
-						<td>${f.fname}</td>
-						<td>${f.ftime}</td>
-						<td>${f.cstate}</td>
+						<td>${i.name}</td>
+						<td>${i.fname}</td>
+						<td>${i.ftime}</td>
+						<td>${i.cstate}</td>
+						<td>${i.vs}</td>
 						<td>
-							<button class="btn btn-info" onclick="check('${f.file_id}');">导入审核</button>
+							<button class="btn btn-info" onclick="delInvalide('${i.file_id}','${i.vs}');">删除</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -56,6 +58,31 @@
 	</div>
 	</div>
 <script type="text/javascript">
+
+function delInvalide(fid,w){
+	if(confirm("确认删除？文件"+w)){
+		$.ajax({
+			url:"<%=path %>company/delInvalide.handle",
+			type:"post",
+			data:{'fid':fid},
+			dataType:"text",
+			success:function(ret){
+				if(ret=="1"){
+					alert("删除成功");
+				}else if(ret=="-1"){
+					alert("文件已删除");
+				}else if(ret=="0"){
+					alert("删除失败");
+				}
+					location.href="<%=path %>nurse/getInvalideFile.handle";
+			},
+			error:function(){
+				alert("服务器无响应");
+			}
+		});
+	}
+}
+
 function check(fid){
 	location.href="<%=path%>nurse/checkFile.handle?fid="+fid;
 }
