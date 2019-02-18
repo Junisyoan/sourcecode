@@ -108,9 +108,7 @@
 								name="<%=path %>nurse/toRefund.handle" title="团检退费" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检退费</a></li>
 								
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>nurse/newslist.handle" title="新闻列表"
-								class="iframeurl"><i class="icon-double-angle-right"></i>新闻列表</a></li>
+
 								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单"

@@ -61,7 +61,7 @@
 	</select>
 	
 	<update id="BalanceChange" parameterType="java.lang.Integer" >
-		update tb_patient_project set balance='已退费'  where patient_project_id=#{patient_project_id} 
+		update tb_patient_project set balance='已退费',state='已退费'  where patient_project_id=#{patient_project_id} 
 	</update>
 
 	<select id="getStatus" parameterType="java.lang.Integer" resultType="String">

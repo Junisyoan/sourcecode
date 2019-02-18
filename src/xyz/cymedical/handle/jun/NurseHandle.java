@@ -831,7 +831,7 @@ public class NurseHandle {
 			System.out.println("onecode=" + onecode);
 			System.out.println(doctorbiz.findMyProject(onecode));
 			
-			String flag="true";//初始化flag，用于控制状态
+			String flag="无需退费";//初始化flag，用于控制状态
 			
 			//根据条码获取项目列表
 			plist=doctorbiz.findMyProject(onecode);
@@ -843,8 +843,15 @@ public class NurseHandle {
 				
 				//若存在退费项目，返回false
 				for (int i = 0; i < plist.size(); i++) {
+					
+					if(plist.get(i).get("state").equals("未接收")) {
+						flag="可退费";
+						break;
+					}
+					
+					
 					if(plist.get(i).get("balance").equals("已退费")) {
-						flag="false";
+						flag="已退费";
 						break;
 					}
 				}
@@ -905,7 +912,7 @@ public class NurseHandle {
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("prolist", plist);
-			mav.addObject("flag", "false");
+			mav.addObject("flag", "已退费");
 			mav.addObject("patient", plist.get(0));
 			
 			mav.setViewName("WEB-INF/medical_workstation/Refund_receive");
@@ -930,50 +937,6 @@ public class NurseHandle {
 			return mav;
 
 		}
-		
-		//新闻列表
-		@RequestMapping(value = "/newslist.handle")
-		public ModelAndView newslist() {
-			
-			ModelAndView mav = new ModelAndView();
-			
-			ArrayList<News> nlist=nurseBiz.findAllNews(); 
-			
-			System.out.println("nlist="+nlist);
-			
-			mav.addObject("nlist", nlist);
-			
-			mav.setViewName("WEB-INF/medical_workstation/news_list");
-			
-			return mav;
-		}
-		
-				//新闻列表
-				@RequestMapping(value = "/searchnews.handle")
-				public ModelAndView searchnews(String title,String mindate,String maxdate,String info) {
-					
-					System.out.println("title="+title);
-					System.out.println("mindate="+mindate);
-					System.out.println("maxdate="+maxdate);
-					System.out.println("info="+info);
-					
-					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("title",title);
-					map.put("mindate",mindate);
-					map.put("maxdate",maxdate);
-					map.put("info",info);
-					
-					List<News> nlist = nurseBiz.searchNews(map);
-					System.out.println("nlist="+nlist);
-					
-					ModelAndView mav = new ModelAndView();
-					mav.addObject("nlist", nlist);
-					
-					mav.setViewName("WEB-INF/medical_workstation/news_list");
-					
-					return mav;
-				}
-		
 		
 		
 		
