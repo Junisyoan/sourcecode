@@ -32,6 +32,7 @@
 					<tr>
 						<th>序号</th>
 						<th>公司名</th>
+						<th>文件名</th>
 						<th>是否结算</th>
 						<th>总金额</th>
 						<th>批次</th>
@@ -43,6 +44,7 @@
 						<tr>
 							<td>${s.count}</td>
 							<td>${b.name}</td>
+							<td>${b.fname}</td>
 							<td>${b.bstate}</td>
 							<td>${b.totalMoney }</td>
 							<td>${b.batch}</td>

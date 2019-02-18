@@ -18,11 +18,13 @@
 	</select>
 <!-- 公司查询账单 -->
 	<select id="queryCompanyBillerList" resultType="xyz.cymedical.entity.jun.Biller">
-		select b.*,c.name from 
-		tb_company c,tb_group g,tb_biller b 
-		where c.company_id = #{cid} 
+		select b.*,c.name ,f.fname from 
+		tb_company c,tb_group g,tb_biller b ,tb_file_group fg,tb_file f
+		where c.company_id = #{cid}
 		and c.company_id=g.company_id 
 		and g.group_id=b.group_id 
+		and fg.group_id=g.group_id
+		and f.file_id=fg.file_id
 		and b.bstate=#{bstate}
 	</select>
 <!-- 医院查询账单 -->

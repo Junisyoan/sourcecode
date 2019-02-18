@@ -26,7 +26,8 @@
 <body>
 	<div class="Manager_style">
 		<div class="title_name">充值</div>
-		<button id="get" onclick="getUrl();" >充值</button>
+		<button id="get" class="btn btn-info" onclick="getUrl();" >充值</button>
+		<button type="button" class="btn btn-primary" onclick="tableToExcel('depositTable','data');">导出Excel</button>
 		余额：${userCompany.deposit }
 	</div>
 	<div class="Manager_style">
@@ -52,7 +53,35 @@
 			</tbody>
 		</table>
 	</div>
+	
+	
 </body>
+
+<script type="text/javascript">
+	function base64(content) {
+		return window.btoa(unescape(encodeURIComponent(content)));
+	}
+	/*
+	 *@tableId: table的Id
+	 *@fileName: 要生成excel文件的名字（不包括后缀，可随意填写）
+	 */
+	function tableToExcel(tableID, fileName) {
+		var table = document.getElementById(tableID);
+		var excelContent = table.innerHTML;
+		var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='http://www.w3.org/TR/REC-html40'>";
+		excelFile += "<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>";
+		excelFile += "<body><table>";
+		excelFile += excelContent;
+		excelFile += "</table></body>";
+		excelFile += "</html>";
+		var link = "data:application/vnd.ms-excel;base64," + base64(excelFile);
+		var a = document.createElement("a");
+		a.download = fileName + ".xls";
+		a.href = link;
+		a.click();
+	}
+</script>
+
 <script type="text/javascript">
 function getUrl(){
 	window.open("<%=path%>company/getUrl.handle");

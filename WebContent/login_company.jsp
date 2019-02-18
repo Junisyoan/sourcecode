@@ -14,16 +14,16 @@ import="java.sql.*" errorPage=""%>
     <script type="text/javascript">
         $(function(){
             $(".name input").focus(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/user2.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/user2.png)"});
             });
             $(".name input").blur(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/user1.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/user1.png)"});
             });
             $(".password input").focus(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/password2.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/password2.png)"});
             });
             $(".password input").blur(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/password1.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/password1.png)"});
             });
         });
     </script>
