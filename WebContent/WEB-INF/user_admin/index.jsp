@@ -88,7 +88,7 @@
 				</div>
 				<!-- #sidebar-shortcuts -->
 				<ul class="nav nav-list" id="nav_list">
-					<li class="home"><a href="javascript:void(0)" name="<%=path%>company/systemhome.handle>"
+					<li class="home"><a href="javascript:void(0)" name="<%=path%>company/systemhome.handle"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
 					<li><a href="#" class="dropdown-toggle"><i
