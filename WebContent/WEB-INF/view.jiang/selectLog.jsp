@@ -49,38 +49,7 @@
 		$("#item").dataTable();
 	});
 </script>
-<script>
-	function delLog(a) {
-		
-		var log_id = a;
-		
-		var b = confirm("是否删除");
-		
-		if(b == true){
-			$.ajax({
-				 type:"POST",
-				 url:"<%=path%>log/delLog.handle",
-				 data:{
-					 "log_id":log_id
-					 },
-				 dataType:"text",
-				 error:function(){
-					 alert('ajax请求请求错误...');
-				 },
-				 success:function(data){
-					if(data=="success"){
-						alert("删除成功！");
-						window.location.href="<%=path%>log/findAllLog.handle";
-							} else {
-								alert(data);
-							}
 
-						},
-					});
-		}
-
-	}
-</script>
 <script>
 	function selectAll() {
 		
@@ -112,7 +81,6 @@
 			}
 		}
 		if(arrin.length > 0){
-			alert(arrin);
 			var b = confirm("是否删除");
 			
 			if(b == true){
@@ -123,12 +91,12 @@
 					 data:{
 						 "arrin":arrin
 						 },
-					 dataType:"json",
+					 dataType:"text",
 					 traditional:true,
 					 error:function(){
-						 alert("删除成功！");
-						 window.location.href="<%=path%>log/findAllLog.handle";
-						 <!--alert('ajax请求请求错误...');-->
+// 						 alert("删除成功！");
+						 alert('ajax请求请求错误...');
+<%-- 						 window.location.href="<%=path%>log/findAllLog.handle"; --%>
 					 },
 					 success:function(data){
 						if(data=="success"){

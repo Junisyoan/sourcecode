@@ -5,6 +5,7 @@ import java.util.Map;
 
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.entity.xin.Summarize;
 
 

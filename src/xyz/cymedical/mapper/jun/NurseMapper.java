@@ -80,4 +80,16 @@ public interface NurseMapper {
 
 	//条件查询
 	public List<News> searchNews(Map<String, Object> map);
+
+	//添加
+	public boolean addNews(News news);
+
+	//id找新闻
+	public News findMyNews(int newsid);
+
+	//新闻修改
+	public boolean updateNews(News news);
+
+	//id删新闻
+	public boolean delNews(String newsid);
 }
