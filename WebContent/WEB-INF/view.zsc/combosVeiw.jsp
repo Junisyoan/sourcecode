@@ -29,14 +29,12 @@
       margin-top:10px;
  	}
 	.textarea {
-      width:150px;
-      border:1px solid #ccc;
       min-height:80px;
       max-height:80px;
       overflow: auto;
       font-size: 14px;
       outline: none;
-      margin:0 auto;
+      margin:0;
  	}
  	.checkList{
  		width:400px;
@@ -44,7 +42,7 @@
  	}
  	.info{
  		resize: none;
- 		margin-left:20px;
+ 		margin-left:40px;
  	}
  	.btnList{
 		width: 300px;
@@ -108,9 +106,9 @@
 				</div>
 				<label class="label_name">套餐描述</label>
 				<div>
-					<textarea rows="4" cols="50" class = "info" name = "info" id = "info1"></textarea>
-      				<!-- <span id = "number1"></span>
-					<span>/100</span> -->
+					<textarea cols="40" rows="5" class="info" id="info1" name="info" maxlength="100"
+                    onkeyup="this.value=this.value.substring(0, 100)" placeholder="最多可输入100字"></textarea>
+                    <span id="text-count1">0</span>/100
 				</div>
       	 </form> 
       </div>       
@@ -150,9 +148,11 @@
 				</div> 
 				<label class="label_name">套餐描述</label>
 				<div>
-					<textarea rows="4" cols="50" class = "info" name = "info" id = "info"></textarea>
-      				<!-- <span id = "number1"></span>
-					<span>/100</span> -->
+					<div>
+					<textarea cols="40" rows="5" class="info" id="info" name="info" maxlength="100"
+                    onkeyup="this.value=this.value.substring(0, 100)" placeholder="最多可输入100字"></textarea>
+                    <span id="text-count">0</span>/100
+				</div>
 				</div>
       		<input type="hidden" id = "combo_id" name = "combo_id">
       	 </form> 
@@ -183,7 +183,7 @@
 							<td>${s.count}</td>
 							<td>${c.name}</td>
 							<td>${c.price}</td>
-							<td>
+							<td style="padding:0px;">
 								<div class="textarea">
 									<c:forEach items="${c.projects}" var="p">
 										<span>${p.name}</span>
@@ -223,6 +223,7 @@ var totalPage;
 var state;
 
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
+var numCheck1 = /^[0-9]*$/;
 
 function createProject(project_id,project_name){
 	var project = new Object();
@@ -322,7 +323,7 @@ function jump(){
 <!-- 查 -->
 <script type="text/javascript">
 function putIn(){
-	if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+	/* if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
 		layer.alert('最小值必须是数值!',{
               title: '提示框',								
 			  icon:0,			    
@@ -335,13 +336,14 @@ function putIn(){
 			  icon:0,			    
 			 });
 			return false;
-	}
+	}  */
 	$.ajax({
 		url:"<%=path%>combo/selectCombo.handle",
 		type:"POST",
-		dataType:"JSON",
+		dataType:"json",
 		data:$("#aFrom").serialize(),
 		success:function(combos){
+			console.log(combos);
 			showCombos(combos);
 		},
 		error:function(){
@@ -355,8 +357,8 @@ function showCombos(combos){
 	for(var i = 0;i < combos.length;i++){
 		var td0=$("<td></td>").text(i+1);
 		var td1=$("<td></td>").text(combos[i].name);
-		var td2=$("<td></td>").text(combos[i].price);
-		var td3=$("<td></td>");
+		var td2=$("<td></td>").text(combos[i].strPrice);
+		var td3=$("<td></td>").css("margin","0px");
 		var td4=$("<td></td>");
 		var tr=$("<tr></tr>");
 		
@@ -389,21 +391,24 @@ function remove(e){
 	var t = e.target || e.srcElement;
 	var combo_id = t.name;
 	
-	var rt = confirm("确定删除此项?");
-	if(rt){
-		var form = document.createElement("Form");
-		form.action="<%=path%>combo/deleteCombo.handle";
-		form.method="post";
-		form.style.display="none";
-		
-		var option = document.createElement("input");
-		option.name="combo_id";
-		option.value=combo_id;
-		
-		form.appendChild(option);
-		document.body.appendChild(form);
-		
-		form.submit();
+	var rt = confirm('确定删除此项?');
+	
+	if(rt > 0){
+		$.ajax({
+			url:"<%=path%>combo/deleteCombo.handle",
+			type:"POST",
+			dataType:"text",
+			data:"combo_id="+combo_id,
+			success:function(msg){
+				alert(msg);
+    			if(msg == "删除成功"){
+					window.location.href="<%=path%>combo/combosVeiw.handle";
+    			}
+			},
+			error:function(){
+				alert("异常");
+			}
+		});
 	}
 }
 </script>
@@ -486,18 +491,18 @@ function change(e){
 	var project_id = parent.getElementsByTagName("input");
 	
 	for(var i=0;i <2;i++){
-		input[i].value = mag[i].innerHTML;
+		input[i].value = mag[i+1].innerHTML;
 	}
 	
 	var info = document.getElementById("info");
-	var info2 = t.parentNode.getElementsByTagName("input");
-	info.value = info2[0].value;
+	info.value = project_id[0].value;
 	
-	//describe
-	for(var i=0;i <project_id.length;i++){
+	for(var i=1;i <project_id.length;i++){
 		idArray.push(project_id[i].value);
 	}
-	
+	        
+    document.getElementById('text-count').innerHTML=document.getElementById('info').value.length;
+    
 	show();
 	
 	layer.open({
@@ -509,7 +514,7 @@ function change(e){
 		btn:['提交','取消'],
 		yes: function(index, layero){	
 			save();
-			
+
 			if($('#name').val()==""){
 				 layer.alert('名称不能为空!',{
 		              title: '提示框',								
@@ -596,6 +601,19 @@ $(document).ready(function(){
 		var project = createProject("${p.project_id}","${p.name}");
 		projectList.push(project);
 	</c:forEach>
+	
+	document.getElementById('info').onkeyup = function() {        
+        document.getElementById('text-count').innerHTML=this.value.length;
+    }
+    document.getElementById('info1').onkeyup = function() {        
+        document.getElementById('text-count1').innerHTML=this.value.length;
+    }
+    $('#info').keyup(function() {
+        var len=this.value.length$('#text-count').text(len);
+        })
+    $('#info1').keyup(function() {
+    	var len=this.value.length$('#text-count1').text(len);
+    })
 });
 
 var check1;

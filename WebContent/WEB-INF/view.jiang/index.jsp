@@ -85,27 +85,6 @@
 					<li class="home"><a href="javascript:void(0)" name="<%=path%>user/systemhome.handle"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
-					<li><a href="#" class="dropdown-toggle">
-							<i class="icon-desktop"></i><span class="menu-text"> 1231 </span><b
-							class="arrow icon-angle-down"></b></a>
-						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
-								name="项目立项.html" title="项目立项" class="iframeurl"><i
-									class="icon-double-angle-right"></i>1234</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="未到期询价项目.html" title="未到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>12345</a></li>
-
-						</ul></li>
-					<li><a href="#" class="dropdown-toggle"><i
-							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
-							class="arrow icon-angle-down"></b></a>
-						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
-								name="待确认订单.html" title="待确认订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>123</a></li>
-
-						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b
 							class="arrow icon-angle-down"></b></a>
