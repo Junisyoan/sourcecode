@@ -416,21 +416,21 @@ public class NurseHandle {
 				isSuccess=false;
 			//比对手机号码是否存在
 			} else if(patientBiz.queryPhone(patient.getPhone())){
-				response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码存在", "<%=path%>nurse/getList.handle"));
+				response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码存在", path+"nurse/getList.handle"));
 				isSuccess=false;
 			//比对套餐是否存在
-			} else if(!comboBiz.queryComboByName(patient.getComboName())){
-				response.getWriter().print(ResponseTools.returnMsgAndRedirect("套餐不存在", "<%=path%>nurse/getList.handle"));
+			} else if(comboBiz.queryComboByName(patient.getComboName())){
+				response.getWriter().print(ResponseTools.returnMsgAndRedirect("套餐不存在", path+"nurse/getList.handle"));
 				isSuccess=false;
 			}else {
 				//比对其他人
 				for (Patient p : patientList) {
 					if (p.getPhone().equals(patient.getPhone())) {
-						response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码重复", "<%=path%>nurse/getList.handle"));
+						response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码重复", path+"nurse/getList.handle"));
 						isSuccess=false;
 						break;
 					} else if(p.getID().equals(patient.getID())){
-						response.getWriter().print(ResponseTools.returnMsgAndRedirect("身份证号码重复", "<%=path%>nurse/getList.handle"));
+						response.getWriter().print(ResponseTools.returnMsgAndRedirect("身份证号码重复", path+"nurse/getList.handle"));
 						isSuccess=false;
 						break;
 					}else {
@@ -445,6 +445,7 @@ public class NurseHandle {
 				patientList.get(Integer.parseInt(id)-1).setAge(patient.getAge());
 				patientList.get(Integer.parseInt(id)-1).setID(patient.getID());
 				patientList.get(Integer.parseInt(id)-1).setPhone(patient.getPhone());
+				patientList.get(Integer.parseInt(id)-1).setComboName(patient.getComboName());
 				response.getWriter().print(ResponseTools.returnMsgAndRedirect("修改成功",path+"nurse/getList.handle"));
 			}
 		} catch (IOException e) {

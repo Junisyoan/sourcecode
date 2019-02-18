@@ -18,7 +18,7 @@ public class LogCompany {
 	public int log_company_id;// 公司日志表id
 	public int company_id;// 公司表id
 	public String operate;// 操作事项
-	public int money;// 金额
+	public float money;// 金额
 	public String time;// 时间
 
 	private Company company;
@@ -60,7 +60,7 @@ public class LogCompany {
 		this.operate = operate;
 	}
 
-	public int getMoney() {
+	public float getMoney() {
 		return money;
 	}
 

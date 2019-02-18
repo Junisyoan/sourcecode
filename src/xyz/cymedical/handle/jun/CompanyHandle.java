@@ -292,7 +292,7 @@ public class CompanyHandle {
 	 */
 	@RequestMapping(value="/getBillerNoPay.handle",method=RequestMethod.GET)
 	public ModelAndView getBillerNoPay(HttpServletRequest request, HttpServletResponse response,String cid) {
-		System.out.println("查询未结算账单");
+		System.out.println("查询未结算账单，公司id:"+cid);
 		List<Biller> billerList = billerBiz.queryCompanyBillerList("未结算",Integer.parseInt(cid));
 		System.out.println(billerList);
 		modelAndView = new ModelAndView("WEB-INF/user_admin/biller_list_nopay");

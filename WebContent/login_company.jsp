@@ -9,21 +9,21 @@ import="java.sql.*" errorPage=""%>
 <head>
     <meta charset="UTF-8">
     <title>登陆页面</title>
-    <link rel="stylesheet" type="text/css" href="css/medical_workstation_css/company-login.css">
-    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path%>css/medical_workstation_css/company-login.css">
+    <script type="text/javascript" src="<%=path%>js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $(".name input").focus(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/user2.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/user2.png)"});
             });
             $(".name input").blur(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/user1.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/user1.png)"});
             });
             $(".password input").focus(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/password2.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/password2.png)"});
             });
             $(".password input").blur(function(){
-                $(this).prev("i").css({"background-image":"url(image/medical_workstation/password1.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/password1.png)"});
             });
         });
     </script>
@@ -36,7 +36,7 @@ import="java.sql.*" errorPage=""%>
                 <section>
                     <aside>
                         <em>
-                            <img src="image/medical_workstation/user.png">
+                            <img src="<%=path%>image/medical_workstation/user.png">
                         </em>
                          <form action="company/loginCompany.handle?login=12" method="post">
                             <p class="name"><i></i><input type="text" name="userName" name="userName" class="userName" placeholder="请输入用户名"></p>

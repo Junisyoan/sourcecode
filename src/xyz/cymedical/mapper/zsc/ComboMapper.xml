@@ -50,7 +50,7 @@
 			(#{combo.combo_id},#{d})
 		</foreach>
 		update tb_combo set 
-		name = #{combo.name},info = #{info},price = 
+		name = #{combo.name},info = #{combo.info},price = 
 		<choose>
 			<when test="combo.price != 0">
 				#{combo.price}
