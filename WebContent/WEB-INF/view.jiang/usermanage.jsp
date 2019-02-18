@@ -36,7 +36,7 @@
     		 <form method="post" id = "aFrom" method="post">
      		部门	<input type="text" name="dept"/>
      		账号	<input type="text" name="account"/>
-     		联系人<input type="text" name="name"/>
+<!--      		联系人<input type="text" name="name"/> -->
      		性别	<input type="text" name="sex"/>
      		联系电话		<input type="text" name="phone"/><br/>
      		身份证	<input type="text" name="IDcard"/>
@@ -65,10 +65,8 @@
              
         </select></li>
         
-        <li>   <label  class="label_name">   角色</label><input type="text" id="doctor" name="doctor"/>
-        
-        
-       </li> 
+        <li>   <label  class="label_name"> 联系人</label><input type="text" id="name" name="name"/>   </li> 
+        <li>   <label  class="label_name">   角色</label><input type="text" id="doctor" name="doctor"/>   </li> 
             
       <li><label class="label_name">账号</label><input name="account" type="text"  class="text_add" id="account"/><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">密码</label><input name="pwd" type="password"  class="text_add" id="pwd"/></li>

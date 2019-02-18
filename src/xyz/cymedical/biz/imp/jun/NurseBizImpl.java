@@ -91,5 +91,29 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 		return nurseMapper.searchNews(map);
 	}
 
+	@Override
+	public boolean addNews(News news) {
+		// TODO Auto-generated method stub
+		return nurseMapper.addNews(news);
+	}
+
+	@Override
+	public News findMyNews(int newsid) {
+		// TODO Auto-generated method stub
+		return nurseMapper.findMyNews(newsid);
+	}
+
+	@Override
+	public boolean updateNews(News news) {
+		// TODO Auto-generated method stub
+		return nurseMapper.updateNews(news);
+	}
+
+	@Override
+	public boolean delNews(String newsid) {
+		// TODO Auto-generated method stub
+		return nurseMapper.delNews(newsid);
+	}
+
 	
 }

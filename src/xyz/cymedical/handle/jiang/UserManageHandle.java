@@ -12,15 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.biz.jiang.TbUserBiz;
+import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.entity.jiang.Tb_role_dept;
 import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.jun.Company;
+import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.tools.zsc.Encryption;
 
 @Controller
@@ -37,6 +40,9 @@ public class UserManageHandle {
 	@Resource
 	private TbRoleDept tbRoleDept;
 
+	@Resource
+	private NurseBiz nurseBiz;
+	
 	private List<Map<String, Object>> maplist;
 
 	// 添加后台人员
@@ -79,10 +85,10 @@ public class UserManageHandle {
 		System.out.println("过");
 //		----加密
 		Map<String, Object> map = new HashMap<String, Object>();
-		Tb_user tb_userr=tb_user;
-		tb_userr.setPwd(Encryption.getResult(tb_userr.getPwd()));
+//		Tb_user tb_userr=tb_user;
+//		tb_userr.setPwd(Encryption.getResult(tb_userr.getPwd()));
 //		---
-		map.put("tb_user", tb_userr);
+		map.put("tb_user", tb_user);
 
 		map.put("dept", dept);
 		
@@ -270,4 +276,154 @@ public class UserManageHandle {
 		return tbUserBiz.changePwd(map);
 	}
 
+	@RequestMapping(value = "/toaddnews.handle")
+	public ModelAndView toaddnews() {
+
+		System.out.println("toaddnews");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/news_add");
+		return mav;
+
+	}
+	
+	
+	@RequestMapping(value = "/deleteNews.handle")
+	public ModelAndView deleteNews(int newsid) {
+
+		System.out.println("newsid="+newsid);
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/news_add");
+		return mav;
+
+	}
+	
+	
+	@RequestMapping(value = "/toUpdateNews.handle")
+	public ModelAndView toUpdateNews(String newsid) {
+
+		System.out.println("news_id="+newsid);
+		
+		News news=nurseBiz.findMyNews(Integer.valueOf(newsid));
+		
+		System.out.println("news="+news);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("news", news);
+		
+		mav.setViewName("WEB-INF/view.jiang/news_update");
+		return mav;
+
+	}
+	
+	
+	@RequestMapping(value = "/updatenews.handle")
+	public ModelAndView updatenews(News news) {
+
+		System.out.println("news="+news);
+		
+		nurseBiz.updateNews(news);
+		
+		System.out.println("news="+news);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("news", news);
+		
+		mav.setViewName("WEB-INF/view.jiang/news_update");
+		
+		return mav;
+
+	}
+	
+	
+	
+	@RequestMapping(value = "/addnews.handle")
+	public ModelAndView addnews(String title,String time,String info) {
+		
+		System.out.println("title="+title);
+		System.out.println("time="+time);
+		System.out.println("info="+info);
+		
+		News news = new News(title, info, time);
+		
+		//添加新闻
+		nurseBiz.addNews(news);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("WEB-INF/view.jiang/news_add");
+		return mav;
+
+	}
+	
+	//新闻列表
+	@RequestMapping(value = "/newslist.handle")
+	public ModelAndView newslist() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<News> nlist=nurseBiz.findAllNews(); 
+		
+		System.out.println("nlist="+nlist);
+		
+		mav.addObject("nlist", nlist);
+		
+		mav.setViewName("WEB-INF/view.jiang/news_list");
+		
+		return mav;
+	}
+	
+	//新闻条件查询
+	@RequestMapping(value = "/searchnews.handle")
+	public ModelAndView searchnews(String title,String mindate,String maxdate,String info) {
+		
+		System.out.println("title="+title);
+		System.out.println("mindate="+mindate);
+		System.out.println("maxdate="+maxdate);
+		System.out.println("info="+info);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title",title);
+		map.put("mindate",mindate);
+		map.put("maxdate",maxdate);
+		map.put("info",info);
+		
+		List<News> nlist = nurseBiz.searchNews(map);
+		System.out.println("nlist="+nlist);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("nlist", nlist);
+		
+		mav.setViewName("WEB-INF/view.jiang/news_list");
+		
+		return mav;
+	}
+
+	
+	// 删除方法
+		@RequestMapping(value = "/delNews.handle", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+		public @ResponseBody String delNews(HttpServletRequest req, @RequestParam(value = "arrin") String[] arrin) {
+			
+			String result = "";
+			boolean flag = false;
+			
+			for (int i = 0; i < arrin.length; i++) {
+				flag = nurseBiz.delNews(arrin[i]);
+				if (i == arrin.length - 1) {
+					if (flag == true) {
+						result = "success";
+					} else {
+						result = "failure";
+					}
+				}
+			}
+			return result;
+		}
+	
+	
+	
 }

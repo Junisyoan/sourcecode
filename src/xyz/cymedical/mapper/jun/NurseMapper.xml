@@ -74,5 +74,23 @@
 		</if>
 	</select>	
 	
+	<!-- 新闻添加 -->
+	<insert id="addNews"  parameterType="xyz.cymedical.entity.xin.News">
+		insert into tb_new (title,time,info) values('${title}','${time}','${info}')
+	</insert>
+	
+	<!-- 新闻查询 -->
+	<select id="findMyNews"  resultType="xyz.cymedical.entity.xin.News">
+		select * from tb_new where new_id=#{0};
+	</select>	
+	
+	<!-- 新闻查询 -->
+	<update id="updateNews"  parameterType="xyz.cymedical.entity.xin.News">
+		update tb_new set title=#{title},time=#{time},info=#{info} where new_id=#{new_id}
+	</update>	
+	
+	<delete id="delNews"  parameterType="String">
+		delete from tb_new where new_id=#{0}
+	</delete>
 	
 </mapper>

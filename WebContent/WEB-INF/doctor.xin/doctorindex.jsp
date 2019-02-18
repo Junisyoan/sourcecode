@@ -154,7 +154,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="index.html">首页</a>
+								<a href="<%=path%>doctor/toindex.handle">首页</a>
 							</li>
 							<li class="active"><span class="Current_page"></span></li>
                             <li class="active" id="parentIframe"><span class="parentIframe"></span></li>
@@ -210,8 +210,8 @@
          <!--底部样式-->
        
          <div class="footer_style" id="footerstyle">  
-          <p class="lf">版权所有：传一科技  </p>
-          <p class="rf">地址：观日路软件园二期56号  邮编：XXXXXX 技术支持：XXXX</p>
+          <p class="lf">版权所有：厦门市传一信息科技有限公司 闽公网安备 35020602000054号</p>
+          <p class="rf">地址：厦门市思明区软件园二期观日路56号101号 邮编：361000 技术支持：黄俊彦组</p>
          </div>
          <!--修改密码样式-->
          <div class="change_Pass_style" id="change_Pass">

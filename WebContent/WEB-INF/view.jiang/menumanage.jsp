@@ -36,10 +36,10 @@
     		  
     		  	  
     		<form method="post" id = "aFrom" method="post">
-     		菜单id	<input type="text" name="menu_id"/>
+     		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/>
      		菜单名	<input type="text" name="name"/>
      		菜单路径<input type="text" name="link"/>
-     		上级菜单<input type="text" name="superior"/>
+     		<i style="color:#F60; ">必填</i>上级菜单<input type="text" name="superior"/>
      		  
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 	</form>  

@@ -11,6 +11,12 @@
 	resultType="xyz.cymedical.entity.jiang.Tb_dept">
 		select * from tb_dept  
 	</select>
+	
+	<select id="select"  parameterType="string"
+	resultType="xyz.cymedical.entity.jiang.Tb_dept">
+		 
+		select d.* from tb_dept d,tb_role_dept rd where state=#{sta} and d.dept_id = rd.dept_id
+	</select>
  
 <!--  	 <delete id="deletePower" parameterType="int" > -->
 	

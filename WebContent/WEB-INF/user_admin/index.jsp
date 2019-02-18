@@ -88,7 +88,7 @@
 				</div>
 				<!-- #sidebar-shortcuts -->
 				<ul class="nav nav-list" id="nav_list">
-					<li class="home"><a href="javascript:void(0)" name="<%=path%>company/systemhome.handle>"
+					<li class="home"><a href="javascript:void(0)" name="<%=path%>company/systemhome.handle"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
 					<li><a href="#" class="dropdown-toggle"><i
@@ -201,8 +201,8 @@
 	<!--底部样式-->
 
 	<div class="footer_style" id="footerstyle">
-		<p class="lf">版权所有：长江南京航道局 苏ICP备11011739号</p>
-		<p class="rf">地址：南京市鼓楼区阅江楼街道公共路64号 邮编：210011 技术支持：XXXX</p>
+		<p class="lf">版权所有：厦门市传一信息科技有限公司 闽公网安备 35020602000054号</p>
+		<p class="rf">地址：厦门市思明区软件园二期观日路56号101号 邮编：361000 技术支持：黄俊彦组</p>
 	</div>
 	<!--修改密码样式-->
 	<div class="change_Pass_style" id="change_Pass">

@@ -37,8 +37,8 @@
 	<insert id="addUser"
 		parameterType="xyz.cymedical.entity.jiang.Tb_user">
 		insert into
-		tb_user(role_dept_id,account,pwd,sex,address,phone,IDcard,state)
-		values(#{role_dept_id},#{account},#{pwd},#{sex},#{address},#{phone},#{IDcard},#{state})
+		tb_user(role_dept_id,name,account,pwd,sex,address,phone,IDcard,state)
+		values(#{role_dept_id},#{name},#{account},#{pwd},#{sex},#{address},#{phone},#{IDcard},#{state})
 	</insert>
 
 	<delete id="deleteUser" parameterType="int">

@@ -8,9 +8,26 @@
 <!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
 
 	<select id="findroledeptid"   parameterType="xyz.cymedical.entity.jiang.Tb_role_dept"
-	resultType="xyz.cymedical.entity.jiang.Tb_role_dept">>
+	resultType="xyz.cymedical.entity.jiang.Tb_role_dept">
 		select * from tb_role_dept where role_dept_id = #{role_dept_id}  
 	</select>
  
+ 	<select id="selectroledeptid"   parameterType="int"
+	resultType="xyz.cymedical.entity.jiang.Tb_role_dept">
+		select * from tb_role_dept where dept_id = #{dept_id}  
+	</select>
+	
+	<delete id="deleteroledept" >
+		delete from tb_role_dept where dept_id=#{dept_id}
+	</delete>
+	
+	<update id="deletelogic" parameterType="xyz.cymedical.entity.jiang.Tb_role_dept">
+	update tb_role_dept set state=#{state} where dept_id=#{dept_id}
+	</update>
+	
+	<insert id="addroledept" parameterType="xyz.cymedical.entity.jiang.Tb_role_dept">
+	insert into tb_role_dept (role_id,dept_id,state) values(#{role_id},#{dept_id},#{state})
+	
+	</insert>
   
 </mapper>

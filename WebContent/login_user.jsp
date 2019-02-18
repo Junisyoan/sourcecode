@@ -9,21 +9,21 @@ import="java.sql.*" errorPage=""%>
 <head>
     <meta charset="UTF-8">
     <title>登陆页面</title>
-    <link rel="stylesheet" type="text/css" href="<%=path%>css/medical_workstation_css/company-login.css">
-    <script type="text/javascript" src="<%=path%>js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=path %>css/medical_workstation_css/company-login.css">
+    <script type="text/javascript" src="<%=path %>js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $(".name input").focus(function(){
-                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/user2.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path %>image/medical_workstation/user2.png)"});
             });
             $(".name input").blur(function(){
-                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/user1.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path %>image/medical_workstation/user1.png)"});
             });
             $(".password input").focus(function(){
-                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/password2.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path %>image/medical_workstation/password2.png)"});
             });
             $(".password input").blur(function(){
-                $(this).prev("i").css({"background-image":"url(<%=path%>image/medical_workstation/password1.png)"});
+                $(this).prev("i").css({"background-image":"url(<%=path %>image/medical_workstation/password1.png)"});
             });
         });
     </script>
@@ -111,25 +111,23 @@ function check(){
 <body>
     <div class="container">
         <div class="wrap">
-            <header><em></em><span>HealthCare体检中心</span></header>
+            <header><em></em><span>HealthCare</span></header>
             <article>
                 <section>
                     <aside>
                         <em>
                             <img src="<%=path%>image/medical_workstation/user.png">
                         </em>
-                         <form action="company/loginCompany.handle?login=12" method="post" onsubmit="return check()">
-                            <p class="name"><i></i><input type="text" name="userName" name="userName" class="userName" placeholder="请输入用户名"></p>
-                            <p class="password"><i></i><input type="password" name="password" class="pwd" placeholder="请输入密码"></p>
+                         <form action="nurse/loginUser.handle?login=9" method="post" onsubmit="return check()">
+                            <p class="name"><i></i><input type="text" name="account" id="account" class="account" placeholder="请输入用户名"></p>
+                            <p class="password"><i></i><input type="password" name="pwd" id="pwd" class="pwd" placeholder="请输入密码"></p>
                             <p>
                             <input type="text" value="" placeholder="请输入验证码" class="input-val" style="width:140px;"/>
                             <canvas id="canvas" width="100" height="40"></canvas></p>
                             <button>登录</button>
-                            <p class="remember"><input type="checkbox" name="remember">记住密码</p>
-                            <p class="regist"><span>没有账号?</span><a href="reg_company.html">立即注册</a></p>
-                            <div class="clear"></div>
                         </form>
                     </aside>
+                   
                 </section>               
             </article>
         </div>
