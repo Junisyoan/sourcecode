@@ -48,7 +48,9 @@
 							<td>${b.bcreate}</td>
 							<td>${b.bstate}</td>
 							<td>${b.batch}</td>
-							<td><input type="button" value="生成导检单" onclick="createCheckpage('${b.biller_id}','${b.batch}');"></input></td>
+							<td>
+							<button class="btn btn-info" onclick="createCheckpage('${b.biller_id}','${b.batch}');">生成导检单</button>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

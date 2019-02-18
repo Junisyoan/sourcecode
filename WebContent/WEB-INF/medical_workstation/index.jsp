@@ -108,18 +108,26 @@
 								name="<%=path %>nurse/toRefund.handle" title="团检退费" class="iframeurl"><i
 									class="icon-double-angle-right"></i>团检退费</a></li>
 								
+
+								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getBillerNoPay.handle" title="未结算账单"
 								class="iframeurl"><i class="icon-double-angle-right"></i>未结算账单</a></li>
+							
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getNoCreateList.handle" title="未开单列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>未开单记账表</a></li>
+								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>nurse/getCreateList.handle" title="已开单列表"
 								class="iframeurl"><i class="icon-double-angle-right"></i>已开单列表</a></li>
+						
+								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检报告打印</a></li>
+									
+							
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 统计查询 </span><b
@@ -406,9 +414,21 @@
 				btn : [ '是', '否' ]
 			//按钮
 			}, function() {
-				location.href = "<%=path%>login_user.html";
+				location.href = "<%=path%>nurse/exit.handle";
 
 			});
+		});
+		
+		//在刷新或关闭时调用的事件 
+		$(window).bind('beforeunload',function(){ 
+			$.ajax({ 
+				url:"<%=path%>nurse/exit.handle", 
+				type:"post", 
+				dataType:"text",
+				success:function(){ 
+					alert("您已退出登录"); 
+				} 
+			}); 
 		});
 	</script>
 </body>

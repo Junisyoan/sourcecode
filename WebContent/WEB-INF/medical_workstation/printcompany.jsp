@@ -78,7 +78,7 @@
 						<td style="mso-number-format: 'yyyy\-mm\-dd';">${p.time}</td>
 						<td><a
 							href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}">打印体检报告</a>
-							</th>
+							</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -13,6 +13,7 @@ public class Biller {
 	private int biller_id;				//记账表id
 	private int group_id;				//团检表id
 	private String batch;				//批次
+	private String fname;				//文件名
 	private String name;				//公司名
 	private String bstate;				//是否结算
 	private double totalMoney;			//总金额
@@ -108,6 +109,14 @@ public class Biller {
 
 	public void setPatientList(List<Patient> patientList) {
 		this.patientList = patientList;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 
 	@Override

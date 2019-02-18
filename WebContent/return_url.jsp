@@ -52,7 +52,7 @@
 	
 		//付款金额
 		String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
-		String str = "<form name='a' method='post' action='company/pay.handle'><input type='text' name='deposit' value='"+total_amount+"'><input type='submit' value='????' style='display:none' ></form><script>document.forms[0].submit();</script>";
+		String str = "<div style='display:none'><form name='a' method='post' action='company/pay.handle'><input type='text' name='deposit' value='"+total_amount+"'><input type='submit' value='????'></div></form><script>document.forms[0].submit();</script>";
 		out.println(str);
 		
 	}else {

@@ -10,6 +10,10 @@ import xyz.cymedical.entity.jun.Patient;
 @Repository
 public interface PatientMapper {
 
+	public Patient queryPhone(String p);
+	
+	public Patient queryID(String ID);
+	
 	/**
 	 * 插入体检人员
 	 * 

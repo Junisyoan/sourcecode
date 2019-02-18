@@ -17,6 +17,14 @@ import xyz.cymedical.mapper.zsc.ComboMapper;
 @Service
 public class ComboBiz {
 
+	public boolean queryComboByName(String name) {
+		if (comboMapper.queryComboByName(name)!=null) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 	@Resource
 	ComboMapper comboMapper;
 
@@ -39,8 +47,9 @@ public class ComboBiz {
 	}
 
 	@Log(action = "删除套餐")
-	public int deleteCombo(int combo_id) {
-		return comboMapper.deleteCombo(combo_id);
+	public String deleteCombo(int combo_id) {
+		comboMapper.deleteCombo(combo_id);
+		return "删除成功";
 	};
 
 	@Log(action = "修改套餐")

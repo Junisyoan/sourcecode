@@ -78,4 +78,24 @@ public class PatientBizImpl extends BaseImpl implements PatientBiz {
 		return patientMapper.querypath(name, time);
 	}
 
+	@Override
+	public boolean queryID(String ID) {
+		if (patientMapper.queryID(ID)!=null) {
+			isUpdate=true;
+		} else {
+			isUpdate=false;
+		}
+		return isUpdate;
+	}
+
+	@Override
+	public boolean queryPhone(String phone) {
+		if (patientMapper.queryPhone(phone)!=null) {
+			isUpdate=true;
+		} else {
+			isUpdate=false;
+		}
+		return isUpdate;
+	}
+
 }

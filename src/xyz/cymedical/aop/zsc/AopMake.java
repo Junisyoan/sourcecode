@@ -66,7 +66,7 @@ public class AopMake {
 				        Tb_user user = (Tb_user) session.getAttribute("user");
 				        
 				        //获取当前时间
-				        String format = "yyyy-MM-dd";
+				        String format = "yyyy-MM-dd HH:mm:ss";
 				        String time = new SimpleDateFormat(format).format(new Date());
 				        
 				        //存储在一个map中，传入sql

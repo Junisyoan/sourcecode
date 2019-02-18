@@ -1,6 +1,9 @@
 package xyz.cymedical.mapper.jun;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -9,6 +12,7 @@ import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.entity.xin.News;
 
 /**
 *	@author Junisyoan;
@@ -69,4 +73,23 @@ public interface NurseMapper {
 	 * @return	用户信息
 	 */
 	public Nurse queryNurseByLogin(@Param("account")String account, @Param("pwd")String pwd);
+
+	
+	//查找所有新闻
+	public ArrayList<News> findAllNews();
+
+	//条件查询
+	public List<News> searchNews(Map<String, Object> map);
+
+	//添加
+	public boolean addNews(News news);
+
+	//id找新闻
+	public News findMyNews(int newsid);
+
+	//新闻修改
+	public boolean updateNews(News news);
+
+	//id删新闻
+	public boolean delNews(String newsid);
 }

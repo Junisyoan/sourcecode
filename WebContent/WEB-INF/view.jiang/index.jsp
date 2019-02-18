@@ -85,27 +85,6 @@
 					<li class="home"><a href="javascript:void(0)" name="<%=path%>user/systemhome.handle"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
-					<li><a href="#" class="dropdown-toggle">
-							<i class="icon-desktop"></i><span class="menu-text"> 1231 </span><b
-							class="arrow icon-angle-down"></b></a>
-						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
-								name="项目立项.html" title="项目立项" class="iframeurl"><i
-									class="icon-double-angle-right"></i>1234</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="未到期询价项目.html" title="未到期询价项目" class="iframeurl"><i
-									class="icon-double-angle-right"></i>12345</a></li>
-
-						</ul></li>
-					<li><a href="#" class="dropdown-toggle"><i
-							class="icon-list"></i><span class="menu-text"> 订单管理 </span><b
-							class="arrow icon-angle-down"></b></a>
-						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
-								name="待确认订单.html" title="待确认订单" class="iframeurl"><i
-									class="icon-double-angle-right"></i>123</a></li>
-
-						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 系统管理 </span><b
 							class="arrow icon-angle-down"></b></a>
@@ -129,6 +108,11 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>contact/selectmsg.handle" title="客户留言"
 								class="iframeurl"><i class="icon-double-angle-right"></i>留言信息</a></li> 
+								
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>usermanage/newslist.handle" title="新闻列表"
+								class="iframeurl"><i class="icon-double-angle-right"></i>新闻列表</a></li>
+								
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>contact/select.handle" title="公司信息"
 								class="iframeurl"><i class="icon-double-angle-right"></i>公司信息</a></li> 
@@ -168,24 +152,27 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>param/findAllParam.handle" title="参数管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>参数管理</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>company/findAllCompany.handle" title="用户管理"
+								class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
 						</ul></li>
 
-					<c:forEach items="${mlist }" var="m" varStatus="s">
-						<c:if test="${m.superior==0}">
-							<li><a href="#" class="dropdown-toggle"><i
-									class="icon-desktop"></i><span class="menu-text">
-										${m.name} </span><b class="arrow icon-angle-down"></b></a>
-								<ul class="submenu">
-									<c:forEach items="${mlist }" var="p" varStatus="s">
-										<c:if test="${m.menu_id==p.superior}">
-											<li class="home"><a href="javascript:void(0)"
-												name="<%=path %>${p.link }" title="${p.name}"
-												class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li>
-										</c:if>
-									</c:forEach>
-								</ul></li>
-						</c:if>
-					</c:forEach>
+<%-- 					<c:forEach items="${mlist }" var="m" varStatus="s"> --%>
+<%-- 						<c:if test="${m.superior==0}"> --%>
+<!-- 							<li><a href="#" class="dropdown-toggle"><i -->
+<!-- 									class="icon-desktop"></i><span class="menu-text"> -->
+<%-- 										${m.name} </span><b class="arrow icon-angle-down"></b></a> --%>
+<!-- 								<ul class="submenu"> -->
+<%-- 									<c:forEach items="${mlist }" var="p" varStatus="s"> --%>
+<%-- 										<c:if test="${m.menu_id==p.superior}"> --%>
+<!-- 											<li class="home"><a href="javascript:void(0)" -->
+<%-- 												name="<%=path %>${p.link }" title="${p.name}" --%>
+<%-- 												class="iframeurl"><i class="icon-double-angle-right"></i>${p.name}</a></li> --%>
+<%-- 										</c:if> --%>
+<%-- 									</c:forEach> --%>
+<!-- 								</ul></li> -->
+<%-- 						</c:if> --%>
+<%-- 					</c:forEach> --%>
 
 				</ul>
 				<div class="sidebar-collapse" id="sidebar-collapse">
@@ -273,8 +260,8 @@
 	<!--底部样式-->
 
 	<div class="footer_style" id="footerstyle">
-		<p class="lf">版权所有：长江南京航道局 苏ICP备11011739号</p>
-		<p class="rf">地址：南京市鼓楼区阅江楼街道公共路64号 邮编：210011 技术支持：XXXX</p>
+		<p class="lf">版权所有：厦门市传一信息科技有限公司 闽公网安备 35020602000054号</p>
+		<p class="rf">地址：厦门市思明区软件园二期观日路56号101号 邮编：361000 技术支持：黄俊彦组</p>
 	</div>
 	<!--修改密码样式-->
 	<div class="change_Pass_style" id="change_Pass">

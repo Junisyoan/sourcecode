@@ -1,11 +1,15 @@
 package xyz.cymedical.biz.jun;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.entity.xin.News;
 
 /**
 *	@author Junisyoan;
@@ -60,4 +64,23 @@ public interface NurseBiz {
 	 * @return	用户信息
 	 */
 	public Nurse queryNurseBylogin(String account, String pwd);
+
+	//查找所有新闻
+	public ArrayList<News> findAllNews();
+
+	//条件查询
+	public List<News> searchNews(Map<String, Object> map);
+
+	//添加新闻
+	public boolean addNews(News news);
+
+	//根据id查找
+	public News findMyNews(int newsid);
+
+	//修改
+	public boolean updateNews(News news);
+
+	//删除
+	public boolean delNews(String newsid);
+
 }

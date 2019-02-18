@@ -1,5 +1,4 @@
 package xyz.cymedical.handle.jun;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,6 +25,7 @@ import org.jbarcode.util.ImageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
@@ -44,6 +44,7 @@ import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
@@ -94,6 +95,25 @@ public class NurseHandle {
 	private DoctorBiz doctorbiz;//医生业务
 	
 	private String mycode;
+	
+	
+	
+	
+	//退出
+		@RequestMapping(value = "/exit.handle")
+		public void brief(HttpServletRequest request,HttpServletResponse resp) {
+			String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
+			//退出时销毁登录信息
+			request.getSession().invalidate();
+			System.out.println("已销毁用户");
+			try {
+				resp.sendRedirect(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
 	/*
 	 * 已开单账单再次开单
 	 */
@@ -348,27 +368,115 @@ public class NurseHandle {
 		return null;
 	}
 	
+	/*
+	 * 体检列表
+	 */
+	@RequestMapping(value="/getList.handle",method=RequestMethod.GET)
+	public ModelAndView getList(HttpServletRequest request) {
+		System.out.println(request.getSession().getAttribute("patientList"));
+		modelAndView = new ModelAndView("WEB-INF/medical_workstation/patient_list");
+		modelAndView.addObject("patientList",request.getSession().getAttribute("patientList"));
+		return modelAndView;
+	}
+	
+	/*
+	 * 删除体检人员
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/delPatient.handle",method=RequestMethod.POST)
+	public @ResponseBody String delPatient(HttpServletRequest request, String id) {
+		List<Patient> list = (List<Patient>) request.getSession().getAttribute("patientList");
+		System.out.println(list.remove(Integer.parseInt(id)-1));
+		String str = "1";
+		request.getSession().setAttribute("patientList", list);
+		return str;
+		
+	}
+
+	/*
+	 * 修改体检人员
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/updatePatient.handle",method=RequestMethod.POST)
+	public @ResponseBody String updatePatient(HttpServletRequest request, 
+			HttpServletResponse response, 
+			Patient patient,
+			String id) {
+		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
+		System.out.println("当前操作人员列表："+patientList);
+		System.out.println("修改人员："+patient);
+		response.setCharacterEncoding("utf-8");
+		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/";
+		boolean isSuccess =false;
+		try {
+			//比对身份证是否存在
+			if (patientBiz.queryID(patient.getID())) {
+				response.getWriter().print(ResponseTools.returnMsgAndRedirect("身份证存在", "<%=path%>nurse/getList.handle"));
+				isSuccess=false;
+			//比对手机号码是否存在
+			} else if(patientBiz.queryPhone(patient.getPhone())){
+				response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码存在", path+"nurse/getList.handle"));
+				isSuccess=false;
+			//比对套餐是否存在
+			} else if(comboBiz.queryComboByName(patient.getComboName())){
+				response.getWriter().print(ResponseTools.returnMsgAndRedirect("套餐不存在", path+"nurse/getList.handle"));
+				isSuccess=false;
+			}else {
+				//比对其他人
+				for (Patient p : patientList) {
+					if (p.getPhone().equals(patient.getPhone())) {
+						response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码重复", path+"nurse/getList.handle"));
+						isSuccess=false;
+						break;
+					} else if(p.getID().equals(patient.getID())){
+						response.getWriter().print(ResponseTools.returnMsgAndRedirect("身份证号码重复", path+"nurse/getList.handle"));
+						isSuccess=false;
+						break;
+					}else {
+						isSuccess=true;
+					}
+				}
+			}
+			if (isSuccess) {
+				System.out.println(id);
+				patientList.get(Integer.parseInt(id)-1).setName(patient.getName());
+				patientList.get(Integer.parseInt(id)-1).setSex(patient.getSex());
+				patientList.get(Integer.parseInt(id)-1).setAge(patient.getAge());
+				patientList.get(Integer.parseInt(id)-1).setID(patient.getID());
+				patientList.get(Integer.parseInt(id)-1).setPhone(patient.getPhone());
+				patientList.get(Integer.parseInt(id)-1).setComboName(patient.getComboName());
+				response.getWriter().print(ResponseTools.returnMsgAndRedirect("修改成功",path+"nurse/getList.handle"));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		request.getSession().setAttribute("patientList", patientList);
+		
+		return null;
+	}
 	
 	/*
 	 * 添加体检人员
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
-	public ModelAndView addPatient(HttpServletRequest request, HttpServletResponse response, Patient patient) {
+	public @ResponseBody String addPatient(HttpServletRequest request, HttpServletResponse response, Patient patient) {
 		System.out.println(patient);
+		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/";
 		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
 		System.out.println("当前操作人员列表："+patientList);
 		response.setCharacterEncoding("utf-8");
 		try {
 			patientList.add(0,patient);
-			response.getWriter().print(ResponseTools.returnMsgAndBack("添加成功"));
+			response.getWriter().print(ResponseTools.returnMsgAndRedirect("添加成功", path+"nurse/getList.handle"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		request.getSession().setAttribute("patientList", patientList);
-		modelAndView = new ModelAndView("WEB-INF/medical_workstation/patient_list");
-		modelAndView.addObject("patientList",patientList);
-		return modelAndView;
+		return null;
 	}
 	
 	/*
@@ -432,6 +540,7 @@ public class NurseHandle {
 							isNull = true;
 							break;
 						} else if (cell != null) {
+							cell.setCellType(CellType.STRING);
 							dataList.add(cell.toString());
 						}
 					}
@@ -476,7 +585,6 @@ public class NurseHandle {
 		
 	}
 	
-	
 	/*
 	 * 获取文件列表
 	 */
@@ -488,8 +596,6 @@ public class NurseHandle {
 		modelAndView.addObject("fileList", fileList);
 		return modelAndView;
 	}
-	
-	
 	
 	/*
 	 * 审核不通过
@@ -726,7 +832,7 @@ public class NurseHandle {
 			System.out.println("onecode=" + onecode);
 			System.out.println(doctorbiz.findMyProject(onecode));
 			
-			String flag="true";//初始化flag，用于控制状态
+			String flag="无需退费";//初始化flag，用于控制状态
 			
 			//根据条码获取项目列表
 			plist=doctorbiz.findMyProject(onecode);
@@ -738,8 +844,15 @@ public class NurseHandle {
 				
 				//若存在退费项目，返回false
 				for (int i = 0; i < plist.size(); i++) {
+					
+					if(plist.get(i).get("state").equals("未接收")) {
+						flag="可退费";
+						break;
+					}
+					
+					
 					if(plist.get(i).get("balance").equals("已退费")) {
-						flag="false";
+						flag="已退费";
 						break;
 					}
 				}
@@ -800,7 +913,7 @@ public class NurseHandle {
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("prolist", plist);
-			mav.addObject("flag", "false");
+			mav.addObject("flag", "已退费");
 			mav.addObject("patient", plist.get(0));
 			
 			mav.setViewName("WEB-INF/medical_workstation/Refund_receive");
@@ -825,5 +938,9 @@ public class NurseHandle {
 			return mav;
 
 		}
+		
+		
+		
+		
 	
 }

@@ -32,14 +32,12 @@
 }
 
 .textarea {
-	width: 150px;
-	border: 1px solid #ccc;
 	min-height: 80px;
 	max-height: 80px;
 	overflow: auto;
 	font-size: 14px;
 	outline: none;
-	margin: 0 auto;
+	margin: 0;
 }
 
 .checkList {
@@ -189,8 +187,8 @@
 							<td>${p.name}</td>
 							<td>${p.price}</td>
 							<td>${p.param.name}</td>
-							<td>
-								<div class="textarea">
+							<td style="padding:0px;">
+								<div class="textarea" style="margin:0px;">
 									<c:forEach items="${p.details}" var="d">
 										<span>${d.name}</span>
 										<br />
@@ -368,8 +366,9 @@ function showProject(projects){
 	for(var i = 0;i < projects.length;i++){
 		var td0=$("<td></td>").text(i+1);
 		var td1=$("<td></td>").text(projects[i].name);
+		console.log(projects[i].price);
 		var td2=$("<td></td>").text(projects[i].price);
-		var td3=$("<td></td>");
+		var td3=$("<td></td>").css("margin","0px");
 		var td4=$("<td></td>");
 		var td5=$("<td></td>").text(projects[i].param.name);
 		var tr=$("<tr></tr>");
@@ -403,8 +402,9 @@ function remove(e){
 	var t = e.target || e.srcElement;
 	var project_id = t.name;
 	
-	var rt = confirm("确定删除此项?");
-	if(rt){
+	var rt = confirm('确定删除此项?');
+	
+	if(rt > 0){
 		$.ajax({
 			url:"<%=path%>project/deleteProject.handle",
 			type:"POST",
@@ -547,7 +547,7 @@ function change(e){
 					 });
 				return false;
 				
-			}if(!numCheck.test($('#price').val())){
+			}if(!(numCheck.test($('#price').val())||numCheck1.test($('#price').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
@@ -680,7 +680,7 @@ $('#add_butn').on('click', function(){
 					 });
 				return false;
 				
-			}if(!numCheck.test($('#price1').val())){
+			}if(!(numCheck.test($('#price1').val())||numCheck1.test($('#price1').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    

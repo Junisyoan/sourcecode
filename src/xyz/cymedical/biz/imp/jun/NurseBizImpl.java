@@ -1,6 +1,9 @@
 package xyz.cymedical.biz.imp.jun;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,6 +15,7 @@ import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.mapper.jun.CompanyMapper;
 import xyz.cymedical.mapper.jun.NurseMapper;
 
@@ -74,4 +78,42 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 		}
 		return isUpdate;
 	}
+
+	@Override
+	public ArrayList<News> findAllNews() {
+		// TODO Auto-generated method stub
+		return nurseMapper.findAllNews();
+	}
+
+	@Override
+	public List<News> searchNews(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return nurseMapper.searchNews(map);
+	}
+
+	@Override
+	public boolean addNews(News news) {
+		// TODO Auto-generated method stub
+		return nurseMapper.addNews(news);
+	}
+
+	@Override
+	public News findMyNews(int newsid) {
+		// TODO Auto-generated method stub
+		return nurseMapper.findMyNews(newsid);
+	}
+
+	@Override
+	public boolean updateNews(News news) {
+		// TODO Auto-generated method stub
+		return nurseMapper.updateNews(news);
+	}
+
+	@Override
+	public boolean delNews(String newsid) {
+		// TODO Auto-generated method stub
+		return nurseMapper.delNews(newsid);
+	}
+
+	
 }

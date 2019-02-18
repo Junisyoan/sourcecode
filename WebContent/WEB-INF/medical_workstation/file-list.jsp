@@ -48,7 +48,7 @@
 							<td>${l.ftime}</td>
 							<td>${l.cstate }</td>
 							<td>
-								<a href="javascript:;" onclick="importFile('${l.file_id}');">导入</a>
+								<button class="btn btn-info" onclick="importFile('${l.file_id}');">导入</button>
 							</td>
 						</tr>
 					</c:forEach>
