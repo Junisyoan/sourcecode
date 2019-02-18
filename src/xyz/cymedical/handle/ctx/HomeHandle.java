@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.mapper.zsc.ComboMapper;
 
 @Controller
@@ -20,10 +22,15 @@ public class HomeHandle {
 	@Resource
 	private ComboMapper comboMapper;
 
+	@Resource
+	private NurseBiz nurseBiz;
+	
+	private List<Combo> combolist = new ArrayList<Combo>();
 	private List<Combo> combolist1 = new ArrayList<Combo>();
 	private List<Combo> combolist2 = new ArrayList<Combo>();
 	private List<Combo> combolist3 = new ArrayList<Combo>();
 	private List<Combo> combolist4 = new ArrayList<Combo>();
+
 
 	public HomeHandle() {
 
@@ -55,9 +62,18 @@ public class HomeHandle {
 	public ModelAndView findindex() {
 
 		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<News> nlist=nurseBiz.findAllNews(); 
+		
+		System.out.println("nlist="+nlist);
+		//取最新的两条新闻
+		if(nlist!=null && nlist.size()>0) {
+			mav.addObject("news1", nlist.get(0));
+			mav.addObject("news2", nlist.get(1));
+		}
+		
 		mav.setViewName("index");
 		return mav;
-
 	}
 
 	// 关于

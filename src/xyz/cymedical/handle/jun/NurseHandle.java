@@ -1,5 +1,4 @@
 package xyz.cymedical.handle.jun;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,6 +44,7 @@ import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
+import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
@@ -931,5 +931,53 @@ public class NurseHandle {
 			return mav;
 
 		}
+		
+		//新闻列表
+		@RequestMapping(value = "/newslist.handle")
+		public ModelAndView newslist() {
+			
+			ModelAndView mav = new ModelAndView();
+			
+			ArrayList<News> nlist=nurseBiz.findAllNews(); 
+			
+			System.out.println("nlist="+nlist);
+			
+			mav.addObject("nlist", nlist);
+			
+			mav.setViewName("WEB-INF/medical_workstation/news_list");
+			
+			return mav;
+		}
+		
+				//新闻列表
+				@RequestMapping(value = "/searchnews.handle")
+				public ModelAndView searchnews(String title,String mindate,String maxdate,String info) {
+					
+					System.out.println("title="+title);
+					System.out.println("mindate="+mindate);
+					System.out.println("maxdate="+maxdate);
+					System.out.println("info="+info);
+					
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("title",title);
+					map.put("mindate",mindate);
+					map.put("maxdate",maxdate);
+					map.put("info",info);
+					
+					List<News> nlist = nurseBiz.searchNews(map);
+					System.out.println("nlist="+nlist);
+					
+					ModelAndView mav = new ModelAndView();
+					mav.addObject("nlist", nlist);
+					
+					mav.setViewName("WEB-INF/medical_workstation/news_list");
+					
+					return mav;
+				}
+		
+		
+		
+		
+		
 	
 }
