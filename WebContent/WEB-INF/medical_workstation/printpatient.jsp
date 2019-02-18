@@ -342,7 +342,7 @@ input {
 			<h3 align="center">
 				<a
 					href="<%=path%>patient/printpatient.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">返回</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-					href="" onclick="pAll();"><button class="btn btn-info">返回</button></a>
+					href="" onclick="pAll();"><button class="btn btn-info">打印</button></a>
 			</h3>
 		</c:if>
 	</c:forEach>

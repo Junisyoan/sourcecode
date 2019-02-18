@@ -70,9 +70,14 @@
 			</tbody>
 		</table>
 	</div>
-	<p align="center">
-		<a
-			href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">返回</button></a>
-	</p>
+	<c:forEach items="${patientlist}" var="p" varStatus="s">
+		<c:if test="${s.index == 0}">
+			<p align="center">
+				<a
+					href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}"><button
+						class="btn btn-info">返回</button></a>
+			</p>
+		</c:if>
+	</c:forEach>
 </body>
 </html>
