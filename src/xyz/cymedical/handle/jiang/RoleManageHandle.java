@@ -77,8 +77,12 @@ public class RoleManageHandle {
 		String state="在用";
 		int dept_id=tb_role.getDept_id();
 		int role_id=tb_role.getRole_id();
-		System.out.println("~~~"+dept_id);
-		System.out.println(""+role_id);
+		/*
+		 * 
+		 * 用部门查出部门id
+		 * 
+		 * 
+		 */
 		
 		tb_role_dept.setDept_id(dept_id);
 		tb_role_dept.setRole_id(role_id);

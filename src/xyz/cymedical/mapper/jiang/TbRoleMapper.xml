@@ -8,7 +8,8 @@
 
 	<select id="selectRole"   parameterType="xyz.cymedical.entity.jiang.Tb_role"
 		resultType="xyz.cymedical.entity.jiang.Tb_role">
-		select * from tb_role where 1=1
+<!-- 		select * from tb_role where 1=1 -->
+		select tr.* from tb_role tr,tb_role_dept trp where state='在用' and tr.role_id=trp.role_id
 	</select>
 	
 	<insert id="addRole" parameterType="String"> 

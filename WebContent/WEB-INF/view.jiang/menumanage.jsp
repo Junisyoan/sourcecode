@@ -240,7 +240,7 @@ function delect(e){
 		 success:function(data){
 		 if(data=="00"){
 			 alert("删除成功"); 
-			 
+<%-- 			 location.href="<%=path%>menumanage/select.handle"; --%>
 		 }
 			
 		 },

@@ -7,7 +7,7 @@
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
 %>
-
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -112,7 +112,7 @@
          <td>${u.IDcard}</td>  <td>${u.address}</td> <td>${u.state}</td> 
           <td><button type="button" class="btn btn-info Product_Details" name="${u.user_id}">详细</button>
           <button type="button" class="btn btn-primary" onclick="updete()" name="${u.user_id}">修改</button> 
-          <button type="button" class="btn btn-primary" onclick="updetestate()" name="${u.state}&${u.user_id}"  id="state">状态切换</button>
+          <button type="button" class="btn btn-primary" onclick="updetestate('${u.state}','${u.user_id}')" name="${u.state}&${u.user_id}"  id="state">状态切换</button>
            <button type="button" class="btn btn-warning" onclick="delect()" name="${u.user_id}">删除</button></td> 
            
    
@@ -163,7 +163,7 @@ function show(companys){
 		var td9=$("<td></td>").text(companys[i].state);
 		var td10=$("<td></td>");
 		
-		var input1=$("<button type='button' class='btn btn-warning' onclick='updetestate()' name='"+companys[i].state+"&"+companys[i].user_id+"'>切换状态</button>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='updetestate('"+companys[i].state+"','"+companys[i].user_id+"')' name='"+companys[i].state+"&"+companys[i].user_id+"'>切换状态</button>");
   	
 		var input2=$("<button type='button' class='btn btn-warning' onclick='delect()' name='"+companys[i].user_id+"'>删除</button>");
 		var input3=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].company_id+"'>修改</button>"); 
@@ -269,7 +269,7 @@ function delect(e){
 		 success:function(data){
 		 if(data=="00"){
 			 alert("删除成功");
-			 
+			 location.href="<%=path%>usermanage/select.handle";
 			 
 		 }
 			
@@ -344,38 +344,55 @@ function loadAjax(){
 	
 }
 //修改状态
-function updetestate(b){
-	var b=b||event;
-	var t =b.target || b.srcElement;
-	var stateandid=t.name;
+function updetestate(s,id){
+	var re=confirm("确定修改状态？");
+// 	var b=b||event;
+// 	var t =b.target || b.srcElement;
+// 	var stateandid=t.name;
 //		 alert(stateandid);
-	    var sArr=stateandid.split("&")
-	    var state=sArr[0];
-	    var userid=sArr[1];
+// 	    var sArr=stateandid.split("&")
+// 	    var state=sArr[0];
+// 	    var userid=sArr[1];
 	  
 	
 	 
-	var re=confirm("确定修改状态？");
 	if(re){
 //			alert(state);
-		var form = document.createElement("Form");
-		form.action="<%=path%>usermanage/updetestate.handle";
-		form.method="post";
-		form.style.display="none";
+// 		var form = document.createElement("Form");
+<%-- 		form.action="<%=path%>usermanage/updetestate.handle"; --%>
+// 		form.method="post";
+// 		form.style.display="none";
 		
-		var opstate= document.createElement("input");
-		opstate.name="statet";
-		opstate.value=state;
-		var opuserid= document.createElement("input");
-		opuserid.name="userid";
-		opuserid.value=userid;
+// 		var opstate= document.createElement("input");
+// 		opstate.name="statet";
+// 		opstate.value=state;
+// 		var opuserid= document.createElement("input");
+// 		opuserid.name="userid";
+// 		opuserid.value=userid;
 		
-		form.appendChild(opstate);
-		form.appendChild(opuserid);
-		document.body.appendChild(form);
+// 		form.appendChild(opstate);
+// 		form.appendChild(opuserid);
+// 		document.body.appendChild(form);
 		
-		form.submit();
-		 
+// 		form.submit();
+		 $.ajax({
+			 url:"<%=path%>usermanage/updetestate.handle",
+			 type:"post",
+			 dataType:"text",
+			 data:{'userid':id,'statet':s},
+			 success:function(ret){
+				 if(ret=="1"){
+					 alert("修改成功");
+				 }else{
+					 alert("修改失敗");
+				 }
+				 location.href="<%=path%>usermanage/select.handle";
+				 
+			 },
+			 error:function(){
+				 alert('服務器無響應');
+			 }
+		 });
 	 
 	}
 	else{
