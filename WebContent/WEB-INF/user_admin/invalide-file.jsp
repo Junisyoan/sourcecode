@@ -1,5 +1,4 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html;  charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -20,57 +19,35 @@
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path %>js/jquery.dataTables.min.js"></script>
 <script src="<%=path %>js/datatables.bootstrap.min.js"></script>
-<title>人员列表</title>
+<title>不合格人员列表</title>
 </head>
-
 <body>
 	<div class="page-content">
+	<div class="Manager_style">
+		<span class="title_name">操作</span>
+		<button class="btn btn-info" onclick="window.history.back();">返回</button>
+	</div>
 		<div class="Manager_style">
-			<span class="title_name">已开单列表</span>
-			<table id="patientTable" class="table table-striped table-bordered table-hover">
+			<span class="title_name">不合格人员列表</span>
+			<table id="listTable" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>序号</th>
-						<th>公司名</th>
-						<th>金额</th>
-						<th>是否开单</th>
-						<th>是否结算</th>
-						<th>批次</th>
-						<th>操作</th>
+						<th>姓名</th>
+						<th>原因</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${billerList}" var="b" varStatus="s">
+					<c:forEach items="${invalideList}" var="l" varStatus="s">
 						<tr>
 							<td>${s.count}</td>
-							<td>${b.name}</td>
-							<td>${b.totalMoney }</td>
-							<td>${b.bcreate}</td>
-							<td>${b.bstate}</td>
-							<td>${b.batch}</td>
-							<td>
-							<button class="btn btn-info" onclick="createCheckpage('${b.biller_id}','${b.batch}');">生成导检单</button>
-							</td>
+							<td>${l.name }</td>
+							<td>${l.reason }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-
-<script type="text/javascript">
-
-function createCheckpage(bid,batch){
-	var s = confirm("是否生成导检单？批次："+batch);
-	if(s){
-		location.href="<%=path%>nurse/getCheckPage.handle?bid="+bid;
-	}
-}
-
-$(function(){
-	$('#patientTable').DataTable();
-});
-
-</script>
 </body>
 </html>

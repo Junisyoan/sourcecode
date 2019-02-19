@@ -42,7 +42,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	
 	<div class="Manager_style">
 		<span class="title_name">体检人员信息</span>
 		<table class="table table-striped table-bordered table-hover"
@@ -75,13 +75,14 @@
 						<td>${p.code}</td>
 						<td>${p.check_num}</td>
 						<td style="mso-number-format: 'yyyy\-mm\-dd';">${p.time}</td>
-						<td><a
-							href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}">打印体检报告</a>
-							</td>
+						<td>
+						<a href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}"><span class="btn btn-info">打印体检报告</span></a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+	</div>
 	</div>
 </body>
 </html>

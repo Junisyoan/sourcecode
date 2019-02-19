@@ -20,6 +20,7 @@ public class CompanyFile {
 	private String fpath;			//文件路径
 	private String ftime;			//上传时间
 	private String cstate;			//审核状态
+	private String vs;				//是否查看
 	public CompanyFile() {
 		super();
 	}
@@ -48,6 +49,15 @@ public class CompanyFile {
 		this.ftime = ftime;
 		this.cstate = cstate;
 	}
+	
+	public String getVs() {
+		return vs;
+	}
+
+	public void setVs(String vs) {
+		this.vs = vs;
+	}
+
 	public int getFile_id() {
 		return file_id;
 	}

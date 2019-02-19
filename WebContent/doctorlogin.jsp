@@ -61,11 +61,11 @@ function login(){
 
 $(function(){
     draw(show_num);
-
-    $("#canvas").on('click',function(){
-        draw(show_num);
-    })
 })
+
+function cli(){
+    draw(show_num);
+}
 
 function draw(show_num) {
     var canvas_width=$('#canvas').width();
@@ -80,7 +80,7 @@ function draw(show_num) {
     
     for (var i = 0; i <= 3; i++) {
         var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
-        var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
+        var deg = Math.random() * 30 * Math.PI / 180;//产生0~30
         var txt = aCode[j];//得到随机的一个内容
         show_num[i] = txt.toLowerCase();
         var x = 10 + i * 20;//文字在canvas上的x坐标
@@ -134,25 +134,24 @@ function randomColor() {//得到随机的颜色值
 <%-- 	<form  action="<%=path%>doctor/login.handle?login=1" method="post"> --%>
 	
 		<div class="login_padding">
-			<h2>用户名</h2>
-			<label>
-				<input type="text" id="account" name="account" class="txt_input txt_input2" />
-			</label>
-			<h2>密码</h2>
-			<label>
-				<input type="password" name="pwd" id="pwd" class="txt_input" />
-			</label>
-			<label>
-				验证码<input type="text" value="" placeholder="请输入验证码" class="input-val" style="width:80px;"/><canvas id="canvas" width="100" height="40"></canvas>
-			</label>
+			<div>
+				用户名<input type="text" id="account" name="account" class="txt_input txt_input2" style="width:250px;margin-top:20px"/>
+			</div>
+			
+			<div>
+				密&nbsp;&nbsp;&nbsp;码<input type="password" name="pwd" id="pwd" class="txt_input" style="width:250px"/>
+			</div>
+			<div style="width:350px;height:55px;border:0px solid red">
+			
+				<div style="float:left">验证码<input type="text" value="" placeholder="请输入验证码" class="input-val txt_input" style="width:120px;height:38px;border-radius: 3px;margin-top:5px"/></div>
+				<div style="float:left;margin-left:8px"><canvas onclick="cli()" id="canvas" width="120" height="40" style="border:0px solid red;"></canvas></div>
+			
+			</div>
 			<div class="rem_sub">
-				<div class="rem_sub_l">
-					<input type="checkbox" name="checkbox" id="save_me" />
-					<label for="checkbox">记住</label>
-				</div>
+				
 				<label>
 				<a onclick="login()">
-					<input type="button" class="sub_button" name="button" value="登录" style="opacity: 0.7;" />
+					<input type="button" class="sub_button" name="button" value="登录" style="margin-top:15px;" />
 				</a>
 				</label>
 			</div>
@@ -164,7 +163,7 @@ function randomColor() {//得到随机的颜色值
 
 <br />
 <br />
-<p style="margin:0 auto">版权所有：传一科技</p>
+<p align="center">版权所有：传一科技</p>
 
 </body>
 </html>

@@ -15,11 +15,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.ClientAbortException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.google.zxing.Result;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.ctx.PatientBiz;
@@ -40,15 +39,16 @@ import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.biz.jun.ComboCheckBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
+import xyz.cymedical.biz.jun.InvalideBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.biz.zsc.ComboBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
 import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
+import xyz.cymedical.entity.jun.Invalide;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
-import xyz.cymedical.mapper.jun.CompanyMapper;
 import xyz.cymedical.tools.jun.AlipayConfig;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
@@ -78,10 +78,11 @@ public class CompanyHandle {
 	private BillerBiz billerBiz;//账单业务
 	@Resource
 	private ComboBiz comboBiz;
-	
 	@Resource
 	private DoctorBiz doctorbiz;//医生业务
-
+	@Resource
+	private InvalideBiz invalideBiz;
+	
 	private boolean isSuccess;//是否成功
 	
 	private ModelAndView modelAndView; // 视图和模型
@@ -89,10 +90,54 @@ public class CompanyHandle {
 	private List<CompanyFile> listFile; // 文件列表
 	
 	private List<Map<String,Object>> plist; //项目列表
-
+	
+	private volatile int pState = 2;//1支付成功，0未支付，-1支付失败，2正在操作
+	
 	public CompanyHandle() {
 	}
 
+	
+	/*
+	 * 删除不合格文件
+	 */
+	@RequestMapping(value="/delInvalide.handle",method=RequestMethod.POST)
+	public @ResponseBody String delInvalide(String fid) {
+		System.out.println("删除文件："+fid);
+		
+		String strRet = "";
+		//先删除文件
+		CompanyFile companyFile =companyFileBiz.queryFile(fid);
+		if (companyFile!=null) {
+			File file = new File(companyFile.getFpath());
+			if (file.exists()) {
+				isSuccess = file.delete();
+				System.out.println("删除文件："+isSuccess);
+			}
+			isSuccess = invalideBiz.delete(Integer.parseInt(fid));
+			if (isSuccess) {
+				strRet="1";
+			}else {
+				strRet="0";
+			}
+		} else {
+			strRet="-1";
+		}
+		return strRet;
+	}
+	
+	/*
+	 * 查询不合格文件
+	 */
+	@RequestMapping(value="/invalideFile.handle",method=RequestMethod.GET)
+	public ModelAndView invalideFile(String fid) {
+		System.out.println("查看不合格文件id："+fid);
+		modelAndView = new ModelAndView("WEB-INF/user_admin/invalide-file");
+		List<Invalide> invalideList = invalideBiz.queryInvalideByFileId(Integer.parseInt(fid));
+		modelAndView.addObject("invalideList", invalideList);
+		return modelAndView;
+		
+	}
+	
 	//退出
 	@RequestMapping(value = "/exit.handle")
 	public void brief(HttpServletRequest request,HttpServletResponse resp) {
@@ -116,6 +161,43 @@ public class CompanyHandle {
 		System.out.println("获取充值链接");
 		modelAndView=new ModelAndView("WEB-INF/user_admin/recharge");
 		return modelAndView;
+	}
+	
+	/*
+	 * 充值数据返回
+	 */
+	@RequestMapping(value="/waitPay.handle",method=RequestMethod.POST)
+	public @ResponseBody String payState(String WF) {
+		pState=2;
+		System.out.println("wf："+WF+"计时30分钟，pState="+pState);
+		Timer timer = new Timer();
+		int t = 1000*60*30;
+		timer.schedule(new TimerTask() {
+			int time = 0;
+			@Override
+			public void run() {
+				time+=1;
+				if (pState==1||pState==-1) {
+					timer.cancel();
+				}else if (time==t) {
+					pState=0;
+					timer.cancel();
+				}
+			}
+		} , 0,1000);
+		while (true) {
+			if (pState==2) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				continue;
+			}
+			break;
+		}
+		System.out.println(pState);
+		return String.valueOf(pState);
 	}
 	
 	/*
@@ -201,7 +283,6 @@ public class CompanyHandle {
 		return null;
 	}
 	
-	
 	/*
 	 * 打印发票
 	 */
@@ -225,8 +306,6 @@ public class CompanyHandle {
 		return modelAndView;
 	}
 	
-	
-	
 	/*
 	 * 获取已结算账单
 	 */
@@ -239,7 +318,6 @@ public class CompanyHandle {
 		modelAndView.addObject("billerList", billerList);
 		return modelAndView;
 	}
-	
 	
 	/*
 	 * 结算
@@ -307,7 +385,7 @@ public class CompanyHandle {
 	@RequestMapping(value="/pay.handle",method=RequestMethod.POST)
 	public @ResponseBody String payForDeposit(HttpServletRequest request, String deposit) {
 		System.out.println("存款："+deposit);
-				
+		pState=2;//正在操作
 		//得到操作用户
 		company = (Company)request.getSession().getAttribute("userCompany");
 		//插入日志
@@ -318,11 +396,11 @@ public class CompanyHandle {
 		//先查询余额
 		float balance = companyBiz.queryDepositCompanyId(company.getCompany_id());
 		boolean isSuccess = companyBiz.updateDeposit(Float.parseFloat(deposit)+balance,company.getCompany_id());
-		String strRet="";
+		String strRet="<script>window.close();</script>";
 			if (isSuccess) {
-				strRet="<script>window.close();</script>";
+				pState=1;
 			} else {
-				strRet="0";
+				pState=-1;
 			}
 		return strRet;
 	}
@@ -390,14 +468,14 @@ public class CompanyHandle {
 			}else {
 				response.getWriter().println(ResponseTools.returnMsgAndBack("文件不存在，请联系管理员"));
 			}
+		}catch (ClientAbortException e) {
+			System.out.println("终止下载");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		return null;
 	}
-	
-	
 	
 	/*
 	 * 删除文件
@@ -430,7 +508,6 @@ public class CompanyHandle {
 		return null;
 	}
 	
-	
 	/*
 	 * 上传团检文件
 	 */
@@ -438,46 +515,45 @@ public class CompanyHandle {
 	public String fileUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile companyFile) {
 		company = (Company) request.getSession().getAttribute("userCompany");
 		System.out.println(companyFile.getSize());
+		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		+ request.getContextPath() + "/";
 		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
 		System.out.println(fileDir.getPath());
 		// 目录是否存在
-		if (fileDir.isDirectory()) {
-			// 创建文件
-			File file = new File(fileDir.getAbsolutePath() + "/" + companyFile.getOriginalFilename());
-			if (file.exists()) {
-				System.out.println("文件存在");
-			} else {
-				try {
-					byte[] bytes = companyFile.getBytes();
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
-					stream.write(bytes);
-					stream.close();
-					System.out.println("上传成功，准备写入数据库");
+		try {
+			if (fileDir.isDirectory()) {
+				// 创建文件
+				File file = new File(fileDir.getAbsolutePath() + "/" + companyFile.getOriginalFilename());
+				if (file.exists()) {
+					System.out.println("文件存在");
+					response.getWriter().println(ResponseTools.returnMsgAndBack("文件存在"));
+				} else {
+						byte[] bytes = companyFile.getBytes();
+						BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+						stream.write(bytes);
+						stream.close();
+						System.out.println("上传成功，准备写入数据库");
 
-					CompanyFile insertFile = new CompanyFile(-1, company.getCompany_id(),
-							companyFile.getOriginalFilename(), companyFile.getSize(), file.getAbsolutePath(),
-							new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis()),"未审核");
-					if (companyFileBiz.insertFile(insertFile)) {
-						System.out.println("写入成功"+file.getName());
+						CompanyFile insertFile = new CompanyFile(-1, company.getCompany_id(),
+								companyFile.getOriginalFilename(), companyFile.getSize(), file.getAbsolutePath(),
+								new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis()),"未审核");
+						if (companyFileBiz.insertFile(insertFile)) {
+							System.out.println("写入成功"+file.getName());
 
-						response.getWriter().println(ResponseTools.returnMsgAndRedirect("上传文件成功", "<%=path %>company/getUpFilePath.handle"));
-					} else {
-						response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
-					}
+							response.getWriter().println(ResponseTools.returnMsgAndRedirect("上传文件成功", path+"company/getFileList.handle?cid="+company.getCompany_id()));
+						} else {
+							response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
+						}
 
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
+			} else {
+					response.getWriter().println(ResponseTools.returnMsgAndBack("文件存在"));
+				System.out.println("目录不存在");
 			}
-		} else {
-			try {
-				response.getWriter().println(ResponseTools.returnMsgAndBack("文件存在"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			System.out.println("目录不存在");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -492,7 +568,6 @@ public class CompanyHandle {
 		modelAndView.setViewName("WEB-INF/user_admin/upfile-group");
 		return modelAndView;
 	}
-
 
 	/*
 	 * 公司用户登录

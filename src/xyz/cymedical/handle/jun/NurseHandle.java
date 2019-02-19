@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jbarcode.util.ImageUtil;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +36,7 @@ import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.biz.jun.GroupBiz;
+import xyz.cymedical.biz.jun.InvalideBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.biz.zsc.ComboBiz;
@@ -41,6 +44,7 @@ import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
 import xyz.cymedical.entity.jun.Group;
+import xyz.cymedical.entity.jun.Invalide;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
@@ -48,6 +52,7 @@ import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
+import xyz.cymedical.tools.zsc.Encryption;
 
 /**
 *	@author Junisyoan;
@@ -84,20 +89,62 @@ public class NurseHandle {
 	@Resource
 	private ComboBiz comboBiz;
 	
+	@Resource
+	private InvalideBiz invalideBiz;
+	
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
 	
 	
 	private List<Map<String,Object>> plist; //项目列表
 	
-	
 	@Resource
 	private DoctorBiz doctorbiz;//医生业务
 	
 	private String mycode;
 	
+	private boolean isExsit;
 	
 	
+	/*
+	 * 删除不合格文件
+	 */
+	@RequestMapping(value="/delInvalide.handle",method=RequestMethod.POST)
+	public @ResponseBody String delInvalide(String fid) {
+		System.out.println("删除文件："+fid);
+		
+		String strRet = "";
+		//先删除文件
+		CompanyFile companyFile =companyFileBiz.queryFile(fid);
+		if (companyFile!=null) {
+			File file = new File(companyFile.getFpath());
+			if (file.exists()) {
+				System.out.println("删除文件："+file.delete());
+			}
+			
+			if (invalideBiz.delete(Integer.parseInt(fid))) {
+				strRet="1";
+			}else {
+				strRet="0";
+			}
+		}else {
+			strRet="-1";
+		}
+		return strRet;
+	}
+	
+	
+	/*
+	 * 查看不合格文件列表
+	 */
+	@RequestMapping(value="/getInvalideFile.handle",method=RequestMethod.GET)
+	public ModelAndView getInvalideFile() {
+		List<CompanyFile> invalides = invalideBiz.queryInvalide();
+		System.out.println(invalides);
+		modelAndView=new ModelAndView("WEB-INF/medical_workstation/invalide-file");
+		modelAndView.addObject("invalides", invalides);
+		return modelAndView;
+	}
 	
 	//退出
 		@RequestMapping(value = "/exit.handle")
@@ -130,7 +177,6 @@ public class NurseHandle {
 		for(int i = 0;i<cps.size();i++) {
 			BarCodeTools.createBarCode(file.getPath(), cps.get(i).getCode(), imgFormat);
 		}
-		
 		
 		System.out.println("体检人员信息："+cps);
 		HashMap<String, List<Patient>> checkMap = new HashMap<>();
@@ -196,9 +242,19 @@ public class NurseHandle {
 		//生成条形码
 		String imgFormat = ImageUtil.JPEG;
 		for(int i = 0;i<patientList.size();i++) {
-			BarCodeTools.createBarCode(path, patientList.get(i).getCode(), imgFormat);
+			BarCodeTools.createBarCode(file.getParent()+File.separator, patientList.get(i).getCode(), imgFormat);
 		}
 		System.out.println("条形码生成成功");
+		//体检号
+		Object obj=request.getServletContext().getAttribute("CN");
+		int cn = 0;
+		if (obj==null) {
+			cn = 1;
+		}
+		for (Patient patient : patientList) {
+			patient.setCheck_num(String.format("%08d", cn));
+		}
+		
 		try {
 			//	插入病人
 			List<Patient> pList = patientBiz.insertByBatch(patientList);
@@ -411,11 +467,11 @@ public class NurseHandle {
 		boolean isSuccess =false;
 		try {
 			//比对身份证是否存在
-			if (patientBiz.queryID(patient.getID())) {
+			if (patientBiz.queryID(patient.getID())!=null) {
 				response.getWriter().print(ResponseTools.returnMsgAndRedirect("身份证存在", "<%=path%>nurse/getList.handle"));
 				isSuccess=false;
 			//比对手机号码是否存在
-			} else if(patientBiz.queryPhone(patient.getPhone())){
+			} else if(patientBiz.queryPhone(patient.getPhone())!=null){
 				response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码存在", path+"nurse/getList.handle"));
 				isSuccess=false;
 			//比对套餐是否存在
@@ -601,8 +657,23 @@ public class NurseHandle {
 	 * 审核不通过
 	 */
 	@RequestMapping(value="/invalidFile.handle",method=RequestMethod.POST)
-	public String invalidFile(HttpServletResponse response, String fid) {
+	public String invalidFile(HttpServletResponse response, HttpServletRequest request,String fid) {
 		System.out.println("文件审核不通过："+fid);
+		@SuppressWarnings("unchecked")
+		List<Patient> patients =(List<Patient> ) request.getSession().getAttribute("patientList");
+		for (Iterator<Patient> iterator = patients.iterator(); iterator.hasNext();) {
+			Patient patient = (Patient) iterator.next();
+			if (patient.getCheck_num()!=null||!patient.getCheck_num().equals("")) {
+				Invalide invalide = new Invalide();
+				invalide.setFile_id(Integer.valueOf(fid));
+				invalide.setName(patient.getName());
+				invalide.setReason(patient.getCheck_num());
+				isExsit = invalideBiz.insert(invalide);
+				System.out.println("插入不合格信息结果："+isExsit);
+			}
+		}
+		
+		
 		response.setCharacterEncoding("utf-8");
 		try {
 			if(companyFileBiz.updateFileState(Integer.parseInt(fid),"不合格")){
@@ -657,6 +728,8 @@ public class NurseHandle {
 	@RequestMapping(value="/checkFile.handle",method=RequestMethod.GET)
 	public ModelAndView checkFile(HttpServletRequest request, HttpServletResponse response, String fid) {
 		companyFile = companyFileBiz.queryFile(fid);
+		
+		ExcelTools.getPatientList(companyFile);
 		System.out.println("审核文件"+companyFile.getFname());
 		//得到文件
 		File cfile = new File(companyFile.getFpath());
@@ -664,88 +737,118 @@ public class NurseHandle {
 		//创建列表
 		List<Patient> patientList = new ArrayList<>();
 		
-		//创建excel工作区间
-		Workbook wb = null;
-		//创建列存储空间
-		List<String> dataList = new ArrayList<>();
+//		//创建excel工作区间
+//		Workbook wb = null;
+//		//创建列存储空间
+//		List<String> dataList = new ArrayList<>();
 		//判断文件是否存在，并且必须是文件
 		if (cfile.exists()&&cfile.isFile()) {
-			//获取后缀
-			String [] suffix = cfile.getName().split("\\.");
-			//分析后缀，确定打开方式
-			try {
-				if (suffix[1].equals("xls")) {
-					wb = new HSSFWorkbook(new FileInputStream(cfile));
-				} else if (suffix[1].equals("xlsx")) {
-					wb = new XSSFWorkbook(cfile);
-				} else {
-					System.out.println("文件类型错误");
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (InvalidFormatException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			//	开始解析，读取第一页
-			Sheet sheet = wb.getSheetAt(0);
-			//	第一行是列名，所以不读
-			int firstRowIndex = sheet.getFirstRowNum() + 1;
-			int lastRowIndex = sheet.getLastRowNum();
-			//	循环获取
-			for (int i = firstRowIndex; i <= lastRowIndex; i++) {
-				//	遍历每一行
-				Row row = sheet.getRow(i);
-				if (row!=null) {
-					//	获取总列数
-					int colFirst = row.getFirstCellNum();
-					int colLast = row.getLastCellNum();
-					//	清空列存储
-					dataList.clear();
-					//	遍历每一列，如果列有空则进入下一行
-					boolean isNull = false;
-					for (int c = colFirst; c < colLast; c++) {
-						Cell cell = row.getCell(c);
-						if (cell.toString().equals("")) {
-							isNull=true;
-							break;
-						} else if (cell != null) {
-							cell.setCellType(CellType.STRING);
-							dataList.add(cell.toString());
-						}
-					}
-					//	如果列为空就下次循环
-					if (isNull) {
-						System.out.println("文档有空值");
-						continue;
-					}else {
-						System.out.println(dataList);
-						//	添加进数据
-						patientList.add(
-								new Patient(
-										-1, 					//	病人id
-										companyFile.getCompany_id(), 	//	公司id
-										-1, 					//	套餐id
-										dataList.get(0), 		//	姓名
-										dataList.get(1),		//	性别
-										dataList.get(2), 		//	年龄
-										dataList.get(3), 		//	身份证号
-										"-1",					
-										dataList.get(4), 		//	电话号码
-										"-1",
-										dataList.get(5)			//	套餐名
-								)
-						);
-					}
-				}
-			}
-			try {
-				wb.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+//			//获取后缀
+//			String [] suffix = cfile.getName().split("\\.");
+//			//分析后缀，确定打开方式
+//			try {
+//				if (suffix[1].equals("xls")) {
+//					wb = new HSSFWorkbook(new FileInputStream(cfile));
+//				} else if (suffix[1].equals("xlsx")) {
+//					wb = new XSSFWorkbook(cfile);
+//				} else {
+//					System.out.println("文件类型错误");
+//				}
+//			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//			} catch (InvalidFormatException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			//	开始解析，读取第一页
+//			Sheet sheet = wb.getSheetAt(0);
+//			//	第一行是列名，所以不读
+//			int firstRowIndex = sheet.getFirstRowNum() + 1;
+//			int lastRowIndex = sheet.getLastRowNum();
+//			//	循环获取
+//			for (int i = firstRowIndex; i <= lastRowIndex; i++) {
+//				//	遍历每一行
+//				Row row = sheet.getRow(i);
+//				if (row!=null) {
+//					//	获取总列数
+//					int colFirst = row.getFirstCellNum();
+//					int colLast = row.getLastCellNum();
+//					//	清空列存储
+//					dataList.clear();
+//					//	遍历每一列，如果列有空则进入下一行
+//					boolean isNull = false;
+//					for (int c = colFirst; c < colLast; c++) {
+//						Cell cell = row.getCell(c);
+//						if (cell.toString().equals("")) {
+//							isNull=true;
+//							break;
+//						} else if (cell != null) {
+//							cell.setCellType(CellType.STRING);
+//							dataList.add(cell.toString());
+//						}
+//					}
+//					//	如果列为空就下次循环
+//					if (isNull) {
+//						System.out.println("文档有空值");
+//						continue;
+//					}else {
+//						System.out.println(dataList);
+//						//	添加进数据
+//						patientList.add(
+//								new Patient(
+//										-1, 					//	病人id
+//										companyFile.getCompany_id(), 	//	公司id
+//										-1, 					//	套餐id
+//										dataList.get(0), 		//	姓名
+//										dataList.get(1),		//	性别
+//										dataList.get(2), 		//	年龄
+//										dataList.get(3), 		//	身份证号
+//										"-1",					
+//										dataList.get(4), 		//	电话号码
+//										"-1",
+//										dataList.get(5)			//	套餐名
+//								)
+//						);
+//					}
+//				}
+//			}
+//			try {
+//				wb.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+			patientList = ExcelTools.getPatientList(companyFile);
 			System.out.println(patientList);
+			
+			
+			StringBuilder strState= new StringBuilder();
+			Patient p=null;
+			System.out.println("开始查询是否符合");
+			for (Patient patient : patientList) {
+				strState.setLength(0);
+				isExsit = comboBiz.queryComboByName(patient.getComboName());
+				if (!isExsit) {
+					strState.append("套餐不存在-");
+				}
+				p=patientBiz.queryID(patient.getID());
+				if (p!=null) {
+					isExsit = patient.getName().equals(p.getName());
+					if (!isExsit) {
+						strState.append("身份证重复-");
+					}
+				}
+				p=patientBiz.queryPhone(patient.getPhone());
+				if (p!=null) {
+					isExsit = patient.getName().equals(p.getName());
+					if (!isExsit) {
+						strState.append("手机号码重复-");
+					}
+				}
+				patient.setCheck_num(strState.toString());
+			}
+			System.out.println("查询结束");
+			
 			request.getSession().setAttribute("fid", fid);
 			request.getSession().setAttribute("patientList", patientList);
 			modelAndView = new ModelAndView("WEB-INF/medical_workstation/check-patient");
@@ -764,7 +867,7 @@ public class NurseHandle {
 	 */
 	@RequestMapping(value="/queryCheckFile.handle",method=RequestMethod.GET)
 	public ModelAndView queryCheckFile() {
-		List<CompanyFile> fileList = nurseBiz.queryCheckFile();
+		List<CompanyFile> fileList = nurseBiz.queryCheckFile("未审核");
 		modelAndView = new ModelAndView();
 		modelAndView.setViewName("WEB-INF/medical_workstation/wait-check-file");
 		modelAndView.addObject("fileList",fileList);
@@ -781,7 +884,7 @@ public class NurseHandle {
 			String account,
 			String pwd) {
 		System.out.println("用户登录" + account);
-		Nurse nurse = nurseBiz.queryNurseBylogin(account, pwd);
+		Nurse nurse = nurseBiz.queryNurseBylogin(account, Encryption.getResult(pwd));
 		modelAndView = new ModelAndView();
 		if (nurse != null) {
 			System.out.println("登录成功"+nurse);

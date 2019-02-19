@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
-<script src="<%=path%>js/jquery.dataTables.min.js"></script>
-<script src="<%=path%>js/datatables.bootstrap.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
 <script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
 <script src="<%=path%>assets/layer/layer.js" type="text/javascript"></script>
 <title>人员列表</title>
@@ -29,9 +29,9 @@
 	<div class="page-content">
 		<div class="Manager_style">
 			<span class="title_name">相关操作</span>
-			<button type="button" class="btn btn-info"
-				onclick="javascript:$('#addDialog').dialog('open');">添加临时人员</button>
+			<button type="button" class="btn btn-info" onclick="javascript:$('#addDialog').dialog('open');">添加临时人员</button>
 			<button type="button" id="all" class="btn btn-primary"	onclick="allOpen('${fid}');">生成账单</button>
+			<button type="button" id="all" class="btn btn-waring" onclick="javascript:window.history.back();">返回</button>
 		</div>
 		<div class="Manager_style">
 			<span class="title_name">人员列表</span>
