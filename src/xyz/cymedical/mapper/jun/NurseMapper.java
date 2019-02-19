@@ -99,11 +99,11 @@ public interface NurseMapper {
 	public List<Project> findMyProject(String comboname);
 
 	//插入病人项目表
-	public void insertPaitentProject(int paitent_id, int project_id);
+	public void insertPaitentProject(String ID, int project_id);
 
 	//项目id找细项
 	public List<Detail> findMyDetail(int project_id);
 
 	//插入小结表
-	public boolean insertbrief(int detail_id, int paitent_id, String time,int project_id);
+	public boolean insertbrief(int detail_id, String ID, String time,int project_id);
 }
