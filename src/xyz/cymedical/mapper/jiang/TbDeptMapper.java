@@ -22,6 +22,10 @@ public interface TbDeptMapper {
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 	
+	public List<Tb_dept> selectDeptname(Tb_dept tb_dept);/*查询新添加的部门名是否存在*/
+	
+	public Tb_dept selectDeptnameid(Tb_dept tb_dept);/*回查新添加的id号*/
+	
 	
 
 }

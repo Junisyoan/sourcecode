@@ -77,6 +77,8 @@ public class RoleManageHandle {
 		
 //		int dept_id=Integer.valueOf(dept_id);
 //		tb_role_dept.setDept_id(dept_id);
+		
+		/*****
 		String state="在用";
 		int dept_id=tb_role.getDept_id();
 		int role_id=tb_role.getRole_id();
@@ -85,7 +87,7 @@ public class RoleManageHandle {
 		 * 用部门查出部门id
 		 * 
 		 * 
-		 */
+		  
 		
 		tb_role_dept.setDept_id(dept_id);
 		tb_role_dept.setRole_id(role_id);
@@ -94,7 +96,7 @@ public class RoleManageHandle {
 		System.out.println(tb_role_dept.toString());
 		
 		tbRoleDept.addroledept(tb_role_dept);
-		 
+	******/
 		 System.out.println("ret="+ret);
 		 if(ret==1) {
 			 System.out.println("添加成功"); 

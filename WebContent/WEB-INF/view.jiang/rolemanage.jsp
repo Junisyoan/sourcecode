@@ -45,9 +45,9 @@
     <div class="add_user_style clearfix">
      <form action="<%=path%>rolemanage/addrole.handle" method="post" id="ddd" >
      <ul class="clearfix">
-      <li><label class="label_name">新角色ID</label> <input name="role_id" type="text"  class="text_add" id="role_id"/><i style="color:#F60; ">*</i></li>
+<!--       <li><label class="label_name">新角色ID</label> <input name="role_id" type="text"  class="text_add" id="role_id"/><i style="color:#F60; ">*</i></li> -->
       <li><label class="label_name">新角色</label> <input name="name" type="text"  class="text_add" id="name"/><i style="color:#F60; ">*</i></li>
-      <li><label class="label_name">归属ID</label> <input name="dept_id" type="text"  class="text_add" id="dept_id"/><i style="color:#F60; ">*部门ID</i></li>
+<!--       <li><label class="label_name">归属ID</label> <input name="dept_id" type="text"  class="text_add" id="dept_id"/><i style="color:#F60; ">*部门ID</i></li> -->
       </ul>    
    		 </form>
      </div>       

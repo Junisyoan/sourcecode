@@ -49,10 +49,11 @@
     	<form action="<%=path%>deptmanage/adddept.handle" method="post" id="add">
   		   <ul class="clearfix">
      
+       <li><label class="label_name">角色</label> <input name="role" type="text"  class="text_add" id="role"/><i style="color:#F60; ">*</i></li>  
       
 <!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
 <!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id" onblur="loadAjax()"/></li> -->
-      <li><label class="label_name">部门id</label><input name="dept_id" type="text"  class="text_add" id="dept_id"/></li>
+<!--       <li><label class="label_name">部门id</label><input name="dept_id" type="text"  class="text_add" id="dept_id"/></li> -->
 <!--       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li> -->
       <li><label class="label_name">部门名</label><input name="name" type="text"  class="text_add" id="name"/></li>
 <!--       <li><label class="label_name">角色</label><input name="name" type="text"  class="text_add" id="name"/></li> -->
@@ -154,8 +155,8 @@ $('#add_butn').on('click', function(){
 		yes: function(index, layero){		
 		 
 // 		 ------------------------------------------
-			 if($("#dept_id").val()==""){
-				  layer.alert('部门id不能为空!',{
+			 if($("#role").val()==""){
+				  layer.alert('角色不能为空!',{
 	             title: '提示框',								
 				  icon:0,			    
 				 });

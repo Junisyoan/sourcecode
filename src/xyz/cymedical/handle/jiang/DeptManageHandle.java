@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbDeptBiz;
+import xyz.cymedical.biz.jiang.TbRoleBiz;
 import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.entity.jiang.Tb_dept;
 import xyz.cymedical.entity.jiang.Tb_power;
@@ -30,13 +31,18 @@ public class DeptManageHandle {
 	 
 	@Resource
 	private TbDeptBiz tbDeptBiz;
-	
+	@Resource
+	private TbRoleBiz tbRoleBiz; 
 	@Resource
 	private TbRoleDept tbRoleDept;
 	
 	private List<Tb_role_dept> roledeptlist;
 	@Resource
 	private Tb_role_dept tb_role_dept;
+	
+	private  List<Tb_dept> listdept;
+	@Resource
+	private  Tb_role_dept tbroledept;
 	
 //	private List<Tb_dept> maplist;
 	
@@ -62,12 +68,35 @@ public class DeptManageHandle {
 	@RequestMapping(value = "/adddept.handle")
 	public ModelAndView addPower(HttpServletRequest request, HttpServletResponse response, Tb_dept tb_dept) {
 		ModelAndView mav = new ModelAndView();  
-		 
-//		int ret=TbPowerBiz.addPower(tb_power);
-		System.out.println(tb_dept.getDept_id());
-		System.out.println(tb_dept.getName());
-		int ret=tbDeptBiz.addDept(tb_dept);
-		String sta="在用";
+		int ret=0;
+		 /*查询 新添加的部门名字是否存在 */
+		listdept=  tbDeptBiz.selectDeptname(tb_dept);
+		if(listdept.size()>0) {
+			System.out.println("部门名已存在");
+			 
+		}else {
+			 tbDeptBiz.addDept(tb_dept);
+			 String sta="在用";
+			 /*回查 新添加的部门 id*/
+			 int dept_id=tbDeptBiz.selectDeptnameid(tb_dept).getDept_id();
+			 /*查詢角色对应的id*/
+			int role_id= tbRoleBiz.selectName(tb_dept.getRole()).getRole_id();
+			tbroledept.setDept_id(dept_id);
+			tbroledept.setRole_id(role_id);
+			 tbroledept.setState(sta);
+			 
+			 /*添加联合表*/
+			 ret= tbRoleDept.addroledept(tbroledept);
+			 
+			 
+			 
+		}
+		
+////		int ret=TbPowerBiz.addPower(tb_power);
+//		System.out.println(tb_dept.getDept_id());
+//		System.out.println(tb_dept.getName());
+//		int ret=tbDeptBiz.addDept(tb_dept);
+		
 		/*联表添加*/
 		
 		/*
