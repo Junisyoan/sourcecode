@@ -217,6 +217,7 @@ function allOpen(fid){
 			url:"<%=path%>nurse/allOpen.handle?fid="+fid,
 			success:function(retData){
 				if(retData=="1"){
+					location.href="<%=path%>nurse/getFileList.handle";
 					alert("生成成功");
 				}else{
 					alert("生成失败");
