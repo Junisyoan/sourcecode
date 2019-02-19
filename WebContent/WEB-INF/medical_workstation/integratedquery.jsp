@@ -66,18 +66,18 @@
 				<tbody>
 					<c:forEach items="${patientlist}" var="p" varStatus="s">
 						<tr>
-							<td>${s.index + 1}</th>
-								<td>${p.n1}</th>
-									<td>${p.time}</th>
+							<td>${s.index + 1}</td>
+								<td>${p.n1}</td>
+									<td>${p.time}</td>
 										<td><a
-											href="<%=path%>patient/showmessage.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+											href="<%=path%>patient/showmessage.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">查看</button></a></td>
 							<td><a
-								href="<%=path%>patient/showproject.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+								href="<%=path%>patient/showproject.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">查看</button></a></td>
 							<td><a
-								href="<%=path%>patient/showbrief.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+								href="<%=path%>patient/showbrief.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">查看</button></a></td>
 							<td><a
-								href="<%=path%>patient/showsummarize.handle?name=${p.n1}&time=${p.time}">查看</a></td>
-							<td><a href="<%=path%>patient/showall.handle?name=${p.n1}&time=${p.time}">查看</a></td>
+								href="<%=path%>patient/showsummarize.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">查看</button></a></td>
+							<td><a href="<%=path%>patient/showall.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">查看</button></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

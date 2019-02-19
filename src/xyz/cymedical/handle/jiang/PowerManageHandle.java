@@ -84,13 +84,23 @@ public class PowerManageHandle {
 			System.out.println("delectname="+delectname);
 			String data = null;
 			int power_id=Integer.valueOf(delectname);
+			/*先权限角色表删除 还要先查询一下存在此id字段  */
+			  
+			tb_role_power.setPower_id(power_id);
+			System.out.println("tb_role_power="+tb_role_power.getPower_id());
+			List<Tb_role_power> tbrolepower= tbRolePower.selectrp(tb_role_power);
+			if(tbrolepower.size()>0) {
+				 
+			tbRolePower.delectrp(tb_role_power);
+			}
 			int ret=TbPowerBiz.deletePower(power_id);
 			
 			if(ret==1) {
 //				mav.setViewName("WEB-INF/view.jiang/powermanage");
 				data = "00";
 			}
-			  
+			
+			
 			return data;
  	
 		}
@@ -99,13 +109,17 @@ public class PowerManageHandle {
 		@RequestMapping(value = "/addPower.handle")
 		public ModelAndView addPower(HttpServletRequest request, HttpServletResponse response, Tb_power tb_power,String roleid) {
 			ModelAndView mav = new ModelAndView();  
-//			int role_id=Integer.valueOf(roleid); 
-//			int power_id=tb_power.getPower_id();
-//			tbRolePower.addmanage(role_id, power_id);////////c此处存在错误
-			 
+			int role_id=Integer.valueOf(roleid); 
+			int power_id=tb_power.getPower_id();
+			
+//			 
 			int ret=TbPowerBiz.addPower(tb_power);
 			
 			if(ret==1) {
+				tb_role_power.setRole_id(role_id);
+				tb_role_power.setPower_id(power_id);
+				
+				tbRolePower.addmanage(tb_role_power); 
 				
 				mav.setViewName("WEB-INF/view.jiang/powermanage");
 			}

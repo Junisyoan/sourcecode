@@ -120,15 +120,16 @@
 						</div>
 					</div>
 					<div class="cont-right">
-						<h4>推荐</h4>
+						<h4>企业团检采购</h4>
 						<div class="cont-pic">
 							<img src="<%=path%>image/index1/pic5.jpg" alt="">
 						</div>
 						<div class="cont-para">
-							<p class="p1">陈田祥 Jan 20.12.12</p>
-							<p>Sed nisi turpis, pellentesque at ultrices in, dapibus in
-								magna. Nunc easi diam risus, placerat ut scelerisque et,
-								suscipit eu ante.</p>
+							<p class="p1">渠道销售经理-陈田祥 Jan 20.12.12</p>
+							<p>
+								电话：13715329416 <br>
+								邮箱：maxiaoqian@topsky.com.cn
+							</p>
 						</div>
 						<div class="clear"></div>
 						<div class="cont-p">
@@ -136,10 +137,9 @@
 								<img src="<%=path%>image/index1/pic6.jpg" alt="">
 							</div>
 							<div class="cont-para">
-								<p class="p1">曾少聪 Feb 27.12.12</p>
-								<p>Sed nisi turpis, pellentesque at ultrices in, dapibus in
-									magna. Nunc easi diam risus, placerat ut scelerisque et,
-									suscipit eu ante.</p>
+								<p class="p1">渠道销售助理-曾少聪 Feb 27.12.12</p>
+								<p>电话： 15816329421 <br>
+								         邮箱：418337024@qq.com</p>
 							</div>
 						</div>
 					</div>

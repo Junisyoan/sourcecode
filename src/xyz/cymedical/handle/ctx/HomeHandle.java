@@ -67,7 +67,7 @@ public class HomeHandle {
 		
 		System.out.println("nlist="+nlist);
 		//取最新的两条新闻
-		if(nlist!=null && nlist.size()>0) {
+		if(nlist!=null && nlist.size()>1) {
 			mav.addObject("news1", nlist.get(0));
 			mav.addObject("news2", nlist.get(1));
 		}

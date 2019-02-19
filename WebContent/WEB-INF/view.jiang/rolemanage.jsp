@@ -7,7 +7,7 @@
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
 %>
-
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -45,7 +45,9 @@
     <div class="add_user_style clearfix">
      <form action="<%=path%>rolemanage/addrole.handle" method="post" id="ddd" >
      <ul class="clearfix">
+      <li><label class="label_name">新角色ID</label> <input name="role_id" type="text"  class="text_add" id="role_id"/><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">新角色</label> <input name="name" type="text"  class="text_add" id="name"/><i style="color:#F60; ">*</i></li>
+      <li><label class="label_name">归属ID</label> <input name="dept_id" type="text"  class="text_add" id="dept_id"/><i style="color:#F60; ">*</i></li>
       </ul>    
    		 </form>
      </div>       
@@ -205,7 +207,7 @@ function delectrole(a){
 	var a=a||event;
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
-	var re=confirm("确定刪除？");
+	var re=confirm("确定刪除？   刪除前请确保此角色与部门无关联");
 	if(re){
 			alert(updetename);
 		var form = document.createElement("Form");

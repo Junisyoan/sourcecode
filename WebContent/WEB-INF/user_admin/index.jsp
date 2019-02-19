@@ -45,7 +45,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <img
-						src="images/logo.png">
+						src="<%=path%>image/index1/logo.png">
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -88,7 +88,7 @@
 				</div>
 				<!-- #sidebar-shortcuts -->
 				<ul class="nav nav-list" id="nav_list">
-					<li class="home"><a href="javascript:void(0)" name="<%=path%>company/systemhome.handle>"
+					<li class="home"><a href="javascript:void(0)" name="<%=path%>company/systemhome.handle"
 						class="iframeurl" title=""><i class="icon-dashboard"></i><span
 							class="menu-text"> 系统首页 </span></a></li>
 					<li><a href="#" class="dropdown-toggle"><i
@@ -96,23 +96,26 @@
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path %>company/getUpFilePath.handle" title="团检文件上传"
-								class="iframeurl"><i class="icon-double-angle-right"></i>团检文件上传</a></li>
-							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>company/getFileList.handle?cid=${userCompany.company_id }" title="团检文件列表" class="iframeurl"><i
-									class="icon-double-angle-right"></i>团检文件列表</a></li>
+									class="icon-double-angle-right"></i>团检文件</a></li>
+							<li class="home"><a href="javascript:void(0)"
+								name="<%=path%>patient/showcompanypatient.handle" title="体检报告打印" class="iframeurl"><i
+									class="icon-double-angle-right"></i>体检报告打印</a></li>
+						</ul></li>
+						
+						<li><a href="#" class="dropdown-toggle"><i
+							class="icon-desktop"></i><span class="menu-text">费用管理 </span><b
+							class="arrow icon-angle-down"></b></a>
+							<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>company/getDepositDetail.handle?cid=${userCompany.company_id }" title="费用管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>费用管理</a></li>
+									class="icon-double-angle-right"></i>费用明细</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>company/getBillerNoPay.handle?cid=${userCompany.company_id }" title="未结算账单" class="iframeurl"><i
 									class="icon-double-angle-right"></i>未结算账单</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>company/getBillerHasPay.handle?cid=${userCompany.company_id }" title="已结算账单" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已结算账单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>patient/showcompanypatient.handle" title="体检报告打印" class="iframeurl"><i
-									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.nav-list -->

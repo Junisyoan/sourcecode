@@ -125,8 +125,7 @@ function check(){
                             <input type="text" value="" placeholder="请输入验证码" class="input-val" style="width:140px;"/>
                             <canvas id="canvas" width="100" height="40"></canvas></p>
                             <button>登录</button>
-                            <p class="remember"><input type="checkbox" name="remember">记住密码</p>
-                            <p class="regist"><span>没有账号?</span><a href="reg_company.html">立即注册</a></p>
+                            <p class="regist"><span>没有账号?</span><a href="reg/reg.jsp">立即注册</a></p>
                             <div class="clear"></div>
                         </form>
                     </aside>

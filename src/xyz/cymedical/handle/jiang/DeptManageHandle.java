@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.annotation.Resources;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
 import xyz.cymedical.biz.jiang.TbDeptBiz;
+import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.entity.jiang.Tb_dept;
 import xyz.cymedical.entity.jiang.Tb_power;
+import xyz.cymedical.entity.jiang.Tb_role_dept;
 import xyz.cymedical.entity.jiang.Tb_user;
 
 @Controller
@@ -28,14 +31,26 @@ public class DeptManageHandle {
 	@Resource
 	private TbDeptBiz tbDeptBiz;
 	
-	private List<Tb_dept> maplist;
+	@Resource
+	private TbRoleDept tbRoleDept;
+	
+	private List<Tb_role_dept> roledeptlist;
+	@Resource
+	private Tb_role_dept tb_role_dept;
+	
+//	private List<Tb_dept> maplist;
+	
+	private List<Map<String, Object>> maplist;
 	
 	@RequestMapping(value = "/select.handle")
 	public ModelAndView findAll(HttpServletRequest request, HttpServletResponse response, Tb_dept tbdept) {
 		
 		ModelAndView mav = new ModelAndView(); 
 		System.out.println("部门管理");
-		maplist=tbDeptBiz.selectDept();
+//		maplist=tbDeptBiz.selectDept();
+		String sta="在用";
+		maplist=tbDeptBiz.select(sta);
+		
 		request.setAttribute("maplist", maplist);
 		
 		mav.setViewName("WEB-INF/view.jiang/deptmanage");
@@ -52,6 +67,17 @@ public class DeptManageHandle {
 		System.out.println(tb_dept.getDept_id());
 		System.out.println(tb_dept.getName());
 		int ret=tbDeptBiz.addDept(tb_dept);
+		String sta="在用";
+		/*联表添加*/
+		
+		/*
+		 * 
+		 * 科室添加成功  科室无人 不能显示  快去添加人员吧
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		
 		
 		if(ret==1) {
@@ -102,14 +128,28 @@ public class DeptManageHandle {
  				
 				System.out.println("delectname="+delectname);
 				String data = null;
+				int ret=0;
 				int dept_id=Integer.valueOf(delectname);
-				int ret=tbDeptBiz.delectDept(dept_id);
+				/**
+				 * 删除部门前 先查询是否存在角色部门表
+				 *  如果存在 要先删除角色部门关联表
+				 * 
+				 * 主键 外键关联过多  使用状态 逻辑删除
+				 */
+				String state="删除";
+				tb_role_dept.setState(state);
+				tb_role_dept.setDept_id(dept_id);
+				List<Tb_role_dept> tbroledeptlist= 	tbRoleDept.selectroledeptid(dept_id);
 				
+				if(tbroledeptlist.size()>0) {
+					 ret=tbRoleDept.deletelogic(tb_role_dept); 
+				}else { 
+					  ret=tbDeptBiz.delectDept(dept_id);
+				}
 				if(ret==1) { 
 					data = "00";
-				}
-				  
-				return data;
+				} 
+				return data; 
 	 	
 			}
 			

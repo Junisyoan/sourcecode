@@ -24,6 +24,7 @@
 
 <body>
 <input type="button" value="全部打印" onclick="pAll();"/>
+<button onclick="window.history.back();">返回</button>
 	<c:forEach items="${checkMap }" var="c" varStatus="s">
 	<!-- abegin -->
 	<!-- begin -->

@@ -322,7 +322,7 @@ input {
 		<c:if test="${s.index == 0}">
 			<h3 align="center">
 				<a
-					href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}">返回</a>
+					href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">返回</button></a>
 			</h3>
 		</c:if>
 	</c:forEach>

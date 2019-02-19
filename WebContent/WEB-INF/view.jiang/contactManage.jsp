@@ -7,7 +7,7 @@
 	String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
 %>
-
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -17,8 +17,8 @@
   <link rel="stylesheet" href="<%=path %>css/style.css"/>
 <title>公司信息管理</title>
   
-<link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
 
 <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
 <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
@@ -39,14 +39,14 @@
     <div class="add_user_style clearfix">
     
    <form action="<%=path%>contact/upcontact.so"  method="post" id = "aFrom"  > 
-    		序号    <input type="text" name="name"  readonly="readonly" value="${tb_contact.contact_id}"/>&nbsp
-     		公司名&nbsp&nbsp	&nbsp<input type="text" name="power_id" value="${tb_contact.name}"/>&nbsp </br>
-     		地区	<input type="text" name="menu_id" value="${tb_contact.province}"/>&nbsp
-     		详细地址    <input type="text" name="name" value="${tb_contact.area}"/>&nbsp</br>
-     		固话    <input type="text" name="name" value="${tb_contact.tel}"/>&nbsp
-     		手机 &nbsp&nbsp &nbsp&nbsp&nbsp  <input type="text" name="name" value="${tb_contact.phone}"/>&nbsp</br>
-     		传真    <input type="text" name="name" value="${tb_contact.fax}"/>&nbsp
-     		邮箱 &nbsp&nbsp &nbsp &nbsp&nbsp <input type="text" name="name" value="${tb_contact.email}"/>&nbsp</br>
+    		序号    <input type="text" name="contact_id"  readonly="readonly" value="${tb_contact.contact_id}"/>&nbsp
+     		公司名&nbsp&nbsp	&nbsp<input type="text" name="name" value="${tb_contact.name}"/>&nbsp <br/>
+     		地区	<input type="text" name="province" value="${tb_contact.province}"/>&nbsp
+     		详细地址    <input type="text" name="area" value="${tb_contact.area}"/>&nbsp<br/>
+     		固话    <input type="text" name="tel" value="${tb_contact.tel}"/>&nbsp
+     		手机 &nbsp&nbsp &nbsp&nbsp&nbsp  <input type="text" name="phone" value="${tb_contact.phone}"/>&nbsp<br/>
+     		传真    <input type="text" name="fax" value="${tb_contact.fax}"/>&nbsp
+     		邮箱 &nbsp&nbsp &nbsp &nbsp&nbsp <input type="text" name="email" value="${tb_contact.email}"/>&nbsp<br/>
      		  
   	 	</form>
        </div>       
@@ -88,8 +88,6 @@
 </tbody>
 
 </table>
-</body>
- 
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
@@ -130,4 +128,5 @@ $('#add_butn').on('click', function(){
 	});
   
 </script>
+</body>
 </html>

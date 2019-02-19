@@ -20,13 +20,14 @@
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path %>js/jquery.dataTables.min.js"></script>
 <script src="<%=path %>js/datatables.bootstrap.min.js"></script>
+<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
 <title>资金明细</title>
 </head>
 
 <body>
 	<div class="Manager_style">
 		<div class="title_name">充值</div>
-		<button id="get" class="btn btn-info" onclick="getUrl();" >充值</button>
+		<button id="get" class="btn btn-info" onclick="javascript:$('#recharge').dialog('open');" >充值</button>
 		<button type="button" class="btn btn-primary" onclick="tableToExcel('depositTable','data');">导出Excel</button>
 		余额：${userCompany.deposit }
 	</div>
@@ -53,9 +54,53 @@
 			</tbody>
 		</table>
 	</div>
-	
+	<div style="display:none" id="recharge" align="center">
+		<br/>
+		<form id="r" action="<%=path%>alipay.trade.page.pay.jsp" method="post" onsubmit="return check11();" target= "_blank">
+			<input type="text" id="m" name="WIDtotal_amount"/>
+			<div style="display:none">
+				<input type="text" id="subject" name="WIDsubject"/>
+				<input type="text" id="sNow" name="WIDout_trade_no"/>
+				<input type="text" id="WIDbody" name="WIDbody"/>
+			</div>
+			<button id="cz" class="btn btn-info">充值</button>
+<!-- 			<input class="btn btn-info" type="submit" value="充值" /> -->
+		</form>
+	</div>
 	
 </body>
+
+<script type="text/javascript">
+
+function check11(){
+	var m =document.getElementById('m').value;
+	var s = false;
+	if(m==""){
+		return s;
+	}else if(isNaN(m)){
+		alert('请输入正确金额！');
+		return s;
+	}else if(m<0||m==0){
+		alert('不能充值小于0！');
+		return s;
+	}else if(m>0){
+		var vNow = new Date();
+		var sNow = "";
+		sNow += String(vNow.getFullYear());
+		sNow += String(vNow.getMonth() + 1);
+		sNow += String(vNow.getDate());
+		sNow += String(vNow.getHours());
+		sNow += String(vNow.getMinutes());
+		sNow += String(vNow.getSeconds());
+		sNow += String(vNow.getMilliseconds());
+		document.getElementById("sNow").value =  sNow;
+		document.getElementById("subject").value =  '充值';
+		document.getElementById("WIDbody").value =  '充值';
+		return true;
+	}
+	
+}
+</script>
 
 <script type="text/javascript">
 	function base64(content) {
@@ -83,6 +128,48 @@
 </script>
 
 <script type="text/javascript">
+
+$(function(){
+	$('#recharge').dialog({
+		 autoOpen: false,
+	      show: {
+	        effect: "blind",
+	        duration: 1000
+	      },
+	      hide: {
+	        effect: "explode",
+	        duration: 1000
+	      }
+	});
+});
+
+$(function(){
+	$('#cz').click(function(){
+		var f = document.getElementById('r');
+		f.submit;
+		$.ajax({
+			url:"<%=path%>company/waitPay.handle",
+			data:{'WF':'go'},
+			dataType:"text",
+			type:"post",
+			success:function(retData){
+				if(retData=="1"){
+					alert('支付成功');
+				}else if(retData=="0"){
+					alert('未支付');
+				}else if(retData=="-1"){
+					alert('支付失败');
+				}
+				$('#recharge').dialog("close");
+				location.href="<%=path%>company/getDepositDetail.handle?cid=${userCompany.company_id }";
+			},
+			error:function(){
+				alert("服务器未响应");
+			}
+		});
+	});
+});
+
 function getUrl(){
 	window.open("<%=path%>company/getUrl.handle");
 }
@@ -100,6 +187,7 @@ function recharge(){
 			sNow += String(vNow.getMilliseconds());
 
 			location.href='<%=path%>alipay.trade.page.pay.jsp?money='+m+'&sNow='+sNow+'&subject=充值&WIDbody=充值';
+			alert();
 	}
 }
 $(function(){

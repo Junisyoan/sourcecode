@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xyz.cymedical.mapper.jiang.TbRolePowerMapper">
+
+
+<!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
+
+		<insert id="addmanage" parameterType="xyz.cymedical.entity.jiang.Tb_role_power">
+		insert into tb_role_power(power_id,role_id) values(#{power_id},#{role_id})
+	</insert>
+ 
+ 	<delete id="delectrp" parameterType="xyz.cymedical.entity.jiang.Tb_role_power">
+ 	
+ 	delete from tb_role_power where power_id=#{power_id} 
+ 	 
+ 	</delete>
+ 
+ 	<select id="selectrp" parameterType="xyz.cymedical.entity.jiang.Tb_role_power" 
+ 	resultType="xyz.cymedical.entity.jiang.Tb_role_power">
+ 		select * from tb_role_power where power_id=#{power_id}
+ 	</select>
+ 	
+ 	<select id="selectrprid" parameterType="xyz.cymedical.entity.jiang.Tb_role_power" 
+ 	resultType="xyz.cymedical.entity.jiang.Tb_role_power">
+ 		select * from tb_role_power where role_id=#{role_id}
+ 	</select>
+ 
+	 <delete id="delectrprid" parameterType="xyz.cymedical.entity.jiang.Tb_role_power">
+ 	
+ 	delete from tb_role_power where role_id=#{role_id} 
+ 	 
+ 	</delete>
+ 
+</mapper>

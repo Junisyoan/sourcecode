@@ -12,6 +12,8 @@ public interface TbDeptMapper {
 
 	public List<Tb_dept> selectDept();
 	
+	public List<Map<String, Object>>  select(String sta);
+	
 	public int addDept(Tb_dept tb_dept);
 	
 	public int upDept(Tb_dept tb_dept);
@@ -19,5 +21,7 @@ public interface TbDeptMapper {
 	public  int delectDept(int dept_id);
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
+	
+	
 
 }

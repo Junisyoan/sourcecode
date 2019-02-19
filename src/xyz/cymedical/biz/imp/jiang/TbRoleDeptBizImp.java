@@ -21,6 +21,30 @@ public class TbRoleDeptBizImp implements TbRoleDept{
 		return tbRoleDeptMapper.findroledeptid(role_dept_id);
 	}
 
+	@Override
+	public List<Tb_role_dept> selectroledeptid(int dept_id) {
+		// TODO Auto-generated method stub
+		return tbRoleDeptMapper.selectroledeptid(dept_id);
+	}
+
+	@Override
+	public int deleteroledept(int dept_id) {
+		// TODO Auto-generated method stub
+		return tbRoleDeptMapper.deleteroledept(dept_id);
+	}
+
+	@Override
+	public int deletelogic(Tb_role_dept tb_role_dept) {
+		// TODO Auto-generated method stub
+		return tbRoleDeptMapper.deletelogic(tb_role_dept);
+	}
+
+	@Override
+	public int addroledept(Tb_role_dept tb_role_dept) {
+		// TODO Auto-generated method stub
+		return tbRoleDeptMapper.addroledept(tb_role_dept);
+	}
+
  
 
 }

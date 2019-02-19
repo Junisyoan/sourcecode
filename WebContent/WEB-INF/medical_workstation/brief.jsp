@@ -71,9 +71,21 @@
 			</tbody>
 		</table>
 	</div>
-	<p align="center">
-		<a
-			href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}">返回</a>
-	</p>
+	<c:forEach items="${patientlist}" var="p" varStatus="s">
+		<c:if test="${p.resultpath != null}">
+			<p align="center">
+				<img src="${pageContext.servletContext.contextPath}/upload/${p.resultpath}" style="width:350px;"/>
+			</p>
+		</c:if>
+	</c:forEach>
+	<c:forEach items="${patientlist}" var="p" varStatus="s">
+		<c:if test="${s.index == 0}">
+			<p align="center">
+				<a
+					href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}"><button
+						class="btn btn-info">返回</button></a>
+			</p>
+		</c:if>
+	</c:forEach>
 </body>
 </html>
