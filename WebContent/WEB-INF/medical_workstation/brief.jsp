@@ -73,8 +73,11 @@
 	</div>
 	<c:forEach items="${patientlist}" var="p" varStatus="s">
 		<c:if test="${p.resultpath != null}">
+			<p align="center">${p.n3}</p>
 			<p align="center">
-				<img src="${pageContext.servletContext.contextPath}/upload/${p.resultpath}" style="width:350px;"/>
+				<img
+					src="${pageContext.servletContext.contextPath}/upload/${p.resultpath}"
+					style="width: 350px;" />
 			</p>
 		</c:if>
 	</c:forEach>
