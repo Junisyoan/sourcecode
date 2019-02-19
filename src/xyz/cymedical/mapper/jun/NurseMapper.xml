@@ -103,7 +103,8 @@
 	
 	<!-- 插入病人项目表 -->
 	<insert id="insertPaitentProject" >
-		insert into tb_patient_project (patient_id,project_id,state,balance) values(#{0},#{1},'未接收','已结算')
+		insert into tb_patient_project (patient_id,project_id,state,balance) values
+		((select patient_id from tb_patient where ID=#{0}),#{1},'未接收','已结算')
 	</insert>
 	
 	<!-- 项目id对应细项 -->
@@ -115,7 +116,7 @@
 	
 	<!-- 插入小结表 -->
 	<insert id="insertbrief" >
-		insert into tb_brief (detail_id,patient_id,time,sstate,project_id) values(#{0},#{1},#{2},'未提交',#{3})
+		insert into tb_brief (detail_id,patient_id,time,sstate,project_id) values(#{0},(select patient_id from tb_patient where ID=#{1}),#{2},'未提交',#{3})
 	</insert>
 	
 </mapper>
