@@ -170,9 +170,9 @@ public class NurseHandle {
 		System.out.println("打印导检单："+bid);
 		List<Patient> cps = nurseBiz.getCheckPage(bid);
 		
-		companyFile = companyFileBiz.queryFileByBillerId(bid);
-		String path = companyFile.getFpath();
-		File file = new File(path);
+//		companyFile = companyFileBiz.queryFileByBillerId(bid);
+//		String path = companyFile.getFpath();
+//		File file = new File(path);
 		//生成条形码
 //		String imgFormat = "jpeg";
 //		for(int i = 0;i<cps.size();i++) {
@@ -273,6 +273,7 @@ public class NurseHandle {
 		}
 		for (Patient patient : patientList) {
 			patient.setCheck_num(String.format("%08d", cn));
+			System.out.println(patient.getCheck_num());
 		}
 			System.out.println("准备插入体检人员");
 			//	插入病人
