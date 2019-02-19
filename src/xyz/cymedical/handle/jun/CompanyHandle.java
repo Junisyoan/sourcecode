@@ -93,6 +93,7 @@ public class CompanyHandle {
 	
 	private volatile int pState = 2;//1支付成功，0未支付，-1支付失败，2正在操作
 	
+	private String strRet;
 	public CompanyHandle() {
 	}
 
@@ -489,31 +490,32 @@ public class CompanyHandle {
 	 * 删除文件
 	 */
 	@RequestMapping(value = "/delFile.handle",method=RequestMethod.POST)
-	public String delelteFile(String fid,String fname, HttpServletResponse response) {
+	public @ResponseBody String delelteFile(String fid,String fname, HttpServletResponse response) {
 		System.out.println("删除文件："+fname+"--文件id："+fid);
-		response.setCharacterEncoding("utf-8");
+		strRet="";
 		//获得文件信息
 		CompanyFile cf = companyFileBiz.queryFile(fid);
-		
+		if (cf==null) {
+			strRet="1";
+			return strRet;
+		}
 		isSuccess=false;
 		
-		try {
 			if (companyFileBiz.delFile(fid)) {
 				//1成功，删除文件
 				File file = new File(cf.getFpath());
 				if (file.delete()) {
-					response.getWriter().print("1");
+					strRet="1";
+//					response.getWriter().print("1");
 					isSuccess = true;
 				}
 			}
 			//0失败
 			if (!isSuccess) {
-				response.getWriter().print("0");
+//				response.getWriter().print("0");
+				strRet="0";
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return strRet;
 	}
 	
 	/*
@@ -613,7 +615,7 @@ public class CompanyHandle {
 	 * 公司注册
 	 */
 	@RequestMapping(value = "/regCompany.so", method = RequestMethod.POST)
-	public String regCompany(HttpServletResponse response, HttpServletRequest request, Company company) {
+	public @ResponseBody String regCompany(HttpServletResponse response, HttpServletRequest request, Company company) {
 		System.out.println(company);
 		company.setPwd(Encryption.getResult(company.getPwd()));
 		// 执行注册

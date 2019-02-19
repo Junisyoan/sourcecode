@@ -32,7 +32,7 @@
 		<div id="upfile" style="display:none;">
 			<form action="${path}company/fileUpload.handle" id="companyFile" method="post" enctype="multipart/form-data" onsubmit="return check();">
 				<input style="width:100%;padding:10px;" type="file" class="up" name="companyFile" id="cFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
-				<input class="btn btn-info" style="width:100%;padding:3px;" type="submit" value="上传" />
+				<input class="btn btn-info" id="up" style="width:100%;padding:3px;" type="submit" value="上传" />
 			</form>
 		</div>
 	</div>
@@ -75,6 +75,22 @@
 			</table>
 		</div>
 	</div>
+	<div id="loadgif" style="width:66px;height:66px;position:absolute;top:50%;left:50%;">
+		<img alt="加载中..." src="<%=path%>image/loading.gif"/>
+	</div>
+<script type="text/javascript">
+
+$(function(){
+	$('#up').click(function(){
+		$("#upfile").dialog('close');
+		$("#loadgif").show();
+	});
+});
+$(function(){
+	$("#loadgif").hide();
+});
+
+</script>
 <script type="text/javascript">
 
 function delInvalide(fid){
@@ -108,11 +124,11 @@ $(function(){
 		 autoOpen: false,
 	      show: {
 	        effect: "blind",
-	        duration: 1000
+	        duration: 300
 	      },
 	      hide: {
 	        effect: "explode",
-	        duration: 1000
+	        duration: 500
 	      }
 	});
 });

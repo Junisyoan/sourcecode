@@ -31,7 +31,7 @@
 			<span class="title_name">相关操作</span>
 			<button type="button" class="btn btn-info" onclick="javascript:$('#addDialog').dialog('open');">添加临时人员</button>
 			<button type="button" id="all" class="btn btn-primary"	onclick="allOpen('${fid}');">生成账单</button>
-			<button type="button" id="all" class="btn btn-waring" onclick="javascript:window.history.back();">返回</button>
+			<button type="button" id="goback" class="btn btn-waring" onclick="javascript:window.history.back();">返回</button>
 		</div>
 		<div class="Manager_style">
 			<span class="title_name">人员列表</span>
@@ -138,16 +138,40 @@
 				</tr>
 			</table>
 			<div style="display:none">
-			<input type="text" name="id" id="count"></input>
+				<input type="text" name="id" id="count"></input>
 			</div>
 		</form>
-
+	</div>
+	<div id="loadgif" style="width:66px;height:66px;position:absolute;top:50%;left:50%;">
+		<img alt="加载中..." src="<%=path%>image/loading.gif"/>
 	</div>
 </body>
 <script type="text/javascript">
 
+$(function(){
+	$("#loadgif").hide();
+});
+
+$('#upComboName').blur(function(){
+	var c = $('#upComboName').val();
+	$.ajax({
+		url:"<%=path%>nurse/queryComboName.handle",
+		type:"post",
+		dataType:"text",
+		data:{'comboName':c},
+		success:function(strRet){
+			if(strRet=="0"){
+				alert('套餐不存在');
+			}
+		},
+		error:function(){
+			
+		}
+	});
+});
 function delPatient(id,n){
 	if(confirm("确认删除"+n+"?")){
+		$("#loadgif").show();
 		$.ajax({
 			type:"post",
 			url:"<%=path%>nurse/delPatient.handle",
@@ -163,6 +187,7 @@ function delPatient(id,n){
 				alert('服务器无响应');
 			}
 		});
+		$("#loadgif").hide();
 	}
 	
 }
@@ -186,7 +211,7 @@ function upPatient(combo,name,sex,age,ID,phone,id){
 			var a = document.getElementById('upAge').value;
 			var i =document.getElementById('upID').value;
 			var p =document.getElementById('upPhone').value;
-			if(parseInt(a)<0||parseInt(a)>150){
+			if(parseInt(a)<16||parseInt(a)>150){
 				layer.alert('年龄错误!',{title: '提示框',icon:0,});
 			}else if(i.length>18||i.length<18){
 				layer.alert('身份证错误!',{title: '提示框',icon:0,});

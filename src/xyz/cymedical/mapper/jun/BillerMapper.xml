@@ -15,6 +15,7 @@
 		on b.group_id = g.group_id 
 		left join tb_company c
 		on g.company_id = c.company_id
+		order by b.btime desc
 	</select>
 <!-- 公司查询账单 -->
 	<select id="queryCompanyBillerList" resultType="xyz.cymedical.entity.jun.Biller">
