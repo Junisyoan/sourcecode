@@ -138,10 +138,6 @@
 									class="icon-double-angle-right"></i>团检退费</a></li>
 								
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>nurse/newslist.handle" title="新闻列表"
-								class="iframeurl"><i class="icon-double-angle-right"></i>新闻列表</a></li>
-								
-							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>patient/showpatient.handle" title="体检报告打印" class="iframeurl"><i
 									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
