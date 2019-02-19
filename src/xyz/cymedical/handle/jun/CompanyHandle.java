@@ -650,7 +650,7 @@ public class CompanyHandle {
 				} else {
 					System.out.println("创建失败");
 				}
-				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "../login_company.html"));
+				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "../login_company.jsp"));
 				break;
 
 			default:

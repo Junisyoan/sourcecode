@@ -18,7 +18,7 @@
 	</select>
 <!-- 查询已审核文件列表 -->
 	<select id="queryPassFileList" resultType="xyz.cymedical.entity.jun.CompanyFile">
-		select * from tb_file f join tb_company c on f.cstate='已审核' and f.company_id = c.company_id
+		select * from tb_file f join tb_company c on f.cstate='已审核' and f.company_id = c.company_id order by f.ftime desc
 	</select>
 
 <!-- 修改文件状态 -->
