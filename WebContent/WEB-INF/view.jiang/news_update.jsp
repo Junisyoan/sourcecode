@@ -25,22 +25,45 @@
 
 <script type="text/javascript">
 
-	$(function() {
-	
-	$("#signupForm").on("blur",function(event){
-	$(this).validate("submitValidate");
-		
-	});
-	
-	$("#signupForm").validate({
-		rules:{
-			title:"required",
-			time:"required",
-			info:"required",
-		}
-	});
-});
+function checkupdate(){
+var title = document.getElementById("title").value;
+var time = document.getElementById("time").value;
+var info = document.getElementById("info").value;
+var new_id = document.getElementById("new_id").value;
 
+if(title=='' || time=='' || info==''){
+	 alert("修改失败,信息不全！");
+}
+else{
+var f=confirm('确定修改？')
+if(f){
+	 $.ajax({
+		 type:"POST",
+		 url:"<%=path%>usermanage/updatenews.handle",
+		 data:{
+			 "title":title,
+			 "time":time,
+			 "info":info,
+			 "new_id":new_id,
+			 },
+		 dataType:"text",
+		 error:function(){
+			 alert('ajax请求请求错误...');
+		 },
+		 success:function(data){
+			if(data=="成功"){
+				alert("修改成功,前往列表页面！");
+				window.location.href="<%=path %>usermanage/newslist.handle";
+			}else{
+				alert("修改失败,要不再试试？");
+			}
+			
+		 },
+	 });
+}
+}
+
+}
 </script>
 
 
@@ -50,7 +73,7 @@
 </head>
 
 <body>
-<form id="signupForm" action="<%=path %>usermanage/updatenews.handle" method="post">
+<%-- <form id="signupForm" action="<%=path %>usermanage/updatenews.handle" method="post"> --%>
 	<div style="width:400px;margin:0 auto;border:1px black solid;border-radius:10px">
     	<table  border="0" align="center">
        		<tr >
@@ -71,7 +94,7 @@
             </tr>
             <tr >
             <td colspan="2" align="center">
-            <input type="submit" onclick="return confirm('确定修改？')" value="修改" />
+            <input type="button" onclick="checkupdate()" value="修改" />
 	         <a href="<%=path%>usermanage/newslist.handle" >
 	           <input type="button" value="返回"/>
 	         </a>
@@ -79,6 +102,6 @@
             </tr>
         </table>
     </div>
-   </form>
+<!--    </form> -->
 </body>
 </html>

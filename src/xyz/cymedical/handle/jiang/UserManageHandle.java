@@ -287,21 +287,6 @@ public class UserManageHandle {
 
 	}
 	
-	
-	@RequestMapping(value = "/deleteNews.handle")
-	public ModelAndView deleteNews(int newsid) {
-
-		System.out.println("newsid="+newsid);
-		
-		
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.jiang/news_add");
-		return mav;
-
-	}
-	
-	
 	@RequestMapping(value = "/toUpdateNews.handle")
 	public ModelAndView toUpdateNews(String newsid) {
 
@@ -320,30 +305,26 @@ public class UserManageHandle {
 
 	}
 	
-	
-	@RequestMapping(value = "/updatenews.handle")
-	public ModelAndView updatenews(News news) {
+	//新闻修改
+	@RequestMapping(value = "/updatenews.handle",method = RequestMethod.POST,produces = "application/json;charset=utf-8" )
+	public @ResponseBody String updatenews(News news) {
 
 		System.out.println("news="+news);
 		
-		nurseBiz.updateNews(news);
+		boolean flag=nurseBiz.updateNews(news);
 		
-		System.out.println("news="+news);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("news", news);
-		
-		mav.setViewName("WEB-INF/view.jiang/news_update");
-		
-		return mav;
+		if(flag) {
+			return "成功";
+		}else {
+			return "失败";
+		}
 
 	}
 	
 	
 	
-	@RequestMapping(value = "/addnews.handle")
-	public ModelAndView addnews(String title,String time,String info) {
+	@RequestMapping(value = "/addnews.handle",method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	public @ResponseBody String addnews(String title,String time,String info) {
 		
 		System.out.println("title="+title);
 		System.out.println("time="+time);
@@ -352,11 +333,17 @@ public class UserManageHandle {
 		News news = new News(title, info, time);
 		
 		//添加新闻
-		nurseBiz.addNews(news);
+		boolean flag=nurseBiz.addNews(news);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("WEB-INF/view.jiang/news_add");
-		return mav;
+		if(flag) {
+			return "成功";
+		}else {
+			return "失败";
+		}
+		
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("WEB-INF/view.jiang/news_add");
+		
 
 	}
 	

@@ -163,7 +163,7 @@ function randomColor() {//得到随机的颜色值
 
 <br />
 <br />
-<p style="margin:0 auto">版权所有：传一科技</p>
+<p align="center">版权所有：传一科技</p>
 
 </body>
 </html>
