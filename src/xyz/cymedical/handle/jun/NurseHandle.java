@@ -278,9 +278,7 @@ public class NurseHandle {
 						&& groupBiz.updateGroupCheckTime(sdf.format(cTime), bid)) {
 					//添加至病人项目表以及小结表
 					nurseBiz.insertPaitentProject(pList,time);
-						
 					strRet = "1";
-
 				} else {
 					strRet = "0";
 				}
