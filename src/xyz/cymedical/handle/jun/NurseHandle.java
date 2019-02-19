@@ -242,7 +242,7 @@ public class NurseHandle {
 		//生成条形码
 		String imgFormat = ImageUtil.JPEG;
 		for(int i = 0;i<patientList.size();i++) {
-			BarCodeTools.createBarCode(path, patientList.get(i).getCode(), imgFormat);
+			BarCodeTools.createBarCode(file.getParent()+File.separator, patientList.get(i).getCode(), imgFormat);
 		}
 		System.out.println("条形码生成成功");
 		//体检号
