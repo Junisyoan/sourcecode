@@ -259,13 +259,13 @@ public class NurseHandle {
 		int cn = 0;
 		if (obj==null) {
 			cn = 1;
-		}else {
-			cn = (int)obj+1;
 		}
 		for (Patient patient : patientList) {
 			patient.setCheck_num(String.format("%08d", cn));
+			cn++;
 			System.out.println(patient.getCheck_num());
 		}
+		request.getServletContext().setAttribute("CN",cn);
 			System.out.println("准备插入体检人员");
 			//	插入病人
 			List<Patient> pList = patientBiz.insertByBatch(patientList);
