@@ -69,14 +69,13 @@ public class UserManageHandle {
 
 		if (ret == 1) {
 			System.out.println("添加成功...");
-			mav.setViewName("WEB-INF/view.jiang/usermanage");
+			maplist = tbUserBiz.findAll2();
 		}
 
 //		mav.setViewName("WEB-INF/view.jiang/index");
 		mav.setViewName("WEB-INF/view.jiang/usermanage");
-
+		mav.addObject("maplist", maplist);
 		return mav;
-
 	}
 
 	// 查
@@ -223,9 +222,26 @@ public class UserManageHandle {
 	// 修改人员信息二部
 	@RequestMapping(value = "/updeteuser.handle", method = RequestMethod.POST)
 	public ModelAndView updeteuser(HttpServletRequest request, HttpServletResponse response, Tb_user upuser) {
+//		ModelAndView mav = new ModelAndView();
+//
+//		tbUserBiz.upUser(upuser);
+//
+//		mav.setViewName("WEB-INF/view.jiang/usermanage");
+		
 		ModelAndView mav = new ModelAndView();
-
+		upuser.setPwd(Encryption.getResult(upuser.getPwd()));
 		tbUserBiz.upUser(upuser);
+		userall = tbUserBiz.findAll();
+		maplist = tbUserBiz.findAll2();
+		System.out.println("99999=" + maplist.get(0).get("name"));
+
+		System.out.println("aaaa....=" + userall);
+		if (null != maplist && maplist.size() > 0) {
+
+			request.setAttribute("maplist", maplist);
+		} else {
+			System.out.println("沒有數據");
+		}
 
 		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		return mav;

@@ -47,7 +47,7 @@
      <ul class="clearfix">
       <li><label class="label_name">新角色ID</label> <input name="role_id" type="text"  class="text_add" id="role_id"/><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">新角色</label> <input name="name" type="text"  class="text_add" id="name"/><i style="color:#F60; ">*</i></li>
-      <li><label class="label_name">归属ID</label> <input name="dept_id" type="text"  class="text_add" id="dept_id"/><i style="color:#F60; ">*</i></li>
+      <li><label class="label_name">归属ID</label> <input name="dept_id" type="text"  class="text_add" id="dept_id"/><i style="color:#F60; ">*部门ID</i></li>
       </ul>    
    		 </form>
      </div>       
@@ -209,7 +209,7 @@ function delectrole(a){
 	var updetename=t.name;
 	var re=confirm("确定刪除？   刪除前请确保此角色与部门无关联");
 	if(re){
-			alert(updetename);
+// 			alert(updetename);
 		var form = document.createElement("Form");
 		form.action="<%=path%>rolemanage/delectrole.handle";
 		form.method="post";
@@ -223,7 +223,7 @@ function delectrole(a){
 		document.body.appendChild(form);
 		
 		form.submit();
-		
+<%-- 		 location.href="<%=path%>rolemanage/select.handle"; --%>
 		 
 		}else{
 			alert("错误");

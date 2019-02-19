@@ -14,5 +14,7 @@ public interface TbRolePower {
 	public List<Tb_role_power>  selectrprid(Tb_role_power tb_role_power);
 	
 	public int delectrprid(Tb_role_power tb_role_power);
+	
+	
 
 }

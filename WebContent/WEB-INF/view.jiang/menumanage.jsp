@@ -178,10 +178,28 @@ $('#add_butn').on('click', function(){
 	             }
 // 			 
 		        else{
-		        	var aaa = document.getElementById("add");
-		        	aaa.submit();
+// 		        	var aaa = document.getElementById("add");
+// 		        	aaa.submit();
 	 
-				  layer.close(index);      
+				  var m = $('#menu_id').val();
+				  var n = $('#name').val();
+				  var l = $('#link').val();
+				  var s = $('#superior').val();
+				  $.ajax({
+					  url:"<%=path%>menumanage/addmenu.handle",
+					  dataType:"text",
+					  type:"post",
+					  data:{'menu_id':m ,'name':n,'link':l,'superior':s  },
+					  success:function(re){
+						  if(re=="1"){
+							  alert("添加成功");
+						  }else{
+							  alert("添加失败");
+						  }
+						  location.href='<%=path%>menumanage/select.handle';
+					  }
+				  });
+				  layer.close(index); 
 			  } 
 			}
 	    })
@@ -240,7 +258,7 @@ function delect(e){
 		 success:function(data){
 		 if(data=="00"){
 			 alert("删除成功"); 
-			 
+			 location.href="<%=path%>menumanage/select.handle";
 		 }
 			
 		 },

@@ -32,5 +32,7 @@
  	delete from tb_role_power where role_id=#{role_id} 
  	 
  	</delete>
+ 	
+ 	
  
 </mapper>

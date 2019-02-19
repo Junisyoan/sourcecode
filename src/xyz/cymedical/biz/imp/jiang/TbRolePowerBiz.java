@@ -44,6 +44,9 @@ public class TbRolePowerBiz implements TbRolePower{
 		// TODO Auto-generated method stub
 		return tbRolePowerMapper.delectrprid(tb_role_power);
 	}
+
+ 
+	 
 	
 	 
 

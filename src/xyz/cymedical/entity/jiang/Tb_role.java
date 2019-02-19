@@ -9,6 +9,7 @@ public class Tb_role {
 	private int role_id;//角色id
 	private String name;//角色名字 
 	private int  dept_id;
+	 
 	
 	public Tb_role() {
 		super();

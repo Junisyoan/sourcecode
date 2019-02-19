@@ -29,5 +29,14 @@
 	insert into tb_role_dept (role_id,dept_id,state) values(#{role_id},#{dept_id},#{state})
 	
 	</insert>
+	
+	<update id="deletetep" parameterType="xyz.cymedical.entity.jiang.Tb_role_dept">
+ 	 update tb_role_dept set state=#{state} where role_id=#{role_id}
+ 	</update>
+ 	
+ 	<select id="selectroledeptroleid"   parameterType="int"
+	resultType="xyz.cymedical.entity.jiang.Tb_role_dept">
+		select * from tb_role_dept where role_id = #{role_id}  
+	</select>
   
 </mapper>

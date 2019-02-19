@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jiang.Tb_role_dept;
+import xyz.cymedical.entity.jiang.Tb_role_power;
 import xyz.cymedical.entity.jiang.Tb_user;
 
 @Repository
@@ -20,5 +21,8 @@ public interface TbRoleDeptMapper {
 	
 	public int addroledept(Tb_role_dept tb_role_dept);/*添加角色部门联合表*/
 	
+	public int deletetep(Tb_role_dept tb_role_dept);/*逻辑删除*/
+	
+	public List<Tb_role_dept>  selectroledeptroleid(int role_id);/*删除前 先查一下角色部门id*/
  
 }

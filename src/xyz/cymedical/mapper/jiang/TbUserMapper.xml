@@ -72,6 +72,9 @@
 			<if test="pwd != null and pwd != ''">
 				pwd=#{pwd},
 			</if>
+			<if test="param_id != null and param_id != ''">
+				param_id=#{param_id},
+			</if>
 			<if test="sex != null and sex != ''">
 				sex=#{sex},
 			</if>
