@@ -633,8 +633,11 @@ public class CompanyHandle {
 
 			case "注册成功":
 				System.out.println("公司注册成功，生成公司目录" + company.getName());
-				File file = new File(
-						request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
+				File file = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile"));
+				if (!file.exists()) {
+					file.mkdir();
+				}
+				file = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
 				System.out.println(file.getPath());
 				if (file.mkdir()) {
 					System.out.println("目录创建成功");
