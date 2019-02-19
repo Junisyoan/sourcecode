@@ -256,7 +256,7 @@ var r_id;
 		</div>
 
 		<!-- 未分配的菜单 -->
-		<div id="menu_select"" class="zTreeDemoBackground left">
+		<div id="menu_select" class="zTreeDemoBackground left">
 			<h1>未分配菜单</h1>
 
 			<ul id="unallot" class="ztree" style="font-size: 28"></ul>

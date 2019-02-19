@@ -58,7 +58,7 @@
 			</table>
 		</div>
 	</div>
-</body>
+
 <script type="text/javascript">
 function getReceipt(bid){
 	var s = confirm("确认打印?");
@@ -99,4 +99,5 @@ $(function(){
 });
 
 </script>
+</body>
 </html>

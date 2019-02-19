@@ -57,7 +57,7 @@
 			</table>
 		</div>
 	</div>
-</body>
+
 <script type="text/javascript">
 
 function createCheckpage(bid,batch){
@@ -72,4 +72,5 @@ $(function(){
 });
 
 </script>
+</body>
 </html>

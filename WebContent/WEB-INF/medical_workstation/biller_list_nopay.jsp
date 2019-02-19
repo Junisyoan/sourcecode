@@ -53,7 +53,7 @@
 			</table>
 		</div>
 	</div>
-</body>
+
 <script type="text/javascript">
 
 function delBiller(bid){
@@ -82,4 +82,5 @@ $(function(){
 });
 
 </script>
+</body>
 </html>

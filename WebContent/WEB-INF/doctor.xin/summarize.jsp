@@ -138,7 +138,7 @@
 				</c:if>
 				<div style="width:180px;margin:0 auto;border:0px red solid;padding:20px">
 					<c:if test="${flag=='false'}">
-						<input type="submit" class="btn btn-info Product_Details" onClick="return confirm('确定提交么？') ;" value="提交"/>
+						<input type="submit" class="btn btn-info Product_Details" onclick="return confirm('确定提交么？') ;" value="提交"/>
 					</c:if>
 					<a href="<%=path%>chiefdoctor/first.handle"><button type="button" class="btn btn-info Product_Details" >返回</button></a>
 				</div>
@@ -148,7 +148,6 @@
 
 	</div>
 	
-	</div>
 	<!--添加属性样式-->
 	<div class="Attributes_style" id="add_Attributes_style"
 		style="display: none">
