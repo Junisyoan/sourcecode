@@ -83,4 +83,7 @@ public interface NurseBiz {
 	//删除
 	public boolean delNews(String newsid);
 
+	//选择套餐后添加对应项目信息
+	public boolean insertPaitentProject(List<Patient> pList,String time);
+
 }

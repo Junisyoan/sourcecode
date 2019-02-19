@@ -263,7 +263,14 @@ public class NurseHandle {
 				if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)
 						&& billerBiz.updateBillerCreate(bid)
 						&& nurseBiz.insertPaitentCombo(pList,bid)) {
+					
+					String time = "2018-08-08";
+					nurseBiz.insertPaitentProject(pList,time);
+					
 					response.getWriter().print("1");
+					
+					
+					
 				} else {
 					response.getWriter().print("0");
 				}

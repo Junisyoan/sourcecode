@@ -40,17 +40,18 @@
 				</form>
 				
 					<div>
-					<table align="center" style="width:1000px;font-size: 15px;">
+					<table align="center" style="width:950px;font-size: 15px;">
 					<tr style="margin:0 5px">
-						<td>姓名：${patient.name }&nbsp;&nbsp;</td>
-						<td>年龄：${patient.age }&nbsp;&nbsp;</td>
-						<td>性别：${patient.sex }&nbsp;&nbsp;</td>
-						<td>身份证号：${patient.ID }&nbsp;&nbsp;</td>
-						<td>电话号码：${patient.phone }&nbsp;&nbsp;</td>
+						<td>姓名：${patient.name }</td>
+						<td>年龄：${patient.age }</td>
+						<td>性别：${patient.sex }</td>
+						<td>身份证号：${patient.ID }</td>
+						<td>电话号码：${patient.phone }</td>
 						<td>检查号：${patient.check_num }</td>
 					</tr>
 					<tr>
-						<td>公司名称：${patient.cname }&nbsp;&nbsp;</td>
+						
+						<td>公司名称：${patient.cname }</td>
 						<td>余额：${patient.deposit }</td>
 					</tr>
 					</table>
@@ -73,18 +74,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>13505140602</td>
-							<td>备注信息</td>
-							<td>备注信息</td>
-							<td>备注信息</td>
-							<td>
-								<a href=""><button type="button" class="btn btn-info Product_Details">检查</button></a>
-								<button type="button" class="btn btn-primary">修改</button>
-								<button type="button" class="btn btn-warning">删除</button></td>
-						</tr>
-
+						
 						<c:forEach items="${prolist }" var="p" varStatus="s">
 							<tr>
 								<td>${s.index + 1}</td>

@@ -16,6 +16,8 @@ import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 import xyz.cymedical.entity.xin.News;
+import xyz.cymedical.entity.zsc.Detail;
+import xyz.cymedical.entity.zsc.Project;
 import xyz.cymedical.mapper.jun.CompanyMapper;
 import xyz.cymedical.mapper.jun.NurseMapper;
 
@@ -113,6 +115,42 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	public boolean delNews(String newsid) {
 		// TODO Auto-generated method stub
 		return nurseMapper.delNews(newsid);
+	}
+
+	@Override
+	public boolean insertPaitentProject(List<Patient> pList,String time) {
+		// TODO Auto-generated method stub
+		
+		if(pList!=null && pList.size()>0) {
+			//项目列表
+			System.out.println("套餐名="+pList.get(0).getComboName());
+			List<Project> prolist = nurseMapper.findMyProject(pList.get(0).getComboName());
+			System.out.println("prolist.get(0)="+prolist.get(0));
+			
+			for (int i = 0; i < pList.size(); i++) {
+				Patient p=pList.get(i);
+				System.out.println("病人="+p);
+				for (int j = 0; j < prolist.size(); j++) {
+					Project pro=prolist.get(j);
+					
+					List<Detail> dlist =nurseMapper.findMyDetail(pro.getProject_id());
+					
+					for (int k = 0; k < dlist.size(); k++) {
+						Detail d = dlist.get(k);
+						nurseMapper.insertbrief(d.getDetail_id(),p.getPaitent_id(),time,pro.getProject_id());
+					}
+					
+					
+					
+					System.out.println("pro="+pro);
+					nurseMapper.insertPaitentProject(p.getPaitent_id(),pro.getProject_id());
+				}
+				
+			}
+		}
+		
+		
+		return true;
 	}
 
 	
