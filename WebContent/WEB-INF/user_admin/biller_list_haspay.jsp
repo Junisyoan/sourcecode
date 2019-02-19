@@ -53,7 +53,7 @@
 			</table>
 		</div>
 	</div>
-</body>
+
 <script type="text/javascript">
 
 $(function(){
@@ -61,4 +61,5 @@ $(function(){
 });
 
 </script>
+</body>
 </html>
