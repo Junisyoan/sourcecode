@@ -137,13 +137,13 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 					
 					for (int k = 0; k < dlist.size(); k++) {
 						Detail d = dlist.get(k);
-						nurseMapper.insertbrief(d.getDetail_id(),p.getPaitent_id(),time,pro.getProject_id());
+						nurseMapper.insertbrief(d.getDetail_id(),p.getID(),time,pro.getProject_id());
 					}
 					
 					
 					
 					System.out.println("pro="+pro);
-					nurseMapper.insertPaitentProject(p.getPaitent_id(),pro.getProject_id());
+					nurseMapper.insertPaitentProject(p.getID(),pro.getProject_id());
 				}
 				
 			}
