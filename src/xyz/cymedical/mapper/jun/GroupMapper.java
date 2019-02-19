@@ -16,6 +16,13 @@ import xyz.cymedical.entity.jun.Group;
 public interface GroupMapper {
 	
 	/**
+	 * 修改体检时间
+	 * @param time	体检时间
+	 * @return	是否插入
+	 */
+	public boolean updateGroupCheckTime(@Param("time")String time,@Param("bid")String bid);
+	
+	/**
 	 * 创建关联表
 	 * @param fid	文件id
 	 * @param gid	团检表id

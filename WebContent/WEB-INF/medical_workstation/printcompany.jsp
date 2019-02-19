@@ -77,7 +77,7 @@
 						<td>${p.check_num}</td>
 						<td style="mso-number-format: 'yyyy\-mm\-dd';">${p.time}</td>
 						<td><a
-							href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}"><span class="btn btn-info">打印体检报告</span></a>
+							href="<%=path%>patient/print.handle?name=${p.n1}&time=${p.time}&code=${p.code}"><span class="btn btn-info">打印体检报告</span></a>
 							</td>
 					</tr>
 				</c:forEach>

@@ -116,10 +116,10 @@ public class PatientHandle {
 
 	// 体检报告人打印
 	@RequestMapping(value = "/print.handle")
-	public ModelAndView print(String name, String time) {
+	public ModelAndView print(String name, String time,String code) {
 
 		patientlist5 = patientMapper.querypath(name, time);
-		patientlist = patientMapper.query(name, "", time, "");
+		patientlist = patientMapper.query(name, "", time, code);
 		patientlist2 = patientMapper.queryproject(name, time);
 		patientlist3 = patientMapper.querybrief(name, time);
 		patientlist4 = patientMapper.queryadvise(name, time);

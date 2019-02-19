@@ -85,6 +85,7 @@ public class BarCodeTools {
 			// 保存二维码图片
 			FileOutputStream fileOutputStream = null;
 			String imgPath = savePath + imgName + "." + imgFormat;
+			System.out.println("条形码位置："+imgPath);
 			try {
 				try {
 					savePath = URLDecoder.decode(savePath, "UTF-8");
