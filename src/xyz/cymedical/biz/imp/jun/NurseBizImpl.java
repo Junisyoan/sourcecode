@@ -121,6 +121,8 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 	public boolean insertPaitentProject(List<Patient> pList,String time) {
 		// TODO Auto-generated method stub
 		
+		System.out.println("pList="+pList);
+		
 		if(pList!=null && pList.size()>0) {
 			//项目列表
 			System.out.println("套餐名="+pList.get(0).getComboName());
@@ -139,7 +141,6 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 						Detail d = dlist.get(k);
 						nurseMapper.insertbrief(d.getDetail_id(),p.getID(),time,pro.getProject_id());
 					}
-					
 					
 					
 					System.out.println("pro="+pro);
