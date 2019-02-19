@@ -170,15 +170,6 @@ public class NurseHandle {
 		System.out.println("打印导检单："+bid);
 		List<Patient> cps = nurseBiz.getCheckPage(bid);
 		
-//		companyFile = companyFileBiz.queryFileByBillerId(bid);
-//		String path = companyFile.getFpath();
-//		File file = new File(path);
-		//生成条形码
-//		String imgFormat = "jpeg";
-//		for(int i = 0;i<cps.size();i++) {
-//			BarCodeTools.createBarCode(file.getPath(), cps.get(i).getCode(), imgFormat);
-//		}
-		
 		System.out.println("体检人员信息："+cps);
 		HashMap<String, List<Patient>> checkMap = new HashMap<>();
 		List<Patient> tmpList = new ArrayList<>();
@@ -202,7 +193,7 @@ public class NurseHandle {
 		
 		modelAndView = new ModelAndView("WEB-INF/medical_workstation/print-check");
 		modelAndView.addObject("checkMap", checkMap);
-		modelAndView.addObject("ctime", ctime);
+		modelAndView.addObject("ctime", cps.get(0).getID());
 		return modelAndView;
 	}
 	
