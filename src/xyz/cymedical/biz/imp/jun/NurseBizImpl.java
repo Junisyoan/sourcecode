@@ -70,7 +70,7 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 
 	@Override
 	public boolean insertPaitentCombo(List<Patient> patients,String bid) {
-		System.out.println("体检人数量："+patients.size());
+		System.out.println("创建关系表，体检人数量："+patients.size());
 		if (nurseMapper.insertPaitentCombo(Integer.parseInt(bid),patients)==patients.size()) {
 			isUpdate=true;
 		}else {

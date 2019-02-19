@@ -10,6 +10,12 @@ import xyz.cymedical.entity.jun.Group;
 */
 public interface GroupBiz {
 	
+	/**
+	 * 修改体检时间
+	 * @param time	体检时间
+	 * @return	是否插入
+	 */
+	public boolean updateGroupCheckTime(String time,String bid);
 	
 	/**
 	 * 更新软件表信息

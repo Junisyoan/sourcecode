@@ -98,6 +98,14 @@ public class CompanyHandle {
 
 	
 	/*
+	 * 下载套餐模板
+	 */
+	
+	
+	
+	
+	
+	/*
 	 * 删除不合格文件
 	 */
 	@RequestMapping(value="/delInvalide.handle",method=RequestMethod.POST)
@@ -517,13 +525,14 @@ public class CompanyHandle {
 		System.out.println(companyFile.getSize());
 		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath() + "/";
-		File fileDir = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
+		File fileDir = new File(request.getServletContext().getRealPath("/uploadFile/" + company.getName()));
 		System.out.println(fileDir.getPath());
 		// 目录是否存在
 		try {
 			if (fileDir.isDirectory()) {
 				// 创建文件
 				File file = new File(fileDir.getAbsolutePath() + "/" + companyFile.getOriginalFilename());
+				System.out.println(fileDir.getAbsolutePath() + "/" + companyFile.getOriginalFilename());
 				if (file.exists()) {
 					System.out.println("文件存在");
 					response.getWriter().println(ResponseTools.returnMsgAndBack("文件存在"));

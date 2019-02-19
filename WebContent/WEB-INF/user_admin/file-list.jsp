@@ -26,7 +26,7 @@
 <body>
 	<div class="page-content">
 	<div class="Manager_style">
-		<span class="title_name">文件上传</span>
+		<span class="title_name">文件操作</span>
 		<button type="button" class="btn btn-info" onclick="javascript:$('#upfile').dialog('open');">上传文件</button>
 		<button type="button" class="btn btn-info" onclick="javascript:location.href='${path}XX公司团检表.xls';">下载文档模板</button>
 		<div id="upfile" style="display:none;">
