@@ -81,6 +81,9 @@ input {
 				<h4 style="margin-left: 210px;">
 					打印时间：<input type="text" value="<%=datetime%>" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
+						<img
+						src="${pageContext.servletContext.contextPath}/uploadFile/${p.n2}/${p.check_num}.jpeg"
+						width="180" height="50" />
 				</h4>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
