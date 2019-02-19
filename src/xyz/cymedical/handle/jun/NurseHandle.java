@@ -52,6 +52,7 @@ import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
+import xyz.cymedical.tools.zsc.Encryption;
 
 /**
 *	@author Junisyoan;
@@ -883,7 +884,7 @@ public class NurseHandle {
 			String account,
 			String pwd) {
 		System.out.println("用户登录" + account);
-		Nurse nurse = nurseBiz.queryNurseBylogin(account, pwd);
+		Nurse nurse = nurseBiz.queryNurseBylogin(account, Encryption.getResult(pwd));
 		modelAndView = new ModelAndView();
 		if (nurse != null) {
 			System.out.println("登录成功"+nurse);

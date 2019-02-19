@@ -43,7 +43,6 @@
 					<option></option>
 					<option>普通</option>
 					<option>检验</option>
-					<option>影像</option>
 					<option>彩超</option>
 				</select>
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
@@ -74,7 +73,6 @@
      				<select name="type" id="type1" style="width:160px;height:30px;margin-left:10px;">
 						<option>普通</option>
 						<option>检验</option>
-						<option>影像</option>
 						<option>彩超</option>
 					</select>
 				</li>
@@ -109,7 +107,6 @@
      				<select name="type" id="type" style="width:160px;height:30px;margin-left:10px;">
 						<option>普通</option>
 						<option>检验</option>
-						<option>影像</option>
 						<option>彩超</option>
 					</select>
 				</li>
