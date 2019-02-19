@@ -283,7 +283,7 @@ $(function(){
 				}else if(retData=="0"){
 					alert("生成失败");
 				}
-					location.href="<%=path%>nurse/getBillerNoPay.handle";
+				location.href="<%=path%>nurse/getBillerNoPay.handle";
 			},
 			error:function(){
 				alert("服务器无响应");

@@ -253,16 +253,12 @@ public class CompanyHandle {
 			//商户订单号
 			//交易状态
 			String trade_status="";
-			try {
-				String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+				String out_trade_no = request.getParameter("out_trade_no");
 
 				//支付宝交易号
-				String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+				String trade_no = request.getParameter("trade_no");
 
-				trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+				trade_status = request.getParameter("trade_status");
 			
 			if(trade_status.equals("TRADE_FINISHED")){
 				//判断该笔订单是否在商户网站中已经做过处理
@@ -528,7 +524,15 @@ public class CompanyHandle {
 		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath() + "/";
 		File fileDir = new File(request.getServletContext().getRealPath("/uploadFile/" + company.getName()));
+		File upload = new File(request.getServletContext().getRealPath("/uploadFile"));
 		System.out.println(fileDir.getPath());
+		if (!upload.exists()) {
+			upload.mkdirs();
+		}
+		if (!fileDir.exists()) {
+			fileDir.mkdir();
+		}
+		
 		// 目录是否存在
 		try {
 			if (fileDir.isDirectory()) {
@@ -646,7 +650,7 @@ public class CompanyHandle {
 				} else {
 					System.out.println("创建失败");
 				}
-				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "../login_company.html"));
+				response.getWriter().println(ResponseTools.returnMsgAndRedirect(res, "../login_company.jsp"));
 				break;
 
 			default:
