@@ -57,4 +57,10 @@ public class GroupBizImpl extends BaseImpl implements GroupBiz {
 		return isUpdate;
 	}
 
+	@Override
+	public boolean updateGroupCheckTime(String time,String bid) {
+		System.out.println("修改体检时间："+time);
+		return groupMapper.updateGroupCheckTime(time, bid);
+	}
+
 }

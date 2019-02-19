@@ -44,7 +44,7 @@ input {
 					<h3>体检日期：${p.time}</h3>
 				</div>
 				<p>&nbsp;</p>
-				<hr style="width: 1200px; color: black;"/>
+				<hr style="width: 1200px; color: black;" />
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
@@ -81,6 +81,9 @@ input {
 				<h4 style="margin-left: 210px;">
 					打印时间：<input type="text" value="<%=datetime%>" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
+						<img
+						src="${pageContext.servletContext.contextPath}/uploadFile/${p.n2}/${p.check_num}.jpeg"
+						width="180" height="50" />
 				</h4>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
@@ -113,7 +116,7 @@ input {
 					<h3>体检日期：${p.time}</h3>
 				</div>
 				<p>&nbsp;</p>
-				<hr style="width: 1200px;"/>
+				<hr style="width: 1200px;" />
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
@@ -160,7 +163,7 @@ input {
 					<h3>体检日期：${p.time}</h3>
 				</div>
 				<p>&nbsp;</p>
-				<hr style="width: 1200px;"/>
+				<hr style="width: 1200px;" />
 				<div class="Manager_style">
 					<span class="title_name">体检项目列表</span>
 					<table class="table table-striped table-bordered table-hover"
@@ -211,7 +214,7 @@ input {
 					<h3>体检日期：${p.time}</h3>
 				</div>
 				<p>&nbsp;</p>
-				<hr style="width: 1200px;"/>
+				<hr style="width: 1200px;" />
 				<p>&nbsp;</p>
 				<h4 style="margin-left: 80px;">体检总结及建议</h4>
 				<blockquote
@@ -238,7 +241,7 @@ input {
 					<h3>体检日期：${p.time}</h3>
 				</div>
 				<p>&nbsp;</p>
-				<hr style="width: 1200px;"/>
+				<hr style="width: 1200px;" />
 				<p>&nbsp;</p>
 				<h4 style="margin-left: 80px;">生活健康保健</h4>
 				<blockquote
@@ -271,7 +274,7 @@ input {
 				<div style="float: right; margin-right: 75px;">
 					<h3>体检日期：${p.time}</h3>
 				</div>
-				<hr style="width: 1200px;"/>
+				<hr style="width: 1200px;" />
 				<div class="Manager_style">
 					<span class="title_name">体检小结信息</span>
 					<table class="table table-striped table-bordered table-hover"
@@ -312,6 +315,16 @@ input {
 							</c:forEach>
 						</tbody>
 					</table>
+					<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
+						<c:if test="${p3.resultpath != null}">
+							<p align="center">${p3.n3}</p>
+							<p align="center">
+								<img
+									src="${pageContext.servletContext.contextPath}/upload/${p3.resultpath}"
+									style="width: 350px;" />
+							</p>
+						</c:if>
+					</c:forEach>
 					<h4 align="center">6</h4>
 				</div>
 			</form>
@@ -322,7 +335,8 @@ input {
 		<c:if test="${s.index == 0}">
 			<h3 align="center">
 				<a
-					href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}"><button class="btn btn-info">返回</button></a>
+					href="<%=path%>patient/findpatientall.handle?name=${p.n1}&time=${p.time}"><button
+						class="btn btn-info">返回</button></a>
 			</h3>
 		</c:if>
 	</c:forEach>

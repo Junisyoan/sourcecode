@@ -4,6 +4,10 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="xyz.cymedical.mapper.jun.GroupMapper">
+
+	<update id="updateGroupCheckTime" parameterType="String">
+		update tb_group set time = #{time} where group_id = (select group_id from tb_biller where biller_id = #{bid})
+	</update>
 <!-- 创建关联表 -->
 	<insert id="insertFileGroup">
 		insert into tb_file_group(file_id,group_id)

@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +53,7 @@ import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
+import xyz.cymedical.tools.zsc.Encryption;
 
 /**
 *	@author Junisyoan;
@@ -172,10 +174,10 @@ public class NurseHandle {
 		String path = companyFile.getFpath();
 		File file = new File(path);
 		//生成条形码
-		String imgFormat = "jpeg";
-		for(int i = 0;i<cps.size();i++) {
-			BarCodeTools.createBarCode(file.getPath(), cps.get(i).getCode(), imgFormat);
-		}
+//		String imgFormat = "jpeg";
+//		for(int i = 0;i<cps.size();i++) {
+//			BarCodeTools.createBarCode(file.getPath(), cps.get(i).getCode(), imgFormat);
+//		}
 		
 		System.out.println("体检人员信息："+cps);
 		HashMap<String, List<Patient>> checkMap = new HashMap<>();
@@ -220,17 +222,33 @@ public class NurseHandle {
 	 * 账单生成导检单
 	 */
 	@RequestMapping(value="/createCheckList.handle",method=RequestMethod.POST)
-	public String createCheckList(
+	public @ResponseBody String createCheckList(
 			HttpServletResponse response,
 			HttpServletRequest request,
-			String bid) {
-		
+			String bid,
+			String time) {
+		System.out.println("要体检的时间："+time);
+		String strRet = "";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		long cTime = 0;//要体检的时间
+		long nTime = 0;//当前时间
+		try {
+			cTime = sdf.parse(time).getTime();
+			nTime = sdf.parse(sdf.format(System.currentTimeMillis())).getTime();
+			System.out.println("体检时间："+cTime);
+			System.out.println("当前时间："+nTime);
+			if (cTime<=nTime) {
+				strRet="-1";
+			}
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		response.setCharacterEncoding("utf-8");
 		System.out.println("生成导检单："+bid);
 		//取得文件信息
 		companyFile = companyFileBiz.queryFileByBillerId(bid);
 		
-		//	获取体检人员列表
+		//	获取体检人员列表，生成条形码
 		List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
 		System.out.println(patientList);
 		//获得公司存储路径
@@ -238,10 +256,11 @@ public class NurseHandle {
 		File file = new File(path);
 		path = file.getPath();
 		
+		System.out.println("生成条形码");
 		//生成条形码
 		String imgFormat = ImageUtil.JPEG;
 		for(int i = 0;i<patientList.size();i++) {
-			BarCodeTools.createBarCode(path, patientList.get(i).getCode(), imgFormat);
+			BarCodeTools.createBarCode(file.getParent()+File.separator, patientList.get(i).getCode(), imgFormat);
 		}
 		System.out.println("条形码生成成功");
 		//体检号
@@ -249,39 +268,34 @@ public class NurseHandle {
 		int cn = 0;
 		if (obj==null) {
 			cn = 1;
+		}else {
+			cn = (int)obj+1;
 		}
 		for (Patient patient : patientList) {
 			patient.setCheck_num(String.format("%08d", cn));
 		}
-		
-		try {
+			System.out.println("准备插入体检人员");
 			//	插入病人
 			List<Patient> pList = patientBiz.insertByBatch(patientList);
-			
+			System.out.println("准备创建关系表、修改体检时间");
 			if (pList!=null) {
 				//	创建关系表
 				if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)
 						&& billerBiz.updateBillerCreate(bid)
-						&& nurseBiz.insertPaitentCombo(pList,bid)) {
-					
-					String time = "2018-08-08";
+						&& nurseBiz.insertPaitentCombo(pList,bid)
+						&& groupBiz.updateGroupCheckTime(sdf.format(cTime), bid)) {
+					//添加至病人项目表以及小结表
 					nurseBiz.insertPaitentProject(pList,time);
-					
-					response.getWriter().print("1");
-					
-					
-					
+						
+					strRet = "1";
+
 				} else {
-					response.getWriter().print("0");
+					strRet = "0";
 				}
 			}else {
-				response.getWriter().print("0");
+				strRet="0";
 			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return strRet;
 	}
 
 	/*
@@ -743,98 +757,18 @@ public class NurseHandle {
 		//创建列表
 		List<Patient> patientList = new ArrayList<>();
 		
-//		//创建excel工作区间
-//		Workbook wb = null;
-//		//创建列存储空间
-//		List<String> dataList = new ArrayList<>();
 		//判断文件是否存在，并且必须是文件
 		if (cfile.exists()&&cfile.isFile()) {
-//			//获取后缀
-//			String [] suffix = cfile.getName().split("\\.");
-//			//分析后缀，确定打开方式
-//			try {
-//				if (suffix[1].equals("xls")) {
-//					wb = new HSSFWorkbook(new FileInputStream(cfile));
-//				} else if (suffix[1].equals("xlsx")) {
-//					wb = new XSSFWorkbook(cfile);
-//				} else {
-//					System.out.println("文件类型错误");
-//				}
-//			} catch (FileNotFoundException e) {
-//				e.printStackTrace();
-//			} catch (InvalidFormatException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//			//	开始解析，读取第一页
-//			Sheet sheet = wb.getSheetAt(0);
-//			//	第一行是列名，所以不读
-//			int firstRowIndex = sheet.getFirstRowNum() + 1;
-//			int lastRowIndex = sheet.getLastRowNum();
-//			//	循环获取
-//			for (int i = firstRowIndex; i <= lastRowIndex; i++) {
-//				//	遍历每一行
-//				Row row = sheet.getRow(i);
-//				if (row!=null) {
-//					//	获取总列数
-//					int colFirst = row.getFirstCellNum();
-//					int colLast = row.getLastCellNum();
-//					//	清空列存储
-//					dataList.clear();
-//					//	遍历每一列，如果列有空则进入下一行
-//					boolean isNull = false;
-//					for (int c = colFirst; c < colLast; c++) {
-//						Cell cell = row.getCell(c);
-//						if (cell.toString().equals("")) {
-//							isNull=true;
-//							break;
-//						} else if (cell != null) {
-//							cell.setCellType(CellType.STRING);
-//							dataList.add(cell.toString());
-//						}
-//					}
-//					//	如果列为空就下次循环
-//					if (isNull) {
-//						System.out.println("文档有空值");
-//						continue;
-//					}else {
-//						System.out.println(dataList);
-//						//	添加进数据
-//						patientList.add(
-//								new Patient(
-//										-1, 					//	病人id
-//										companyFile.getCompany_id(), 	//	公司id
-//										-1, 					//	套餐id
-//										dataList.get(0), 		//	姓名
-//										dataList.get(1),		//	性别
-//										dataList.get(2), 		//	年龄
-//										dataList.get(3), 		//	身份证号
-//										"-1",					
-//										dataList.get(4), 		//	电话号码
-//										"-1",
-//										dataList.get(5)			//	套餐名
-//								)
-//						);
-//					}
-//				}
-//			}
-//			try {
-//				wb.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
 			patientList = ExcelTools.getPatientList(companyFile);
 			System.out.println(patientList);
-			
-			
 			StringBuilder strState= new StringBuilder();
 			Patient p=null;
 			System.out.println("开始查询是否符合");
 			for (Patient patient : patientList) {
 				strState.setLength(0);
 				isExsit = comboBiz.queryComboByName(patient.getComboName());
-				if (!isExsit) {
+				System.out.println(patient.getComboName());
+				if (isExsit) {
 					strState.append("套餐不存在-");
 				}
 				p=patientBiz.queryID(patient.getID());
@@ -890,7 +824,7 @@ public class NurseHandle {
 			String account,
 			String pwd) {
 		System.out.println("用户登录" + account);
-		Nurse nurse = nurseBiz.queryNurseBylogin(account, pwd);
+		Nurse nurse = nurseBiz.queryNurseBylogin(account, Encryption.getResult(pwd));
 		modelAndView = new ModelAndView();
 		if (nurse != null) {
 			System.out.println("登录成功"+nurse);
