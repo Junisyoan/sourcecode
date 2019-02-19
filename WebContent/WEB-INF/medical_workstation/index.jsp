@@ -45,7 +45,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <img
-						src="images/logo.png">
+						src="<%=path%>image/index1/logo.png">
 				</small>
 				</a>
 				<!-- /.brand -->

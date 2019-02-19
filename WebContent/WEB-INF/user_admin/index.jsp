@@ -45,7 +45,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <img
-						src="images/logo.png">
+						src="<%=path%>image/index1/logo.png">
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -116,9 +116,6 @@
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path %>company/getBillerHasPay.handle?cid=${userCompany.company_id }" title="已结算账单" class="iframeurl"><i
 									class="icon-double-angle-right"></i>已结算账单</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>patient/showcompanypatient.handle" title="体检报告打印" class="iframeurl"><i
-									class="icon-double-angle-right"></i>体检报告打印</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.nav-list -->

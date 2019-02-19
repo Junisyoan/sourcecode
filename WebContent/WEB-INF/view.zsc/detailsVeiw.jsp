@@ -43,7 +43,6 @@
 					<option></option>
 					<option>普通</option>
 					<option>检验</option>
-					<option>影像</option>
 					<option>彩超</option>
 				</select>
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
@@ -74,7 +73,6 @@
      				<select name="type" id="type1" style="width:160px;height:30px;margin-left:10px;">
 						<option>普通</option>
 						<option>检验</option>
-						<option>影像</option>
 						<option>彩超</option>
 					</select>
 				</li>
@@ -109,7 +107,6 @@
      				<select name="type" id="type" style="width:160px;height:30px;margin-left:10px;">
 						<option>普通</option>
 						<option>检验</option>
-						<option>影像</option>
 						<option>彩超</option>
 					</select>
 				</li>
@@ -308,11 +305,11 @@ function change(e){
 				layer.alert('计量单位不能为空!',{title: '提示框',icon:0,});
 					return false;
 					
-			}if(!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+			}if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
 				layer.alert('最小值必须是数值!',{title: '提示框',icon:0,});
 					return false;
 					
-			}if(!(numCheck.test($('#max').val())||numCheck1.test($('#max').val()))){
+			}if($('#max').val() != ""&&!(numCheck.test($('#max').val())||numCheck1.test($('#max').val()))){
 				layer.alert('最大值必须是数值!',{title: '提示框',icon:0,});
 					return false;
 			}
@@ -402,14 +399,14 @@ $('#add_butn').on('click', function(){
 					 });
 					return false;
 					
-			}if(!(numCheck.test($('#min1').val())||numCheck1.test($('#min1').val()))){
+			}if($('#min1').val() != ""&&!(numCheck.test($('#min1').val())||numCheck1.test($('#min1').val()))){
 				layer.alert('最小值必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
 					 });
 					return false;
 					
-			}if(!(numCheck.test($('#max1').val())||numCheck1.test($('#max1').val()))){
+			}if($('#max1').val() != ""&&!(numCheck.test($('#max1').val())||numCheck1.test($('#max1').val()))){
 				layer.alert('最大值必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
