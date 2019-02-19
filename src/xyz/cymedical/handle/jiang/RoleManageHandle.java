@@ -73,7 +73,7 @@ public class RoleManageHandle {
 				
 			
 		 System.out.println("++++++="+name);
-		int ret= tbRoleBiz.addRole(name);
+		int ret= tbRoleBiz.addRole(tb_role);
 		
 //		int dept_id=Integer.valueOf(dept_id);
 //		tb_role_dept.setDept_id(dept_id);

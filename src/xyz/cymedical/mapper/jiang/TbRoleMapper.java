@@ -16,7 +16,8 @@ public interface TbRoleMapper {
 	
 	public Tb_role selectName(String name);
 	
-	public int addRole(String name);
+//	public int addRole(String name);
+	public int addRole(Tb_role tb_role);//添加
 	
 	public int delectrole(int role_id);
 	

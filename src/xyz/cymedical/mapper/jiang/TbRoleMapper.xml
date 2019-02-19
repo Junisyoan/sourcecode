@@ -12,9 +12,9 @@
 		select tr.* from tb_role tr,tb_role_dept trp where state='在用' and tr.role_id=trp.role_id
 	</select>
 	
-	<insert id="addRole" parameterType="String"> 
+	<insert id="addRole" parameterType="xyz.cymedical.entity.jiang.Tb_role"> 
 	
-		 insert into tb_role  (name) values (#{name})
+		 insert into tb_role  (role_id,name) values (#{role_id},#{name})
 	
 	</insert>
 

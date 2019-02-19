@@ -27,10 +27,10 @@ public class TbRoleBizImp implements TbRoleBiz{
 	}
 
 
-	@Override
-	public int addRole(String name) {
-		return tbRoleMapper.addRole(name);
-	}
+//	@Override
+//	public int addRole(String name) {
+//		return tbRoleMapper.addRole(name);
+//	}
 
 
 	@Override
@@ -71,6 +71,13 @@ public class TbRoleBizImp implements TbRoleBiz{
 	public List<Tb_menu> findUnMenu(int role_idd) {
 		// TODO Auto-generated method stub
 		return tbRoleMapper.findUnMenu(role_idd);
+	}
+
+
+	@Override
+	public int addRole(Tb_role tb_role) {
+		// TODO Auto-generated method stub
+		return tbRoleMapper.addRole(tb_role);
 	}
 
 

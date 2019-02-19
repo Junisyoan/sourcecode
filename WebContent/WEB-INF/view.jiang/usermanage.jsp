@@ -41,7 +41,16 @@
      		联系电话		<input type="text" name="phone"/><br/>
      		身份证	<input type="text" name="IDcard"/>
      		地址	<input type="text" name="address"/>
-     		状态<input type="text" name="state"/>
+<!--      		状态<input type="text" name="state"/> -->
+     		
+     		<li> <label class="label_name">状态</label>
+        <select name="state" id="state"   style=" width:170px;">
+       
+            <option value="启用">启用</option>
+            
+            <option value="禁用">禁用</option> 
+             
+        </select></li>
      		 
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 	</form>  
@@ -76,8 +85,8 @@
       <li><label class="label_name">联系地址</label><input name="address" type="text"  class="text_add" id="address"/></li>
        <li> <label class="label_name">状态</label>
         <select name="state"  style=" width:170px;">
-            <option value="禁用" >禁用</option>
             <option value="启用">启用</option> 
+            <option value="禁用" >禁用</option>
         </select></li>
          
       </ul>   
@@ -153,9 +162,9 @@ function show(companys){
 	for(var i = 0;i < companys.length;i++){
 		
 		var td1=$("<td></td>").text(companys[i].user_id);
-		var td2=$("<td></td>").text(companys[i].deptname);
+		var td2=$("<td></td>").text(companys[i].name);
 		var td3=$("<td></td>").text(companys[i].account);
-		var td4=$("<td></td>").text(companys[i].name);
+		var td4=$("<td></td>").text(companys[i].deptname);
 		var td5=$("<td></td>").text(companys[i].sex);
 		var td6=$("<td></td>").text(companys[i].phone);
 		var td7=$("<td></td>").text(companys[i].IDcard);
