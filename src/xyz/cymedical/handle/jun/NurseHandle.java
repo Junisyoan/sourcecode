@@ -24,7 +24,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jbarcode.util.ImageUtil;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,7 +48,6 @@ import xyz.cymedical.entity.jun.Invalide;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
-import xyz.cymedical.entity.xin.News;
 import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
 import xyz.cymedical.tools.jun.ResponseTools;
@@ -103,9 +101,56 @@ public class NurseHandle {
 	private DoctorBiz doctorbiz;//医生业务
 	
 	private String mycode;
-	
+	private String strRet;
 	private boolean isExsit;
 	
+	
+	
+	/*
+	 * 删除文件
+	 */
+	@RequestMapping(value = "/delFile.handle",method=RequestMethod.POST)
+	public @ResponseBody String delelteFile(String fid,String fname, HttpServletResponse response) {
+		System.out.println("删除文件："+fname+"--文件id："+fid);
+		strRet="";
+		//获得文件信息
+		CompanyFile cf = companyFileBiz.queryFile(fid);
+		boolean isSuccess=false;
+		if (cf!=null) {
+			if (companyFileBiz.delFile(fid)) {
+				//1成功，删除文件
+				File file = new File(cf.getFpath());
+				if (file.delete()) {
+					strRet="1";
+//					response.getWriter().print("1");
+					isSuccess = true;
+				}
+			}
+			//0失败
+			if (!isSuccess) {
+//				response.getWriter().print("0");
+				strRet="0";
+			}
+		}else {
+			strRet="1";
+		}
+		return strRet;
+	}
+	
+	
+	/*
+	 * 查询套餐
+	 */
+	@RequestMapping(value="/queryComboName.handle",method=RequestMethod.POST)
+	public @ResponseBody String queryComboName(String comboName) {
+		strRet="";
+		if (!comboBiz.queryComboByName(comboName)) {
+			strRet="1";
+		}else {
+			strRet="0";
+		}
+		return strRet;
+	}
 	
 	/*
 	 * 删除不合格文件
@@ -114,7 +159,7 @@ public class NurseHandle {
 	public @ResponseBody String delInvalide(String fid) {
 		System.out.println("删除文件："+fid);
 		
-		String strRet = "";
+		strRet = "";
 		//先删除文件
 		CompanyFile companyFile =companyFileBiz.queryFile(fid);
 		if (companyFile!=null) {
@@ -174,7 +219,6 @@ public class NurseHandle {
 		HashMap<String, List<Patient>> checkMap = new HashMap<>();
 		List<Patient> tmpList = new ArrayList<>();
 		String tmpName = cps.get(0).getName();
-		String ctime = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
 		for(int i = 0;i<cps.size();i++) {
 			if (!tmpName.equals(cps.get(i).getName())) {
 				checkMap.put(tmpName, tmpList);
@@ -219,7 +263,7 @@ public class NurseHandle {
 			String bid,
 			String time) {
 		System.out.println("要体检的时间："+time);
-		String strRet = "";
+		strRet = "";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		long cTime = 0;//要体检的时间
 		long nTime = 0;//当前时间
@@ -338,7 +382,7 @@ public class NurseHandle {
 	 * 全部生成账单
 	 */
 	@RequestMapping(value="/allOpen.handle",method=RequestMethod.POST)
-	public String allOpen(HttpServletResponse response,HttpServletRequest request,String fid) {
+	public @ResponseBody String allOpen(HttpServletResponse response,HttpServletRequest request,String fid) {
 		
 		response.setCharacterEncoding("utf-8");
 		//取得文件信息
@@ -422,16 +466,18 @@ public class NurseHandle {
 			isSuccess = billerBiz.insertBiller(group.getGroup_id(), "未结算", strBatch,price);
 			if (isSuccess) {
 				System.out.println("生成记账表");
-				response.getWriter().print("1");
+				strRet = "1";
+//				response.getWriter().print("1");
 			}else {
 				System.out.println("账单生成失败");
-				response.getWriter().print("0");
+				strRet="0";
+//				response.getWriter().print("0");
 			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return strRet;
 	}
 	
 	/*

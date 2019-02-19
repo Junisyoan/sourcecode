@@ -36,6 +36,7 @@
 						<th>是否开单</th>
 						<th>是否结算</th>
 						<th>批次</th>
+						<th>操作时间</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -48,6 +49,7 @@
 							<td>${b.bcreate}</td>
 							<td>${b.bstate}</td>
 							<td>${b.batch}</td>
+							<td>${b.btime}</td>
 							<td>
 							<button class="btn btn-info" onclick="createCheckpage('${b.biller_id}','${b.batch}');">生成导检单</button>
 							</td>

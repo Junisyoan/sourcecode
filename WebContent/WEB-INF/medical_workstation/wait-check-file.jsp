@@ -54,7 +54,7 @@
 			</tbody>
 		</table>
 	</div>
-	</div>
+</div>
 <script type="text/javascript">
 function check(fid){
 	location.href="<%=path%>nurse/checkFile.handle?fid="+fid;
