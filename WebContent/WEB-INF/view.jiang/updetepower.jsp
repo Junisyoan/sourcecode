@@ -23,6 +23,7 @@
       	
      	</ul>
 <input type="submit" value="提交">
+<button onclick="window.history.back();">返回</button>
 
 </form>
 </body>

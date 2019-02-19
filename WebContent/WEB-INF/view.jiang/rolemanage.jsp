@@ -209,7 +209,7 @@ function delectrole(a){
 	var updetename=t.name;
 	var re=confirm("确定刪除？   刪除前请确保此角色与部门无关联");
 	if(re){
-			alert(updetename);
+// 			alert(updetename);
 		var form = document.createElement("Form");
 		form.action="<%=path%>rolemanage/delectrole.handle";
 		form.method="post";
@@ -223,7 +223,7 @@ function delectrole(a){
 		document.body.appendChild(form);
 		
 		form.submit();
-		
+<%-- 		 location.href="<%=path%>rolemanage/select.handle"; --%>
 		 
 		}else{
 			alert("错误");

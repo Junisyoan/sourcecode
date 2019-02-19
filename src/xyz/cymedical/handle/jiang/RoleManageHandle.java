@@ -31,6 +31,7 @@ public class RoleManageHandle {
 	
 	
 	private  Tb_role role;
+	private List<Tb_role_dept> roledeptlist;
 	private List<Tb_role> roleall;
 	@Resource
 	private TbRoleBiz tbRoleBiz;
@@ -39,6 +40,8 @@ public class RoleManageHandle {
 	private TbRoleDept tbRoleDept;
 	@Resource
 	private Tb_role_dept tb_role_dept;
+	
+	
 	
 	@Resource
 	private TbRolePower tbRolePower;/*0biz*/
@@ -125,6 +128,7 @@ public class RoleManageHandle {
 	// 删除 
 		@RequestMapping(value = "/delectrole.handle", method = RequestMethod.POST)
 		public ModelAndView delect(HttpServletRequest request, HttpServletResponse response, String updetename) {
+			System.out.println("删除啊");
 			String data = null;
 			ModelAndView mav = new ModelAndView();  
 			System.out.println("...=" + updetename);
@@ -132,14 +136,33 @@ public class RoleManageHandle {
 			System.out.println("role_id="+role_id);
 			/*删除角色之前要先查询 本id是否在角色权限表中存在 如存在 需要先删除角色权限表*/
 			tb_role_power.setRole_id(role_id);
+			String state="删除";
+			tb_role_dept.setRole_id(role_id);
+			tb_role_dept.setState(state);
 			List<Tb_role_power> tbrolepower=tbRolePower.selectrprid(tb_role_power);
 			System.out.println("tbrolepower="+tbrolepower);
+			/*
+			 * 
+			 * 查询角色部门联合表是否存在
+			 */
+			
+			int ret=0;
+			
+			 roledeptlist=tbRoleDept.selectroledeptroleid(role_id);
+			
+			
 			if(tbrolepower.size()>0) {
-				tbRolePower.delectrprid(tb_role_power);
+				ret=tbRolePower.delectrprid(tb_role_power);
+			}else {
+				if(roledeptlist.size()==0) {
+					
+					ret=tbRoleBiz.delectrole(role_id);
+				}else {
+					 ret=tbRoleDept.deletetep(tb_role_dept);
+				}
 			}
 			
 			
-			int ret=tbRoleBiz.delectrole(role_id);
 			System.out.println("ret="+ret);
 			
 			try {

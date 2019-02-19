@@ -20,4 +20,6 @@ public interface TbRolePowerMapper {
 	public List<Tb_role_power>  selectrprid(Tb_role_power tb_role_power);/*删除角色前 先查询联表中是否存在*/
 	
 	public int delectrprid(Tb_role_power tb_role_power);
+	
+	
 }

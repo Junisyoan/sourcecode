@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.entity.jiang.Tb_role_dept;
+import xyz.cymedical.entity.jiang.Tb_role_power;
 import xyz.cymedical.mapper.jiang.TbRoleDeptMapper;
 
 @Service("tbRoleDept")
@@ -43,6 +44,18 @@ public class TbRoleDeptBizImp implements TbRoleDept{
 	public int addroledept(Tb_role_dept tb_role_dept) {
 		// TODO Auto-generated method stub
 		return tbRoleDeptMapper.addroledept(tb_role_dept);
+	}
+
+	@Override
+	public int deletetep(Tb_role_dept tb_role_dept) {
+		// TODO Auto-generated method stub
+		return tbRoleDeptMapper.deletetep(tb_role_dept);
+	}
+
+	@Override
+	public List<Tb_role_dept> selectroledeptroleid(int role_id) {
+		// TODO Auto-generated method stub
+		return tbRoleDeptMapper.selectroledeptroleid(role_id);
 	}
 
  

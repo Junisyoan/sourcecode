@@ -122,17 +122,20 @@ public class MenuManageHandle {
 	}
 	//添加第二步 正式添加
 	@RequestMapping(value = "/addmenu.handle", method = RequestMethod.POST) 
-	public ModelAndView  addMenu(HttpServletRequest request, HttpServletResponse response, Tb_menu tb_menu) {
+	public @ResponseBody String  addMenu(HttpServletRequest request, HttpServletResponse response, Tb_menu tb_menu) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("-1");
 		int ret=tbMenuBiz.addMenu(tb_menu);
+		String re = "";
 		if(ret==1) { 
-			mav.setViewName("WEB-INF/view.jiang/menumanage");
+//			mav.setViewName("WEB-INF/view.jiang/menumanage");
+			re="1";
 		}else { 
-			mav.setViewName("WEB-INF/view.jiang/err");
+//			mav.setViewName("WEB-INF/view.jiang/err");
+			re="0";
 		} 
 
-		return mav;
+		return re;
 	}
 // 
 	//修改第一步
