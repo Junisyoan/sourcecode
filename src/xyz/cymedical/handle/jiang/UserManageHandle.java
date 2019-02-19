@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import xyz.cymedical.biz.jiang.TbDeptBiz;
+import xyz.cymedical.biz.jiang.TbRoleBiz;
 import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
+import xyz.cymedical.entity.jiang.Tb_role;
 import xyz.cymedical.entity.jiang.Tb_role_dept;
 import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.jun.Company;
@@ -29,8 +33,10 @@ import xyz.cymedical.tools.zsc.Encryption;
 @Controller
 @RequestMapping("/usermanage")
 public class UserManageHandle {
-
+	@Resource
 	private Tb_user user;
+	@Resource
+	private Tb_user userroledept;
 
 	private List<Tb_user> userall;
 
@@ -38,12 +44,25 @@ public class UserManageHandle {
 	@Resource
 	private TbUserBiz tbUserBiz;
 	@Resource
+	private TbRoleBiz tbRoleBiz;
+	@Resource
 	private TbRoleDept tbRoleDept;
+	@Resource
+	private Tb_role tbRole;
+	
+	private List<Tb_role> tbrole;
+	private List<Map<String, Object>> maplisttbrole;
+	
 
 	@Resource
 	private NurseBiz nurseBiz;
 	
 	private List<Map<String, Object>> maplist;
+	
+	private List<Map<String, Object>> maplistdept;
+	
+	@Resource
+	private TbDeptBiz tbDeptBiz;
 
 	// 添加后台人员
 
@@ -55,13 +74,19 @@ public class UserManageHandle {
 //		System.out.println("doctor="+adduser.getDoctor());
 		System.out.println(adduser.getRole_dept_id());
 		System.out.println("douctor=" + adduser.getDoctor());
-		if (adduser.getDoctor().equals("内科医生")) {
-			adduser.setRole_dept_id(1);
-		} else if (adduser.getDoctor().equals("外科医生")) {
-			adduser.setRole_dept_id(2);
-		} else if (adduser.getDoctor().equals("管理员")) {
-			adduser.setRole_dept_id(3);
-		}
+//		if (adduser.getDoctor().equals("内科医生")) {
+//			adduser.setRole_dept_id(1);
+//		} else if (adduser.getDoctor().equals("外科医生")) {
+//			adduser.setRole_dept_id(2);
+//		} else if (adduser.getDoctor().equals("管理员")) {
+//			adduser.setRole_dept_id(3);
+//		}
+		userroledept= tbUserBiz.findthree(adduser);
+		System.out.println("userroledept="+userroledept);
+		int role_dept_id=userroledept.getRole_dept_id();
+		
+//		int role_dept_id=tbUserBiz.findthree(adduser).getRole_dept_id();
+		adduser.setRole_dept_id(role_dept_id);
 
 		System.out.println("qqqqqqqqqqqq+Role_dept_id=" + adduser.getRole_dept_id());
 		adduser.setPwd(Encryption.getResult(adduser.getPwd()));
@@ -115,7 +140,14 @@ public class UserManageHandle {
 		} else {
 			System.out.println("沒有數據");
 		}
-
+//
+		System.out.println("添加人员 进入后台查找部门"); 
+		String sta="在用";
+		maplistdept=tbDeptBiz.select(sta);
+		
+		request.setAttribute("maplistdept", maplistdept);
+		 
+		//
 		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		return mav;
 
@@ -137,23 +169,31 @@ public class UserManageHandle {
 	}
 
 	// 部门查询
-	@RequestMapping(value = "/adddept.handle", method = RequestMethod.POST)
+	@RequestMapping(value = "/adddept.handle", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
 //	, produces = "application/text;charset=utf-8"
-	public @ResponseBody String adddept(HttpServletRequest request, HttpServletResponse response, String dept) {
+	public @ResponseBody JSONObject adddept(HttpServletRequest request, HttpServletResponse response, String dept) {
 		String addrole;
-		System.out.println("...=" + dept);
-		if (dept.equals("内科")) {
-			addrole = "01";
-		} else {
-			if (dept.equals("外科")) {
-				addrole = "02";
-			} else {
-				addrole = "03";
-
-			}
-		}
-		System.out.println("xxxxxxj" + addrole);
-		return addrole;
+		System.out.println("dept="+dept);
+		maplisttbrole=tbRoleBiz.selectrole(dept);
+		System.out.println("maplisttbrole="+maplisttbrole);
+//		System.out.println("...=" + dept);
+//		if (dept.equals("内科")) {
+//			addrole = "01";
+//		} else {
+//			if (dept.equals("外科")) {
+//				addrole = "02";
+//			} else {
+//				addrole = "03";
+//
+//			}
+//		}
+//		System.out.println("xxxxxxj" + addrole);
+//		addrole=tbRole.toString();
+//		System.out.println("addrole="+addrole);
+//		mav.addObject("maplist", maplist);
+	
+		JSONObject jobj=JSONObject.fromObject(maplisttbrole);//把字符串ss转成json对象
+		return    jobj;
 
 	}
 
@@ -426,7 +466,18 @@ public class UserManageHandle {
 			}
 			return result;
 		}
-	
-	
+		//ajax 显示部门
+		@RequestMapping(value="/selectdept.handle",method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+		public @ResponseBody String  selectdept(HttpServletRequest request, HttpServletResponse response) {
+			System.out.println("添加人员 进入后台查找部门");
+			ModelAndView mav = new ModelAndView(); 
+			String sta="在用";
+			maplistdept=tbDeptBiz.select(sta);
+			
+			request.setAttribute("maplistdept", maplistdept);
+			
+			mav.setViewName("WEB-INF/view.jiang/usermanage");
+			return null;
+		}
 	
 }

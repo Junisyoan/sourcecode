@@ -80,4 +80,9 @@ public class TbUserBizImp implements TbUserBiz{
 			return "密码修改失败";
 		}
 	}
+	@Override
+	public Tb_user findthree(Tb_user user) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.findthree(user);
+	}
 }

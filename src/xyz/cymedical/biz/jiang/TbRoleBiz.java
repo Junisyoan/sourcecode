@@ -12,6 +12,8 @@ public interface TbRoleBiz {
 	
 	public Tb_role selectName(String name);
 	
+	public  List<Map<String,Object>> selectrole(String name);/*已知部门查角色*/
+	
 //	public int addRole(String name);//添加
 	public int addRole(Tb_role tb_role);//添加
 	

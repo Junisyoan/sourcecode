@@ -28,4 +28,7 @@ public interface TbRoleMapper {
 	public List<Tb_menu> findMenu(int role_idd);
 	
 	public List<Tb_menu> findUnMenu(@Param("rid")int rid);  
+	
+//	public  List<Tb_role> selectrole(String name);/*已知部门查角色*/
+	public  List<Map<String,Object>> selectrole(String name);/*已知部门查角色*/
 }

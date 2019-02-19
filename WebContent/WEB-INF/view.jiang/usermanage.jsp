@@ -63,19 +63,26 @@
     	<form action="<%=path%>usermanage/adduser.handle" method="post" id="ddd">
   		   <ul class="clearfix">
      
-     	<li> <label class="label_name">部门</label>
-        <select name="cardstatef" id="dept" onblur="loadAjax()" style=" width:170px;">
-       
-            <option value="外科">外科</option>
-            
-            <option value="内科">内科</option>
-               
-            <option value="管理员">管理员</option> 
-             
+     	<li> <label class="label_name">部门</label> 
+        <select name="dept" id="dept" value="${u.name}" style=" width:170px;">
+<!--          onblur="loadAjax()" -->
+       <c:forEach items="${maplistdept}" var="u" varStatus="s">
+            <option value="${u.name}">${u.name}</option> 
+            </c:forEach> 
         </select></li>
+<%--      	<li> <label class="label_name">部门</label>${maplistdept} --%>
+<!--         <select name="cardstatef" id="dept" onblur="loadAjax()" style=" width:170px;"> -->
+       
+<!--             <option value="外科">外科</option> -->
+            
+<!--             <option value="内科">内科</option> -->
+               
+<!--             <option value="管理员">管理员</option>  -->
+             
+<!--         </select></li> -->
         
         <li>   <label  class="label_name"> 联系人</label><input type="text" id="name" name="name"/>   </li> 
-        <li>   <label  class="label_name">   角色</label><input type="text" id="doctor" name="doctor"/>   </li> 
+        <li>   <label  class="label_name">   角色1</label><input type="text" id="doctor" name="doctor"/>   </li> 
             
       <li><label class="label_name">账号</label><input name="account" type="text"  class="text_add" id="account"/><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">密码</label><input name="pwd" type="password"  class="text_add" id="pwd"/></li>
@@ -264,7 +271,7 @@ function delect(e){
 	var re=confirm("确定删除此项？");
 	
 	if(re){
-	alert(delectname);
+// 	alert(delectname);
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>usermanage/delect.handle", 
@@ -328,19 +335,19 @@ function loadAjax(){
 			 data:{
 				 "dept":dept
 			 },
-			 dataType:"text",
+			 dataType:"json",
 			 error:function(){
 				 alert('ajax请求请求错误...');
 			 },
 			 success:function(data){
 				 alert("ajax="+data); 
-				 if(data=="03"){
-					 $("#doctor").val("内科医生");
-				 }else if(data=="02"){
-					 $("#doctor").val("外科医生");
-				 }else{
-					 $("#doctor").val("管理员");
-				 }
+// 				 if(data=="03"){
+// 					 $("#doctor").val("内科医生");
+// 				 }else if(data=="02"){
+// 					 $("#doctor").val("外科医生");
+// 				 }else{
+// 					 $("#doctor").val("管理员");
+// 				 }
 				
 				
 				 var datato=data.val();
@@ -409,7 +416,20 @@ function updetestate(s,id){
 	}
   
 }
- 
-
+//  function selectdept(){
+<%-- <%-- 	 location.href="<%=path%>usermanage/selectdept.handle"; --%> 
+ 	
+// 	 $.ajax({
+<%-- 	 url:"<%=path%>usermanage/selectdept.handle", --%>
+// 	 type:"post",  
+// 	 success:function(ret){
+// 		 if(ret=="1"){
+//  }
+// 	 },
+// 	 error:function(){
+// 		 alert('服務器無響應');
+// 	 }
+	 
+// 	 }
 </script>
 </html>

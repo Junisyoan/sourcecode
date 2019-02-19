@@ -32,5 +32,7 @@ public interface TbUserBiz {
 	public String checkPwd(Map<String, Object> map);
 
 	public String changePwd(Map<String, Object> map);  
+	
+	public Tb_user findthree(Tb_user user);/*查链表id*/
 	 
 }
