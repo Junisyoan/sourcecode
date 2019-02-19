@@ -93,6 +93,7 @@ public class CompanyHandle {
 	
 	private volatile int pState = 2;//1支付成功，0未支付，-1支付失败，2正在操作
 	
+	private String strRet;
 	public CompanyHandle() {
 	}
 
@@ -252,16 +253,12 @@ public class CompanyHandle {
 			//商户订单号
 			//交易状态
 			String trade_status="";
-			try {
-				String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+				String out_trade_no = request.getParameter("out_trade_no");
 
 				//支付宝交易号
-				String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+				String trade_no = request.getParameter("trade_no");
 
-				trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+				trade_status = request.getParameter("trade_status");
 			
 			if(trade_status.equals("TRADE_FINISHED")){
 				//判断该笔订单是否在商户网站中已经做过处理
@@ -489,31 +486,32 @@ public class CompanyHandle {
 	 * 删除文件
 	 */
 	@RequestMapping(value = "/delFile.handle",method=RequestMethod.POST)
-	public String delelteFile(String fid,String fname, HttpServletResponse response) {
+	public @ResponseBody String delelteFile(String fid,String fname, HttpServletResponse response) {
 		System.out.println("删除文件："+fname+"--文件id："+fid);
-		response.setCharacterEncoding("utf-8");
+		strRet="";
 		//获得文件信息
 		CompanyFile cf = companyFileBiz.queryFile(fid);
-		
+		if (cf==null) {
+			strRet="1";
+			return strRet;
+		}
 		isSuccess=false;
 		
-		try {
 			if (companyFileBiz.delFile(fid)) {
 				//1成功，删除文件
 				File file = new File(cf.getFpath());
 				if (file.delete()) {
-					response.getWriter().print("1");
+					strRet="1";
+//					response.getWriter().print("1");
 					isSuccess = true;
 				}
 			}
 			//0失败
 			if (!isSuccess) {
-				response.getWriter().print("0");
+//				response.getWriter().print("0");
+				strRet="0";
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return strRet;
 	}
 	
 	/*
@@ -526,7 +524,15 @@ public class CompanyHandle {
 		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath() + "/";
 		File fileDir = new File(request.getServletContext().getRealPath("/uploadFile/" + company.getName()));
+		File upload = new File(request.getServletContext().getRealPath("/uploadFile"));
 		System.out.println(fileDir.getPath());
+		if (!upload.exists()) {
+			upload.mkdirs();
+		}
+		if (!fileDir.exists()) {
+			fileDir.mkdir();
+		}
+		
 		// 目录是否存在
 		try {
 			if (fileDir.isDirectory()) {
@@ -613,7 +619,7 @@ public class CompanyHandle {
 	 * 公司注册
 	 */
 	@RequestMapping(value = "/regCompany.so", method = RequestMethod.POST)
-	public String regCompany(HttpServletResponse response, HttpServletRequest request, Company company) {
+	public @ResponseBody String regCompany(HttpServletResponse response, HttpServletRequest request, Company company) {
 		System.out.println(company);
 		company.setPwd(Encryption.getResult(company.getPwd()));
 		// 执行注册
@@ -633,8 +639,11 @@ public class CompanyHandle {
 
 			case "注册成功":
 				System.out.println("公司注册成功，生成公司目录" + company.getName());
-				File file = new File(
-						request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
+				File file = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile"));
+				if (!file.exists()) {
+					file.mkdir();
+				}
+				file = new File(request.getServletContext().getRealPath("/WEB-INF/uploadFile/" + company.getName()));
 				System.out.println(file.getPath());
 				if (file.mkdir()) {
 					System.out.println("目录创建成功");

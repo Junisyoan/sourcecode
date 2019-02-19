@@ -48,7 +48,8 @@
 							<td>${l.ftime}</td>
 							<td>${l.cstate }</td>
 							<td>
-								<button class="btn btn-info" onclick="importFile('${l.file_id}');">导入</button>
+								<button id="importF" class="btn btn-info" onclick="importFile('${l.file_id}');">导入</button>
+								<button id="importF" class="btn btn-info" onclick="delFile('${l.file_id}');">删除</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -56,8 +57,41 @@
 			</table>
 		</div>
 	</div>
+	<div id="loadgif" style="width:66px;height:66px;position:absolute;top:50%;left:50%;">
+		<img alt="加载中..." src="<%=path%>image/loading.gif"/>
+	</div>
 <script type="text/javascript">
+function delFile(fid){
+	if(confirm("确认删除？")){
+		$.ajax({
+			url:"<%=path%>nurse/delFile.handle",
+			type:"post",
+			dataType:"text",
+			data:{'fid':fid},
+			success:function(retData){
+				if(retData=="1"){
+					alert("删除成功");
+				}else{
+					alert("删除失败");
+				}
+				location.href="<%=path %>nurse/getFileList.handle";
+			},
+			error:function(){
+				alert("服务器无响应");
+			}
+			
+		});
+	}
+}
 
+$(function(){
+	$('#importF').click(function(){
+		$("#loadgif").show();
+	});
+});
+$(function(){
+	$("#loadgif").hide();
+});
 function importFile(file_id){
 	location.href='<%=path%>nurse/importFile.handle?file_id='+file_id;
 }

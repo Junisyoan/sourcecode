@@ -15,15 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_user;
+import xyz.cymedical.entity.jun.Patient;
 
 //单检医生
 @Controller
 @RequestMapping("/doctor")
 public class DoctorHandle {
 
+	@Resource
+	private NurseBiz nurseBiz;				//工作站业务逻辑
+	
 	@Resource
 	private DoctorBiz doctorbiz; 			//医生的业务逻辑
 	
@@ -102,7 +107,18 @@ public class DoctorHandle {
 	@RequestMapping(value = "/findProject.handle")
 	public ModelAndView index(HttpServletRequest req,String onecode) {
 
-
+//	List<Patient> pList=new ArrayList<Patient>();
+//		
+//		pList.add(new Patient(1,1,1,"兰斯","男","18","1","1","1","1","团体高管A体检套餐"));
+//		
+//		pList.add(new Patient(2,1,1,"兰斯","男","18","1","1","1","1","团体高管A体检套餐"));
+//		
+//		String time = "2018-08-08";
+//		nurseBiz.insertPaitentProject(pList,time);
+//		
+		
+		
+		
 		this.onecode=onecode;
 		
 		Tb_user user=(Tb_user) req.getSession().getAttribute("user");
@@ -118,6 +134,8 @@ public class DoctorHandle {
 				}
 			}
 		}
+		
+		System.out.println("pplist="+pplist);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("prolist", pplist);
@@ -176,6 +194,8 @@ public class DoctorHandle {
 	@RequestMapping(value = "/receive.handle")
 	public ModelAndView receive(HttpServletRequest req,String patient_project_id,String onecode) {
 
+		ModelAndView mav = new ModelAndView();
+		
 		System.out.println("receive....");
 		System.out.println("patient_project_id=" + patient_project_id);
 		System.out.println("onecode=" + onecode);
@@ -184,11 +204,22 @@ public class DoctorHandle {
 		
 		boolean f=doctorbiz.receive(Integer.valueOf(patient_project_id),user.getUser_id());
 		
-		System.out.println("f="+f);
+		//总项目列表
 		plist=doctorbiz.findMyProject(onecode);
+		List<Map<String,Object>> pplist = new ArrayList<Map<String,Object>>();//
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("prolist", plist);
+		if(plist!=null && plist.size()>0) {
+			for (int i = 0; i < plist.size(); i++) {
+				Map m=plist.get(i);
+				if(user.getParam_id()==Integer.parseInt(m.get("param_id").toString())) {
+					pplist.add(m);
+				}
+			}
+		}
+		
+		System.out.println("pplist="+pplist);
+		
+		mav.addObject("prolist", pplist);
 		mav.setViewName("WEB-INF/doctor.xin/pro_receive");
 		return mav;
 	}

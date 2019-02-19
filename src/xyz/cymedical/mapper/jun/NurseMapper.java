@@ -13,6 +13,8 @@ import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
 import xyz.cymedical.entity.xin.Combo;
 import xyz.cymedical.entity.xin.News;
+import xyz.cymedical.entity.zsc.Detail;
+import xyz.cymedical.entity.zsc.Project;
 
 /**
 *	@author Junisyoan;
@@ -92,4 +94,16 @@ public interface NurseMapper {
 
 	//id删新闻
 	public boolean delNews(String newsid);
+
+	//comboname找项目
+	public List<Project> findMyProject(String comboname);
+
+	//插入病人项目表
+	public void insertPaitentProject(String ID, int project_id);
+
+	//项目id找细项
+	public List<Detail> findMyDetail(int project_id);
+
+	//插入小结表
+	public boolean insertbrief(int detail_id, String ID, String time,int project_id);
 }

@@ -13,7 +13,7 @@
 		from 
 		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_patient_combo g,tb_company h
 		where 
-		a.patient_id=g.patient_id and g.combo_id=b.combo_id and b.project_id=c.project_id and 
+		a.patient_id=g.patient_id=d.patient_id and g.combo_id=b.combo_id and b.project_id=c.project_id and 
 		c.project_id=d.project_id and c.param_id=e.param_id and (a.`code`=#{0} or a.phone=#{0}) and h.company_id=a.company_id)z 
 		on s.user_id=z.uid  order by z.name
 	</select>
