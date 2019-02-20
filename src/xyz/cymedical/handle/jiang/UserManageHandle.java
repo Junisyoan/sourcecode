@@ -171,7 +171,7 @@ public class UserManageHandle {
 	// 部门查询
 	@RequestMapping(value = "/adddept.handle", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
 //	, produces = "application/text;charset=utf-8"
-	public @ResponseBody JSONObject adddept(HttpServletRequest request, HttpServletResponse response, String dept) {
+	public @ResponseBody String adddept(HttpServletRequest request, HttpServletResponse response, String dept) {
 		String addrole;
 		System.out.println("dept="+dept);
 		maplisttbrole=tbRoleBiz.selectrole(dept);
@@ -192,8 +192,8 @@ public class UserManageHandle {
 //		System.out.println("addrole="+addrole);
 //		mav.addObject("maplist", maplist);
 	
-		JSONObject jobj=JSONObject.fromObject(maplisttbrole);//把字符串ss转成json对象
-		return    jobj;
+		JSONArray jobj=JSONArray.fromObject(maplisttbrole);//把字符串ss转成json对象
+		return    jobj.toString();
 
 	}
 

@@ -75,7 +75,10 @@
 	</select>
 	
 	<select id="selectrole" parameterType="string" resultType="map">
-	select r.* from tb_dept d,tb_role_dept rd ,tb_role r where d.name=#{name} and rd.state='在用' and r.role_id=rd.role_id
+<!-- 	select r.* from tb_dept d,tb_role_dept rd ,tb_role r where d.name=#{dept} and rd.state='在用' and r.role_id=rd.role_id -->
+		select * from tb_role where role_id= 
+		(select role_id from tb_role_dept where dept_id=
+		(select dept_id from tb_dept where name=#{dept}) and state='在用')
 	</select>
 
 </mapper>

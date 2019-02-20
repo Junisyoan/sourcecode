@@ -64,7 +64,7 @@
   		   <ul class="clearfix">
      
      	<li> <label class="label_name">部门</label> 
-        <select name="dept" id="dept" value="${u.name}" style=" width:170px;">
+        <select name="dept" id="dept" value="${u.name}"  onblur="loadAjax()" style=" width:170px;">
 <!--          onblur="loadAjax()" -->
        <c:forEach items="${maplistdept}" var="u" varStatus="s">
             <option value="${u.name}">${u.name}</option> 
@@ -82,7 +82,13 @@
 <!--         </select></li> -->
         
         <li>   <label  class="label_name"> 联系人</label><input type="text" id="name" name="name"/>   </li> 
-        <li>   <label  class="label_name">   角色1</label><input type="text" id="doctor" name="doctor"/>   </li> 
+<!--         <li>   <label  class="label_name">   角色1</label><input type="text" id="doctor" name="doctor"/>   </li>  -->
+     <li> <label class="label_name">角色</label>  
+         <select name="doctor" id="doctor"  style=" width:170px;"> 
+        
+       </select></li>
+
+
             
       <li><label class="label_name">账号</label><input name="account" type="text"  class="text_add" id="account"/><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">密码</label><input name="pwd" type="password"  class="text_add" id="pwd"/></li>
@@ -340,19 +346,29 @@ function loadAjax(){
 				 alert('ajax请求请求错误...');
 			 },
 			 success:function(data){
-				 alert("ajax="+data); 
-// 				 if(data=="03"){
-// 					 $("#doctor").val("内科医生");
-// 				 }else if(data=="02"){
-// 					 $("#doctor").val("外科医生");
-// 				 }else{
-// 					 $("#doctor").val("管理员");
-// 				 }
+// 				 alert("ajax="+data); 
+				 $("#doctor").empty();  /*先清空數據*/
+// 			 	
+				 for(var i = 0;i <data.length;i++){
+					 
+					 var dc=document.getElementById("doctor").value;
+					 
+					 dc = data[i].name;
+					 
+// 					 alert(dc);
+						
+					 
+ 						var op=$("<option></option>").text(dc);
+					 
+ 					 	//var tr=$("<tr></tr>");
+						 
+// 						$(tr).append(td1); 
+ 						$("#doctor").append(op);
+					}
 				
+// 				 var datato=data.val();
 				
-				 var datato=data.val();
-				
-				 window.location.href="<%=path%>usermanage/adddeptto.action";
+<%-- 				 window.location.href="<%=path%>usermanage/adddeptto.action"; --%>
 			 }
 		
 		});
