@@ -43,6 +43,7 @@ import xyz.cymedical.biz.jun.InvalideBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.biz.zsc.ComboBiz;
 import xyz.cymedical.entity.ctx.LogCompany;
+import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
@@ -98,13 +99,32 @@ public class CompanyHandle {
 	}
 
 	
+	
 	/*
-	 * 下载套餐模板
+	 * 修改密码
 	 */
-	
-	
-	
-	
+	@RequestMapping(value="/cpwd.handle",method=RequestMethod.POST)
+	public @ResponseBody String cpwd(String id,String cpwd,String pwd) {
+		
+		System.out.println("修改用户id："+id);
+		strRet = "";
+		company = companyBiz.queryUser(id, Encryption.getResult(pwd));
+		if (company==null) {
+			strRet="原始密码不正确";
+		} else {
+			cpwd = Encryption.getResult(cpwd);
+			Map<String, Object> map = new HashMap<>();
+			map.put("id", id);
+			map.put("pwd", cpwd);
+			isSuccess=companyBiz.updatePwd(id, Encryption.getResult(cpwd));
+			if (isSuccess) {
+				strRet="1";
+			} else {
+				strRet="0";
+			}
+		}
+		return strRet;
+	}
 	
 	/*
 	 * 删除不合格文件

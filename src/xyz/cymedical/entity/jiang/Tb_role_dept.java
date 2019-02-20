@@ -67,11 +67,15 @@ public class Tb_role_dept {
 		this.dept_id = dept_id;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Tb_role_dept [role_dept_id=" + role_dept_id + ", role_id=" + role_id + ", dept_id=" + dept_id + "]";
+		return "Tb_role_dept [role_dept_id=" + role_dept_id + ", role_id=" + role_id + ", dept_id=" + dept_id
+				+ ", state=" + state + "]";
 	}
-	
+
+ 
 	
 	
 	

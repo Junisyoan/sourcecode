@@ -11,10 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=path%>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" />
-<!--[if IE 7]>
-    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
+<link rel="stylesheet" href="<%=path%>assets/css/font-awesome.min.css" /> 
 <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
 <link rel="stylesheet" href="<%=path%>css/style.css" />
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>

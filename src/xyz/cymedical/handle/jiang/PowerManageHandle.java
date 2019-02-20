@@ -79,7 +79,7 @@ public class PowerManageHandle {
 		
 		@RequestMapping(value = "/delect.handle",method = RequestMethod.POST)
 		public @ResponseBody String deletePower(HttpServletRequest request, HttpServletResponse response, String delectname) {
-//			ModelAndView mav = new ModelAndView();
+ 
 			
 			System.out.println("delectname="+delectname);
 			String data = null;
@@ -95,8 +95,7 @@ public class PowerManageHandle {
 			}
 			int ret=TbPowerBiz.deletePower(power_id);
 			
-			if(ret==1) {
-//				mav.setViewName("WEB-INF/view.jiang/powermanage");
+			if(ret==1) { 
 				data = "00";
 			}
 			
@@ -193,11 +192,8 @@ public class PowerManageHandle {
 		@RequestMapping(value= "/allot.handle",method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 		public @ResponseBody String allot( String role_id) {
 
-			System.out.println(1);
-//			List<Menu> menuList = menuBiz.findMenu(role.getRole_id());
-//			System.out.println(role_id);
-			int role_idd=Integer.valueOf(role_id);
-//		 	int role_idd=role.getRole_id();
+			System.out.println(1); 
+			int role_idd=Integer.valueOf(role_id); 
 			
 			System.out.println("点击权限名 弹出id="+role_idd);
 			List<Tb_menu> menuList=tbRoleBiz.findMenu(role_idd);
@@ -333,12 +329,7 @@ public class PowerManageHandle {
 			}else {
 				ret="添加失败wangxing";
 			}
-			
-//			try {
-//				resp.getWriter().print(ret);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			 
 			return ret;
 		}
 		

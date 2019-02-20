@@ -8,6 +8,7 @@ import xyz.cymedical.entity.jun.Company;
  
   
 public interface TbUserBiz {
+	public Tb_user queryUser(String id,String pwd);
 	
 	public List<Tb_user>  findUser(Tb_user user);
 	
@@ -32,5 +33,7 @@ public interface TbUserBiz {
 	public String checkPwd(Map<String, Object> map);
 
 	public String changePwd(Map<String, Object> map);  
+	
+	public Tb_user findthree(Tb_user user);/*查链表id*/
 	 
 }

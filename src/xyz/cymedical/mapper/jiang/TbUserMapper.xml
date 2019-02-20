@@ -5,6 +5,10 @@
 <mapper namespace="xyz.cymedical.mapper.jiang.TbUserMapper">
 
 
+	<select id="queryUser">
+		select * from tb_user where user_id = #{id} and pwd=#{pwd}	
+	</select>
+
 	<!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
 
 	<select id="findUser"
@@ -152,4 +156,11 @@
 	<update id="changePwd" parameterType = "map">
 		update tb_user set pwd = #{pwd} where user_id = #{id}
 	</update>
+	
+	<select id="findthree" parameterType="xyz.cymedical.entity.jiang.Tb_user"  resultType="xyz.cymedical.entity.jiang.Tb_user">
+	
+	select * from tb_dept d,tb_role r,tb_role_dept rd where d.name=#{dept} and r.name=#{doctor} and r.role_id=rd.role_id
+	
+	</select>
+	
 </mapper>

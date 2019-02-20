@@ -45,9 +45,9 @@
     <div class="add_user_style clearfix">
      <form action="<%=path%>rolemanage/addrole.handle" method="post" id="ddd" >
      <ul class="clearfix">
-      <li><label class="label_name">新角色ID</label> <input name="role_id" type="text"  class="text_add" id="role_id"/><i style="color:#F60; ">*</i></li>
+<!--       <li><label class="label_name">新角色ID</label> <input name="role_id" type="text"  class="text_add" id="role_id"/><i style="color:#F60; ">*</i></li> -->
       <li><label class="label_name">新角色</label> <input name="name" type="text"  class="text_add" id="name"/><i style="color:#F60; ">*</i></li>
-      <li><label class="label_name">归属ID</label> <input name="dept_id" type="text"  class="text_add" id="dept_id"/><i style="color:#F60; ">*部门ID</i></li>
+<!--       <li><label class="label_name">归属ID</label> <input name="dept_id" type="text"  class="text_add" id="dept_id"/><i style="color:#F60; ">*部门ID</i></li> -->
       </ul>    
    		 </form>
      </div>       
@@ -74,11 +74,7 @@
 <c:forEach items="${roleall}" var="u" varStatus="s">
        <tr>
         <td>${u.role_id}</td><td>${u.name}</td> 
-        <td>
-<!--         <button type="button" class="btn btn-info Product_Details">详情</button> -->
-    
-<!-- ----------------------- -->
-<!--  <div class="Manager_style"> -->
+        <td> 
    
       <button type="button" class="btn btn-primary" onclick="updect()"  name="${u.role_id}">修改</button>
     <div class="Add_Manager_style">
@@ -94,8 +90,7 @@
      </div>       
       </div>
       </div>
-    </div>
-<!--     </div> -->
+    </div> 
 
 
 <!-- ----------------- -->
@@ -208,8 +203,7 @@ function delectrole(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定刪除？   刪除前请确保此角色与部门无关联");
-	if(re){
-// 			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>rolemanage/delectrole.handle";
 		form.method="post";
@@ -222,8 +216,7 @@ function delectrole(a){
 		form.appendChild(opupdetename); 
 		document.body.appendChild(form);
 		
-		form.submit();
-<%-- 		 location.href="<%=path%>rolemanage/select.handle"; --%>
+		form.submit(); 
 		 
 		}else{
 			alert("错误");
@@ -236,8 +229,7 @@ function updeterole(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定修改？");
-	if(re){
-			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>rolemanage/updectrole.handle";
 		form.method="post";

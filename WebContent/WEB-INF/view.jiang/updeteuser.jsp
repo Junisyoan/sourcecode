@@ -31,11 +31,7 @@
       <li><label class="label_name">联系电话</label><input name="phone" type="text"  class="text_add" id="phone"/><i style="color:#F60; ">11位数数字</i></li>
       <li><label class="label_name">联系地址</label><input name="address" type="text"  class="text_add" id="address"/><i style="color:#F60; ">*</i></li>
        <li> <label class="label_name">状态</label><input name="state" type="text"  class="text_add" id="state"/><i style="color:#F60; ">启用*禁用</i></li>
-<!--         <li> <label class="label_name">状态</label><select  id="state"  name="state"  style=" width:170px;"> -->
-<!--          	<option value="启用">启用</option> -->
-<!--          	<option value="禁用">禁用</option> -->
-<!--          </select> -->
-<!--      	</li> -->
+ 
      	</ul>
 <input type="submit" value="提交">
 

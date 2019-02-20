@@ -16,10 +16,29 @@ public class Tb_user {
 	private String IDcard;//身份证
 	private String state;//身份证
 	private int param_id;
-	private String doctor;
+	private String doctor;//角色
+	private String dept;//部门
 	
 	public Tb_user() {
 		super();
+	}
+
+	public Tb_user(int user_id, int role_dept_id, String account, String pwd, String name, String sex, String address,
+			String phone, String iDcard, String state, int param_id, String doctor, String dept) {
+		super();
+		this.user_id = user_id;
+		this.role_dept_id = role_dept_id;
+		this.account = account;
+		this.pwd = pwd;
+		this.name = name;
+		this.sex = sex;
+		this.address = address;
+		this.phone = phone;
+		IDcard = iDcard;
+		this.state = state;
+		this.param_id = param_id;
+		this.doctor = doctor;
+		this.dept = dept;
 	}
 
 	public Tb_user(int user_id, int role_dept_id, String account, String pwd, String name, String sex, String address,
@@ -37,6 +56,14 @@ public class Tb_user {
 		this.state = state;
 		this.param_id = param_id;
 		this.doctor = doctor;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
 	}
 
 	public int getUser_id() {
@@ -139,9 +166,11 @@ public class Tb_user {
 	public String toString() {
 		return "Tb_user [user_id=" + user_id + ", role_dept_id=" + role_dept_id + ", account=" + account + ", pwd="
 				+ pwd + ", name=" + name + ", sex=" + sex + ", address=" + address + ", phone=" + phone + ", IDcard="
-				+ IDcard + ", state=" + state + ", param_id=" + param_id + ", doctor=" + doctor + "]";
+				+ IDcard + ", state=" + state + ", param_id=" + param_id + ", doctor=" + doctor + ", dept=" + dept
+				+ "]";
 	}
 
+	 
  
 
 	 

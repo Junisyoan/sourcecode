@@ -9,6 +9,10 @@ public interface TbDeptBiz {
   
 	public List<Tb_dept> selectDept();
 	
+	public List<Tb_dept> selectDeptname(Tb_dept tb_dept);/*查询新添加的部门名是否存在*/
+	
+	public Tb_dept selectDeptnameid(Tb_dept tb_dept);/*回查新添加的id号*/
+	
 	public List<Map<String, Object>>  select(String sta);/*新版查询 带状态*/
 	
 	public int addDept(Tb_dept tb_dept);

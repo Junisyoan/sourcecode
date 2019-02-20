@@ -8,11 +8,11 @@
 
 	<select id="selectRole"   parameterType="xyz.cymedical.entity.jiang.Tb_role"
 		resultType="xyz.cymedical.entity.jiang.Tb_role">
-<!-- 		select * from tb_role where 1=1 -->
-		select tr.* from tb_role tr,tb_role_dept trp where state='在用' and tr.role_id=trp.role_id
+		select * from tb_role where 1=1
+<!-- 		select tr.* from tb_role tr,tb_role_dept trp where state='在用' and tr.role_id=trp.role_id -->
 	</select>
 	
-	<insert id="addRole" parameterType="String"> 
+	<insert id="addRole" parameterType="xyz.cymedical.entity.jiang.Tb_role"> 
 	
 		 insert into tb_role  (name) values (#{name})
 	
@@ -72,6 +72,13 @@
 	
 	select * from tb_menu where menu_id not in(select menu_id from tb_power a,tb_role_power b where a.power_id=b.power_id and b.role_id=${rid}) or superior=0	
 	
+	</select>
+	
+	<select id="selectrole" parameterType="string" resultType="map">
+<!-- 	select r.* from tb_dept d,tb_role_dept rd ,tb_role r where d.name=#{dept} and rd.state='在用' and r.role_id=rd.role_id -->
+		select * from tb_role where role_id= 
+		(select role_id from tb_role_dept where dept_id=
+		(select dept_id from tb_dept where name=#{dept}) and state='在用')
 	</select>
 
 </mapper>

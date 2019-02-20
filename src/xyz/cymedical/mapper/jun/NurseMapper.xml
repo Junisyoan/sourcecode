@@ -48,7 +48,12 @@
 	
 <!-- 登录查询 -->
 	<select id="queryNurseByLogin" parameterType="String" resultType="xyz.cymedical.entity.jun.Nurse">
-		select * from tb_user where account = #{account} and pwd = #{pwd}
+<!-- 		select * from tb_user where u.account = #{account} and u.pwd = #{pwd} -->
+		select u.* from tb_user u, tb_role_dept rd,tb_dept d 
+		where u.role_dept_id = rd.role_dept_id 
+		and rd.dept_id = d.dept_id 
+		and d.name="护士站" and u.state="启用"
+		and u.account = #{account} and u.pwd = #{pwd}
 	</select>
 	
 	<!-- 新闻查询 -->

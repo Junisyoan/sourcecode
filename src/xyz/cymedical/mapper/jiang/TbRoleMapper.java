@@ -16,7 +16,8 @@ public interface TbRoleMapper {
 	
 	public Tb_role selectName(String name);
 	
-	public int addRole(String name);
+//	public int addRole(String name);
+	public int addRole(Tb_role tb_role);//添加
 	
 	public int delectrole(int role_id);
 	
@@ -27,4 +28,7 @@ public interface TbRoleMapper {
 	public List<Tb_menu> findMenu(int role_idd);
 	
 	public List<Tb_menu> findUnMenu(@Param("rid")int rid);  
+	
+//	public  List<Tb_role> selectrole(String name);/*已知部门查角色*/
+	public  List<Map<String,Object>> selectrole(String name);/*已知部门查角色*/
 }

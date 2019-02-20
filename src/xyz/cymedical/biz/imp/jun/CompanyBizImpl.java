@@ -158,4 +158,14 @@ public class CompanyBizImpl extends BaseImpl implements CompanyBiz {
 		return companyMapper.findCompany(company_id);
 	}
 
+	@Override
+	public boolean updatePwd(String id, String cpwd) {
+		return companyMapper.updatePwd(id, cpwd);
+	}
+
+	@Override
+	public Company queryUser(String id, String pwd) {
+		return companyMapper.queryUser(id, pwd);
+	}
+
 }

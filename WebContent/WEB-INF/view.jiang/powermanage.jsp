@@ -86,8 +86,7 @@
 <td>${u.menu_id}</td>
 <td>${u.name}</td>
 <td>  <button type="button" class="btn btn-primary" onclick="updete()" name="${u.power_id}">修改</button>
-  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.power_id}">刪除</button></td>
-<!-- <td><input type="checkbox" value="5" /></td> -->
+  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.power_id}">刪除</button></td> 
 </tr>
     </c:forEach> 
  
@@ -189,8 +188,7 @@ function loadAjax(){
 	 
 		$.ajax({
 			 type:"POST",
-			 url:"<%=path%>menumanage/addmenuid.handle",
-//				 contentType:"application/text;charset=utf-8",
+			 url:"<%=path%>menumanage/addmenuid.handle", 
 			 data:{
 				 "name":name
 			 },
@@ -198,16 +196,14 @@ function loadAjax(){
 			 error:function(){
 				 alert('ajax请求请求错误...');
 			 },
-			 success:function(data){
-				 alert("ajax="+data); 
+			 success:function(data){ 
 				 if(data=="01"){
 					 alert("菜单名可以用");
 				 }else{
 					 alert("菜单名已存在...");
 				 }
 				
-				
-// 				 var datato=data.val();
+				  
 				
 				 window.location.href="<%=path%>usermanage/adddeptto.action";
 			 }
@@ -223,8 +219,7 @@ function delect(e){
 	var delectname=t.name;
 	var re=confirm("确定删除此项？");
 	
-	if(re){
-	alert(delectname);
+	if(re){ 
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>powermanage/delect.handle", 
@@ -255,8 +250,7 @@ function updete(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定修改此项？");
-	if(re){
-//			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>powermanage/updete1.handle";
 		form.method="post";

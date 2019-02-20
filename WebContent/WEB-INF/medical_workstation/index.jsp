@@ -396,7 +396,14 @@
 								});
 								return false;
 							}
+							if ($("#Nes_pas").val().length<6) {
+								layer.alert('新密码不能小于6位!', {
+									title : '提示框',
+									icon : 0,
 
+								});
+								return false;
+							}
 							if ($("#c_mew_pas").val() == "") {
 								layer.alert('确认新密码不能为空!', {
 									title : '提示框',
@@ -415,9 +422,27 @@
 								});
 								return false;
 							} else {
-								layer.alert('修改成功！', {
-									title : '提示框',
-									icon : 1,
+								$.ajax({
+									url:"<%=path%>nurse/cpwd.handle",
+									type:"post",
+									dataType:"text",
+									data:{
+										'id':${nurse.user_id},
+										'cpwd':$("#c_mew_pas").val(),
+										'pwd':$("#password").val()
+									},
+									success:function(retData){
+											layer.alert(retData, {
+												title : '提示框',
+												icon : 1,
+											});
+									},
+									error:function(){
+										layer.alert('修改失败！', {
+											title : '提示框',
+											icon : 1,
+										});
+									}
 								});
 								layer.close(index);
 							}

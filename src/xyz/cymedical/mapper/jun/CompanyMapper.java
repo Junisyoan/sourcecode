@@ -18,6 +18,16 @@ import xyz.cymedical.entity.jun.Patient;
 @Repository
 public interface CompanyMapper {
 
+	public Company queryUser(@Param("id")String id,@Param("pwd")String pwd);
+	
+	/**
+	 * 修改密码
+	 * @param id
+	 * @param cpwd
+	 * @return
+	 */
+	public boolean updatePwd(@Param("id")String id,@Param("cpwd")String cpwd) ;
+	
 	//delete
 	/**
 	 * 删除文件，团检关系表数据

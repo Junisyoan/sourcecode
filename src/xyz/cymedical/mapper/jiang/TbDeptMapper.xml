@@ -9,7 +9,8 @@
 
 	<select id="selectDept"   parameterType="xyz.cymedical.entity.jiang.Tb_dept"
 	resultType="xyz.cymedical.entity.jiang.Tb_dept">
-		select * from tb_dept  
+<!-- 		select * from tb_dept   -->
+		select td.* from tb_dept td,tb_role_dept trp where state='在用' and td.dept_id=trp.dept_id 
 	</select>
 	
 	<select id="select"  parameterType="string"
@@ -25,7 +26,7 @@
 <!-- 	</delete> -->
 	
 	<insert id="addDept" parameterType="xyz.cymedical.entity.jiang.Tb_dept">
-		insert into tb_dept(dept_id,name) values(#{dept_id},#{name})
+		insert into tb_dept(name) values(#{name})
 	</insert>
 	
 	<update id="upDept"  parameterType="xyz.cymedical.entity.jiang.Tb_dept" >
@@ -59,6 +60,16 @@
 		</if>
 	 
 		 
+	</select>
+	
+	<select id="selectDeptname"  parameterType="xyz.cymedical.entity.jiang.Tb_dept" resultType="xyz.cymedical.entity.jiang.Tb_dept">
+		select * from tb_dept where name=#{name}
+	
+	</select>
+	
+		<select id="selectDeptnameid"  parameterType="xyz.cymedical.entity.jiang.Tb_dept" resultType="xyz.cymedical.entity.jiang.Tb_dept">
+		select * from tb_dept where name=#{name}
+	
 	</select>
 	
 </mapper>
