@@ -118,9 +118,9 @@
 		from(select a5.n1,a5.n2,pro.`name`
 		n3,a5.unit,a5.min,a5.max,a5.resulttext,a5.time,a5.patient_id,a5.user_id,a5.resultpath
 		from (select
-		a4.n1,a4.n2,a4.unit,a4.min,a4.max,a4.resulttext,gro.time,a4.patient_id,a4.project_id,a4.user_id,a4.resultpath
+		a4.n1,a4.n2,a4.unit,a4.min,a4.max,a4.resulttext,a4.patient_id,a4.project_id,a4.user_id,a4.resultpath,a4.time
 		from (select
-		a3.n1,a3.n2,a3.unit,a3.min,a3.max,br.resulttext,a3.company_id,a3.patient_id,a3.project_id,a3.user_id,br.resultpath
+		a3.n1,a3.n2,a3.unit,a3.min,a3.max,br.resulttext,a3.company_id,a3.patient_id,a3.project_id,a3.user_id,br.resultpath,br.time
 		from (select a2.`name` n1,det.`name`
 		n2,det.unit,det.min,det.max,a2.detail_id,a2.company_id,a2.patient_id,a2.project_id,a2.user_id
 		from(select
@@ -131,8 +131,8 @@
 		pat.patient_id) a1 left join tb_detail_project dp on a1.project_id =
 		dp.project_id) a2 left join tb_detail det on a2.detail_id =
 		det.detail_id) a3 left join tb_brief br on a3.detail_id =
-		br.detail_id) a4 left join tb_group gro on a4.company_id =
-		gro.company_id) a5 left join tb_project pro on a5.project_id =
+		br.detail_id and a3.patient_id = br.patient_id) a4 left join tb_group gro on a4.company_id =
+		gro.company_id and a4.time = gro.time) a5 left join tb_project pro on a5.project_id =
 		pro.project_id) a6 left join tb_patient_combo pc on a6.patient_id =
 		pc.patient_id) a7 left join tb_combo com on a7.combo_id =
 		com.combo_id) a8 left join tb_user us on a8.user_id = us.user_id where
