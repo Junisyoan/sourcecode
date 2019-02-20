@@ -52,17 +52,14 @@ public class TbUserBizImp implements TbUserBiz{
 	}
 	@Override
 	public List<Tb_user> findUserRole(Tb_user user) {
-		// TODO Auto-generated method stub
 		return tbUserMapper.findUserRole(user);
 	}
 	public  List<Map<String,Object>> selectCompany(Map<String, Object> map) {
-		// TODO Auto-generated method stub 
 			return tbUserMapper.selectCompany(map);
 		 
 	}
 	@Override
 	public String checkPwd(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		int rt = tbUserMapper.checkPwd(map);
 		if (rt > 0) {
 			return "ok";
@@ -72,12 +69,15 @@ public class TbUserBizImp implements TbUserBiz{
 	}
 	@Override
 	public String changePwd(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		int rt = tbUserMapper.changePwd(map);
 		if (rt > 0) {
 			return "密码修改成功";
 		} else {
 			return "密码修改失败";
 		}
+	}
+	@Override
+	public Tb_user queryUser(String id, String pwd) {
+		return tbUserMapper.queryUser(id, pwd);
 	}
 }

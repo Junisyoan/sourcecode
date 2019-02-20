@@ -369,9 +369,34 @@
 								});
 								return false;
 							} else {
-								layer.alert('修改成功！', {
-									title : '提示框',
-									icon : 1,
+								$.ajax({
+									url:"<%=path%>company/cpwd.handle",
+									type:"post",
+									dataType:"text",
+									data:{
+										'id':${userCompany.company_id},
+										'cpwd':$("#c_mew_pas").val(),
+										'pwd':$("#password").val()
+									},
+									success:function(retData){
+										if(retData=="1"){
+											layer.alert('修改成功！', {
+												title : '提示框',
+												icon : 1,
+											});
+										}else{
+											layer.alert('修改失败！', {
+												title : '提示框',
+												icon : 1,
+											});
+										}
+									},
+									error:function(){
+										layer.alert('修改失败！', {
+											title : '提示框',
+											icon : 1,
+										});
+									}
 								});
 								layer.close(index);
 							}

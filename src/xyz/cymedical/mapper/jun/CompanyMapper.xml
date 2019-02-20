@@ -4,6 +4,16 @@
 
 
 <mapper namespace="xyz.cymedical.mapper.jun.CompanyMapper">
+
+	<select id="queryUser">
+		select * from tb_user where user_id = #{id} and pwd=#{pwd}
+	</select>
+
+
+	<update id="updatePwd">
+		update tb_company set pwd = #{cpwd} where company_id = #{id}
+	</update>
+
 <!-- 扣除体检费用 -->
 	<update id="deductDeposit" parameterType="String">
 		update tb_company set deposit=#{price} where company_id = #{company_id}
