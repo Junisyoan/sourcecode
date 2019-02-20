@@ -80,7 +80,7 @@
   			<ul class="clearfix">
      			<li>
      				<label class="label_name">名称</label>
-     				<input type = "text" name="name" id="name1" autofocus="autofocus" onblur="checkName1()">
+     				<input type = "text" name="name" id="name1" onblur="checkName1()">
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
@@ -122,7 +122,7 @@
   			<ul class="clearfix">
      			<li>
      				<label class="label_name">名称</label>
-     				<input type = "text" name="name" id="name" autofocus="autofocus" onblur="checkName1()">
+     				<input type = "text" name="name" id="name" onblur="checkName()">
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
@@ -344,7 +344,6 @@ function putIn(){
 		dataType:"json",
 		data:$("#aFrom").serialize(),
 		success:function(combos){
-			console.log(combos);
 			showCombos(combos);
 		},
 		error:function(){
@@ -415,8 +414,9 @@ function remove(e){
 </script>
 <!-- 改 -->
 <script>
-var check;
 function checkName(){
+	var rt;
+	
 	if($("#name").val() == ""){
 		return;
 	}
@@ -429,18 +429,20 @@ function checkName(){
 			name:$("#name").val(),
 			id:"${combo.combo_id}"
 		},
+		async: false,
 		success:function(msg){
 			if(msg == "该名称已存在"){
-				check = 0;
 				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check = 1;
-			} 
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 
 function show(){
@@ -468,6 +470,7 @@ function show(){
 }
 
 function change(e){
+	check = 1;
 	state = "update";
 	current = 0;
 	idArray  = new Array();
@@ -523,14 +526,11 @@ function change(e){
 					 });
 					return false;
 					
-			}if(check == 0){
-				 layer.alert('该名称已存在!',{
-		              title: '提示框',								
-					  icon:0,			    
-					 });
+			}if(checkName()== "ok"){
 				return false;
 				
-			}if(!(numCheck.test($('#price').val())||numCheck1.test($('#price').val()))){
+			}else{
+			if(!(numCheck.test($('#price').val())||numCheck1.test($('#price').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
@@ -568,6 +568,7 @@ function change(e){
 	    		}
 	    	});
 			}
+		}
 		})
 	};
 </script>
@@ -617,8 +618,9 @@ $(document).ready(function(){
     })
 });
 
-var check1;
 function checkName1(){
+	var rt;
+	
 	if($("#name1").val() == ""){
 		return;
 	}
@@ -629,20 +631,23 @@ function checkName1(){
 		data:{
 			name:$("#name1").val()
 		},
+		async: false,
 		success:function(msg){
 			if(msg == "该名称已存在"){
-				check1 = 0;
 				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check1 = 1;
-			} 
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 $('#add_butn').on('click', function(){	
+	check1 = 1;
 	state = "add";
 	current = 0;
 	idArray  = new Array();
@@ -676,14 +681,11 @@ $('#add_butn').on('click', function(){
 					 });
 					return false;
 					
-			}if(check1 == 0){
-				 layer.alert('该名称已存在!',{
-		              title: '提示框',								
-					  icon:0,			    
-					 });
+			}if(checkName1()== "ok"){
 				return false;
 				
-			}if(!(numCheck.test($('#price1').val())||numCheck1.test($('#price1').val()))){
+			}else{
+			if(!(numCheck.test($('#price1').val())||numCheck1.test($('#price1').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
@@ -723,6 +725,7 @@ $('#add_butn').on('click', function(){
 	    		}
 	    	});
 			}
+		}
 		})
 	});
 </script>
