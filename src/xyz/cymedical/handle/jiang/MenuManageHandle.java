@@ -127,11 +127,9 @@ public class MenuManageHandle {
 		System.out.println("-1");
 		int ret=tbMenuBiz.addMenu(tb_menu);
 		String re = "";
-		if(ret==1) { 
-//			mav.setViewName("WEB-INF/view.jiang/menumanage");
+		if(ret==1) {  
 			re="1";
-		}else { 
-//			mav.setViewName("WEB-INF/view.jiang/err");
+		}else {  
 			re="0";
 		} 
 
@@ -176,8 +174,7 @@ public class MenuManageHandle {
 			Map<String, Object> map = new HashMap<String, Object>(); 
 			map.put("tb_menu", tb_menu);
 			 
-			List<Map<String,Object>> companys = tbMenuBiz.selectCompany(map); 
-//			List<Tb_user> companys = companyBizsc.selectCompany(map);
+			List<Map<String,Object>> companys = tbMenuBiz.selectCompany(map);  
 			String str = JSONArray.fromObject(companys).toString();  
 			return str;
 		}

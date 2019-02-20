@@ -98,13 +98,7 @@
 </table>
 </body>
 
-<%-- 		<script src="<%=path %>assets/js/jquery.min.js"></script> --%>
  
-
-<!-- 		<script type="text/javascript"> -->
-<!-- //   			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>"); -->
-<!--  	</script>   -->
-
 	 
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -177,10 +171,7 @@ $('#add_butn').on('click', function(){
 				return false;
 	             }
 // 			 
-		        else{
-// 		        	var aaa = document.getElementById("add");
-// 		        	aaa.submit();
-	 
+		        else{ 
 				  var m = $('#menu_id').val();
 				  var n = $('#name').val();
 				  var l = $('#link').val();
@@ -209,8 +200,7 @@ function loadAjax(){
 	 
 		$.ajax({
 			 type:"POST",
-			 url:"<%=path%>menumanage/addmenuid.handle",
-//				 contentType:"application/text;charset=utf-8",
+			 url:"<%=path%>menumanage/addmenuid.handle", 
 			 data:{
 				 "name":name
 			 },
@@ -226,10 +216,8 @@ function loadAjax(){
 					 alert("菜单名已存在...");
 				 }
 				
-				
-// 				 var datato=data.val();
-				
-<%-- 				 window.location.href="<%=path%>menumanage/adddeptto.action"; --%>
+				 
+				 
 			 }
 		
 		});
@@ -243,8 +231,7 @@ function delect(e){
 	var delectname=t.name;
 	var re=confirm("确定删除此项？");
 	
-	if(re){
-// 	alert(delectname);
+	if(re){ 
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>menumanage/delect.handle", 
@@ -275,8 +262,7 @@ function updete(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定修改此项？");
-	if(re){
-//			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>menumanage/updete1.handle";
 		form.method="post";

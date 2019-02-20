@@ -20,17 +20,7 @@
  
 <body>
  
-<%-- <form action="<%=path%>menumanage/updetemenu2.handle" method="post" id="ccc"> --%>
-<!-- <ul class="clearfix"> -->
-<%--      <li> <label class="label_name"   >序号</label>  <input name="menu_id" type="text"  readonly="readonly" class="text_add" id="menu_id" value="${updetename}"/></li> --%>
-<!--      	<li> <label class="label_name"   >菜单名</label><input name="name" type="text"  class="text_add" id="name"/><i style="color:#F60; ">只能修改成未拥有的菜单名</i></li> -->
-<!--      	  <li><label class="label_name">路径</label><input name="link" type="text"  class="text_add" id="link"/><i style="color:#F60; ">*</i></li> -->
-<!--      	  <li><label class="label_name">上级菜单</label><input name="superior" type="text"  class="text_add" id="superior"/><i style="color:#F60; ">*</i></li> -->
-      	
-<!--      	</ul> -->
-<!-- <input type="submit" value="提交"> -->
-<!-- <button onclick="window.history.back();">返回</button> -->
-<!-- </form> -->
+ 
 
 <h1>修改菜单</h1>
 
@@ -103,32 +93,7 @@
 		</td>
 
 	</tr>
-
-<!-- 	<tr bgcolor="#ffffff"> -->
-
-<!-- 		<td align="right" bgcolor="#EEEEEE" width="150px" style="padding-left: 5px; padding-top: 4px; padding-bottom: 4px; padding-right: 18px;"> -->
-
-<!-- 		来自哪里 :  -->
-
-<!-- 		</td> -->
-
-<!-- 		<td align="left" style="padding-left: 5px; padding-top: 4px; padding-bottom: 4px; padding-right: 18px;"> -->
-
-<!-- 		<select id="from" name="from" reg="[^0]" tip="一定要选择哟"> -->
-
-<!-- 		  <option value="0">－－请选择你来自哪里－－</option> -->
-
-<!-- 		  <option value="a">北京</option> -->
-
-<!-- 		  <option value="b">上海</option> -->
-
-<!-- 		  <option value="c">四川</option> -->
-
-<!-- 		</select> <span name="easyTip"></span> -->
-
-<!-- 		</td> -->
-
-<!-- 	</tr> -->
+ 
 
 	<tr bgcolor="#ffffff">
 

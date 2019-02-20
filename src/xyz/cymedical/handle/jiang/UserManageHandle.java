@@ -69,23 +69,13 @@ public class UserManageHandle {
 	@RequestMapping(value = "/adduser.handle")
 	public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, Tb_user adduser) {
 
-		ModelAndView mav = new ModelAndView();
-//		adduser.setRole_dept_id(1);
-//		System.out.println("doctor="+adduser.getDoctor());
+		ModelAndView mav = new ModelAndView(); 
 		System.out.println(adduser.getRole_dept_id());
-		System.out.println("douctor=" + adduser.getDoctor());
-//		if (adduser.getDoctor().equals("内科医生")) {
-//			adduser.setRole_dept_id(1);
-//		} else if (adduser.getDoctor().equals("外科医生")) {
-//			adduser.setRole_dept_id(2);
-//		} else if (adduser.getDoctor().equals("管理员")) {
-//			adduser.setRole_dept_id(3);
-//		}
+		System.out.println("douctor=" + adduser.getDoctor()); 
 		userroledept= tbUserBiz.findthree(adduser);
 		System.out.println("userroledept="+userroledept);
 		int role_dept_id=userroledept.getRole_dept_id();
-		
-//		int role_dept_id=tbUserBiz.findthree(adduser).getRole_dept_id();
+		 
 		adduser.setRole_dept_id(role_dept_id);
 
 		System.out.println("qqqqqqqqqqqq+Role_dept_id=" + adduser.getRole_dept_id());
@@ -96,8 +86,7 @@ public class UserManageHandle {
 			System.out.println("添加成功...");
 			maplist = tbUserBiz.findAll2();
 		}
-
-//		mav.setViewName("WEB-INF/view.jiang/index");
+ 
 		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		mav.addObject("maplist", maplist);
 		return mav;
@@ -108,16 +97,12 @@ public class UserManageHandle {
 	public @ResponseBody String selectCompany(Tb_user tb_user, String dept) {
 		System.out.println("过");
 //		----加密
-		Map<String, Object> map = new HashMap<String, Object>();
-//		Tb_user tb_userr=tb_user;
-//		tb_userr.setPwd(Encryption.getResult(tb_userr.getPwd()));
-//		---
+		Map<String, Object> map = new HashMap<String, Object>();  
 		map.put("tb_user", tb_user);
 
 		map.put("dept", dept);
 		
-		List<Map<String, Object>> companys = tbUserBiz.selectCompany(map);
-//			List<Tb_user> companys = companyBizsc.selectCompany(map);
+		List<Map<String, Object>> companys = tbUserBiz.selectCompany(map); 
 		String str = JSONArray.fromObject(companys).toString();
 		System.out.println(companys.get(0).get(dept));
 		return str;
@@ -169,28 +154,12 @@ public class UserManageHandle {
 	}
 
 	// 部门查询
-	@RequestMapping(value = "/adddept.handle", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-//	, produces = "application/text;charset=utf-8"
+	@RequestMapping(value = "/adddept.handle", method = RequestMethod.POST,produces = "application/json;charset=utf-8") 
 	public @ResponseBody String adddept(HttpServletRequest request, HttpServletResponse response, String dept) {
 		String addrole;
 		System.out.println("dept="+dept);
 		maplisttbrole=tbRoleBiz.selectrole(dept);
-		System.out.println("maplisttbrole="+maplisttbrole);
-//		System.out.println("...=" + dept);
-//		if (dept.equals("内科")) {
-//			addrole = "01";
-//		} else {
-//			if (dept.equals("外科")) {
-//				addrole = "02";
-//			} else {
-//				addrole = "03";
-//
-//			}
-//		}
-//		System.out.println("xxxxxxj" + addrole);
-//		addrole=tbRole.toString();
-//		System.out.println("addrole="+addrole);
-//		mav.addObject("maplist", maplist);
+		System.out.println("maplisttbrole="+maplisttbrole); 
 	
 		JSONArray jobj=JSONArray.fromObject(maplisttbrole);//把字符串ss转成json对象
 		return    jobj.toString();
@@ -261,12 +230,7 @@ public class UserManageHandle {
 
 	// 修改人员信息二部
 	@RequestMapping(value = "/updeteuser.handle", method = RequestMethod.POST)
-	public ModelAndView updeteuser(HttpServletRequest request, HttpServletResponse response, Tb_user upuser) {
-//		ModelAndView mav = new ModelAndView();
-//
-//		tbUserBiz.upUser(upuser);
-//
-//		mav.setViewName("WEB-INF/view.jiang/usermanage");
+	public ModelAndView updeteuser(HttpServletRequest request, HttpServletResponse response, Tb_user upuser) { 
 		
 		ModelAndView mav = new ModelAndView();
 		upuser.setPwd(Encryption.getResult(upuser.getPwd()));
@@ -294,11 +258,7 @@ public class UserManageHandle {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("11-=" + depts);
 		System.out.println("11-=" + users);
-		System.out.println("11-=" + phones);
-//		String account= "'%"+users+"%'";
-//		System.out.println(account);
-//		String sql="select * from tb_user where account like '%"+users+"%'";
-//		System.out.println(sql);
+		System.out.println("11-=" + phones); 
 		maplist = tbUserBiz.selUser(depts, users, phones);
 		if (null != maplist && maplist.size() > 0) {
 
@@ -396,9 +356,7 @@ public class UserManageHandle {
 		}else {
 			return "失败";
 		}
-		
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("WEB-INF/view.jiang/news_add");
+		 
 		
 
 	}

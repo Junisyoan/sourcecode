@@ -91,11 +91,7 @@ public class DeptManageHandle {
 			 
 			 
 		}
-		
-////		int ret=TbPowerBiz.addPower(tb_power);
-//		System.out.println(tb_dept.getDept_id());
-//		System.out.println(tb_dept.getName());
-//		int ret=tbDeptBiz.addDept(tb_dept);
+		 
 		
 		/*联表添加*/
 		

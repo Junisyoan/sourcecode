@@ -67,9 +67,7 @@ public class ContactManageHandle {
 		int ret=tbContactBiz.upcontact(tb_contact);
 		System.out.println(ret);
 		if(ret==1) {
-			 System.out.println("修改公司信息ret="+ret);
-//			 tb_contact= tbContactBiz.fornt();
-//			req.setAttribute("tb_contact", tb_contact); 
+			 System.out.println("修改公司信息ret="+ret); 
 		} 
 		ModelAndView ma=new ModelAndView();
 		ma.setViewName("WEB-INF/view.jiang/contactManage");

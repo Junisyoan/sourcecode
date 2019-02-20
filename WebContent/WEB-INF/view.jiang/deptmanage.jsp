@@ -50,13 +50,8 @@
   		   <ul class="clearfix">
      
        <li><label class="label_name">角色</label> <input name="role" type="text"  class="text_add" id="role"/><i style="color:#F60; ">必须输入已拥有的角色</i></li>  
-      
-<!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
-<!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id" onblur="loadAjax()"/></li> -->
-<!--       <li><label class="label_name">部门id</label><input name="dept_id" type="text"  class="text_add" id="dept_id"/></li> -->
-<!--       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li> -->
-      <li><label class="label_name">部门名</label><input name="name" type="text"  class="text_add" id="name"/></li>
-<!--       <li><label class="label_name">角色</label><input name="name" type="text"  class="text_add" id="name"/></li> -->
+       
+      <li><label class="label_name">部门名</label><input name="name" type="text"  class="text_add" id="name"/></li> 
      
          
       </ul>  
@@ -85,8 +80,7 @@
 <%-- <td>${u.menu_id}</td> --%>
 <td>${u.name}</td>
 <td>  <button type="button" class="btn btn-primary" onclick="updete()" name="${u.dept_id}">修改</button>
-  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.dept_id}">刪除</button></td>
-<!-- <td><input type="checkbox" value="5" /></td> -->
+  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.dept_id}">刪除</button></td> 
 </tr>
     </c:forEach> 
  
@@ -95,12 +89,7 @@
 </table>
 </body>
 
-<%-- 		<script src="<%=path %>assets/js/jquery.min.js"></script> --%>
  
-
-<!-- 		<script type="text/javascript"> -->
-<!-- //   			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>"); -->
-<!--  	</script>   -->
 
 	 
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
@@ -187,8 +176,7 @@ function loadAjax(){
 	 
 		$.ajax({
 			 type:"POST",
-			 url:"<%=path%>menumanage/addmenuid.handle",
-//				 contentType:"application/text;charset=utf-8",
+			 url:"<%=path%>menumanage/addmenuid.handle", 
 			 data:{
 				 "name":name
 			 },
@@ -204,9 +192,7 @@ function loadAjax(){
 					 alert("菜单名已存在...");
 				 }
 				
-				
-// 				 var datato=data.val();
-				
+				 
 				 window.location.href="<%=path%>usermanage/adddeptto.action";
 			 }
 		
@@ -252,8 +238,7 @@ function updete(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定修改此项？");
-	if(re){
-//			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>deptmanage/updete1.handle";
 		form.method="post";
