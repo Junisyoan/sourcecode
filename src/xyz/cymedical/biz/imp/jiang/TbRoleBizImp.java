@@ -88,6 +88,13 @@ public class TbRoleBizImp implements TbRoleBiz{
 	}
 
 
+	@Override
+	public List<Map<String, Object>>  selectroleall() {
+		// TODO Auto-generated method stub
+		return tbRoleMapper.selectroleall();
+	}
+
+
  
 
 	 

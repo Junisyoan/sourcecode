@@ -72,4 +72,8 @@
 	
 	</select>
 	
+	<select id="selectrowedid" resultType="map">
+	select d.* from tb_dept d,tb_role_dept rd where rd.state='在用' and d.dept_id=rd.dept_id
+	</select>
+	
 </mapper>

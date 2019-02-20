@@ -27,6 +27,8 @@ public interface TbDeptMapper {
 	
 	public Tb_dept selectDeptnameid(Tb_dept tb_dept);/*回查新添加的id号*/
 	
+	public List<Map<String,Object>> selectrowedid(); //**查询权限id 和名字  在添加权限时使用
+	
 	
 	
 	
