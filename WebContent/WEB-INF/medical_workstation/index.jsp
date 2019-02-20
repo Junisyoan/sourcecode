@@ -44,8 +44,9 @@
 			</script>
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
-				<a href="#" class="navbar-brand"> <small> <img
-						src="<%=path%>image/index1/logo.png">
+				<a href="#" class="navbar-brand">
+				<small> 
+					用户后台
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -53,7 +54,7 @@
 			<!-- /.navbar-header -->
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
-					<span id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>欢迎光临,${nurse.account }</span>
+					<span id="time"></span>&nbsp;<span>欢迎光临,${nurse.account }</span>
 				</div>
 				<ul class="nav ace-nav">
 					<li><a href="javascript:void(0)" class="change_Password">修改密码</a></li>
