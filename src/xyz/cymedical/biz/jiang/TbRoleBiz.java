@@ -27,6 +27,10 @@ public interface TbRoleBiz {
 	
 	public List<Tb_menu> findUnMenu(int role_idd);  
 	
+	public List<Map<String, Object>>  selectroleall();//**查找所角色
+	
+//	public List<Map<String,Object>> selectrole(); //**查询权限id 和名字  在添加权限时使用
+	
 	
 
 }

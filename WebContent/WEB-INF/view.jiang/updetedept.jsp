@@ -40,7 +40,7 @@
 
 		<td align="left" style="padding-left: 5px; padding-top: 4px; padding-bottom: 4px; padding-right: 18px;">
 
-		<input name="dept_id" type="text" id="flightno" value="${updetename}" reg="^\w{2}\d+$" tip="游戏商名称[2个字母简写]+用户ID[数字] 如: sd10059"/>
+		<input name="dept_id" type="text" id="flightno" value="${updetename}"  readonly="readonly" reg="^\w{2}\d+$" tip="游戏商名称[2个字母简写]+用户ID[数字] 如: sd10059"/>
 
 		</td>
 

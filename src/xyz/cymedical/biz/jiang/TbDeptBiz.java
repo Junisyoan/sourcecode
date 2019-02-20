@@ -23,5 +23,7 @@ public interface TbDeptBiz {
 	
 	public List<Map<String,Object>> selectCompany(Map<String, Object> map);  
 	
+	public List<Map<String,Object>> selectrowedid(); //**查询权限id 和名字  在添加权限时使用
+	
 	
 }

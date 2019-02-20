@@ -36,10 +36,10 @@
     		  
     		  	  
     		<form method="post" id = "aFrom" method="post">
-     		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/>
+<!--      		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/> -->
      		菜单名	<input type="text" name="name"/>
      		菜单路径<input type="text" name="link"/>
-     		<i style="color:#F60; ">必填</i>上级菜单<input type="text" name="superior"/>
+<!--      		<i style="color:#F60; ">必填</i>上级菜单<input type="text" name="superior"/> -->
      		  
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 	</form>  
@@ -54,7 +54,7 @@
   		   <ul class="clearfix">
      
       
-      <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li>
+<!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
       <li><label class="label_name">菜单名</label><input name="name" type="text"  class="text_add" id="name" onblur="loadAjax()"/></li>
       <li><label class="label_name">路径</label><input name="link" type="text"  class="text_add" id="link"/></li>
       <li><label class="label_name">上级菜单</label><input name="superior" type="text"  class="text_add" id="superior"/></li>

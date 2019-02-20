@@ -17,28 +17,33 @@ function addparam(){
 	var pid = document.getElementById("pid").value;
 	var name = document.getElementById("name").value;
 	
-	$.ajax({
-		 type:"POST",
-		 url:"<%=path%>param/addparam.handle",
-		 data:{
-			 "pid":pid,
-			 "name":name
+	if(name == null || name == ""){
+		alert("参数名字不能为空");
+	}else{
+		$.ajax({
+			 type:"POST",
+			 url:"<%=path%>param/addparam.handle",
+			 data:{
+				 "pid":pid,
+				 "name":name
+				 },
+			 dataType:"text",
+			 error:function(){
+				 alert('ajax请求请求错误...');
 			 },
-		 dataType:"text",
-		 error:function(){
-			 alert('ajax请求请求错误...');
-		 },
-		 success:function(data){
-			if(data=="success"){
-				alert("增加参数成功");
-				window.location.href="<%=path%>param/findAllParam.handle";
-			}else{
-				alert(data);
-			}
-			
-		 },
-	 });
- }
+			 success:function(data){
+				if(data=="success"){
+					alert("增加参数成功");
+					window.location.href="<%=path%>param/findAllParam.handle";
+							} else {
+								alert(data);
+							}
+
+						},
+					});
+	}
+	
+	}
 </script>
 </head>
 <body>
@@ -47,10 +52,15 @@ function addparam(){
 		<p align="center">&nbsp;</p>
 		<p align="center">&nbsp;</p>
 		<p align="center">
-			上级参数ID：<input name="pid" type="text" id="pid"/>
+			上级参数ID：<select type="text" id="pid" style="width:152px;">
+					<option value="0">0</option>
+				<c:forEach items="${paramlist}" var="p" varStatus="s">
+					<option value="${p.param_id}">${p.param_id}</option>
+				</c:forEach>
+			</select>
 		</p>
 		<p align="center">
-			参&nbsp;数&nbsp;名&nbsp;字：<input name="name" type="text" id="name"/>
+			参&nbsp;数&nbsp;名&nbsp;字：<input name="name" type="text" id="name" />
 		</p>
 		<p align="center">
 			<input type="button" value="提交" onclick="addparam()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a

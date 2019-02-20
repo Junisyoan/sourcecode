@@ -19,9 +19,25 @@
 <script src="<%=path%>js/jquery-1.8.3.min.js"></script>
 <script src="<%=path%>js/jquery.dataTables.min.js"></script>
 <script src="<%=path%>js/datatables.bootstrap.min.js"></script>
+<script src="<%=path%>js/jquery-ui.1.12.1.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#item").dataTable();
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		$("#showpicture").dialog({
+			autoOpen : false,
+			show : {
+				effect : "blind",
+				duration : 300
+			},
+			hide : {
+				effect : "explode",
+				duration : 500
+			}
+		});
 	});
 </script>
 <title>无标题文档</title>
@@ -70,16 +86,25 @@
 			</tbody>
 		</table>
 	</div>
-	<c:forEach items="${patientlist}" var="p" varStatus="s">
-		<c:if test="${p.resultpath != null}">
-			<p align="center">${p.n3}</p>
-			<p align="center">
-				<img
-					src="${pageContext.servletContext.contextPath}/upload/${p.resultpath}"
-					style="width: 350px;" />
-			</p>
-		</c:if>
-	</c:forEach>
+	<p align="center">
+		<button type="button" class="btn btn-info"
+			onclick="javascript:$('#showpicture').dialog('open');">查看彩超图片</button>
+	</p>
+	<div id="showpicture" style="display: none;">
+		<form>
+			<c:forEach items="${patientlist}" var="p" varStatus="s">
+				<c:if test="${p.resultpath != null}">
+					<p align="center">${p.n3}</p>
+					<p align="center">
+						<img
+							src="${pageContext.servletContext.contextPath}/upload/${p.resultpath}"
+							style="width: 350px;" />
+					</p>
+				</c:if>
+			</c:forEach>
+		</form>
+	</div>
+	<p align="center">&nbsp;</p>
 	<c:forEach items="${patientlist}" var="p" varStatus="s">
 		<c:if test="${s.index == 0}">
 			<p align="center">

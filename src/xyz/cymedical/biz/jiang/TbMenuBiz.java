@@ -31,4 +31,6 @@ public interface TbMenuBiz {
 	public int insert(Tb_role_power tb_role_power);
 	
 	public int del(Tb_role_power tb_role_power);
+	
+	 
 }

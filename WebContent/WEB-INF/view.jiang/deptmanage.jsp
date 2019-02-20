@@ -49,8 +49,14 @@
     	<form action="<%=path%>deptmanage/adddept.handle" method="post" id="add">
   		   <ul class="clearfix">
      
-       <li><label class="label_name">角色</label> <input name="role" type="text"  class="text_add" id="role"/><i style="color:#F60; ">必须输入已拥有的角色</i></li>  
-       
+<!--        <li><label class="label_name">角色</label> <input name="role" type="text"  class="text_add" id="role"/><i style="color:#F60; ">必须输入已拥有的角色</i></li>   -->
+        
+     	<li> <label class="label_name">角色</label> 
+        <select name="role" id="role" value="${u.name}"   style=" width:170px;"> 
+       <c:forEach items="${maprolealllist}" var="u" varStatus="s">
+            <option value="${u.name}">${u.name}</option> 
+            </c:forEach> 
+        </select></li> 
       <li><label class="label_name">部门名</label><input name="name" type="text"  class="text_add" id="name"/></li> 
      
          

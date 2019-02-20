@@ -11,6 +11,12 @@
 <script src="<%=path %>js/jquery.min.js"></script>
 <script src="<%=path %>js/jquery.validate.min.js"></script>
 <script src="<%=path %>js/jquery.validate.cn.js"></script>
+
+
+<script type="text/javascript" src="<%=path %>jss/jquery-1.3.2.min.js"></script> 
+<script type="text/javascript" src="<%=path %>jss/easy_validator.pack.js"></script> 
+<script type="text/javascript" src="<%=path %>jss/jquery.bgiframe.min.js"></script> 
+<link  href="<%=path %>jss/validate.css" rel="stylesheet" type="text/css" />
 </head>
  
 <body>
@@ -26,6 +32,8 @@
 <button onclick="window.history.back();">返回</button>
 
 </form>
+
+
 </body>
  
 </html>
