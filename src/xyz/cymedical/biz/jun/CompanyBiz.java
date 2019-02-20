@@ -15,6 +15,16 @@ import xyz.cymedical.entity.jun.Patient;
 
 public interface CompanyBiz {
 	
+	public Company queryUser(String id,String pwd);
+	
+	/**
+	 * 修改密码
+	 * @param id
+	 * @param cpwd
+	 * @return
+	 */
+	public boolean updatePwd(String id,String cpwd);
+	
 	/**
 	 * 扣除公司费用
 	 * @param price	价格

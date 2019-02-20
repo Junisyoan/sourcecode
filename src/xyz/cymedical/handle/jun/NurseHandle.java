@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import xyz.cymedical.biz.ctx.LogCompanyBiz;
 import xyz.cymedical.biz.ctx.PatientBiz;
+import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.biz.jun.BillerBiz;
 import xyz.cymedical.biz.jun.CompanyBiz;
 import xyz.cymedical.biz.jun.CompanyFileBiz;
@@ -40,6 +41,7 @@ import xyz.cymedical.biz.jun.InvalideBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.biz.zsc.ComboBiz;
+import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.jun.Biller;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.jun.CompanyFile;
@@ -91,6 +93,9 @@ public class NurseHandle {
 	@Resource
 	private InvalideBiz invalideBiz;
 	
+	@Resource
+	private TbUserBiz userBiz;
+	
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
 	
@@ -104,7 +109,24 @@ public class NurseHandle {
 	private String strRet;
 	private boolean isExsit;
 	
-	
+	/*
+	 * 修改密码
+	 */
+	@RequestMapping(value="/cpwd.handle",method=RequestMethod.POST)
+	public @ResponseBody String cpwd(String id,String cpwd,String pwd) {
+		System.out.println("修改用户id："+id);
+		Tb_user user = userBiz.queryUser(id, Encryption.getResult(pwd));
+		if (user==null) {
+			strRet="原始密码不正确";
+		} else {
+			cpwd = Encryption.getResult(cpwd);
+			Map<String, Object> map = new HashMap<>();
+			map.put("id", id);
+			map.put("pwd", cpwd);
+			strRet=userBiz.changePwd(map);
+		}
+		return strRet;
+	}
 	
 	/*
 	 * 删除文件

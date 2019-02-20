@@ -191,7 +191,7 @@ function show(details){
 		var td6=$("<td></td>");
 		
 		var input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+details[i].detail_id+"'>删除</button>");
-		var input2=$("<button type='button' class='btn btn-warning' onclick='change()' name='"+details[i].detail_id+"'>修改</button>");
+		var input2=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+details[i].detail_id+"'>修改</button>");
 
 		var tr=$("<tr></tr>");
 		

@@ -85,7 +85,7 @@
 				<div class="left2">
 				<p>一、检验室：</p>
 					<c:forEach items="${dlist }" var="d" varStatus="s">
-							<c:if test="${d.tips!=null && d.type=='检验' && d.code==mycode}">
+							<c:if test="${d.tips!=null && d.tips!='' && d.type=='检验' && d.code==mycode}">
 								${d.name}&nbsp;&nbsp;
 								${d.resulttext}&nbsp;${d.unit}&nbsp;
 								${d.tips}<br/>

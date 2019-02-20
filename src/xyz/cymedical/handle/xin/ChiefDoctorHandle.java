@@ -110,9 +110,9 @@ public class ChiefDoctorHandle {
 		System.out.println("time="+time);
 		
 		//判断是否已总结
-		int sumid=Integer.parseInt(dlist.get(0).get("summarize_id").toString());
 		
-		if(sumid>0) {
+		if(dlist.get(0).get("summarize_id")!=null) {
+		int sumid=Integer.parseInt(dlist.get(0).get("summarize_id").toString());
 			Summarize summarize=doctorbiz.findMySummarize(Integer.valueOf(sumid));			//总结列表
 			System.out.println("summarize="+summarize);
 			mav.addObject("flag", "true");
@@ -131,13 +131,15 @@ public class ChiefDoctorHandle {
 	
 	// 总结
 	@RequestMapping(value = "/dosummarize.handle")
-	public void summary(String advise, String guide) {
+	public ModelAndView summary(String advise, String guide) {
 
 		System.out.println("dosummarize");
 		System.out.println("advice="+advise);
 		System.out.println("guide="+guide);
 		
 		dlist = doctorbiz.findAllDetail(mycode);
+		
+		String time=(String) dlist.get(0).get("time");
 		
 		doctorbiz.addsummarize(advise,guide);
 		
@@ -152,7 +154,15 @@ public class ChiefDoctorHandle {
 			briefbiz.addsummarize(briefid,sumid);
 			
 		}
+		Summarize summarize = new Summarize(advise,guide);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("dlist", dlist);
+		mav.addObject("time", time);
+		mav.addObject("mycode", mycode);
+		mav.addObject("flag", "true");
+		mav.addObject("summarize", summarize);
+		mav.setViewName("WEB-INF/doctor.xin/summarize");
 		
-		
+		return mav;
 	}
 }

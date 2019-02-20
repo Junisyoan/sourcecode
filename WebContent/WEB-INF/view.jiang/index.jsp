@@ -144,17 +144,11 @@
 								name="<%=path%>companys/companysVeiw.handle" title="账号管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>账号管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>powermanage/select.handle" title="权限用户管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>权限用户管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>log/findAllLog.handle" title="日志管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>日志管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
 								name="<%=path%>param/findAllParam.handle" title="参数管理"
 								class="iframeurl"><i class="icon-double-angle-right"></i>参数管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="<%=path%>company/findAllCompany.handle" title="用户管理"
-								class="iframeurl"><i class="icon-double-angle-right"></i>用户管理</a></li>
 						</ul></li>
 
 					<c:forEach items="${mlist }" var="m" varStatus="s">

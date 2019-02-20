@@ -32,7 +32,7 @@
 				<!-- 查询条码号 -->
 				<form method="post" action="<%=path %>nurse/findProject.handle">
 					<ul class="search_content clearfix">
-						<li><label class="lf">条码号</label><input name="onecode" type="text"
+						<li><label class="lf">条码号/手机号</label><input name="onecode" type="text"
 							class="text_add" />
 							<button type="submit" class="btn btn-primary" class="btn_search">查询</button>
 						</li>
@@ -40,18 +40,18 @@
 				</form>
 				
 					<div>
-					<table align="center" style="width:950px;font-size: 15px;">
+					<table align="center" style="width:1000px;font-size: 15px;">
 					<tr style="margin:0 5px">
-						<td>姓名：${patient.name }</td>
-						<td>年龄：${patient.age }</td>
-						<td>性别：${patient.sex }</td>
-						<td>身份证号：${patient.ID }</td>
-						<td>电话号码：${patient.phone }</td>
-						<td>检查号：${patient.check_num }</td>
+						<td>姓名：${patient.name }&nbsp;</td>
+						<td>年龄：${patient.age }&nbsp;</td>
+						<td>性别：${patient.sex }&nbsp;</td>
+						<td>身份证号：${patient.ID }&nbsp;</td>
+						<td>电话号码：${patient.phone }&nbsp;</td>
+						<td>检查号：${patient.check_num }&nbsp;</td>
 					</tr>
 					<tr>
 						
-						<td>公司名称：${patient.cname }</td>
+						<td>公司名称：${patient.cname }&nbsp;</td>
 						<td>余额：${patient.deposit }</td>
 					</tr>
 					</table>
