@@ -193,7 +193,7 @@
 							</td>
 							<td>
 								<input type = "hidden" value = "${c.info}">
-								<button type="button" class="btn btn-warning" onclick="remove()"
+								<button type="button" class="btn btn-warning" onclick="remove1()"
 									name="${c.combo_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
 									name="${c.combo_id}">修改</button>
@@ -368,8 +368,8 @@ function showCombos(combos){
 			$(div).append(divn);
 		}
 		
-		var input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+combos[i].combo_id+"'>删除</button>");
-		var input2=$("<button type='button' class='btn btn-warning' onclick='change()' name='"+combos[i].combo_id+"'>修改</button>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='remove1()' name='"+combos[i].combo_id+"'>删除</button>");
+		var input2=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+combos[i].combo_id+"'>修改</button>");
 		
 		$(td3).append(div);  
 		$(td4).append(input1,input2);  
@@ -386,7 +386,7 @@ function showCombos(combos){
 </script>
 <!-- 删 -->
 <script>
-function remove(e){
+function remove1(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var combo_id = t.name;

@@ -145,7 +145,7 @@
 							<td>${d.max}</td>
 							<td>${d.type}</td>
 							<td>
-								<button type="button" class="btn btn-warning" onclick="remove()"
+								<button type="button" class="btn btn-warning" onclick="remove1()"
 									name="${d.detail_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
 									name="${d.detail_id}">修改</button>
@@ -190,7 +190,7 @@ function show(details){
 		var td5=$("<td></td>").text(details[i].type);
 		var td6=$("<td></td>");
 		
-		var input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+details[i].detail_id+"'>删除</button>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='remove1()' name='"+details[i].detail_id+"'>删除</button>");
 		var input2=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+details[i].detail_id+"'>修改</button>");
 
 		var tr=$("<tr></tr>");
@@ -203,7 +203,7 @@ function show(details){
 </script>
 <!-- 删 -->
 <script>
-function remove(e){
+function remove1(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var detail_id = t.name;

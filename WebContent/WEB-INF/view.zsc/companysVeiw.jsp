@@ -182,7 +182,7 @@
 											onclick="stateChange()" name="${c.company_id}">禁用</button>
 									</c:otherwise>
 								</c:choose>
-								<button type="button" class="btn btn-warning" onclick="remove()"
+								<button type="button" class="btn btn-warning" onclick="remove1()"
 									name="${c.company_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
 									name="${c.company_id}">修改</button>
@@ -301,13 +301,13 @@ function show(companys){
 		var input1;
 		
 		if(companys[i].cstate == "禁用"){
-			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>启用</button>");
+			input1=$("<button type='button' class='btn btn-primary' onclick='stateChange()' name='"+companys[i].company_id+"'>启用</button>");
 		}else{
-			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>禁用</button>");
+			input1=$("<button type='button' class='btn btn-primary' onclick='stateChange()' name='"+companys[i].company_id+"'>禁用</button>");
 		}
 		
-		var input2=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+companys[i].company_id+"'>删除</button>");
-		var input3=$("<button type='button' class='btn btn-warning' onclick='change()' name='"+companys[i].company_id+"'>修改</button>");
+		var input2=$("<button type='button' class='btn btn-warning' onclick='remove1()' name='"+companys[i].company_id+"'>删除</button>");
+		var input3=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+companys[i].company_id+"'>修改</button>");
 		var input4=$("<button type='button' class='btn btn-warning' onclick='resetPwd()' name='"+companys[i].company_id+"'>重置密码</button>");
 		var tr=$("<tr></tr>");
 		
@@ -349,7 +349,7 @@ function resetPwd(e){
 </script>
 <!-- 删 -->
 <script>
-function remove(e){
+function remove1(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var company_id = t.name;

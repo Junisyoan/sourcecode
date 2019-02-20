@@ -194,7 +194,7 @@
 								</div>
 							</td>
 							<td>
-								<button type="button" class="btn btn-warning" onclick="remove()"
+								<button type="button" class="btn btn-warning" onclick="remove1()"
 									name="${p.project_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
 									name="${p.project_id}">修改</button>
@@ -377,8 +377,8 @@ function showProject(projects){
 			$(div).append(divn);
 		}
 		
-		var input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+projects[i].project_id+"'>删除</button>");
-		var input2=$("<button type='button' class='btn btn-warning' onclick='change()' name='"+projects[i].project_id+"'>修改</button>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='remove1()' name='"+projects[i].project_id+"'>删除</button>");
+		var input2=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+projects[i].project_id+"'>修改</button>");
 		
 		$(td3).append(div);  
 		$(td4).append(input1,input2);  
@@ -395,7 +395,7 @@ function showProject(projects){
 </script>
 <!-- 删 -->
 <script>
-function remove(e){
+function remove1(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var project_id = t.name;
