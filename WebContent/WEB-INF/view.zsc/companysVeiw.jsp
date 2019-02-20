@@ -438,9 +438,13 @@ function change(e){
 					return false;
 					
 			}if(!numCheck.test($('#tel').val())){
-				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
+				layer.alert('电话号码必须是数值!',{title: '提示框',icon:0,});
 					return false;
 					
+			}if($('#tel').val().length != 11){
+				layer.alert('电话号码必须为11位!',{title: '提示框',icon:0,});
+				return false;
+				
 			}if($('#address').val()==""){
 				layer.alert('地址不能为空!',{title: '提示框',icon:0,});
 				return false;
@@ -451,7 +455,11 @@ function change(e){
 				
 			}if(!numCheck.test($('#phone').val())){
 				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
-					return false;
+				return false;
+			}if($('#phone').val().length != 11){
+				layer.alert('手机号必须为11位!',{title: '提示框',icon:0,});
+				return false;
+				
 			}if($('#deposit').val()==""||!(numCheck.test($('#deposit').val())||numCheck1.test($('#deposit').val()))	){
 				layer.alert('金额必须是数值!',{title: '提示框',icon:0,});
 				return false;
@@ -527,8 +535,8 @@ $('#add_butn').on('click', function(){
 				layer.alert('账号不能为空!',{title: '提示框',icon:0,});
 					return false;
 					
-			}if($('#pwd1').val()==""){
-				layer.alert('密码不能为空!',{title: '提示框',icon:0,});
+			}if($('#pwd1').val().length < 6){
+				layer.alert('密码长度不小于6位!',{title: '提示框',icon:0,});
 				return false;
 				
 			}if($('#confirmPwd1').val()!=$('#pwd1').val()){
@@ -536,9 +544,13 @@ $('#add_butn').on('click', function(){
 				return false;
 				
 			}if(!numCheck.test($('#tel1').val())){
-				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
+				layer.alert('电话号码必须是数值!',{title: '提示框',icon:0,});
 					return false;
 					
+			}if($('#tel1').val().length != 11){
+				layer.alert('电话号码必须为11位!',{title: '提示框',icon:0,});
+				return false;
+				
 			}if($('#address1').val()==""){
 				layer.alert('地址不能为空!',{title: '提示框',icon:0,});
 				return false;
@@ -551,6 +563,10 @@ $('#add_butn').on('click', function(){
 				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
 					return false;
 					
+			}if($('#phone1').val().length != 11){
+				layer.alert('手机号必须为11位!',{title: '提示框',icon:0,});
+				return false;
+				
 			}if($('#deposit1').val()==""||!(numCheck.test($('#deposit1').val())||numCheck1.test($('#deposit1').val()))){
 				layer.alert('金额必须是数值!',{title: '提示框',icon:0,});
 				return false;
