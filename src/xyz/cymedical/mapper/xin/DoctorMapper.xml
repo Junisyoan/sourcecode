@@ -8,13 +8,13 @@
 
 	<select id="findMyProject" parameterType="String"
 		resultType="java.util.HashMap">
-		select s.user_id,s.name docname,z.* from tb_user s right join 
-		(select a.*,c.project_id,c.name projectname,c.price,e.param_id,e.name keshi,d.patient_id patid,d.project_id proid,d.state,d.user_id uid,d.balance,d.patient_project_id,h.company_id cid,h.name cname,h.deposit
-		from 
-		tb_patient a,tb_project_combo b,tb_project c,tb_patient_project d,tb_param e,tb_patient_combo g,tb_company h
-		where 
-		a.patient_id=g.patient_id=d.patient_id and g.combo_id=b.combo_id and b.project_id=c.project_id and 
-		c.project_id=d.project_id and c.param_id=e.param_id and (a.`code`=#{0} or a.phone=#{0}) and h.company_id=a.company_id)z 
+		select DISTINCT s.user_id,s.name docname,z.* from tb_user s right join 
+		(select a.*,c.project_id,c.name projectname,c.price,e.param_id,e.name keshi,d.patient_id patid,d.project_id proid,d.state,d.user_id uid,d.balance,d.patient_project_id,h.company_id cid,h.name cname,h.deposit 
+	from 
+	tb_patient a,tb_patient_combo g,tb_project c,tb_project_combo b,tb_patient_project d,tb_param e,tb_company h
+ where 
+a.patient_id=g.patient_id and (a.`code`=#{0} or a.phone=#{0}) and a.patient_id=d.patient_id and d.project_id=c.project_id and
+g.combo_id=b.combo_id and c.project_id=b.project_id and c.param_id=e.param_id and a.company_id=h.company_id)z 
 		on s.user_id=z.uid  order by z.name
 	</select>
 

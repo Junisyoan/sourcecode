@@ -53,7 +53,6 @@
 							<td><input type="date" name="time" id="time"/></td>
 							<td>
 							<button onclick="createList('${s.count}','${b.biller_id}');" class="btn btn-primary">开单</button>
-<!-- 							<button onclick="javascript:$('#timeDialog').dialog('open');" class="btn btn-primary">设置体检时间</button> -->
 							</td>
 						</tr>
 					</c:forEach>
@@ -61,12 +60,14 @@
 			</table>
 		</div>
 	</div>
-<!-- 	<div style="display:none" id="timeDialog"> -->
-<!-- 		<input type="date" name="time" id="time"/> -->
-<%-- 		<button onclick="createList('${s.count}','${b.biller_id}');" class="btn btn-primary">开单</button> --%>
-<!-- 	</div> -->
+	<div id="loadgif" style="width:66px;height:66px;position:absolute;top:50%;left:50%;">
+		<img alt="加载中..." src="<%=path%>image/loading.gif"/>
+	</div>
 <script type="text/javascript">
 
+$(function(){
+	$("#loadgif").hide();
+});
 
 function createList(cid,bid){
 	var t = document.getElementById('time').value;
@@ -75,6 +76,7 @@ function createList(cid,bid){
 	}
 	var s = confirm("确认开单？序号："+cid);
 	if(s){
+		$("#loadgif").show();
 		$.ajax({
 			url:"<%=path%>nurse/createCheckList.handle",
 			type:"post",
@@ -89,10 +91,11 @@ function createList(cid,bid){
 				}else if(retData=="-1"){
 					alert("时间必须大于当天时间！");
 				}
-				
+				$("#loadgif").hide();
 			},
 			error:function(){
 				alert('服务器无响应');
+				$("#loadgif").hide();
 			}
 		});
 	}

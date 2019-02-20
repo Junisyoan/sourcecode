@@ -87,14 +87,15 @@
 												<td>${d.name}</td>
 												<td>${d.unit}</td>
 
-												<c:if test="${d.sstate=='未提交' }">
-													<td><input type="text" name="data" id="${d.name}" /></td>
-													<td class="center"><a href="javascript:;"
-														onclick="location ='<%=path %>brief/normal.handle?result='+document.getElementById('${d.name}').value+'&id='+${d.brief_id};">
-															<button type="button" class="btn btn-primary"
-																onclick="return confirm('确定提交么？');">提交</button>
-													</a></td>
-												</c:if>
+<%-- 												<c:if test="${d.sstate=='未提交' }"> --%>
+<%-- 													<td><input type="text" name="data" id="${d.name}" /></td> --%>
+<!-- 													<td class="center"><a href="javascript:;" -->
+<%-- 														onclick="location ='<%=path %>brief/normal.handle?result='+document.getElementById('${d.name}').value+'&id='+${d.brief_id};"> --%>
+<!-- 															<button type="button" class="btn btn-primary" -->
+<!-- 																onclick="return confirm('确定提交么？');">提交</button> -->
+<!-- 													</a></td> -->
+<%-- 												</c:if> --%>
+
 												<c:if test="${d.sstate=='已提交' }">
 													<td>${d.resulttext}</td>
 													<td class="center">已提交</td>

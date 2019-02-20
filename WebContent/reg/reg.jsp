@@ -73,37 +73,35 @@
 						</div>
 
 						<div class="form_text_ipt">
-							<input type="text" name="people" id="people" placeholder="体检带队人姓名" />
+							<input type="text" name="people" id="people" placeholder="紧急联系人姓名" />
 						</div>
 						<div class="ececk_warning">
 							<span>体检带队人姓名不能为空</span>
 						</div>
 
 						<div class="form_text_ipt">
-							<input type="text" name="phone" id="phone" placeholder="带队人手机号" />
+							<input type="text" name="phone" id="phone" placeholder="紧急联系人手机号" />
 						</div>
 						<div class="ececk_warning">
 							<span>带队人手机号不能为空</span>
 						</div>
 
-						<div class="form_text_ipt">
-							<input name="code" type="text" placeholder="验证码">
-						</div>
-            			<div class="right">验证码:</div>
-            			<div class="left" style="width:82px;">
-            				<input type="text" value="" placeholder="请输入验证码" class="input-val" style="width:80px;"/>
-            			</div>
+<!-- 						<div class="form_text_ipt"> -->
+<!-- 							<input name="code" type="text" placeholder="验证码"> -->
+<!-- 						</div> -->
+<!--             			<div class="right">验证码:</div> -->
+<!--             			<div class="form_text_ipt"> -->
+            				<input type="text" id="c" placeholder="请输入验证码" style="padding:10px;"/>
+<!--             			</div> -->
             			<div class="left">
             				<canvas id="canvas" width="100" height="40"></canvas>
             			</div>
-						<div class="ececk_warning">
-							<span>验证码不能为空</span>
-						</div>
 
 						<div class="form_btn">
 							<button type="button" onclick="doSubmitForm();">注册</button>
 						</div>
 						<div class="form_reg_btn">
+							<button type="button" onclick="javascript:window.history.back();">返回</button>
 							<span>已有帐号？</span><a href="login_company.html">马上登录</a>
 						</div>
 					</form>
@@ -118,9 +116,7 @@
 var show_num = [];
 function passwordIsTrue(){
 	
-	var account = document.getElementById("account").value;
-	var pwd = document.getElementById("pwd").value;
-	var val = $(".input-val").val().toLowerCase();
+	var val = $("#c").val().toLowerCase();
     var num = show_num.join("");
     
     if(val==''){
@@ -131,30 +127,8 @@ function passwordIsTrue(){
          $(".input-val").val('');
          draw(show_num);
          return false;
-    } 
-    
-	 $.ajax({
-		 type:"POST",
-		 url:"<%=path%>user/login.handle",
-		 data:{
-			 "account":account,
-			 "pwd":pwd,
-			 "login":"login"
-			 },
-		 dataType:"text",
-		 error:function(){
-			 alert('ajax请求请求错误...');
-		 },
-		 success:function(data){
-			if(data=="管理员"){
-				alert("登陆后台成功！！");
-				window.location.href="<%=path%>user/index.handle";
-			}else{
-				alert(data);
-			}
-			
-		 },
-	 });
+    }
+    return true;
  }
 
 $(function(){
@@ -326,7 +300,9 @@ function randomColor() {//得到随机的颜色值
 	
 	function doSubmitForm(){
 		var form = document.getElementById('regCompany');
-		form.submit();
+		if(passwordIsTrue()){
+			form.submit();
+		}
 	}
 </script>
 </html>
