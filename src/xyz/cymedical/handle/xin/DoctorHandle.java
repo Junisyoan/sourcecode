@@ -20,6 +20,7 @@ import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.entity.jiang.Tb_menu;
 import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.jun.Patient;
+import xyz.cymedical.tools.zsc.Encryption;
 
 //单检医生
 @Controller
@@ -55,9 +56,8 @@ public class DoctorHandle {
 		System.out.println("pwd="+pwd);
 
 		Tb_user user = new Tb_user();
-		user=doctorbiz.login(account,pwd);
+		user=doctorbiz.login(account,Encryption.getResult(pwd));
 		System.out.println("user="+user);
-		
 		
 		String Status="";
 		
