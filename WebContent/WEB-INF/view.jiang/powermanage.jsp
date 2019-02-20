@@ -199,7 +199,7 @@ function loadAjax(){
 				 alert('ajax请求请求错误...');
 			 },
 			 success:function(data){
-				 alert("ajax="+data); 
+// 				 alert("ajax="+data); 
 				 if(data=="01"){
 					 alert("菜单名可以用");
 				 }else{
@@ -224,7 +224,7 @@ function delect(e){
 	var re=confirm("确定删除此项？");
 	
 	if(re){
-	alert(delectname);
+// 	alert(delectname);
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>powermanage/delect.handle", 

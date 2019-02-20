@@ -221,8 +221,7 @@ function delect(e){
 	var delectname=t.name;
 	var re=confirm("确定删除此项？");
 	
-	if(re){
-	alert(delectname);
+	if(re){ 
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>deptmanage/delect.handle", 

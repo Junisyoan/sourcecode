@@ -237,7 +237,7 @@ function updeterole(a){
 	var updetename=t.name;
 	var re=confirm("确定修改？");
 	if(re){
-			alert(updetename);
+// 			alert(updetename);
 		var form = document.createElement("Form");
 		form.action="<%=path%>rolemanage/updectrole.handle";
 		form.method="post";
