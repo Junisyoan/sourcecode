@@ -36,10 +36,10 @@
     		  
     		  	  
     		<form method="post" id = "aFrom" method="post">
-     		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/>
+<!--      		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/> -->
      		菜单名	<input type="text" name="name"/>
      		菜单路径<input type="text" name="link"/>
-     		<i style="color:#F60; ">必填</i>上级菜单<input type="text" name="superior"/>
+<!--      		<i style="color:#F60; ">必填</i>上级菜单<input type="text" name="superior"/> -->
      		  
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 	</form>  
@@ -54,7 +54,7 @@
   		   <ul class="clearfix">
      
       
-      <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li>
+<!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
       <li><label class="label_name">菜单名</label><input name="name" type="text"  class="text_add" id="name" onblur="loadAjax()"/></li>
       <li><label class="label_name">路径</label><input name="link" type="text"  class="text_add" id="link"/></li>
       <li><label class="label_name">上级菜单</label><input name="superior" type="text"  class="text_add" id="superior"/></li>
@@ -98,13 +98,7 @@
 </table>
 </body>
 
-<%-- 		<script src="<%=path %>assets/js/jquery.min.js"></script> --%>
  
-
-<!-- 		<script type="text/javascript"> -->
-<!-- //   			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>"); -->
-<!--  	</script>   -->
-
 	 
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -177,10 +171,7 @@ $('#add_butn').on('click', function(){
 				return false;
 	             }
 // 			 
-		        else{
-// 		        	var aaa = document.getElementById("add");
-// 		        	aaa.submit();
-	 
+		        else{ 
 				  var m = $('#menu_id').val();
 				  var n = $('#name').val();
 				  var l = $('#link').val();
@@ -209,8 +200,7 @@ function loadAjax(){
 	 
 		$.ajax({
 			 type:"POST",
-			 url:"<%=path%>menumanage/addmenuid.handle",
-//				 contentType:"application/text;charset=utf-8",
+			 url:"<%=path%>menumanage/addmenuid.handle", 
 			 data:{
 				 "name":name
 			 },
@@ -219,17 +209,15 @@ function loadAjax(){
 				 alert('ajax请求请求错误...');
 			 },
 			 success:function(data){
-				 alert("ajax="+data); 
+// 				 alert("ajax="+data); 
 				 if(data=="01"){
 					 alert("菜单名可以用");
 				 }else{
 					 alert("菜单名已存在...");
 				 }
 				
-				
-// 				 var datato=data.val();
-				
-<%-- 				 window.location.href="<%=path%>menumanage/adddeptto.action"; --%>
+				 
+				 
 			 }
 		
 		});
@@ -243,8 +231,7 @@ function delect(e){
 	var delectname=t.name;
 	var re=confirm("确定删除此项？");
 	
-	if(re){
-	alert(delectname);
+	if(re){ 
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>menumanage/delect.handle", 
@@ -275,8 +262,7 @@ function updete(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定修改此项？");
-	if(re){
-//			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>menumanage/updete1.handle";
 		form.method="post";

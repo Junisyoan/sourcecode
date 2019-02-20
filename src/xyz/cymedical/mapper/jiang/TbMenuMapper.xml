@@ -17,7 +17,7 @@
 	</select>
   
  	 <insert id="addMenu" parameterType="xyz.cymedical.entity.jiang.Tb_menu">
-		insert into tb_menu(menu_id,name,link,superior) values(#{menu_id},#{name},#{link},#{superior})
+		insert into tb_menu(name,link,superior) values(#{name},#{link},#{superior})
 	</insert>
   
   
@@ -54,18 +54,18 @@
 	<select id = "selectCompany" parameterType="map" resultType="map">
  		select * from tb_menu  where 1=1
  	 
-		<if test="tb_menu.menu_id!=0 and tb_menu.menu_id!=''"> 
-			and menu_id like '%${tb_menu.menu_id}%'
-		</if>
+<!-- 		<if test="tb_menu.menu_id!=0 and tb_menu.menu_id!=''">  -->
+<!-- 			and menu_id like '%${tb_menu.menu_id}%' -->
+<!-- 		</if> -->
 		<if test="tb_menu.name!=null and tb_menu.name!=''"> 
 			and name like '%${tb_menu.name}%'
 		</if>
 		<if test="tb_menu.link!=null and tb_menu.link!=''"> 
 			and link like '%${tb_menu.link}%'
 		</if>
-		<if test="tb_menu.superior!=0 and tb_menu.superior!=''"> 
-			and superior like '%${tb_menu.superior}%'
-		</if>
+<!-- 		<if test="tb_menu.superior!=0 and tb_menu.superior!=''">  -->
+<!-- 			and superior like '%${tb_menu.superior}%' -->
+<!-- 		</if> -->
 	 
 		 
 	</select>

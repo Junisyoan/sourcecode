@@ -60,11 +60,11 @@
   			<ul class="clearfix">
      			<li>
      				<label class="label_name">公司名</label>
-     				<input type = "text" name="name" id="name1" autofocus="autofocus" onblur="checkName1()">
+     				<input type = "text" name="name" id="name1" >
      			</li>
         		<li>
      				<label class="label_name">账户名</label>
-     				<input type = "text" name="account" id = "account1">
+     				<input type = "text" name="account" id = "account1" onblur="checkName1()">
      			</li>
      			<li>
      				<label class="label_name">密码</label>
@@ -106,11 +106,11 @@
   			<ul class="clearfix">
      			<li>
      				<label class="label_name">公司名</label>
-     				<input type = "text" name="name" id="name" autofocus="autofocus" onblur="checkName1()">
+     				<input type = "text" name="name" id="name">
      			</li>
         		<li>
      				<label class="label_name">账户名</label>
-     				<input type = "text" name="account" id = "account">
+     				<input type = "text" name="account" id = "account" onblur="checkName()">
      			</li>
      			<li>
      				<label class="label_name">公司电话</label>
@@ -182,7 +182,7 @@
 											onclick="stateChange()" name="${c.company_id}">禁用</button>
 									</c:otherwise>
 								</c:choose>
-								<button type="button" class="btn btn-warning" onclick="remove()"
+								<button type="button" class="btn btn-warning" onclick="remove1()"
 									name="${c.company_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
 									name="${c.company_id}">修改</button>
@@ -301,13 +301,13 @@ function show(companys){
 		var input1;
 		
 		if(companys[i].cstate == "禁用"){
-			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>启用</button>");
+			input1=$("<button type='button' class='btn btn-primary' onclick='stateChange()' name='"+companys[i].company_id+"'>启用</button>");
 		}else{
-			input1=$("<button type='button' class='btn btn-warning' onclick='stateChange()' name='"+companys[i].company_id+"'>禁用</button>");
+			input1=$("<button type='button' class='btn btn-primary' onclick='stateChange()' name='"+companys[i].company_id+"'>禁用</button>");
 		}
 		
-		var input2=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+companys[i].company_id+"'>删除</button>");
-		var input3=$("<button type='button' class='btn btn-warning' onclick='change()' name='"+companys[i].company_id+"'>修改</button>");
+		var input2=$("<button type='button' class='btn btn-warning' onclick='remove1()' name='"+companys[i].company_id+"'>删除</button>");
+		var input3=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+companys[i].company_id+"'>修改</button>");
 		var input4=$("<button type='button' class='btn btn-warning' onclick='resetPwd()' name='"+companys[i].company_id+"'>重置密码</button>");
 		var tr=$("<tr></tr>");
 		
@@ -349,7 +349,7 @@ function resetPwd(e){
 </script>
 <!-- 删 -->
 <script>
-function remove(e){
+function remove1(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var company_id = t.name;
@@ -378,8 +378,9 @@ function remove(e){
 <!-- 改 -->
 <script>
 var numCheck = /^[0-9]+\.{0,1}[0-9]{0,2}$/;
-var check;
 function checkName(){
+	var rt;
+	
 	if($("#account").val() == ""){
 		return;
 	}
@@ -391,18 +392,20 @@ function checkName(){
 			account:$("#account").val(),
 			id:$("#company_id").val()
 		},
+		async: false,
 		success:function(msg){
-			if(msg == "该名称已存在"){
-				check = 0;
-				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check = 1;
-			} 
+			if(msg == "该账号已存在"){
+				layer.alert('该账号已存在!',{title: '提示框',icon:0,});
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 function change(e){
 	var e = e || event;
@@ -427,19 +430,19 @@ function change(e){
 		yes: function(index, layero){
 			if($('#name').val()==""){
 				 layer.alert('名称不能为空!',{title: '提示框',icon:0,});
-					return false;
-					
-			}if(check == 0){
-				 layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-					return false;
+				return false;
 				
 			}if($('#account').val()==""){
 				layer.alert('账号不能为空!',{title: '提示框',icon:0,});
-					return false;
+				return false;
+				
+			}if(checkName() == "ok"){
+				return false;
 					
-			}if(!numCheck.test($('#tel').val())){
+			}else{
+			if(!numCheck.test($('#tel').val())){
 				layer.alert('电话号码必须是数值!',{title: '提示框',icon:0,});
-					return false;
+				return false;
 					
 			}if($('#tel').val().length != 11){
 				layer.alert('电话号码必须为11位!',{title: '提示框',icon:0,});
@@ -483,13 +486,15 @@ function change(e){
 	    		}
 	    	});
 			}
+		}
 		})
 	};
 </script>
 <!-- 增 -->
 <script>
-var check1;
 function checkName1(){
+	var rt;
+	
 	if($("#account1").val() == ""){
 		return;
 	}
@@ -500,20 +505,23 @@ function checkName1(){
 		data:{
 			account:$("#account1").val()
 		},
+		async: false,
 		success:function(msg){
-			if(msg == "该名称已存在"){
-				check1 = 0;
-				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check1 = 1;
-			} 
+			if(msg == "该账号已存在"){
+				layer.alert('该账号已存在!',{title: '提示框',icon:0,});
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 $('#add_butn').on('click', function(){	
+	
     layer.open({
         type: 1,
         title: '添加账号',
@@ -525,17 +533,17 @@ $('#add_butn').on('click', function(){
 			
 			if($('#name1').val()==""){
 				 layer.alert('名称不能为空!',{title: '提示框',icon:0,});
-					return false;
-					
-			}if(check1 == 0){
-				 layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-					return false;
-				
+				return false;
+
 			}if($('#account1').val()==""){
 				layer.alert('账号不能为空!',{title: '提示框',icon:0,});
-					return false;
-					
-			}if($('#pwd1').val().length < 6){
+				return false;
+				
+			}if(checkName1() == "ok"){
+				return false;
+						
+			}else{
+			if($('#pwd1').val().length < 6){
 				layer.alert('密码长度不小于6位!',{title: '提示框',icon:0,});
 				return false;
 				
@@ -561,7 +569,7 @@ $('#add_butn').on('click', function(){
 				
 			}if(!numCheck.test($('#phone1').val())){
 				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
-					return false;
+				return false;
 					
 			}if($('#phone1').val().length != 11){
 				layer.alert('手机号必须为11位!',{title: '提示框',icon:0,});
@@ -590,6 +598,7 @@ $('#add_butn').on('click', function(){
 	    		}
 	    	});
 			}
+		}
 		})
 	});
 </script>

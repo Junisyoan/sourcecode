@@ -44,8 +44,9 @@
 			</script>
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
-				<a href="#" class="navbar-brand"> <small> <img
-						src="<%=path%>image/index1/logo.png">
+				<a href="#" class="navbar-brand"> 
+				<small> 
+					体检工作站
 				</small>
 				</a>
 				<!-- /.brand -->

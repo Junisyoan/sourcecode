@@ -59,5 +59,26 @@ public class TbDeptBizImp implements  TbDeptBiz{
 		return tbDeptMapper.select(sta);
 	}
 
+
+	@Override
+	public List<Tb_dept> selectDeptname(Tb_dept tb_dept) {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.selectDeptname(tb_dept);
+	}
+
+
+	@Override
+	public Tb_dept selectDeptnameid(Tb_dept tb_dept) {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.selectDeptnameid(tb_dept);
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectrowedid() {
+		// TODO Auto-generated method stub
+		return tbDeptMapper.selectrowedid();
+	}
+
 	
 }

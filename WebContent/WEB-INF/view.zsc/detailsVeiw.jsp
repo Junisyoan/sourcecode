@@ -54,7 +54,7 @@
   			<ul class="clearfix">
      			<li>
      				<label class="label_name">名称</label>
-     				<input type = "text" name="name" id="name1" autofocus="autofocus" onblur="checkName1()">
+     				<input type = "text" name="name" id="name1" onblur="checkName1()">
      			</li>
         		<li>
      				<label class="label_name">计量单位</label>
@@ -88,7 +88,7 @@
   			<ul class="clearfix">
      			<li>
      				<label class="label_name">名称</label>
-     				<input type = "text" name="name" id="name" autofocus="autofocus" onblur="checkName()">
+     				<input type = "text" name="name" id="name" onblur="checkName()">
      			</li>
         		<li>
      				<label class="label_name">计量单位</label>
@@ -145,7 +145,7 @@
 							<td>${d.max}</td>
 							<td>${d.type}</td>
 							<td>
-								<button type="button" class="btn btn-warning" onclick="remove()"
+								<button type="button" class="btn btn-warning" onclick="remove1()"
 									name="${d.detail_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
 									name="${d.detail_id}">修改</button>
@@ -190,7 +190,7 @@ function show(details){
 		var td5=$("<td></td>").text(details[i].type);
 		var td6=$("<td></td>");
 		
-		var input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+details[i].detail_id+"'>删除</button>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='remove1()' name='"+details[i].detail_id+"'>删除</button>");
 		var input2=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+details[i].detail_id+"'>修改</button>");
 
 		var tr=$("<tr></tr>");
@@ -203,7 +203,7 @@ function show(details){
 </script>
 <!-- 删 -->
 <script>
-function remove(e){
+function remove1(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var detail_id = t.name;
@@ -233,8 +233,9 @@ function remove(e){
 <script>
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 var numCheck1 = /^[0-9]*$/;
-var check;
 function checkName(){
+	var rt;
+	
 	if($("#name").val() == ""){
 		return;
 	}
@@ -246,18 +247,20 @@ function checkName(){
 			name:$("#name").val(),
 			id:$("#detail_id").val()
 		},
+		async: false,
 		success:function(msg){
 			if(msg == "该名称已存在"){
-				check = 0;
 				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check = 1;
-			} 
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 function change(e){
 	var e = e || event;
@@ -296,12 +299,11 @@ function change(e){
 			if($('#name').val()==""){
 				 layer.alert('名称不能为空!',{title: '提示框',icon:0,});
 					return false;
-					
-			}if(check == 0){
-				 layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-					return false;
 				
-			}if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
+			}if(checkName() == "ok"){
+				return false;
+			}
+			if($('#min').val() != ""&&!(numCheck.test($('#min').val())||numCheck1.test($('#min').val()))){
 				layer.alert('最小值必须是数值!',{title: '提示框',icon:0,});
 					return false;
 					
@@ -339,8 +341,9 @@ function change(e){
 </script>
 <!-- 增 -->
 <script>
-var check1;
 function checkName1(){
+	var rt;
+	
 	if($("#name1").val() == ""){
 		return;
 	}
@@ -351,20 +354,23 @@ function checkName1(){
 		data:{
 			name:$("#name1").val()
 		},
+		async: false,
 		success:function(msg){
 			if(msg == "该名称已存在"){
-				check1 = 0;
 				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check1 = 1;
-			} 
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 $('#add_butn').on('click', function(){	
+	check1 = 1;
     layer.open({
         type: 1,
         title: '添加细项',
@@ -381,14 +387,11 @@ $('#add_butn').on('click', function(){
 					 });
 					return false;
 					
-			}if(check1 == 0){
-				 layer.alert('该名称已存在!',{
-		              title: '提示框',								
-					  icon:0,			    
-					 });
+			}
+			if(checkName1() == "ok"){
 				return false;
-				
-			}if($('#min1').val() != ""&&!(numCheck.test($('#min1').val())||numCheck1.test($('#min1').val()))){
+			}
+			if($('#min1').val() != ""&&!(numCheck.test($('#min1').val())||numCheck1.test($('#min1').val()))){
 				layer.alert('最小值必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    

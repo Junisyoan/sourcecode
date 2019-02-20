@@ -87,8 +87,7 @@
 								<form id="addForm">
 									<ul class="clearfix">
 										<li><label class="label_name">名称</label> <input
-											type="text" name="name" id="name1" autofocus="autofocus"
-											onblur="checkName1()"></li>
+											type="text" name="name" id="name1" onblur="checkName1()"></li>
 										<li><label class="label_name">价钱</label> <input
 											type="text" name="price" id="price1"></li>
 										<li><label class="label_name">科室</label> <select
@@ -127,8 +126,7 @@
 								<form id="updateForm">
 									<ul class="clearfix">
 										<li><label class="label_name">名称</label> <input
-											type="text" name="name" id="name" autofocus="autofocus"
-											onblur="checkName1()"></li>
+											type="text" name="name" id="name" onblur="checkName()"></li>
 										<li><label class="label_name">价钱</label> <input
 											type="text" name="price" id="price"></li>
 										<li><label class="label_name">科室</label> <select
@@ -196,7 +194,7 @@
 								</div>
 							</td>
 							<td>
-								<button type="button" class="btn btn-warning" onclick="remove()"
+								<button type="button" class="btn btn-warning" onclick="remove1()"
 									name="${p.project_id}">删除</button>
 								<button type="button" class="btn btn-primary" onclick="change()"
 									name="${p.project_id}">修改</button>
@@ -379,8 +377,8 @@ function showProject(projects){
 			$(div).append(divn);
 		}
 		
-		var input1=$("<button type='button' class='btn btn-warning' onclick='remove()' name='"+projects[i].project_id+"'>删除</button>");
-		var input2=$("<button type='button' class='btn btn-warning' onclick='change()' name='"+projects[i].project_id+"'>修改</button>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='remove1()' name='"+projects[i].project_id+"'>删除</button>");
+		var input2=$("<button type='button' class='btn btn-primary' onclick='change()' name='"+projects[i].project_id+"'>修改</button>");
 		
 		$(td3).append(div);  
 		$(td4).append(input1,input2);  
@@ -397,7 +395,7 @@ function showProject(projects){
 </script>
 <!-- 删 -->
 <script>
-function remove(e){
+function remove1(e){
 	var e = e || event;
 	var t = e.target || e.srcElement;
 	var project_id = t.name;
@@ -425,8 +423,9 @@ function remove(e){
 </script>
 <!-- 改 -->
 <script>
-var check;
 function checkName(){
+	var rt;
+	
 	if($("#name").val() == ""){
 		return;
 	}
@@ -437,20 +436,22 @@ function checkName(){
 		dataType:"text",
 		data:{
 			name:$("#name").val(),
-			id:"${project.project_id}"
+			id:$("#project_id").val()
 		},
+		async: false,
 		success:function(msg){
 			if(msg == "该名称已存在"){
-				check = 0;
 				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check = 1;
-			} 
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 
 function show(){
@@ -540,14 +541,11 @@ function change(e){
 					 });
 					return false;
 					
-			}if(check == 0){
-				 layer.alert('该名称已存在!',{
-		              title: '提示框',								
-					  icon:0,			    
-					 });
+			}if(checkName()== "ok"){
 				return false;
 				
-			}if(!(numCheck.test($('#price').val())||numCheck1.test($('#price').val()))){
+			}else{
+			if(!(numCheck.test($('#price').val())||numCheck1.test($('#price').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    
@@ -584,6 +582,7 @@ function change(e){
 	    		}
 	    	});
 			}
+		}
 		})
 	};
 </script>
@@ -613,8 +612,9 @@ function show1(){
 	}
 }
 
-var check1;
 function checkName1(){
+	var rt;
+	
 	if($("#name1").val() == ""){
 		return;
 	}
@@ -625,21 +625,23 @@ function checkName1(){
 		data:{
 			name:$("#name1").val()
 		},
+		async: false,
 		success:function(msg){
 			if(msg == "该名称已存在"){
-				check1 = 0;
 				layer.alert('该名称已存在!',{title: '提示框',icon:0,});
-			}else{
-				check1 = 1;
-			} 
+				rt = 'ok';
+			}
 		},
 		error : function() {
 			alert("异常！");
+			rt = 'ok';
 		}
 	});
+	
+	return rt;
 }
 
-$('#add_butn').on('click', function(){	
+$('#add_butn').on('click', function(){
 	state = "add";
 	current = 0;
 	idArray  = new Array();
@@ -673,14 +675,11 @@ $('#add_butn').on('click', function(){
 					 });
 					return false;
 					
-			}if(check1 == 0){
-				 layer.alert('该名称已存在!',{
-		              title: '提示框',								
-					  icon:0,			    
-					 });
+			}if(checkName1()== "ok"){
 				return false;
 				
-			}if(!(numCheck.test($('#price1').val())||numCheck1.test($('#price1').val()))){
+			}
+			if(!(numCheck.test($('#price1').val())||numCheck1.test($('#price1').val()))){
 				layer.alert('价格必须是数值!',{
 		              title: '提示框',								
 					  icon:0,			    

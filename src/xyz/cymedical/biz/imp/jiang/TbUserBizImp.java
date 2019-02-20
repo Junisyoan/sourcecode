@@ -76,8 +76,13 @@ public class TbUserBizImp implements TbUserBiz{
 			return "密码修改失败";
 		}
 	}
-	@Override
+	@Override 
+	public Tb_user findthree(Tb_user user) {
+		// TODO Auto-generated method stub
+		return tbUserMapper.findthree(user);
+	}
+	@Override 	
 	public Tb_user queryUser(String id, String pwd) {
-		return tbUserMapper.queryUser(id, pwd);
+		return tbUserMapper.queryUser(id, pwd); 
 	}
 }

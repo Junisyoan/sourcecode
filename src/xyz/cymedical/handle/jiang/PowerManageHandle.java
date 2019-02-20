@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
+import xyz.cymedical.biz.jiang.TbDeptBiz;
 import xyz.cymedical.biz.jiang.TbMenuBiz;
 import xyz.cymedical.biz.jiang.TbPowerBiz;
 import xyz.cymedical.biz.jiang.TbRoleBiz;
@@ -42,17 +43,28 @@ public class PowerManageHandle {
 		@Resource
 		private TbRoleBiz tbRoleBiz;
 		
+		 
+		
 		private Tb_power tbpower;
 		
 		@Resource
 		private Tb_role_power tb_role_power;
 		
+		@Resource
+		private TbDeptBiz tbDeptBiz;
+		 
+		
 		private Tb_menu tb_menu;
 		
 		@Resource
 		private TbMenuBiz tbMenuBiz;
+		
+		private List<Tb_menu> listmenu;
 		   
-//		private List<Map<String,Object>> maplist;
+		private List<Map<String,Object>> maplistdept;//**部门
+		private List<Map<String,Object>> maplistrole;//**角色
+		
+		private  List<Tb_power> maplistpower;
 		 
 		int  rett;
 		
@@ -68,7 +80,21 @@ public class PowerManageHandle {
 			 maplist = TbPowerBiz.selectPower();
 			 
 			request.setAttribute("maplist", maplist);
-			
+			/*
+			 * 提前发送菜单  权限  角色 名字和角色到前台
+			 * 
+			 * 
+			 * 
+			 */
+			maplistpower=TbPowerBiz.selectPower();
+			request.setAttribute("maplistpower", maplistpower);
+//			maplistdept=tbDeptBiz.selectrowedid();
+//			request.setAttribute("maplistdept", maplistdept);
+			listmenu=tbMenuBiz.selectMenu();
+			request.setAttribute("listmenu", listmenu);
+			maplistrole=tbRoleBiz.selectroleall();
+			request.setAttribute("maplistrole", maplistrole);
+			 
 			mav.setViewName("WEB-INF/view.jiang/powermanage");
 			return mav;
 
@@ -79,7 +105,7 @@ public class PowerManageHandle {
 		
 		@RequestMapping(value = "/delect.handle",method = RequestMethod.POST)
 		public @ResponseBody String deletePower(HttpServletRequest request, HttpServletResponse response, String delectname) {
-//			ModelAndView mav = new ModelAndView();
+ 
 			
 			System.out.println("delectname="+delectname);
 			String data = null;
@@ -95,8 +121,7 @@ public class PowerManageHandle {
 			}
 			int ret=TbPowerBiz.deletePower(power_id);
 			
-			if(ret==1) {
-//				mav.setViewName("WEB-INF/view.jiang/powermanage");
+			if(ret==1) { 
 				data = "00";
 			}
 			
@@ -110,10 +135,11 @@ public class PowerManageHandle {
 		public ModelAndView addPower(HttpServletRequest request, HttpServletResponse response, Tb_power tb_power,String roleid) {
 			ModelAndView mav = new ModelAndView();  
 			int role_id=Integer.valueOf(roleid); 
-			int power_id=tb_power.getPower_id();
+//			int power_id=tb_power.getPower_id();
 			
 //			 
 			int ret=TbPowerBiz.addPower(tb_power);
+			int power_id=TbPowerBiz.selectpowerid(tb_power).getPower_id();
 			
 			if(ret==1) {
 				tb_role_power.setRole_id(role_id);
@@ -193,11 +219,8 @@ public class PowerManageHandle {
 		@RequestMapping(value= "/allot.handle",method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 		public @ResponseBody String allot( String role_id) {
 
-			System.out.println(1);
-//			List<Menu> menuList = menuBiz.findMenu(role.getRole_id());
-//			System.out.println(role_id);
-			int role_idd=Integer.valueOf(role_id);
-//		 	int role_idd=role.getRole_id();
+			System.out.println(1); 
+			int role_idd=Integer.valueOf(role_id); 
 			
 			System.out.println("点击权限名 弹出id="+role_idd);
 			List<Tb_menu> menuList=tbRoleBiz.findMenu(role_idd);
@@ -333,12 +356,7 @@ public class PowerManageHandle {
 			}else {
 				ret="添加失败wangxing";
 			}
-			
-//			try {
-//				resp.getWriter().print(ret);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			 
 			return ret;
 		}
 		

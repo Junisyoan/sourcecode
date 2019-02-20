@@ -156,4 +156,11 @@
 	<update id="changePwd" parameterType = "map">
 		update tb_user set pwd = #{pwd} where user_id = #{id}
 	</update>
+	
+	<select id="findthree" parameterType="xyz.cymedical.entity.jiang.Tb_user"  resultType="xyz.cymedical.entity.jiang.Tb_user">
+	
+	select * from tb_dept d,tb_role r,tb_role_dept rd where d.name=#{dept} and r.name=#{doctor} and r.role_id=rd.role_id
+	
+	</select>
+	
 </mapper>

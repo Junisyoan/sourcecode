@@ -35,13 +35,19 @@
       <div class="Add_Manager_style">
     		 <form method="post" id = "aFrom" method="post">
      		部门	<input type="text" name="dept"/>
-     		账号	<input type="text" name="account"/>
-<!--      		联系人<input type="text" name="name"/> -->
+     		账号	<input type="text" name="account"/> 
      		性别	<input type="text" name="sex"/>
      		联系电话		<input type="text" name="phone"/><br/>
      		身份证	<input type="text" name="IDcard"/>
-     		地址	<input type="text" name="address"/>
-     		状态<input type="text" name="state"/>
+     		地址	<input type="text" name="address"/> 
+     		<li> <label class="label_name">状态</label>
+        <select name="state" id="state"   style=" width:170px;">
+       
+            <option value="启用">启用</option>
+            
+            <option value="禁用">禁用</option> 
+             
+        </select></li>
      		 
   			<input type="button" class="<%=path%>btn btn-primary" value="查询" onclick="putIn()">
   	 	</form>  
@@ -54,19 +60,21 @@
     	<form action="<%=path%>usermanage/adduser.handle" method="post" id="ddd">
   		   <ul class="clearfix">
      
-     	<li> <label class="label_name">部门</label>
-        <select name="cardstatef" id="dept" onblur="loadAjax()" style=" width:170px;">
-       
-            <option value="外科">外科</option>
-            
-            <option value="内科">内科</option>
-               
-            <option value="管理员">管理员</option> 
-             
-        </select></li>
+     	<li> <label class="label_name">部门</label> 
+        <select name="dept" id="dept" value="${u.name}"  onblur="loadAjax()" style=" width:170px;"> 
+       <c:forEach items="${maplistdept}" var="u" varStatus="s">
+            <option value="${u.name}">${u.name}</option> 
+            </c:forEach> 
+        </select></li> 
         
         <li>   <label  class="label_name"> 联系人</label><input type="text" id="name" name="name"/>   </li> 
-        <li>   <label  class="label_name">   角色</label><input type="text" id="doctor" name="doctor"/>   </li> 
+<!--         <li>   <label  class="label_name">   角色1</label><input type="text" id="doctor" name="doctor"/>   </li>  -->
+     <li> <label class="label_name">角色</label>  
+         <select name="doctor" id="doctor"  style=" width:170px;"> 
+        
+       </select></li>
+
+
             
       <li><label class="label_name">账号</label><input name="account" type="text"  class="text_add" id="account"/><i style="color:#F60; ">*</i></li>
       <li><label class="label_name">密码</label><input name="pwd" type="password"  class="text_add" id="pwd"/></li>
@@ -76,8 +84,8 @@
       <li><label class="label_name">联系地址</label><input name="address" type="text"  class="text_add" id="address"/></li>
        <li> <label class="label_name">状态</label>
         <select name="state"  style=" width:170px;">
-            <option value="禁用" >禁用</option>
             <option value="启用">启用</option> 
+            <option value="禁用" >禁用</option>
         </select></li>
          
       </ul>   
@@ -146,16 +154,15 @@ function putIn(){
 	});
 }
 function show(companys){
-	
-// 	alert("回来了==="+companys.get(0).get(deptname));
+	 
 	$("#companyBody").empty();  
 	
 	for(var i = 0;i < companys.length;i++){
 		
 		var td1=$("<td></td>").text(companys[i].user_id);
-		var td2=$("<td></td>").text(companys[i].deptname);
+		var td2=$("<td></td>").text(companys[i].name);
 		var td3=$("<td></td>").text(companys[i].account);
-		var td4=$("<td></td>").text(companys[i].name);
+		var td4=$("<td></td>").text(companys[i].deptname);
 		var td5=$("<td></td>").text(companys[i].sex);
 		var td6=$("<td></td>").text(companys[i].phone);
 		var td7=$("<td></td>").text(companys[i].IDcard);
@@ -166,7 +173,7 @@ function show(companys){
 		var input1=$("<button type='button' class='btn btn-warning' onclick='updetestate('"+companys[i].state+"','"+companys[i].user_id+"')' name='"+companys[i].state+"&"+companys[i].user_id+"'>切换状态</button>");
   	
 		var input2=$("<button type='button' class='btn btn-warning' onclick='delect()' name='"+companys[i].user_id+"'>删除</button>");
-		var input3=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].company_id+"'>修改</button>"); 
+		var input3=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].user_id+"'>修改</button>"); 
 		var tr=$("<tr></tr>");
 		
 		$(td10).append(input1,input2,input3);  
@@ -247,15 +254,13 @@ $('#add_butn').on('click', function(){
 
 
 //删除
-function delect(e){
-//		var delectname=	document.getElementById("name").value;
+function delect(e){ 
 	var e=e||event;
 	var t =e.target || e.srcElement;
 	var delectname=t.name;
 	var re=confirm("确定删除此项？");
 	
-	if(re){
-	alert(delectname);
+	if(re){ 
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>usermanage/delect.handle", 
@@ -287,8 +292,7 @@ function updete(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定修改此项？");
-	if(re){
-//			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>usermanage/updete2.handle";
 		form.method="post";
@@ -314,29 +318,27 @@ function loadAjax(){
 	 
 		$.ajax({
 			 type:"POST",
-			 url:"<%=path%>usermanage/adddept.handle",
-//				 contentType:"application/text;charset=utf-8",
+			 url:"<%=path%>usermanage/adddept.handle", 
 			 data:{
 				 "dept":dept
 			 },
-			 dataType:"text",
+			 dataType:"json",
 			 error:function(){
 				 alert('ajax请求请求错误...');
 			 },
-			 success:function(data){
-				 alert("ajax="+data); 
-				 if(data=="03"){
-					 $("#doctor").val("内科医生");
-				 }else if(data=="02"){
-					 $("#doctor").val("外科医生");
-				 }else{
-					 $("#doctor").val("管理员");
-				 }
-				
-				
-				 var datato=data.val();
-				
-				 window.location.href="<%=path%>usermanage/adddeptto.action";
+			 success:function(data){ 
+				 $("#doctor").empty();  /*先清空數據*/
+// 			 	
+				 for(var i = 0;i <data.length;i++){
+					 
+					 var dc=document.getElementById("doctor").value;
+					 
+					 dc = data[i].name; 
+ 						var op=$("<option></option>").text(dc);
+					  
+ 						$("#doctor").append(op);
+					}
+				 
 			 }
 		
 		});
@@ -345,36 +347,9 @@ function loadAjax(){
 }
 //修改状态
 function updetestate(s,id){
-	var re=confirm("确定修改状态？");
-// 	var b=b||event;
-// 	var t =b.target || b.srcElement;
-// 	var stateandid=t.name;
-//		 alert(stateandid);
-// 	    var sArr=stateandid.split("&")
-// 	    var state=sArr[0];
-// 	    var userid=sArr[1];
-	  
-	
+	var re=confirm("确定修改状态？"); 
 	 
-	if(re){
-//			alert(state);
-// 		var form = document.createElement("Form");
-<%-- 		form.action="<%=path%>usermanage/updetestate.handle"; --%>
-// 		form.method="post";
-// 		form.style.display="none";
-		
-// 		var opstate= document.createElement("input");
-// 		opstate.name="statet";
-// 		opstate.value=state;
-// 		var opuserid= document.createElement("input");
-// 		opuserid.name="userid";
-// 		opuserid.value=userid;
-		
-// 		form.appendChild(opstate);
-// 		form.appendChild(opuserid);
-// 		document.body.appendChild(form);
-		
-// 		form.submit();
+	if(re){ 
 		 $.ajax({
 			 url:"<%=path%>usermanage/updetestate.handle",
 			 type:"post",
@@ -401,6 +376,5 @@ function updetestate(s,id){
   
 }
  
-
 </script>
 </html>

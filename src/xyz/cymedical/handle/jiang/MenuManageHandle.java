@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
+import xyz.cymedical.biz.jiang.TbDeptBiz;
 import xyz.cymedical.biz.jiang.TbMenuBiz;
 import xyz.cymedical.biz.jiang.TbPowerBiz;
 import xyz.cymedical.biz.jiang.TbRoleDept;
@@ -44,6 +45,10 @@ public class MenuManageHandle {
 	 
 	private List<Map<String,Object>> maplist;
 	
+	private List<Map<String, Object>> maplistdept;
+	@Resource
+	private TbDeptBiz tbDeptBiz;
+	
 	// 添加后台人员
 
 // 
@@ -56,8 +61,12 @@ public class MenuManageHandle {
 		ModelAndView mav = new ModelAndView();
 		tbmenuall=tbMenuBiz.selectMenu();
 		request.setAttribute("tbmenuall", tbmenuall);
-	 
-
+		//**
+//		String sta="在用";
+//		maplistdept=tbDeptBiz.select(sta);
+//		
+//		request.setAttribute("maplistdept", maplistdept);
+		//**
 		mav.setViewName("WEB-INF/view.jiang/menumanage");
 		return mav;
 
@@ -127,11 +136,9 @@ public class MenuManageHandle {
 		System.out.println("-1");
 		int ret=tbMenuBiz.addMenu(tb_menu);
 		String re = "";
-		if(ret==1) { 
-//			mav.setViewName("WEB-INF/view.jiang/menumanage");
+		if(ret==1) {  
 			re="1";
-		}else { 
-//			mav.setViewName("WEB-INF/view.jiang/err");
+		}else {  
 			re="0";
 		} 
 
@@ -176,8 +183,7 @@ public class MenuManageHandle {
 			Map<String, Object> map = new HashMap<String, Object>(); 
 			map.put("tb_menu", tb_menu);
 			 
-			List<Map<String,Object>> companys = tbMenuBiz.selectCompany(map); 
-//			List<Tb_user> companys = companyBizsc.selectCompany(map);
+			List<Map<String,Object>> companys = tbMenuBiz.selectCompany(map);  
 			String str = JSONArray.fromObject(companys).toString();  
 			return str;
 		}

@@ -35,8 +35,8 @@
       <div class="Add_Manager_style">
     		  
     	<form method="post" id = "aFrom" method="post">
-     		<i style="color:#F60; ">必填</i>权限id	<input type="text" name="power_id"/>
-     		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/>
+<!--      		<i style="color:#F60; ">必填</i>权限id	<input type="text" name="power_id"/> -->
+<!--      		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/> -->
      		权限名    <input type="text" name="name"/>
 
      		  
@@ -51,13 +51,31 @@
     	<form action="<%=path%>powermanage/addPower.handle" method="post" id="add">
   		   <ul class="clearfix">
      
-      
+<!--     	  <li> <label class="label_name">权限</label>  -->
+<%--         <select name="power_id" id="power_id" value="${u.power_id}"   style=" width:170px;">  --%>
+<%--        <c:forEach items="${maplistpower}" var="u" varStatus="s"> --%>
+<%--             <option value="${u.power_id}">${u.name}</option>  --%>
+<%--             </c:forEach>  --%>
+<!--         </select></li>  -->
+          <li> <label class="label_name">角色</label> 
+        <select name="roleid" id="roleid" value="${u.role_id}"  style=" width:170px;"> 
+       <c:forEach items="${maplistrole}" var="u" varStatus="s">
+            <option value="${u.role_id}">${u.name}</option> 
+            </c:forEach> 
+        </select></li> 
+          <li> <label class="label_name">菜單</label> 
+        <select name="menu_id" id="menu_id" value="${u.menu_id}"  style=" width:170px;"> 
+       <c:forEach items="${listmenu}" var="u" varStatus="s">
+            <option value="${u.menu_id}">${u.name}</option> 
+            </c:forEach> 
+        </select></li> 
 <!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
 <!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id" onblur="loadAjax()"/></li> -->
-      <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id"/></li>
-      <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li>
+
+<!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id"/></li> -->
+<!--       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li> -->
       <li><label class="label_name">权限名</label><input name="name" type="text"  class="text_add" id="name"/></li>
-      <li><label class="label_name">角色id</label><input name="roleid" type="text"  class="text_add" id="roleid"/></li>
+<!--       <li><label class="label_name">角色id</label><input name="roleid" type="text"  class="text_add" id="roleid"/></li> -->
      
          
       </ul>  
@@ -86,8 +104,7 @@
 <td>${u.menu_id}</td>
 <td>${u.name}</td>
 <td>  <button type="button" class="btn btn-primary" onclick="updete()" name="${u.power_id}">修改</button>
-  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.power_id}">刪除</button></td>
-<!-- <td><input type="checkbox" value="5" /></td> -->
+  <button type="button" class="btn btn-primary" onclick="delect()" name="${u.power_id}">刪除</button></td> 
 </tr>
     </c:forEach> 
  
@@ -189,8 +206,7 @@ function loadAjax(){
 	 
 		$.ajax({
 			 type:"POST",
-			 url:"<%=path%>menumanage/addmenuid.handle",
-//				 contentType:"application/text;charset=utf-8",
+			 url:"<%=path%>menumanage/addmenuid.handle", 
 			 data:{
 				 "name":name
 			 },
@@ -198,16 +214,14 @@ function loadAjax(){
 			 error:function(){
 				 alert('ajax请求请求错误...');
 			 },
-			 success:function(data){
-				 alert("ajax="+data); 
+			 success:function(data){ 
 				 if(data=="01"){
 					 alert("菜单名可以用");
 				 }else{
 					 alert("菜单名已存在...");
 				 }
 				
-				
-// 				 var datato=data.val();
+				  
 				
 				 window.location.href="<%=path%>usermanage/adddeptto.action";
 			 }
@@ -223,8 +237,7 @@ function delect(e){
 	var delectname=t.name;
 	var re=confirm("确定删除此项？");
 	
-	if(re){
-	alert(delectname);
+	if(re){ 
 	 $.ajax({
 		 type:"POST",
 		 url:"<%=path%>powermanage/delect.handle", 
@@ -255,8 +268,7 @@ function updete(a){
 	var t =a.target || a.srcElement;
 	var updetename=t.name;
 	var re=confirm("确定修改此项？");
-	if(re){
-//			alert(updetename);
+	if(re){ 
 		var form = document.createElement("Form");
 		form.action="<%=path%>powermanage/updete1.handle";
 		form.method="post";
