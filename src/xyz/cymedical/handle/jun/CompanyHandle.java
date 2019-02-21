@@ -557,6 +557,7 @@ public class CompanyHandle {
 		}
 
 		String [] str =companyFile.getOriginalFilename().split("\\.");
+		System.out.println(str[str.length-1].toLowerCase());
 		if (str[str.length-1].toLowerCase().equals("xls")
 				||str[str.length-1].toLowerCase().equals("xlsx")) {
 			isSuccess =true;
