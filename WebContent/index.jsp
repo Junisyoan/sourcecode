@@ -94,7 +94,7 @@
 						<h4>最新消息</h4>
 						<div class="grid-left">
 							<div class="date">
-								<img src="<%=path%>image/index1/date.png" alt="">
+								<img src="<%=path%>images/news.png" alt="" style="width:75px;height:62px;">
 							</div>
 							<div class="nav-cont">
 								<ul>
@@ -107,7 +107,7 @@
 						</div>
 						<div class="grid-left">
 							<div class="date">
-								<img src="<%=path%>image/index1/date1.png" alt="">
+								<img src="<%=path%>images/news.png" alt="" style="width:75px;height:62px;">
 							</div>
 							<div class="nav-cont">
 								<ul>

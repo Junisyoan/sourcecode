@@ -124,14 +124,14 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 		System.out.println("pList="+pList);
 		
 		if(pList!=null && pList.size()>0) {
-			//项目列表
-			System.out.println("套餐名="+pList.get(0).getComboName());
-			List<Project> prolist = nurseMapper.findMyProject(pList.get(0).getComboName());
-			System.out.println("prolist.get(0)="+prolist.get(0));
-			
 			for (int i = 0; i < pList.size(); i++) {
 				Patient p=pList.get(i);
-				System.out.println("病人="+p);
+				//项目列表
+				System.out.println("套餐名="+p.getComboName());
+				List<Project> prolist = nurseMapper.findMyProject(p.getComboName());
+				System.out.println("prolist.get("+i+")="+prolist);
+				
+				System.out.println("导入病人"+i+"="+p);
 				for (int j = 0; j < prolist.size(); j++) {
 					Project pro=prolist.get(j);
 					
@@ -141,7 +141,6 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 						Detail d = dlist.get(k);
 						nurseMapper.insertbrief(d.getDetail_id(),p.getID(),time,pro.getProject_id());
 					}
-					
 					
 					System.out.println("pro="+pro);
 					nurseMapper.insertPaitentProject(p.getID(),pro.getProject_id());
