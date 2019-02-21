@@ -99,6 +99,13 @@ function passFile(fid){
 }
 
 function invalidFile(fid){
+	var check = document.getElementsByName("c");
+	for(var i = 0;i<check.length;i++){
+		if(check[i].innerHTML==""){
+			alert("内容符合！");
+			return false;
+		}
+	}
 	$.ajax({
 		type:"post",
 		dataType:"text",

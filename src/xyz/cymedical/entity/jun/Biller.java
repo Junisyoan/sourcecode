@@ -20,7 +20,7 @@ public class Biller {
 	private String btime;				//结算时间
 	private String bcreate;				//是否开单
 	private List<Patient> patientList;	//病人信息
-	
+	private String hcode;
 	
 	public Biller() {
 		super();
@@ -117,6 +117,14 @@ public class Biller {
 
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+
+	public String getHcode() {
+		return hcode;
+	}
+
+	public void setHcode(String hcode) {
+		this.hcode = hcode;
 	}
 
 	@Override

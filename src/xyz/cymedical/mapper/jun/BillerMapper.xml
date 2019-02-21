@@ -4,6 +4,9 @@
 
 <mapper namespace="xyz.cymedical.mapper.jun.BillerMapper">
 
+	<select id="query" parameterType="int" resultType="xyz.cymedical.entity.jun.Biller">
+		select * from tb_biller where biller_id = #{bid}
+	</select>
 <!-- 修改记账表为开单 -->
 	<update id="updateBillerCreate" parameterType="String">
 		update tb_biller set bcreate='已开单' where biller_id = #{bid}
@@ -50,9 +53,9 @@
 		select * from tb_biller where group_id = #{gid} and batch = #{batch}
 	</select>
 <!-- 生成记账表 -->
-	<insert id="insertBiller">
-		insert into tb_biller(group_id,bstate,batch,totalmoney)
-		values(#{gid},#{bstate},#{batch},#{price})
+	<insert id="insertBiller" useGeneratedKeys="true" keyProperty="biller_id" parameterType="xyz.cymedical.entity.jun.Biller">
+		insert into tb_biller(group_id,bstate,batch,totalmoney,hcode)
+		values(#{group_id},#{bstate},#{batch},#{totalMoney},#{hcode})
 	</insert>
 
 </mapper>
