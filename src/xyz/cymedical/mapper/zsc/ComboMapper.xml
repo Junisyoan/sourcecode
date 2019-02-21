@@ -82,6 +82,8 @@
 		<if test="max!=null and max!=''">
 			and ${max} > cb.price
 		</if>
+		
+		ORDER BY combo_id DESC
 	</select>
 	
 	<select id="findCombo" parameterType="java.lang.String" resultMap="comboMap">

@@ -86,12 +86,17 @@
 							<div class="add_user_style clearfix">
 								<form id="addForm">
 									<ul class="clearfix">
-										<li><label class="label_name">名称</label> <input
-											type="text" name="name" id="name1" onblur="checkName1()"></li>
-										<li><label class="label_name">价钱</label> <input
-											type="text" name="price" id="price1"></li>
-										<li><label class="label_name">科室</label> <select
-											name="deptname" id="deptname1"
+										<li>
+										<label class="label_name">名称</label> 
+										<input type="text" name="name" id="name1" onblur="checkName1()">
+										</li>
+										<li>
+										<label class="label_name">价钱</label> 
+										<input type="text" name="price" id="price1" placeholder = "输入数字">
+										</li>
+										<li>
+										<label class="label_name">科室</label> 
+										<select name="deptname" id="deptname1"
 											style="width: 160px; height: 30px; margin-left: 10px;">
 												<c:forEach items="${params}" var="p" varStatus="s">
 													<option>${p.name}</option>
@@ -128,7 +133,7 @@
 										<li><label class="label_name">名称</label> <input
 											type="text" name="name" id="name" onblur="checkName()"></li>
 										<li><label class="label_name">价钱</label> <input
-											type="text" name="price" id="price"></li>
+											type="text" name="price" id="price" placeholder = "输入数字"></li>
 										<li><label class="label_name">科室</label> <select
 											name="deptname" id="deptname"
 											style="width: 160px; height: 30px; margin-left: 10px;">

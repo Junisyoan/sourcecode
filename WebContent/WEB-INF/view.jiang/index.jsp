@@ -306,8 +306,9 @@
 	<script src="<%=path%>assets/layer/layer.js" type="text/javascript"></script>
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
-	var check;
 	function checkPwd(){
+		var rt;
+		
 		if($("#password").val() == ""){
 			return;
 		}
@@ -318,18 +319,20 @@
 			data:{
 				pwd:$("#password").val()
 			},
+			async:false,
 			success:function(msg){
 				if(msg == "error"){
-					check = 0;
 					layer.alert('密码输入有误!',{title: '提示框',icon:0,});
-				}else{
-					check = 1;
-				} 
+					rt = 'ok';
+				}
 			},
 			error : function() {
 				alert("异常！");
+				rt = 'ok';
 			}
 		});
+		
+		return rt;
 	}
 	
 	jQuery(document).ready(
@@ -433,12 +436,7 @@
 								});
 								return false;
 							}
-							if (check == 0) {
-								layer.alert('原密码有误!', {
-									title : '提示框',
-									icon : 0,
-
-								});
+							if (checkPwd() == 'ok') {
 								return false;
 							}
 							if ($("#Nes_pas").val() == "") {

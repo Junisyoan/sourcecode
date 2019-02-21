@@ -85,4 +85,24 @@ public class TbUserBizImp implements TbUserBiz{
 	public Tb_user queryUser(String id, String pwd) {
 		return tbUserMapper.queryUser(id, pwd); 
 	}
+	@Override
+	public String findMail(String mail) {
+		// TODO Auto-generated method stub
+		int rt = tbUserMapper.findMail(mail);
+		if (rt == 1) {
+			return "ok";
+		} else {
+			return "error";
+		}
+	}
+	@Override
+	public String changePwdBymail(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int rt = tbUserMapper.changePwdBymail(map);
+		if (rt == 1) {
+			return "ok";
+		} else {
+			return "error";
+		}
+	}
 }

@@ -62,11 +62,11 @@
      			</li>
      			<li>
      				<label class="label_name">最小值</label>
-     				<input type = "text" name="min" id ="min1">
+     				<input type = "text" name="min" id ="min1" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">最大值</label>
-     				<input type = "text" name="max" id="max1">
+     				<input type = "text" name="max" id="max1" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">类型</label>
@@ -96,11 +96,11 @@
      			</li>
      			<li>
      				<label class="label_name">最小值</label>
-     				<input type = "text" name="min" id ="min">
+     				<input type = "text" name="min" id ="min" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">最大值</label>
-     				<input type = "text" name="max" id="max">
+     				<input type = "text" name="max" id="max" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">类型</label>
