@@ -141,7 +141,7 @@
 						<tr>
 							<th>序号</th>
 							<th>标题</th>
-							<th>时间</th>
+							<th style="width:150px">时间</th>
 							<th>内容</th>
 							<th>操作</th>
 							<th>选择</th>

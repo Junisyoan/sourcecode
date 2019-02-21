@@ -35,10 +35,11 @@
 		<!-- <![endif]-->
 		<script src="<%=path%>assets/js/jquery.min.js"></script>        
 		<script type="text/javascript">
-		var check;
 // 		var label=document.getElementById("utxt"); 
 
 		function checkPwd(){
+			var rt;
+			
 			if($("#password").val() == ""){
 				return;
 			}
@@ -49,18 +50,20 @@
 				data:{
 					pwd:$("#password").val()
 				},
+				async: false,
 				success:function(msg){
 					if(msg == "error"){
-						check = 0;
 						layer.alert('密码有误!',{title: '提示框',icon:0,});
-					}else{
-						check = 1;
-					} 
+						rt = 'ok';
+					}
 				},
 				error : function() {
 					alert("异常！");
+					rt = 'ok';
 				}
 			});
+			
+			return rt;
 		}
 		</script>
 		 
@@ -338,13 +341,8 @@ $('.change_Password').on('click', function(){
 			 });
 			return false;
           } 
-		   if(check!=1){
-			   layer.alert('原密码有误!',{
-		            title: '提示框',				
-					icon:0,
-					    
-					 });
-					return false;
+		   if(checkPwd() == 'ok'){
+			   return false;
 		   }
 		  if ($("#Nes_pas").val()==""){
 			  layer.alert('新密码不能为空!',{
@@ -372,6 +370,8 @@ $('.change_Password').on('click', function(){
 			 });
 			 return false;
         }   
+		    
+		    
 		    $.ajax({
 				url:"<%=path%>usermanage/changePwd.handle",
 				type:"POST",
@@ -382,6 +382,9 @@ $('.change_Password').on('click', function(){
 				success:function(msg){
 					alert(msg);
 	    			if(msg == "密码修改成功"){
+	    				$("#password").val('');
+	    				$("#c_mew_pas").val('');
+	    				$("#Nes_pas").val('');
 	    				layer.close(index);
 	    			}
 				},
