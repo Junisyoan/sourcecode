@@ -97,14 +97,16 @@
 										</li>
 										<li>
 										<label class="label_name">价钱</label> 
-										<input type="text" name="price" id="price1" placeholder = "输入数字">
+										<input type="text" name="price" id="price1" placeholder = "输入数字" maxlength="8">
 										</li>
 										<li>
 										<label class="label_name">科室</label> 
 										<select name="deptname" id="deptname1"
 											style="width: 160px; height: 30px; margin-left: 10px;">
 												<c:forEach items="${params}" var="p" varStatus="s">
-													<option>${p.name}</option>
+													<c:if test="${p.name != '总检室'}">
+														<option>${p.name}</option>
+													</c:if>
 												</c:forEach>
 										</select></li>
 									</ul>
@@ -140,12 +142,14 @@
 										<li><label class="label_name">名称</label> <input
 											type="text" name="name" id="name" onblur="checkName()"></li>
 										<li><label class="label_name">价钱</label> <input
-											type="text" name="price" id="price" placeholder = "输入数字"></li>
+											type="text" name="price" id="price" placeholder = "输入数字" maxlength="8"></li>
 										<li><label class="label_name">科室</label> <select
 											name="deptname" id="deptname"
 											style="width: 160px; height: 30px; margin-left: 10px;">
 												<c:forEach items="${params}" var="p" varStatus="s">
-													<option>${p.name}</option>
+													<c:if test="${p.name != '总检室'}">
+														<option>${p.name}</option>
+													</c:if>
 												</c:forEach>
 										</select></li>
 									</ul>
@@ -341,6 +345,40 @@ function jump(){
 		show();
 		$("#current").text(current+1);
 	}
+}
+
+function changeCheck(){
+	var deptname;
+	if(state=="add"){
+		deptname = $("#deptname1").val();
+	}else{
+		deptname = $("#deptname").val();
+	}
+	
+	if(deptname == "常规检查室"){
+		for(var i=0;i < detailList.length;i++){
+			if(detailList[i].type != "普通"&&idArray.indexOf(detailList[i].id) >= 0){
+				return false;
+			}
+		}
+	}
+	
+	if(deptname == "彩超室"){
+		for(var i=0;i < detailList.length;i++){
+			if(detailList[i].type != "彩超"&&idArray.indexOf(detailList[i].id) >= 0){
+				return false;
+			}
+		}
+	}
+	
+	if(deptname == "检验室"){
+		for(var i=0;i < detailList.length;i++){
+			if(detailList[i].type != "检验"&&idArray.indexOf(detailList[i].id) >= 0){
+				return false;
+			}
+		}
+	}
+	
 }
 </script>
 <!-- 查 -->
@@ -575,6 +613,16 @@ function change(e){
 					 });
 					return false;
 			}
+
+			if(changeCheck() == false){
+				 layer.alert('选择的细项与科室不匹配!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}
+			
 			$.ajax({
 	    		type:"POST",
 	    		dataType:"text",
@@ -684,7 +732,7 @@ $('#add_butn').on('click', function(){
 		btn:['提交','取消'],
 		yes: function(index, layero){	
 			save();
-			
+
 			if($('#name1').val()==""){
 				 layer.alert('名称不能为空!',{
 		              title: '提示框',								
@@ -711,7 +759,16 @@ $('#add_butn').on('click', function(){
 					return false;
 					
 			}
-			
+
+			if(changeCheck() == false){
+				 layer.alert('选择的细项与科室不匹配!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}
+
 			$.ajax({
 	    		type:"POST",
 	    		dataType:"text",

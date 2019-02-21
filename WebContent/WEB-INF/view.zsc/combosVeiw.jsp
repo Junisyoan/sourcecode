@@ -84,7 +84,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price1" placeholder = "输入0代表所选项目总价">
+     				<input type = "text" name="price" id="price1" placeholder = "输入0代表所选项目总价" maxlength="10">
      			</li>
       		</ul>  
      			<label class="label_name">选择项目</label>
@@ -127,7 +127,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price" placeholder = "输入0代表所选项目总价">
+     				<input type = "text" name="price" id="price" placeholder = "输入0代表所选项目总价" maxlength="10">
      			</li>
       		</ul> 
       			<label class="label_name">选择项目</label>
