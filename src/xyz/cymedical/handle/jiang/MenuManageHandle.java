@@ -40,6 +40,8 @@ public class MenuManageHandle {
 	private TbPowerBiz tbPowerBiz;
 	@Resource
 	private TbRoleDept tbRoleDept;
+	@Resource
+	private Tb_power power;
 	
 	private Tb_power tb_power;
 	 
@@ -135,6 +137,16 @@ public class MenuManageHandle {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("-1");
 		int ret=tbMenuBiz.addMenu(tb_menu);
+		/*新添加的菜单   查询id*/
+		tbmenu= tbMenuBiz.selectmenuid(tb_menu);
+		int menu_id=tbmenu.getMenu_id();
+		/*在权限中添加 新的菜单id的power表*/
+		String name=tb_menu.getName();
+		power.setMenu_id(menu_id);
+		power.setName(name);
+		/*添加菜单  添加权限*/
+		
+		
 		String re = "";
 		if(ret==1) {  
 			re="1";

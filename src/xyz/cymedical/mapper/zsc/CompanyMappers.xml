@@ -47,6 +47,7 @@
 	<select id="findCompanys" resultType = "xyz.cymedical.entity.jun.Company">
 		select company_id,name,account,pwd,tel,address,people,phone,deposit,cstate
 		from tb_company where cstate != '已删除'
+		ORDER BY company_id DESC
 	</select>
 
 	<select id = "findCompany" parameterType="java.lang.String" resultType = "xyz.cymedical.entity.jun.Company">
@@ -84,5 +85,6 @@
 		<if test="company.cstate!=null and company.cstate!=''">
 			and cstate = #{company.cstate}
 		</if>
+		ORDER BY company_id DESC
 	</select>
 </mapper>

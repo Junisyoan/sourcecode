@@ -72,6 +72,7 @@
 		<if test="deptname!=null and deptname!=''">
 			and pa.name = #{deptname}
 		</if>
+		ORDER BY pj.project_id DESC
 	</select>
 	
 	<select id="findProject" parameterType="java.lang.String" resultMap="projectMap">
@@ -80,6 +81,7 @@
 		left join tb_param pa on pj.param_id = pa.param_id 
 		left join tb_detail_project dp on dp.project_id = #{project_id}
 		left join tb_detail dt on dp.detail_id = dt.detail_id where pj.project_id = #{project_id}
+		ORDER BY pj.project_id DESC
 	</select>
 	
 	<!-- 查询项目返回的map -->

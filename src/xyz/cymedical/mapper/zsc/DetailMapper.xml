@@ -34,7 +34,7 @@
 
 	<!-- 细项集合 -->
 	<select id="findDetails" resultType = "xyz.cymedical.entity.zsc.Detail">
-		select detail_id,name,unit,max,min,type from tb_detail
+		select detail_id,name,unit,max,min,type from tb_detail ORDER BY detail_id DESC
 	</select>
 
 	<!-- 修改细项前的查询细项 -->
@@ -52,5 +52,6 @@
 		<if test="type!=null and type!=''">
 			and type = #{type}
 		</if>
+		ORDER BY detail_id DESC
 	</select>
 </mapper>

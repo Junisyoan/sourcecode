@@ -27,5 +27,7 @@ public interface TbPowerBiz {
 //	public List<Tb_power> selectrowepid(); //**查询权限id 和名字  在添加权限时使用
 	
 	public Tb_power selectpowerid(Tb_power tb_power);//囘查
+	
+	/*添加菜单时  权限表*/
 
 }

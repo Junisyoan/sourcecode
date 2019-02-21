@@ -131,7 +131,7 @@
 				
 				
 				<c:if test="${flag=='true'}">
-					<div class="left2">${summarize.guide}</div>
+					<blockquote class="left2">${summarize.guide}</blockquote>
 				</c:if>
 				<c:if test="${flag=='false'}">
 					<p class="left1"><textarea rows="5" cols="150" id="guide" name="guide"></textarea></p>

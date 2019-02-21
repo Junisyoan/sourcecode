@@ -14,6 +14,8 @@ public interface TbMenuMapper {
 
 	public List<Tb_menu> selectMenu();
 	
+	public  Tb_menu  selectmenuid(Tb_menu tb_menu);/*新添加的菜单  要查询菜单id*/
+	
 	public int addMenuid(String name);
 	
 	public int addMenu(Tb_menu tb_menu);
