@@ -29,6 +29,8 @@ public interface TbDeptMapper {
 	
 	public List<Map<String,Object>> selectrowedid(); //**查询权限id 和名字  在添加权限时使用
 	
+	public  List<Map<String, Object>> selectmapdept();/*查询部门名  角色部门表id*/
+	
 	
 	
 	

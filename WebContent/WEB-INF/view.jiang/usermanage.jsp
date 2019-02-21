@@ -82,6 +82,16 @@
       <li><label class="label_name">联系人身份</label><input name="IDcard" type="text"  class="text_add" id="IDcard"/></li>
       <li><label class="label_name">联系电话</label><input name="phone" type="text"  class="text_add" id="phone"/></li>
       <li><label class="label_name">联系地址</label><input name="address" type="text"  class="text_add" id="address"/></li>
+<!--       <li><label class="label_name">参数</label><input name="param_id" type="text"  class="text_add" id="param_id"/></li> -->
+   	  <li> <label class="label_name">科室</label> 
+        <select name="param_id" id="param_id" value="${u.param_id}"  style=" width:170px;"> 
+     		  <c:forEach items="${parameterlist}" var="u" varStatus="s">
+     		  <c:if test="${u.name!='科室'}">
+          	  <option value="${u.param_id}">${u.name}</option> 
+          	  </c:if>
+            </c:forEach> 
+        </select></li> 
+      <li><label class="label_name">邮箱</label><input name="mail" type="text"  class="text_add" id="mail"/></li>
        <li> <label class="label_name">状态</label>
         <select name="state"  style=" width:170px;">
             <option value="启用">启用</option> 
@@ -109,6 +119,7 @@
         <th>联系电话</th>
         <th>身份证</th>
         <th>地址</th>
+        <th>邮箱</th>
         <th>状态</th>
         <th>操作</th>
        </tr>
@@ -117,7 +128,7 @@
 <c:forEach items="${maplist}" var="u" varStatus="s">
        <tr>
         <td>${u.user_id}</td> <td>${u.name}</td> <td>${u.account}</td>  <td> ${u.deptname} </td><td>${u.sex}</td> <td>${u.phone}</td> 
-         <td>${u.IDcard}</td>  <td>${u.address}</td> <td>${u.state}</td> 
+         <td>${u.IDcard}</td>  <td>${u.address}</td> <td>${u.mail}</td> <td>${u.state}</td> 
           <td><button type="button" class="btn btn-info Product_Details" name="${u.user_id}">详细</button>
           <button type="button" class="btn btn-primary" onclick="updete()" name="${u.user_id}">修改</button> 
           <button type="button" class="btn btn-primary" onclick="updetestate('${u.state}','${u.user_id}')" name="${u.state}&${u.user_id}"  id="state">状态切换</button>
@@ -167,17 +178,18 @@ function show(companys){
 		var td6=$("<td></td>").text(companys[i].phone);
 		var td7=$("<td></td>").text(companys[i].IDcard);
 		var td8=$("<td></td>").text(companys[i].address);
-		var td9=$("<td></td>").text(companys[i].state);
-		var td10=$("<td></td>");
+		var td9=$("<td></td>").text(companys[i].mail);
+		var td10=$("<td></td>").text(companys[i].state);
+		var td11=$("<td></td>");
 		
-		var input1=$("<button type='button' class='btn btn-warning' onclick='updetestate('"+companys[i].state+"','"+companys[i].user_id+"')' name='"+companys[i].state+"&"+companys[i].user_id+"'>切换状态</button>");
+		var input1=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].user_id+"'>修改</button>"); 
+		var input2=$("<button type='button' class='btn btn-warning' onclick='updetestate('"+companys[i].state+"','"+companys[i].user_id+"')' name='"+companys[i].state+"&"+companys[i].user_id+"'>切换状态</button>");
+		var input3=$("<button type='button' class='btn btn-warning' onclick='delect()' name='"+companys[i].user_id+"'>删除</button>");
   	
-		var input2=$("<button type='button' class='btn btn-warning' onclick='delect()' name='"+companys[i].user_id+"'>删除</button>");
-		var input3=$("<button type='button' class='btn btn-warning' onclick='updete()' name='"+companys[i].user_id+"'>修改</button>"); 
 		var tr=$("<tr></tr>");
 		
-		$(td10).append(input1,input2,input3);  
-		$(tr).append(td1,td2,td3,td4,td5,td6,td7,td8,td9,td10); 
+		$(td11).append(input1,input2,input3);  
+		$(tr).append(td1,td2,td3,td4,td5,td6,td7,td8,td9,td10,td11); 
 		$("#companyBody").append(tr);
 	}
 }
