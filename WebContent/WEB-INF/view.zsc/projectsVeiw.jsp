@@ -58,6 +58,11 @@
 	font-size: 15px;
 	text-align: center;
 }
+.hint1{
+	margin-left:40px;
+	font-size: 12px;
+	color:red;
+}
 </style>
 </head>
 <body>
@@ -104,6 +109,7 @@
 										</select></li>
 									</ul>
 									<label class="label_name">选择细项</label>
+									<label class="hint1">*请选择与科室匹配的细项</label>
 									<table class="checkList">
 										<tr>
 											<th style="width: 50px;">选择</th>
@@ -144,6 +150,7 @@
 										</select></li>
 									</ul>
 									<label class="label_name">选择细项</label>
+									<label class="hint1">*请选择与科室匹配的细项</label>
 									<table class="checkList">
 										<tr>
 											<th style="width: 50px;">选择</th>
