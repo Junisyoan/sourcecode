@@ -74,7 +74,7 @@
 	</div>
 	<!-- 弹出框 -->
 	<div id="addDialog" title="增加人员">
-		<form action="<%=path%>nurse/addPatient.handle" method="post">
+<%-- 		<form action="<%=path%>nurse/addPatient.handle" method="post"> --%>
 			<table width="600" border="0" cellpadding="2">
 				<tr>
 					<td>套餐名：</td>
@@ -101,11 +101,11 @@
 					<td><input type="text" name="phone" id="phone" /></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="增加" /></td>
+					<td><button onclick='addPatient();' class='btn btn-info' >增加</button></td>
 					<td><input type="reset" value="清空" /></td>
 				</tr>
 			</table>
-		</form>
+<!-- 		</form> -->
 
 	</div>
 
@@ -147,6 +147,68 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function addPatient(){
+	document.getElementById('comboName').value=combo;
+	document.getElementById('name').value=name;
+	document.getElementById('sex').value=sex;
+	document.getElementById('age').value=age;
+	document.getElementById('ID').value=ID;
+	document.getElementById('phone').value=phone;
+	alert('^\d{15}|\d{}18$'.test(ID));
+	if($('#comboName').val()==""){
+		alert('套餐名不能为空');
+		return false;
+	}else if($('#comboName').val().length>20){
+		alert("套餐名称太长");
+		return false;
+	}else if(sex!="男"&&sex!="女"){
+		alert('性别输入错误');
+		return false;
+	}else if(age<15||age>80){
+		alert('年龄输入错误');
+		return false;
+	}else if('^\d{15}|\d{}18$'.test(ID)){
+		alert("身份证错误");
+		return false;
+	}else if('^1[34578]\d{9}$'.test(phone)){
+		alert('手机号码不正确');
+		return false;
+	}else{
+		$.ajax({
+			url:"<%=path%>nurse/addPatient.handle",
+			data:{'comboName':combo,'name':name,'sex':sex,'age':age,'ID':ID,'phone':phone},
+			type:'post',
+			dataType:'text',
+			success:function(ret){
+				if(ret=="1"){
+					alert("添加成功");
+				}else if(ret=="-1"){
+					alert('套餐名不存在');
+				}else if(ret=="-2"){
+					alert('身份证存在');
+				}else if(ret=="-3"){
+					alert('手机号码存在');
+				}else if(ret=="-4"){
+					alert('手机号码与文档中的人员重复');
+				}else if(ret=="-5"){
+					alert('身份证号码与文档中的人员重复');
+				}
+				location.href="<%=path%>nurse/getList.handle";
+			},
+			error:function(){
+				alert('服务器无响应');
+			}
+		
+		});
+	}
+	
+	
+	
+	
+	
+}
+
 
 $(function(){
 	$("#loadgif").hide();
@@ -270,26 +332,24 @@ $(function(){
 	});
 });
 
-$(function(){
-	$('#comboName').on('blur',function(){
-		var comboName = document.getElementById('combo').value;
-		$.ajax({
-			type:"post",
-			url:"<%=path%>company/queryCombo.handle?comboName="+comboName,
-			dataType:"text",
-			success:function(retData){
-				if(retData=="1"){
-					alert("生成成功");
-				}else if(retData=="0"){
-					alert("生成失败");
-				}
-				location.href="<%=path%>nurse/getBillerNoPay.handle";
-			},
-			error:function(){
-				alert("服务器无响应");
-			}
-		});
-	});
-});
+// $(function(){
+// 	$('#comboName').on('blur',function(){
+// 		var comboName = document.getElementById('combo').value;
+// 		$.ajax({
+// 			type:"post",
+<%-- 			url:"<%=path%>nurse/queryComboName.handle", --%>
+// 			dataType:"text",
+// 			data:{'comboName':comboName}
+// 			success:function(retData){
+// 				if(retData=="1"){
+// 					alert("生成成功");
+// 				}
+// 			},
+// 			error:function(){
+// 				alert("服务器无响应");
+// 			}
+// 		});
+// 	});
+// });
 </script>
 </html>

@@ -9,8 +9,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>健康团检系统后台登录</title>
+ <script src="<%=path%>js/jquery.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
+  <script src="<%=path %>assets/js/jquery.min.js"></script>
+  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
+  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
+  <link rel="stylesheet" href="<%=path %>css/style.css"/>
+  <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+  <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
+  <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
+  <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=path%>css/backlogin.css" />
-<script src="<%=path%>js/jquery.min.js"></script>
 <script>
 
 // function turn(){
@@ -124,6 +137,45 @@ function randomColor() {//得到随机的颜色值
 }
 
 </script>
+<script>
+var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+	function forgetPassWord(){
+		layer.open({
+	        type: 1,
+	        title: '寻找密码',
+			shadeClose: true, //点击遮罩关闭层
+	        area: ['600px' , ''],
+	        content: $('#Add_Product_style'),
+			btn:['提交','取消'],
+			yes: function(index, layero){	
+				if(!reg.test($('#mailAddress').val())){
+					layer.alert('邮箱格式有误!',{title: '提示框',icon:0,});
+					return false;
+					
+				}
+				$.ajax({
+		    		type:"POST",
+		    		dataType:"text",
+		    		url:"<%=path%>forgetPassword/changePwd.handle",
+		    		data:{
+		    			"mailAddress":$('#mailAddress').val(),
+		    			"login":"login"
+		    		},
+		    		success:function(msg){
+		    			layer.alert(msg);
+		    			if(msg == "密码重置成功，已发送至您的邮箱"){
+		    				layer.close(index);
+		    			}
+		    		},
+		    		error : function(msg) {
+		    			alert("异常！"+msg);
+		    		}
+		    	});
+				}
+			})
+	}
+</script>
+
 <style>
 .left{
 	text-align:left
@@ -131,15 +183,33 @@ function randomColor() {//得到随机的颜色值
 .right{
  	text-align:right
 }
+.forgetPwd{
+	font-size:80%;
+	color:blue;
+}
+.forgetPwd.hand:hover   {cursor:move}   
 </style>
 </head>
 
 <body background="<%=path%>image/bkg.jpg">
-
+	<div id="Add_Product_style" style="display: none;">
+		<div class="page-content">
+			<div class="add_user_style clearfix">
+				<form id="addForm">
+					<ul class="clearfix">
+						<li>
+							<label class="label_name" style="margin-left:50px;">邮箱：</label> 
+							<input type="text" name="mailAddress" id="mailAddress" style="width:400px;">
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
 	<p id="top">后台登录</p>
-	<div id="login">
+	<div id="login" style = "width:330px;">
 		<form method="post">
-			<table width="303">
+			<table width="330">
 				<tr>
 					<td height="33" colspan="3">后台登录</td>
 				</tr>
@@ -150,7 +220,10 @@ function randomColor() {//得到随机的颜色值
 				</tr>
 				<tr>
 					<td height="23" class="right">密码:</td>
-					<td colspan="2" class="left"><input type="password" name="pwd" id="pwd" /></td>
+					<td colspan="2" class="left">
+						<input type="password" name="pwd" id="pwd"/>
+						<span class="forgetPwd" id = "forgetPwd" onclick = "forgetPassWord()">忘记密码</span>
+					</td>
 				</tr>
 				<tr>
             	<td class="right">验证码:</td>
@@ -170,3 +243,4 @@ function randomColor() {//得到随机的颜色值
 	</div>
 </body>
 </html>
+

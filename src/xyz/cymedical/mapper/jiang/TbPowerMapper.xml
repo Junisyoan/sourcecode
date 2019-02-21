@@ -19,7 +19,7 @@
 	</delete>
 	 
 	<insert id="addPower" parameterType="xyz.cymedical.entity.jiang.Tb_power">
-		insert into tb_power(power_id,menu_id,name) values(#{power_id},#{menu_id},#{name})
+		insert into tb_power(menu_id,name) values(#{menu_id},#{name})
 	</insert>
 	
 	<update id="upPower"  parameterType="xyz.cymedical.entity.jiang.Tb_power" >
@@ -43,12 +43,12 @@
 	<select id = "selectCompany" parameterType="map" resultType="map">
  		select * from tb_power  where 1=1
  	 
-		<if test="tb_power.power_id!=0 and tb_power.power_id!=''"> 
-			and power_id like '%${tb_power.power_id}%'
-		</if>
-		<if test="tb_power.menu_id!=0 and tb_power.menu_id!=''"> 
-			and menu_id like '%${tb_power.menu_id}%'
-		</if>
+<!-- 		<if test="tb_power.power_id!=0 and tb_power.power_id!=''">  -->
+<!-- 			and power_id like '%${tb_power.power_id}%' -->
+<!-- 		</if> -->
+<!-- 		<if test="tb_power.menu_id!=0 and tb_power.menu_id!=''">  -->
+<!-- 			and menu_id like '%${tb_power.menu_id}%' -->
+<!-- 		</if> -->
 		<if test="tb_power.name!=null and tb_power.name!=''"> 
 			and name like '%${tb_power.name}%'
 		</if>
@@ -74,4 +74,7 @@
 	
 	</delete>
 	
+	<select id="selectpowerid" parameterType="xyz.cymedical.entity.jiang.Tb_power" resultType="xyz.cymedical.entity.jiang.Tb_power">
+		select * from tb_power where menu_id=#{menu_id} and name=#{name}
+	</select>
 </mapper>

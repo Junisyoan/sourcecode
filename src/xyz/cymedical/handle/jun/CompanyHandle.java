@@ -538,7 +538,10 @@ public class CompanyHandle {
 	 * 上传团检文件
 	 */
 	@RequestMapping(value = "/fileUpload.handle", method = RequestMethod.POST)
-	public String fileUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile companyFile) {
+	public @ResponseBody String fileUpload(
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			MultipartFile companyFile) {
 		company = (Company) request.getSession().getAttribute("userCompany");
 		System.out.println(companyFile.getSize());
 		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -552,9 +555,24 @@ public class CompanyHandle {
 		if (!fileDir.exists()) {
 			fileDir.mkdir();
 		}
+
+		String [] str =companyFile.getOriginalFilename().split("\\.");
+		if (str[str.length-1].toLowerCase().equals("xls")
+				||str[str.length-1].toLowerCase().equals("xlsx")) {
+			isSuccess =true;
+		} else {
+			isSuccess=false;
+		}
+		
+		
+		
 		
 		// 目录是否存在
 		try {
+			if (isSuccess) {
+				response.getWriter().print(ResponseTools.returnMsgAndBack("文件格式不正确"));
+				return null;
+			}
 			if (fileDir.isDirectory()) {
 				// 创建文件
 				File file = new File(fileDir.getAbsolutePath() + "/" + companyFile.getOriginalFilename());
@@ -579,10 +597,9 @@ public class CompanyHandle {
 						} else {
 							response.getWriter().println(ResponseTools.returnMsgAndBack("上传文件失败"));
 						}
-
 				}
 			} else {
-					response.getWriter().println(ResponseTools.returnMsgAndBack("文件存在"));
+				response.getWriter().println(ResponseTools.returnMsgAndBack("目录不存在"));
 				System.out.println("目录不存在");
 			}
 		} catch (FileNotFoundException e) {

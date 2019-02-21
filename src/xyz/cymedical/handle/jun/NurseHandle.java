@@ -108,7 +108,7 @@ public class NurseHandle {
 	private String mycode;
 	private String strRet;
 	private boolean isExsit;
-	
+	private boolean isSuccess;
 	/*
 	 * 修改密码
 	 */
@@ -294,63 +294,64 @@ public class NurseHandle {
 			nTime = sdf.parse(sdf.format(System.currentTimeMillis())).getTime();
 			System.out.println("体检时间："+cTime);
 			System.out.println("当前时间："+nTime);
-			if (cTime<=nTime) {
+			if (cTime<nTime) {
 				strRet="-1";
+			}else {
+				System.out.println("生成导检单："+bid);
+				//取得文件信息
+				companyFile = companyFileBiz.queryFileByBillerId(bid);
+				
+				//	获取体检人员列表，生成条形码
+				List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
+				System.out.println(patientList);
+				//获得公司存储路径
+				String path = companyFile.getFpath();
+				File file = new File(path);
+				path = file.getPath();
+				
+				System.out.println("生成条形码");
+				//生成条形码
+				String imgFormat = ImageUtil.JPEG;
+				for(int i = 0;i<patientList.size();i++) {
+					BarCodeTools.createBarCode(file.getParent()+File.separator, patientList.get(i).getCode(), imgFormat);
+				}
+				System.out.println("条形码生成成功");
+				//体检号
+				Object obj=request.getServletContext().getAttribute("CN");
+				int cn = 0;
+				if (obj==null) {
+					cn = 1;
+				}
+				for (Patient patient : patientList) {
+					patient.setCheck_num(String.format("%08d", cn));
+					cn++;
+					System.out.println(patient.getCheck_num());
+				}
+				request.getServletContext().setAttribute("CN",cn);
+					System.out.println("准备插入体检人员");
+					//	插入病人
+					List<Patient> pList = patientBiz.insertByBatch(patientList);
+					System.out.println("准备创建关系表、修改体检时间");
+					if (pList!=null) {
+						//	创建关系表
+						if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)
+								&& billerBiz.updateBillerCreate(bid)
+								&& nurseBiz.insertPaitentCombo(pList,bid)
+								&& groupBiz.updateGroupCheckTime(sdf.format(cTime), bid)) {
+							//添加至病人项目表以及小结表
+							nurseBiz.insertPaitentProject(pList,time);
+							strRet = "1";
+						} else {
+							strRet = "0";
+						}
+					}else {
+						strRet="0";
+					}
 			}
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
-		response.setCharacterEncoding("utf-8");
-		System.out.println("生成导检单："+bid);
-		//取得文件信息
-		companyFile = companyFileBiz.queryFileByBillerId(bid);
 		
-		//	获取体检人员列表，生成条形码
-		List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
-		System.out.println(patientList);
-		//获得公司存储路径
-		String path = companyFile.getFpath();
-		File file = new File(path);
-		path = file.getPath();
-		
-		System.out.println("生成条形码");
-		//生成条形码
-		String imgFormat = ImageUtil.JPEG;
-		for(int i = 0;i<patientList.size();i++) {
-			BarCodeTools.createBarCode(file.getParent()+File.separator, patientList.get(i).getCode(), imgFormat);
-		}
-		System.out.println("条形码生成成功");
-		//体检号
-		Object obj=request.getServletContext().getAttribute("CN");
-		int cn = 0;
-		if (obj==null) {
-			cn = 1;
-		}
-		for (Patient patient : patientList) {
-			patient.setCheck_num(String.format("%08d", cn));
-			cn++;
-			System.out.println(patient.getCheck_num());
-		}
-		request.getServletContext().setAttribute("CN",cn);
-			System.out.println("准备插入体检人员");
-			//	插入病人
-			List<Patient> pList = patientBiz.insertByBatch(patientList);
-			System.out.println("准备创建关系表、修改体检时间");
-			if (pList!=null) {
-				//	创建关系表
-				if (nurseBiz.insertRelation(Integer.parseInt(bid), pList)
-						&& billerBiz.updateBillerCreate(bid)
-						&& nurseBiz.insertPaitentCombo(pList,bid)
-						&& groupBiz.updateGroupCheckTime(sdf.format(cTime), bid)) {
-					//添加至病人项目表以及小结表
-					nurseBiz.insertPaitentProject(pList,time);
-					strRet = "1";
-				} else {
-					strRet = "0";
-				}
-			}else {
-				strRet="0";
-			}
 		return strRet;
 	}
 
@@ -596,21 +597,50 @@ public class NurseHandle {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/addPatient.handle",method=RequestMethod.POST)
-	public @ResponseBody String addPatient(HttpServletRequest request, HttpServletResponse response, Patient patient) {
-		System.out.println(patient);
-		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-		+ request.getContextPath() + "/";
+	public @ResponseBody String addPatient(HttpServletRequest request, 
+			Patient patient) {
+		System.out.println("添加人员："+patient);
 		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
 		System.out.println("当前操作人员列表："+patientList);
-		response.setCharacterEncoding("utf-8");
-		try {
+		//先查询数据库的套餐
+		isExsit=comboBiz.queryComboByName(patient.getComboName());
+		if (!isExsit) {
+			return "-1";
+		}
+		//比对身份证是否存在
+		Patient p = patientBiz.queryID(patient.getID());
+		if (p!=null) {
+			if (!p.getName().equals(patient.getName())) {
+				return "-2";
+			}
+		}
+		//比对手机号码是否存在
+		p=patientBiz.queryPhone(patient.getPhone());
+		if(p!=null){
+			if (!p.getName().equals(patient.getName())) {
+				return "-3";
+			}
+		}
+		//比对其他人
+		for (Patient pt : patientList) {
+			if (pt.getPhone().equals(patient.getPhone())) {
+				strRet="-4";
+				isSuccess=false;
+				break;
+			} else if(pt.getID().equals(patient.getID())){
+				strRet="-5";
+				isSuccess=false;
+				break;
+			}else {
+				isSuccess=true;
+			}
+		}
+		if (isSuccess) {
 			patientList.add(0,patient);
-			response.getWriter().print(ResponseTools.returnMsgAndRedirect("添加成功", path+"nurse/getList.handle"));
-		} catch (IOException e) {
-			e.printStackTrace();
+			strRet="1";
 		}
 		request.getSession().setAttribute("patientList", patientList);
-		return null;
+		return strRet;
 	}
 	
 	/*

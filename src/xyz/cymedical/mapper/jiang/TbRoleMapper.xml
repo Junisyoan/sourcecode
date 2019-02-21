@@ -81,4 +81,12 @@
 		(select dept_id from tb_dept where name=#{dept}) and state='在用')
 	</select>
 
+
+	<select id="selectroleall"   
+		resultType="map">
+		select r.* from tb_role r,tb_role_dept rp where state='在用' and r.role_id=rp.role_id
+	</select>
+
+	
+
 </mapper>

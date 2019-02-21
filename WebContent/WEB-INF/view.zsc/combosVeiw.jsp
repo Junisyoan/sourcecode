@@ -84,7 +84,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price1">
+     				<input type = "text" name="price" id="price1" placeholder = "输入0代表所选项目总价">
      			</li>
       		</ul>  
      			<label class="label_name">选择项目</label>
@@ -126,7 +126,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price">
+     				<input type = "text" name="price" id="price" placeholder = "输入0代表所选项目总价">
      			</li>
       		</ul> 
       			<label class="label_name">选择项目</label>
@@ -427,7 +427,7 @@ function checkName(){
 		dataType:"text",
 		data:{
 			name:$("#name").val(),
-			id:"${combo.combo_id}"
+			id:$("#combo_id").val()
 		},
 		async: false,
 		success:function(msg){

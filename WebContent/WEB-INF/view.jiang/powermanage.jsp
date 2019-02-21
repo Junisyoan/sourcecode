@@ -35,8 +35,8 @@
       <div class="Add_Manager_style">
     		  
     	<form method="post" id = "aFrom" method="post">
-     		<i style="color:#F60; ">必填</i>权限id	<input type="text" name="power_id"/>
-     		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/>
+<!--      		<i style="color:#F60; ">必填</i>权限id	<input type="text" name="power_id"/> -->
+<!--      		<i style="color:#F60; ">必填</i>菜单id	<input type="text" name="menu_id"/> -->
      		权限名    <input type="text" name="name"/>
 
      		  
@@ -51,13 +51,31 @@
     	<form action="<%=path%>powermanage/addPower.handle" method="post" id="add">
   		   <ul class="clearfix">
      
-      
+<!--     	  <li> <label class="label_name">权限</label>  -->
+<%--         <select name="power_id" id="power_id" value="${u.power_id}"   style=" width:170px;">  --%>
+<%--        <c:forEach items="${maplistpower}" var="u" varStatus="s"> --%>
+<%--             <option value="${u.power_id}">${u.name}</option>  --%>
+<%--             </c:forEach>  --%>
+<!--         </select></li>  -->
+          <li> <label class="label_name">角色</label> 
+        <select name="roleid" id="roleid" value="${u.role_id}"  style=" width:170px;"> 
+       <c:forEach items="${maplistrole}" var="u" varStatus="s">
+            <option value="${u.role_id}">${u.name}</option> 
+            </c:forEach> 
+        </select></li> 
+          <li> <label class="label_name">菜單</label> 
+        <select name="menu_id" id="menu_id" value="${u.menu_id}"  style=" width:170px;"> 
+       <c:forEach items="${listmenu}" var="u" varStatus="s">
+            <option value="${u.menu_id}">${u.name}</option> 
+            </c:forEach> 
+        </select></li> 
 <!--       <li><label class="label_name">菜单序号</label><input name="menu_id" type="text"  class="text_add" id="menu_id"  /><i style="color:#F60; ">*</i></li> -->
 <!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id" onblur="loadAjax()"/></li> -->
-      <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id"/></li>
-      <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li>
+
+<!--       <li><label class="label_name">权限id</label><input name="power_id" type="text"  class="text_add" id="power_id"/></li> -->
+<!--       <li><label class="label_name">菜单id</label><input name="menu_id" type="text"  class="text_add" id="menu_id"/></li> -->
       <li><label class="label_name">权限名</label><input name="name" type="text"  class="text_add" id="name"/></li>
-      <li><label class="label_name">角色id</label><input name="roleid" type="text"  class="text_add" id="roleid"/></li>
+<!--       <li><label class="label_name">角色id</label><input name="roleid" type="text"  class="text_add" id="roleid"/></li> -->
      
          
       </ul>  

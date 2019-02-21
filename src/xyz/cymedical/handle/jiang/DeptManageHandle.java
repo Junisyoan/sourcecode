@@ -47,6 +47,7 @@ public class DeptManageHandle {
 //	private List<Tb_dept> maplist;
 	
 	private List<Map<String, Object>> maplist;
+	private List<Map<String, Object>> maprolealllist;
 	
 	@RequestMapping(value = "/select.handle")
 	public ModelAndView findAll(HttpServletRequest request, HttpServletResponse response, Tb_dept tbdept) {
@@ -58,6 +59,13 @@ public class DeptManageHandle {
 		maplist=tbDeptBiz.select(sta);
 		
 		request.setAttribute("maplist", maplist);
+		 
+		/*
+		 * 查詢所有角色
+		 * 
+		 */
+		maprolealllist=	tbRoleBiz.selectroleall();
+		request.setAttribute("maprolealllist", maprolealllist);
 		
 		mav.setViewName("WEB-INF/view.jiang/deptmanage");
 		return mav;

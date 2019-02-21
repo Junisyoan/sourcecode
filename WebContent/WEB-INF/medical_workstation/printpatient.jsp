@@ -239,8 +239,10 @@ input {
 				<blockquote
 					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">【建议】</blockquote>
 				<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
+					<c:if test="${s4.index == 0}">
 					<blockquote
-						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15 px; line-height: 1.5;">（${s4.index + 1}）${p4.guide}</blockquote>
+						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15 px; line-height: 1.5;">${p4.guide}</blockquote>
+					</c:if>
 				</c:forEach>
 				<h4 align="center">4</h4>
 				<p>&nbsp;</p>
@@ -271,8 +273,10 @@ input {
 				<blockquote
 					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">二、指导</blockquote>
 				<c:forEach items="${patientlist4}" var="p4" varStatus="s4">
+					<c:if test="${s4.index == 0}">
 					<blockquote
-						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">（${s4.index + 1}）${p4.advise}</blockquote>
+						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">${p4.advise}</blockquote>
+					</c:if>
 				</c:forEach>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
