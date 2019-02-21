@@ -58,6 +58,11 @@
 	font-size: 15px;
 	text-align: center;
 }
+.hint1{
+	margin-left:40px;
+	font-size: 12px;
+	color:red;
+}
 </style>
 </head>
 <body>
@@ -86,12 +91,17 @@
 							<div class="add_user_style clearfix">
 								<form id="addForm">
 									<ul class="clearfix">
-										<li><label class="label_name">名称</label> <input
-											type="text" name="name" id="name1" onblur="checkName1()"></li>
-										<li><label class="label_name">价钱</label> <input
-											type="text" name="price" id="price1"></li>
-										<li><label class="label_name">科室</label> <select
-											name="deptname" id="deptname1"
+										<li>
+										<label class="label_name">名称</label> 
+										<input type="text" name="name" id="name1" onblur="checkName1()">
+										</li>
+										<li>
+										<label class="label_name">价钱</label> 
+										<input type="text" name="price" id="price1" placeholder = "输入数字">
+										</li>
+										<li>
+										<label class="label_name">科室</label> 
+										<select name="deptname" id="deptname1"
 											style="width: 160px; height: 30px; margin-left: 10px;">
 												<c:forEach items="${params}" var="p" varStatus="s">
 													<option>${p.name}</option>
@@ -99,10 +109,12 @@
 										</select></li>
 									</ul>
 									<label class="label_name">选择细项</label>
+									<label class="hint1">*请选择与科室匹配的细项</label>
 									<table class="checkList">
 										<tr>
 											<th style="width: 50px;">选择</th>
 											<th>名称</th>
+											<th>类型</th>
 										</tr>
 										<tbody id="detailBody1"></tbody>
 									</table>
@@ -128,7 +140,7 @@
 										<li><label class="label_name">名称</label> <input
 											type="text" name="name" id="name" onblur="checkName()"></li>
 										<li><label class="label_name">价钱</label> <input
-											type="text" name="price" id="price"></li>
+											type="text" name="price" id="price" placeholder = "输入数字"></li>
 										<li><label class="label_name">科室</label> <select
 											name="deptname" id="deptname"
 											style="width: 160px; height: 30px; margin-left: 10px;">
@@ -138,10 +150,12 @@
 										</select></li>
 									</ul>
 									<label class="label_name">选择细项</label>
+									<label class="hint1">*请选择与科室匹配的细项</label>
 									<table class="checkList">
 										<tr>
 											<th style="width: 50px;">选择</th>
 											<th>名称</th>
+											<th>类型</th>
 										</tr>
 										<tbody id="detailBody"></tbody>
 									</table>
@@ -226,16 +240,17 @@ var state;
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 var numCheck1 = /^[0-9]*$/;
 
-function createDetail(detail_id,detail_name){
+function createDetail(detail_id,detail_name,type){
 	var detail = new Object();
 	detail.id = detail_id;
 	detail.name = detail_name;
+	detail.type = type;
 	return detail;
 }
 
 $(document).ready(function(){
 	<c:forEach items="${details}" var = "d" >
-		var detail = createDetail("${d.detail_id}","${d.name}");
+		var detail = createDetail("${d.detail_id}","${d.name}","${d.type}");
 		detailList.push(detail);
 	</c:forEach>
 });
@@ -462,6 +477,7 @@ function show(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(detailList[i].name);
+		var td3=$("<td></td>").text(detailList[i].type);
 		
 		var checkbox=$("<input type='checkbox' value='"+detailList[i].id+"'/>");
 		
@@ -472,7 +488,7 @@ function show(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#detailBody").append(tr);
 	}
@@ -596,6 +612,7 @@ function show1(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(detailList[i].name);
+		var td3=$("<td></td>").text(detailList[i].type);
 		
 		var checkbox=$("<input type='checkbox' value='"+detailList[i].id+"'/>");
 		
@@ -606,7 +623,7 @@ function show1(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#detailBody1").append(tr);
 	}

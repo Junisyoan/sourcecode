@@ -40,4 +40,8 @@ public interface TbUserMapper {
 	public int changePwd(Map<String, Object> map);  
 	
 	public Tb_user findthree(Tb_user user);/*查链表id*/
+	
+	public int findMail(String mail); 
+	
+	public int changePwdBymail(Map<String, Object> map); 
 }

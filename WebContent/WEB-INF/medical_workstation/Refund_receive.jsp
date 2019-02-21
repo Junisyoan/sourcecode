@@ -100,7 +100,7 @@
 				</c:if>
 				<c:if test="${flag=='无需退费' }">
 					<div style="width:100px;margin:0 auto">
-						<input type="button" class="btn btn-warning" value="无需退费"/>
+						<input type="button" class="btn btn-warning" value="无可退费项"/>
 					</div>
 				</c:if>
 			</div>

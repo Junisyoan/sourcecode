@@ -186,6 +186,8 @@ var r_id;
 			},
 			error:function(data){ 
 				alert("添加异常");
+				alert(data.status); 
+// 				500;503;101;
 			}
 		});
 	}

@@ -68,15 +68,15 @@
      			</li>
      			<li>
      				<label class="label_name">密码</label>
-     				<input type = "text" name="pwd" id ="pwd1">
+     				<input type = "password" name="pwd" id ="pwd1">
      			</li>
      			<li>
      				<label class="label_name">确认密码</label>
-     				<input type = "text" name="confirmPwd" id="confirmPwd1">
+     				<input type = "password" name="confirmPwd" id="confirmPwd1">
      			</li>
      			<li>
      				<label class="label_name">公司电话</label>
-     				<input type = "text" name="tel" id = "tel1">
+     				<input type = "text" name="tel" id = "tel1" maxlength="11">
      			</li>
      			<li>
      				<label class="label_name">公司地址</label>
@@ -88,7 +88,7 @@
      			</li>
      			<li>
      				<label class="label_name">领队人电话</label>
-     				<input type = "text" name="phone" id = "phone1">
+     				<input type = "text" name="phone" id = "phone1" maxlength="11">
      			</li>
      			<li>
      				<label class="label_name">存储金额</label>
@@ -114,7 +114,7 @@
      			</li>
      			<li>
      				<label class="label_name">公司电话</label>
-     				<input type = "text" name="tel" id = "tel">
+     				<input type = "text" name="tel" id = "tel" maxlength="11">
      			</li>
      			<li>
      				<label class="label_name">公司地址</label>
@@ -126,7 +126,7 @@
      			</li>
      			<li>
      				<label class="label_name">领队人电话</label>
-     				<input type = "text" name="phone" id = "phone">
+     				<input type = "text" name="phone" id = "phone" maxlength="11">
      			</li>
      			<li>
      				<label class="label_name">存储金额</label>
@@ -201,6 +201,7 @@
 	});
 	var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 	var numCheck1 = /^[0-9]*$/;
+	var telCheck = /^1[34578]\d{9}$/;
 </script>
 <script type="text/javascript">
 function stateChange(e){
@@ -377,7 +378,6 @@ function remove1(e){
 </script>
 <!-- 改 -->
 <script>
-var numCheck = /^[0-9]+\.{0,1}[0-9]{0,2}$/;
 function checkName(){
 	var rt;
 	
@@ -440,14 +440,10 @@ function change(e){
 				return false;
 					
 			}else{
-			if(!numCheck.test($('#tel').val())){
-				layer.alert('电话号码必须是数值!',{title: '提示框',icon:0,});
+			if(!telCheck.test($('#tel').val())){
+				layer.alert('电话号码格式有误!',{title: '提示框',icon:0,});
 				return false;
 					
-			}if($('#tel').val().length != 11){
-				layer.alert('电话号码必须为11位!',{title: '提示框',icon:0,});
-				return false;
-				
 			}if($('#address').val()==""){
 				layer.alert('地址不能为空!',{title: '提示框',icon:0,});
 				return false;
@@ -456,11 +452,8 @@ function change(e){
 				layer.alert('领队人不能为空!',{title: '提示框',icon:0,});
 				return false;
 				
-			}if(!numCheck.test($('#phone').val())){
-				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
-				return false;
-			}if($('#phone').val().length != 11){
-				layer.alert('手机号必须为11位!',{title: '提示框',icon:0,});
+			}if(!telCheck.test($('#phone').val())){
+				layer.alert('领队人手机号格式有误!',{title: '提示框',icon:0,});
 				return false;
 				
 			}if($('#deposit').val()==""||!(numCheck.test($('#deposit').val())||numCheck1.test($('#deposit').val()))	){
@@ -551,14 +544,10 @@ $('#add_butn').on('click', function(){
 				layer.alert('两次输入密码不同!',{title: '提示框',icon:0,});
 				return false;
 				
-			}if(!numCheck.test($('#tel1').val())){
-				layer.alert('电话号码必须是数值!',{title: '提示框',icon:0,});
+			}if(!telCheck.test($('#tel1').val())){
+				layer.alert('公司电话格式有误!',{title: '提示框',icon:0,});
 					return false;
 					
-			}if($('#tel1').val().length != 11){
-				layer.alert('电话号码必须为11位!',{title: '提示框',icon:0,});
-				return false;
-				
 			}if($('#address1').val()==""){
 				layer.alert('地址不能为空!',{title: '提示框',icon:0,});
 				return false;
@@ -567,14 +556,10 @@ $('#add_butn').on('click', function(){
 				layer.alert('领队人不能为空!',{title: '提示框',icon:0,});
 				return false;
 				
-			}if(!numCheck.test($('#phone1').val())){
-				layer.alert('手机号必须是数值!',{title: '提示框',icon:0,});
+			}if(!telCheck.test($('#phone1').val())){
+				layer.alert('领队人手机号格式有误!',{title: '提示框',icon:0,});
 				return false;
 					
-			}if($('#phone1').val().length != 11){
-				layer.alert('手机号必须为11位!',{title: '提示框',icon:0,});
-				return false;
-				
 			}if($('#deposit1').val()==""||!(numCheck.test($('#deposit1').val())||numCheck1.test($('#deposit1').val()))){
 				layer.alert('金额必须是数值!',{title: '提示框',icon:0,});
 				return false;

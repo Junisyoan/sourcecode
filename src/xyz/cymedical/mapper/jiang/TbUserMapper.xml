@@ -4,6 +4,13 @@
 
 <mapper namespace="xyz.cymedical.mapper.jiang.TbUserMapper">
 
+	<select id="findMail" parameterType = "String" resultType = "int">
+		select count(*) from tb_user where mail = #{mail}
+	</select>
+
+	<update id="changePwdBymail" parameterType = "map">
+		update tb_user set pwd = #{pwd} where mail = #{mail}
+	</update>
 
 	<select id="queryUser">
 		select * from tb_user where user_id = #{id} and pwd=#{pwd}	
