@@ -377,6 +377,7 @@ public class NurseHandle {
 							nurseBiz.insertPaitentProject(pList,time);
 							strRet = "1";
 							request.getServletContext().removeAttribute(biller.getHcode());
+							patientTmpBiz.del(bid);
 						} else {
 							strRet = "0";
 						}

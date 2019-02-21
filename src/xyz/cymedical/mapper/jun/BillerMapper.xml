@@ -47,6 +47,7 @@
 <!-- 删除未结算账单 -->
 	<delete id="delBiller">
 		delete from tb_biller where biller_id = #{bid}
+		delete from tb_patient_tmp where biller_id = #{bid}
 	</delete>
 <!-- 查询记账表 -->
 	<select id="queryBiller" resultType="xyz.cymedical.entity.jun.Biller">
