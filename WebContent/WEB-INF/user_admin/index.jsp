@@ -54,12 +54,13 @@
 			<!-- /.navbar-header -->
 			<div class="navbar-header pull-right" role="navigation">
 				<div class="get_time">
-					<span id="time"></span>&nbsp;&nbsp;<span>欢迎光临，${userCompany.name }</span>
+					<span id="time"></span>&nbsp;&nbsp;<span>${userCompany.name }</span>
 				</div>
 				<ul class="nav ace-nav">
+					
 					<li><a href="javascript:void(0)" class="change_Password">修改密码</a></li>
 					<li><a href="javascript:void(0)" id="Exit_system">退出系统</a></li>
-
+					<li>欢迎光临</li>
 				</ul>
 				<!-- /.ace-nav -->
 			</div>
