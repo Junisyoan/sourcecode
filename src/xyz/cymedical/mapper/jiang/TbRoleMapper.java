@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jiang.Tb_menu;
+import xyz.cymedical.entity.jiang.Tb_power;
 import xyz.cymedical.entity.jiang.Tb_role;
 
 @Repository 
@@ -31,4 +32,8 @@ public interface TbRoleMapper {
 	
 //	public  List<Tb_role> selectrole(String name);/*已知部门查角色*/
 	public  List<Map<String,Object>> selectrole(String name);/*已知部门查角色*/
+	
+	public List<Map<String, Object>>  selectroleall();//**查找所角色
+	
+//	public List<Tb_power> selectrowepid(); //**查询权限id 和名字  在添加权限时使用
 }

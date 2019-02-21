@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.sf.json.JSONArray;
+import xyz.cymedical.biz.jiang.TbDeptBiz;
 import xyz.cymedical.biz.jiang.TbMenuBiz;
 import xyz.cymedical.biz.jiang.TbPowerBiz;
 import xyz.cymedical.biz.jiang.TbRoleDept;
@@ -39,10 +40,16 @@ public class MenuManageHandle {
 	private TbPowerBiz tbPowerBiz;
 	@Resource
 	private TbRoleDept tbRoleDept;
+	@Resource
+	private Tb_power power;
 	
 	private Tb_power tb_power;
 	 
 	private List<Map<String,Object>> maplist;
+	
+	private List<Map<String, Object>> maplistdept;
+	@Resource
+	private TbDeptBiz tbDeptBiz;
 	
 	// 添加后台人员
 
@@ -56,8 +63,12 @@ public class MenuManageHandle {
 		ModelAndView mav = new ModelAndView();
 		tbmenuall=tbMenuBiz.selectMenu();
 		request.setAttribute("tbmenuall", tbmenuall);
-	 
-
+		//**
+//		String sta="在用";
+//		maplistdept=tbDeptBiz.select(sta);
+//		
+//		request.setAttribute("maplistdept", maplistdept);
+		//**
 		mav.setViewName("WEB-INF/view.jiang/menumanage");
 		return mav;
 
@@ -126,6 +137,16 @@ public class MenuManageHandle {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("-1");
 		int ret=tbMenuBiz.addMenu(tb_menu);
+		/*新添加的菜单   查询id*/
+		tbmenu= tbMenuBiz.selectmenuid(tb_menu);
+		int menu_id=tbmenu.getMenu_id();
+		/*在权限中添加 新的菜单id的power表*/
+		String name=tb_menu.getName();
+		power.setMenu_id(menu_id);
+		power.setName(name);
+		/*添加菜单  添加权限*/
+		
+		
 		String re = "";
 		if(ret==1) {  
 			re="1";

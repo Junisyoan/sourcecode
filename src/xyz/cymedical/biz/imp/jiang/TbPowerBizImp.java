@@ -64,4 +64,12 @@ public class TbPowerBizImp implements TbPowerBiz{
 		return tbPowerMapper.deletepower_role(power_id);
 	}
 
+	@Override
+	public Tb_power selectpowerid(Tb_power tb_power) {
+		// TODO Auto-generated method stub
+		return tbPowerMapper.selectpowerid(tb_power);
+	}
+
+	 
+
 }

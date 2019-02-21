@@ -83,7 +83,7 @@
     <div class="add_user_style clearfix">
      <form action="<%=path%>rolemanage/updectrole.handle" method="post" id="ccc" >
      <ul class="clearfix">
-       <li><label class="label_name">序号</label> <input name="nameed" type="text"   class="text_add" id="nameed"   /><i style="color:#F60; ">*</i></li>  
+       <li><label class="label_name">序号</label> <input name="nameed" type="text" value="${u.role_id}"  readonly="readonly" class="text_add" id="nameed"   /><i style="color:#F60; ">*</i></li>  
        <li><label class="label_name">新角色名称</label> <input name="newname" type="text"  class="text_add" id="newname"/><i style="color:#F60; ">*</i></li>  
       </ul>    
    		 </form>
@@ -217,7 +217,7 @@ function delectrole(a){
 		document.body.appendChild(form);
 		
 		form.submit(); 
-		 
+<%-- 		 location.href="<%=path%>rolemanage/select.handle"; --%>
 		}else{
 			alert("错误");
 		}

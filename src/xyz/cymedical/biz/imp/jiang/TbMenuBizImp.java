@@ -87,4 +87,11 @@ public class TbMenuBizImp implements TbMenuBiz{
 		return tbMenuMapper.del(tb_role_power);
 	}
 
+
+	@Override
+	public  Tb_menu selectmenuid(Tb_menu tb_menu) {
+		// TODO Auto-generated method stub
+		return tbMenuMapper.selectmenuid(tb_menu);
+	}
+
 }
