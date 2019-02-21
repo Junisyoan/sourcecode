@@ -543,6 +543,7 @@ public class CompanyHandle {
 			HttpServletResponse response, 
 			MultipartFile companyFile) {
 		company = (Company) request.getSession().getAttribute("userCompany");
+		System.out.println(company);
 		System.out.println(companyFile.getSize());
 		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath() + "/";
@@ -557,11 +558,9 @@ public class CompanyHandle {
 		}
 
 		String [] str =companyFile.getOriginalFilename().split("\\.");
-		System.out.println(str[str.length-1].toLowerCase());
-		if (str[str.length-1].toLowerCase().equals("xls")
-				||str[str.length-1].toLowerCase().equals("xlsx")) {
-			isSuccess =true;
-		} else {
+		System.out.println("文件后缀："+str[str.length-1].toLowerCase());
+		if (!str[str.length-1].toLowerCase().equals("xls")
+				||!str[str.length-1].toLowerCase().equals("xlsx")) {
 			isSuccess=false;
 		}
 		

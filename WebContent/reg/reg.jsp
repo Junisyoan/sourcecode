@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage=""%>
+<%@ page contentType="text/html; charset=utf-8" language="java"
+	import="java.sql.*" errorPage=""%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,66 +28,72 @@
 
 				<div class="login_form">
 					<div class="login_title">注册</div>
-					<form action="<%=path %>company/regCompany.so" method="post" id="regCompany">
+					<form action="<%=path%>company/regCompany.so" method="post"
+						id="regCompany">
 						<div class="form_text_ipt">
-							<input type="text" style="color:black;" name="name" id="name" placeholder="公司名称" />
+							<input type="text" style="color: black;" name="name" id="name"
+								placeholder="公司名称" />
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>公司名称不能为空</span> -->
-<!-- 						</div> -->
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>公司名称不能为空</span> -->
+						<!-- 						</div> -->
 
 						<div class="form_text_ipt">
-							<input type="text" name="account" id="account" placeholder="账户，5-18个字符" />
+							<input type="text" name="account" id="account"
+								placeholder="账户，5-18个字符" />
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>账户名称不能为空</span> -->
-<!-- 						</div> -->
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>账户名称不能为空</span> -->
+						<!-- 						</div> -->
 
 						<div class="form_text_ipt">
-							<input name="pwd" id="pwd" type="password" placeholder="密码：6-18个字符">
+							<input name="pwd" id="pwd" type="password"
+								placeholder="密码：6-18个字符">
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>密码不能为空</span> -->
-<!-- 						</div> -->
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>密码不能为空</span> -->
+						<!-- 						</div> -->
 
 						<div class="form_text_ipt">
 							<input name="rpwd" id="rpwd" type="password" placeholder="重复密码">
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>密码不能为空</span> -->
-<!-- 						</div> -->
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>密码不能为空</span> -->
+						<!-- 						</div> -->
 
 						<div class="form_text_ipt">
 							<input type="text" name="tel" id="tel" placeholder="公司座机号，11位" />
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>公司座机号不能为空</span> -->
-<!-- 						</div> -->
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>公司座机号不能为空</span> -->
+						<!-- 						</div> -->
 
 						<div class="form_text_ipt">
 							<input type="text" name="address" id="address" placeholder="公司地址" />
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>公司地址不能为空</span> -->
-<!-- 						</div> -->
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>公司地址不能为空</span> -->
+						<!-- 						</div> -->
 
 						<div class="form_text_ipt">
-							<input type="text" name="people" id="people" placeholder="紧急联系人姓名" />
+							<input type="text" name="people" id="people"
+								placeholder="紧急联系人姓名" />
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>体检带队人姓名不能为空</span> -->
-<!-- 						</div> -->
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>体检带队人姓名不能为空</span> -->
+						<!-- 						</div> -->
 
 						<div class="form_text_ipt">
 							<input type="text" name="phone" id="phone" placeholder="紧急联系人手机号" />
 						</div>
-<!-- 						<div class="ececk_warning"> -->
-<!-- 							<span>带队人手机号不能为空</span> -->
-<!-- 						</div> -->
-            				<input type="text" id="c" placeholder="请输入验证码" style="padding:10px;"/>
-            			<div class="left">
-            				<canvas id="canvas" width="100" height="40"></canvas>
-            			</div>
+						<!-- 						<div class="ececk_warning"> -->
+						<!-- 							<span>带队人手机号不能为空</span> -->
+						<!-- 						</div> -->
+						<input type="text" id="c" placeholder="请输入验证码"
+							style="padding: 10px;" />
+						<div class="left">
+							<canvas id="canvas" width="100" height="40"></canvas>
+						</div>
 
 						<div class="form_btn">
 							<button type="button" onclick="doSubmitForm();">注册</button>
@@ -187,126 +194,94 @@ function randomColor() {//得到随机的颜色值
 
 </script>
 <style>
-.left{
-	text-align:left
+.left {
+	text-align: left
 }
-.right{
- 	text-align:right
+
+.right {
+	text-align: right
 }
 </style>
 
 <script type="text/javascript">
-	$(function() {
-		$("#regCompany").validate({
-			rules : {
-				name : {
-					maxlength : 20,
-					minlength : 5,
-					required : true
-				},
-				account : {
-					required : true,
-					maxlength : 20,
-					minlength : 5
-				},
-				pwd : {
-					required : true,
-					maxlength : 20,
-					minlength : 6
-				},
-				rpwd : {
-					required : true,
-					equalTo:'#pwd',
-				},
-				tel : {
-					maxlength : 11,
-					minlength : 11,
-					required : true,
-					number : true
-				},
-				address : {
-					required : true
-					maxlength : 40,
-					minlength : 6,
-				},
-				people : {
-					required : true
-				},
-				phone : {
-					maxlength : 11,
-					minlength : 11,
-					required : true,
-					number : true
+$(function() {
+	$("#regCompany").validate({
+		rules : {
+			name : { maxlength : 20, minlength : 5, required : true },
+			account : { required : true, maxlength : 20, minlength : 5 },
+			pwd : { required : true, maxlength : 20, minlength : 6 },
+			rpwd : { required : true, equalTo:'#pwd' },
+			tel : { maxlength : 11, minlength : 11, required : true, number : true },
+			address : { required : true, maxlength : 40, minlength : 6 },
+			people : { required : true },
+			phone : { maxlength : 11, minlength : 11, required : true, number : true }
+		}
+	});
+	$("#name").blur(function() {
+		if ($("#name").val()=="") {
+			return;
+		}
+		$.ajax({
+			type : "post",
+			dataType : "text",
+			data : {'name' : $("#name").val()},
+			url : "<%=path%>company/queryName.so",
+			success : function(retData) {
+				if(retData=="0"){
+					alert("公司名已被注册");
 				}
+			},
+			error : function() {
+				alert('服务器连接失败');
 			}
-		});
-
-		$("#name").blur(function() {
-			if ($("#name").val()=="") {
-				return;
-			}
-			$.ajax({
-				type : "post",
-				dataType : "text",
-				data : {'name' : $("#name").val()},
-				url : "<%=path%>company/queryName.so",
-				success : function(retData) {
-					if(retData=="0"){
-						alert("公司名已被注册");
-					}
-				},
-				error : function() {
-					alert('服务器连接失败');
-				}
-			});
-		});
-
-		$("#account").blur(function() {
-			if ($("#account").val() == "") {
-				return;
-			}
-			$.ajax({
-				type : "post",
-				dataType : "text",
-				data : {'account' : $("#account").val()},
-				url : "<%=path%>company/queryAccount.so",
-				success : function(retData) {
-					if(retData=="0"){
-						alert("用户名已被注册");
-					}
-				},
-				error : function() {
-					alert('服务器连接失败');
-				}
-			});
-		});
-
-		$("#tel").blur(function() {
-			if ($("#tel").val() == "") {
-				return;
-			}
-			$.ajax({
-				url : "<%=path%>company/queryTel.so",
-				type : "post",
-				dataType : "text",
-				data : {'tel' : $("#tel").val()},
-				success : function(retData) {
-					if(retData=="0"){
-						alert("座机号码已被注册");
-					}
-				},
-				error : function() {
-					alert('服务器连接失败');
-				}
-			});
 		});
 	});
-	
-	function doSubmitForm(){
-		var form = document.getElementById('regCompany');
-		if(passwordIsTrue()){
-			form.submit();
+	$("#account").blur(function() {
+		if ($("#account").val() == "") {
+			return;
 		}
+		$.ajax({
+			type : "post",
+			dataType : "text",
+			data : {'account' : $("#account").val()},
+			url : "<%=path%>company/queryAccount.so",
+			success : function(retData) {
+				if(retData=="0"){
+					alert("用户名已被注册");
+				}
+			},
+			error : function() {
+				alert('服务器连接失败');
+			}
+		});
+	});
+
+	$("#tel").blur(function() {
+		if ($("#tel").val() == "") {
+			return;
+		}
+		$.ajax({
+			url : "<%=path%>company/queryTel.so",
+			type : "post",
+			dataType : "text",
+			data : {'tel' : $("#tel").val()},
+			success : function(retData) {
+				if(retData=="0"){
+					alert("座机号码已被注册");
+				}
+			},
+			error : function() {
+				alert('服务器连接失败');
+			}
+		});
+	});
+});
+	
+function doSubmitForm(){
+	var form = document.getElementById('regCompany');
+	if(passwordIsTrue()){
+		form.submit();
 	}
+}
 </script>
 </html>
