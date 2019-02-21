@@ -104,6 +104,7 @@ function createList(cid,bid){
 $(function(){
 	$('#timeDialog').dialog({
 		 autoOpen: false,
+		 modal:true;
 	      show: {
 	        effect: "blind",
 	        duration: 100
