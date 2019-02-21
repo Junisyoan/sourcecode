@@ -564,9 +564,6 @@ public class CompanyHandle {
 			isSuccess=false;
 		}
 		
-		
-		
-		
 		// 目录是否存在
 		try {
 			if (isSuccess) {

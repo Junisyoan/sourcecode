@@ -29,6 +29,10 @@ public class PatientTools {
 				}
 			}
 		}
+		
+		for(Patient p:patients) {
+			p.setCode(BarCodeTools.randomNumStr(13));
+		}
 		System.out.println(patients);
 		return patients;
 	}

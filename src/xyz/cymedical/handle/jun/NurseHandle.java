@@ -323,6 +323,10 @@ public class NurseHandle {
 		
 		
 		try {
+			if (time==null) {
+				strRet="-1";
+				return strRet;
+			}
 			cTime = sdf.parse(time).getTime();
 			nTime = sdf.parse(sdf.format(System.currentTimeMillis())).getTime();
 			System.out.println("体检时间："+cTime);
