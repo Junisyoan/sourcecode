@@ -15,16 +15,19 @@ public class Tb_user {
 	private String phone;//电话
 	private String IDcard;//身份证
 	private String state;//身份证
-	private int param_id;
+	private int param_id;//参数id
 	private String doctor;//角色
 	private String dept;//部门
+	private String mail;
 	
 	public Tb_user() {
 		super();
 	}
 
+	 
+
 	public Tb_user(int user_id, int role_dept_id, String account, String pwd, String name, String sex, String address,
-			String phone, String iDcard, String state, int param_id, String doctor, String dept) {
+			String phone, String iDcard, String state, int param_id, String doctor, String dept, String mail) {
 		super();
 		this.user_id = user_id;
 		this.role_dept_id = role_dept_id;
@@ -39,7 +42,10 @@ public class Tb_user {
 		this.param_id = param_id;
 		this.doctor = doctor;
 		this.dept = dept;
+		this.mail = mail;
 	}
+
+
 
 	public Tb_user(int user_id, int role_dept_id, String account, String pwd, String name, String sex, String address,
 			String phone, String iDcard, String state, int param_id, String doctor) {
@@ -57,6 +63,18 @@ public class Tb_user {
 		this.param_id = param_id;
 		this.doctor = doctor;
 	}
+
+	public String getMail() {
+		return mail;
+	}
+
+
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+
 
 	public String getDept() {
 		return dept;
@@ -162,13 +180,17 @@ public class Tb_user {
 		this.doctor = doctor;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Tb_user [user_id=" + user_id + ", role_dept_id=" + role_dept_id + ", account=" + account + ", pwd="
 				+ pwd + ", name=" + name + ", sex=" + sex + ", address=" + address + ", phone=" + phone + ", IDcard="
 				+ IDcard + ", state=" + state + ", param_id=" + param_id + ", doctor=" + doctor + ", dept=" + dept
-				+ "]";
+				+ ", mail=" + mail + "]";
 	}
+
+ 
 
 	 
  

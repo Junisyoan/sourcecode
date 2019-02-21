@@ -76,4 +76,8 @@
 	select d.* from tb_dept d,tb_role_dept rd where rd.state='在用' and d.dept_id=rd.dept_id
 	</select>
 	
+	<select id="selectmapdept"  resultType="map">
+	select * from tb_dept d,tb_role_dept rd where d.dept_id=rd.dept_id and rd.state='在用'
+	</select>
+	
 </mapper>
