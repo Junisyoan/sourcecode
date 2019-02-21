@@ -377,6 +377,7 @@ public class NurseHandle {
 								&& nurseBiz.insertPaitentCombo(pList,bid)
 								&& groupBiz.updateGroupCheckTime(sdf.format(cTime), bid)) {
 							//添加至病人项目表以及小结表
+							
 							nurseBiz.insertPaitentProject(pList,time);
 							strRet = "1";
 							request.getServletContext().removeAttribute(biller.getHcode());

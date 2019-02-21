@@ -142,7 +142,7 @@ var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]
 	function forgetPassWord(){
 		layer.open({
 	        type: 1,
-	        title: '寻找密码',
+	        title: '忘记密码',
 			shadeClose: true, //点击遮罩关闭层
 	        area: ['600px' , ''],
 	        content: $('#Add_Product_style'),
@@ -198,8 +198,9 @@ var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]
 				<form id="addForm">
 					<ul class="clearfix">
 						<li>
-							<label class="label_name" style="margin-left:50px;">邮箱：</label> 
-							<input type="text" name="mailAddress" id="mailAddress" style="width:400px;">
+							<label class="label_name" style="margin-left:40px;">邮箱地址：</label> 
+							<input type="text" name="mailAddress" id="mailAddress" style="width:400px;"
+							placeholder="请输入您的邮箱地址，新密码将发送至您的邮箱">
 						</li>
 					</ul>
 				</form>
