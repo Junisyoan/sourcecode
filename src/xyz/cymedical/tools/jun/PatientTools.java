@@ -25,7 +25,6 @@ public class PatientTools {
 			for(int i =0;i<patients.size();i++) {
 				if (combos.get(j).getName().equals(patients.get(i).getComboName())) {
 					patients.get(i).setCombo_id(combos.get(j).getCombo_id());
-					break;
 				}
 			}
 		}
