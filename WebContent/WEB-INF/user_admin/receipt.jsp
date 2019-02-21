@@ -40,6 +40,7 @@
 </table>
 <!-- end -->
 <input type="button" value="打印" onclick="p();" />
+<input type="button" value="返回" onclick="javascript:window.history.back();" />
 </div>
 <script type="text/javascript">
 function p(){

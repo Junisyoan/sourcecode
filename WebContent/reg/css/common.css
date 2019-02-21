@@ -114,7 +114,6 @@ header{
 	height: 40px;
 	border: solid 1px #CCCCCC;
 	margin: 20px auto 0 auto;
-	background: #FFFFFF;
 }
 .form_check_ipt{
 	width: 300px;
@@ -125,10 +124,8 @@ header{
 	width: 290px;
 	height: 30px;
 	margin: 5px;
-	border: none;
 	font-family: "微软雅黑";
 	font-size: 15px;
-	color: #666;
 }
 .check_left label{
 	cursor: pointer;

@@ -70,9 +70,12 @@ public class ParamHandle {
 	// 新增页面显示
 	@RequestMapping(value = "showaddparam.handle")
 	public ModelAndView showaddparam() {
+		
+		paramlist = paramBiz.findAllParam();
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("WEB-INF/view.jiang/addparam");
+		mav.addObject("paramlist", paramlist);
 
 		return mav;
 	}
