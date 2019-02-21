@@ -92,6 +92,7 @@
 					<tr>
 						<th style="width:50px;">选择</th>
 						<th>名称</th>
+						<th>价钱</th>
 					</tr>
 					<tbody id = "projectBody1"></tbody>
 				</table>
@@ -134,6 +135,7 @@
 					<tr>
 						<th style="width:50px;">选择</th>
 						<th>名称</th>
+						<th>价钱</th>
 					</tr>
 					<tbody id = "projectBody"></tbody>
 				</table>
@@ -225,10 +227,11 @@ var state;
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 var numCheck1 = /^[0-9]*$/;
 
-function createProject(project_id,project_name){
+function createProject(project_id,project_name,price){
 	var project = new Object();
 	project.id = project_id;
 	project.name = project_name;
+	project.price = price;
 	return project;
 }
 
@@ -453,6 +456,7 @@ function show(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(projectList[i].name);
+		var td3=$("<td></td>").text(projectList[i].price);
 		
 		var checkbox=$("<input type='checkbox' value='"+projectList[i].id+"'/>");
 		
@@ -463,7 +467,7 @@ function show(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#projectBody").append(tr);
 	}
@@ -582,6 +586,7 @@ function show1(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(projectList[i].name);
+		var td3=$("<td></td>").text(projectList[i].price);
 		
 		var checkbox=$("<input type='checkbox' value='"+projectList[i].id+"'/>");
 		
@@ -592,7 +597,7 @@ function show1(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#projectBody1").append(tr);
 	}
@@ -600,7 +605,7 @@ function show1(){
 
 $(document).ready(function(){
 	<c:forEach items="${projects}" var = "p" >
-		var project = createProject("${p.project_id}","${p.name}");
+		var project = createProject("${p.project_id}","${p.name}","${p.price}");
 		projectList.push(project);
 	</c:forEach>
 	

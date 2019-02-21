@@ -108,6 +108,7 @@
 										<tr>
 											<th style="width: 50px;">选择</th>
 											<th>名称</th>
+											<th>类型</th>
 										</tr>
 										<tbody id="detailBody1"></tbody>
 									</table>
@@ -147,6 +148,7 @@
 										<tr>
 											<th style="width: 50px;">选择</th>
 											<th>名称</th>
+											<th>类型</th>
 										</tr>
 										<tbody id="detailBody"></tbody>
 									</table>
@@ -231,16 +233,17 @@ var state;
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 var numCheck1 = /^[0-9]*$/;
 
-function createDetail(detail_id,detail_name){
+function createDetail(detail_id,detail_name,type){
 	var detail = new Object();
 	detail.id = detail_id;
 	detail.name = detail_name;
+	detail.type = type;
 	return detail;
 }
 
 $(document).ready(function(){
 	<c:forEach items="${details}" var = "d" >
-		var detail = createDetail("${d.detail_id}","${d.name}");
+		var detail = createDetail("${d.detail_id}","${d.name}","${d.type}");
 		detailList.push(detail);
 	</c:forEach>
 });
@@ -467,6 +470,7 @@ function show(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(detailList[i].name);
+		var td3=$("<td></td>").text(detailList[i].type);
 		
 		var checkbox=$("<input type='checkbox' value='"+detailList[i].id+"'/>");
 		
@@ -477,7 +481,7 @@ function show(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#detailBody").append(tr);
 	}
@@ -601,6 +605,7 @@ function show1(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(detailList[i].name);
+		var td3=$("<td></td>").text(detailList[i].type);
 		
 		var checkbox=$("<input type='checkbox' value='"+detailList[i].id+"'/>");
 		
@@ -611,7 +616,7 @@ function show1(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#detailBody1").append(tr);
 	}

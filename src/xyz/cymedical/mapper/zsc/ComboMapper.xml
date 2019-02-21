@@ -92,6 +92,7 @@
 		left join tb_project_combo pc on pc.combo_id = cb.combo_id
 		left join tb_project pj on pc.project_id = pj.project_id
 		where cb.combo_id = #{combo_id}
+		ORDER BY cb.combo_id DESC
 	</select>
 	
 	<!-- 查询项目返回的map -->
