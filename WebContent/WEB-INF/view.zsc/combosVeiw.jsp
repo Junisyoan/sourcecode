@@ -8,21 +8,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script src="<%=path%>js/jquery.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
-  <script src="<%=path %>assets/js/jquery.min.js"></script>
-  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+<%--   <script src="<%=path%>js/jquery.min.js"></script> --%>
+<%--   <script src="<%=path%>js/jquery.validate.min.js"></script> --%>
+<%--   <script src="<%=path%>js/jquery.validate.cn.js"></script>   --%>
+<%--   <script src="<%=path %>assets/js/jquery.min.js"></script> --%>
+<%--   <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>   --%>
+<%--   <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" /> --%>
+<%--   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" /> --%>
+<%--   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" /> --%>
+<%--   <link rel="stylesheet" href="<%=path %>css/style.css"/> --%>
+<%--   <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css"> --%>
+<%--   <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"> --%>
+<%--   <script src="<%=path %>js2/jquery-1.8.3.min.js"></script> --%>
+<%--   <script src="<%=path %>js2/datatables.bootstrap.min.js"></script> --%>
+<%--   <script src="<%=path %>js2/jquery.dataTables.min.js"></script> --%>
   <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-  <link rel="stylesheet" href="<%=path %>css/style.css"/>
   <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
-  <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
-  <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
-  <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
+<script src="<%=path%>js/jquery.validate.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
+  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
     <title>套餐查询</title>
   <style type="text/css">
   	#aFrom input {
@@ -84,7 +96,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price1">
+     				<input type = "text" name="price" id="price1" placeholder = "输入0代表所选项目总价" maxlength="10">
      			</li>
       		</ul>  
      			<label class="label_name">选择项目</label>
@@ -92,6 +104,7 @@
 					<tr>
 						<th style="width:50px;">选择</th>
 						<th>名称</th>
+						<th>价钱</th>
 					</tr>
 					<tbody id = "projectBody1"></tbody>
 				</table>
@@ -126,7 +139,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price">
+     				<input type = "text" name="price" id="price" placeholder = "输入0代表所选项目总价" maxlength="10">
      			</li>
       		</ul> 
       			<label class="label_name">选择项目</label>
@@ -134,6 +147,7 @@
 					<tr>
 						<th style="width:50px;">选择</th>
 						<th>名称</th>
+						<th>价钱</th>
 					</tr>
 					<tbody id = "projectBody"></tbody>
 				</table>
@@ -225,10 +239,11 @@ var state;
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 var numCheck1 = /^[0-9]*$/;
 
-function createProject(project_id,project_name){
+function createProject(project_id,project_name,price){
 	var project = new Object();
 	project.id = project_id;
 	project.name = project_name;
+	project.price = price;
 	return project;
 }
 
@@ -427,7 +442,7 @@ function checkName(){
 		dataType:"text",
 		data:{
 			name:$("#name").val(),
-			id:"${combo.combo_id}"
+			id:$("#combo_id").val()
 		},
 		async: false,
 		success:function(msg){
@@ -453,6 +468,7 @@ function show(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(projectList[i].name);
+		var td3=$("<td></td>").text(projectList[i].price);
 		
 		var checkbox=$("<input type='checkbox' value='"+projectList[i].id+"'/>");
 		
@@ -463,7 +479,7 @@ function show(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#projectBody").append(tr);
 	}
@@ -582,6 +598,7 @@ function show1(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(projectList[i].name);
+		var td3=$("<td></td>").text(projectList[i].price);
 		
 		var checkbox=$("<input type='checkbox' value='"+projectList[i].id+"'/>");
 		
@@ -592,7 +609,7 @@ function show1(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#projectBody1").append(tr);
 	}
@@ -600,7 +617,7 @@ function show1(){
 
 $(document).ready(function(){
 	<c:forEach items="${projects}" var = "p" >
-		var project = createProject("${p.project_id}","${p.name}");
+		var project = createProject("${p.project_id}","${p.name}","${p.price}");
 		projectList.push(project);
 	</c:forEach>
 	

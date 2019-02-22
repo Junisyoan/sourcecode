@@ -21,5 +21,7 @@ public interface TbRolePowerMapper {
 	
 	public int delectrprid(Tb_role_power tb_role_power);
 	
+	public Tb_role_power selecttowid(Tb_role_power tb_role_power);//**查找此表中是否存在两个id都有的字段
 	
+	public int addtowid(Tb_role_power tb_role_power);//不能存在 则添加
 }

@@ -1,5 +1,7 @@
 package xyz.cymedical.entity.jun;
 
+import java.io.Serializable;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,8 +9,12 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class Patient {
+public class Patient implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int paitent_id; // 病人id
 	private int company_id; // 公司id
 	private int combo_id; // 套餐id

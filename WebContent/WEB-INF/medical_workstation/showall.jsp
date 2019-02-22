@@ -221,7 +221,7 @@ input {
 					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">【综述】</blockquote>
 				<c:forEach items="${patientlist3}" var="p3" varStatus="s3">
 					<blockquote
-						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">${p3.n3}:${p3.resulttext}${p3.unit}</blockquote>
+						style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">${p3.n2}:${p3.resulttext}${p3.unit}</blockquote>
 				</c:forEach>
 				<blockquote
 					style="margin-left: 90px; text-indent: 25px; margin-right: 90px; font-size: 15px; line-height: 1.5;">【建议】</blockquote>

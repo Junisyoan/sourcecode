@@ -111,7 +111,7 @@
 		parameterType="xyz.cymedical.entity.jun.Patient"
 		resultType="java.util.HashMap">
 		select
-		a8.n1,a8.n2,a8.n3,a8.n4,a8.unit,a8.min,a8.max,a8.resulttext,a8.time,a8.resultpath
+		a8.n1,a8.n2,a8.n3,a8.n4,a8.unit,a8.min,a8.max,a8.resulttext,a8.time,a8.resultpath,us.name n5
 		from(select a7.n1,a7.n2,a7.n3,com.`name`
 		n4,a7.unit,a7.min,a7.max,a7.resulttext,a7.time,a7.user_id,a7.resultpath from(select
 		a6.n1,a6.n2,a6.n3,pc.combo_id,a6.unit,a6.min,a6.max,a6.resulttext,a6.time,a6.user_id,a6.resultpath

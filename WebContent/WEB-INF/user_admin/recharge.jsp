@@ -42,8 +42,8 @@ function check11(){
 		sNow += String(vNow.getSeconds());
 		sNow += String(vNow.getMilliseconds());
 		document.getElementById("sNow").value =  sNow;
-		document.getElementById("subject").value =  '充值';
-		document.getElementById("WIDbody").value =  '充值';
+		document.getElementById("subject").value =  '预存体检费用';
+		document.getElementById("WIDbody").value =  '预存体检费用';
 		return true;
 	}
 	

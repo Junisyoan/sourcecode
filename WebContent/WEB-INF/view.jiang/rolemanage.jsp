@@ -59,6 +59,9 @@
     </div>
     </div>
     </div>
+    <div class="page-content">
+<div class="gys_style">
+<div class="Manager_style">
 <table id="test" class="table table-striped table-bordered" style="60%">   
 <thead>
  
@@ -73,11 +76,23 @@
 <tbody id="companyBody">
 <c:forEach items="${roleall}" var="u" varStatus="s">
        <tr>
-        <td>${u.role_id}</td><td>${u.name}</td> 
+        <td>${u.role_id}</td>
+        <td>${u.name}</td> 
         <td> 
    
-      <button type="button" class="btn btn-primary" onclick="updect()"  name="${u.role_id}">修改</button>
-    <div class="Add_Manager_style">
+     	 <button type="button" class="btn btn-primary" onclick="updect()"  name="${u.role_id}">修改</button>
+         <button type="button" class="btn btn-warning" onclick="delectrole()" name="${u.role_id}">删除</button>
+         </td>
+       </tr>
+       </c:forEach> 
+ 
+</tbody>
+
+</table>
+</div>
+</div>
+</div>
+<div class="Add_Manager_style">
     <div id="Add_Product_styleed" style="display:none">
      <div class="page-content">
     <div class="add_user_style clearfix">
@@ -91,17 +106,6 @@
       </div>
       </div>
     </div> 
-
-
-<!-- ----------------- -->
-    </br>
-         <button type="button" class="btn btn-warning" onclick="delectrole()" name="${u.role_id}">删除</button></td>
-       </tr>
-       </c:forEach> 
- 
-</tbody>
-
-</table>
 </body>
    
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
@@ -171,8 +175,14 @@ $('#Add_Product_btn').on('click', function(){
     })
 });
 //修改角色
-function updect(){
- 
+function updect(a){
+	var a=a||event;
+	var t =a.target || a.srcElement;
+	var id=t.name;
+	
+	 document.getElementById("nameed").value=id;
+	
+	
     layer.open({ 
         type: 1,
         title: '修改角色',

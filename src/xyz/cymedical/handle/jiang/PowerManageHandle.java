@@ -53,8 +53,14 @@ public class PowerManageHandle {
 		@Resource
 		private TbDeptBiz tbDeptBiz;
 		 
-		
+		@Resource
 		private Tb_menu tb_menu;
+		 
+		private Tb_menu tmenu;
+		
+//		private Tb_power Tbpower;
+		@Resource
+		private Tb_role_power Tbrolepowertow;
 		
 		@Resource
 		private TbMenuBiz tbMenuBiz;
@@ -135,12 +141,53 @@ public class PowerManageHandle {
 		public ModelAndView addPower(HttpServletRequest request, HttpServletResponse response, Tb_power tb_power,String roleid) {
 			ModelAndView mav = new ModelAndView();  
 			int role_id=Integer.valueOf(roleid); 
+			int  rrt=0;
 //			int power_id=tb_power.getPower_id();
 			
 //			 
 			int ret=TbPowerBiz.addPower(tb_power);
 			int power_id=TbPowerBiz.selectpowerid(tb_power).getPower_id();
+			/*查找本菜单上级菜单是否为0  不为0 则查找本菜单的上级在但在role power中存在？？ 如果不存在则添加 */
+			int menu_id=tb_power.getMenu_id();
+			tb_menu.setMenu_id(menu_id);
+			tmenu=tbMenuBiz.selectmenuidwheresup(tb_menu);
+			System.out.println("今晚菜单上级="+tmenu);
+			int superior=tmenu.getSuperior();
 			
+			if(superior==0) {
+			 
+			}else { 
+				
+				//查找有没有上一级  如果有上级就不能再添加上级的role power表  如果没有上级 
+				tb_menu.setMenu_id(superior);
+				tmenu=tbMenuBiz.selectmenuidwheresup(tb_menu);
+				if(tmenu==null) {
+					
+				
+				
+//				int powerid=tb_power.getPower_id();
+				//找到上级菜单对应的权限
+				
+				tb_role_power.setPower_id(power_id);
+				int roleidd=Integer.valueOf(roleid);
+				tb_role_power.setRole_id(roleidd);
+				//**查询tbRolePower中存在两个id 都有的表？  不存在添加  存在则不需要
+				Tbrolepowertow=tbRolePower.selecttowid(tb_role_power);
+				if(Tbrolepowertow==null) {
+					//添加
+					//添加上级菜单变的菜单id中对应的权限和  现有的角色id
+					tb_role_power.setPower_id(superior);
+					 rrt=tbRolePower.addtowid(tb_role_power);
+				}
+				} 
+				
+				//上级存在 配本级？？？
+
+			}
+			
+			
+			
+			////////////////////
 			if(ret==1) {
 				tb_role_power.setRole_id(role_id);
 				tb_role_power.setPower_id(power_id);
@@ -149,9 +196,15 @@ public class PowerManageHandle {
 				
 				mav.setViewName("WEB-INF/view.jiang/powermanage");
 			}
-			  
+		
 			return mav;
  
+		}
+		private void addMainMenu() {
+			
+		}
+		private void addSubMenu() {
+			
 		}
 		//修改第一步
 		@RequestMapping(value = "/updete1.handle", method = RequestMethod.POST)
@@ -271,7 +324,7 @@ public class PowerManageHandle {
 				node.put("id", menu.getMenu_id());
 				node.put("name", menu.getName());
 				node.put("pId", menu.getSuperior());
-				System.out.println("555555555555="+menu.getMenu_id()+"111"+menu.getSuperior());
+				System.out.println("菜单="+menu.getMenu_id()+"上级"+menu.getSuperior());
 
 				if (menu.getSuperior()!= 0) {
 					mapList.add(node);

@@ -91,4 +91,16 @@
 	
 	</delete>
 	
+	<select id="selectmenuid" parameterType="xyz.cymedical.entity.jiang.Tb_menu"
+	resultType="xyz.cymedical.entity.jiang.Tb_menu" > 
+	select * from tb_menu where name=#{name}
+	
+	</select>
+	
+	<select id="selectmenuidwheresup" parameterType="xyz.cymedical.entity.jiang.Tb_menu"
+	resultType="xyz.cymedical.entity.jiang.Tb_menu">
+	select * from tb_menu where menu_id=#{menu_id}
+	
+	</select>
+	
 </mapper>

@@ -9,20 +9,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script src="<%=path%>js/jquery.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
-  <script src="<%=path %>assets/js/jquery.min.js"></script>
-  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
   <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-  <link rel="stylesheet" href="<%=path %>css/style.css"/>
   <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
-  <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
-  <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
-  <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
+<script src="<%=path%>js/jquery.validate.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
+  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
     <title>细项管理</title>
   <style type="text/css">
 	#aFrom input {
@@ -62,11 +60,11 @@
      			</li>
      			<li>
      				<label class="label_name">最小值</label>
-     				<input type = "text" name="min" id ="min1">
+     				<input type = "text" name="min" id ="min1" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">最大值</label>
-     				<input type = "text" name="max" id="max1">
+     				<input type = "text" name="max" id="max1" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">类型</label>
@@ -96,11 +94,11 @@
      			</li>
      			<li>
      				<label class="label_name">最小值</label>
-     				<input type = "text" name="min" id ="min">
+     				<input type = "text" name="min" id ="min" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">最大值</label>
-     				<input type = "text" name="max" id="max">
+     				<input type = "text" name="max" id="max" placeholder = "输入数字">
      			</li>
      			<li>
      				<label class="label_name">类型</label>

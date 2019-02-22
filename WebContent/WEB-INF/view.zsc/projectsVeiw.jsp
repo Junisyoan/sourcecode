@@ -9,22 +9,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="<%=path%>js/jquery.min.js"></script>
+<%-- <script src="<%=path%>js/jquery.min.js"></script> --%>
+<%-- <script src="<%=path%>js/jquery.validate.min.js"></script> --%>
+<%-- <script src="<%=path%>js/jquery.validate.cn.js"></script> --%>
+<%-- <script src="<%=path %>assets/js/jquery.min.js"></script> --%>
+<%-- <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script> --%>
+<%-- <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" /> --%>
+<%-- <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" /> --%>
+<%-- <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" /> --%>
+<%-- <link rel="stylesheet" href="<%=path %>css/style.css" /> --%>
+<%-- <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" --%>
+<!-- 	type="text/css"> -->
+<%-- <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" --%>
+<!-- 	type="text/css"> -->
+<%-- <script src="<%=path %>js2/jquery-1.8.3.min.js"></script> --%>
+<%-- <script src="<%=path %>js2/datatables.bootstrap.min.js"></script> --%>
+<%-- <script src="<%=path %>js2/jquery.dataTables.min.js"></script> --%>
+  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
+  <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
 <script src="<%=path%>js/jquery.validate.min.js"></script>
-<script src="<%=path%>js/jquery.validate.cn.js"></script>
-<script src="<%=path %>assets/js/jquery.min.js"></script>
-<script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
-<link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-<link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<%=path %>css/style.css" />
-<link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet"
-	type="text/css">
-<link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet"
-	type="text/css">
-<script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
-<script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
-<script src="<%=path %>js2/jquery.dataTables.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
+  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
 <title>项目管理</title>
 <style type="text/css">
 #aFrom input {
@@ -58,6 +70,11 @@
 	font-size: 15px;
 	text-align: center;
 }
+.hint1{
+	margin-left:40px;
+	font-size: 12px;
+	color:red;
+}
 </style>
 </head>
 <body>
@@ -86,23 +103,32 @@
 							<div class="add_user_style clearfix">
 								<form id="addForm">
 									<ul class="clearfix">
-										<li><label class="label_name">名称</label> <input
-											type="text" name="name" id="name1" onblur="checkName1()"></li>
-										<li><label class="label_name">价钱</label> <input
-											type="text" name="price" id="price1"></li>
-										<li><label class="label_name">科室</label> <select
-											name="deptname" id="deptname1"
+										<li>
+										<label class="label_name">名称</label> 
+										<input type="text" name="name" id="name1" onblur="checkName1()">
+										</li>
+										<li>
+										<label class="label_name">价钱</label> 
+										<input type="text" name="price" id="price1" placeholder = "输入数字" maxlength="8">
+										</li>
+										<li>
+										<label class="label_name">科室</label> 
+										<select name="deptname" id="deptname1"
 											style="width: 160px; height: 30px; margin-left: 10px;">
 												<c:forEach items="${params}" var="p" varStatus="s">
-													<option>${p.name}</option>
+													<c:if test="${p.name != '总检室'}">
+														<option>${p.name}</option>
+													</c:if>
 												</c:forEach>
 										</select></li>
 									</ul>
 									<label class="label_name">选择细项</label>
+									<label class="hint1">*请选择与科室匹配的细项</label>
 									<table class="checkList">
 										<tr>
 											<th style="width: 50px;">选择</th>
 											<th>名称</th>
+											<th>类型</th>
 										</tr>
 										<tbody id="detailBody1"></tbody>
 									</table>
@@ -128,20 +154,24 @@
 										<li><label class="label_name">名称</label> <input
 											type="text" name="name" id="name" onblur="checkName()"></li>
 										<li><label class="label_name">价钱</label> <input
-											type="text" name="price" id="price"></li>
+											type="text" name="price" id="price" placeholder = "输入数字" maxlength="8"></li>
 										<li><label class="label_name">科室</label> <select
 											name="deptname" id="deptname"
 											style="width: 160px; height: 30px; margin-left: 10px;">
 												<c:forEach items="${params}" var="p" varStatus="s">
-													<option>${p.name}</option>
+													<c:if test="${p.name != '总检室'}">
+														<option>${p.name}</option>
+													</c:if>
 												</c:forEach>
 										</select></li>
 									</ul>
 									<label class="label_name">选择细项</label>
+									<label class="hint1">*请选择与科室匹配的细项</label>
 									<table class="checkList">
 										<tr>
 											<th style="width: 50px;">选择</th>
 											<th>名称</th>
+											<th>类型</th>
 										</tr>
 										<tbody id="detailBody"></tbody>
 									</table>
@@ -226,16 +256,17 @@ var state;
 var numCheck = /^[1-9]d*.d*|0.d*[1-9]d*$/;
 var numCheck1 = /^[0-9]*$/;
 
-function createDetail(detail_id,detail_name){
+function createDetail(detail_id,detail_name,type){
 	var detail = new Object();
 	detail.id = detail_id;
 	detail.name = detail_name;
+	detail.type = type;
 	return detail;
 }
 
 $(document).ready(function(){
 	<c:forEach items="${details}" var = "d" >
-		var detail = createDetail("${d.detail_id}","${d.name}");
+		var detail = createDetail("${d.detail_id}","${d.name}","${d.type}");
 		detailList.push(detail);
 	</c:forEach>
 });
@@ -326,6 +357,40 @@ function jump(){
 		show();
 		$("#current").text(current+1);
 	}
+}
+
+function changeCheck(){
+	var deptname;
+	if(state=="add"){
+		deptname = $("#deptname1").val();
+	}else{
+		deptname = $("#deptname").val();
+	}
+	
+	if(deptname == "常规检查室"){
+		for(var i=0;i < detailList.length;i++){
+			if(detailList[i].type != "普通"&&idArray.indexOf(detailList[i].id) >= 0){
+				return false;
+			}
+		}
+	}
+	
+	if(deptname == "彩超室"){
+		for(var i=0;i < detailList.length;i++){
+			if(detailList[i].type != "彩超"&&idArray.indexOf(detailList[i].id) >= 0){
+				return false;
+			}
+		}
+	}
+	
+	if(deptname == "检验室"){
+		for(var i=0;i < detailList.length;i++){
+			if(detailList[i].type != "检验"&&idArray.indexOf(detailList[i].id) >= 0){
+				return false;
+			}
+		}
+	}
+	
 }
 </script>
 <!-- 查 -->
@@ -462,6 +527,7 @@ function show(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(detailList[i].name);
+		var td3=$("<td></td>").text(detailList[i].type);
 		
 		var checkbox=$("<input type='checkbox' value='"+detailList[i].id+"'/>");
 		
@@ -472,7 +538,7 @@ function show(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#detailBody").append(tr);
 	}
@@ -559,6 +625,16 @@ function change(e){
 					 });
 					return false;
 			}
+
+			if(changeCheck() == false){
+				 layer.alert('选择的细项与科室不匹配!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}
+			
 			$.ajax({
 	    		type:"POST",
 	    		dataType:"text",
@@ -596,6 +672,7 @@ function show1(){
 		
 		var td1=$("<td></td>");
 		var td2=$("<td></td>").text(detailList[i].name);
+		var td3=$("<td></td>").text(detailList[i].type);
 		
 		var checkbox=$("<input type='checkbox' value='"+detailList[i].id+"'/>");
 		
@@ -606,7 +683,7 @@ function show1(){
 		var tr=$("<tr></tr>");
 		
 		$(td1).append(checkbox);  
-		$(tr).append(td1,td2); 
+		$(tr).append(td1,td2,td3); 
 		
 		$("#detailBody1").append(tr);
 	}
@@ -667,7 +744,7 @@ $('#add_butn').on('click', function(){
 		btn:['提交','取消'],
 		yes: function(index, layero){	
 			save();
-			
+
 			if($('#name1').val()==""){
 				 layer.alert('名称不能为空!',{
 		              title: '提示框',								
@@ -694,7 +771,16 @@ $('#add_butn').on('click', function(){
 					return false;
 					
 			}
-			
+
+			if(changeCheck() == false){
+				 layer.alert('选择的细项与科室不匹配!',{
+		              title: '提示框',								
+					  icon:0,			    
+					 });
+					return false;
+					
+			}
+
 			$.ajax({
 	    		type:"POST",
 	    		dataType:"text",

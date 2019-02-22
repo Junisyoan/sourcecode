@@ -58,6 +58,12 @@ public class TbRoleDeptBizImp implements TbRoleDept{
 		return tbRoleDeptMapper.selectroledeptroleid(role_id);
 	}
 
+//	@Override
+//	public boolean updateUser_id(String role_dept_id, String user_id) {
+//		// TODO Auto-generated method stub
+//		return tbRoleDeptMapper.updateUser_id(role_dept_id, user_id);
+//	}
+
  
 
 }

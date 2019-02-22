@@ -23,11 +23,14 @@ import xyz.cymedical.biz.jiang.TbRoleBiz;
 import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
+import xyz.cymedical.biz.yjn.ParamBiz;
+import xyz.cymedical.entity.jiang.Tb_dept;
 import xyz.cymedical.entity.jiang.Tb_role;
 import xyz.cymedical.entity.jiang.Tb_role_dept;
 import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.entity.jun.Company;
 import xyz.cymedical.entity.xin.News;
+import xyz.cymedical.entity.yjn.Parameter;
 import xyz.cymedical.tools.zsc.Encryption;
 
 @Controller
@@ -48,7 +51,7 @@ public class UserManageHandle {
 	@Resource
 	private TbRoleDept tbRoleDept;
 	@Resource
-	private Tb_role tbRole;
+	private Tb_role tbRole; 
 	
 	private List<Tb_role> tbrole;
 	private List<Map<String, Object>> maplisttbrole;
@@ -63,6 +66,13 @@ public class UserManageHandle {
 	
 	@Resource
 	private TbDeptBiz tbDeptBiz;
+	 
+	private  List<Map<String, Object>> tb_deptlist;
+	
+	@Resource
+	private ParamBiz paramBiz;
+	
+	private List<Parameter> parameterlist;
 
 	// 添加后台人员
 
@@ -120,18 +130,20 @@ public class UserManageHandle {
 
 		System.out.println("aaaa....=" + userall);
 		if (null != maplist && maplist.size() > 0) {
-
+			
 			request.setAttribute("maplist", maplist);
 		} else {
 			System.out.println("沒有數據");
 		}
 //
+		 
 		System.out.println("添加人员 进入后台查找部门"); 
 		String sta="在用";
 		maplistdept=tbDeptBiz.select(sta);
 		
 		request.setAttribute("maplistdept", maplistdept);
-		 
+		parameterlist=paramBiz.findAllParam(); 
+		request.setAttribute("parameterlist", parameterlist);
 		//
 		mav.setViewName("WEB-INF/view.jiang/usermanage");
 		return mav;
@@ -222,7 +234,16 @@ public class UserManageHandle {
 		ModelAndView mav = new ModelAndView();
 
 		System.out.println("修改人员信息=" + updetename);
+		
+		/* 查询所有部门  返回角色部门id和部门名字*/  
+		tb_deptlist=tbDeptBiz.selectmapdept();
+		request.setAttribute("tb_deptlist", tb_deptlist); 
+		///根据参数id和参数 
+		parameterlist=paramBiz.findAllParam(); 
+		request.setAttribute("parameterlist", parameterlist);
+		
 		request.setAttribute("updetename", updetename);
+		 
 		mav.setViewName("WEB-INF/view.jiang/updeteuser");
 		return mav;
 

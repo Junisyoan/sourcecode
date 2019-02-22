@@ -2,6 +2,7 @@ package xyz.cymedical.mapper.jiang;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import xyz.cymedical.entity.jiang.Tb_role_dept;
@@ -11,6 +12,8 @@ import xyz.cymedical.entity.jiang.Tb_user;
 @Repository
 public interface TbRoleDeptMapper {
 
+//	public boolean updateUser_id(@Param("rdid")String role_dept_id,@Param("uid")String user_id);
+	
 	public List<Tb_role_dept>  findroledeptid(int role_dept_id);
 	
 	public List<Tb_role_dept>  selectroledeptid(int dept_id);
