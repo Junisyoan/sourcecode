@@ -175,8 +175,14 @@ $('#Add_Product_btn').on('click', function(){
     })
 });
 //修改角色
-function updect(){
- 
+function updect(a){
+	var a=a||event;
+	var t =a.target || a.srcElement;
+	var id=t.name;
+	
+	 document.getElementById("nameed").value=id;
+	
+	
     layer.open({ 
         type: 1,
         title: '修改角色',
