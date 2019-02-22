@@ -182,7 +182,7 @@ var r_id;
 				
 				var treeObj = $.fn.zTree.getZTreeObj("unallot");
 				treeObj.reAsyncChildNodes(null, "refresh");
-// 				alert(data);
+				alert(data);
 			},
 			error:function(data){ 
 				alert("添加异常");
