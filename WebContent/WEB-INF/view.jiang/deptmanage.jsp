@@ -69,6 +69,9 @@
     </div>
     </div>
     </div>
+        <div class="page-content">
+<div class="gys_style">
+<div class="Manager_style">
 <table id="test" class="table table-striped table-bordered" style="60%">   
 <thead>
  
@@ -93,6 +96,9 @@
 </tbody>
 
 </table>
+</div>
+</div>
+</div>
 </body>
 
  

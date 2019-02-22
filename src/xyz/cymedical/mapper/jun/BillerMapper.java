@@ -17,6 +17,7 @@ import xyz.cymedical.entity.jun.Biller;
 @Repository
 public interface BillerMapper {
 	
+	public Biller query(int bid);
 	
 	/**
 	 * 医院查询账单
@@ -82,11 +83,7 @@ public interface BillerMapper {
 	 * @param bstate	是否结算
 	 * @param batch	批次
 	 * @param price 总金额
-	 * @return	是否成功
+	 * @return	账单实体
 	 */
-	public boolean insertBiller(
-			@Param("gid")int gid,
-			@Param("bstate")String bstate, 
-			@Param("batch")String batch,
-			@Param("price")float price);
+	public int insertBiller(Biller biller);
 }

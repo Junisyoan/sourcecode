@@ -25,8 +25,10 @@ public class BillerBizImpl extends BaseImpl implements BillerBiz {
 	private BillerMapper billerMapper;
 	
 	@Override
-	public boolean insertBiller(int gid, String bstate, String batch,float price) {
-		return billerMapper.insertBiller(gid, bstate, batch,price);
+	public Biller insertBiller(Biller biller) {
+		int i = billerMapper.insertBiller(biller);
+		System.out.println(biller.getBiller_id());
+		return biller;
 	}
 
 	@Override
@@ -76,6 +78,11 @@ public class BillerBizImpl extends BaseImpl implements BillerBiz {
 	public List<Biller> getReceipt(int bid) {
 		System.out.println("打印发票没写");
 		return null;
+	}
+
+	@Override
+	public Biller query(int bid) {
+		return billerMapper.query(bid);
 	}
 
 }

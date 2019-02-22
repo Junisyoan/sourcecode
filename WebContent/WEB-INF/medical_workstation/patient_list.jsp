@@ -149,13 +149,12 @@
 <script type="text/javascript">
 
 function addPatient(){
-	document.getElementById('comboName').value=combo;
-	document.getElementById('name').value=name;
-	document.getElementById('sex').value=sex;
-	document.getElementById('age').value=age;
-	document.getElementById('ID').value=ID;
-	document.getElementById('phone').value=phone;
-	alert('^\d{15}|\d{}18$'.test(ID));
+	var combo = document.getElementById('comboName').value;
+	var name = document.getElementById('name').value;
+	var sex = document.getElementById('sex').value;
+	var age = document.getElementById('age').value;
+	var ID = document.getElementById('ID').value;
+	var phone = document.getElementById('phone').value;
 	if($('#comboName').val()==""){
 		alert('套餐名不能为空');
 		return false;
@@ -168,10 +167,10 @@ function addPatient(){
 	}else if(age<15||age>80){
 		alert('年龄输入错误');
 		return false;
-	}else if('^\d{15}|\d{}18$'.test(ID)){
+	}else if(!/^\d{15}|\d{}18$/.test(ID)){
 		alert("身份证错误");
 		return false;
-	}else if('^1[34578]\d{9}$'.test(phone)){
+	}else if(/^1[34578]\d{9}$/.test(phone)){
 		alert('手机号码不正确');
 		return false;
 	}else{
@@ -183,6 +182,7 @@ function addPatient(){
 			success:function(ret){
 				if(ret=="1"){
 					alert("添加成功");
+					location.href="<%=path%>nurse/getList.handle";
 				}else if(ret=="-1"){
 					alert('套餐名不存在');
 				}else if(ret=="-2"){
@@ -194,7 +194,6 @@ function addPatient(){
 				}else if(ret=="-5"){
 					alert('身份证号码与文档中的人员重复');
 				}
-				location.href="<%=path%>nurse/getList.handle";
 			},
 			error:function(){
 				alert('服务器无响应');
@@ -202,11 +201,6 @@ function addPatient(){
 		
 		});
 	}
-	
-	
-	
-	
-	
 }
 
 

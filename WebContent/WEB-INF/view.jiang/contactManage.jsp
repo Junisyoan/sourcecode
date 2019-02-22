@@ -10,11 +10,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" /> 
-  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-  <link rel="stylesheet" href="<%=path %>css/style.css"/>
+  <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
+  <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
+<script src="<%=path%>js/jquery.validate.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
+  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
 <title>公司信息管理</title>
   
 <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -56,6 +63,11 @@
     </div>
     </div>
     </div>
+    
+    
+    <div class="page-content">
+<div class="gys_style">
+<div class="Manager_style">
 <table id="test" class="table table-striped table-bordered" style="60%">   
 <thead>
  
@@ -88,6 +100,10 @@
 </tbody>
 
 </table>
+</div>
+</div>
+</div>
+
 <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){

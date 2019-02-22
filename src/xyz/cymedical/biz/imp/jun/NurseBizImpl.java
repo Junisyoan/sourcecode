@@ -131,7 +131,7 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 			
 			for (int i = 0; i < pList.size(); i++) {
 				Patient p=pList.get(i);
-				System.out.println("病人="+p);
+				System.out.println("导入病人"+i+"="+p);
 				for (int j = 0; j < prolist.size(); j++) {
 					Project pro=prolist.get(j);
 					
@@ -141,7 +141,6 @@ public class NurseBizImpl extends BaseImpl implements NurseBiz {
 						Detail d = dlist.get(k);
 						nurseMapper.insertbrief(d.getDetail_id(),p.getID(),time,pro.getProject_id());
 					}
-					
 					
 					System.out.println("pro="+pro);
 					nurseMapper.insertPaitentProject(p.getID(),pro.getProject_id());

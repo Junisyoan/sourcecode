@@ -39,6 +39,7 @@ import xyz.cymedical.biz.jun.CompanyFileBiz;
 import xyz.cymedical.biz.jun.GroupBiz;
 import xyz.cymedical.biz.jun.InvalideBiz;
 import xyz.cymedical.biz.jun.NurseBiz;
+import xyz.cymedical.biz.jun.PatientTmpBiz;
 import xyz.cymedical.biz.xin.DoctorBiz;
 import xyz.cymedical.biz.zsc.ComboBiz;
 import xyz.cymedical.entity.jiang.Tb_user;
@@ -49,9 +50,11 @@ import xyz.cymedical.entity.jun.Group;
 import xyz.cymedical.entity.jun.Invalide;
 import xyz.cymedical.entity.jun.Nurse;
 import xyz.cymedical.entity.jun.Patient;
+import xyz.cymedical.entity.jun.PatientTmp;
 import xyz.cymedical.entity.xin.Combo;
 import xyz.cymedical.tools.jun.BarCodeTools;
 import xyz.cymedical.tools.jun.ExcelTools;
+import xyz.cymedical.tools.jun.PatientTools;
 import xyz.cymedical.tools.jun.ResponseTools;
 import xyz.cymedical.tools.zsc.Encryption;
 
@@ -95,6 +98,9 @@ public class NurseHandle {
 	
 	@Resource
 	private TbUserBiz userBiz;
+	
+	@Resource
+	private PatientTmpBiz patientTmpBiz;
 	
 	private ModelAndView modelAndView;
 	private CompanyFile companyFile;
@@ -230,7 +236,7 @@ public class NurseHandle {
 		}
 	
 	/*
-	 * 已开单账单再次开单
+	 * 已开单账单再次开单，打印导检单
 	 */
 	@RequestMapping(value="/getCheckPage.handle",method=RequestMethod.GET)
 	public ModelAndView getCheckPage(String bid) {
@@ -289,7 +295,38 @@ public class NurseHandle {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		long cTime = 0;//要体检的时间
 		long nTime = 0;//当前时间
+		Biller biller = billerBiz.query(Integer.parseInt(bid));
+		System.out.println(biller.getHcode());
+
+		List<Patient> patientList =(List<Patient>) request.getServletContext().getAttribute(biller.getHcode());
+		
+		if (patientList==null) {
+			patientList = new ArrayList<>();
+			List<PatientTmp> pt = patientTmpBiz.queryByBillerId(bid);
+			for(int i =0;i<pt.size();i++) {
+				patientList.add(new Patient(
+						-1, 							//病人id
+						-1, 						//公司id
+						-1, 						//套餐id
+						pt.get(i).getName(), 			//名称
+						pt.get(i).getSex(), 			//性别
+						pt.get(i).getAge(), 			//年龄
+						pt.get(i).getID(), 			//身份证
+						"-1", 						//条形码
+						pt.get(i).getPhone(), 			//电话
+						"-1", 						//体检码
+						pt.get(i).getComboName())		//套餐名
+				);
+			}
+			System.out.println(patientList);
+		}
+		
+		
 		try {
+			if (time==null) {
+				strRet="-1";
+				return strRet;
+			}
 			cTime = sdf.parse(time).getTime();
 			nTime = sdf.parse(sdf.format(System.currentTimeMillis())).getTime();
 			System.out.println("体检时间："+cTime);
@@ -301,8 +338,9 @@ public class NurseHandle {
 				//取得文件信息
 				companyFile = companyFileBiz.queryFileByBillerId(bid);
 				
-				//	获取体检人员列表，生成条形码
-				List<Patient> patientList = ExcelTools.getPatientList(companyFile,comboBiz.findCombos());
+				//	生成条形码
+				patientList = PatientTools.fillInfo(patientList, comboBiz.findCombos());
+				
 				System.out.println(patientList);
 				//获得公司存储路径
 				String path = companyFile.getFpath();
@@ -317,7 +355,7 @@ public class NurseHandle {
 				}
 				System.out.println("条形码生成成功");
 				//体检号
-				Object obj=request.getServletContext().getAttribute("CN");
+				Object obj=request.getSession().getServletContext().getAttribute("CN");
 				int cn = 0;
 				if (obj==null) {
 					cn = 1;
@@ -327,7 +365,7 @@ public class NurseHandle {
 					cn++;
 					System.out.println(patient.getCheck_num());
 				}
-				request.getServletContext().setAttribute("CN",cn);
+				request.getSession().getServletContext().setAttribute("CN",cn);
 					System.out.println("准备插入体检人员");
 					//	插入病人
 					List<Patient> pList = patientBiz.insertByBatch(patientList);
@@ -339,8 +377,11 @@ public class NurseHandle {
 								&& nurseBiz.insertPaitentCombo(pList,bid)
 								&& groupBiz.updateGroupCheckTime(sdf.format(cTime), bid)) {
 							//添加至病人项目表以及小结表
+							
 							nurseBiz.insertPaitentProject(pList,time);
 							strRet = "1";
+							request.getServletContext().removeAttribute(biller.getHcode());
+							patientTmpBiz.del(bid);
 						} else {
 							strRet = "0";
 						}
@@ -374,7 +415,11 @@ public class NurseHandle {
 	public String delBiller(String bid,HttpServletResponse response) {
 		System.out.println("删除账单id："+bid);
 		boolean isSuccess = billerBiz.delBiller(bid);
-		
+		if (patientTmpBiz.del(bid)) {
+			System.out.println("删除临时表成功");
+		}else {
+			System.out.println("临时表不存在");
+		}
 		try {
 			if (isSuccess) {
 				response.getWriter().print("1");
@@ -405,7 +450,10 @@ public class NurseHandle {
 	 * 全部生成账单
 	 */
 	@RequestMapping(value="/allOpen.handle",method=RequestMethod.POST)
-	public @ResponseBody String allOpen(HttpServletResponse response,HttpServletRequest request,String fid) {
+	public @ResponseBody String allOpen(
+			HttpServletResponse response,
+			HttpServletRequest request,
+			String fid) {
 		
 		response.setCharacterEncoding("utf-8");
 		//取得文件信息
@@ -423,6 +471,11 @@ public class NurseHandle {
 		@SuppressWarnings("unchecked")
 		//体检人员列表
 		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
+		System.out.println(patientList.hashCode()+"体检人数："+patientList.size());
+		String index = String.valueOf(patientList.hashCode());
+		System.out.println(index);
+		request.getServletContext().setAttribute(index, patientList);
+
 		//获取所有人的套餐数量
 		HashMap<String, Integer> map = new HashMap<>();
 		//基本套餐数量一
@@ -486,9 +539,39 @@ public class NurseHandle {
 			//	获得团检表信息
 			Group group = groupBiz.queryGroupByFileId(Integer.parseInt(fid));
 			System.out.println(group);
-			isSuccess = billerBiz.insertBiller(group.getGroup_id(), "未结算", strBatch,price);
-			if (isSuccess) {
-				System.out.println("生成记账表");
+			Biller biller = new Biller();
+			biller.setGroup_id(group.getGroup_id());
+			biller.setBstate("未结算");
+			biller.setBatch(strBatch);
+			biller.setTotalMoney(price);
+			biller.setHcode(index);
+			biller = billerBiz.insertBiller(biller);
+			if (biller.getBiller_id()>0) {
+				System.out.println("生成记账表，插入临时表");
+//				new Thread(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//						System.out.println(patientTmpBiz.insert(patientList));
+//					}
+//				});
+				List<PatientTmp> tmps = new ArrayList<>();
+				for(Patient p: patientList) {
+					tmps.add(
+						new PatientTmp(
+						-1, 
+						biller.getBiller_id(),
+						p.getName(), 
+						p.getAge(), 
+						p.getID(), 
+						p.getPhone(), 
+						p.getComboName(), 
+						index, 
+						p.getSex()
+						)
+					);
+				}
+				System.out.println(patientTmpBiz.insert(tmps));
 				strRet = "1";
 //				response.getWriter().print("1");
 			}else {
@@ -539,27 +622,38 @@ public class NurseHandle {
 			String id) {
 		List<Patient> patientList = (List<Patient>)request.getSession().getAttribute("patientList");
 		System.out.println("当前操作人员列表："+patientList);
+		System.out.println(id);
 		System.out.println("修改人员："+patient);
 		response.setCharacterEncoding("utf-8");
 		String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 		+ request.getContextPath() + "/";
 		boolean isSuccess =false;
+		Patient pa=null;
 		try {
 			//比对身份证是否存在
-			if (patientBiz.queryID(patient.getID())!=null) {
-				response.getWriter().print(ResponseTools.returnMsgAndRedirect("身份证存在", "<%=path%>nurse/getList.handle"));
-				isSuccess=false;
+			pa = patientBiz.queryID(patient.getID());
+			if (pa!=null) {
+				if (!pa.getName().equals(patient.getName())) {
+					response.getWriter().print(ResponseTools.returnMsgAndRedirect("身份证存在", "<%=path%>nurse/getList.handle"));
+					isSuccess=false;
+				}
 			//比对手机号码是否存在
-			} else if(patientBiz.queryPhone(patient.getPhone())!=null){
-				response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码存在", path+"nurse/getList.handle"));
-				isSuccess=false;
+			} else if((pa=patientBiz.queryPhone(patient.getPhone()))!=null){
+				if (!pa.getName().equals(patient.getName())) {
+					response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码存在", path+"nurse/getList.handle"));
+					isSuccess=false;
+				}
 			//比对套餐是否存在
 			} else if(comboBiz.queryComboByName(patient.getComboName())){
 				response.getWriter().print(ResponseTools.returnMsgAndRedirect("套餐不存在", path+"nurse/getList.handle"));
 				isSuccess=false;
 			}else {
 				//比对其他人
-				for (Patient p : patientList) {
+				for (int i =0;i<patientList.size();i++) {
+					Patient p = patientList.get(i);
+					if (i==Integer.parseInt(id)-1) {
+						continue;
+					}
 					if (p.getPhone().equals(patient.getPhone())) {
 						response.getWriter().print(ResponseTools.returnMsgAndRedirect("手机号码重复", path+"nurse/getList.handle"));
 						isSuccess=false;
@@ -604,7 +698,7 @@ public class NurseHandle {
 		System.out.println("当前操作人员列表："+patientList);
 		//先查询数据库的套餐
 		isExsit=comboBiz.queryComboByName(patient.getComboName());
-		if (!isExsit) {
+		if (isExsit) {
 			return "-1";
 		}
 		//比对身份证是否存在
@@ -769,9 +863,10 @@ public class NurseHandle {
 		System.out.println("文件审核不通过："+fid);
 		@SuppressWarnings("unchecked")
 		List<Patient> patients =(List<Patient> ) request.getSession().getAttribute("patientList");
+		System.out.println(patients);
 		for (Iterator<Patient> iterator = patients.iterator(); iterator.hasNext();) {
 			Patient patient = (Patient) iterator.next();
-			if (patient.getCheck_num()!=null||!patient.getCheck_num().equals("")) {
+			if (patient.getCheck_num()!=null&&!patient.getCheck_num().equals("")) {
 				Invalide invalide = new Invalide();
 				invalide.setFile_id(Integer.valueOf(fid));
 				invalide.setName(patient.getName());
@@ -857,24 +952,55 @@ public class NurseHandle {
 				isExsit = comboBiz.queryComboByName(patient.getComboName());
 				System.out.println(patient.getComboName());
 				if (isExsit) {
-					strState.append("套餐不存在-");
+					strState.append("套餐不存在 ");
 				}
 				p=patientBiz.queryID(patient.getID());
-				if (p!=null) {
+				if(patient.getID().length()!=18&&patient.getID().length()!=15) {
+					strState.append("身份证长度错误 ");
+				}else if (p!=null) {
 					isExsit = patient.getName().equals(p.getName());
 					if (!isExsit) {
-						strState.append("身份证重复-");
+						strState.append("身份证重复 ");
 					}
 				}
 				p=patientBiz.queryPhone(patient.getPhone());
-				if (p!=null) {
+				if (patient.getPhone().length()!=11) {
+					strState.append("手机号码位数错误 ");
+				}else if (p!=null) {
 					isExsit = patient.getName().equals(p.getName());
 					if (!isExsit) {
-						strState.append("手机号码重复-");
+						strState.append("手机号码重复 ");
 					}
 				}
 				patient.setCheck_num(strState.toString());
 			}
+			System.out.println(patientList);
+			//比对其他人的
+			for(int i =0;i<patientList.size();i++) {
+				strState.setLength(0);//清空
+				isExsit=false;
+				for(int j = 0;j<patientList.size();j++) {
+					if(i==j) {
+						continue;
+					}
+					if (patientList.get(i).getID().equals(patientList.get(j).getID())) {
+						strState.append("身份证与文档重复 ");
+						isExsit=true;
+					}
+					if (patientList.get(i).getPhone().equals(patientList.get(j).getPhone())) {
+						strState.append("手机号与文档重复 ");
+						isExsit=true;
+					}
+					if (isExsit) {
+						break;
+					}
+				}
+				if (isExsit) {
+					strState.append(patientList.get(i).getCheck_num());
+					patientList.get(i).setCheck_num(strState.toString());
+				}
+			}
+			
 			System.out.println("查询结束");
 			
 			request.getSession().setAttribute("fid", fid);

@@ -11,6 +11,10 @@ import xyz.cymedical.entity.jun.Biller;
 *	类说明：记账表相关操作
 */
 public interface BillerBiz {
+	
+	
+	public Biller query(int bid);
+	
 	/**
 	 * 打印发票
 	 * @param bid
@@ -78,5 +82,5 @@ public interface BillerBiz {
 	 * @param price 总金额
 	 * @return	是否成功
 	 */
-	public boolean insertBiller(int gid,String bstate, String batch, float price);
+	public Biller insertBiller(Biller biller);
 }

@@ -8,21 +8,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script src="<%=path%>js/jquery.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.min.js"></script>
-  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
-  <script src="<%=path %>assets/js/jquery.min.js"></script>
-  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+<%--   <script src="<%=path%>js/jquery.min.js"></script> --%>
+<%--   <script src="<%=path%>js/jquery.validate.min.js"></script> --%>
+<%--   <script src="<%=path%>js/jquery.validate.cn.js"></script>   --%>
+<%--   <script src="<%=path %>assets/js/jquery.min.js"></script> --%>
+<%--   <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>   --%>
+<%--   <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" /> --%>
+<%--   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" /> --%>
+<%--   <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" /> --%>
+<%--   <link rel="stylesheet" href="<%=path %>css/style.css"/> --%>
+<%--   <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css"> --%>
+<%--   <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"> --%>
+<%--   <script src="<%=path %>js2/jquery-1.8.3.min.js"></script> --%>
+<%--   <script src="<%=path %>js2/datatables.bootstrap.min.js"></script> --%>
+<%--   <script src="<%=path %>js2/jquery.dataTables.min.js"></script> --%>
   <link href="<%=path %>assets/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="<%=path %>assets/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="<%=path %>assets/css/ace.min.css" />
-  <link rel="stylesheet" href="<%=path %>css/style.css"/>
   <link href="<%=path %>js2/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="<%=path %>js2/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
-  <script src="<%=path %>js2/jquery-1.8.3.min.js"></script>
-  <script src="<%=path %>js2/datatables.bootstrap.min.js"></script>
-  <script src="<%=path %>js2/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="<%=path%>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<%=path%>css/style.css" />
+<script src="<%=path%>js/jquery-1.8.3.min.js"></script>
+<script src="<%=path %>js/jquery.dataTables.min.js"></script>
+<script src="<%=path %>js/datatables.bootstrap.min.js"></script>
+<script src="<%=path%>js/jquery.validate.min.js"></script>
+  <script src="<%=path%>js/jquery.validate.cn.js"></script>  
+  <script src="<%=path %>assets/layer/layer.js" type="text/javascript"></script>  
     <title>套餐查询</title>
   <style type="text/css">
   	#aFrom input {
@@ -84,7 +96,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price1" placeholder = "输入0代表所选项目总价">
+     				<input type = "text" name="price" id="price1" placeholder = "输入0代表所选项目总价" maxlength="10">
      			</li>
       		</ul>  
      			<label class="label_name">选择项目</label>
@@ -127,7 +139,7 @@
      			</li>
      			<li>
      				<label class="label_name">价钱</label>
-     				<input type = "text" name="price" id="price" placeholder = "输入0代表所选项目总价">
+     				<input type = "text" name="price" id="price" placeholder = "输入0代表所选项目总价" maxlength="10">
      			</li>
       		</ul> 
       			<label class="label_name">选择项目</label>
