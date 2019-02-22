@@ -153,16 +153,17 @@ public class PowerManageHandle {
 			tmenu=tbMenuBiz.selectmenuidwheresup(tb_menu);
 			System.out.println("今晚菜单上级="+tmenu);
 			int superior=tmenu.getSuperior();
+			
 			if(superior==0) {
-				
+			 
 			}else { 
 				
 				//查找有没有上一级  如果有上级就不能再添加上级的role power表  如果没有上级 
 				tb_menu.setMenu_id(superior);
 				tmenu=tbMenuBiz.selectmenuidwheresup(tb_menu);
-				if(tmenu!=null) {
+				if(tmenu==null) {
 					
-				} 
+				
 				
 //				int powerid=tb_power.getPower_id();
 				//找到上级菜单对应的权限
@@ -178,11 +179,10 @@ public class PowerManageHandle {
 					tb_role_power.setPower_id(superior);
 					 rrt=tbRolePower.addtowid(tb_role_power);
 				}
-				
+				} 
 				
 				//上级存在 配本级？？？
-				
-					
+
 			}
 			
 			
@@ -199,6 +199,12 @@ public class PowerManageHandle {
 		
 			return mav;
  
+		}
+		private void addMainMenu() {
+			
+		}
+		private void addSubMenu() {
+			
 		}
 		//修改第一步
 		@RequestMapping(value = "/updete1.handle", method = RequestMethod.POST)
