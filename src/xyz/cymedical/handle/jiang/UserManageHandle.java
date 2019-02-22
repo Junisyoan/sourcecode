@@ -136,6 +136,7 @@ public class UserManageHandle {
 			System.out.println("沒有數據");
 		}
 //
+		 
 		System.out.println("添加人员 进入后台查找部门"); 
 		String sta="在用";
 		maplistdept=tbDeptBiz.select(sta);

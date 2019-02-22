@@ -18,7 +18,8 @@ public class TbRolePowerBiz implements TbRolePower{
 
 	@Override
 	public int addmanage(Tb_role_power tb_role_power) {
-		// TODO Auto-generated method stub
+		System.out.println(tb_role_power);
+		
 		return tbRolePowerMapper.addmanage(tb_role_power);
 	}
 
@@ -43,6 +44,18 @@ public class TbRolePowerBiz implements TbRolePower{
 	public int delectrprid(Tb_role_power tb_role_power) {
 		// TODO Auto-generated method stub
 		return tbRolePowerMapper.delectrprid(tb_role_power);
+	}
+
+	@Override
+	public Tb_role_power selecttowid(Tb_role_power tb_role_power) {
+		// TODO Auto-generated method stub
+		return tbRolePowerMapper.selecttowid(tb_role_power);
+	}
+
+	@Override
+	public int addtowid(Tb_role_power tb_role_power) {
+		// TODO Auto-generated method stub
+		return tbRolePowerMapper.addtowid(tb_role_power);
 	}
 
  

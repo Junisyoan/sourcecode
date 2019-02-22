@@ -33,4 +33,6 @@ public interface TbMenuMapper {
 	public int insert(Tb_role_power tb_role_power);
 	
 	public int del(Tb_role_power tb_role_power);
+	
+	public Tb_menu selectmenuidwheresup(Tb_menu tb_menu);//根据id查上级
 }

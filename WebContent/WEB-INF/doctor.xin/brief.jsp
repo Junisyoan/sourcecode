@@ -60,6 +60,7 @@
                     var img = document.getElementById("xmTanImg");
                     img.src = e.target.result;
                     //或者 img.src = this.result;  //e.target == this
+                    //e.target.result就是src；其实这个方法就是把你上传的图片转化成base64进行在网络上流通，在控制台可看出
                 }
 
                 reader.readAsDataURL(file)
