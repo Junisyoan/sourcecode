@@ -1,7 +1,9 @@
 package xyz.cymedical.entity.jiang;
 
+import org.springframework.stereotype.Component;
 
 //菜单表
+@Component
 public class Tb_menu {
 
 	private int menu_id;//菜单表id

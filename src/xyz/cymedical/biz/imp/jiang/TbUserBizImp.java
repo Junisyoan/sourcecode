@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import xyz.cymedical.biz.jiang.TbRoleDept;
 import xyz.cymedical.biz.jiang.TbUserBiz;
 import xyz.cymedical.entity.jiang.Tb_user;
 import xyz.cymedical.mapper.jiang.TbUserMapper;
@@ -16,6 +17,9 @@ public class TbUserBizImp implements TbUserBiz{
 
 	@Resource
 	TbUserMapper tbUserMapper;
+	
+	@Resource
+	TbRoleDept tbRoleDept;
 	
 	@Override
 	public List<Tb_user> findUser(Tb_user user) {
@@ -33,6 +37,11 @@ public class TbUserBizImp implements TbUserBiz{
 	@Override//添加
 	public int addUser(Tb_user user) {
 		return  tbUserMapper.addUser(user); 
+		
+//		int num = tbUserMapper.addUser(user);
+//		tbRoleDept.updateUser_id(user, user_id)
+		
+		
 	}
 	@Override//删除
 	public int deleteUser(int user_id) {

@@ -8,6 +8,8 @@ import xyz.cymedical.entity.jiang.Tb_role_power;
 
 public interface TbRoleDept {
 	
+//	public boolean updateUser_id(String role_dept_id,String user_id);
+	//************************************************
 	public List<Tb_role_dept>  findroledeptid(int role_dept_id);
 	
 	public List<Tb_role_dept>  selectroledeptid(int dept_id);

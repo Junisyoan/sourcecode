@@ -33,6 +33,15 @@
  	 
  	</delete>
  	
+	<select id="selecttowid" parameterType="xyz.cymedical.entity.jiang.Tb_role_power" 
+ 	resultType="xyz.cymedical.entity.jiang.Tb_role_power">
+ 	select * from tb_role_power where role_id=#{role_id} and power_id=#{power_id}
  	
+ 	</select>
+ 	
+ 	<insert id="addtowid" parameterType="xyz.cymedical.entity.jiang.Tb_role_power"  >
+ 	
+ 	insert into tb_role_power (power_id,role_id) values(#{power_id},#{role_id})
+ 	</insert>
  
 </mapper>

@@ -355,7 +355,7 @@ public class NurseHandle {
 				}
 				System.out.println("条形码生成成功");
 				//体检号
-				Object obj=request.getServletContext().getAttribute("CN");
+				Object obj=request.getSession().getServletContext().getAttribute("CN");
 				int cn = 0;
 				if (obj==null) {
 					cn = 1;
@@ -365,7 +365,7 @@ public class NurseHandle {
 					cn++;
 					System.out.println(patient.getCheck_num());
 				}
-				request.getServletContext().setAttribute("CN",cn);
+				request.getSession().getServletContext().setAttribute("CN",cn);
 					System.out.println("准备插入体检人员");
 					//	插入病人
 					List<Patient> pList = patientBiz.insertByBatch(patientList);

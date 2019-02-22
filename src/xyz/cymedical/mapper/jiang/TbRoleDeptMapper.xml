@@ -7,6 +7,10 @@
 
 <!-- 使用嵌套查询，当查出一条员工数据时，也关联查询出对应的部门信息 -->
 
+<!-- 	<update id="updateUser_id"> -->
+<!-- 		update tb_role_dept set user_id = #{uid} where role_dept_id = #{rdid} -->
+<!-- 	</update> -->
+
 	<select id="findroledeptid"   parameterType="xyz.cymedical.entity.jiang.Tb_role_dept"
 	resultType="xyz.cymedical.entity.jiang.Tb_role_dept">
 		select * from tb_role_dept where role_dept_id = #{role_dept_id}  
