@@ -114,6 +114,13 @@ public class DeptManageHandle {
 		
 		
 		if(ret==1) {
+			String sta="在用";
+			maplist=tbDeptBiz.select(sta);
+			
+			request.setAttribute("maplist", maplist);
+			 
+			maprolealllist=	tbRoleBiz.selectroleall();
+			request.setAttribute("maprolealllist", maprolealllist);
 			
 			mav.setViewName("WEB-INF/view.jiang/deptmanage");
 		}
