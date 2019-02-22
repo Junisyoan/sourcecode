@@ -72,17 +72,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>13505140602</td>
-							<td>备注信息</td>
-							<td>备注信息</td>
-							<td>备注信息</td>
-							<td>
-								<a href="<%=path %>doctor/Detail.handle?projectname=血常规 &patientid=1&projectid=1"><button type="button" class="btn btn-info Product_Details">检查</button></a>
-								<button type="button" class="btn btn-primary">修改</button>
-								<button type="button" class="btn btn-warning">删除</button></td>
-						</tr>
 
 						<c:forEach items="${prolist }" var="p" varStatus="s">
 							<tr>
