@@ -105,19 +105,7 @@ public class DoctorHandle {
 	
 	// 查询一维码对应病人的导检单
 	@RequestMapping(value = "/findProject.handle")
-	public ModelAndView index(HttpServletRequest req,String onecode) {
-
-//	List<Patient> pList=new ArrayList<Patient>();
-//		
-//		pList.add(new Patient(1,1,1,"兰斯","男","18","1","1","1","1","团体高管A体检套餐"));
-//		
-//		pList.add(new Patient(2,1,1,"兰斯","男","18","1","1","1","1","团体高管A体检套餐"));
-//		
-//		String time = "2018-08-08";
-//		nurseBiz.insertPaitentProject(pList,time);
-//		
-		
-		
+	public ModelAndView index(HttpServletRequest req,String onecode) {	
 		
 		this.onecode=onecode;
 		

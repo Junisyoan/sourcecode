@@ -74,25 +74,6 @@ public class ChiefDoctorHandle {
 		return mav;
 	}
 
-//	// 根据选中项目跳转至对应小结
-//	@RequestMapping(value = "/Detail.handle")
-//	public ModelAndView getDetail(String patientid, String projectid, String projectname,String keshi,String code) {
-//
-//		System.out.println("getDetail....");
-//
-//		dlist=doctorbiz.findMyDetail(Integer.valueOf(projectid),Integer.valueOf(patientid));
-//		
-//		System.out.println("dlist="+dlist);
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("projectname", projectname);
-//		mav.addObject("keshi", keshi);
-//		mav.addObject("dlist", dlist);
-//		mav.addObject("code", code);
-//
-//		mav.setViewName("WEB-INF/doctor.xin/brief");
-//		return mav;
-//	}
 	
 	// 跳转至总结
 	@RequestMapping(value = "/tosummarize.handle")
