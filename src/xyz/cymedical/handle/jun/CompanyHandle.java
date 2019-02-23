@@ -524,13 +524,13 @@ public class CompanyHandle {
 					strRet="1";
 //					response.getWriter().print("1");
 					isSuccess = true;
+				}else {
+					strRet="0";
 				}
+			}else {
+				strRet="-1";
 			}
 			//0失败
-			if (!isSuccess) {
-//				response.getWriter().print("0");
-				strRet="0";
-			}
 		return strRet;
 	}
 	
