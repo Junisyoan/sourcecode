@@ -88,6 +88,10 @@ public class RoleManageHandle {
 		 System.out.println("ret="+ret);
 		 if(ret==1) {
 			 System.out.println("添加成功"); 
+			 roleall=tbRoleBiz.selectRole();
+				
+				request.setAttribute("roleall", roleall);
+				 
 			 
 		 }else {
 			 System.out.println("添加失败");
@@ -163,6 +167,10 @@ public class RoleManageHandle {
 			
 			if(ret==1) {
 				System.out.println("删除成功");
+				roleall=tbRoleBiz.selectRole();
+				
+				request.setAttribute("roleall", roleall);
+				 
 			}else {
 				System.out.println("删除失败");
 			}
@@ -185,6 +193,11 @@ public class RoleManageHandle {
 					System.out.println("user_id"+role_id);
 					int ret=tbRoleBiz.upRole(role_id, name);
 					if(ret==1) {
+//						mav.setViewName("WEB-INF/view.jiang/rolemanage");
+						roleall=tbRoleBiz.selectRole();
+						
+						request.setAttribute("roleall", roleall);
+						
 						mav.setViewName("WEB-INF/view.jiang/rolemanage");
 						
 					}else {

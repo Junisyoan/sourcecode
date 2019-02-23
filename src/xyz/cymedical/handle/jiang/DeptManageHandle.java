@@ -114,6 +114,13 @@ public class DeptManageHandle {
 		
 		
 		if(ret==1) {
+			String sta="在用";
+			maplist=tbDeptBiz.select(sta);
+			
+			request.setAttribute("maplist", maplist);
+			 
+			maprolealllist=	tbRoleBiz.selectroleall();
+			request.setAttribute("maprolealllist", maprolealllist);
 			
 			mav.setViewName("WEB-INF/view.jiang/deptmanage");
 		}
@@ -145,7 +152,17 @@ public class DeptManageHandle {
 				int  ret=tbDeptBiz.upDept(tb_dept);
 				
 				 	if(ret==1) {
-				 		
+				 		String sta="在用";
+				 		maplist=tbDeptBiz.select(sta);
+						
+						request.setAttribute("maplist", maplist);
+						 
+						/*
+						 * 查詢所有角色
+						 * 
+						 */
+						maprolealllist=	tbRoleBiz.selectroleall();
+						request.setAttribute("maprolealllist", maprolealllist);
 				 		mav.setViewName("WEB-INF/view.jiang/deptmanage");
 				 	}
 

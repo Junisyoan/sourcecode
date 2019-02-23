@@ -180,6 +180,9 @@ public class MenuManageHandle {
 			int ret=tbMenuBiz.upMenu(tb_menu);
 			  if(ret==1) {
 			System.out.println("修改成功");
+			tbmenuall=tbMenuBiz.selectMenu();
+			request.setAttribute("tbmenuall", tbmenuall);
+	  
 			mav.setViewName("WEB-INF/view.jiang/menumanage");
 			  }else {
 				  
