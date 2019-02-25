@@ -15,7 +15,7 @@
 		 where 
 		a.patient_id=g.patient_id and (a.`code`=#{0} or a.phone=#{0}) and a.patient_id=d.patient_id and d.project_id=c.project_id and
 		g.combo_id=b.combo_id and c.project_id=b.project_id and c.param_id=e.param_id and a.company_id=h.company_id)z 
-		on s.user_id=z.uid  order by z.name
+		on s.user_id=z.uid  order by z.name 
 	</select>
 
 	<select id="findMyDetail" parameterType="java.lang.Integer"
