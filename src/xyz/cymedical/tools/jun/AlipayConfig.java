@@ -27,10 +27,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtqXPnTU4+vXNK3y/dC0bh4/heJXqq6Z4DgTze6jpcCmYkAjm1Aul1LBwvWNsGZU+00zU9D57Tft4AOTEPkKX8g7vz3NPvGgiP7lPqev+UVFlFMCivQ9N9iiSTo93FWpqokb9VL3S3TE8i5Pz6hySeaYh48jjfiae3VcbO8eNFes6bhFZ1TxIpmGVu3sfmkn2C8xoWwLvhkuqvFFDW3qH7d1ZhtQg9RZjZU0Gw15BxJNKvkoVDwkdLyhfRs1VYuYzUHD5oTfEGlfNwRmR8T2EsFsKACVYxrY1quXKFhZjbrY8LlODur1Oln1JoLqtqJ6TH1ExNtJVdxbf5V3GHr6b5wIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://localhost:8080/cymedical/company/notify.handle";
+	public static String notify_url = "http://www.cyunits.xyz:8080/cymedical/company/notify.handle";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://localhost:8080/cymedical/return_url.jsp";
+	public static String return_url = "http://www.cyunits.xyz:8080/cymedical/return_url.jsp";
 	
 	// 签名方式
 	public static String sign_type = "RSA2";

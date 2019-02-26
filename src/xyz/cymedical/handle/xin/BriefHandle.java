@@ -189,14 +189,14 @@ public class BriefHandle {
 	                    // 自定义的文件名称
 	                    String trueFileName=String.valueOf(System.currentTimeMillis())+fileName;
 	                    
-	                    String uploadpath=realPath+"\\upload";
+	                    String uploadpath=realPath+"upload";
 	                    if(!new File(uploadpath).exists()) {
 	                    	new File(uploadpath).mkdirs();
 	                    }
 	                    
 	                    
 	                    // 设置存放图片文件的路径
-	                    path=realPath+"\\upload\\"+trueFileName;
+	                    path=uploadpath+File.separator+trueFileName;
 	                    System.out.println("存放图片文件的路径:"+path);
 	                    
 	                    

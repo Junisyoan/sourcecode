@@ -63,19 +63,19 @@ input {
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
-				<h4 style="margin-left: 280px;">
+				<h4 style="margin-left: 90px;">
 					团&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;体: <input type="text"
 						value="${p.n2}" disabled="disabled"
 						style="width: 410px; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</h4>
-				<h4 style="margin-left: 280px;">
+				<h4 style="margin-left: 90px;">
 					团体序号: <input type="text" value="${p.company_id}"
 						disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 					体检号码： <input type="text" value="${p.check_num}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</h4>
-				<h4 style="margin-left: 280px;">
+				<h4 style="margin-left: 90px;">
 					姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名: <input type="text"
 						value="${p.n1}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
@@ -83,7 +83,7 @@ input {
 						value="${p.sex}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</h4>
-				<h4 style="margin-left: 280px;">
+				<h4 style="margin-left: 90px;">
 					年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄: <input type="text"
 						value="${p.age}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
@@ -91,7 +91,7 @@ input {
 						value="${p.phone}" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 				</h4>
-				<h4 style="margin-left: 330px;">
+				<h4 style="margin-left: 140px;">
 					打印时间：<input type="text" value="<%=datetime%>" disabled="disabled"
 						style="border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: solid; text-align: center;" />
 					<img
@@ -116,10 +116,10 @@ input {
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
-				<p>&nbsp;</p>
 				<p style="line-height: 1.6;">&nbsp;</p>
 				<h4 align="center">1</h4>
 				<p>&nbsp;</p>
+				<div class="PageNext"></div>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
 				<div style="float: left; margin-left: 75px;">
@@ -163,10 +163,10 @@ input {
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
-				<p>&nbsp;</p>
 				<p style="line-height: 2.2;">&nbsp;</p>
 				<h4 align="center">2</h4>
 				<p>&nbsp;</p>
+				<div class="PageNext"></div>
 			</form>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
 				<div style="float: left; margin-left: 75px;">
@@ -344,6 +344,8 @@ input {
 						</c:if>
 					</c:forEach>
 					<h4 align="center">6</h4>
+					<p>&nbsp;</p>
+				    <div class="PageNext"></div>
 				</div>
 			</form>
 		</c:if>
