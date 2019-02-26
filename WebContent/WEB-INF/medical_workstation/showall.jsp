@@ -106,8 +106,8 @@ input {
 				<p style="line-height: 1.6;">&nbsp;</p>
 				<h4 align="center">1</h4>
 				<p>&nbsp;</p>
-				<div class="PageNext"></div>
 			</form>
+				<div class="PageNext"></div>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
 				<div style="float: left; margin-left: 75px;">
 					<h3>健康体检中心</h3>
@@ -153,8 +153,8 @@ input {
 				<p style="line-height: 2.2;">&nbsp;</p>
 				<h4 align="center">2</h4>
 				<p>&nbsp;</p>
-				<div class="PageNext"></div>
 			</form>
+				<div class="PageNext"></div>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
 				<div style="float: left; margin-left: 75px;">
 					<h3>健康体检中心</h3>
@@ -204,8 +204,8 @@ input {
 					<p>&nbsp;</p>
 					<h4 align="center">3</h4>
 				</div>
-				<div class="PageNext"></div>
 			</form>
+				<div class="PageNext"></div>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
 				<div style="float: left; margin-left: 75px;">
 					<h3>健康体检中心</h3>
@@ -233,8 +233,8 @@ input {
 				</c:forEach>
 				<h4 align="center">4</h4>
 				<p>&nbsp;</p>
-				<div class="PageNext"></div>
 			</form>
+				<div class="PageNext"></div>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
 				<div style="float: left; margin-left: 75px;">
 					<h3>健康体检中心</h3>
@@ -269,8 +269,8 @@ input {
 				<p>&nbsp;</p>
 				<h4 align="center">5</h4>
 				<p>&nbsp;</p>
-				<div class="PageNext"></div>
 			</form>
+				<div class="PageNext"></div>
 			<form action="" style="border: 1px solid #000; margin: 50px 140px;">
 				<div style="float: left; margin-left: 75px;">
 					<h3>健康体检中心</h3>
@@ -331,8 +331,8 @@ input {
 					</c:forEach>
 					<h4 align="center">6</h4>
 					<p>&nbsp;</p>
-				    <div class="PageNext"></div>
 				</div>
+				    <div class="PageNext"></div>
 			</form>
 		</c:if>
 	</c:forEach>
